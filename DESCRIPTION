@@ -1,20 +1,25 @@
 Package: leaflet.extras
 Type: Package
-Title: Extra functionality for leaflet package.
+Title: Extra functionality for leaflet package
 Version: 0.1.0
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
     role = c("aut", "cre"))
-Description: Leaflet Javascript library provides many plugins some of which are
-  available in the core leaflet package, but there are many more. It is not possible
-  to support them all in the core leaflet package. This package serves as an addon to
-  the leaflet pacakge by providing extra functionality via leaflet plugins.
+Description: Leaflet Javascript library provides many plugins some of which
+    are available in the core leaflet package, but there are many more. It is not
+    possible to support them all in the core leaflet package. This package serves
+    as an addon to the leaflet pacakge by providing extra functionality via leaflet
+    plugins.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.1.0)
-Imports: leaflet,
+Depends:
+    R (>= 3.1.0)
+Imports:
+    leaflet (>= 1.0.2.9003),
     shiny,
     htmlwidgets,
-    htmltools
+    htmltools,
+    magrittr
 URL: https://github.com/bhaskarvk/leaflet.extras
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
+RoxygenNote: 5.0.1
