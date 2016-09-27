@@ -9,7 +9,7 @@ LeafletWidget.methods.addPulseMarkers = function(
 
       // This cbinds the icon URLs and any other icon options; they're all
       // present on the icon object.
-      icondf = LeafletWidget.methods.newDataFrame().cbind(icon);
+      icondf = new LeafletWidget.DataFrame().cbind(icon);
 
       // Constructs an icon from a specified row of the icon dataframe.
       getIcon = function(i) {
@@ -23,7 +23,7 @@ LeafletWidget.methods.addPulseMarkers = function(
       };
     }
 
-    var df = LeafletWidget.methods.newDataFrame()
+    var df = new LeafletWidget.DataFrame()
       .col("lat", lat)
       .col("lng", lng)
       .col("layerId", layerId)
