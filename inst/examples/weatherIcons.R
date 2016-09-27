@@ -6,16 +6,18 @@ leaf %>%
   addWeatherMarkers(
     lng=-118.456554, lat=34.078039,
     label='This is a label',
-    icon = makeWeatherIcon(icon='hot', iconColor = '#ffffff77', markerColor='blue' ))
+    icon = makeWeatherIcon(icon='hot', iconColor ='#ffffff77',
+                           markerColor='blue' ))
 
-cities <- read.csv(textConnection("
-City,Lat,Long,Pop
-                                  Boston,42.3601,-71.0589,645966
-                                  Hartford,41.7627,-72.6743,125017
-                                  New York City,40.7127,-74.0059,8406000
-                                  Philadelphia,39.9500,-75.1667,1553000
-                                  Pittsburgh,40.4397,-79.9764,305841
-                                  Providence,41.8236,-71.4222,177994"))
+cities <- read.csv(
+  textConnection("
+    City,Lat,Long,Pop
+    Boston,42.3601,-71.0589,645966
+    Hartford,41.7627,-72.6743,125017
+    New York City,40.7127,-74.0059,8406000
+    Philadelphia,39.9500,-75.1667,1553000
+    Pittsburgh,40.4397,-79.9764,305841
+    Providence,41.8236,-71.4222,177994"))
 
 # Translate darksky API icons to Weather Icons
 iconMap = list(
@@ -52,11 +54,32 @@ cities.icons <- weatherIcons(
     })
 )
 
+# cities.forecast.tables <- purrr::map(
+#   cities.forecast,
+#   function(forecast) {
+#     purrr::map(names(forecast), function(cat) {
+#       df <- forecast[[cat]]
+#       colnames(df) <- tools::toTitleCase(stringr::str_replace_all(
+#         colnames(df), '([A-Z])',' \\1'))
+#       htmlTable::htmlTable(
+#         t(df),
+#         caption=sprintf('Forecast %s',cat),
+#         align='left',
+#         #header=rep('Value',nrow(df)),
+#         rowlabel='Variable',
+#         align.header='left',
+#         col.rgroup=c('#ffffff','#eeeeee'))
+#     })
+#   })
+
 cities.popups <- purrr::map(
   cities.forecast,
   function(forecast) {
+    df <- forecast$currently
+    colnames(df) <- tools::toTitleCase(stringr::str_replace_all(
+      colnames(df), '([A-Z])',' \\1'))
     htmlTable::htmlTable(
-      t(forecast$currently),
+      t(df),
       caption='Current Forecast',
       align='left',
       header=c('Value'),
