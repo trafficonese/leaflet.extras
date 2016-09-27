@@ -1,0 +1,16 @@
+{
+  "name": "leaflet.icon.glyph",
+  "version": "0.2.0",
+  "description": "Allows you to put glyphs from icon fonts into your LeafletJS markers.",
+  "main": "Leaflet.Icon.Glyph.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IvanSanchez/Leaflet.Icon.Glyph.git"
+  },
+  "keywords": ["leaflet", "icon font"],
+  "author": "Iván Sánchez Ortega <ivan@sanchezortega.es>",
+  "license": "Beerware",
+  "bugs": {
+    "url": "https://github.com/IvanSanchez/Leaflet.Icon.Glyph/issues"
+  }
+}
