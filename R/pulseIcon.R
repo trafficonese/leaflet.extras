@@ -148,6 +148,7 @@ pulseIcons <- function(
 #' @param clusterId the id for the marker cluster layer
 #' @param options a list of extra options for tile layers, popups, paths
 #'   (circles, rectangles, polygons, ...), or other map elements
+#' @rdname pulseMarkers
 #' @export
 addPulseMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,

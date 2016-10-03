@@ -54,24 +54,6 @@ cities.icons <- weatherIcons(
     })
 )
 
-# cities.forecast.tables <- purrr::map(
-#   cities.forecast,
-#   function(forecast) {
-#     purrr::map(names(forecast), function(cat) {
-#       df <- forecast[[cat]]
-#       colnames(df) <- tools::toTitleCase(stringr::str_replace_all(
-#         colnames(df), '([A-Z])',' \\1'))
-#       htmlTable::htmlTable(
-#         t(df),
-#         caption=sprintf('Forecast %s',cat),
-#         align='left',
-#         #header=rep('Value',nrow(df)),
-#         rowlabel='Variable',
-#         align.header='left',
-#         col.rgroup=c('#ffffff','#eeeeee'))
-#     })
-#   })
-
 cities.popups <- purrr::map(
   cities.forecast,
   function(forecast) {
