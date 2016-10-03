@@ -58,7 +58,7 @@ weatherIconSetToWeatherIcons = function(x) {
   cols = structure(as.list(cols), names = cols)
 
   # Construct an equivalent output to weatherIcons().
-  leaflet:::filterNULL(lapply(cols, function(col) {
+  leaflet::filterNULL(lapply(cols, function(col) {
     # Pluck the `col` member off of each item in weatherIconObjs and put them in an
     # unnamed list (or vector if possible).
     colVals = unname(sapply(x, `[[`, col))
@@ -98,7 +98,7 @@ makeWeatherIcon <- function(
     stop(sprintf("markerColor should be one of %s",paste(markerColors,collapse=', ')))
   }
 
-  icon = leaflet:::filterNULL(list(
+  icon = leaflet::filterNULL(list(
     icon = icon, markerColor = markerColor,
     iconColor = iconColor, extraClasses = extraClasses
   ))
@@ -136,7 +136,7 @@ weatherIcons <- function(
     stop(sprintf("markerColor should be one of %s",paste(markerColors,collapse=', ')))
   }
 
-  leaflet:::filterNULL(list(
+  leaflet::filterNULL(list(
     icon = icon, markerColor = markerColor,
     iconColor = iconColor, extraClasses = extraClasses
   ))
@@ -196,22 +196,22 @@ addWeatherMarkers = function(
   if (!is.null(icon)) {
     # If formulas are present, they must be evaluated first so we can pack the
     # resulting values
-    icon = leaflet:::evalFormula(list(icon), data)[[1]]
+    icon = leaflet::evalFormula(list(icon), data)[[1]]
 
     if (inherits(icon, "leaflet_weather_icon_set")) {
       icon = weatherIconSetToWeatherIcons(icon)
     }
-    icon = leaflet:::filterNULL(icon)
+    icon = leaflet::filterNULL(icon)
   }
 
   if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet:::markerClusterDependencies())
+    map$dependencies = c(map$dependencies, leaflet::markerClusterDependencies())
 
-  pts = leaflet:::derivePoints(
+  pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addWeatherMarkers")
   leaflet::invokeMethod(
     map, data, 'addWeatherMarkers', pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,
-    clusterOptions, clusterId, leaflet:::safeLabel(label, data), labelOptions
-  ) %>% leaflet:::expandLimits(pts$lat, pts$lng)
+    clusterOptions, clusterId, leaflet::safeLabel(label, data), labelOptions
+  ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }

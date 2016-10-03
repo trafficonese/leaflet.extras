@@ -54,7 +54,7 @@ pulseIconSetToPulseIcons = function(x) {
   cols = structure(as.list(cols), names = cols)
 
   # Construct an equivalent output to pulseIcons().
-  leaflet:::filterNULL(lapply(cols, function(col) {
+  leaflet::filterNULL(lapply(cols, function(col) {
     # Pluck the `col` member off of each item in pulseIconObjs and put them in an
     # unnamed list (or vector if possible).
     colVals = unname(sapply(x, `[[`, col))
@@ -83,7 +83,7 @@ makePulseIcon <- function(
   heartbeat = 1
 ) {
 
-  icon = leaflet:::filterNULL(list(
+  icon = leaflet::filterNULL(list(
     color = color, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
   structure(icon, class = "leaflet_pulse_icon")
@@ -109,7 +109,7 @@ pulseIcons <- function(
   heartbeat = 1
 ) {
 
-  leaflet:::filterNULL(list(
+  leaflet::filterNULL(list(
     color = color, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
 }
@@ -168,22 +168,22 @@ addPulseMarkers = function(
   if (!is.null(icon)) {
     # If formulas are present, they must be evaluated first so we can pack the
     # resulting values
-    icon = leaflet:::evalFormula(list(icon), data)[[1]]
+    icon = leaflet::evalFormula(list(icon), data)[[1]]
 
     if (inherits(icon, "leaflet_pulse_icon_set")) {
       icon = pulseIconSetToPulseIcons(icon)
     }
-    icon = leaflet:::filterNULL(icon)
+    icon = leaflet::filterNULL(icon)
   }
 
   if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet:::markerClusterDependencies())
+    map$dependencies = c(map$dependencies, leaflet::markerClusterDependencies())
 
-  pts = leaflet:::derivePoints(
+  pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addPulseMarkers")
   leaflet::invokeMethod(
     map, data, 'addPulseMarkers', pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,
-    clusterOptions, clusterId, leaflet:::safeLabel(label, data), labelOptions
-  ) %>% leaflet:::expandLimits(pts$lat, pts$lng)
+    clusterOptions, clusterId, leaflet::safeLabel(label, data), labelOptions
+  ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }
