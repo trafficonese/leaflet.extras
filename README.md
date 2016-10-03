@@ -2,7 +2,16 @@
 
 The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins.
 
-For now you'll have to build leaflet from 
-https://github.com/bhaskarvk/leaflet/tree/issue/283 to try this out. Check out the inst/examples for how to use the integrated pulse icon plugin
+For now you'll have to build leaflet from github `devtools::install('rstudio/leaflet')`
+to try this out. Check out the inst/examples for what's been done so far.
 
+
+Plugins integrated so far
+
+
+- [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse) Demo at [Rpubs:Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
+- [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers) Demo at [Rpubs: Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
+- [Geojson Choropleth](https://github.com/timwis/leaflet-choropleth) Demo at [Rpubs: GeoJSON Choropleth](http://rpubs.com/bhaskarvk/geojson-choropleth)
+
+Stay tuned for more to come.
 
