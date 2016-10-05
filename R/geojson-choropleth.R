@@ -20,6 +20,19 @@ geoJSONChoroplethDependency <- function() {
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
 #' @param colors overrides scale with manual colors
+#' @param stroke whether to draw stroke along the path (e.g. the borders of
+#'   polygons or circles)
+#' @param color stroke color
+#' @param weight stroke width in pixels
+#' @param opacity stroke opacity (or layer opacity for tile layers)
+#'   circles)
+#' @param fillOpacity fill opacity
+#' @param dashArray a string that defines the stroke
+#'   \href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash
+#'   pattern}
+#' @param smoothFactor how much to simplify the polyline on each zoom level
+#'   (more means better performance and less accurate representation)
+#' @param noClip whether to disable polyline clipping
 #' @rdname geojson-choropleth
 #' @export
 addGeoJSONChoropleth = function(

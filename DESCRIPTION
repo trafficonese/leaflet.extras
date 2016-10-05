@@ -13,13 +13,22 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.1.0)
-Imports:
+    R (>= 3.1.0),
     leaflet (>= 1.0.2.9003),
+Imports:
     shiny,
     htmlwidgets,
     htmltools,
     magrittr
+Suggests: V8,
+    dplyr,
+    geojsonio,
+    purrr,
+    readr,
+    stringr,
+    rmapshaper,
+    htmlTable,
+    memoise
 URL: https://github.com/bhaskarvk/leaflet.extras
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
 RoxygenNote: 5.0.1

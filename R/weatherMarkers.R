@@ -39,6 +39,8 @@ weatherIconList = function(...) {
   res
 }
 
+#' @param x icons
+#' @param i offset
 #' @export
 #' @rdname weatherMarkers
 `[.leaflet_weather_icon_set` = function(x, i) {
@@ -165,7 +167,6 @@ weatherIcons <- function(
 #' @param data the data object from which the argument values are derived; by
 #'   default, it is the \code{data} object provided to \code{leaflet()}
 #'   initially, but can be overridden
-#' @param icon the icon(s) for markers;
 #' @param label a character vector of the HTML content for the labels
 #' @param labelOptions A Vector of \code{\link{labelOptions}} to provide label
 #' options for each label. Default \code{NULL}

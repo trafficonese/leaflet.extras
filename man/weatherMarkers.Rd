@@ -27,6 +27,10 @@ addWeatherMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
 \arguments{
 \item{...}{icons created from \code{\link{makeWeatherIcon}()}}
 
+\item{x}{icons}
+
+\item{i}{offset}
+
 \item{icon}{the weather icon name w/o the 'wi-' prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}}
 
 \item{markerColor}{color of the marker}
@@ -79,8 +83,6 @@ options}
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
-
-\item{icon}{the icon(s) for markers;}
 }
 \description{
 Make weather-icon set

@@ -27,6 +27,10 @@ addPulseMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
 \arguments{
 \item{...}{icons created from \code{\link{makePulseIcon}()}}
 
+\item{x}{icons}
+
+\item{i}{offset}
+
 \item{color}{Color of the icon}
 
 \item{iconSize}{Size of Icon in Pixels.}

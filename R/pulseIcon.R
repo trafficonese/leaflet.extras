@@ -35,6 +35,8 @@ pulseIconList = function(...) {
   res
 }
 
+#' @param x icons
+#' @param i offset
 #' @export
 #' @rdname pulseMarkers
 `[.leaflet_pulse_icon_set` = function(x, i) {
