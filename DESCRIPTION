@@ -1,7 +1,7 @@
 Package: leaflet.extras
 Type: Package
 Title: Extra functionality for leaflet package
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
     role = c("aut", "cre"))
 Description: Leaflet Javascript library provides many plugins some of which

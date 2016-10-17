@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>weatherIconList. leaflet.extras 0.1.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">leaflet.extras 0.1.1</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Make weather-icon set</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><div>weatherIconList(...)</div>
+<div># S3 method for leaflet_weather_icon_set
+[(x, i)</div>
+<div>makeWeatherIcon(icon, markerColor&nbsp;=&nbsp;"red", iconColor&nbsp;=&nbsp;"white", extraClasses&nbsp;=&nbsp;NULL)</div>
+<div>weatherIcons(icon, markerColor&nbsp;=&nbsp;"red", iconColor&nbsp;=&nbsp;"white", extraClasses&nbsp;=&nbsp;NULL)</div>
+<div>addWeatherMarkers(map, lng&nbsp;=&nbsp;NULL, lat&nbsp;=&nbsp;NULL, layerId&nbsp;=&nbsp;NULL, group&nbsp;=&nbsp;NULL, icon&nbsp;=&nbsp;NULL, popup&nbsp;=&nbsp;NULL, popupOptions&nbsp;=&nbsp;NULL, label&nbsp;=&nbsp;NULL, labelOptions&nbsp;=&nbsp;NULL, options&nbsp;=&nbsp;leaflet::markerOptions(), clusterOptions&nbsp;=&nbsp;NULL, clusterId&nbsp;=&nbsp;NULL, data&nbsp;=&nbsp;leaflet::getMapData(map))</div></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>...</dt>
+      <dd>icons created from <code><a href='weatherMarkers.html'>makeWeatherIcon</a>()</code></dd>
+      <dt>x</dt>
+      <dd>icons</dd>
+      <dt>i</dt>
+      <dd>offset</dd>
+      <dt>icon</dt>
+      <dd>the weather icon name w/o the &#39;wi-&#39; prefix. For a full list see <a href = 'https://erikflowers.github.io/weather-icons/'>https://erikflowers.github.io/weather-icons/</a></dd>
+      <dt>markerColor</dt>
+      <dd>color of the marker</dd>
+      <dt>iconColor</dt>
+      <dd>color of the weather icon</dd>
+      <dt>extraClasses</dt>
+      <dd>Character vector of extra classes.</dd>
+      <dt>map</dt>
+      <dd>the map to add weather Markers to.</dd>
+      <dt>lng</dt>
+      <dd>a numeric vector of longitudes, or a one-sided formula of the form
+<code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
+explicitly provided), it will be automatically inferred from <code>data</code> by
+looking for a column named <code>lng</code>, <code>long</code>, or <code>longitude</code>
+(case-insensitively)</dd>
+      <dt>lat</dt>
+      <dd>a vector of latitudes or a formula (similar to the <code>lng</code>
+argument; the names <code>lat</code> and <code>latitude</code> are used when guessing
+the latitude column from <code>data</code>)</dd>
+      <dt>layerId</dt>
+      <dd>the layer id</dd>
+      <dt>group</dt>
+      <dd>the name of the group the newly created layers should belong to
+(for <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/remove'>clearGroup</a></code> and <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/addLayersControl'>addLayersControl</a></code> purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</dd>
+      <dt>popup</dt>
+      <dd>a character vector of the HTML content for the popups (you are
+recommended to escape the text using <code><a href='http://www.rdocumentation.org/packages/htmltools/topics/htmlEscape'>htmlEscape</a>()</code>
+for security reasons)</dd>
+      <dt>popupOptions</dt>
+      <dd>options for popup</dd>
+      <dt>label</dt>
+      <dd>a character vector of the HTML content for the labels</dd>
+      <dt>labelOptions</dt>
+      <dd>A Vector of <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></code> to provide label
+options for each label. Default <code>NULL</code></dd>
+      <dt>options</dt>
+      <dd>a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements</dd>
+      <dt>clusterOptions</dt>
+      <dd>if not <code>NULL</code>, markers will be clustered using
+<a href = 'https://github.com/Leaflet/Leaflet.markercluster'>Leaflet.markercluster</a>;
+ you can use <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>markerClusterOptions</a>()</code> to specify marker cluster
+options</dd>
+      <dt>clusterId</dt>
+      <dd>the id for the marker cluster layer</dd>
+      <dt>data</dt>
+      <dd>the data object from which the argument values are derived; by
+default, it is the <code>data</code> object provided to <code>leaflet()</code>
+initially, but can be overridden</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Make weather-icon set</p>
+
+      <p>Make Weather Icon</p>
+
+      <p>An icon can be represented as a list of the form <code>list(icon, markerColor,
+...)</code>. This function is vectorized over its arguments to create a list of
+icon data. Shorter argument values will be re-cycled. <code>NULL</code> values for
+these arguments will be ignored.</p>
+
+      <p>Add Weather Markers</p>
+
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class="symbol">iconSet</span> <span class="assignement">=</span> <span class="functioncall"><a href='weatherMarkers.html'>weatherIconList</a></span><span class="keyword">(</span>
+  <span class="argument">hurricane</span> <span class="argument">=</span> <span class="functioncall"><a href='weatherMarkers.html'>makeWeatherIcon</a></span><span class="keyword">(</span><span class="argument">icon</span><span class="argument">=</span><span class="string">'hurricane'</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">tornado</span> <span class="argument">=</span> <span class="functioncall"><a href='weatherMarkers.html'>makeWeatherIcon</a></span><span class="keyword">(</span><span class="argument">icon</span><span class="argument">=</span><span class="string">'tornado'</span><span class="keyword">)</span>
+<span class="keyword">)</span>
+
+<span class="symbol">iconSet</span><span class="keyword">[</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">'hurricane'</span><span class="keyword">,</span> <span class="string">'tornado'</span><span class="keyword">)</span><span class="keyword">]</span></div>
+<div class='output'>$hurricane
+$icon
+[1] &quot;hurricane&quot;
+
+$markerColor
+[1] &quot;red&quot;
+
+$iconColor
+[1] &quot;white&quot;
+
+attr(,&quot;class&quot;)
+[1] &quot;leaflet_weather_icon&quot;
+
+$tornado
+$icon
+[1] &quot;tornado&quot;
+
+$markerColor
+[1] &quot;red&quot;
+
+$iconColor
+[1] &quot;white&quot;
+
+attr(,&quot;class&quot;)
+[1] &quot;leaflet_weather_icon&quot;
+
+attr(,&quot;class&quot;)
+[1] &quot;leaflet_weather_icon_set&quot;
+</div></pre>
+  </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>[.leaflet_weather_icon_set</li><li>addWeatherMarkers</li><li>makeWeatherIcon</li><li>weatherIconList</li><li>weatherIcons</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
