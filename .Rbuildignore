@@ -1,6 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^inst/htmlwidgets/lib/.*/node_modules$
+^inst/htmlwidgets/lib/.*/node_modules.*$
 ^inst/examples/.*.html$
 ^inst/examples/rsconnect$
 ^cran-comments\.md$

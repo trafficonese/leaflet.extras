@@ -125,10 +125,20 @@ L.TileLayer.include({
 				//this._db.remove(tileUrl, existingRevision);
 				db.get(tileUrl).then(function (doc) {
           return db.remove(doc);
+        }).then(function(response) {
+          // handle response
+        }).catch(function(err) {
+          console.log(err);
         });
 			}
 			//this._db.put(doc, tileUrl, doc.timestamp);
-			this._db.put(doc);
+			this._db.put(doc).catch(function(err) {
+         if (err.name === 'conflict') {
+           // for now ignore conflict errors
+         } else {
+          console.log(err);
+         }
+          });
 		}.bind(this);
 	},
 

@@ -4,7 +4,7 @@ tileLayer.PouchDBCachedDependency <- function() {
     htmltools::htmlDependency(
       "tileLayer.PouchDBCached",version = "0.1.1",
       system.file("htmlwidgets/lib/TileLayer.PouchDBCached", package = "leaflet.extras"),
-      script = c("pouchdb.js","L.TileLayer.PouchDBCached.js")
+      script = c("pouchdb-6.0.7.js","L.TileLayer.PouchDBCached.js")
     )
   )
 }
