@@ -14,6 +14,7 @@ Plugins integrated so far
 - [Geojson Choropleth](https://github.com/timwis/leaflet-choropleth) Demo at [Rpubs: GeoJSON Choropleth](http://rpubs.com/bhaskarvk/geojson-choropleth)
 - [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet) Demo at [Rpubs: Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
 - [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached) Demo at [Rpubs: Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
+- [Leaflet Hash](https://github.com/mlevans/leaflet-hash)
 
 Stay tuned for more to come. If you need a plugin that is not already implemented create an issue.
 

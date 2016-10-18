@@ -1,0 +1,20 @@
+{
+  "author": "Michael Lawrence Evans",
+  "name": "leaflet-hash",
+  "description": "linkable location hashes for leaflet",
+  "version": "0.2.1",
+  "homepage": "https://github.com/mlevans/leaflet-hash",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mlevans/leaflet-hash.git"
+  },
+  "devDependencies": {
+      "mocha": "~1.8",
+      "expect.js": "~0.2.0"
+  },
+  "main": "leaflet-hash.js",
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

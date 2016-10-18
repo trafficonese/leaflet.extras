@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.2
+
+* Added Leaflet Hash Plugin for bookmarkable/sharable URLs.
+
 # leaflet.extras 0.1.1
 
 * Added Tile Caching ability

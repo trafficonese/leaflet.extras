@@ -3,6 +3,7 @@
 S3method("[",leaflet_pulse_icon_set)
 S3method("[",leaflet_weather_icon_set)
 export(addGeoJSONChoropleth)
+export(addHash)
 export(addPulseMarkers)
 export(addWeatherMarkers)
 export(addWebGLHeatmap)
