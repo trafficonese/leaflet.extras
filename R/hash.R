@@ -16,8 +16,8 @@ hashDependency <- function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' leaflet() %>%
-#'   addHash() %>%
+#' leaflet() %>% addTiles() %>%
+#'   addHash()
 #' }
 addHash <- function(map) {
   map$dependencies <- c(map$dependencies, hashDependency())

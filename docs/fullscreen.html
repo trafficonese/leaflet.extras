@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>enableTileCaching. leaflet.extras 0.1.2</title>
+<title>addFullscreenControl. leaflet.extras 0.1.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -49,36 +49,37 @@
         
       </header>
       
-      <h1>Enables caching of Tiles</h1>
+      <h1>Add fullscreen control</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='TileCaching.html'>enableTileCaching</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span></pre>
+    <pre><span class="functioncall"><a href='fullscreen.html'>addFullscreenControl</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"topleft"</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
       <dt>map</dt>
       <dd>The leaflet map</dd>
+      <dt>position</dt>
+      <dd>position of control: &#39;topleft&#39;, &#39;topright&#39;, &#39;bottomleft&#39;, or &#39;bottomright&#39;</dd>
     </dl>
     
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Enables caching of tiles locally in browser. See <a href = 'https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached'>https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached</a> for details. In addition to invoking this function, you should also pass <code>useCache=TRUE</code> &amp; <code>crossOrigin=TRUE</code> in the <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>tileOptions</a></code> call and pass that to your <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-layers'>addTiles</a></code>&#39;s <code>options</code> parameter.</p>
+      <p>Add a fullscreen control button</p>
 
     </div>
     
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'><span class="comment">## Not run: ------------------------------------</span>
-<span class="comment"># leaflet() %&gt;%</span>
-<span class="comment">#   enableTileCaching() %&gt;%</span>
-<span class="comment">#   addTiles(options=tileOptions(useCache=TRUE,crossOrigin=TRUE))</span>
+<span class="comment"># leaflet() %&gt;% addTiles() %&gt;%</span>
+<span class="comment">#   addFullscreenControl()</span>
 <span class="comment">## ---------------------------------------------</span></div></pre>
   </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>enableTileCaching</li>
+      <li>addFullscreenControl</li>
     </ul>
     <ul>
       

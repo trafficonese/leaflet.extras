@@ -14,8 +14,8 @@ Leaflet-hash lets you to add dynamic URL hashes to web pages with Leaflet maps. 
 }
 \examples{
 \dontrun{
-leaflet() \%>\%
-  addHash() \%>\%
+leaflet() \%>\% addTiles() \%>\%
+  addHash()
 }
 }
 
