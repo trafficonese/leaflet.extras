@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>removes the geojson choropleth. — addGeoJSONChoropleth • leaflet.extras</title>
+<title>removes the topojson choropleth. — addTopoJSONChoropleth • leaflet.extras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -74,33 +74,33 @@
       </header>
 
       <div class="page-header">
-  <h1>removes the geojson choropleth.</h1>
+  <h1>removes the topojson choropleth.</h1>
 </div>
 
 <div class="row">
   <div class="col-md-9">
     
-    <p>removes the geojson choropleth.</p>
+    <p>removes the topojson choropleth.</p>
 
-    <p>clears the geojson choropleth.</p>
+    <p>clears the topojson choropleth.</p>
     
 
-    <pre><span class='fu'>addGeoJSONChoropleth</span>(<span class='no'>map</span>, <span class='no'>geojson</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre><span class='fu'>addTopoJSONChoropleth</span>(<span class='no'>map</span>, <span class='no'>data</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>valueProperty</span>, <span class='no'>labelProperty</span>, <span class='no'>popupProperty</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"white"</span>, <span class='st'>"red"</span>),
   <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"q"</span>, <span class='kw'>colors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#03F"</span>,
   <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>dashArray</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>smoothFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>noClip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>removeGeoJSONChoropleth</span>(<span class='no'>map</span>, <span class='no'>layerId</span>)
+<span class='fu'>removeTopoJSONChoropleth</span>(<span class='no'>map</span>, <span class='no'>layerId</span>)
 
-<span class='fu'>clearGeoJSONChoropleth</span>(<span class='no'>map</span>)</pre>
+<span class='fu'>clearTopoJSONChoropleth</span>(<span class='no'>map</span>)</pre>
     
     <h2>Arguments</h2>
     <dl class="dl-horizontal">
       <dt>map</dt>
       <dd>The leaflet map</dd>
-      <dt>geojson</dt>
-      <dd>either as a list or a string</dd>
+      <dt>data</dt>
+      <dd>Geojson or topojson data: either as a list or a string</dd>
       <dt>layerId</dt>
       <dd>a unique ID for the layer</dd>
       <dt>group</dt>

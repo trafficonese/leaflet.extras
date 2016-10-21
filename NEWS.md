@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.3
+
+* Added topojson-choropleth Plugin to support topojson.
+
 # leaflet.extras 0.1.2
 
 * Added Leaflet Hash Plugin for bookmarkable/sharable URLs.
