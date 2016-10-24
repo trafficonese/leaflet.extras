@@ -4,3 +4,4 @@
 .Ruserdata
 inst/examples/*html
 inst/examples/rsconnect
+.Rprofile

@@ -16,6 +16,7 @@ Plugins integrated so far
 - [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached) Demo at [Rpubs: Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
 - [Leaflet Hash](https://github.com/mlevans/leaflet-hash)
 - [Fullscreen Control](https://github.com/Leaflet/Leaflet.fullscreen)
+- [WMS Legend](https://github.com/kartoza/leaflet-wms-legend)
 
 Stay tuned for more to come. If you need a plugin that is not already implemented create an issue.
 
