@@ -1,39 +1,47 @@
 LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity,
   layerId, group, options) {
 
-  var heatmapLayer = L.webGLHeatmap(options);
+  if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+    ($.isNumeric(lat) && $.isNumeric(lng))) {
 
-  var df = new LeafletWidget.DataFrame()
-    .col('lat',lat)
-    .col('lng',lng);
+    var heatmapLayer = L.webGLHeatmap(options);
 
-   if(intensity) {
-     df.col('intensity',intensity);
-   }
+    var df = new LeafletWidget.DataFrame()
+      .col('lat',lat)
+      .col('lng',lng);
 
-  var latlngs = [];
-  var i = 0;
+     if(intensity) {
+       df.col('intensity',intensity);
+     }
 
-  if(intensity) {
-    for(i;i<df.nrow();i++){
-      latlngs.push([
-        df.get(i,'lat'),
-        df.get(i,'lng'),
-        df.get(i,'intensity')
-      ]);
+    var latlngs = [];
+    var i = 0;
+
+    if(intensity) {
+      for(i;i<df.nrow();i++){
+        if($.isNumeric(df.get(i, "lat")) && $.isNumeric(df.get(i, "lng"))) {
+          latlngs.push([
+            df.get(i,'lat'),
+            df.get(i,'lng'),
+            df.get(i,'intensity')
+          ]);
+        }
+      }
+    } else {
+      for(i;i<df.nrow();i++){
+        if($.isNumeric(df.get(i, "lat")) && $.isNumeric(df.get(i, "lng"))) {
+          latlngs.push([
+            df.get(i,'lat'),
+            df.get(i,'lng')
+          ]);
+        }
+      }
     }
-  } else {
-    for(i;i<df.nrow();i++){
-      latlngs.push([
-        df.get(i,'lat'),
-        df.get(i,'lng')
-      ]);
-    }
+
+    heatmapLayer.setData(latlngs);
+
+    this.layerManager.addLayer(heatmapLayer, "webGLHeatmap", layerId, group);
   }
-
-  heatmapLayer.setData(latlngs);
-
-  this.layerManager.addLayer(heatmapLayer, "webGLHeatmap", layerId, group);
 };
 
 LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {

@@ -30,25 +30,29 @@ LeafletWidget.methods.addWeatherMarkers = function(
       };
     }
 
-    var df = new LeafletWidget.DataFrame()
-      .col("lat", lat)
-      .col("lng", lng)
-      .col("layerId", layerId)
-      .col("group", group)
-      .col("popup", popup)
-      .col("popupOptions", popupOptions)
-      .col("label", label)
-      .col("labelOptions", labelOptions)
-      .cbind(options);
+    if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+      ($.isNumeric(lat) && $.isNumeric(lng))) {
 
-    if (icon) icondf.effectiveLength = df.nrow();
+      var df = new LeafletWidget.DataFrame()
+        .col("lat", lat)
+        .col("lng", lng)
+        .col("layerId", layerId)
+        .col("group", group)
+        .col("popup", popup)
+        .col("popupOptions", popupOptions)
+        .col("label", label)
+        .col("labelOptions", labelOptions)
+        .cbind(options);
 
-    LeafletWidget.methods.addGenericMarkers(
-      this, df, group, clusterOptions, clusterId, function(df, i) {
-      var options = df.get(i);
-      if (icon) options.icon = getIcon(i);
-      return L.marker([df.get(i, "lat"), df.get(i, "lng")], options);
-    });
+      if (icon) icondf.effectiveLength = df.nrow();
+
+      LeafletWidget.methods.addGenericMarkers(
+        this, df, group, clusterOptions, clusterId, function(df, i) {
+        var options = df.get(i);
+        if (icon) options.icon = getIcon(i);
+        return L.marker([df.get(i, "lat"), df.get(i, "lng")], options);
+      });
+    }
 
   }).call(this);
 };
