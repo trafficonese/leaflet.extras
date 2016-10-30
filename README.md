@@ -2,7 +2,7 @@
 
 The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins.
 
-For now you'll have to build leaflet from github `devtools::install('rstudio/leaflet')`
+For now you'll have to build leaflet from github `devtools::install_github('rstudio/leaflet')`
 to try this out. Check out the inst/examples for what's been done so far.
 
 
