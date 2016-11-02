@@ -1,6 +1,11 @@
-# leaflet.extras 0.1.2
+# leaflet.extras 0.1.4
 
-* Added WMS Legend Control
+* GeoJSON Choropleth now accepts popupOptions and labelOptions.
+* Added addTopoJSONChoropleth (Thanks [TrantorM](https://github.com/TrantorM)).
+
+# leaflet.extras 0.1.3
+
+* Added WMS Legend Control.
 
 # leaflet.extras 0.1.2
 

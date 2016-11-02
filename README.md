@@ -11,7 +11,8 @@ Plugins integrated so far
 
 - [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse) Demo at [Rpubs: Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
 - [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers) Demo at [Rpubs: Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
-- [Geojson Choropleth](https://github.com/timwis/leaflet-choropleth) Demo at [Rpubs: GeoJSON Choropleth](http://rpubs.com/bhaskarvk/geojson-choropleth)
+- [GeoJSON Choropleth](https://github.com/timwis/leaflet-choropleth) Demo at [Rpubs: GeoJSON Choropleth](http://rpubs.com/bhaskarvk/geojson-choropleth)
+- [TopoJSON Choropleth](https://github.com/TrantorM/leaflet-choroplethTopoJSON) Demo at [Rpubs: GeoJSON Choropleth](http://rpubs.com/bhaskarvk/topojson-choropleth)
 - [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet) Demo at [Rpubs: Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
 - [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached) Demo at [Rpubs: Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
 - [Leaflet Hash](https://github.com/mlevans/leaflet-hash)

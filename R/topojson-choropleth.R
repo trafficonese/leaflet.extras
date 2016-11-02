@@ -1,16 +1,16 @@
-# Source https://github.com/timwis/leaflet-choropleth
-geoJSONChoroplethDependency <- function() {
+# Source https://github.com/TrantorM/leaflet-choroplethTopoJSON
+topoJSONChoroplethDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "geojson-choropleth",version = "1.1.2",
-      system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
-      script = c("choropleth.js","geojson-choropleth-bindings.js")
+      "topojson-choropleth",version = "0.1.0",
+      system.file("htmlwidgets/lib/topojson-choropleth", package = "leaflet.extras"),
+      script = c("choroplethTopoJSON.min.js","topojson-choropleth-bindings.js")
     )
   )
 }
 
 #' @param map The leaflet map
-#' @param geojson either as a list or a string
+#' @param data Geojson or topojson data: either as a list or a string
 #' @param layerId a unique ID for the layer
 #' @param group the group this layer will be added to
 #' @param valueProperty The property to use for coloring
@@ -35,10 +35,10 @@ geoJSONChoroplethDependency <- function() {
 #' @param smoothFactor how much to simplify the polyline on each zoom level
 #'   (more means better performance and less accurate representation)
 #' @param noClip whether to disable polyline clipping
-#' @rdname geojson-choropleth
+#' @rdname topojson-choropleth
 #' @export
-addGeoJSONChoropleth = function(
-  map, geojson, layerId = NULL, group = NULL,
+addTopoJSONChoropleth = function(
+  map, data, layerId = NULL, group = NULL,
   valueProperty,
   labelProperty, labelOptions = leaflet::labelOptions(),
   popupProperty, popupOptions = leaflet::popupOptions(),
@@ -56,7 +56,7 @@ addGeoJSONChoropleth = function(
   noClip = FALSE
 ) {
   map$dependencies <- c(map$dependencies,
-                        geoJSONChoroplethDependency())
+                        topoJSONChoroplethDependency())
   options = list(
     valueProperty=valueProperty,
     popupProperty=popupProperty,
@@ -77,20 +77,20 @@ addGeoJSONChoropleth = function(
     noClip=noClip
   )
   leaflet::invokeMethod(
-    map, leaflet::getMapData(map), 'addGeoJSONChoropleth',
-    geojson, layerId, group, options)
+    map, leaflet::getMapData(map), 'addTopoJSONChoropleth',
+    data, layerId, group, options)
 }
 
-#' removes the geojson choropleth.
-#' @rdname geojson-choropleth
+#' removes the topojson choropleth.
+#' @rdname topojson-choropleth
 #' @export
-removeGeoJSONChoropleth = function(map, layerId) {
-    leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeGeoJSONChoropleth', layerId)
+removeTopoJSONChoropleth = function(map, layerId) {
+    leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeTopoJSONChoropleth', layerId)
 }
 
-#' clears the geojson choropleth.
-#' @rdname geojson-choropleth
+#' clears the topojson choropleth.
+#' @rdname topojson-choropleth
 #' @export
-clearGeoJSONChoropleth = function(map) {
-    leaflet::invokeMethod(map, NULL, 'clearGeoJSONChoropleth')
+clearTopoJSONChoropleth = function(map) {
+    leaflet::invokeMethod(map, NULL, 'clearTopoJSONChoropleth')
 }

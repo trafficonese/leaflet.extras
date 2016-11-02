@@ -1,4 +1,4 @@
-LeafletWidget.methods.addGeoJSONChoropleth = function(data, layerId, group, options) {
+LeafletWidget.methods.addTopoJSONChoropleth = function(data, layerId, group, options) {
   var self = this;
   if (typeof(data) === "string") {
     data = JSON.parse(data);
@@ -68,15 +68,14 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(data, layerId, group, opti
       "geojson_mouseout", extraInfo), this);
   };
 
-  var gjlayer = L.choropleth(data, globalOptions);
-  this.layerManager.addLayer(gjlayer, "geojsonchoropleth", layerId, group);
+  var gjlayer = L.choroplethTopo(data, globalOptions);
+  this.layerManager.addLayer(gjlayer, "topojsonchoropleth", layerId, group);
 };
 
-LeafletWidget.methods.removeGeoJSONChoropleth = function(layerId) {
-  this.layerManager.removeLayer("geojsonchoropleth", layerId);
+LeafletWidget.methods.removeTopoJSONChoropleth = function(layerId) {
+  this.layerManager.removeLayer("topojsonchoropleth", layerId);
 };
 
-LeafletWidget.methods.clearGeoJSONChoropleth = function() {
-  this.layerManager.clearLayers("geojsonchoropleth");
+LeafletWidget.methods.clearTopoJSONChoropleth = function() {
+  this.layerManager.clearLayers("topojsonchoropleth");
 };
-
