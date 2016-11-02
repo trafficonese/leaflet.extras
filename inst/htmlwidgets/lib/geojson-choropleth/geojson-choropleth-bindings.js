@@ -13,6 +13,36 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(data, layerId, group, opti
   delete options.popupOptions;
   delete options.labelOptions;
 
+  var defaultStyle = {};
+  var highlightStyle = options.highlightOptions;
+  delete options.highlightOptions;
+  if(!$.isEmptyObject(highlightStyle)) {
+
+    $.each(highlightStyle, function (k, v) {
+      if(k != "bringToFront" && k != "sendToBack"){
+        if(options[k]) {
+          defaultStyle[k] = options[k];
+        }
+      }
+    });
+  }
+
+	function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle(highlightStyle);
+    if(highlightStyle.bringToFront) {
+      layer.bringToFront();
+    }
+	}
+	function resetFeature(e){
+    var layer = e.target;
+    layer.setStyle(defaultStyle);
+    if(highlightStyle.sendToBack) {
+      layer.bringToBack();
+    }
+	}
+
+
   var globalOptions = $.extend({}, options);
   globalOptions.onEachFeature =  function(feature, layer) {
     var extraInfo = {
@@ -59,6 +89,12 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(data, layerId, group, opti
         }
 			}
 		}
+
+    if(!$.isEmptyObject(highlightStyle)) {
+      layer.on({
+        "mouseover": highlightFeature,
+        "mouseout": resetFeature});
+    }
 
     layer.on("click", LeafletWidget.methods.mouseHandler(self.id, layerId, group,
       "geojson_click", extraInfo), this);

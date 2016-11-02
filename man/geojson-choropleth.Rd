@@ -11,7 +11,8 @@ addGeoJSONChoropleth(map, geojson, layerId = NULL, group = NULL,
   popupProperty, popupOptions = leaflet::popupOptions(), scale = c("white",
   "red"), steps = 5, mode = "q", colors = NULL, stroke = TRUE,
   color = "#03F", weight = 1, opacity = 0.5, fillOpacity = 0.2,
-  dashArray = NULL, smoothFactor = 1, noClip = FALSE)
+  dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  highlightOptions = NULL)
 
 removeGeoJSONChoropleth(map, layerId)
 
@@ -64,6 +65,8 @@ pattern}}
 (more means better performance and less accurate representation)}
 
 \item{noClip}{whether to disable polyline clipping}
+
+\item{highlightOptions}{Options for highlighting shapes on hover.}
 }
 \description{
 removes the geojson choropleth.

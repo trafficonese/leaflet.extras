@@ -35,6 +35,7 @@ geoJSONChoroplethDependency <- function() {
 #' @param smoothFactor how much to simplify the polyline on each zoom level
 #'   (more means better performance and less accurate representation)
 #' @param noClip whether to disable polyline clipping
+#' @param highlightOptions Options for highlighting shapes on hover.
 #' @rdname geojson-choropleth
 #' @export
 addGeoJSONChoropleth = function(
@@ -53,7 +54,8 @@ addGeoJSONChoropleth = function(
   fillOpacity = 0.2,
   dashArray = NULL,
   smoothFactor = 1.0,
-  noClip = FALSE
+  noClip = FALSE,
+  highlightOptions = NULL
 ) {
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
@@ -74,7 +76,8 @@ addGeoJSONChoropleth = function(
     fillOpacity=fillOpacity,
     dashArray=dashArray,
     smoothFactor=smoothFactor,
-    noClip=noClip
+    noClip=noClip,
+    highlightOptions = highlightOptions
   )
   leaflet::invokeMethod(
     map, leaflet::getMapData(map), 'addGeoJSONChoropleth',

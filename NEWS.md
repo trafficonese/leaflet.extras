@@ -1,7 +1,7 @@
 # leaflet.extras 0.1.4
 
-* GeoJSON Choropleth now accepts popupOptions and labelOptions.
 * Added addTopoJSONChoropleth (Thanks [TrantorM](https://github.com/TrantorM)).
+* GeoJSON/TopoJSON Choropleth now accepts popupOptions, labelOptions, and highlightOptions.
 
 # leaflet.extras 0.1.3
 

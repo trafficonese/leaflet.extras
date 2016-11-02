@@ -49,5 +49,8 @@ leaf %>%
             '</ul>';
       }"),
     labelProperty = 'NAME',
-    color='#ffffff', weight=1, fillOpacity = 0.7
+    color='#ffffff', weight=1, fillOpacity = 0.7,
+    highlightOptions =
+      highlightOptions(fillOpacity=1, weight=2, opacity=1, color='#000000',
+                        bringToFront=TRUE)
  )
