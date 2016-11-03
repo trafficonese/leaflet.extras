@@ -41,8 +41,8 @@ geoJSONChoroplethDependency <- function() {
 addGeoJSONChoropleth = function(
   map, geojson, layerId = NULL, group = NULL,
   valueProperty,
-  labelProperty, labelOptions = leaflet::labelOptions(),
-  popupProperty, popupOptions = leaflet::popupOptions(),
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
   scale = c('white','red'),
   steps =5,
   mode = 'q',
