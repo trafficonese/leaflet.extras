@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.5
+
+* Added addGeoJSONv2 for better GeoJSON support.
+
 # leaflet.extras 0.1.4
 
 * Added addTopoJSONChoropleth (Thanks [TrantorM](https://github.com/TrantorM)).

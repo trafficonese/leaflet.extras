@@ -206,7 +206,7 @@ addWeatherMarkers = function(
   }
 
   if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet::markerClusterDependencies())
+    map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
 
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addWeatherMarkers")
