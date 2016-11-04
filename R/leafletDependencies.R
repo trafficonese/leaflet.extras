@@ -1,3 +1,7 @@
+#' Add AwesomeMarkers and related lib dependencies to a map
+#' @param map the map widget
+#' @param libs char vector with lib names.
+#' @export
 addAwesomeMarkersDependencies <- function(map, libs) {
   map$dependencies <- c(map$dependencies,
                         leaflet::leafletDependencies$awesomeMarkers())
@@ -15,3 +19,12 @@ addAwesomeMarkersDependencies <- function(map, libs) {
   }
   map
 }
+
+#' Various leaflet dependency functions for use in downstream packages
+#' @export
+leafletExtrasDependencies <- list(
+  omnivore = function() {omnivoreDependencies()},
+  weatherIcons = function(){weatherIconDependency()},
+  pulseIcons = function(){pulseIconDependency()},
+  webGLHeatmap = function(){webGLHeatmapDependency()}
+)
