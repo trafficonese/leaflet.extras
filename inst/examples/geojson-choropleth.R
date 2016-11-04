@@ -37,7 +37,7 @@ leaf %>%
     geoJson,
     valueProperty =
       JS("function(feature) {
-           return feature.properties.POP2005/feature.properties.AREA;
+           return feature.properties.POP2005/Math.max(feature.properties.AREA,1);
          }"),
     scale = c('white','blue','red'), mode='q', steps = 10,
     popupProperty =

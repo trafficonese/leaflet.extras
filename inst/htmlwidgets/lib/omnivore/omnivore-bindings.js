@@ -1,15 +1,24 @@
-LeafletWidget.methods.addGeoJSONv2 = function(
-  data, layerId, group,
+LeafletWidget.methods.addgenericGeoJSON = function(
+  widget,
+  dataFunction, geojsonLayerFunction,
+  layerId, group,
+  setStyle,
   markerIconProperty, markerOptions, markerIcons, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
   ) {
-  var self = this;
+  var self = widget;
+
+  var data = dataFunction();
 
   // convert JSON string to Object
-  if (typeof(data) === "string") {
-    data = JSON.parse(data);
+  if (data !== null){
+    if(typeof(data) === "string") {
+      data = JSON.parse(data);
+    }
+  } else {
+    data = {};
   }
 
   // Initialize Clusering support if enabled.
@@ -55,6 +64,7 @@ LeafletWidget.methods.addGeoJSONv2 = function(
       layer.bringToBack();
     }
   }
+
 
   var globalStyle = $.extend({}, style, data.style || {});
 
@@ -119,11 +129,11 @@ LeafletWidget.methods.addGeoJSONv2 = function(
     }
 
     layer.on("click", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_click", featureExtraInfo), this);
+      thisGroup, "geojson_click", featureExtraInfo), self);
     layer.on("mouseover", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_mouseover", featureExtraInfo), this);
+      thisGroup, "geojson_mouseover", featureExtraInfo), self);
     layer.on("mouseout", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_mouseout", featureExtraInfo), this);
+      thisGroup, "geojson_mouseout", featureExtraInfo), self);
   }
 
   // code for custom markers
@@ -152,18 +162,42 @@ LeafletWidget.methods.addGeoJSONv2 = function(
   }
 
   var geojsonOptions = {};
-  geojsonOptions.style = styleFunction;
+  if(setStyle){
+    geojsonOptions.style = styleFunction;
+  }
   geojsonOptions.onEachFeature = onEachFeatureFunction;
 
   if(!$.isEmptyObject(markerIcons)) {
     geojsonOptions.pointToLayer = pointToLayerFunction;
   }
 
-  var gjlayer = L.geoJson(data, geojsonOptions);
+  var gjlayer = geojsonLayerFunction(data, geojsonOptions);
 
-  this.layerManager.addLayer(gjlayer, "geojson", layerId, thisGroup);
+  self.layerManager.addLayer(gjlayer, "geojson", layerId, thisGroup);
   if (cluster) {
-    this.layerManager.addLayer(clusterGroup, "cluster", clusterId, group);
+    self.layerManager.addLayer(clusterGroup, "cluster", clusterId, group);
   }
 
+};
+
+LeafletWidget.methods.addGeoJSONv2 = function(
+  data, layerId, group,
+  markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+  clusterOptions, clusterId,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+  ) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){return data;},
+      function getGeoJSONLayer(data, geoJsonOptions){
+        return L.geoJson(data, geoJsonOptions);
+      },
+      layerId, group,
+      true,
+      markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
 };

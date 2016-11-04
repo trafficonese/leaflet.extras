@@ -9,7 +9,7 @@ var topojson = require("topojson");
 
 L.choroplethTopo = module.exports = function (geojson, opts) {
   if (geojson.type === "Topology") {
-  	for (key in geojson.objects) {
+  	for (var key in geojson.objects) {
   		geojson = topojson.feature(geojson, geojson.objects[key]);
   	}
   }

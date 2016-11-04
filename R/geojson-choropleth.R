@@ -9,6 +9,7 @@ geoJSONChoroplethDependency <- function() {
   )
 }
 
+#' Adds a GeoJSON Choropleth.
 #' @param map The leaflet map
 #' @param geojson either as a list or a string
 #' @param layerId a unique ID for the layer
@@ -35,6 +36,7 @@ geoJSONChoroplethDependency <- function() {
 #' @param smoothFactor how much to simplify the polyline on each zoom level
 #'   (more means better performance and less accurate representation)
 #' @param noClip whether to disable polyline clipping
+#' @param pathOptions Options for shapes
 #' @param highlightOptions Options for highlighting shapes on hover.
 #' @rdname geojson-choropleth
 #' @export
@@ -55,16 +57,14 @@ addGeoJSONChoropleth = function(
   dashArray = NULL,
   smoothFactor = 1.0,
   noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL
 ) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
-  options = list(
+  pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
-    popupProperty=popupProperty,
-    popupOptions=popupOptions,
-    labelProperty=labelProperty,
-    labelOptions=labelOptions,
     scale=scale,
     steps=steps,
     mode=mode,
@@ -76,24 +76,12 @@ addGeoJSONChoropleth = function(
     fillOpacity=fillOpacity,
     dashArray=dashArray,
     smoothFactor=smoothFactor,
-    noClip=noClip,
-    highlightOptions = highlightOptions
-  )
+    noClip=noClip
+  ))
   leaflet::invokeMethod(
     map, leaflet::getMapData(map), 'addGeoJSONChoropleth',
-    geojson, layerId, group, options)
-}
-
-#' removes the geojson choropleth.
-#' @rdname geojson-choropleth
-#' @export
-removeGeoJSONChoropleth = function(map, layerId) {
-    leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeGeoJSONChoropleth', layerId)
-}
-
-#' clears the geojson choropleth.
-#' @rdname geojson-choropleth
-#' @export
-clearGeoJSONChoropleth = function(map) {
-    leaflet::invokeMethod(map, NULL, 'clearGeoJSONChoropleth')
+    geojson, layerId, group,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    pathOptions, highlightOptions
+    )
 }
