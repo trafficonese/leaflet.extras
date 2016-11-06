@@ -1,12 +1,5 @@
 fName <- 'https://raw.githubusercontent.com/MinnPost/simple-map-d3/master/example-data/world-population.geo.json'
 
-readGeoJson_ <- function(fName) {
-  rmapshaper::ms_simplify(paste0(readLines(fName)))
-}
-
-readGeoJson <- memoise::memoise(readGeoJson_)
-geoJson <- readGeoJson(fName)
-
 library(leaflet.extras)
 
 #' Just some fancy projection coz Spherical Mercator sucks.
@@ -33,21 +26,18 @@ leaf <- leaflet(options =
 
 #+ fig.width=8, fig.height=5
 leaf %>%
+  addBootstrapDependency() %>%
   addGeoJSONChoropleth(
-    geoJson,
+    #geoJson,
+    fName,
     valueProperty =
       JS("function(feature) {
            return feature.properties.POP2005/Math.max(feature.properties.AREA,1);
          }"),
-    scale = c('white','blue','red'), mode='q', steps = 10,
-    popupProperty =
-      JS("function(feature){
-            return '<ul>' +
-            '<li>Name: <em>' + feature.properties.NAME + '</em></li>' +
-            '<li>Region: <em>' + feature.properties.REGION + '</em></li>' +
-            '<li>Population Density: <em>' + (feature.properties.POP2005/feature.properties.AREA).toLocaleString() + '</em></li>' +
-            '</ul>';
-      }"),
+    scale = c('yellow','navy'), mode='q', steps = 5,
+    popupProperty = propstoHTMLTable(
+      props = c('NAME', 'REGION', 'ISO_3_CODE', 'ISO_2_CODE', 'AREA', 'POP2005'),
+      table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
     labelProperty = 'NAME',
     color='#ffffff', weight=1, fillOpacity = 0.7,
     highlightOptions =

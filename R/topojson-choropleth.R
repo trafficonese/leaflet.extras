@@ -4,7 +4,7 @@ topoJSONChoroplethDependency <- function() {
     htmltools::htmlDependency(
       "topojson-choropleth",version = "0.1.0",
       system.file("htmlwidgets/lib/topojson-choropleth", package = "leaflet.extras"),
-      script = c("choroplethTopoJSON.min.js","topojson-choropleth-bindings.js")
+      script = c("choroplethTopoJSON.min.js")
     )
   )
 }
@@ -35,7 +35,9 @@ addTopoJSONChoropleth = function(
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
-                        topoJSONChoroplethDependency())
+                        geoJSONChoroplethDependency())
+  #map$dependencies <- c(map$dependencies,
+                        #topoJSONChoroplethDependency())
   pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
     scale=scale,

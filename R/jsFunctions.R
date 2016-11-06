@@ -105,5 +105,3 @@ propstoHTMLTable <- function(props = NULL, table.attrs=NULL, drop.na = TRUE) {
     ))
 
 }
-
-

@@ -4,7 +4,7 @@ geoJSONChoroplethDependency <- function() {
     htmltools::htmlDependency(
       "geojson-choropleth",version = "1.1.2",
       system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
-      script = c("choropleth.js","geojson-choropleth-bindings.js")
+      script = c("choropleth.js")
     )
   )
 }

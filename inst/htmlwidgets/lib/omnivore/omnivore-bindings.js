@@ -11,7 +11,7 @@ LeafletWidget.utils.isURL = function(url) {
         + "[a-z]{2,6})" // first level domain- .com or .museum
         + "(:[0-9]{1,4})?" // Port - :80
         + "((/?)|" // a slash isn't required if there is no file name
-        + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+        + "(/[0-9A-Za-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
      var re=new RegExp(strRegex);
      return re.test(url);
  };
@@ -229,4 +229,67 @@ LeafletWidget.methods.addGeoJSONv2 = function(
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
     );
+};
+
+LeafletWidget.methods.addGeoJSONChoropleth = function(
+  data, layerId, group,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+        if (LeafletWidget.utils.isURL(data)) {
+           return {};
+        } else {
+          return data;
+        }
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        if (LeafletWidget.utils.isURL(data)) {
+          var l = L.choropleth(null, $.extend(
+            pathOptions, geoJsonOptions));
+          return omnivore.geojson(data,null,l);
+        } else {
+          return L.choropleth(parsedData, $.extend(
+            pathOptions, geoJsonOptions));
+        }
+      },
+      layerId, group,
+      false,
+      null, null, null, null,
+      null, null,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+
+};
+
+LeafletWidget.methods.addTopoJSONChoropleth = function(
+  data, layerId, group,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+          return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.choropleth(null, $.extend(
+          pathOptions, geoJsonOptions));
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.topojson(data,null,l);
+        } else {
+          return omnivore.topojson.parse(data,null,l);
+        }
+      },
+      layerId, group,
+      false,
+      null, null, null, null,
+      null, null,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+
 };

@@ -7,7 +7,7 @@
 \usage{
 propsToHTML(props, elem = NULL, elem.attrs = NULL)
 
-propstoHTMLTable(props = NULL, table.attrs = NULL)
+propstoHTMLTable(props = NULL, table.attrs = NULL, drop.na = TRUE)
 }
 \arguments{
 \item{props}{A list of GeoJSON Property Keys.}
