@@ -1,3 +1,21 @@
+LeafletWidget.utils.isURL = function(url) {
+    if (typeof url === "undefined" && url === null) {
+			return false;
+    }
+    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
+        + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp user@
+        + "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP/URL- 199.194.52.184
+        + "|" // IP/DOMAIN
+        + "([0-9a-z_!~*'()-]+\.)*" //  www.
+        + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." //
+        + "[a-z]{2,6})" // first level domain- .com or .museum
+        + "(:[0-9]{1,4})?" // Port - :80
+        + "((/?)|" // a slash isn't required if there is no file name
+        + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+     var re=new RegExp(strRegex);
+     return re.test(url);
+ };
+
 LeafletWidget.methods.addgenericGeoJSON = function(
   widget,
   dataFunction, geojsonLayerFunction,
@@ -189,9 +207,20 @@ LeafletWidget.methods.addGeoJSONv2 = function(
   ) {
     LeafletWidget.methods.addgenericGeoJSON(
       this,
-      function getData(){return data;},
-      function getGeoJSONLayer(data, geoJsonOptions){
-        return L.geoJson(data, geoJsonOptions);
+      function getData(){
+        if (LeafletWidget.utils.isURL(data)) {
+           return {};
+        } else {
+          return data;
+        }
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        if (LeafletWidget.utils.isURL(data)) {
+          var l = L.geoJson(null, geoJsonOptions);
+          return omnivore.geojson(data,null,l);
+        } else {
+          return L.geoJson(parsedData, geoJsonOptions);
+        }
       },
       layerId, group,
       true,

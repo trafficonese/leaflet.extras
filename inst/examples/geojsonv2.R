@@ -115,3 +115,33 @@ leaf %>%
              markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
              clusterOptions = markerClusterOptions())
 
+#' ## Direct URL
+
+artsAndCultures <- 'https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson'
+historicLandmarks <- 'https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson'
+
+artsAndCulture <- makeAwesomeIcon(icon='paintbrush', library='ion', markerColor = 'red', iconColor = 'black')
+historicLandmark <- makeAwesomeIcon(icon='flag', library='ion', markerColor = 'green', iconColor = 'black')
+
+leaf %>% setView(-77.0369, 38.9072, 12) %>%
+  addBootstrapDependency() %>%
+  addGeoJSONv2(artsAndCultures,
+             labelProperty='NAME',
+             popupProperty=propstoHTMLTable(
+               table.attrs = list(class='table table-striped table-bordered'), drop.na = T),
+             labelOptions = labelOptions(textsize ='12px', direction = 'auto' ),
+             markerIcons = artsAndCulture,
+             markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
+             clusterOptions = markerClusterOptions(), group = "Arts/Culture") %>%
+  addGeoJSONv2(historicLandmarks,
+             labelProperty='LABEL',
+             popupProperty=propstoHTMLTable(
+               table.attrs = list(class='table table-striped table-bordered'), drop.na = T),
+             labelOptions = labelOptions(textsize ='12px', direction = 'auto' ),
+             markerIcons = historicLandmark,
+             markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
+             clusterOptions = markerClusterOptions(), group = "Historic Landmarks") %>%
+  addLayersControl(overlayGroups =  c('Arts/Culture', 'Historic Landmarks'),
+                   options = layersControlOptions(collapsed=F))
+
+
