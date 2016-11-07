@@ -8,8 +8,19 @@ omnivoreDependencies <- function() {
   )
 }
 
+# Source https://github.com/timwis/leaflet-choropleth
+geoJSONChoroplethDependency <- function() {
+  list(
+    htmltools::htmlDependency(
+      "geojson-choropleth",version = "1.1.2",
+      system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
+      script = c("choropleth.js")
+    )
+  )
+}
+
 # Utility Function
-invokeJsMethod <- function(
+invokeJSAddMethod <- function(
   jsMethod, # The javascript method to invoke
   map, data, layerId = NULL, group = NULL,
   markerType = NULL, markerIcons = NULL,
@@ -146,7 +157,7 @@ addGeoJSONv2 = function(
   highlightOptions = NULL
 ) {
 
-  invokeJsMethod('addGeoJSONv2',
+  invokeJSAddMethod('addGeoJSONv2',
     map, geojson, layerId, group,
     markerType, markerIcons,
     markerIconProperty, markerOptions,
@@ -163,7 +174,60 @@ addGeoJSONv2 = function(
     smoothFactor,
     noClip,
     pathOptions, highlightOptions)
+}
 
+#' Adds a GeoJSON Choropleth.
+#' @param valueProperty The property to use for coloring
+#' @param scale The scale to use from chroma.js
+#' @param steps number of breakes
+#' @param mode q for quantile, e for equidistant, k for k-means
+#' @param colors overrides scale with manual colors
+#' @rdname omnivore
+#' @export
+addGeoJSONChoropleth = function(
+  map, geojson, layerId = NULL, group = NULL,
+  valueProperty,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  scale = c('white','red'),
+  steps =5,
+  mode = 'q',
+  colors = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 1,
+  opacity = 0.5,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies,
+                        geoJSONChoroplethDependency())
+  pathOptions =c(pathOptions, list(
+    valueProperty=valueProperty,
+    scale=scale,
+    steps=steps,
+    mode=mode,
+    colors=colors,
+    stroke=stroke,
+    color=color,
+    weight=weight,
+    opacity=opacity,
+    fillOpacity=fillOpacity,
+    dashArray=dashArray,
+    smoothFactor=smoothFactor,
+    noClip=noClip
+  ))
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map), 'addGeoJSONChoropleth',
+    geojson, layerId, group,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    pathOptions, highlightOptions
+    )
 }
 
 #' Adds a TopoJSON to the leaflet map.
@@ -192,7 +256,7 @@ addTopoJSONv2 = function(
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL
 ) {
-  invokeJsMethod('addTopoJSONv2',
+  invokeJSAddMethod('addTopoJSONv2',
     map, topojson, layerId, group,
     markerType, markerIcons,
     markerIconProperty, markerOptions,
@@ -209,4 +273,53 @@ addTopoJSONv2 = function(
     smoothFactor,
     noClip,
     pathOptions, highlightOptions)
+}
+
+#' Adds a TopoJSON Choropleth.
+#' @rdname omnivore
+#' @export
+addTopoJSONChoropleth = function(
+  map, topojson, layerId = NULL, group = NULL,
+  valueProperty,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  scale = c('white','red'),
+  steps =5,
+  mode = 'q',
+  colors = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 1,
+  opacity = 0.5,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies,
+                        geoJSONChoroplethDependency())
+  pathOptions =c(pathOptions, list(
+    valueProperty=valueProperty,
+    scale=scale,
+    steps=steps,
+    mode=mode,
+    colors=colors,
+    stroke=stroke,
+    color=color,
+    weight=weight,
+    opacity=opacity,
+    fillOpacity=fillOpacity,
+    dashArray=dashArray,
+    smoothFactor=smoothFactor,
+    noClip=noClip
+  ))
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map), 'addTopoJSONChoropleth',
+    topojson, layerId, group,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    pathOptions, highlightOptions
+    )
 }
