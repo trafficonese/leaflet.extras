@@ -60,6 +60,7 @@ propsToHTML <- function(props, elem=NULL, elem.attrs=NULL) {
 
 #' Converts GeoJSON Feature properties to HTML Table.
 #' @param table.attrs An optional named list for the HTML Table.
+#' @param drop.na whether to skip properties with empty values.
 #' @export
 #' @rdname utils
 propstoHTMLTable <- function(props = NULL, table.attrs=NULL, drop.na = TRUE) {

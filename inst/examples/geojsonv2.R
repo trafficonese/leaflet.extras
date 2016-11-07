@@ -6,7 +6,7 @@ leaf <- leaflet() %>%
 
 #' ## With Polygons
 #'
-json <- paste(readLines('inst/examples/dc-ward-2012.geojson'),collapse = '')
+json <- readr::read_file('https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson')
 
 json.l <- jsonlite::fromJSON(json)
 
@@ -143,5 +143,3 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
              clusterOptions = markerClusterOptions(), group = "Historic Landmarks") %>%
   addLayersControl(overlayGroups =  c('Arts/Culture', 'Historic Landmarks'),
                    options = layersControlOptions(collapsed=F))
-
-

@@ -2,39 +2,52 @@
 % Please edit documentation in R/omnivore.R
 \name{addGeoJSONv2}
 \alias{addGeoJSONv2}
+\alias{addTopoJSONv2}
 \title{Adds a GeoJSON to the leaflet map.
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
 options to map feature properties to labels, popups, colors, markers etc.}
 \usage{
 addGeoJSONv2(map, geojson, layerId = NULL, group = NULL,
-  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
-  markerIcons = NULL, clusterOptions = NULL, clusterId = NULL,
-  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
-  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
-  stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
-  fill = TRUE, fillColor = color, fillOpacity = 0.2, dashArray = NULL,
-  smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL)
+  markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
+  clusterId = NULL, labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
+  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+
+addTopoJSONv2(map, topojson, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
+  clusterId = NULL, labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
+  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
 }
 \arguments{
 \item{map}{the leaflet map widget}
 
-\item{geojson}{a GeoJSON list, or character vector of length 1}
+\item{geojson}{a GeoJSON URL or contents in a character vector.}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group this raster image should belong to (see
 the same parameter under \code{\link{addTiles}})}
 
+\item{markerType}{The type of marker.  either 'marker' or 'circleMarker'}
+
+\item{markerIcons}{Icons for Marker.
+Can be a single marker using \code{\link[leaflet]{makeIcon}}
+or a list of markers using \code{\link[leaflet]{iconList}}}
+
 \item{markerIconProperty}{The property of the feature to use for marker icon.
 Can be a JS function which accepts a feature and returns an index of \code{markerIcons}.
 In either case the result must be one of the indexes of markerIcons.}
 
 \item{markerOptions}{The options for markers}
-
-\item{markerIcons}{Icons for Marker.
-Can be a single marker using \code{\link[leaflet]{makeIcon}}
-or a list of markers using \code{\link[leaflet]{iconList}}}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
@@ -84,10 +97,16 @@ pattern}}
 options for each label. Default \code{NULL}
    you can use \code{\link[leaflet]{highlightOptions}()} to specify highlight
   options}
+
+\item{topojson}{a TopoJSON URL or contents in a character vector.}
 }
 \description{
 Adds a GeoJSON to the leaflet map.
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
+options to map feature properties to labels, popups, colors, markers etc.
+
+Adds a TopoJSON to the leaflet map.
+This is a feature rich alternative to the \code{\link[leaflet]{addTopoJSON}} with
 options to map feature properties to labels, popups, colors, markers etc.
 }
 

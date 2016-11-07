@@ -8,22 +8,90 @@ omnivoreDependencies <- function() {
   )
 }
 
+# Utility Function
+invokeJsMethod <- function(
+  jsMethod, # The javascript method to invoke
+  map, data, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
+  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL, clusterId = NULL,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  if(!is.null(markerType) && !(markerType %in% c('marker', 'circleMarker'))) {
+    stop("markerType if specified then it needs to be either 'marker' or 'clusterMarker'")
+  }
+
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+
+  if (!is.null(clusterOptions)) {
+    map$dependencies = c(map$dependencies,
+                         leaflet::leafletDependencies$markerCluster())
+  }
+
+  pathOptions = c(pathOptions, list(
+    stroke = stroke, color = color, weight = weight, opacity = opacity,
+    fill = fill, fillColor = fillColor, fillOpacity = fillOpacity,
+    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip))
+
+  markerIconFunction <- NULL
+  if(!is.null(markerIcons)) {
+     if(inherits(markerIcons,'leaflet_icon_set') ||
+        inherits(markerIcons, 'leaflet_icon')) {
+       markerIconFunction <- defIconFunction
+     } else if(inherits(markerIcons,'leaflet_awesome_icon_set') ||
+               inherits(markerIcons, 'leaflet_awesome_icon')) {
+       if(inherits(markerIcons,'leaflet_awesome_icon_set')) {
+         libs <- unique(sapply(markerIcons,function(icon) icon$library))
+         map <- addAwesomeMarkersDependencies(map,libs)
+       } else {
+         map <- addAwesomeMarkersDependencies(map,markerIcons$library)
+       }
+       markerIconFunction <- awesomeIconFunction
+     } else {
+       stop('markerIcons should be created using either leaflet::iconList() or leaflet::awesomeIconList()')
+     }
+  }
+
+  invokeMethod(
+    map, getMapData(map), jsMethod, data, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions, markerIconFunction,
+    clusterOptions, clusterId,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    pathOptions, highlightOptions)
+
+}
+
 
 #' Adds a GeoJSON to the leaflet map.
 #' This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
 #' options to map feature properties to labels, popups, colors, markers etc.
 #' @param map the leaflet map widget
-#' @param geojson a GeoJSON list, or character vector of length 1
+#' @param geojson a GeoJSON URL or contents in a character vector.
 #' @param layerId the layer id
 #' @param group the name of the group this raster image should belong to (see
 #'   the same parameter under \code{\link{addTiles}})
+#' @param markerType The type of marker.  either 'marker' or 'circleMarker'
+#' @param markerIcons Icons for Marker.
+#' Can be a single marker using \code{\link[leaflet]{makeIcon}}
+#' or a list of markers using \code{\link[leaflet]{iconList}}
 #' @param markerIconProperty The property of the feature to use for marker icon.
 #' Can be a JS function which accepts a feature and returns an index of \code{markerIcons}.
 #' In either case the result must be one of the indexes of markerIcons.
 #' @param markerOptions The options for markers
-#' @param markerIcons Icons for Marker.
-#' Can be a single marker using \code{\link[leaflet]{makeIcon}}
-#' or a list of markers using \code{\link[leaflet]{iconList}}
 #' @param clusterOptions if not \code{NULL}, markers will be clustered using
 #'   \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
 #'    you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
@@ -59,8 +127,8 @@ omnivoreDependencies <- function() {
 #' @export
 addGeoJSONv2 = function(
   map, geojson, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
   markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
-  markerIcons = NULL,
   clusterOptions = NULL, clusterId = NULL,
   labelProperty = NULL, labelOptions = leaflet::labelOptions(),
   popupProperty = NULL, popupOptions = leaflet::popupOptions(),
@@ -78,41 +146,67 @@ addGeoJSONv2 = function(
   highlightOptions = NULL
 ) {
 
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
-
-  if (!is.null(clusterOptions)) {
-    map$dependencies = c(map$dependencies,
-                         leaflet::leafletDependencies$markerCluster())
-  }
-
-  pathOptions = c(pathOptions, list(
-    stroke = stroke, color = color, weight = weight, opacity = opacity,
-    fill = fill, fillColor = fillColor, fillOpacity = fillOpacity,
-    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip))
-
-  markerIconFunction <- NULL
-  if(!is.null(markerIcons)) {
-     if(inherits(markerIcons,'leaflet_icon_set') ||
-        inherits(markerIcons, 'leaflet_icon')) {
-       markerIconFunction <- defIconFunction
-     } else if(inherits(markerIcons,'leaflet_awesome_icon_set') ||
-               inherits(markerIcons, 'leaflet_awesome_icon')) {
-       if(inherits(markerIcons,'leaflet_awesome_icon_set')) {
-         libs <- unique(sapply(markerIcons,function(icon) icon$library))
-         map <- addAwesomeMarkersDependencies(map,libs)
-       } else {
-         map <- addAwesomeMarkersDependencies(map,markerIcons$library)
-       }
-       markerIconFunction <- awesomeIconFunction
-     } else {
-       stop('markerIcons should be created using either leaflet::iconList() or leaflet::awesomeIconList()')
-     }
-  }
-
-  invokeMethod(
-    map, getMapData(map), 'addGeoJSONv2', geojson, layerId, group,
-    markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+  invokeJsMethod('addGeoJSONv2',
+    map, geojson, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions,
     clusterOptions, clusterId,
     labelProperty, labelOptions, popupProperty, popupOptions,
+    stroke,
+    color,
+    weight,
+    opacity,
+    fill,
+    fillColor,
+    fillOpacity,
+    dashArray,
+    smoothFactor,
+    noClip,
+    pathOptions, highlightOptions)
+
+}
+
+#' Adds a TopoJSON to the leaflet map.
+#' This is a feature rich alternative to the \code{\link[leaflet]{addTopoJSON}} with
+#' options to map feature properties to labels, popups, colors, markers etc.
+#' @param topojson a TopoJSON URL or contents in a character vector.
+#' @rdname omnivore
+#' @export
+addTopoJSONv2 = function(
+  map, topojson, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
+  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL, clusterId = NULL,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  invokeJsMethod('addTopoJSONv2',
+    map, topojson, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions,
+    clusterOptions, clusterId,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    stroke,
+    color,
+    weight,
+    opacity,
+    fill,
+    fillColor,
+    fillOpacity,
+    dashArray,
+    smoothFactor,
+    noClip,
     pathOptions, highlightOptions)
 }

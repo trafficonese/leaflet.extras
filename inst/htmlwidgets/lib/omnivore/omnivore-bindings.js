@@ -21,7 +21,8 @@ LeafletWidget.methods.addgenericGeoJSON = function(
   dataFunction, geojsonLayerFunction,
   layerId, group,
   setStyle,
-  markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
@@ -157,21 +158,25 @@ LeafletWidget.methods.addgenericGeoJSON = function(
   // code for custom markers
   function pointToLayerFunction(feature, latlng) {
     var layer = null;
-  	if (typeof markerIconProperty !== "undefined" && markerIconProperty !== null) {
-  		if(typeof markerIconProperty == "string") {
-          layer = L.marker(latlng, $.extend({
-            icon: markerIconFunction(markerIcons[feature.properties[markerIconProperty]])
-          }, markerOptions || {}));
-  		} else if(typeof markerIconProperty == "function") {
+    if(markerType === 'circleMarker') {
+      layer = L.circleMarker(latlng, markerOptions || {});
+    } else {
+      if (typeof markerIconProperty !== "undefined" && markerIconProperty !== null) {
+        if(typeof markerIconProperty == "string") {
             layer = L.marker(latlng, $.extend({
-              icon: markerIconFunction(markerIcons[markerIconProperty(feature)])
+              icon: markerIconFunction(markerIcons[feature.properties[markerIconProperty]])
             }, markerOptions || {}));
-  		}
-  	} else {
-          layer = L.marker(latlng, $.extend({
-            icon: markerIconFunction(markerIcons)
-          }, markerOptions || {}));
-  	}
+        } else if(typeof markerIconProperty == "function") {
+              layer = L.marker(latlng, $.extend({
+                icon: markerIconFunction(markerIcons[markerIconProperty(feature)])
+              }, markerOptions || {}));
+        }
+      } else {
+            layer = L.marker(latlng, $.extend({
+              icon: markerIconFunction(markerIcons)
+            }, markerOptions || {}));
+      }
+    }
 
     if(cluster) {
       clusterGroup.clusterLayerStore.add(layer);
@@ -185,7 +190,7 @@ LeafletWidget.methods.addgenericGeoJSON = function(
   }
   geojsonOptions.onEachFeature = onEachFeatureFunction;
 
-  if(!$.isEmptyObject(markerIcons)) {
+  if(markerType === 'circleMarker' || !$.isEmptyObject(markerIcons)) {
     geojsonOptions.pointToLayer = pointToLayerFunction;
   }
 
@@ -200,7 +205,8 @@ LeafletWidget.methods.addgenericGeoJSON = function(
 
 LeafletWidget.methods.addGeoJSONv2 = function(
   data, layerId, group,
-  markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
@@ -224,7 +230,39 @@ LeafletWidget.methods.addGeoJSONv2 = function(
       },
       layerId, group,
       true,
-      markerIconProperty, markerOptions, markerIcons, markerIconFunction,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+};
+
+LeafletWidget.methods.addTopoJSONv2 = function(
+  data, layerId, group,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
+  clusterOptions, clusterId,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+  ) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+           return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.geoJson(null, geoJsonOptions);
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.topojson(data,null,l);
+        } else {
+          return omnivore.topojson.parse(data,null,l);
+        }
+      },
+      layerId, group,
+      true,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
       clusterOptions, clusterId,
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
@@ -257,7 +295,8 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
       },
       layerId, group,
       false,
-      null, null, null, null,
+      null, null,
+      null, null, null,
       null, null,
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
@@ -286,7 +325,8 @@ LeafletWidget.methods.addTopoJSONChoropleth = function(
       },
       layerId, group,
       false,
-      null, null, null, null,
+      null, null,
+      null, null, null,
       null, null,
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions

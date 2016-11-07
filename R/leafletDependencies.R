@@ -1,6 +1,5 @@
 #' Add Bootstrap dependency to a map
 #' @param map the map widget
-#' @param libs char vector with lib names.
 #' @export
 addBootstrapDependency <- function(map)  {
     map$dependencies <- c(map$dependencies,

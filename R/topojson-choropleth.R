@@ -1,14 +1,3 @@
-# Source https://github.com/TrantorM/leaflet-choroplethTopoJSON
-topoJSONChoroplethDependency <- function() {
-  list(
-    htmltools::htmlDependency(
-      "topojson-choropleth",version = "0.1.0",
-      system.file("htmlwidgets/lib/topojson-choropleth", package = "leaflet.extras"),
-      script = c("choroplethTopoJSON.min.js")
-    )
-  )
-}
-
 #' Adds a TopoJSON Choropleth.
 #' @param topojson either as a list or a string
 #' @rdname geojson-choropleth
@@ -36,8 +25,6 @@ addTopoJSONChoropleth = function(
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
-  #map$dependencies <- c(map$dependencies,
-                        #topoJSONChoroplethDependency())
   pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
     scale=scale,

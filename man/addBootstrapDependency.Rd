@@ -8,8 +8,6 @@ addBootstrapDependency(map)
 }
 \arguments{
 \item{map}{the map widget}
-
-\item{libs}{char vector with lib names.}
 }
 \description{
 Add Bootstrap dependency to a map
