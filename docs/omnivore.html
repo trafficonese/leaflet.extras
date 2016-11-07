@@ -57,12 +57,40 @@ options to map feature properties to labels, popups, colors, markers etc.</h1>
   <div class="span8">
     <h2>Usage</h2>
     <pre><span class="functioncall"><a href='omnivore.html'>addGeoJSONv2</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">geojson</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
-  <span class="argument">markerIconProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>markerOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
-  <span class="argument">markerIcons</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clusterOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">clusterId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
-  <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
-  <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
-  <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span> <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span>
-  <span class="argument">fill</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">fillColor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">color</span><span class="keyword">,</span> <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerType</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIcons</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIconProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>markerOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">clusterOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">clusterId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span>
+  <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span> <span class="argument">fill</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">fillColor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">color</span><span class="keyword">,</span>
+  <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='omnivore.html'>addGeoJSONChoropleth</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">geojson</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="symbol">valueProperty</span><span class="keyword">,</span> <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">scale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"white"</span><span class="keyword">,</span> <span class="string">"red"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">steps</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"q"</span><span class="keyword">,</span> <span class="argument">colors</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span>
+  <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span> <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='omnivore.html'>addTopoJSONv2</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">topojson</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerType</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIcons</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIconProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>markerOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">clusterOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">clusterId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span>
+  <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span> <span class="argument">fill</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">fillColor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">color</span><span class="keyword">,</span>
+  <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='omnivore.html'>addTopoJSONChoropleth</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">topojson</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="symbol">valueProperty</span><span class="keyword">,</span> <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">scale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"white"</span><span class="keyword">,</span> <span class="string">"red"</span><span class="keyword">)</span><span class="keyword">,</span>
+  <span class="argument">steps</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"q"</span><span class="keyword">,</span> <span class="argument">colors</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span>
+  <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span> <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
   <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
     
@@ -71,22 +99,24 @@ options to map feature properties to labels, popups, colors, markers etc.</h1>
       <dt>map</dt>
       <dd>the leaflet map widget</dd>
       <dt>geojson</dt>
-      <dd>a GeoJSON list, or character vector of length 1</dd>
+      <dd>a GeoJSON URL or contents in a character vector.</dd>
       <dt>layerId</dt>
       <dd>the layer id</dd>
       <dt>group</dt>
       <dd>the name of the group this raster image should belong to (see
 the same parameter under <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-layers'>addTiles</a></code>)</dd>
+      <dt>markerType</dt>
+      <dd>The type of marker.  either &#39;marker&#39; or &#39;circleMarker&#39;</dd>
+      <dt>markerIcons</dt>
+      <dd>Icons for Marker.
+Can be a single marker using <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/makeIcon'>makeIcon</a></code>
+or a list of markers using <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/iconList'>iconList</a></code></dd>
       <dt>markerIconProperty</dt>
       <dd>The property of the feature to use for marker icon.
 Can be a JS function which accepts a feature and returns an index of <code>markerIcons</code>.
 In either case the result must be one of the indexes of markerIcons.</dd>
       <dt>markerOptions</dt>
       <dd>The options for markers</dd>
-      <dt>markerIcons</dt>
-      <dd>Icons for Marker.
-Can be a single marker using <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/makeIcon'>makeIcon</a></code>
-or a list of markers using <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/iconList'>iconList</a></code></dd>
       <dt>clusterOptions</dt>
       <dd>if not <code>NULL</code>, markers will be clustered using
 <a href = 'https://github.com/Leaflet/Leaflet.markercluster'>Leaflet.markercluster</a>;
@@ -136,6 +166,18 @@ pattern</a></dd>
 options for each label. Default <code>NULL</code>
    you can use <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-layers'>highlightOptions</a>()</code> to specify highlight
   options</dd>
+      <dt>valueProperty</dt>
+      <dd>The property to use for coloring</dd>
+      <dt>scale</dt>
+      <dd>The scale to use from chroma.js</dd>
+      <dt>steps</dt>
+      <dd>number of breakes</dd>
+      <dt>mode</dt>
+      <dd>q for quantile, e for equidistant, k for k-means</dd>
+      <dt>colors</dt>
+      <dd>overrides scale with manual colors</dd>
+      <dt>topojson</dt>
+      <dd>a TopoJSON URL or contents in a character vector.</dd>
     </dl>
     
     <div class="Description">
@@ -145,11 +187,19 @@ options for each label. Default <code>NULL</code>
 This is a feature rich alternative to the <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-layers'>addGeoJSON</a></code> with
 options to map feature properties to labels, popups, colors, markers etc.</p>
 
+      <p>Adds a GeoJSON Choropleth.</p>
+
+      <p>Adds a TopoJSON to the leaflet map.
+This is a feature rich alternative to the <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-layers'>addTopoJSON</a></code> with
+options to map feature properties to labels, popups, colors, markers etc.</p>
+
+      <p>Adds a TopoJSON Choropleth.</p>
+
     </div>
       </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>addGeoJSONv2</li>
+      <li>addGeoJSONChoropleth</li><li>addGeoJSONv2</li><li>addTopoJSONChoropleth</li><li>addTopoJSONv2</li>
     </ul>
     <ul>
       
