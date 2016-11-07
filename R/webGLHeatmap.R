@@ -64,6 +64,38 @@ addWebGLHeatmap = function(
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }
 
+#' Adds a heatmap with data from a GeoJSON
+#' @param geojson The geojson or topojson url or contents as string.
+#' @param intensityProperty The property to use for determining the intensity at a point.
+#' Can be a 'string' or a JS function, or NULL.
+#' @rdname heatmap
+#' @export
+addWebGLGeoJSONHeatmap = function(
+  map, geojson, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = '30000',
+  units = 'm',
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+  ) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map),
+    'addWebGLGeoJSONHeatmap', geojson, intensityProperty,
+    layerId, group,
+    leaflet::filterNULL(list(
+      size = size,
+      units = units,
+      opacity = opacity,
+      gradientTexture = gradientTexture,
+      alphaRange = alphaRange
+    )))
+
+}
+
 #' removes the webgl heatmap
 #' @rdname heatmap
 #' @export

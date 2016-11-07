@@ -3,7 +3,7 @@ omnivoreDependencies <- function() {
     htmltools::htmlDependency(
       "leaflet.extras-omnivore",version = "0.1.0",
       system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
-      script = c("leaflet-omnivore.min.js", "omnivore-bindings.js")
+      script = c("topojson.js", "leaflet-omnivore.min.js", "omnivore-bindings.js")
     )
   )
 }
