@@ -23,9 +23,10 @@ Plugins integrated so far
 - [Fullscreen Control](https://github.com/Leaflet/Leaflet.fullscreen)
 - [WMS Legend](https://github.com/kartoza/leaflet-wms-legend)
 - [Omnivore](https://github.com/mapbox/leaflet-omnivore)
-    * Demo at [Rpubs - GeoJSON](http://rpubs.com/bhaskarvk/geojsonv2)
-    * Demo at [Rpubs - TopoJSON](http://rpubs.com/bhaskarvk/topojsonv2)
-    * Demo at [Rpubs - KML](http://rpubs.com/bhaskarvk/kml)
+    * GeoJSON: Demo at [Rpubs - GeoJSON](http://rpubs.com/bhaskarvk/geojsonv2)
+    * TopoJSON: Demo at [Rpubs - TopoJSON](http://rpubs.com/bhaskarvk/topojsonv2)
+    * KML: Demo at [Rpubs - KML](http://rpubs.com/bhaskarvk/kml)
+    * CSV: Demo at [Rpubs - CSV](http://rpubs.com/bhaskarvk/CSV)
 
 If you need a plugin that is not already implemented create an issue.
 

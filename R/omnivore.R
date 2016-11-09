@@ -4,7 +4,7 @@ omnivoreDependencies <- function() {
       "leaflet.extras-omnivore",version = "0.1.0",
       system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
       script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
-                 "polyline.js", "cve2geojson.js",
+                 "polyline.js", "csv2geojson.js",
                  "leaflet-omnivore.min.js", "omnivore-bindings.js")
     )
   )
@@ -41,7 +41,8 @@ invokeJSAddMethod <- function(
   smoothFactor = 1.0,
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL
+  highlightOptions = NULL,
+  ...
 ) {
   if(!is.null(markerType) && !(markerType %in% c('marker', 'circleMarker'))) {
     stop("markerType if specified then it needs to be either 'marker' or 'clusterMarker'")
@@ -78,13 +79,24 @@ invokeJSAddMethod <- function(
      }
   }
 
-  invokeMethod(
-    map, getMapData(map), jsMethod, data, layerId, group,
-    markerType, markerIcons,
-    markerIconProperty, markerOptions, markerIconFunction,
-    clusterOptions, clusterId,
-    labelProperty, labelOptions, popupProperty, popupOptions,
-    pathOptions, highlightOptions)
+  if(missing(...)) {
+    invokeMethod(
+      map, getMapData(map), jsMethod, data, layerId, group,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions)
+
+  } else {
+    invokeMethod(
+      map, getMapData(map), jsMethod, data, layerId, group,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions, ...)
+  }
 
 }
 
@@ -416,4 +428,67 @@ addKMLChoropleth = function(
     labelProperty, labelOptions, popupProperty, popupOptions,
     pathOptions, highlightOptions
     )
+}
+
+#' Options for parsing CSV
+#' @param latfield field name for latitude
+#' @param lonfield field name for longitude
+#' @param delimiter field seperator
+#' @rdname omnivore
+#' @export
+csvParserOptions <- function(
+  latfield,
+  lonfield,
+  delimiter = ','
+) {
+  list(
+    latfield = latfield,
+    lonfield = lonfield,
+    delimiter = delimiter
+  )
+}
+
+#' Adds a CSV to the leaflet map.
+#' @param csv a CSV URL or contents in a character vector.
+#' @param csvParserOptions options for parsing the CSV.
+#' Use \code{\link{csvParserOptions}}() to supply csv parser options.
+#' @rdname omnivore
+#' @export
+addCSV = function(
+  map, csv, csvParserOptions, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
+  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL, clusterId = NULL,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  invokeJSAddMethod('addCSV',
+    map, csv, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions,
+    clusterOptions, clusterId,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    stroke,
+    color,
+    weight,
+    opacity,
+    fill,
+    fillColor,
+    fillOpacity,
+    dashArray,
+    smoothFactor,
+    noClip,
+    pathOptions, highlightOptions, csvParserOptions)
 }

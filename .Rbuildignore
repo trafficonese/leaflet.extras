@@ -1,7 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^inst/htmlwidgets/lib/.*/node_modules.*$
-^inst/examples
+^inst/examples/.*\.Rmd
+^inst/examples/.*\.html
+^inst/examples/rsconnect
 ^cran-comments\.md$
 ^NEWS\.md$
 ^README\.md$

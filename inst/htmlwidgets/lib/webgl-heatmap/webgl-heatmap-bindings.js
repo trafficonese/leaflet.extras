@@ -160,6 +160,35 @@ LeafletWidget.methods.addWebGLKMLHeatmap = function(
 
 };
 
+
+LeafletWidget.methods.addWebGLCSVHeatmap = function(
+  csv, intensityProperty, layerId, group, options, parserOptions) {
+ var geojsondata = null;
+    if(LeafletWidget.utils.isURL(csv)) {
+      $.ajaxSetup({async: false});
+      $.getJSON(csv, function(data){
+        csv2geojson.csv2geojson(
+          data, parserOptions || {}, 
+          function(err, gjdata) {
+            geojsondata = gjdata;
+          }
+        );
+      });
+      $.ajaxSetup({async: true});
+    } else {
+      csv2geojson.csv2geojson(
+        csv, parserOptions || {}, 
+        function(err, gjdata) {
+          geojsondata = gjdata;
+        }
+      );
+    }
+    if(geojsondata) {
+    LeafletWidget.methods.addWebGLGeoJSONHeatmap.call(this,
+      geojsondata, intensityProperty, layerId, group, options);
+    }
+
+};
 LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
   this.layerManager.removeLayer("webGLHeatmap", layerId);
 };

@@ -31,7 +31,6 @@ leaflet() %>%
 #'
 fName <- 'https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson'
 
-
 leaflet() %>%
   addBootstrapDependency() %>%
   setView(-75.14, 40, zoom = 11) %>%

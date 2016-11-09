@@ -1,6 +1,6 @@
 # leaflet.extras 0.1.6
 
-* Added KML support and more examples of handling geojson/topojson/kml data.
+* Added KML/CSV support and more examples of handling geojson/topojson/kml data.
 
 # leaflet.extras 0.1.5
 

@@ -93,7 +93,6 @@ addWebGLGeoJSONHeatmap = function(
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
     )))
-
 }
 
 #' Adds a heatmap with data from a KML file/url
@@ -123,7 +122,38 @@ addWebGLKMLHeatmap = function(
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
     )))
+}
 
+#' Adds a heatmap with data from a CSV file/url
+#' @param csv The CSV url or contents as string.
+#' @param csvParserOptions options for parsing the CSV.
+#' Use \code{\link{csvParserOptions}}() to supply csv parser options.
+#' @rdname heatmap
+#' @export
+addWebGLCSVHeatmap = function(
+  map, csv, csvParserOptions, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = '30000',
+  units = 'm',
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+  ) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map),
+    'addWebGLCSVHeatmap', csv, intensityProperty,
+    layerId, group,
+    leaflet::filterNULL(list(
+      size = size,
+      units = units,
+      opacity = opacity,
+      gradientTexture = gradientTexture,
+      alphaRange = alphaRange
+    )),
+    csvParserOptions)
 }
 
 #' removes the webgl heatmap

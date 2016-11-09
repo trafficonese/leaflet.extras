@@ -223,7 +223,7 @@ LeafletWidget.methods.addGeoJSONv2 = function(
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         if (LeafletWidget.utils.isURL(data)) {
           var l = L.geoJson(null, geoJsonOptions);
-          return omnivore.geojson(data,null,l);
+          return omnivore.geojson(data, null, l);
         } else {
           return L.geoJson(parsedData, geoJsonOptions);
         }
@@ -254,9 +254,9 @@ LeafletWidget.methods.addTopoJSONv2 = function(
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         var l = L.geoJson(null, geoJsonOptions);
         if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.topojson(data,null,l);
+          return omnivore.topojson(data, null, l);
         } else {
-          return omnivore.topojson.parse(data,null,l);
+          return omnivore.topojson.parse(data, null, l);
         }
       },
       layerId, group,
@@ -285,9 +285,9 @@ LeafletWidget.methods.addKML = function(
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         var l = L.geoJson(null, geoJsonOptions);
         if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.kml(data,null,l);
+          return omnivore.kml(data, null, l);
         } else {
-          return omnivore.kml.parse(data,null,l);
+          return omnivore.kml.parse(data, null, l);
         }
       },
       layerId, group,
@@ -299,6 +299,38 @@ LeafletWidget.methods.addKML = function(
       pathOptions, highlightOptions
     );
 };
+
+LeafletWidget.methods.addCSV = function(
+  data, layerId, group,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
+  clusterOptions, clusterId,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions, csvParserOptions
+  ) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+           return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.geoJson(null, geoJsonOptions);
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.csv(data, csvParserOptions || {}, l);
+        } else {
+          return omnivore.csv.parse(data, csvParserOptions || {}, l);
+        }
+      },
+      layerId, group,
+      true,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+};
+
 
 LeafletWidget.methods.addGeoJSONChoropleth = function(
   data, layerId, group,
@@ -318,7 +350,7 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
         if (LeafletWidget.utils.isURL(data)) {
           var l = L.choropleth(null, $.extend(
             pathOptions, geoJsonOptions));
-          return omnivore.geojson(data,null,l);
+          return omnivore.geojson(data, null, l);
         } else {
           return L.choropleth(parsedData, $.extend(
             pathOptions, geoJsonOptions));
@@ -349,9 +381,9 @@ LeafletWidget.methods.addTopoJSONChoropleth = function(
         var l = L.choropleth(null, $.extend(
           pathOptions, geoJsonOptions));
         if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.topojson(data,null,l);
+          return omnivore.topojson(data, null, l);
         } else {
-          return omnivore.topojson.parse(data,null,l);
+          return omnivore.topojson.parse(data, null, l);
         }
       },
       layerId, group,
@@ -379,9 +411,9 @@ LeafletWidget.methods.addKMLChoropleth = function(
         var l = L.choropleth(null, $.extend(
           pathOptions, geoJsonOptions));
         if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.kml(data,null,l);
+          return omnivore.kml(data, null, l);
         } else {
-          return omnivore.kml.parse(data,null,l);
+          return omnivore.kml.parse(data, null, l);
         }
       },
       layerId, group,
@@ -394,3 +426,37 @@ LeafletWidget.methods.addKMLChoropleth = function(
     );
 
 };
+
+
+/* Commented until I figure out how to make polylines/polygons from CSV data 
+
+LeafletWidget.methods.addCSVChoropleth = function(
+  data, layerId, group,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions, csvParserOptions
+) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+          return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.choropleth(null, $.extend(
+          pathOptions, geoJsonOptions));
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.csv(data, csvParserOptions || {}, l);
+        } else {
+          return omnivore.csv.parse(data, csvParserOptions || {}, l);
+        }
+      },
+      layerId, group,
+      false,
+      null, null,
+      null, null, null,
+      null, null,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+
+};
+*/

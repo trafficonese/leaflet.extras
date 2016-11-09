@@ -110,6 +110,18 @@ options to map feature properties to labels, popups, colors, markers etc.</h1>
   <span class="argument">scale</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"white"</span><span class="keyword">,</span> <span class="string">"red"</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">steps</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">mode</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"q"</span><span class="keyword">,</span> <span class="argument">colors</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
   <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span> <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span>
   <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span>
+
+<span class="functioncall"><a href='omnivore.html'>csvParserOptions</a></span><span class="keyword">(</span><span class="symbol">latfield</span><span class="keyword">,</span> <span class="symbol">lonfield</span><span class="keyword">,</span> <span class="argument">delimiter</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">","</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='omnivore.html'>addCSV</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">csv</span><span class="keyword">,</span> <span class="symbol">csvParserOptions</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerType</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIcons</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">markerIconProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">markerOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>markerOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">clusterOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">clusterId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">labelProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">labelOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>labelOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">popupProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">popupOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>popupOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">stroke</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">color</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"#03F"</span><span class="keyword">,</span>
+  <span class="argument">weight</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">5</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.5</span><span class="keyword">,</span> <span class="argument">fill</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">,</span> <span class="argument">fillColor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">color</span><span class="keyword">,</span>
+  <span class="argument">fillOpacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">0.2</span><span class="keyword">,</span> <span class="argument">dashArray</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">smoothFactor</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span> <span class="argument">noClip</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
   <span class="argument">pathOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/map-options'>pathOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">highlightOptions</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
@@ -198,6 +210,17 @@ options for each label. Default <code>NULL</code>
       <dd>a TopoJSON URL or contents in a character vector.</dd>
       <dt>kml</dt>
       <dd>a KML URL or contents in a character vector.</dd>
+      <dt>latfield</dt>
+      <dd>field name for latitude</dd>
+      <dt>lonfield</dt>
+      <dd>field name for longitude</dd>
+      <dt>delimiter</dt>
+      <dd>field seperator</dd>
+      <dt>csv</dt>
+      <dd>a CSV URL or contents in a character vector.</dd>
+      <dt>csvParserOptions</dt>
+      <dd>options for parsing the CSV.
+Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv parser options.</dd>
     </dl>
     
     <div class="Description">
@@ -219,11 +242,15 @@ options to map feature properties to labels, popups, colors, markers etc.</p>
 
       <p>Adds a KML Choropleth.</p>
 
+      <p>Options for parsing CSV</p>
+
+      <p>Adds a CSV to the leaflet map.</p>
+
     </div>
       </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>addGeoJSONChoropleth</li><li>addGeoJSONv2</li><li>addKML</li><li>addKMLChoropleth</li><li>addTopoJSONChoropleth</li><li>addTopoJSONv2</li>
+      <li>addCSV</li><li>addGeoJSONChoropleth</li><li>addGeoJSONv2</li><li>addKML</li><li>addKMLChoropleth</li><li>addTopoJSONChoropleth</li><li>addTopoJSONv2</li><li>csvParserOptions</li>
     </ul>
     <ul>
       
