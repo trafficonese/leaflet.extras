@@ -141,6 +141,25 @@ LeafletWidget.methods.addWebGLGeoJSONHeatmap = function(
   }
 };
 
+LeafletWidget.methods.addWebGLKMLHeatmap = function(
+  kml, intensityProperty, layerId, group, options) {
+ var geojsondata = null;
+    if(LeafletWidget.utils.isURL(kml)) {
+      $.ajaxSetup({async: false});
+      $.getJSON(kml, function(data){
+        geojsondata = toGeoJSON.kml(parseXML(data));
+      });
+      $.ajaxSetup({async: true});
+    } else {
+      geojsondata = toGeoJSON.kml(parseXML(kml));
+    }
+    if(geojsondata) {
+    LeafletWidget.methods.addWebGLGeoJSONHeatmap.call(this,
+      geojsondata, intensityProperty, layerId, group, options);
+    }
+
+};
+
 LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
   this.layerManager.removeLayer("webGLHeatmap", layerId);
 };
@@ -148,4 +167,12 @@ LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
 LeafletWidget.methods.clearWebGLHeatmap = function() {
   this.layerManager.clearLayers("webGLHeatmap");
 };
+
+function parseXML(str) {
+  if (typeof str === 'string') {
+    return (new DOMParser()).parseFromString(str, 'text/xml');
+  } else {
+    return str;
+  }
+}
 

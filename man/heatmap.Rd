@@ -3,6 +3,7 @@
 \name{addWebGLHeatmap}
 \alias{addWebGLGeoJSONHeatmap}
 \alias{addWebGLHeatmap}
+\alias{addWebGLKMLHeatmap}
 \alias{clearWebGLHeatmap}
 \alias{removeWebGLHeatmap}
 \title{Add a webgl heatmap}
@@ -13,6 +14,10 @@ addWebGLHeatmap(map, lng = NULL, lat = NULL, intensity = NULL,
   data = leaflet::getMapData(map))
 
 addWebGLGeoJSONHeatmap(map, geojson, layerId = NULL, group = NULL,
+  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
+  gradientTexture = NULL, alphaRange = 1)
+
+addWebGLKMLHeatmap(map, kml, layerId = NULL, group = NULL,
   intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
   gradientTexture = NULL, alphaRange = 1)
 
@@ -61,11 +66,15 @@ initially, but can be overridden}
 
 \item{intensityProperty}{The property to use for determining the intensity at a point.
 Can be a 'string' or a JS function, or NULL.}
+
+\item{kml}{The KML url or contents as string.}
 }
 \description{
 Add a webgl heatmap
 
-Adds a heatmap with data from a GeoJSON
+Adds a heatmap with data from a GeoJSON/TopoJSON file/url
+
+Adds a heatmap with data from a KML file/url
 
 removes the webgl heatmap
 

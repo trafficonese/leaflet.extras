@@ -64,7 +64,7 @@ addWebGLHeatmap = function(
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }
 
-#' Adds a heatmap with data from a GeoJSON
+#' Adds a heatmap with data from a GeoJSON/TopoJSON file/url
 #' @param geojson The geojson or topojson url or contents as string.
 #' @param intensityProperty The property to use for determining the intensity at a point.
 #' Can be a 'string' or a JS function, or NULL.
@@ -85,6 +85,36 @@ addWebGLGeoJSONHeatmap = function(
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
     'addWebGLGeoJSONHeatmap', geojson, intensityProperty,
+    layerId, group,
+    leaflet::filterNULL(list(
+      size = size,
+      units = units,
+      opacity = opacity,
+      gradientTexture = gradientTexture,
+      alphaRange = alphaRange
+    )))
+
+}
+
+#' Adds a heatmap with data from a KML file/url
+#' @param kml The KML url or contents as string.
+#' @rdname heatmap
+#' @export
+addWebGLKMLHeatmap = function(
+  map, kml, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = '30000',
+  units = 'm',
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+  ) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map),
+    'addWebGLKMLHeatmap', kml, intensityProperty,
     layerId, group,
     leaflet::filterNULL(list(
       size = size,

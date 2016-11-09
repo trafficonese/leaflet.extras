@@ -3,6 +3,8 @@
 \name{addGeoJSONv2}
 \alias{addGeoJSONChoropleth}
 \alias{addGeoJSONv2}
+\alias{addKML}
+\alias{addKMLChoropleth}
 \alias{addTopoJSONChoropleth}
 \alias{addTopoJSONv2}
 \title{Adds a GeoJSON to the leaflet map.
@@ -46,6 +48,24 @@ addTopoJSONChoropleth(map, topojson, layerId = NULL, group = NULL,
   weight = 1, opacity = 0.5, fillOpacity = 0.2, dashArray = NULL,
   smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL)
+
+addKML(map, kml, layerId = NULL, group = NULL, markerType = NULL,
+  markerIcons = NULL, markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
+  clusterId = NULL, labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
+  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+
+addKMLChoropleth(map, kml, layerId = NULL, group = NULL, valueProperty,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  scale = c("white", "red"), steps = 5, mode = "q", colors = NULL,
+  stroke = TRUE, color = "#03F", weight = 1, opacity = 0.5,
+  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
 }
 \arguments{
 \item{map}{the leaflet map widget}
@@ -129,6 +149,8 @@ options for each label. Default \code{NULL}
 \item{colors}{overrides scale with manual colors}
 
 \item{topojson}{a TopoJSON URL or contents in a character vector.}
+
+\item{kml}{a KML URL or contents in a character vector.}
 }
 \description{
 Adds a GeoJSON to the leaflet map.
@@ -142,5 +164,9 @@ This is a feature rich alternative to the \code{\link[leaflet]{addTopoJSON}} wit
 options to map feature properties to labels, popups, colors, markers etc.
 
 Adds a TopoJSON Choropleth.
+
+Adds a KML to the leaflet map.
+
+Adds a KML Choropleth.
 }
 

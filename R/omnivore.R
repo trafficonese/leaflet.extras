@@ -3,7 +3,9 @@ omnivoreDependencies <- function() {
     htmltools::htmlDependency(
       "leaflet.extras-omnivore",version = "0.1.0",
       system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
-      script = c("topojson.js", "leaflet-omnivore.min.js", "omnivore-bindings.js")
+      script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
+                 "polyline.js", "cve2geojson.js",
+                 "leaflet-omnivore.min.js", "omnivore-bindings.js")
     )
   )
 }
@@ -319,6 +321,98 @@ addTopoJSONChoropleth = function(
   leaflet::invokeMethod(
     map, leaflet::getMapData(map), 'addTopoJSONChoropleth',
     topojson, layerId, group,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    pathOptions, highlightOptions
+    )
+}
+
+#' Adds a KML to the leaflet map.
+#' @param kml a KML URL or contents in a character vector.
+#' @rdname omnivore
+#' @export
+addKML = function(
+  map, kml, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
+  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL, clusterId = NULL,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  invokeJSAddMethod('addKML',
+    map, kml, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions,
+    clusterOptions, clusterId,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    stroke,
+    color,
+    weight,
+    opacity,
+    fill,
+    fillColor,
+    fillOpacity,
+    dashArray,
+    smoothFactor,
+    noClip,
+    pathOptions, highlightOptions)
+}
+
+#' Adds a KML Choropleth.
+#' @rdname omnivore
+#' @export
+addKMLChoropleth = function(
+  map, kml, layerId = NULL, group = NULL,
+  valueProperty,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  scale = c('white','red'),
+  steps =5,
+  mode = 'q',
+  colors = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 1,
+  opacity = 0.5,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies,
+                        geoJSONChoroplethDependency())
+  pathOptions =c(pathOptions, list(
+    valueProperty=valueProperty,
+    scale=scale,
+    steps=steps,
+    mode=mode,
+    colors=colors,
+    stroke=stroke,
+    color=color,
+    weight=weight,
+    opacity=opacity,
+    fillOpacity=fillOpacity,
+    dashArray=dashArray,
+    smoothFactor=smoothFactor,
+    noClip=noClip
+  ))
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map), 'addKMLChoropleth',
+    kml, layerId, group,
     labelProperty, labelOptions, popupProperty, popupOptions,
     pathOptions, highlightOptions
     )

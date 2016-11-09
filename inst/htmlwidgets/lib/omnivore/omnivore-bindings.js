@@ -269,6 +269,37 @@ LeafletWidget.methods.addTopoJSONv2 = function(
     );
 };
 
+LeafletWidget.methods.addKML = function(
+  data, layerId, group,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
+  clusterOptions, clusterId,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+  ) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+           return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.geoJson(null, geoJsonOptions);
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.kml(data,null,l);
+        } else {
+          return omnivore.kml.parse(data,null,l);
+        }
+      },
+      layerId, group,
+      true,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+};
+
 LeafletWidget.methods.addGeoJSONChoropleth = function(
   data, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
@@ -321,6 +352,36 @@ LeafletWidget.methods.addTopoJSONChoropleth = function(
           return omnivore.topojson(data,null,l);
         } else {
           return omnivore.topojson.parse(data,null,l);
+        }
+      },
+      layerId, group,
+      false,
+      null, null,
+      null, null, null,
+      null, null,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+
+};
+
+LeafletWidget.methods.addKMLChoropleth = function(
+  data, layerId, group,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+) {
+    LeafletWidget.methods.addgenericGeoJSON(
+      this,
+      function getData(){
+          return {};
+      },
+      function getGeoJSONLayer(parsedData, geoJsonOptions){
+        var l = L.choropleth(null, $.extend(
+          pathOptions, geoJsonOptions));
+        if (LeafletWidget.utils.isURL(data)) {
+          return omnivore.kml(data,null,l);
+        } else {
+          return omnivore.kml.parse(data,null,l);
         }
       },
       layerId, group,

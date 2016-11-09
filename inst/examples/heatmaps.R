@@ -1,4 +1,5 @@
 library(leaflet.extras)
+library(magrittr)
 
 #' Just by number of quakes
 #'
@@ -67,14 +68,18 @@ leaflet(df) %>%
 
 #' <br/><br/>
 
-london.crimes.files <- Sys.glob('inst/examples/data/London-Crimes/*/*-city-of-london-street.csv')
+london.crimes.files <- Sys.glob(
+  paste0(system.file('examples/data/London-Crimes', package='leaflet.extras'),
+         '/*/*-city-of-london-street.csv'))
 london.crimes <- suppressMessages(
   purrr::map(
     london.crimes.files,
     ~readr::read_csv(.) %>%
       dplyr::select(Latitude, Longitude) %>%
       dplyr::filter(!is.na(Latitude))) %>%
-  set_names(basename(Sys.glob('inst/examples/data/London-Crimes/2016*'))))
+  set_names(basename(Sys.glob(
+    paste0(system.file('examples/data/London-Crimes', package='leaflet.extras'),
+           '/2016*')))))
 
 leaf <- leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron)
