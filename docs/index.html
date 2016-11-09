@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Home. leaflet.extras 0.1.5</title>
+<title>Home. leaflet.extras 0.1.6</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">leaflet.extras 0.1.5</a>
+      <a class="brand" href="index.html">leaflet.extras 0.1.6</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -53,26 +53,37 @@
   <div class="span8">
     <h1>leaflet.extras</h1>
 
-<p>The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins.</p>
+<p>The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins. </p>
 
-<p>For now you&#39;ll have to build leaflet from github <code>devtools::install_github(&#39;rstudio/leaflet&#39;)</code>
-to try this out. Check out the inst/examples for what&#39;s been done so far.</p>
+<h3>Installation</h3>
+
+<pre><code class="r"># We need latest leaflet package from Github, as CRAN package is too old.
+devtools::install(&#39;rstudio/leaflet&#39;)
+devtools::install(&#39;bhaskarvk/leaflet.extras&#39;)
+</code></pre>
+
+<h3>Progress</h3>
 
 <p>Plugins integrated so far</p>
 
 <ul>
-<li><a href="https://github.com/mapshakers/leaflet-icon-pulse">Pulse Icon</a> Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-pulseIcon">Rpubs: Pulse Icons</a></li>
-<li><a href="https://github.com/tallsam/Leaflet.weather-markers">Weather Markers</a> Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-weather">Rpubs: Weather Icons</a></li>
-<li><a href="https://github.com/timwis/leaflet-choropleth">GeoJSON Choropleth</a> Demo at <a href="http://rpubs.com/bhaskarvk/geojson-choropleth">Rpubs: GeoJSON Choropleth</a></li>
-<li><a href="https://github.com/TrantorM/leaflet-choroplethTopoJSON">TopoJSON Choropleth</a> Demo at <a href="http://rpubs.com/bhaskarvk/topojson-choropleth">Rpubs: GeoJSON Choropleth</a></li>
-<li><a href="https://github.com/ursudio/webgl-heatmap-leaflet">webgl-heatmap</a> Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-heatmap">Rpubs: Heatmap</a></li>
-<li><a href="https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached">Tile Caching</a> Demo at <a href="http://rpubs.com/bhaskarvk/TileLayer-Caching">Rpubs: Tile Caching</a></li>
+<li><a href="https://github.com/mapshakers/leaflet-icon-pulse">Pulse Icon</a>: Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-pulseIcon">Rpubs - Pulse Icons</a></li>
+<li><a href="https://github.com/tallsam/Leaflet.weather-markers">Weather Markers</a>: Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-weather">Rpubs - Weather Icons</a></li>
+<li><a href="https://github.com/ursudio/webgl-heatmap-leaflet">webgl-heatmap</a>: Demo at <a href="http://rpubs.com/bhaskarvk/leaflet-heatmap">Rpubs - Heatmap</a></li>
+<li><a href="https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached">Tile Caching</a>: Demo at <a href="http://rpubs.com/bhaskarvk/TileLayer-Caching">Rpubs - Tile Caching</a></li>
 <li><a href="https://github.com/mlevans/leaflet-hash">Leaflet Hash</a></li>
 <li><a href="https://github.com/Leaflet/Leaflet.fullscreen">Fullscreen Control</a></li>
 <li><a href="https://github.com/kartoza/leaflet-wms-legend">WMS Legend</a></li>
+<li><a href="https://github.com/mapbox/leaflet-omnivore">Omnivore</a>
+
+<ul>
+<li>Demo at <a href="http://rpubs.com/bhaskarvk/geojsonv2">Rpubs - GeoJSON</a></li>
+<li>Demo at <a href="http://rpubs.com/bhaskarvk/topojsonv2">Rpubs - TopoJSON</a></li>
+<li>Demo at <a href="http://rpubs.com/bhaskarvk/kml">Rpubs - KML</a></li>
+</ul></li>
 </ul>
 
-<p>Stay tuned for more to come. If you need a plugin that is not already implemented create an issue.</p>
+<p>If you need a plugin that is not already implemented create an issue.</p>
 
   </div>
 

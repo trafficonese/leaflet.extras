@@ -4,5 +4,6 @@
 ^inst/examples
 ^cran-comments\.md$
 ^NEWS\.md$
+^README\.md$
 ^\.travis\.yml$
 ^docs$

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>addWebGLHeatmap. leaflet.extras 0.1.5</title>
+<title>addWebGLHeatmap. leaflet.extras 0.1.6</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">leaflet.extras 0.1.5</a>
+      <a class="brand" href="index.html">leaflet.extras 0.1.6</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -60,6 +60,10 @@
   <span class="argument">data</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="package">leaflet</span><span class="keyword">::</span><span class="functioncall"><a href='http://www.rdocumentation.org/packages/leaflet/topics/getMapData'>getMapData</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span><span class="keyword">)</span>
 
 <span class="functioncall"><a href='heatmap.html'>addWebGLGeoJSONHeatmap</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">geojson</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">intensityProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"30000"</span><span class="keyword">,</span> <span class="argument">units</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"m"</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span>
+  <span class="argument">gradientTexture</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">alphaRange</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='heatmap.html'>addWebGLKMLHeatmap</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">kml</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
   <span class="argument">intensityProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"30000"</span><span class="keyword">,</span> <span class="argument">units</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"m"</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span>
   <span class="argument">gradientTexture</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">alphaRange</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span>
 
@@ -110,6 +114,8 @@ initially, but can be overridden</dd>
       <dt>intensityProperty</dt>
       <dd>The property to use for determining the intensity at a point.
 Can be a &#39;string&#39; or a JS function, or NULL.</dd>
+      <dt>kml</dt>
+      <dd>The KML url or contents as string.</dd>
     </dl>
     
     <div class="Description">
@@ -117,7 +123,9 @@ Can be a &#39;string&#39; or a JS function, or NULL.</dd>
 
       <p>Add a webgl heatmap</p>
 
-      <p>Adds a heatmap with data from a GeoJSON</p>
+      <p>Adds a heatmap with data from a GeoJSON/TopoJSON file/url</p>
+
+      <p>Adds a heatmap with data from a KML file/url</p>
 
       <p>removes the webgl heatmap</p>
 
@@ -127,7 +135,7 @@ Can be a &#39;string&#39; or a JS function, or NULL.</dd>
       </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>addWebGLGeoJSONHeatmap</li><li>addWebGLHeatmap</li><li>clearWebGLHeatmap</li><li>removeWebGLHeatmap</li>
+      <li>addWebGLGeoJSONHeatmap</li><li>addWebGLHeatmap</li><li>addWebGLKMLHeatmap</li><li>clearWebGLHeatmap</li><li>removeWebGLHeatmap</li>
     </ul>
     <ul>
       
