@@ -134,16 +134,17 @@ leaf.world %>%
       JS("function(feature) {
            return feature.properties.POP2005/Math.max(feature.properties.AREA,1);
          }"),
-    scale = c('#ffc77fff','#000000ff'), mode='q', steps = 10,
+    scale = c('#ffc77fff','#000000ff'), mode='q', steps = 5,
     # Select the data attributes to show in the popup.
     popupProperty = propstoHTMLTable(
       props = c('NAME', 'REGION', 'ISO_3_CODE', 'ISO_2_CODE', 'AREA', 'POP2005'),
       table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
     labelProperty = 'NAME',
-    color='#ffffff', weight=1, fillOpacity = 0.7,
+    color='#ffffff', weight=1, fillOpacity = 0.9,
     highlightOptions = highlightOptions(
-      fillOpacity=1, weight=2, opacity=1, color='#000000',
-      bringToFront=TRUE, sendToBack = TRUE)
+      fillOpacity=1, weight=2, opacity=1, color='#ff0000',
+      bringToFront=TRUE, sendToBack = TRUE),
+    legendOptions = legendOptions(title='Pop. Density')
  )
 
 #' ### Example 3: Processing in the Browser
@@ -155,7 +156,8 @@ fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson'
 leaf %>% setView(-77.0369, 38.9072, 11) %>%
   addBootstrapDependency() %>%
   addGeoJSONChoropleth(
-    fName,
+    readr::read_file(fName),
+    #fName,
     valueProperty = 'AREASQMI',
     scale = c('white','red'), mode='q', steps = 5,
     labelProperty='NAME',
@@ -166,7 +168,8 @@ leaf %>% setView(-77.0369, 38.9072, 11) %>%
     highlightOptions = highlightOptions(
       weight=2, color='#000000',
       fillOpacity=1, opacity =1,
-      bringToFront=TRUE, sendToBack=TRUE))
+      bringToFront=TRUE, sendToBack=TRUE),
+    legendOptions = legendOptions(title='Area in Sq. Miles'))
 
 #' ## Plot Points
 #'

@@ -37,12 +37,19 @@ leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   leaflet.extras::addKMLChoropleth(
     kml,
-    valueProperty ='ALAND',
-    scale = c('white','red'), mode='q', steps = 10,
+    valueProperty = JS(
+      'function(feature){
+         var props = feature.properties;
+         var aland = props.ALAND/100000;
+         var awater = props.AWATER/100000;
+         return 100*awater/(awater+aland);
+      }'),
+    scale = c('yellow','blue'), mode='e', steps = 5,
     popupProperty = 'description',
     labelProperty = 'NAME',
-    color='#ffffff', weight=1, fillOpacity = 0.7,
+    color='#ffffff', weight=1, fillOpacity = 1,
     highlightOptions =
       highlightOptions(fillOpacity=1, weight=2, opacity=1, color='#000000',
-                       bringToFront=TRUE, sendToBack = TRUE)
+                       bringToFront=TRUE, sendToBack = TRUE),
+    legendOptions = legendOptions(title='% of Water Area')
   )

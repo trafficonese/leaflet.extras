@@ -9,6 +9,7 @@
 \alias{addTopoJSONChoropleth}
 \alias{addTopoJSONv2}
 \alias{csvParserOptions}
+\alias{legendOptions}
 \title{Adds a GeoJSON to the leaflet map.
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
 options to map feature properties to labels, popups, colors, markers etc.}
@@ -23,6 +24,10 @@ addGeoJSONv2(map, geojson, layerId = NULL, group = NULL,
   fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
   pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
 
+legendOptions(title = NULL, position = c("bottomleft", "bottomright",
+  "topleft", "topright"), locale = "en-US", numberFormatOptions = list(style
+  = "decimal", maximumFractionDigits = 2))
+
 addGeoJSONChoropleth(map, geojson, layerId = NULL, group = NULL,
   valueProperty, labelProperty = NULL,
   labelOptions = leaflet::labelOptions(), popupProperty = NULL,
@@ -30,7 +35,7 @@ addGeoJSONChoropleth(map, geojson, layerId = NULL, group = NULL,
   steps = 5, mode = "q", colors = NULL, stroke = TRUE, color = "#03F",
   weight = 1, opacity = 0.5, fillOpacity = 0.2, dashArray = NULL,
   smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL)
+  highlightOptions = NULL, legendOptions = NULL)
 
 addTopoJSONv2(map, topojson, layerId = NULL, group = NULL,
   markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
@@ -49,7 +54,7 @@ addTopoJSONChoropleth(map, topojson, layerId = NULL, group = NULL,
   steps = 5, mode = "q", colors = NULL, stroke = TRUE, color = "#03F",
   weight = 1, opacity = 0.5, fillOpacity = 0.2, dashArray = NULL,
   smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL)
+  highlightOptions = NULL, legendOptions = NULL)
 
 addKML(map, kml, layerId = NULL, group = NULL, markerType = NULL,
   markerIcons = NULL, markerIconProperty = NULL,
@@ -67,7 +72,8 @@ addKMLChoropleth(map, kml, layerId = NULL, group = NULL, valueProperty,
   scale = c("white", "red"), steps = 5, mode = "q", colors = NULL,
   stroke = TRUE, color = "#03F", weight = 1, opacity = 0.5,
   fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL,
+  legendOptions = NULL)
 
 csvParserOptions(latfield, lonfield, delimiter = ",")
 
@@ -152,6 +158,14 @@ options for each label. Default \code{NULL}
    you can use \code{\link[leaflet]{highlightOptions}()} to specify highlight
   options}
 
+\item{title}{An optional title for the legend}
+
+\item{position}{legend position}
+
+\item{locale}{The numbers will be formatted using this locale}
+
+\item{numberFormatOptions}{Options for formatting numbers}
+
 \item{valueProperty}{The property to use for coloring}
 
 \item{scale}{The scale to use from chroma.js}
@@ -161,6 +175,8 @@ options for each label. Default \code{NULL}
 \item{mode}{q for quantile, e for equidistant, k for k-means}
 
 \item{colors}{overrides scale with manual colors}
+
+\item{legendOptions}{Options to show a legend.}
 
 \item{topojson}{a TopoJSON URL or contents in a character vector.}
 
@@ -181,6 +197,8 @@ Use \code{\link{csvParserOptions}}() to supply csv parser options.}
 Adds a GeoJSON to the leaflet map.
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
 options to map feature properties to labels, popups, colors, markers etc.
+
+Options to customize a Choropleth Legend
 
 Adds a GeoJSON Choropleth.
 

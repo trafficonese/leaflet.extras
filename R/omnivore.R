@@ -190,12 +190,40 @@ addGeoJSONv2 = function(
     pathOptions, highlightOptions)
 }
 
+#' Options to customize a Choropleth Legend
+#' @param title An optional title for the legend
+#' @param position legend position
+#' @param locale The numbers will be formatted using this locale
+#' @param numberFormatOptions Options for formatting numbers
+#' @export
+#' @rdname omnivore
+legendOptions <- function(
+  title = NULL,
+  position = c('bottomleft', 'bottomright', 'topleft', 'topright'),
+  locale = 'en-US',
+  numberFormatOptions = list(style = 'decimal',
+                             maximumFractionDigits = 2)
+) {
+  position <- match.arg(position)
+  leaflet::filterNULL(
+    list(
+      title = title,
+      position = position,
+      formatOptions = list(
+        locale = locale,
+        options = numberFormatOptions
+      )
+    )
+  )
+}
+
 #' Adds a GeoJSON Choropleth.
 #' @param valueProperty The property to use for coloring
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
 #' @param colors overrides scale with manual colors
+#' @param legendOptions Options to show a legend.
 #' @rdname omnivore
 #' @export
 addGeoJSONChoropleth = function(
@@ -216,7 +244,8 @@ addGeoJSONChoropleth = function(
   smoothFactor = 1.0,
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL
+  highlightOptions = NULL,
+  legendOptions = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
@@ -240,7 +269,7 @@ addGeoJSONChoropleth = function(
     map, leaflet::getMapData(map), 'addGeoJSONChoropleth',
     geojson, layerId, group,
     labelProperty, labelOptions, popupProperty, popupOptions,
-    pathOptions, highlightOptions
+    pathOptions, highlightOptions, legendOptions
     )
 }
 
@@ -310,7 +339,8 @@ addTopoJSONChoropleth = function(
   smoothFactor = 1.0,
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL
+  highlightOptions = NULL,
+  legendOptions = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
@@ -334,7 +364,7 @@ addTopoJSONChoropleth = function(
     map, leaflet::getMapData(map), 'addTopoJSONChoropleth',
     topojson, layerId, group,
     labelProperty, labelOptions, popupProperty, popupOptions,
-    pathOptions, highlightOptions
+    pathOptions, highlightOptions, legendOptions
     )
 }
 
@@ -402,7 +432,8 @@ addKMLChoropleth = function(
   smoothFactor = 1.0,
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL
+  highlightOptions = NULL,
+  legendOptions = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
@@ -426,7 +457,7 @@ addKMLChoropleth = function(
     map, leaflet::getMapData(map), 'addKMLChoropleth',
     kml, layerId, group,
     labelProperty, labelOptions, popupProperty, popupOptions,
-    pathOptions, highlightOptions
+    pathOptions, highlightOptions, legendOptions
     )
 }
 

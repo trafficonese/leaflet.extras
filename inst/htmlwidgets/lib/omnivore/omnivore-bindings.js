@@ -1,3 +1,18 @@
+function getResetStyle(style, highlightStyle) {
+  // Initialize shape highlighting if enabled.
+  var resetStyle = {};
+  if(!$.isEmptyObject(highlightStyle)) {
+    $.each(highlightStyle, function (k, v) {
+      if(k != "bringToFront" && k != "sendToBack"){
+        if(style && style[k]) {
+          resetStyle[k] = style[k];
+        }
+      }
+    });
+  }
+  return resetStyle;
+}
+
 LeafletWidget.utils.isURL = function(url) {
     if (typeof url === "undefined" && url === null) {
 			return false;
@@ -56,18 +71,9 @@ LeafletWidget.methods.addgenericGeoJSON = function(
   var thisGroup = cluster ? null : group;
 
   // Initialize shape highlighting if enabled.
-  var defaultStyle = {};
   var style = pathOptions;
   var highlightStyle = highlightOptions;
-  if(!$.isEmptyObject(highlightStyle)) {
-    $.each(highlightStyle, function (k, v) {
-      if(k != "bringToFront" && k != "sendToBack"){
-        if(style && style[k]) {
-          defaultStyle[k] = style[k];
-        }
-      }
-    });
-  }
+  var defaultStyle = getResetStyle(style, highlightStyle);
 
   function highlightFeature(e) {
     var layer = e.target;
@@ -335,8 +341,17 @@ LeafletWidget.methods.addCSV = function(
 LeafletWidget.methods.addGeoJSONChoropleth = function(
   data, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions
+  pathOptions, highlightOptions, legendOptions
 ) {
+    var style = pathOptions;
+    var highlightStyle = highlightOptions;
+    var defaultStyle = getResetStyle(style, highlightStyle);
+
+    if(!$.isEmptyObject(legendOptions)) {
+      legendOptions.highlightStyle = highlightStyle;
+      legendOptions.resetStyle = defaultStyle;
+    }
+
     LeafletWidget.methods.addgenericGeoJSON(
       this,
       function getData(){
@@ -349,11 +364,11 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         if (LeafletWidget.utils.isURL(data)) {
           var l = L.choropleth(null, $.extend(
-            pathOptions, geoJsonOptions));
+            pathOptions, geoJsonOptions), legendOptions);
           return omnivore.geojson(data, null, l);
         } else {
           return L.choropleth(parsedData, $.extend(
-            pathOptions, geoJsonOptions));
+            pathOptions, geoJsonOptions), legendOptions);
         }
       },
       layerId, group,
@@ -370,8 +385,17 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
 LeafletWidget.methods.addTopoJSONChoropleth = function(
   data, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions
+  pathOptions, highlightOptions, legendOptions
 ) {
+    var style = pathOptions;
+    var highlightStyle = highlightOptions;
+    var defaultStyle = getResetStyle(style, highlightStyle);
+
+    if(!$.isEmptyObject(legendOptions)) {
+      legendOptions.highlightStyle = highlightStyle;
+      legendOptions.resetStyle = defaultStyle;
+    }
+
     LeafletWidget.methods.addgenericGeoJSON(
       this,
       function getData(){
@@ -379,7 +403,7 @@ LeafletWidget.methods.addTopoJSONChoropleth = function(
       },
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         var l = L.choropleth(null, $.extend(
-          pathOptions, geoJsonOptions));
+          pathOptions, geoJsonOptions), legendOptions);
         if (LeafletWidget.utils.isURL(data)) {
           return omnivore.topojson(data, null, l);
         } else {
@@ -400,8 +424,17 @@ LeafletWidget.methods.addTopoJSONChoropleth = function(
 LeafletWidget.methods.addKMLChoropleth = function(
   data, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions
+  pathOptions, highlightOptions, legendOptions
 ) {
+    var style = pathOptions;
+    var highlightStyle = highlightOptions;
+    var defaultStyle = getResetStyle(style, highlightStyle);
+
+    if(!$.isEmptyObject(legendOptions)) {
+      legendOptions.highlightStyle = highlightStyle;
+      legendOptions.resetStyle = defaultStyle;
+    }
+
     LeafletWidget.methods.addgenericGeoJSON(
       this,
       function getData(){
@@ -409,7 +442,7 @@ LeafletWidget.methods.addKMLChoropleth = function(
       },
       function getGeoJSONLayer(parsedData, geoJsonOptions){
         var l = L.choropleth(null, $.extend(
-          pathOptions, geoJsonOptions));
+          pathOptions, geoJsonOptions), legendOptions);
         if (LeafletWidget.utils.isURL(data)) {
           return omnivore.kml(data, null, l);
         } else {
@@ -427,36 +460,3 @@ LeafletWidget.methods.addKMLChoropleth = function(
 
 };
 
-
-/* Commented until I figure out how to make polylines/polygons from CSV data 
-
-LeafletWidget.methods.addCSVChoropleth = function(
-  data, layerId, group,
-  labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions, csvParserOptions
-) {
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-          return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.choropleth(null, $.extend(
-          pathOptions, geoJsonOptions));
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.csv(data, csvParserOptions || {}, l);
-        } else {
-          return omnivore.csv.parse(data, csvParserOptions || {}, l);
-        }
-      },
-      layerId, group,
-      false,
-      null, null,
-      null, null, null,
-      null, null,
-      labelProperty, labelOptions, popupProperty, popupOptions,
-      pathOptions, highlightOptions
-    );
-
-};
-*/
