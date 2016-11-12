@@ -44,12 +44,16 @@ leaflet() %>%
          var awater = props.AWATER/100000;
          return 100*awater/(awater+aland);
       }'),
-    scale = c('yellow','blue'), mode='e', steps = 5,
+    scale = 'OrRd', mode='q', steps = 5,
+    padding = c(0.2,0),
     popupProperty = 'description',
     labelProperty = 'NAME',
     color='#ffffff', weight=1, fillOpacity = 1,
     highlightOptions =
       highlightOptions(fillOpacity=1, weight=2, opacity=1, color='#000000',
                        bringToFront=TRUE, sendToBack = TRUE),
-    legendOptions = legendOptions(title='% of Water Area')
+    legendOptions = legendOptions(
+      title='% of Water Area',
+      numberFormatOptions = list(style = 'decimal',
+                                 maximumFractionDigits = 2))
   )

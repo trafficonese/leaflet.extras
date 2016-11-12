@@ -38,7 +38,8 @@ leaflet() %>%
   leaflet.extras::addTopoJSONChoropleth(
     topoJson,
     valueProperty ='incidents',
-    scale = c('white','red'), mode='q', steps = 5,
+    scale = 'OrRd', mode='q', steps = 5,
+    padding = c(0.2,0),
     popupProperty = propstoHTMLTable(
       props = c('dist_numc', 'location', 'incidents', '_feature_id_string'),
       table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
@@ -47,6 +48,26 @@ leaflet() %>%
     highlightOptions =
       highlightOptions(fillOpacity=1, weight=2, opacity=1, color='#000000',
                         bringToFront=TRUE, sendToBack = TRUE),
-    legendOptions = legendOptions(title='Crimes')
-  )
+    legendOptions =
+      legendOptions(title='Crimes', position='bottomright'),
+    group = 'orange-red'
+  ) %>%
+  leaflet.extras::addTopoJSONChoropleth(
+    topoJson,
+    valueProperty ='incidents',
+    scale = c('yellow','red', 'black'), mode='q', steps = 5,
+    bezierInterpolate = TRUE,
+    popupProperty = propstoHTMLTable(
+      props = c('dist_numc', 'location', 'incidents', '_feature_id_string'),
+      table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
+    labelProperty = JS('function(feature){return "WARD: " + feature.properties.dist_numc;}'),
+    color='#ffffff', weight=1, fillOpacity = 0.7,
+    highlightOptions =
+      highlightOptions(fillOpacity=1, weight=2, opacity=1, color='#ff00ff',
+                        bringToFront=TRUE, sendToBack = TRUE),
+    legendOptions =
+      legendOptions(title='Crimes', position='bottomright'),
+    group = 'yellow-black'
+  ) %>%
+  addLayersControl(baseGroups = c('orange-red','yellow-black'))
 

@@ -222,6 +222,10 @@ legendOptions <- function(
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
+#' @param channelMode: Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'
+#' @param padding either a single number or a 2 number vector for clipping color values at ends.
+#' @param correctLightness whether to correct lightness
+#' @param bezierInterpolate whether to use bezier interpolate for determining colors
 #' @param colors overrides scale with manual colors
 #' @param legendOptions Options to show a legend.
 #' @rdname omnivore
@@ -234,6 +238,10 @@ addGeoJSONChoropleth = function(
   scale = c('white','red'),
   steps =5,
   mode = 'q',
+  channelMode = c('rgb', 'lab', 'hsl', 'lch'),
+  padding = NULL,
+  correctLightness = FALSE,
+  bezierInterpolate = FALSE,
   colors = NULL,
   stroke = TRUE,
   color = "#03F",
@@ -250,11 +258,18 @@ addGeoJSONChoropleth = function(
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
+
+  channelMode <- match.arg(channelMode)
+
   pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
     scale=scale,
     steps=steps,
     mode=mode,
+    channelMode=channelMode,
+    padding=padding,
+    correctLightness=correctLightness,
+    bezierInterpolate=bezierInterpolate,
     colors=colors,
     stroke=stroke,
     color=color,
@@ -329,6 +344,10 @@ addTopoJSONChoropleth = function(
   scale = c('white','red'),
   steps =5,
   mode = 'q',
+  channelMode = c('rgb', 'lab', 'hsl', 'lch'),
+  padding = NULL,
+  correctLightness = FALSE,
+  bezierInterpolate = FALSE,
   colors = NULL,
   stroke = TRUE,
   color = "#03F",
@@ -345,11 +364,16 @@ addTopoJSONChoropleth = function(
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
+  channelMode <- match.arg(channelMode)
   pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
     scale=scale,
     steps=steps,
     mode=mode,
+    channelMode=channelMode,
+    padding=padding,
+    correctLightness=correctLightness,
+    bezierInterpolate=bezierInterpolate,
     colors=colors,
     stroke=stroke,
     color=color,
@@ -422,6 +446,10 @@ addKMLChoropleth = function(
   scale = c('white','red'),
   steps =5,
   mode = 'q',
+  channelMode = c('rgb', 'lab', 'hsl', 'lch'),
+  padding = NULL,
+  correctLightness = FALSE,
+  bezierInterpolate = FALSE,
   colors = NULL,
   stroke = TRUE,
   color = "#03F",
@@ -438,11 +466,16 @@ addKMLChoropleth = function(
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
+  channelMode <- match.arg(channelMode)
   pathOptions =c(pathOptions, list(
     valueProperty=valueProperty,
     scale=scale,
     steps=steps,
     mode=mode,
+    channelMode=channelMode,
+    padding=padding,
+    correctLightness=correctLightness,
+    bezierInterpolate=bezierInterpolate,
     colors=colors,
     stroke=stroke,
     color=color,

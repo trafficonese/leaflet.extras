@@ -32,9 +32,11 @@ addGeoJSONChoropleth(map, geojson, layerId = NULL, group = NULL,
   valueProperty, labelProperty = NULL,
   labelOptions = leaflet::labelOptions(), popupProperty = NULL,
   popupOptions = leaflet::popupOptions(), scale = c("white", "red"),
-  steps = 5, mode = "q", colors = NULL, stroke = TRUE, color = "#03F",
-  weight = 1, opacity = 0.5, fillOpacity = 0.2, dashArray = NULL,
-  smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
+  steps = 5, mode = "q", channelMode = c("rgb", "lab", "hsl", "lch"),
+  padding = NULL, correctLightness = FALSE, bezierInterpolate = FALSE,
+  colors = NULL, stroke = TRUE, color = "#03F", weight = 1,
+  opacity = 0.5, fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
+  noClip = FALSE, pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL, legendOptions = NULL)
 
 addTopoJSONv2(map, topojson, layerId = NULL, group = NULL,
@@ -51,9 +53,11 @@ addTopoJSONChoropleth(map, topojson, layerId = NULL, group = NULL,
   valueProperty, labelProperty = NULL,
   labelOptions = leaflet::labelOptions(), popupProperty = NULL,
   popupOptions = leaflet::popupOptions(), scale = c("white", "red"),
-  steps = 5, mode = "q", colors = NULL, stroke = TRUE, color = "#03F",
-  weight = 1, opacity = 0.5, fillOpacity = 0.2, dashArray = NULL,
-  smoothFactor = 1, noClip = FALSE, pathOptions = leaflet::pathOptions(),
+  steps = 5, mode = "q", channelMode = c("rgb", "lab", "hsl", "lch"),
+  padding = NULL, correctLightness = FALSE, bezierInterpolate = FALSE,
+  colors = NULL, stroke = TRUE, color = "#03F", weight = 1,
+  opacity = 0.5, fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
+  noClip = FALSE, pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL, legendOptions = NULL)
 
 addKML(map, kml, layerId = NULL, group = NULL, markerType = NULL,
@@ -69,7 +73,9 @@ addKML(map, kml, layerId = NULL, group = NULL, markerType = NULL,
 addKMLChoropleth(map, kml, layerId = NULL, group = NULL, valueProperty,
   labelProperty = NULL, labelOptions = leaflet::labelOptions(),
   popupProperty = NULL, popupOptions = leaflet::popupOptions(),
-  scale = c("white", "red"), steps = 5, mode = "q", colors = NULL,
+  scale = c("white", "red"), steps = 5, mode = "q",
+  channelMode = c("rgb", "lab", "hsl", "lch"), padding = NULL,
+  correctLightness = FALSE, bezierInterpolate = FALSE, colors = NULL,
   stroke = TRUE, color = "#03F", weight = 1, opacity = 0.5,
   fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
   pathOptions = leaflet::pathOptions(), highlightOptions = NULL,
@@ -174,6 +180,12 @@ options for each label. Default \code{NULL}
 
 \item{mode}{q for quantile, e for equidistant, k for k-means}
 
+\item{padding}{either a single number or a 2 number vector for clipping color values at ends.}
+
+\item{correctLightness}{whether to correct lightness}
+
+\item{bezierInterpolate}{whether to use bezier interpolate for determining colors}
+
 \item{colors}{overrides scale with manual colors}
 
 \item{legendOptions}{Options to show a legend.}
@@ -192,6 +204,8 @@ options for each label. Default \code{NULL}
 
 \item{csvParserOptions}{options for parsing the CSV.
 Use \code{\link{csvParserOptions}}() to supply csv parser options.}
+
+\item{channelMode:}{Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'}
 }
 \description{
 Adds a GeoJSON to the leaflet map.

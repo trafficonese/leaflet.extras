@@ -153,13 +153,14 @@ leaf.world %>%
 
 fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson'
 
+geoJson <- readr::read_file(fName)
+
 leaf %>% setView(-77.0369, 38.9072, 11) %>%
   addBootstrapDependency() %>%
   addGeoJSONChoropleth(
-    readr::read_file(fName),
-    #fName,
+    geoJson,
     valueProperty = 'AREASQMI',
-    scale = c('white','red'), mode='q', steps = 5,
+    scale = c('white','red'), mode='q', steps = 4, padding = c(0.2,0),
     labelProperty='NAME',
     popupProperty=propstoHTMLTable(
       props = c('NAME', 'AREASQMI', 'REP_NAME', 'WEB_URL', 'REP_PHONE', 'REP_EMAIL', 'REP_OFFICE'),
@@ -169,7 +170,27 @@ leaf %>% setView(-77.0369, 38.9072, 11) %>%
       weight=2, color='#000000',
       fillOpacity=1, opacity =1,
       bringToFront=TRUE, sendToBack=TRUE),
-    legendOptions = legendOptions(title='Area in Sq. Miles'))
+    legendOptions = legendOptions(title='Area in Sq. Miles'),
+    group = 'reds') %>%
+  addGeoJSONChoropleth(
+    geoJson,
+    valueProperty = 'AREASQMI',
+    scale = c('yellow','red', 'black'), mode='q', steps = 4,
+    bezierInterpolate = TRUE,
+    labelProperty='NAME',
+    popupProperty=propstoHTMLTable(
+      props = c('NAME', 'AREASQMI', 'REP_NAME', 'WEB_URL', 'REP_PHONE', 'REP_EMAIL', 'REP_OFFICE'),
+      table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
+    color='#ffffff', weight=1, fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight=2, color='#000000',
+      fillOpacity=1, opacity =1,
+      bringToFront=TRUE, sendToBack=TRUE),
+    legendOptions = legendOptions(title='Area in Sq. Miles'),
+    group = 'yellow-black'
+  ) %>%
+  addLayersControl(baseGroups = c('reds','yellow-black'),
+                   options = layersControlOptions(collapsed=FALSE))
 
 #' ## Plot Points
 #'
