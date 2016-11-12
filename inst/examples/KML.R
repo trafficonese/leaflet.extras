@@ -9,7 +9,7 @@ library(leaflet.extras)
 
 #' We plot crime incidents in Washington DC and a heatmap of them.
 
-fName <- system.file('examples/kml/crimes.kml', package = 'leaflet.extras')
+fName <- system.file('examples/kml/crimes.kml.zip', package = 'leaflet.extras')
 
 kml <- readr::read_file(fName)
 
@@ -26,7 +26,7 @@ leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
 
 #' We plot US states. Notice the convenient 'propsToHTMLTable' function for pretty popups.
 
-fName <- system.file('examples/kml/cb_2015_us_state_20m.kml', package = 'leaflet.extras')
+fName <- system.file('examples/kml/cb_2015_us_state_20m.kml.zip', package = 'leaflet.extras')
 
 kml <- readr::read_file(fName)
 

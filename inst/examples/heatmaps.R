@@ -70,7 +70,7 @@ leaflet(df) %>%
 
 london.crimes.files <- Sys.glob(
   paste0(system.file('examples/data/London-Crimes', package='leaflet.extras'),
-         '/*/*-city-of-london-street.csv'))
+         '/*/*-city-of-london-street.csv.zip'))
 london.crimes <- suppressMessages(
   purrr::map(
     london.crimes.files,

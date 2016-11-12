@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.7
+
+* Added support for automatic legend with bi-directional highlighting to Choropleths.
+
 # leaflet.extras 0.1.6
 
 * Added KML/CSV support and more examples of handling geojson/topojson/kml data.

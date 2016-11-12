@@ -222,7 +222,7 @@ legendOptions <- function(
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
-#' @param channelMode: Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'
+#' @param channelMode Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'
 #' @param padding either a single number or a 2 number vector for clipping color values at ends.
 #' @param correctLightness whether to correct lightness
 #' @param bezierInterpolate whether to use bezier interpolate for determining colors

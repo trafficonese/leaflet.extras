@@ -6,8 +6,8 @@ The goal of leaflet.extras is to provide extra functionality to leaflet R packag
 
 ```r
 # We need latest leaflet package from Github, as CRAN package is too old.
-devtools::install('rstudio/leaflet')
-devtools::install('bhaskarvk/leaflet.extras')
+devtools::install_github('rstudio/leaflet')
+devtools::install_github('bhaskarvk/leaflet.extras')
 ```
 
 ### Progress

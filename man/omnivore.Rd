@@ -180,6 +180,8 @@ options for each label. Default \code{NULL}
 
 \item{mode}{q for quantile, e for equidistant, k for k-means}
 
+\item{channelMode}{Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'}
+
 \item{padding}{either a single number or a 2 number vector for clipping color values at ends.}
 
 \item{correctLightness}{whether to correct lightness}
@@ -204,8 +206,6 @@ options for each label. Default \code{NULL}
 
 \item{csvParserOptions}{options for parsing the CSV.
 Use \code{\link{csvParserOptions}}() to supply csv parser options.}
-
-\item{channelMode:}{Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'}
 }
 \description{
 Adds a GeoJSON to the leaflet map.
