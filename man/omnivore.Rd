@@ -2,6 +2,7 @@
 % Please edit documentation in R/omnivore.R
 \name{addGeoJSONv2}
 \alias{addCSV}
+\alias{addGPX}
 \alias{addGeoJSONChoropleth}
 \alias{addGeoJSONv2}
 \alias{addKML}
@@ -60,6 +61,16 @@ csvParserOptions(latfield, lonfield, delimiter = ",")
 
 addCSV(map, csv, csvParserOptions, layerId = NULL, group = NULL,
   markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
+  clusterId = NULL, labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
+  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+
+addGPX(map, gpx, layerId = NULL, group = NULL, markerType = NULL,
+  markerIcons = NULL, markerIconProperty = NULL,
   markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
   clusterId = NULL, labelProperty = NULL,
   labelOptions = leaflet::labelOptions(), popupProperty = NULL,
@@ -179,6 +190,8 @@ options for each label. Default \code{NULL}
 
 \item{csvParserOptions}{options for parsing the CSV.
 Use \code{\link{csvParserOptions}}() to supply csv parser options.}
+
+\item{gpx}{a GPX URL or contents in a character vector.}
 }
 \description{
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} & \code{\link[leaflet]{addTopoJSON}}
@@ -195,5 +208,7 @@ Adds a KML Choropleth.
 Options for parsing CSV
 
 Adds a CSV to the leaflet map.
+
+Adds a GPX to the leaflet map.
 }
 

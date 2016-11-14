@@ -2,6 +2,7 @@
 % Please edit documentation in R/webGLHeatmap.R
 \name{addWebGLHeatmap}
 \alias{addWebGLCSVHeatmap}
+\alias{addWebGLGPXHeatmap}
 \alias{addWebGLGeoJSONHeatmap}
 \alias{addWebGLHeatmap}
 \alias{addWebGLKMLHeatmap}
@@ -23,6 +24,10 @@ addWebGLKMLHeatmap(map, kml, layerId = NULL, group = NULL,
   gradientTexture = NULL, alphaRange = 1)
 
 addWebGLCSVHeatmap(map, csv, csvParserOptions, layerId = NULL, group = NULL,
+  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
+  gradientTexture = NULL, alphaRange = 1)
+
+addWebGLGPXHeatmap(map, gpx, layerId = NULL, group = NULL,
   intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
   gradientTexture = NULL, alphaRange = 1)
 
@@ -78,6 +83,8 @@ Can be a 'string' or a JS function, or NULL.}
 
 \item{csvParserOptions}{options for parsing the CSV.
 Use \code{\link{csvParserOptions}}() to supply csv parser options.}
+
+\item{gpx}{The GPX url or contents as string.}
 }
 \description{
 Add a webgl heatmap
@@ -87,6 +94,8 @@ Adds a heatmap with data from a GeoJSON/TopoJSON file/url
 Adds a heatmap with data from a KML file/url
 
 Adds a heatmap with data from a CSV file/url
+
+Adds a heatmap with data from a GPX file/url
 
 removes the webgl heatmap
 

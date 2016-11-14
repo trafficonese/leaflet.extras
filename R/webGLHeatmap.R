@@ -156,6 +156,36 @@ addWebGLCSVHeatmap = function(
     csvParserOptions)
 }
 
+#' Adds a heatmap with data from a GPX file/url
+#' @param gpx The GPX url or contents as string.
+#' @rdname heatmap
+#' @export
+addWebGLGPXHeatmap = function(
+  map, gpx, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = '30000',
+  units = 'm',
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+  ) {
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map),
+    'addWebGLGPXHeatmap', gpx, intensityProperty,
+    layerId, group,
+    leaflet::filterNULL(list(
+      size = size,
+      units = units,
+      opacity = opacity,
+      gradientTexture = gradientTexture,
+      alphaRange = alphaRange
+    )))
+}
+
+
 #' removes the webgl heatmap
 #' @rdname heatmap
 #' @export

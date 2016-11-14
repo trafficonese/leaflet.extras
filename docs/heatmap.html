@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>addWebGLHeatmap. leaflet.extras 0.1.7</title>
+<title>addWebGLHeatmap. leaflet.extras 0.1.8</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">leaflet.extras 0.1.7</a>
+      <a class="brand" href="index.html">leaflet.extras 0.1.8</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -68,6 +68,10 @@
   <span class="argument">gradientTexture</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">alphaRange</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span>
 
 <span class="functioncall"><a href='heatmap.html'>addWebGLCSVHeatmap</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">csv</span><span class="keyword">,</span> <span class="symbol">csvParserOptions</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">intensityProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"30000"</span><span class="keyword">,</span> <span class="argument">units</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"m"</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span>
+  <span class="argument">gradientTexture</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">alphaRange</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='heatmap.html'>addWebGLGPXHeatmap</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="symbol">gpx</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
   <span class="argument">intensityProperty</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">size</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"30000"</span><span class="keyword">,</span> <span class="argument">units</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"m"</span><span class="keyword">,</span> <span class="argument">opacity</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">,</span>
   <span class="argument">gradientTexture</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">alphaRange</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">1</span><span class="keyword">)</span>
 
@@ -125,6 +129,8 @@ Can be a &#39;string&#39; or a JS function, or NULL.</dd>
       <dt>csvParserOptions</dt>
       <dd>options for parsing the CSV.
 Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv parser options.</dd>
+      <dt>gpx</dt>
+      <dd>The GPX url or contents as string.</dd>
     </dl>
     
     <div class="Description">
@@ -138,6 +144,8 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
 
       <p>Adds a heatmap with data from a CSV file/url</p>
 
+      <p>Adds a heatmap with data from a GPX file/url</p>
+
       <p>removes the webgl heatmap</p>
 
       <p>clears the webgl heatmap</p>
@@ -146,7 +154,7 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
       </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>addWebGLCSVHeatmap</li><li>addWebGLGeoJSONHeatmap</li><li>addWebGLHeatmap</li><li>addWebGLKMLHeatmap</li><li>clearWebGLHeatmap</li><li>removeWebGLHeatmap</li>
+      <li>addWebGLCSVHeatmap</li><li>addWebGLGPXHeatmap</li><li>addWebGLGeoJSONHeatmap</li><li>addWebGLHeatmap</li><li>addWebGLKMLHeatmap</li><li>clearWebGLHeatmap</li><li>removeWebGLHeatmap</li>
     </ul>
     <ul>
       

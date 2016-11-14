@@ -129,7 +129,7 @@ function getHeatmapCoords(geojson, intensityProperty) {
   return latlngs;
 }
 
-LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap = function(
+function addGenericWebGLGeoJSONHeatmap(
     widget, geojson, intensityProperty, layerId, group, options) {
       var heatmapCoords = getHeatmapCoords(geojson, intensityProperty);
 
@@ -146,15 +146,13 @@ LeafletWidget.methods.addWebGLGeoJSONHeatmap = function(
     var self = this;
     if(LeafletWidget.utils.isURL(geojson)) {
       $.getJSON(geojson, function(geojsondata){
-        LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+        addGenericWebGLGeoJSONHeatmap(self,
           geojsondata, intensityProperty, layerId, group, options);
       });
     } else {
-      LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+      addGenericWebGLGeoJSONHeatmap(self,
         geojson, intensityProperty, layerId, group, options);
     }
-
-
 };
 
 LeafletWidget.methods.addWebGLKMLHeatmap = function(
@@ -164,13 +162,13 @@ LeafletWidget.methods.addWebGLKMLHeatmap = function(
       $.getJSON(kml, function(data){
         var geojsondata = toGeoJSON.kml(
           LeafletWidget.utils.parseXML(data));
-        LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+        addGenericWebGLGeoJSONHeatmap(self,
           geojsondata, intensityProperty, layerId, group, options);
       });
     } else {
       var geojsondata = toGeoJSON.kml(
         LeafletWidget.utils.parseXML(kml));
-      LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+      addGenericWebGLGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
     }
 };
@@ -183,7 +181,7 @@ LeafletWidget.methods.addWebGLCSVHeatmap = function(
         csv2geojson.csv2geojson(
           data, parserOptions || {}, 
           function(err, geojsondata) {
-            LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+            addGenericWebGLGeoJSONHeatmap(self,
               geojsondata, intensityProperty, layerId, group, options);
           }
         );
@@ -192,10 +190,28 @@ LeafletWidget.methods.addWebGLCSVHeatmap = function(
       csv2geojson.csv2geojson(
         csv, parserOptions || {}, 
         function(err, geojsondata) {
-          LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
+          addGenericWebGLGeoJSONHeatmap(self,
             geojsondata, intensityProperty, layerId, group, options);
         }
       );
+    }
+};
+
+LeafletWidget.methods.addWebGLGPXHeatmap = function(
+  gpx, intensityProperty, layerId, group, options) {
+    var self = this;
+    if(LeafletWidget.utils.isURL(gpx)) {
+      $.getJSON(gpx, function(data){
+        var geojsondata = toGeoJSON.gpx(
+          LeafletWidget.utils.parseXML(data));
+        addGenericWebGLGeoJSONHeatmap(self,
+          geojsondata, intensityProperty, layerId, group, options);
+      });
+    } else {
+      var geojsondata = toGeoJSON.gpx(
+        LeafletWidget.utils.parseXML(gpx));
+      addGenericWebGLGeoJSONHeatmap(self,
+        geojsondata, intensityProperty, layerId, group, options);
     }
 };
 

@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.8
+
+* Added support for GPX Files and streamlined code.
+
 # leaflet.extras 0.1.7
 
 * Added support for automatic legend with bi-directional highlighting to Choropleths.

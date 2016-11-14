@@ -452,3 +452,46 @@ addCSV = function(
     noClip,
     pathOptions, highlightOptions, csvParserOptions)
 }
+
+#' Adds a GPX to the leaflet map.
+#' @param gpx a GPX URL or contents in a character vector.
+#' @rdname omnivore
+#' @export
+addGPX = function(
+  map, gpx, layerId = NULL, group = NULL,
+  markerType = NULL, markerIcons = NULL,
+  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL, clusterId = NULL,
+  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+) {
+  invokeJSAddMethod('addGPX',
+    map, gpx, layerId, group,
+    markerType, markerIcons,
+    markerIconProperty, markerOptions,
+    clusterOptions, clusterId,
+    labelProperty, labelOptions, popupProperty, popupOptions,
+    stroke,
+    color,
+    weight,
+    opacity,
+    fill,
+    fillColor,
+    fillOpacity,
+    dashArray,
+    smoothFactor,
+    noClip,
+    pathOptions, highlightOptions)
+}

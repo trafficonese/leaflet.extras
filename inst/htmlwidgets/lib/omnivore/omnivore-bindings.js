@@ -388,6 +388,55 @@ LeafletWidget.methods.addCSV = function(
   }
 };
 
+LeafletWidget.methods.addGPX = function(
+  gpx, layerId, group,
+  markerType, markerIcons,
+  markerIconProperty, markerOptions, markerIconFunction,
+  clusterOptions, clusterId,
+  labelProperty, labelOptions, popupProperty, popupOptions,
+  pathOptions, highlightOptions
+) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(gpx)) {
+    $.getJSON(gpx, function(data){
+      var geojsondata = toGeoJSON.gpx(
+        LeafletWidget.utils.parseXML(data));
+      addGeoJSONLayer(
+        self,
+        function getGeoJSONLayer(geoJSONOptions){
+          return L.geoJson(
+            LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+        },
+        layerId, group,
+        true,
+        markerType, markerIcons,
+        markerIconProperty, markerOptions, markerIconFunction,
+        clusterOptions, clusterId,
+        labelProperty, labelOptions, popupProperty, popupOptions,
+        pathOptions, highlightOptions
+      );
+    });
+  } else {
+    var geojsondata = toGeoJSON.gpx(
+      LeafletWidget.utils.parseXML(gpx));
+    addGeoJSONLayer(
+      self,
+      function getGeoJSONLayer(geoJSONOptions){
+        return L.geoJson(
+          LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+      },
+      layerId, group,
+      true,
+      markerType, markerIcons,
+      markerIconProperty, markerOptions, markerIconFunction,
+      clusterOptions, clusterId,
+      labelProperty, labelOptions, popupProperty, popupOptions,
+      pathOptions, highlightOptions
+    );
+  }
+};
+
+
 
 LeafletWidget.methods.addGeoJSONChoropleth = function(
   geojson, layerId, group,

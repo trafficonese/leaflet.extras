@@ -26,7 +26,10 @@ Plugins integrated so far
     * GeoJSON: Demo at [Rpubs - GeoJSON](http://rpubs.com/bhaskarvk/geojsonv2)
     * TopoJSON: Demo at [Rpubs - TopoJSON](http://rpubs.com/bhaskarvk/topojsonv2)
     * KML: Demo at [Rpubs - KML](http://rpubs.com/bhaskarvk/kml)
-    * CSV: Demo at [Rpubs - CSV](http://rpubs.com/bhaskarvk/CSV)
+    * CSV: Demo at [Rpubs - CSV](http://rpubs.com/bhaskarvk/csv)
+    * GPX: Demo at [Rpubs - GPX](http://rpubs.com/bhaskarvk/gpx)
+    * ~~WKT~~: Will not be implemented.
+    * ~~Polyline~~: Will not be implemented.
 
 If you need a plugin that is not already implemented create an issue.
 
