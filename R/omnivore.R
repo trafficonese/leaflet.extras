@@ -5,7 +5,7 @@ omnivoreDependencies <- function() {
       system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
       script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
                  "polyline.js", "csv2geojson.js",
-                 "leaflet-omnivore.min.js", "omnivore-bindings.js")
+                 "omnivore-bindings.js")
     )
   )
 }
@@ -101,11 +101,11 @@ invokeJSAddMethod <- function(
 }
 
 
-#' Adds a GeoJSON to the leaflet map.
-#' This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} with
-#' options to map feature properties to labels, popups, colors, markers etc.
+#' Adds a GeoJSON/TopoJSON to the leaflet map.
+#' @description  This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} & \code{\link[leaflet]{addTopoJSON}}
+#' with options to map feature properties to labels, popups, colors, markers etc.
 #' @param map the leaflet map widget
-#' @param geojson a GeoJSON URL or contents in a character vector.
+#' @param geojson a GeoJSON/TopoJSON URL or file contents in a character vector.
 #' @param layerId the layer id
 #' @param group the name of the group this raster image should belong to (see
 #'   the same parameter under \code{\link{addTiles}})
@@ -217,7 +217,7 @@ legendOptions <- function(
   )
 }
 
-#' Adds a GeoJSON Choropleth.
+#' Adds a GeoJSON/TopoJSON Choropleth.
 #' @param valueProperty The property to use for coloring
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
@@ -283,110 +283,6 @@ addGeoJSONChoropleth = function(
   leaflet::invokeMethod(
     map, leaflet::getMapData(map), 'addGeoJSONChoropleth',
     geojson, layerId, group,
-    labelProperty, labelOptions, popupProperty, popupOptions,
-    pathOptions, highlightOptions, legendOptions
-    )
-}
-
-#' Adds a TopoJSON to the leaflet map.
-#' This is a feature rich alternative to the \code{\link[leaflet]{addTopoJSON}} with
-#' options to map feature properties to labels, popups, colors, markers etc.
-#' @param topojson a TopoJSON URL or contents in a character vector.
-#' @rdname omnivore
-#' @export
-addTopoJSONv2 = function(
-  map, topojson, layerId = NULL, group = NULL,
-  markerType = NULL, markerIcons = NULL,
-  markerIconProperty = NULL, markerOptions = leaflet::markerOptions(),
-  clusterOptions = NULL, clusterId = NULL,
-  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
-  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
-  stroke = TRUE,
-  color = "#03F",
-  weight = 5,
-  opacity = 0.5,
-  fill = TRUE,
-  fillColor = color,
-  fillOpacity = 0.2,
-  dashArray = NULL,
-  smoothFactor = 1.0,
-  noClip = FALSE,
-  pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL
-) {
-  invokeJSAddMethod('addTopoJSONv2',
-    map, topojson, layerId, group,
-    markerType, markerIcons,
-    markerIconProperty, markerOptions,
-    clusterOptions, clusterId,
-    labelProperty, labelOptions, popupProperty, popupOptions,
-    stroke,
-    color,
-    weight,
-    opacity,
-    fill,
-    fillColor,
-    fillOpacity,
-    dashArray,
-    smoothFactor,
-    noClip,
-    pathOptions, highlightOptions)
-}
-
-#' Adds a TopoJSON Choropleth.
-#' @rdname omnivore
-#' @export
-addTopoJSONChoropleth = function(
-  map, topojson, layerId = NULL, group = NULL,
-  valueProperty,
-  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
-  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
-  scale = c('white','red'),
-  steps =5,
-  mode = 'q',
-  channelMode = c('rgb', 'lab', 'hsl', 'lch'),
-  padding = NULL,
-  correctLightness = FALSE,
-  bezierInterpolate = FALSE,
-  colors = NULL,
-  stroke = TRUE,
-  color = "#03F",
-  weight = 1,
-  opacity = 0.5,
-  fillOpacity = 0.2,
-  dashArray = NULL,
-  smoothFactor = 1.0,
-  noClip = FALSE,
-  pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL,
-  legendOptions = NULL
-) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies,
-                        geoJSONChoroplethDependency())
-  channelMode <- match.arg(channelMode)
-  pathOptions =c(pathOptions, list(
-    valueProperty=valueProperty,
-    scale=scale,
-    steps=steps,
-    mode=mode,
-    channelMode=channelMode,
-    padding=padding,
-    correctLightness=correctLightness,
-    bezierInterpolate=bezierInterpolate,
-    colors=colors,
-    stroke=stroke,
-    color=color,
-    weight=weight,
-    opacity=opacity,
-    fillOpacity=fillOpacity,
-    dashArray=dashArray,
-    smoothFactor=smoothFactor,
-    noClip=noClip
-  ))
-  leaflet::invokeMethod(
-    map, leaflet::getMapData(map), 'addTopoJSONChoropleth',
-    topojson, layerId, group,
     labelProperty, labelOptions, popupProperty, popupOptions,
     pathOptions, highlightOptions, legendOptions
     )

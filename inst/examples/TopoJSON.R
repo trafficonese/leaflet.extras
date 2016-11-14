@@ -18,7 +18,7 @@ leaflet() %>%
   setView(-98.583333, 39.833333, 4) %>%
   addWebGLGeoJSONHeatmap(
     topoJson, size = 20 , units = 'px') %>%
-  addTopoJSONv2(
+  addGeoJSONv2(
     topoJson,
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='black', fillOpacity = 1,
@@ -35,7 +35,7 @@ leaflet() %>%
   addBootstrapDependency() %>%
   setView(-75.14, 40, zoom = 11) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  leaflet.extras::addTopoJSONChoropleth(
+  addGeoJSONChoropleth(
     topoJson,
     valueProperty ='incidents',
     scale = 'OrRd', mode='q', steps = 5,
@@ -52,8 +52,8 @@ leaflet() %>%
       legendOptions(title='Crimes', position='bottomright'),
     group = 'orange-red'
   ) %>%
-  leaflet.extras::addTopoJSONChoropleth(
-    topoJson,
+  addGeoJSONChoropleth(
+    fName,
     valueProperty ='incidents',
     scale = c('yellow','red', 'black'), mode='q', steps = 5,
     bezierInterpolate = TRUE,

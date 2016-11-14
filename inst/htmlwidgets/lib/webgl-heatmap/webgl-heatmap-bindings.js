@@ -72,8 +72,14 @@ function getHeatmapCoords(geojson, intensityProperty) {
   if (geojson.type === "Topology") {
     var topoJsonFeatures = [];
     for (key in geojson.objects) {
-      topoJsonFeatures.push(
-        topojson.feature(geojson, geojson.objects[key]));
+      var topoToGeo = topojson.feature(geojson, geojson.objects[key]);
+      if(L.Util.isArray(topoToGeo)) {
+        topoJsonFeatures = topoJsonFeatures.concat(topoToGeo);
+      } else if('features' in topoToGeo ) {
+        topoJsonFeatures = topoJsonFeatures.concat(topoToGeo.features);
+      } else {
+        topoJsonFeatures.push(topoToGeo);
+      }
     }
     return getHeatmapCoords(topoJsonFeatures, intensityProperty);
   }
@@ -156,12 +162,14 @@ LeafletWidget.methods.addWebGLKMLHeatmap = function(
     var self = this;
     if(LeafletWidget.utils.isURL(kml)) {
       $.getJSON(kml, function(data){
-        var geojsondata = toGeoJSON.kml(parseXML(data));
+        var geojsondata = toGeoJSON.kml(
+          LeafletWidget.utils.parseXML(data));
         LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
           geojsondata, intensityProperty, layerId, group, options);
       });
     } else {
-      var geojsondata = toGeoJSON.kml(parseXML(kml));
+      var geojsondata = toGeoJSON.kml(
+        LeafletWidget.utils.parseXML(kml));
       LeafletWidget.methods.addGenericWebGLGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
     }
@@ -189,7 +197,6 @@ LeafletWidget.methods.addWebGLCSVHeatmap = function(
         }
       );
     }
-
 };
 
 LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
@@ -199,12 +206,3 @@ LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
 LeafletWidget.methods.clearWebGLHeatmap = function() {
   this.layerManager.clearLayers("webGLHeatmap");
 };
-
-function parseXML(str) {
-  if (typeof str === 'string') {
-    return (new DOMParser()).parseFromString(str, 'text/xml');
-  } else {
-    return str;
-  }
-}
-

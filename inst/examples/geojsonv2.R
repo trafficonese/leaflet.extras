@@ -254,12 +254,15 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
 #' This time in addition to the points we also plot the heatmap
 fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson'
 
+geoJson <- readr::read_file(fName)
+
 leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addWebGLGeoJSONHeatmap(
-    fName, size = 30 , units = 'px') %>%
+    geoJson, size = 30 , units = 'px'
+    ) %>%
   addGeoJSONv2(
-    fName,
+    geoJson,
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='black', fillOpacity = 0.7,
     markerOptions = leaflet::markerOptions(radius=2))

@@ -1,5 +1,48 @@
+// parse an XML
+LeafletWidget.utils.parseXML = function(str) {
+  if (typeof str === 'string') {
+    return (new DOMParser()).parseFromString(str, 'text/xml');
+  } else {
+    return str;
+  }
+};
+
+// parse an GeoJSON/TopoJSON
+LeafletWidget.utils.getParsedGeoJSON = function(data) {
+  var geojson;
+
+  if(typeof data ==='undefined' || data === null || 
+    (typeof data === 'string' && data.trim() === '')) {
+    return geojson;
+  }
+
+  if(typeof data === 'string') {
+    geojson = JSON.parse(data);
+  } else {
+    geojson = data;
+  }
+
+  // if input is a TopoJSON
+  // iterate over each of its objects and add their coords
+  if (geojson.type === "Topology") {
+    var topoJsonFeatures = [];
+    for (key in geojson.objects) {
+      var topoToGeo = topojson.feature(geojson, geojson.objects[key]);
+      if(L.Util.isArray(topoToGeo)) {
+        topoJsonFeatures = topoJsonFeatures.concat(topoToGeo);
+      } else if('features' in topoToGeo ) {
+        topoJsonFeatures = topoJsonFeatures.concat(topoToGeo.features);
+      } else {
+        topoJsonFeatures.push(topoToGeo);
+      }
+    }
+    geojson = topoJsonFeatures;
+  }
+  return geojson;
+};
+  
+// utility method to extract resetStyle from defaultStyle & highlightStyle
 function getResetStyle(style, highlightStyle) {
-  // Initialize shape highlighting if enabled.
   var resetStyle = {};
   if(!$.isEmptyObject(highlightStyle)) {
     $.each(highlightStyle, function (k, v) {
@@ -13,6 +56,7 @@ function getResetStyle(style, highlightStyle) {
   return resetStyle;
 }
 
+// is a given string a URL
 LeafletWidget.utils.isURL = function(url) {
     if (typeof url !== "string" || url.trim() === '' ) {
 			return false;
@@ -31,9 +75,9 @@ LeafletWidget.utils.isURL = function(url) {
      return re.test(url);
  };
 
-LeafletWidget.methods.addgenericGeoJSON = function(
+function addGeoJSONLayer(
   widget,
-  dataFunction, geojsonLayerFunction,
+  geojsonLayerFunction,
   layerId, group,
   setStyle,
   markerType, markerIcons,
@@ -41,19 +85,8 @@ LeafletWidget.methods.addgenericGeoJSON = function(
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
-  ) {
+) {
   var self = widget;
-
-  var data = dataFunction();
-
-  // convert JSON string to Object
-  if (data !== null){
-    if(typeof(data) === "string") {
-      data = JSON.parse(data);
-    }
-  } else {
-    data = {};
-  }
 
   // Initialize Clusering support if enabled.
   var clusterGroup = self.layerManager.getLayer("cluster", clusterId),
@@ -90,8 +123,7 @@ LeafletWidget.methods.addgenericGeoJSON = function(
     }
   }
 
-
-  var globalStyle = $.extend({}, style, data.style || {});
+  var globalStyle = $.extend({}, style);
 
   function styleFunction(feature) {
     return $.extend(globalStyle, feature.style || {},
@@ -169,25 +201,25 @@ LeafletWidget.methods.addgenericGeoJSON = function(
     } else {
       if (typeof markerIconProperty !== "undefined" && markerIconProperty !== null) {
         if(typeof markerIconProperty == "string") {
-            layer = L.marker(latlng, $.extend({
-              icon: markerIconFunction(markerIcons[feature.properties[markerIconProperty]])
-            }, markerOptions || {}));
+          layer = L.marker(latlng, $.extend({
+            icon: markerIconFunction(markerIcons[feature.properties[markerIconProperty]])
+          }, markerOptions || {}));
         } else if(typeof markerIconProperty == "function") {
-              layer = L.marker(latlng, $.extend({
-                icon: markerIconFunction(markerIcons[markerIconProperty(feature)])
-              }, markerOptions || {}));
+          layer = L.marker(latlng, $.extend({
+            icon: markerIconFunction(markerIcons[markerIconProperty(feature)])
+          }, markerOptions || {}));
         }
       } else {
-            layer = L.marker(latlng, $.extend({
-              icon: markerIconFunction(markerIcons)
-            }, markerOptions || {}));
+        layer = L.marker(latlng, $.extend({
+          icon: markerIconFunction(markerIcons)
+        }, markerOptions || {}));
       }
     }
 
     if(cluster) {
       clusterGroup.clusterLayerStore.add(layer);
     }
-  	return layer;
+    return layer;
   }
 
   var geojsonOptions = {};
@@ -200,7 +232,7 @@ LeafletWidget.methods.addgenericGeoJSON = function(
     geojsonOptions.pointToLayer = pointToLayerFunction;
   }
 
-  var gjlayer = geojsonLayerFunction(data, geojsonOptions);
+  var gjlayer = geojsonLayerFunction(geojsonOptions);
 
   self.layerManager.addLayer(gjlayer, "geojson", layerId, thisGroup);
   if (cluster) {
@@ -209,61 +241,39 @@ LeafletWidget.methods.addgenericGeoJSON = function(
 
 };
 
-LeafletWidget.methods.addGeoJSONv2 = function(
-  data, layerId, group,
-  markerType, markerIcons,
-  markerIconProperty, markerOptions, markerIconFunction,
-  clusterOptions, clusterId,
-  labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions
-  ) {
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-        if (LeafletWidget.utils.isURL(data)) {
-           return {};
-        } else {
-          return data;
-        }
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        if (LeafletWidget.utils.isURL(data)) {
-          var l = L.geoJson(null, geoJsonOptions);
-          return omnivore.geojson(data, null, l);
-        } else {
-          return L.geoJson(parsedData, geoJsonOptions);
-        }
-      },
-      layerId, group,
-      true,
-      markerType, markerIcons,
-      markerIconProperty, markerOptions, markerIconFunction,
-      clusterOptions, clusterId,
-      labelProperty, labelOptions, popupProperty, popupOptions,
-      pathOptions, highlightOptions
-    );
-};
 
-LeafletWidget.methods.addTopoJSONv2 = function(
-  data, layerId, group,
+LeafletWidget.methods.addGeoJSONv2 = function(
+  geojson, layerId, group,
   markerType, markerIcons,
   markerIconProperty, markerOptions, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
-  ) {
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-           return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.geoJson(null, geoJsonOptions);
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.topojson(data, null, l);
-        } else {
-          return omnivore.topojson.parse(data, null, l);
-        }
+) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(geojson)) {
+    $.getJSON(geojson, function(geojsondata){
+      addGeoJSONLayer(
+        self,
+        function getGeoJSONLayer(geoJSONOptions){
+          return L.geoJson(
+            LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+        },
+        layerId, group,
+        true,
+        markerType, markerIcons,
+        markerIconProperty, markerOptions, markerIconFunction,
+        clusterOptions, clusterId,
+        labelProperty, labelOptions, popupProperty, popupOptions,
+        pathOptions, highlightOptions
+      );
+    });
+  } else {
+    addGeoJSONLayer(
+      self,
+      function getGeoJSONLayer(geoJSONOptions){
+        return L.geoJson(
+          LeafletWidget.utils.getParsedGeoJSON(geojson), geoJSONOptions);
       },
       layerId, group,
       true,
@@ -273,28 +283,45 @@ LeafletWidget.methods.addTopoJSONv2 = function(
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
     );
+  }
 };
 
 LeafletWidget.methods.addKML = function(
-  data, layerId, group,
+  kml, layerId, group,
   markerType, markerIcons,
   markerIconProperty, markerOptions, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions
-  ) {
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-           return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.geoJson(null, geoJsonOptions);
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.kml(data, null, l);
-        } else {
-          return omnivore.kml.parse(data, null, l);
-        }
+) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(kml)) {
+    $.getJSON(kml, function(data){
+      var geojsondata = toGeoJSON.kml(
+        LeafletWidget.utils.parseXML(data));
+      addGeoJSONLayer(
+        self,
+        function getGeoJSONLayer(geoJSONOptions){
+          return L.geoJson(
+            LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+        },
+        layerId, group,
+        true,
+        markerType, markerIcons,
+        markerIconProperty, markerOptions, markerIconFunction,
+        clusterOptions, clusterId,
+        labelProperty, labelOptions, popupProperty, popupOptions,
+        pathOptions, highlightOptions
+      );
+    });
+  } else {
+    var geojsondata = toGeoJSON.kml(
+      LeafletWidget.utils.parseXML(kml));
+    addGeoJSONLayer(
+      self,
+      function getGeoJSONLayer(geoJSONOptions){
+        return L.geoJson(
+          LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
       },
       layerId, group,
       true,
@@ -304,72 +331,105 @@ LeafletWidget.methods.addKML = function(
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
     );
+  }
 };
 
 LeafletWidget.methods.addCSV = function(
-  data, layerId, group,
+  csv, layerId, group,
   markerType, markerIcons,
   markerIconProperty, markerOptions, markerIconFunction,
   clusterOptions, clusterId,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions, csvParserOptions
-  ) {
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-           return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.geoJson(null, geoJsonOptions);
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.csv(data, csvParserOptions || {}, l);
-        } else {
-          return omnivore.csv.parse(data, csvParserOptions || {}, l);
+) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(csv)) {
+    $.getJSON(csv, function(data){
+      csv2geojson.csv2geojson(
+        data, csvParserOptions || {}, 
+        function(err, geojsondata) {
+          addGeoJSONLayer(
+            self,
+            function getGeoJSONLayer(geoJSONOptions){
+              return L.geoJson(
+                LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+            },
+            layerId, group,
+            true,
+            markerType, markerIcons,
+            markerIconProperty, markerOptions, markerIconFunction,
+            clusterOptions, clusterId,
+            labelProperty, labelOptions, popupProperty, popupOptions,
+            pathOptions, highlightOptions
+          );
         }
-      },
-      layerId, group,
-      true,
-      markerType, markerIcons,
-      markerIconProperty, markerOptions, markerIconFunction,
-      clusterOptions, clusterId,
-      labelProperty, labelOptions, popupProperty, popupOptions,
-      pathOptions, highlightOptions
+      );
+    });
+  } else {
+    csv2geojson.csv2geojson(
+      csv, csvParserOptions || {}, 
+      function(err, geojsondata) {
+        addGeoJSONLayer(
+          self,
+          function getGeoJSONLayer(geoJSONOptions){
+            return L.geoJson(
+              LeafletWidget.utils.getParsedGeoJSON(geojsondata), geoJSONOptions);
+          },
+          layerId, group,
+          true,
+          markerType, markerIcons,
+          markerIconProperty, markerOptions, markerIconFunction,
+          clusterOptions, clusterId,
+          labelProperty, labelOptions, popupProperty, popupOptions,
+          pathOptions, highlightOptions
+        );
+      }
     );
+  }
 };
 
 
 LeafletWidget.methods.addGeoJSONChoropleth = function(
-  data, layerId, group,
+  geojson, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions, legendOptions
 ) {
-    var style = pathOptions;
-    var highlightStyle = highlightOptions;
-    var defaultStyle = getResetStyle(style, highlightStyle);
 
-    if(!$.isEmptyObject(legendOptions)) {
-      legendOptions.highlightStyle = highlightStyle;
-      legendOptions.resetStyle = defaultStyle;
-    }
+  var style = pathOptions;
+  var highlightStyle = highlightOptions;
+  var defaultStyle = getResetStyle(style, highlightStyle);
 
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-        if (LeafletWidget.utils.isURL(data)) {
-           return {};
-        } else {
-          return data;
-        }
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        if (LeafletWidget.utils.isURL(data)) {
-          var l = L.choropleth(null, $.extend(
-            pathOptions, geoJsonOptions), legendOptions);
-          return omnivore.geojson(data, null, l);
-        } else {
-          return L.choropleth(parsedData, $.extend(
-            pathOptions, geoJsonOptions), legendOptions);
-        }
+  if(!$.isEmptyObject(legendOptions)) {
+    legendOptions.highlightStyle = highlightStyle;
+    legendOptions.resetStyle = defaultStyle;
+  }
+
+  var self = this;
+  if(LeafletWidget.utils.isURL(geojson)) {
+    $.getJSON(geojson, function(geojsondata){
+      addGeoJSONLayer(
+        self,
+        function getGeoJSONLayer(geoJSONOptions){
+          return L.choropleth(
+            LeafletWidget.utils.getParsedGeoJSON(geojsondata),
+            $.extend(pathOptions, geoJSONOptions), legendOptions);
+        },
+        layerId, group,
+        false,
+        null, null,
+        null, null, null,
+        null, null,
+        labelProperty, labelOptions, popupProperty, popupOptions,
+        pathOptions, highlightOptions
+      );
+    });
+  } else {
+    addGeoJSONLayer(
+      self,
+      function getGeoJSONLayer(geoJSONOptions){
+        return L.choropleth(
+          LeafletWidget.utils.getParsedGeoJSON(geojson),
+          $.extend(pathOptions, geoJSONOptions), legendOptions);
       },
       layerId, group,
       false,
@@ -379,75 +439,51 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
     );
-
-};
-
-LeafletWidget.methods.addTopoJSONChoropleth = function(
-  data, layerId, group,
-  labelProperty, labelOptions, popupProperty, popupOptions,
-  pathOptions, highlightOptions, legendOptions
-) {
-    var style = pathOptions;
-    var highlightStyle = highlightOptions;
-    var defaultStyle = getResetStyle(style, highlightStyle);
-
-    if(!$.isEmptyObject(legendOptions)) {
-      legendOptions.highlightStyle = highlightStyle;
-      legendOptions.resetStyle = defaultStyle;
-    }
-
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-          return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.choropleth(null, $.extend(
-          pathOptions, geoJsonOptions), legendOptions);
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.topojson(data, null, l);
-        } else {
-          return omnivore.topojson.parse(data, null, l);
-        }
-      },
-      layerId, group,
-      false,
-      null, null,
-      null, null, null,
-      null, null,
-      labelProperty, labelOptions, popupProperty, popupOptions,
-      pathOptions, highlightOptions
-    );
-
+  }
 };
 
 LeafletWidget.methods.addKMLChoropleth = function(
-  data, layerId, group,
+  kml, layerId, group,
   labelProperty, labelOptions, popupProperty, popupOptions,
   pathOptions, highlightOptions, legendOptions
 ) {
-    var style = pathOptions;
-    var highlightStyle = highlightOptions;
-    var defaultStyle = getResetStyle(style, highlightStyle);
+  var style = pathOptions;
+  var highlightStyle = highlightOptions;
+  var defaultStyle = getResetStyle(style, highlightStyle);
 
-    if(!$.isEmptyObject(legendOptions)) {
-      legendOptions.highlightStyle = highlightStyle;
-      legendOptions.resetStyle = defaultStyle;
-    }
+  if(!$.isEmptyObject(legendOptions)) {
+    legendOptions.highlightStyle = highlightStyle;
+    legendOptions.resetStyle = defaultStyle;
+  }
 
-    LeafletWidget.methods.addgenericGeoJSON(
-      this,
-      function getData(){
-          return {};
-      },
-      function getGeoJSONLayer(parsedData, geoJsonOptions){
-        var l = L.choropleth(null, $.extend(
-          pathOptions, geoJsonOptions), legendOptions);
-        if (LeafletWidget.utils.isURL(data)) {
-          return omnivore.kml(data, null, l);
-        } else {
-          return omnivore.kml.parse(data, null, l);
-        }
+  var self = this;
+  if(LeafletWidget.utils.isURL(kml)) {
+    $.getJSON(kml, function(data){
+      var geojsondata = toGeoJSON.kml(LeafletWidget.utils.parseXML(data));
+      addGeoJSONLayer(
+        self,
+        function getGeoJSONLayer(geoJSONOptions){
+          return L.choropleth(
+            LeafletWidget.utils.getParsedGeoJSON(geojsondata),
+            $.extend(pathOptions, geoJSONOptions), legendOptions);
+        },
+        layerId, group,
+        false,
+        null, null,
+        null, null, null,
+        null, null,
+        labelProperty, labelOptions, popupProperty, popupOptions,
+        pathOptions, highlightOptions
+      );
+    });
+  } else {
+    var geojsondata = toGeoJSON.kml(LeafletWidget.utils.parseXML(kml));
+    addGeoJSONLayer(
+      self,
+      function getGeoJSONLayer(geoJSONOptions){
+        return L.choropleth(
+          LeafletWidget.utils.getParsedGeoJSON(geojsondata),
+          $.extend(pathOptions, geoJSONOptions), legendOptions);
       },
       layerId, group,
       false,
@@ -457,6 +493,6 @@ LeafletWidget.methods.addKMLChoropleth = function(
       labelProperty, labelOptions, popupProperty, popupOptions,
       pathOptions, highlightOptions
     );
-
+  }
 };
 
