@@ -14,7 +14,7 @@ function getResetStyle(style, highlightStyle) {
 }
 
 LeafletWidget.utils.isURL = function(url) {
-    if (typeof url === "undefined" && url === null) {
+    if (typeof url !== "string" || url.trim() === '' ) {
 			return false;
     }
     var strRegex = "^((https|http|ftp|rtsp|mms)?://)"

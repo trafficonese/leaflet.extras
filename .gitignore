@@ -4,4 +4,6 @@
 .Ruserdata
 inst/examples/*html
 inst/examples/rsconnect
+inst/examples/*.Rmd
 .Rprofile
+*.swp

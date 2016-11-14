@@ -169,8 +169,9 @@ L.GeoJSONChoropleth = L.GeoJSON.extend({
   },
   setGeoJSON: function(geojson) {
     var self = this;
+		var features = L.Util.isArray(geojson) ? geojson : geojson.features;
     
-    var values = geojson.features.map(function (feature) {
+    var values = features.map(function (feature) {
       return getValue(feature, self._options.valueProperty);
     });
 
@@ -297,11 +298,15 @@ L.GeoJSONChoropleth = L.GeoJSON.extend({
 
         return div;
       };
+    }
+
+
+    // Add the geojson to L.GeoJSON object so that our geometries are initialized.
+    L.GeoJSON.prototype.addData.call(self, geojson);
+
       // depending on how the GeoJSON data is supplied the map may or maynot be present at this time.
-      // add legend to map if map is defined.
-      if(self._legend._map) {
-        self._legend.addTo(self._legend._map);
-      }
+    if(self._legend && self._legend._map) {
+      self._legend.addTo(self._legend._map);
     }
   }
 });
