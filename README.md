@@ -12,8 +12,11 @@ devtools::install_github('bhaskarvk/leaflet.extras')
 
 ### Progress
 
-Plugins integrated so far
+Plugins being worked on
 
+- [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw)
+
+Plugins integrated so far
 
 - [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse): Demo at [Rpubs - Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
 - [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers): Demo at [Rpubs - Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
