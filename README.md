@@ -15,6 +15,7 @@ devtools::install_github('bhaskarvk/leaflet.extras')
 Plugins being worked on
 
 - [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw)
+- [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor)
 
 Plugins integrated so far
 

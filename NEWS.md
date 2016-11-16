@@ -3,6 +3,7 @@
 #### New Features
 
 * Added support for [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) plugin.
+* Added support of [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor) plugin.
 
 # leaflet.extras 0.1.8
 

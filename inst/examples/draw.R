@@ -7,4 +7,5 @@ leaflet() %>%
     group='draw',
     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))  %>%
   addLayersControl(overlayGroups = c('draw'), options =
-                     layersControlOptions(collapsed=FALSE))
+                     layersControlOptions(collapsed=FALSE)) %>%
+  addStyleEditor()
