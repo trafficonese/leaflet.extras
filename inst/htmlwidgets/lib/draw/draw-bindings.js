@@ -57,10 +57,56 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
     map.drawToolbar =  new L.Control.Draw(options);
     map.drawToolbar.addTo(map);
 
+    // Event Listeners
     map.on(L.Draw.Event.CREATED, function (e) {
-      var type = layer = e.layer;
+      var layer = e.layer;
       editableLayers.addLayer(layer);
+
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+
+      // assign a unique key to the newly created feature
+      var featureId = L.stamp(layer);
+      layer.feature = {
+        "type" : "Feature",
+        "properties" : {
+          "_leaflet_id" : featureId
+        }
+      }
+
+      // circles are just Points and toGeoJSON won't store radius by default
+      // so we store it inside the properties.
+      if(e.layerType === 'circle') {
+        layer.feature.properties.radius = layer.getRadius();
+      }
+
+      Shiny.onInputChange(map.id+'_draw_new_feature',
+        layer.toGeoJSON());
+      Shiny.onInputChange(map.id+'_draw_all_features',
+        editableLayers.toGeoJSON());
     });
+
+    map.on(L.Draw.Event.EDITED, function (e) {
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      var layers = e.layers;
+      Shiny.onInputChange(map.id+'_draw_edited_features',
+        layers.toGeoJSON());
+      Shiny.onInputChange(map.id+'_draw_all_features',
+        editableLayers.toGeoJSON());
+    });
+
+    map.on(L.Draw.Event.DELETED, function (e) {
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      var layers = e.layers;
+      Shiny.onInputChange(map.id+'_draw_deleted_features',
+        layers.toGeoJSON());
+      Shiny.onInputChange(map.id+'_draw_all_features',
+        editableLayers.toGeoJSON());
+    });
+
+
   }).call(this);
 
 };
