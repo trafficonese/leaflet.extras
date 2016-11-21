@@ -1,8 +1,7 @@
-LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity,
-  layerId, group, options) {
+/* global LeafletWidget, $, L, topojson, csv2geojson, toGeoJSON */
+LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity, layerId, group, options) {
 
-  if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
-    ($.isNumeric(lat) && $.isNumeric(lng))) {
+  if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) || ($.isNumeric(lat) && $.isNumeric(lng))) {
 
     var heatmapLayer = L.webGLHeatmap(options);
 
@@ -10,16 +9,16 @@ LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity,
       .col('lat',lat)
       .col('lng',lng);
 
-     if(intensity) {
-       df.col('intensity',intensity);
-     }
+    if(intensity) {
+      df.col('intensity',intensity);
+    }
 
     var latlngs = [];
     var i = 0;
 
     if(intensity) {
       for(i;i<df.nrow();i++){
-        if($.isNumeric(df.get(i, "lat")) && $.isNumeric(df.get(i, "lng"))) {
+        if($.isNumeric(df.get(i, 'lat')) && $.isNumeric(df.get(i, 'lng'))) {
           latlngs.push([
             df.get(i,'lat'),
             df.get(i,'lng'),
@@ -29,7 +28,7 @@ LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity,
       }
     } else {
       for(i;i<df.nrow();i++){
-        if($.isNumeric(df.get(i, "lat")) && $.isNumeric(df.get(i, "lng"))) {
+        if($.isNumeric(df.get(i, 'lat')) && $.isNumeric(df.get(i, 'lng'))) {
           latlngs.push([
             df.get(i,'lat'),
             df.get(i,'lng')
@@ -40,24 +39,24 @@ LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity,
 
     heatmapLayer.setData(latlngs);
 
-    this.layerManager.addLayer(heatmapLayer, "webGLHeatmap", layerId, group);
+    this.layerManager.addLayer(heatmapLayer, 'webGLHeatmap', layerId, group);
   }
 };
 
 function getHeatmapIntensity(feature, intensityProperty) {
   var intensity = null;
   if(feature) {
-    if(typeof intensityProperty === "string") {
-      intensity = feature.properties[intensityProperty]
-    } else if(typeof intensityProperty === "function") {
-      intensity = intensityProperty(feature)
+    if(typeof intensityProperty === 'string') {
+      intensity = feature.properties[intensityProperty];
+    } else if(typeof intensityProperty === 'function') {
+      intensity = intensityProperty(feature);
     }
   }
   return intensity;
 }
 
 function getHeatmapCoords(geojson, intensityProperty) {
-  
+
   var latlngs = [];
   if(typeof geojson === 'undefined' || geojson === null) {
     return latlngs;
@@ -69,9 +68,9 @@ function getHeatmapCoords(geojson, intensityProperty) {
 
   // if input is a TopoJSON
   // iterate over each of its objects and add their coords
-  if (geojson.type === "Topology") {
+  if (geojson.type === 'Topology') {
     var topoJsonFeatures = [];
-    for (key in geojson.objects) {
+    for (var key in geojson.objects) {
       var topoToGeo = topojson.feature(geojson, geojson.objects[key]);
       if(L.Util.isArray(topoToGeo)) {
         topoJsonFeatures = topoJsonFeatures.concat(topoToGeo);
@@ -118,7 +117,7 @@ function getHeatmapCoords(geojson, intensityProperty) {
       if(lat && lng) {
         if(intensityProperty) {
           latlngs.push([lat, lng,
-            getHeatmapIntensity(feature, intensityProperty)]);
+            getHeatmapIntensity(geojson, intensityProperty)]);
         } else {
           latlngs.push([lat, lng]);
         }
@@ -129,96 +128,91 @@ function getHeatmapCoords(geojson, intensityProperty) {
   return latlngs;
 }
 
-function addGenericWebGLGeoJSONHeatmap(
-    widget, geojson, intensityProperty, layerId, group, options) {
-      var heatmapCoords = getHeatmapCoords(geojson, intensityProperty);
+function addGenericWebGLGeoJSONHeatmap( widget, geojson, intensityProperty, layerId, group, options) {
+  var heatmapCoords = getHeatmapCoords(geojson, intensityProperty);
 
-      if(!$.isEmptyObject(heatmapCoords)) {
-        var heatmapLayer = L.webGLHeatmap(options);
-        heatmapLayer.setData(heatmapCoords);
-        widget.layerManager.addLayer(
-          heatmapLayer, "webGLHeatmap", layerId, group);
-      }
-};
+  if(!$.isEmptyObject(heatmapCoords)) {
+    var heatmapLayer = L.webGLHeatmap(options);
+    heatmapLayer.setData(heatmapCoords);
+    widget.layerManager.addLayer(
+      heatmapLayer, 'webGLHeatmap', layerId, group);
+  }
+}
 
-LeafletWidget.methods.addWebGLGeoJSONHeatmap = function(
-  geojson, intensityProperty, layerId, group, options) {
-    var self = this;
-    if(LeafletWidget.utils.isURL(geojson)) {
-      $.getJSON(geojson, function(geojsondata){
-        addGenericWebGLGeoJSONHeatmap(self,
-          geojsondata, intensityProperty, layerId, group, options);
-      });
-    } else {
-      addGenericWebGLGeoJSONHeatmap(self,
-        geojson, intensityProperty, layerId, group, options);
-    }
-};
-
-LeafletWidget.methods.addWebGLKMLHeatmap = function(
-  kml, intensityProperty, layerId, group, options) {
-    var self = this;
-    if(LeafletWidget.utils.isURL(kml)) {
-      $.getJSON(kml, function(data){
-        var geojsondata = toGeoJSON.kml(
-          LeafletWidget.utils.parseXML(data));
-        addGenericWebGLGeoJSONHeatmap(self,
-          geojsondata, intensityProperty, layerId, group, options);
-      });
-    } else {
-      var geojsondata = toGeoJSON.kml(
-        LeafletWidget.utils.parseXML(kml));
+LeafletWidget.methods.addWebGLGeoJSONHeatmap = function(geojson, intensityProperty, layerId, group, options) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(geojson)) {
+    $.getJSON(geojson, function(geojsondata){
       addGenericWebGLGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
-    }
+    });
+  } else {
+    addGenericWebGLGeoJSONHeatmap(self,
+      geojson, intensityProperty, layerId, group, options);
+  }
 };
 
-LeafletWidget.methods.addWebGLCSVHeatmap = function(
-  csv, intensityProperty, layerId, group, options, parserOptions) {
-    var self = this;
-    if(LeafletWidget.utils.isURL(csv)) {
-      $.getJSON(csv, function(data){
-        csv2geojson.csv2geojson(
-          data, parserOptions || {}, 
-          function(err, geojsondata) {
-            addGenericWebGLGeoJSONHeatmap(self,
-              geojsondata, intensityProperty, layerId, group, options);
-          }
-        );
-      });
-    } else {
+LeafletWidget.methods.addWebGLKMLHeatmap = function(kml, intensityProperty, layerId, group, options) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(kml)) {
+    $.getJSON(kml, function(data){
+      var geojsondata = toGeoJSON.kml(
+        LeafletWidget.utils.parseXML(data));
+      addGenericWebGLGeoJSONHeatmap(self,
+        geojsondata, intensityProperty, layerId, group, options);
+    });
+  } else {
+    var geojsondata = toGeoJSON.kml(
+      LeafletWidget.utils.parseXML(kml));
+    addGenericWebGLGeoJSONHeatmap(self,
+      geojsondata, intensityProperty, layerId, group, options);
+  }
+};
+
+LeafletWidget.methods.addWebGLCSVHeatmap = function(csv, intensityProperty, layerId, group, options, parserOptions) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(csv)) {
+    $.getJSON(csv, function(data){
       csv2geojson.csv2geojson(
-        csv, parserOptions || {}, 
+        data, parserOptions || {},
         function(err, geojsondata) {
           addGenericWebGLGeoJSONHeatmap(self,
             geojsondata, intensityProperty, layerId, group, options);
         }
       );
-    }
-};
-
-LeafletWidget.methods.addWebGLGPXHeatmap = function(
-  gpx, intensityProperty, layerId, group, options) {
-    var self = this;
-    if(LeafletWidget.utils.isURL(gpx)) {
-      $.getJSON(gpx, function(data){
-        var geojsondata = toGeoJSON.gpx(
-          LeafletWidget.utils.parseXML(data));
+    });
+  } else {
+    csv2geojson.csv2geojson(
+      csv, parserOptions || {},
+      function(err, geojsondata) {
         addGenericWebGLGeoJSONHeatmap(self,
           geojsondata, intensityProperty, layerId, group, options);
-      });
-    } else {
+      }
+    );
+  }
+};
+
+LeafletWidget.methods.addWebGLGPXHeatmap = function(gpx, intensityProperty, layerId, group, options) {
+  var self = this;
+  if(LeafletWidget.utils.isURL(gpx)) {
+    $.getJSON(gpx, function(data){
       var geojsondata = toGeoJSON.gpx(
-        LeafletWidget.utils.parseXML(gpx));
+        LeafletWidget.utils.parseXML(data));
       addGenericWebGLGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
-    }
+    });
+  } else {
+    var geojsondata = toGeoJSON.gpx(
+      LeafletWidget.utils.parseXML(gpx));
+    addGenericWebGLGeoJSONHeatmap(self,
+      geojsondata, intensityProperty, layerId, group, options);
+  }
 };
 
 LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
-  this.layerManager.removeLayer("webGLHeatmap", layerId);
+  this.layerManager.removeLayer('webGLHeatmap', layerId);
 };
 
 LeafletWidget.methods.clearWebGLHeatmap = function() {
-  this.layerManager.clearLayers("webGLHeatmap");
+  this.layerManager.clearLayers('webGLHeatmap');
 };

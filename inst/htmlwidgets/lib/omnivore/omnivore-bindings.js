@@ -1,3 +1,4 @@
+/* global LeafletWidget, $, L, topojson, csv2geojson, toGeoJSON */
 // parse an XML
 LeafletWidget.utils.parseXML = function(str) {
   if (typeof str === 'string') {
@@ -11,7 +12,7 @@ LeafletWidget.utils.parseXML = function(str) {
 LeafletWidget.utils.getParsedGeoJSON = function(data) {
   var geojson;
 
-  if(typeof data ==='undefined' || data === null || 
+  if(typeof data ==='undefined' || data === null ||
     (typeof data === 'string' && data.trim() === '')) {
     return geojson;
   }
@@ -24,9 +25,9 @@ LeafletWidget.utils.getParsedGeoJSON = function(data) {
 
   // if input is a TopoJSON
   // iterate over each of its objects and add their coords
-  if (geojson.type === "Topology") {
+  if (geojson.type === 'Topology') {
     var topoJsonFeatures = [];
-    for (key in geojson.objects) {
+    for (var key in geojson.objects) {
       var topoToGeo = topojson.feature(geojson, geojson.objects[key]);
       if(L.Util.isArray(topoToGeo)) {
         topoJsonFeatures = topoJsonFeatures.concat(topoToGeo);
@@ -40,13 +41,13 @@ LeafletWidget.utils.getParsedGeoJSON = function(data) {
   }
   return geojson;
 };
-  
+
 // utility method to extract resetStyle from defaultStyle & highlightStyle
 function getResetStyle(style, highlightStyle) {
   var resetStyle = {};
   if(!$.isEmptyObject(highlightStyle)) {
     $.each(highlightStyle, function (k, v) {
-      if(k != "bringToFront" && k != "sendToBack"){
+      if(k != 'bringToFront' && k != 'sendToBack'){
         if(style && style[k]) {
           resetStyle[k] = style[k];
         }
@@ -58,22 +59,22 @@ function getResetStyle(style, highlightStyle) {
 
 // is a given string a URL
 LeafletWidget.utils.isURL = function(url) {
-    if (typeof url !== "string" || url.trim() === '' ) {
-			return false;
-    }
-    var strRegex = "^((https|http|ftp|rtsp|mms)?://)"
-        + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp user@
-        + "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP/URL- 199.194.52.184
-        + "|" // IP/DOMAIN
-        + "([0-9a-z_!~*'()-]+\.)*" //  www.
-        + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." //
-        + "[a-z]{2,6})" // first level domain- .com or .museum
-        + "(:[0-9]{1,4})?" // Port - :80
-        + "((/?)|" // a slash isn't required if there is no file name
-        + "(/[0-9A-Za-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
-     var re=new RegExp(strRegex);
-     return re.test(url);
- };
+  if (typeof url !== 'string' || url.trim() === '' ) {
+    return false;
+  }
+  var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
+    + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp user@
+    + '(([0-9]{1,3}\.){3}[0-9]{1,3}' // IP/URL- 199.194.52.184
+    + '|' // IP/DOMAIN
+    + "([0-9a-z_!~*'()-]+\.)*" //  www.
+    + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\.' //
+    + '[a-z]{2,6})' // first level domain- .com or .museum
+    + '(:[0-9]{1,4})?' // Port - :80
+    + '((/?)|' // a slash isn't required if there is no file name
+    + "(/[0-9A-Za-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+  var re=new RegExp(strRegex);
+  return re.test(url);
+};
 
 function addGeoJSONLayer(
   widget,
@@ -89,7 +90,7 @@ function addGeoJSONLayer(
   var self = widget;
 
   // Initialize Clusering support if enabled.
-  var clusterGroup = self.layerManager.getLayer("cluster", clusterId),
+  var clusterGroup = self.layerManager.getLayer('cluster', clusterId),
     cluster = clusterOptions !== null;
   if (cluster && !clusterGroup) {
     clusterGroup = L.markerClusterGroup.layerSupport(clusterOptions);
@@ -137,14 +138,14 @@ function addGeoJSONLayer(
     }, extraInfo || {});
 
     // create and bind popups if enabled.
-    if (typeof popupProperty !== "undefined" && popupProperty !== null) {
-      if(typeof popupProperty == "string") {
+    if (typeof popupProperty !== 'undefined' && popupProperty !== null) {
+      if(typeof popupProperty == 'string') {
         if(!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(feature.properties[popupProperty], popupOptions);
         } else {
           layer.bindPopup(feature.properties[popupProperty]);
         }
-      } else if(typeof popupProperty == "function") {
+      } else if(typeof popupProperty == 'function') {
         if(!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(popupProperty(feature), popupOptions);
         } else {
@@ -154,8 +155,8 @@ function addGeoJSONLayer(
     }
 
     // create and bind labels if enabled.
-    if (typeof labelProperty !== "undefined" && labelProperty !== null) {
-      if(typeof labelProperty == "string") {
+    if (typeof labelProperty !== 'undefined' && labelProperty !== null) {
+      if(typeof labelProperty == 'string') {
         if(!$.isEmptyObject(labelOptions)) {
           if(labelOptions.noHide) {
             layer.bindLabel(feature.properties[labelProperty], labelOptions).showLabel();
@@ -165,7 +166,7 @@ function addGeoJSONLayer(
         } else {
           layer.bindLabel(feature.properties[labelProperty]);
         }
-      } else if(typeof labelProperty == "function") {
+      } else if(typeof labelProperty == 'function') {
         if(!$.isEmptyObject(labelOptions)) {
           if(labelOptions.noHide) {
             layer.bindLabel(labelProperty(feature), labelOptions).showLabel();
@@ -181,16 +182,16 @@ function addGeoJSONLayer(
     // add EventListeners to highlight shapes on hover if enabled.
     if(!$.isEmptyObject(highlightStyle)) {
       layer.on({
-        "mouseover": highlightFeature,
-        "mouseout": resetFeature});
+        'mouseover': highlightFeature,
+        'mouseout': resetFeature});
     }
 
-    layer.on("click", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_click", featureExtraInfo), self);
-    layer.on("mouseover", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_mouseover", featureExtraInfo), self);
-    layer.on("mouseout", LeafletWidget.methods.mouseHandler(self.id, layerId,
-      thisGroup, "geojson_mouseout", featureExtraInfo), self);
+    layer.on('click', LeafletWidget.methods.mouseHandler(self.id, layerId,
+      thisGroup, 'geojson_click', featureExtraInfo), self);
+    layer.on('mouseover', LeafletWidget.methods.mouseHandler(self.id, layerId,
+      thisGroup, 'geojson_mouseover', featureExtraInfo), self);
+    layer.on('mouseout', LeafletWidget.methods.mouseHandler(self.id, layerId,
+      thisGroup, 'geojson_mouseout', featureExtraInfo), self);
   }
 
   // code for custom markers
@@ -199,12 +200,12 @@ function addGeoJSONLayer(
     if(markerType === 'circleMarker') {
       layer = L.circleMarker(latlng, markerOptions || {});
     } else {
-      if (typeof markerIconProperty !== "undefined" && markerIconProperty !== null) {
-        if(typeof markerIconProperty == "string") {
+      if (typeof markerIconProperty !== 'undefined' && markerIconProperty !== null) {
+        if(typeof markerIconProperty == 'string') {
           layer = L.marker(latlng, $.extend({
             icon: markerIconFunction(markerIcons[feature.properties[markerIconProperty]])
           }, markerOptions || {}));
-        } else if(typeof markerIconProperty == "function") {
+        } else if(typeof markerIconProperty == 'function') {
           layer = L.marker(latlng, $.extend({
             icon: markerIconFunction(markerIcons[markerIconProperty(feature)])
           }, markerOptions || {}));
@@ -234,12 +235,12 @@ function addGeoJSONLayer(
 
   var gjlayer = geojsonLayerFunction(geojsonOptions);
 
-  self.layerManager.addLayer(gjlayer, "geojson", layerId, thisGroup);
+  self.layerManager.addLayer(gjlayer, 'geojson', layerId, thisGroup);
   if (cluster) {
-    self.layerManager.addLayer(clusterGroup, "cluster", clusterId, group);
+    self.layerManager.addLayer(clusterGroup, 'cluster', clusterId, group);
   }
 
-};
+}
 
 
 LeafletWidget.methods.addGeoJSONv2 = function(
@@ -346,7 +347,7 @@ LeafletWidget.methods.addCSV = function(
   if(LeafletWidget.utils.isURL(csv)) {
     $.getJSON(csv, function(data){
       csv2geojson.csv2geojson(
-        data, csvParserOptions || {}, 
+        data, csvParserOptions || {},
         function(err, geojsondata) {
           addGeoJSONLayer(
             self,
@@ -367,7 +368,7 @@ LeafletWidget.methods.addCSV = function(
     });
   } else {
     csv2geojson.csv2geojson(
-      csv, csvParserOptions || {}, 
+      csv, csvParserOptions || {},
       function(err, geojsondata) {
         addGeoJSONLayer(
           self,
