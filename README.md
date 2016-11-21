@@ -14,7 +14,6 @@ devtools::install_github('bhaskarvk/leaflet.extras')
 
 Plugins integrated so far
 
-
 - [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse): Demo at [Rpubs - Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
 - [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers): Demo at [Rpubs - Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
 - [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet): Demo at [Rpubs - Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
@@ -30,6 +29,7 @@ Plugins integrated so far
     * GPX: Demo at [Rpubs - GPX](http://rpubs.com/bhaskarvk/gpx)
     * ~~WKT~~: Will not be implemented.
     * ~~Polyline~~: Will not be implemented.
+- [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) & [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor): Demo at [Rpubs: leaflet-draw](http://rpubs.com/bhaskarvk/leaflet-draw)
 
 If you need a plugin that is not already implemented create an issue.
 
