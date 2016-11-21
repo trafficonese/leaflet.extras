@@ -12,10 +12,13 @@ drawDependencies <- function() {
   )
 }
 
-#' adds a Toolbar to draw shapes/points on the map
-#' @param map the map
-#' @param layerId An optional unique ID for the layer that will hold the drawn shapes
-#' @param group An optional group to which the layer that will hold the drawn shapes will be added.
+#' Adds a Toolbar to draw shapes/points on the map.
+#' @param map The map widget.
+#' @param targetLayerId An optional layerId of a GeoJSON/TopoJSON layer whose features need to be editable.
+#'  Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.
+#' @param targetGroup An optional group name of a Feature Group whose features need to be editable.
+#'  Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+#'  You can either set layerId or group or none but not both.
 #' @param position The position where the toolbar should appear.
 #' @param polylineOptions See \code{\link{drawPolylineOptions}}(). Set to FALSE to disable polyline drawing.
 #' @param polygonOptions See \code{\link{drawPolygonOptions}}(). Set to FALSE to disable polygon drawing.
@@ -26,7 +29,7 @@ drawDependencies <- function() {
 #' @export
 #' @rdname draw
 addDrawToolbar <- function(
-  map, layerId = NULL, group = NULL,
+  map, targetLayerId = NULL, targetGroup = NULL,
   position = c('topleft','topright','bottomleft','bottomright'),
   polylineOptions = drawPolylineOptions(),
   polygonOptions = drawPolygonOptions(),
@@ -35,6 +38,11 @@ addDrawToolbar <- function(
   markerOptions = drawMarkerOptions(),
   editOptions = FALSE
 ) {
+
+  if(!is.null(targetGroup) && !is.null(targetLayerId)) {
+      stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
+  }
+
   map$dependencies <- c(map$dependencies, drawDependencies())
 
   markerIconFunction <- NULL
@@ -64,12 +72,13 @@ addDrawToolbar <- function(
     edit = editOptions )
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), "addDrawToolbar",
-                        layerId, group, options)
+                        targetLayerId, targetGroup, options)
 }
 
 #' Removes the draw toolbar
+#' @param clearFeatures whether to clear the map of drawn features.
 #' @rdname draw
 #' @export
-removeDrawToolbar <- function(map) {
-  leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeDrawToolbar')
+removeDrawToolbar <- function(map, clearFeatures=FALSE) {
+  leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeDrawToolbar', clearFeatures)
 }

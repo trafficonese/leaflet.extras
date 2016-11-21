@@ -1,7 +1,7 @@
 Package: leaflet.extras
 Type: Package
 Title: Extra Functionality for Leaflet Package
-Version: 0.1.9
+Version: 0.1.9001
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
     role = c("aut", "cre"))
 Description: Leaflet Javascript library provides many plugins some of which
@@ -14,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.1.0),
-    leaflet (>= 1.0.2.9006),
+    leaflet (>= 1.0.2.9008),
 Imports:
     shiny,
     htmlwidgets,

@@ -1,3 +1,10 @@
+# leaflet.extras 0.1.9001
+
+#### New Features
+
+* Switched to x.y.zzzz naming for the package version.
+* Added support for editing existing shapes with the draw toobar.
+
 # leaflet.extras 0.1.9
 
 #### New Features

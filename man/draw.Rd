@@ -3,24 +3,27 @@
 \name{addDrawToolbar}
 \alias{addDrawToolbar}
 \alias{removeDrawToolbar}
-\title{adds a Toolbar to draw shapes/points on the map}
+\title{Adds a Toolbar to draw shapes/points on the map.}
 \usage{
-addDrawToolbar(map, layerId = NULL, group = NULL, position = c("topleft",
-  "topright", "bottomleft", "bottomright"),
+addDrawToolbar(map, targetLayerId = NULL, targetGroup = NULL,
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
   polylineOptions = drawPolylineOptions(),
   polygonOptions = drawPolygonOptions(),
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangeOptions(),
   markerOptions = drawMarkerOptions(), editOptions = FALSE)
 
-removeDrawToolbar(map)
+removeDrawToolbar(map, clearFeatures = FALSE)
 }
 \arguments{
-\item{map}{the map}
+\item{map}{The map widget.}
 
-\item{layerId}{An optional unique ID for the layer that will hold the drawn shapes}
+\item{targetLayerId}{An optional layerId of a GeoJSON/TopoJSON layer whose features need to be editable.
+Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.}
 
-\item{group}{An optional group to which the layer that will hold the drawn shapes will be added.}
+\item{targetGroup}{An optional group name of a Feature Group whose features need to be editable.
+Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+You can either set layerId or group or none but not both.}
 
 \item{position}{The position where the toolbar should appear.}
 
@@ -35,9 +38,11 @@ removeDrawToolbar(map)
 \item{markerOptions}{See \code{\link{drawMarkerOptions}}(). Set to FALSE to disable marker drawing.}
 
 \item{editOptions}{By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().}
+
+\item{clearFeatures}{whether to clear the map of drawn features.}
 }
 \description{
-adds a Toolbar to draw shapes/points on the map
+Adds a Toolbar to draw shapes/points on the map.
 
 Removes the draw toolbar
 }

@@ -1,29 +1,43 @@
 /* global LeafletWidget, $, L, Shiny, HTMLWidgets */
-LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
+LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, options) {
   (function(){
 
     var map = this;
 
-    // clear old toolbar if any
-    map.layerManager.clearLayers('editableLayers');
     if(map.drawToolbar) {
       map.drawToolbar.removeFrom(map);
       delete map.drawToobar;
     }
-    map._editableLayerId = null;
 
     // FeatureGroup that will hold our drawn shapes/markers
-    // DON'T TOUCH THIS IF YOU DON'T KNOW WHAT YOU ARE DOING
-    var editableLayers = new L.FeatureGroup();
-    editableLayers.id = layerId || L.Util.stamp(editableLayers);
-    map._editableLayerId = editableLayers.id; // store the ID for later use
-    this.layerManager.addLayer(editableLayers, 'editableLayers',
-      editableLayers.id, group);
+    // This can be an existing GeoJSON layer whose features can be edited/deleted or new ones added.
+    // OR an existing FeatureGroup whose features can be edited/deleted or new ones added.
+    // OR a new FeatureGroup to hold drawn shapes.
+    var editableFeatureGroup;
+
+    if(targetLayerId) {
+      // If we're given an existing GeoJSON layer find it and use it
+      editableFeatureGroup = map.layerManager.getLayer('geojson', targetLayerId);
+      if(editableFeatureGroup) {
+        map._editableGeoJSONLayerId = targetLayerId;
+      } else {
+        // throw an error if we can't find the target GeoJSON layer
+        throw 'GeoJSON layer with ID '+targetLayerId+' not Found';
+      }
+    } else {
+      // If we're given an existing FeatureLayer use that.
+      // In this case we don't throw an error if the specified FeatureGroup is not found,
+      // we silently create a new one.
+      if(!targetGroup) {
+        targetGroup = 'editableFeatureGroup';
+      }
+      editableFeatureGroup = map.layerManager.getLayerGroup(targetGroup, true);
+      map._editableFeatureGroupName = targetGroup;
+    }
 
     // Create appropriate Marker Icon.
-    // DON'T TOUCH THIS IF YOU DON'T KNOW WHAT YOU ARE DOING
     if(options && options.draw && options.draw.marker) {
-      if(options.draw.marker.markerIcon && 
+      if(options.draw.marker.markerIcon &&
         options.draw.marker.markerIconFunction) {
         options.draw.marker.icon =
           options.draw.marker.markerIconFunction(
@@ -32,7 +46,6 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
     }
 
     // create appropriate options
-    // DON'T TOUCH THIS IF YOU DON'T KNOW WHAT YOU ARE DOING
     if(!$.isEmptyObject(options.edit)) {
       var editOptions = {};
       if(!options.edit.remove) {
@@ -50,53 +63,58 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
         editOptions.poly = options.edit.poly;
       }
 
-      editOptions.featureGroup = editableLayers;
+      editOptions.featureGroup = editableFeatureGroup;
       options.edit = editOptions;
     }
 
-    // DON'T TOUCH ANYTHING BELOW IF YOU DON'T KNOW WHAT YOU ARE DOING
     map.drawToolbar =  new L.Control.Draw(options);
     map.drawToolbar.addTo(map);
 
     // Event Listeners
     map.on(L.Draw.Event.CREATED, function (e) {
       var layer = e.layer;
-      editableLayers.addLayer(layer);
+      editableFeatureGroup.addLayer(layer);
 
       // assign a unique key to the newly created feature
       var featureId = L.stamp(layer);
       layer.feature = {
         'type' : 'Feature',
         'properties' : {
-          '_leaflet_id' : featureId
+          '_leaflet_id' : featureId,
+          'feature_type' : e.layerType
         }
       };
 
       // circles are just Points and toGeoJSON won't store radius by default
       // so we store it inside the properties.
-      if(e.layerType === 'circle') {
-        layer.feature.properties.type = 'circle';
+      if(typeof layer.getRadius === 'function') {
         layer.feature.properties.radius = layer.getRadius();
       }
-      
+
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
 
       Shiny.onInputChange(map.id+'_draw_new_feature',
         layer.toGeoJSON());
       Shiny.onInputChange(map.id+'_draw_all_features',
-        editableLayers.toGeoJSON());
+        editableFeatureGroup.toGeoJSON());
     });
 
     map.on(L.Draw.Event.EDITED, function (e) {
-      
+
       var layers = e.layers;
 
-      // re-compute the radius of circles
       layers.eachLayer(function(layer){
-        // circles are just Points and toGeoJSON won't store radius by default
-        // so we store it inside the properties.
-        if(layer.feature.properties.type === 'circle') {
+        var featureId = L.stamp(layer);
+        if(!layer.feature) {
+          layer.feature = {'type' : 'Feature'};
+        }
+        if(!layer.feature.properties) {
+          layer.feature.properties = {};
+        }
+        layer.feature.properties._leaflet_id = featureId;
+
+        if(typeof layer.getRadius === 'function') {
           layer.feature.properties.radius = layer.getRadius();
         }
       });
@@ -106,7 +124,7 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
       Shiny.onInputChange(map.id+'_draw_edited_features',
         layers.toGeoJSON());
       Shiny.onInputChange(map.id+'_draw_all_features',
-        editableLayers.toGeoJSON());
+        editableFeatureGroup.toGeoJSON());
     });
 
     map.on(L.Draw.Event.DELETED, function (e) {
@@ -116,7 +134,7 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
       Shiny.onInputChange(map.id+'_draw_deleted_features',
         layers.toGeoJSON());
       Shiny.onInputChange(map.id+'_draw_all_features',
-        editableLayers.toGeoJSON());
+        editableFeatureGroup.toGeoJSON());
     });
 
 
@@ -124,7 +142,7 @@ LeafletWidget.methods.addDrawToolbar = function(layerId, group, options) {
 
 };
 
-LeafletWidget.methods.removeDrawToolbar = function() {
+LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
   (function(){
 
     var map = this;
@@ -133,8 +151,14 @@ LeafletWidget.methods.removeDrawToolbar = function() {
       map.drawToolbar.removeFrom(map);
       delete map.drawToolbar;
     }
-    map.layerManager.clearLayers('editableLayers');
-    map._editableLayerId = null;
+    if(map._editableFeatureGroupName && clearFeatures) {
+      map.layerManager.clearGroup(map._editableFeatureGroupName);
+    }
+    map._editableFeatureGroupName = null;
+    if(map._editableGeoJSONLayerId && clearFeatures) {
+      map.layerManager.removeLayer('geojson', map._editableGeoJSONLayerId);
+    }
+    map._editableGeoJSONLayerId = null;
   }).call(this);
 
 };
@@ -142,14 +166,16 @@ LeafletWidget.methods.removeDrawToolbar = function() {
 LeafletWidget.methods.getDrawnItems = function() {
   var map = this;
 
-  if(map._editableLayerId) {
-    var layer = this.layerManager.getLayer('editableLayers', map._editableLayerId);
-    if(layer) { 
-      return layer.toGeoJSON();
-    } else {
-      return null; // Normally this shouldn't happen
-    }
+  var featureGroup;
+  if(map._editableGeoJSONLayerId) {
+    featureGroup = map.layerManager.getLayer('geojson', map._editableGeoJSONLayerId);
+  } else if(map._editableFeatureGroupName) {
+    featureGroup = map.layerManager.getLayerGroup(map._editableFeatureGroupName, false);
+  }
+  if(featureGroup) {
+    return featureGroup.toGeoJSON();
   } else {
     return null;
   }
+  
 };
