@@ -1,6 +1,6 @@
 # leaflet.extras
 
-The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins. 
+The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins.
 
 ### Installation
 
@@ -30,6 +30,7 @@ Plugins integrated so far
     * ~~WKT~~: Will not be implemented.
     * ~~Polyline~~: Will not be implemented.
 - [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) & [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor): Demo at [Rpubs: leaflet-draw](http://rpubs.com/bhaskarvk/leaflet-draw)
+- [Leaflet.Geodesic](https://github.com/henrythasler/Leaflet.Geodesic)
 
 If you need a plugin that is not already implemented create an issue.
 
