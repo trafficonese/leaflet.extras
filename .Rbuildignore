@@ -9,3 +9,4 @@
 ^README\.md$
 ^\.travis\.yml$
 ^docs$
+^inst/htmlwidgets/lib/.eslintrc.js$
