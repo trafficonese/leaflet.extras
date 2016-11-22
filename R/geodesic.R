@@ -3,7 +3,7 @@ geodesicDependencies <- function() {
     htmltools::htmlDependency(
       "geodesic",version = "0.1.0",
       system.file("htmlwidgets/lib/geodesic", package = "leaflet.extras"),
-      script = c('Leaflet.Geodesic.js', 'geodesic-bindings.js')
+      script = c('Leaflet.Geodesic.min.js', 'geodesic-bindings.js')
     )
   )
 }

@@ -30,7 +30,7 @@ Plugins integrated so far
     * ~~WKT~~: Will not be implemented.
     * ~~Polyline~~: Will not be implemented.
 - [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) & [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor): Demo at [Rpubs: leaflet-draw](http://rpubs.com/bhaskarvk/leaflet-draw)
-- [Leaflet.Geodesic](https://github.com/henrythasler/Leaflet.Geodesic)
+- [Leaflet.Geodesic](https://github.com/henrythasler/Leaflet.Geodesic): Demo at [Rpubs: Geodesic Lines](http://rpubs.com/bhaskarvk/geodesic)
 
 If you need a plugin that is not already implemented create an issue.
 

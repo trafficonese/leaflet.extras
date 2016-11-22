@@ -14,8 +14,7 @@ calgary <- c(51.05, -114.08)
 hammerfest <- c(70.67, 23.68)
 barrow <- c(71.29, -156.76)
 
-df <- as.data.frame(rbind(losangeles, sydney, santiago, tokio, capetown,
-            calgary, hammerfest, barrow))
+df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
 names(df) <- c('lat','lng')
 
 library(leaflet.extras)
@@ -25,7 +24,8 @@ library(leaflet.extras)
 leaflet(df) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addGeodesicPolylines(lng=~lng, lat=~lat, weight=2, color='red',
-                       steps=50, opacity=1)
+                       steps=50, opacity=1) %>%
+  addCircleMarkers(df,lat=~lat,lng=~lng, radius = 3, stroke=F, fillColor='black', fillOpacity=1)
 
 #' ### Example 2
 
