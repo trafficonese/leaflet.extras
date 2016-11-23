@@ -13,8 +13,8 @@ leaflet() %>%
                      layersControlOptions(collapsed=FALSE)) %>%
   addStyleEditor()
 
-#' <br/><br/><br/>
-#' ### Add features and then make then editable.<br/>
+#' <br/><br/>
+#' ### Add Circles and enable editing.
 #' The `group` param of `add*` methods has to match the `targetGroup` param of `addDrawToolbar`.
 
 cities <- read.csv(textConnection("
@@ -38,35 +38,48 @@ leaflet(cities) %>% addTiles() %>%
                      layersControlOptions(collapsed=FALSE)) %>%
   addStyleEditor()
 
+#' <br/><br/>
+#' ### Add polygons and enable editing.
+#' The `group` param of `add*` methods has to match the `targetGroup` param of `addDrawToolbar`.
+
+library(rbgm)
+set.seed(2)
+## pick one of the available model files
+fs <- sample(bgmfiles::bgmfiles(), 1)
+
+## read the model, and convert to Spatial (box for polygons, face for boundary lines)
+model <- boxSpatial(bgmfile(fs))
+## most of the BGM models will be in a local map projection
+model <- spTransform(model, "+init=epsg:4326")
+
+#+ fig.width=10, fig.height=8
+leaflet() %>% addTiles() %>%
+  addPolygons(data = model, group = 'model') %>%
+  addDrawToolbar(targetGroup = 'model',
+    editOptions = editToolbarOptions(
+      selectedPathOptions = selectedPathOptions())) %>%
+  addLayersControl(overlayGroups = c('model'), options =
+                     layersControlOptions(collapsed=FALSE)) %>%
+  addStyleEditor()
+
+
 #' <br/><br/><br/>
 #' ### Add GeoJSON and then edit it
-#' The layerId of the GeoJSON has to match the targetLayerId of `addDrawToolbar`
+#' The layerId of the GeoJSON has to match the targetLayerId of `addDrawToolbar`. Also notice that we have to simplify the geometry quite a bit using `rmapshaper::ms_simplify`, otherwise the edit feature is very slow and will even hang the browser.
 
 fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson'
 
 geoJson <- readr::read_file(fName)
+geoJson2 <- rmapshaper::ms_simplify(geoJson, keep=0.01)
 
-leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 11) %>%
-  addBootstrapDependency() %>%
-  addGeoJSONChoropleth(
-    geoJson,
-    valueProperty = 'AREASQMI',
-    scale = c('white','red'), mode='q', steps = 4, padding = c(0.2,0),
-    labelProperty='NAME',
-    popupProperty=propstoHTMLTable(
-      props = c('NAME', 'AREASQMI', 'REP_NAME', 'WEB_URL', 'REP_PHONE', 'REP_EMAIL', 'REP_OFFICE'),
-      table.attrs = list(class='table table-striped table-bordered'),drop.na = T),
-    color='#ffffff', weight=1, fillOpacity = 0.7,
-    highlightOptions = highlightOptions(
-      weight=2, color='#000000',
-      fillOpacity=1, opacity =1,
-      bringToFront=TRUE, sendToBack=TRUE),
-    legendOptions = legendOptions(title='Area in Sq. Miles'),
+#+ fig.width=10, fig.height=8
+leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 12) %>%
+  addGeoJSONv2(geoJson2,
     group = 'wards', layerId = 'dc-wards') %>%
   addDrawToolbar(
     targetLayerId='dc-wards',
-    editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))  %>%
+    editOptions = editToolbarOptions(
+      selectedPathOptions = selectedPathOptions()))  %>%
   addLayersControl(overlayGroups = c('wards'),
                    options = layersControlOptions(collapsed=FALSE)) %>%
   addStyleEditor()
-
