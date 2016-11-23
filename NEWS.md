@@ -1,3 +1,9 @@
+# leaflet.extras 0.1.9002
+
+#### New Features
+
+* Added support for [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path) plugin.
+
 # leaflet.extras 0.1.9001
 
 #### New Features
