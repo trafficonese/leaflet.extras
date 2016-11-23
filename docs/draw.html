@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>addDrawToolbar. leaflet.extras 0.1.9</title>
+<title>addDrawToolbar. leaflet.extras 0.1.9001</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">leaflet.extras 0.1.9</a>
+      <a class="brand" href="index.html">leaflet.extras 0.1.9001</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -49,29 +49,32 @@
         
       </header>
       
-      <h1>adds a Toolbar to draw shapes/points on the map</h1>
+      <h1>Adds a Toolbar to draw shapes/points on the map.</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='draw.html'>addDrawToolbar</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">layerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">group</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"topleft"</span><span class="keyword">,</span>
-  <span class="string">"topright"</span><span class="keyword">,</span> <span class="string">"bottomleft"</span><span class="keyword">,</span> <span class="string">"bottomright"</span><span class="keyword">)</span><span class="keyword">,</span>
+    <pre><span class="functioncall"><a href='draw.html'>addDrawToolbar</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">targetLayerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">targetGroup</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"topleft"</span><span class="keyword">,</span> <span class="string">"topright"</span><span class="keyword">,</span> <span class="string">"bottomleft"</span><span class="keyword">,</span> <span class="string">"bottomright"</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">polylineOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='draw-options.html'>drawPolylineOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">polygonOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='draw-options.html'>drawPolygonOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">circleOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='draw-options.html'>drawCircleOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">rectangleOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='draw-options.html'>drawRectangeOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span>
   <span class="argument">markerOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='draw-options.html'>drawMarkerOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">,</span> <span class="argument">editOptions</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span>
 
-<span class="functioncall"><a href='draw.html'>removeDrawToolbar</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span></pre>
+<span class="functioncall"><a href='draw.html'>removeDrawToolbar</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">clearFeatures</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
       <dt>map</dt>
-      <dd>the map</dd>
-      <dt>layerId</dt>
-      <dd>An optional unique ID for the layer that will hold the drawn shapes</dd>
-      <dt>group</dt>
-      <dd>An optional group to which the layer that will hold the drawn shapes will be added.</dd>
+      <dd>The map widget.</dd>
+      <dt>targetLayerId</dt>
+      <dd>An optional layerId of a GeoJSON/TopoJSON layer whose features need to be editable.
+Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.</dd>
+      <dt>targetGroup</dt>
+      <dd>An optional group name of a Feature Group whose features need to be editable.
+Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+You can either set layerId or group or none but not both.</dd>
       <dt>position</dt>
       <dd>The position where the toolbar should appear.</dd>
       <dt>polylineOptions</dt>
@@ -86,12 +89,14 @@
       <dd>See <code><a href='draw-options.html'>drawMarkerOptions</a></code>(). Set to FALSE to disable marker drawing.</dd>
       <dt>editOptions</dt>
       <dd>By default editing is disable. To enable editing pass <code><a href='draw-options.html'>editToolbarOptions</a></code>().</dd>
+      <dt>clearFeatures</dt>
+      <dd>whether to clear the map of drawn features.</dd>
     </dl>
     
     <div class="Description">
       <h2>Description</h2>
 
-      <p>adds a Toolbar to draw shapes/points on the map</p>
+      <p>Adds a Toolbar to draw shapes/points on the map.</p>
 
       <p>Removes the draw toolbar</p>
 
