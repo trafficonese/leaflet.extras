@@ -1,3 +1,9 @@
+# leaflet.extras 0.1.9003
+
+#### New Features
+
+* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin.
+
 # leaflet.extras 0.1.9002
 
 #### New Features

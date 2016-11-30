@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>addBootstrapDependency. leaflet.extras 0.1.9003</title>
+<title>addSearchOSM. leaflet.extras 0.1.9003</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -49,29 +49,51 @@
         
       </header>
       
-      <h1>Add Bootstrap dependency to a map</h1>
+      <h1>Add a OSM search control to the map.</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='addBootstrapDependency.html'>addBootstrapDependency</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span></pre>
+    <pre><span class="functioncall"><a href='search.html'>addSearchOSM</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='search-options.html'>searchOSMOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='search.html'>addSearchMarker</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">targetLayerId</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">targetGroup</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span>
+  <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='search-options.html'>searchMarkersOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
       <dt>map</dt>
-      <dd>the map widget</dd>
+      <dd>a map widget object</dd>
+      <dt>options</dt>
+      <dd>Search Options</dd>
+      <dt>targetLayerId</dt>
+      <dd>An optional layerId of a GeoJSON/TopoJSON layer whose features need to be searched.</dd>
+      <dt>targetGroup</dt>
+      <dd>An optional group name of a Feature Group whose features need to be searched.</dd>
     </dl>
     
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+modified map</p>
+
+      <p>modified map
+</dl></p>
+
+    </div>
+
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Add Bootstrap dependency to a map</p>
+      <p>Add a OSM search control to the map.</p>
+
+      <p>Add a marker search control to the map.</p>
 
     </div>
       </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>addBootstrapDependency</li>
+      <li>addSearchMarker</li><li>addSearchOSM</li>
     </ul>
     <ul>
       
