@@ -75,7 +75,9 @@ propstoHTMLTable <- function(props = NULL, table.attrs=NULL, drop.na = TRUE) {
     JS(sprintf(
       "function(feature){
          return '<table%s><caption>Properties</caption><tbody style=\"font-size:x-small\">' +
-           L.Util.template('%s',feature.properties) + '</tbody></table>';
+           ( $.isEmptyObject(feature.properties) ? '' :
+             L.Util.template('%s',feature.properties)
+           )+ '</tbody></table>';
        }",
       if(!is.null(table.attrs))
         paste(sapply(names(table.attrs),
