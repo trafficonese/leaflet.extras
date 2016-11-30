@@ -2,7 +2,7 @@
 
 #### New Features
 
-* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin.
+* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin. Contributed by [Bangyou Zheng](https://github.com/bhaskarvk/leaflet.extras/pull/15).
 
 # leaflet.extras 0.1.9002
 
