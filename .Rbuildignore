@@ -10,3 +10,4 @@
 ^\.travis\.yml$
 ^docs$
 ^inst/htmlwidgets/lib/.eslintrc.js$
+^CONDUCT\.md$

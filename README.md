@@ -1,6 +1,6 @@
 # leaflet.extras
 
-The goal of leaflet.extras is to provide extra functionality to leaflet R package using various leaflet plugins.
+The goal of leaflet.extras is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) R package using various [leaflet plugins](http://leafletjs.com/plugins).
 
 ### Installation
 
@@ -34,4 +34,19 @@ Plugins integrated so far
 - [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path): Demo at [Rpubs: Measure Path](http://rpubs.com/bhaskarvk/measure-path)
 - [Leaflet-search](https://github.com/stefanocudini/leaflet-search): Demo at [Rpubs: Leaflet Search](http://rpubs.com/bhaskarvk/leaflet-search)
 
-If you need a plugin that is not already implemented create an issue.
+If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new).
+
+### Documentation
+
+The R functions have been documented using roxygen, and as such should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail, so you are encouraged to check the plugin's documentation. 
+
+Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/bhaskarvk/leaflet.extras/tree/master/inst/examples) available. 
+
+### Contributing
+
+Here are several ways in which you can help. Please consult the [Code of Conduct](CONDUCT.md).
+
+- Create issues for plugins you wish incorporated. It would help in prioritizing if you can include additional details like why you need the plugin, how helpful will it be to everyone etc.
+- Submit pull requests by incorporating plugins on your own.
+- Spreading awareness about the package and showcasing your use via social media, blog posts, presentations etc.
+
