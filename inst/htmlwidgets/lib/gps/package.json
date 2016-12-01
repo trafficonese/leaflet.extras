@@ -1,0 +1,37 @@
+{
+  "name": "leaflet-gps",
+  "version": "1.5.0",
+  "description": "Leaflet Control plugin for tracking gps position, with more options",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:stefanocudini/leaflet-gps.git"
+  },
+  "homepage": "http://labs.easyblog.it/maps/leaflet-gps/",
+  "author": {
+    "name": "Stefano Cudini",
+    "email": "stefano.cudini@gmail.com",
+    "url": "http://labs.easyblog.it/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "gis",
+    "map",
+    "gps",
+    "leaflet"
+  ],
+  "main": "src/leaflet-gps.js",
+  "dependencies": {
+    "leaflet": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-todos": "~0.2.0"
+  }
+}
