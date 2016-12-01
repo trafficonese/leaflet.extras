@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>gpsOptions. leaflet.extras 0.1.9004</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">leaflet.extras 0.1.9004</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Options for the GPS Control</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre><span class="functioncall"><a href='gps.html'>gpsOptions</a></span><span class="keyword">(</span><span class="argument">position</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"topleft"</span><span class="keyword">,</span> <span class="argument">activate</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span> <span class="argument">autoCenter</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">,</span>
+  <span class="argument">maxZoom</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="argument">setView</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">FALSE</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='gps.html'>addControlGPS</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">,</span> <span class="argument">options</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='gps.html'>gpsOptions</a></span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='gps.html'>removeControlGPS</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='gps.html'>activateGPS</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span>
+
+<span class="functioncall"><a href='gps.html'>deactivateGPS</a></span><span class="keyword">(</span><span class="symbol">map</span><span class="keyword">)</span></pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>position</dt>
+      <dd>Position of the Control</dd>
+      <dt>activate</dt>
+      <dd>If TRUE activates the GPS on addition.</dd>
+      <dt>autoCenter</dt>
+      <dd>If TRUE auto centers the map when GPS location changes</dd>
+      <dt>maxZoom</dt>
+      <dd>If set zooms to this level when auto centering</dd>
+      <dt>setView</dt>
+      <dd>If TRUE sets the view to the GPS location when found</dd>
+      <dt>map</dt>
+      <dd>a map widget object</dd>
+      <dt>options</dt>
+      <dd>Options for the GPS control.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+
+      <p>Options for the GPS Control</p>
+
+      <p>Add a gps to the Map.</p>
+
+      <p>Removes the GPS Control</p>
+
+      <p>Activate the GPS Control.
+You should have already added the GPS control before calling this method.</p>
+
+      <p>Deactivate the GPS Control.
+You should have already added the GPS control before calling this method.</p>
+
+    </div>
+      </div>
+  <div class="span4 sidebar">
+    <!-- <ul>
+      <li>activateGPS</li><li>addControlGPS</li><li>deactivateGPS</li><li>gpsOptions</li><li>removeControlGPS</li>
+    </ul>
+    <ul>
+      
+    </ul> -->
+
+
+
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

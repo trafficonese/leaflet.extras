@@ -1,3 +1,9 @@
+# leaflet.extras 0.1.9004
+
+#### New Features
+
+* Added support for [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps).
+
 # leaflet.extras 0.1.9003
 
 #### New Features
