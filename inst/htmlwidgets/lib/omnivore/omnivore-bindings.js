@@ -242,6 +242,7 @@ function addGeoJSONLayer(
 
 }
 
+LeafletWidget.methods.addGenericGeoJSONLayer = addGeoJSONLayer;
 
 LeafletWidget.methods.addGeoJSONv2 = function(
   geojson, layerId, group,
