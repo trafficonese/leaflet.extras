@@ -118,6 +118,7 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
           layer.feature.properties.radius = layer.getRadius();
         }
       });
+	 
 
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
@@ -127,6 +128,17 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         editableFeatureGroup.toGeoJSON());
     });
 
+	map.on(L.Draw.Event.EDITSTART, function (e) {
+		if (!HTMLWidgets.shinyMode) return;
+		Shiny.onInputChange(map.id+'_draw_editstart', true);
+
+	});
+
+	map.on(L.Draw.Event.DELETESTART, function (e) {
+		if (!HTMLWidgets.shinyMode) return;
+		Shiny.onInputChange(map.id+'_draw_deletestart', true);
+
+	});
     map.on(L.Draw.Event.DELETED, function (e) {
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
