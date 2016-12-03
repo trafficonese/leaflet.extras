@@ -4,7 +4,8 @@ Title: Extra Functionality for Leaflet Package
 Version: 0.1.9005
 Authors@R: c(
     person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
-    person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"), comment = "Leaflet-search plugin integration")
+    person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
+      comment = "Leaflet-search and Leaflet-GPS plugin integration")
     )
 Description: Leaflet Javascript library provides many plugins some of which
     are available in the core leaflet package, but there are many more. It is not

@@ -71,6 +71,16 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     map.drawToolbar.addTo(map);
 
     // Event Listeners
+    map.on(L.Draw.Event.DRAWSTART, function(e) {
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType});
+    });
+
+    map.on(L.Draw.Event.DRAWSTOP, function(e) {
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType});
+    });
+
     map.on(L.Draw.Event.CREATED, function (e) {
       var layer = e.layer;
       editableFeatureGroup.addLayer(layer);
@@ -91,7 +101,6 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         layer.feature.properties.radius = layer.getRadius();
       }
 
-      // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
 
       Shiny.onInputChange(map.id+'_draw_new_feature',
@@ -100,10 +109,17 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         editableFeatureGroup.toGeoJSON());
     });
 
+    map.on(L.Draw.Event.EDITSTART, function (e) {
+  		if (!HTMLWidgets.shinyMode) return;
+  		Shiny.onInputChange(map.id+'_draw_editstart', true);
+  	});
+    map.on(L.Draw.Event.EDITSTOP, function (e) {
+  		if (!HTMLWidgets.shinyMode) return;
+  		Shiny.onInputChange(map.id+'_draw_editstop', true);
+  	});
+
     map.on(L.Draw.Event.EDITED, function (e) {
-
       var layers = e.layers;
-
       layers.eachLayer(function(layer){
         var featureId = L.stamp(layer);
         if(!layer.feature) {
@@ -118,37 +134,48 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
           layer.feature.properties.radius = layer.getRadius();
         }
       });
-	 
 
-      // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
+
       Shiny.onInputChange(map.id+'_draw_edited_features',
         layers.toGeoJSON());
       Shiny.onInputChange(map.id+'_draw_all_features',
         editableFeatureGroup.toGeoJSON());
     });
 
-	map.on(L.Draw.Event.EDITSTART, function (e) {
-		if (!HTMLWidgets.shinyMode) return;
-		Shiny.onInputChange(map.id+'_draw_editstart', true);
+  	map.on(L.Draw.Event.DELETESTART, function (e) {
+  		if (!HTMLWidgets.shinyMode) return;
+  		Shiny.onInputChange(map.id+'_draw_deletestart', true);
+  	});
 
-	});
+  	map.on(L.Draw.Event.DELETESTOP, function (e) {
+  		if (!HTMLWidgets.shinyMode) return;
+  		Shiny.onInputChange(map.id+'_draw_deletestop', true);
+  	});
 
-	map.on(L.Draw.Event.DELETESTART, function (e) {
-		if (!HTMLWidgets.shinyMode) return;
-		Shiny.onInputChange(map.id+'_draw_deletestart', true);
-
-	});
     map.on(L.Draw.Event.DELETED, function (e) {
-      // Shiny stuff
-      if (!HTMLWidgets.shinyMode) return;
       var layers = e.layers;
+      layers.eachLayer(function(layer){
+        var featureId = L.stamp(layer);
+        if(!layer.feature) {
+          layer.feature = {'type' : 'Feature'};
+        }
+        if(!layer.feature.properties) {
+          layer.feature.properties = {};
+        }
+        layer.feature.properties._leaflet_id = featureId;
+
+        if(typeof layer.getRadius === 'function') {
+          layer.feature.properties.radius = layer.getRadius();
+        }
+      });
+
+      if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_draw_deleted_features',
         layers.toGeoJSON());
       Shiny.onInputChange(map.id+'_draw_all_features',
         editableFeatureGroup.toGeoJSON());
     });
-
 
   }).call(this);
 
@@ -189,5 +216,5 @@ LeafletWidget.methods.getDrawnItems = function() {
   } else {
     return null;
   }
-  
+
 };
