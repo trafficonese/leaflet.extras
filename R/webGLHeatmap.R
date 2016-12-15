@@ -51,8 +51,18 @@ addWebGLHeatmap = function(
 
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addWebGLHeatmap")
+
+  if(is.null(intensity)) {
+    points <- cbind(pts$lat, pts$lng)
+  } else {
+    if(inherits(intensity,'formula')) {
+      intensity <- eval(intensity[[2]], data, environment(intensity))
+    }
+    points <- cbind(pts$lat, pts$lng, intensity)
+  }
+
   leaflet::invokeMethod(
-    map, data, 'addWebGLHeatmap', pts$lat, pts$lng, intensity,
+    map, data, 'addWebGLHeatmap', points,
     layerId, group,
     leaflet::filterNULL(list(
       size = size,

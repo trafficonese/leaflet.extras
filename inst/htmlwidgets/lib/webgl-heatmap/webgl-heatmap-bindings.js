@@ -1,44 +1,9 @@
 /* global LeafletWidget, $, L, topojson, csv2geojson, toGeoJSON */
-LeafletWidget.methods.addWebGLHeatmap = function(lat, lng, intensity, layerId, group, options) {
+LeafletWidget.methods.addWebGLHeatmap = function(points, layerId, group, options) {
 
-  if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) || ($.isNumeric(lat) && $.isNumeric(lng))) {
-
+  if(!$.isEmptyObject(points)) {
     var heatmapLayer = L.webGLHeatmap(options);
-
-    var df = new LeafletWidget.DataFrame()
-      .col('lat',lat)
-      .col('lng',lng);
-
-    if(intensity) {
-      df.col('intensity',intensity);
-    }
-
-    var latlngs = [];
-    var i = 0;
-
-    if(intensity) {
-      for(i;i<df.nrow();i++){
-        if($.isNumeric(df.get(i, 'lat')) && $.isNumeric(df.get(i, 'lng'))) {
-          latlngs.push([
-            df.get(i,'lat'),
-            df.get(i,'lng'),
-            df.get(i,'intensity')
-          ]);
-        }
-      }
-    } else {
-      for(i;i<df.nrow();i++){
-        if($.isNumeric(df.get(i, 'lat')) && $.isNumeric(df.get(i, 'lng'))) {
-          latlngs.push([
-            df.get(i,'lat'),
-            df.get(i,'lng')
-          ]);
-        }
-      }
-    }
-
-    heatmapLayer.setData(latlngs);
-
+    heatmapLayer.setData(points);
     this.layerManager.addLayer(heatmapLayer, 'webGLHeatmap', layerId, group);
   }
 };
