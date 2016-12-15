@@ -1,3 +1,7 @@
+# leaflet.extras 0.1.9006
+
+* Major performance boost to addWebGLHeatmap function. Closes #42.
+
 # leaflet.extras 0.1.9004
 
 #### New Features
