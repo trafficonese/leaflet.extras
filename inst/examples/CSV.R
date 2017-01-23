@@ -9,7 +9,7 @@ library(leaflet.extras)
 
 #' Nearyly 50K World Airports
 
-fName <- system.file('examples/csv/world_airports.csv.zip', package = 'leaflet.extras')
+fName <- system.file('examples/data/csv/world_airports.csv.zip', package = 'leaflet.extras')
 
 csv <- readr::read_file(fName)
 

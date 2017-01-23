@@ -2,9 +2,9 @@ library(leaflet.extras)
 
 
 airports <- readr::read_file(
-  system.file('examples/gpx/md-airports.gpx.zip', package = 'leaflet.extras'))
+  system.file('examples/data/gpx/md-airports.gpx.zip', package = 'leaflet.extras'))
 towns <- readr::read_file(
-  system.file('examples/gpx/md-towns.gpx.zip', package = 'leaflet.extras'))
+  system.file('examples/data/gpx/md-towns.gpx.zip', package = 'leaflet.extras'))
 
 leaflet() %>%
   addBootstrapDependency() %>%
