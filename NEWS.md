@@ -1,4 +1,12 @@
+# leaflet.extras 0.1.9007
+
+#### New Features
+
+* Ability to suspend scrolling using [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep)
+
 # leaflet.extras 0.1.9006
+
+#### Improvements
 
 * Major performance boost to addWebGLHeatmap function. Closes #42.
 

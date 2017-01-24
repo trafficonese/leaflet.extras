@@ -34,6 +34,7 @@ Plugins integrated so far
 - [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path): Demo at [Rpubs: Measure Path](http://rpubs.com/bhaskarvk/measure-path)
 - [Leaflet-search](https://github.com/stefanocudini/leaflet-search): Demo at [Rpubs: Leaflet Search](http://rpubs.com/bhaskarvk/leaflet-search)
 - [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
+- [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new).
 
