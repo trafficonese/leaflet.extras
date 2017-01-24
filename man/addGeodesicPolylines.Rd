@@ -2,6 +2,7 @@
 % Please edit documentation in R/geodesic.R
 \name{addGeodesicPolylines}
 \alias{addGeodesicPolylines}
+\alias{addGreatCircles}
 \title{Add Geodesic Lines}
 \usage{
 addGeodesicPolylines(map, lng = NULL, lat = NULL, layerId = NULL,
@@ -10,6 +11,14 @@ addGeodesicPolylines(map, lng = NULL, lat = NULL, layerId = NULL,
   smoothFactor = 1, noClip = FALSE, popup = NULL, popupOptions = NULL,
   label = NULL, labelOptions = NULL, options = pathOptions(),
   highlightOptions = NULL, data = getMapData(map))
+
+addGreatCircles(map, lat_center = NULL, lng_center = NULL, radius,
+  layerId = NULL, group = NULL, steps = 10, wrap = TRUE,
+  stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
+  dashArray = NULL, smoothFactor = 1, noClip = FALSE, popup = NULL,
+  popupOptions = NULL, label = NULL, labelOptions = NULL,
+  options = pathOptions(), highlightOptions = NULL,
+  data = getMapData(map))
 }
 \arguments{
 \item{map}{map object}
@@ -60,8 +69,16 @@ a call to \code{\link[leaflet]{pathOptions}}()}
 \item{highlightOptions}{Options for highlighting the shape on mouse over.}
 
 \item{data}{map data}
+
+\item{lat_center, lng_center}{lat/lng for the center}
+
+\item{radius}{in meters}
 }
 \description{
 Add Geodesic Lines
 }
+\section{Functions}{
+\itemize{
+\item \code{addGreatCircles}: Adds a Great Circle to the map
+}}
 

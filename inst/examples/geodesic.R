@@ -17,15 +17,17 @@ barrow <- c(71.29, -156.76)
 df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
 names(df) <- c('lat','lng')
 
+library(leaflet)
 library(leaflet.extras)
+library(sp)
 
 #' #### Example 1
 
 leaflet(df) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addGeodesicPolylines(lng=~lng, lat=~lat, weight=2, color='red',
-                       steps=50, opacity=1) %>%
-  addCircleMarkers(df,lat=~lat,lng=~lng, radius = 3, stroke=F, fillColor='black', fillOpacity=1)
+  addGeodesicPolylines(lng = ~lng, lat = ~lat, weight = 2, color = 'red',
+                       steps = 50, opacity = 1) %>%
+  addCircleMarkers(df,lat = ~lat,lng = ~lng, radius = 3, stroke = F, fillColor = 'black', fillOpacity = 1)
 
 #' ### Example 2
 
@@ -48,10 +50,10 @@ pts <- structure(list(x = c(71, 114.3, 96.4, 70.3, 51.4, 31.7, 38.2,
 
 leaflet() %>% addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
   addPolylines(data = as(tr, "SpatialLinesDataFrame"), color = trcol) %>%
-  addGeodesicPolylines(lng = pts$x, lat = pts$y,weight = 2, color=c('black')) %>%
-  addCircles(pts$x, pts$y, color='black')
+  addGeodesicPolylines(lng = pts$x, lat = pts$y,weight = 2, color = c('black')) %>%
+  addCircles(pts$x, pts$y, color = 'black')
 
-# Same thing as above in a polar projection
+#' <br/><br/>Same thing as above in a polar projection.<br/>
 
 resolutions <- c(16384, 8192, 4096, 2048, 1024, 512, 256)
 zoom <- 0
@@ -59,7 +61,7 @@ maxZoom <- 7
 
 border <- geojsonio::geojson_read(
   system.file('examples/Seamask_medium_res_polygon.kml',
-              package = 'leaflet'), what='sp')
+              package = 'leaflet'), what = 'sp')
 crsAntartica <-  leafletCRS(
   crsClass = 'L.Proj.CRS',
   code = 'EPSG:3031',
@@ -69,12 +71,20 @@ crsAntartica <-  leafletCRS(
   bounds =  list( c(-4194304, -4194304), c(4194304, 4194304) )
 )
 
-leaflet(options= leafletOptions(
-  crs=crsAntartica, minZoom = zoom, maxZoom=maxZoom, worldCopyJump = FALSE)) %>%
+leaflet(options = leafletOptions(
+  crs = crsAntartica, minZoom = zoom, maxZoom = maxZoom, worldCopyJump = FALSE)) %>%
   setView(0, -90, 0) %>%
-  addPolygons(data=border, color = '#ff0000', weight = 2, fill = FALSE) %>%
-  addPolylines(data = as(tr, "SpatialLinesDataFrame"), color = trcol, opacity=0.5) %>%
+  addPolygons(data = border, color = '#ff0000', weight = 2, fill = FALSE) %>%
+  addPolylines(data = as(tr, "SpatialLinesDataFrame"), color = trcol, opacity = 0.5) %>%
   addGeodesicPolylines(lng = pts$x, lat = pts$y,
-                       weight = 2, color=c('black'), opacity = 0.6) %>%
-  addCircles(pts$x, pts$y, color='black') %>%
-  addGraticule(style=list(color='#999', weight=0.5, opacity=0.4))
+                       weight = 2, color = c('black'), opacity = 0.6) %>%
+  addCircles(pts$x, pts$y, color = 'black') %>%
+  addGraticule(style = list(color = '#999', weight = 0.5, opacity = 0.4))
+
+#' ### Great Circle
+leaflet(df) %>% addProviderTiles(providers$CartoDB.Positron) %>%
+  addGreatCircles(radius = 2000000, steps = 100, group = 'circle')  %>%
+  setView(0,35,1) %>%
+  addLayersControl(overlayGroups = c('circle'))
+
+

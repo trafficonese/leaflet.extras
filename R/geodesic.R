@@ -65,10 +65,49 @@ addGeodesicPolylines = function(
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip
   ))
   pgons = leaflet::derivePolygons(
-    data, lng, lat, missing(lng), missing(lat), "addPolylines")
+    data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
   leaflet::invokeMethod(
     map, data, 'addGeodesicPolylines', pgons, layerId, group, options,
     popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions) %>%
     leaflet::expandLimitsBbox(pgons)
 }
 
+
+#' @export
+#' @describeIn addGeodesicPolylines Adds a Great Circle to the map
+#' @param lat_center,lng_center lat/lng for the center
+#' @param radius in meters
+addGreatCircles = function(
+  map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
+  steps = 10,
+  wrap = TRUE,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1.0,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+) {
+  map$dependencies <- c(map$dependencies, geodesicDependencies())
+
+  options = c(options, list(
+    steps = steps, wrap = wrap,
+    stroke = stroke, color = color, weight = weight, opacity = opacity,
+    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip
+  ))
+  points = leaflet::derivePoints(
+    data, lng_center, lat_center, missing(lng_center), missing(lat_center),
+    "addGreatCircles")
+  leaflet::invokeMethod(
+    map, data, 'addGreatCircles',  points$lat, points$lng, radius, layerId, group, options,
+    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions) %>%
+    leaflet::expandLimits(points$lat, points$lng)
+}
