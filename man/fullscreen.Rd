@@ -4,12 +4,13 @@
 \alias{addFullscreenControl}
 \title{Add fullscreen control}
 \usage{
-addFullscreenControl(map, position = "topleft")
+addFullscreenControl(map, position = "topleft", pseudoFullscreen = FALSE)
 }
 \arguments{
 \item{map}{The leaflet map}
 
-\item{position}{position of control: 'topleft', 'topright', 'bottomleft', or 'bottomright'}
+\item{position}{position of control: 'topleft', 'topright', 'bottomleft', or 'bottomright'
+# @param pseudoFullscreen if true, fullscreen to page width and height}
 }
 \description{
 Add a fullscreen control button
