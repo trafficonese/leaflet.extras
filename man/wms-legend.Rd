@@ -18,4 +18,3 @@ addWMSLegend(map, uri, position = "topright", layerId = NULL)
 \description{
 Add a WMS Legend
 }
-

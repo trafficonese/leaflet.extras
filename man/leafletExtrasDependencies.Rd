@@ -12,4 +12,3 @@ leafletExtrasDependencies
 Various leaflet dependency functions for use in downstream packages
 }
 \keyword{datasets}
-

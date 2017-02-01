@@ -34,4 +34,3 @@ Converts GeoJSON Feature properties to HTML Table.
 
 Customize the leaflet widget style
 }
-

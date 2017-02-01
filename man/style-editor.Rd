@@ -26,4 +26,3 @@ Add style editor
 
 Remove style editor
 }
-

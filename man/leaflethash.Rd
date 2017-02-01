@@ -18,4 +18,3 @@ leaflet() \%>\% addTiles() \%>\%
   addHash()
 }
 }
-

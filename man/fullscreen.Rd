@@ -21,4 +21,3 @@ leaflet() \%>\% addTiles() \%>\%
   addFullscreenControl()
 }
 }
-

@@ -12,4 +12,3 @@ addBootstrapDependency(map)
 \description{
 Add Bootstrap dependency to a map
 }
-

@@ -14,4 +14,3 @@ addAwesomeMarkersDependencies(map, libs)
 \description{
 Add AwesomeMarkers and related lib dependencies to a map
 }
-

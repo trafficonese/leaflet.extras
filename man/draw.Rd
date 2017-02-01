@@ -46,4 +46,3 @@ Adds a Toolbar to draw shapes/points on the map.
 
 Removes the draw toolbar
 }
-

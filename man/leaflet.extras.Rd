@@ -8,4 +8,3 @@
 \description{
 leaflet.extras.
 }
-

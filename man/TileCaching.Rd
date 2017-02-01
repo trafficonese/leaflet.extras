@@ -19,4 +19,3 @@ leaflet() \%>\%
   addTiles(options=tileOptions(useCache=TRUE,crossOrigin=TRUE))
 }
 }
-
