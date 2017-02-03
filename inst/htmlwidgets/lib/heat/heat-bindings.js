@@ -1,27 +1,9 @@
 /* global LeafletWidget, $, L, topojson, csv2geojson, toGeoJSON */
-LeafletWidget.methods.addWebGLHeatmap = function(points, layerId, group, options) {
-
-  var map = this;
+LeafletWidget.methods.addHeatmap = function(points, layerId, group, options) {
 
   if(!$.isEmptyObject(points)) {
-
-    if(options.gradientTexture) {
-      var attachment =
-        document.getElementById("webgl-heatmap-"+options.gradientTexture+"-attachment")
-        if(!$.isEmptyObject(attachment)) {
-          options.gradientTexture = attachment.href;
-        } else {
-          delete options.gradientTexture;
-        }
-    }
-
-    var heatmapLayer = L.webGLHeatmap(options);
-    heatmapLayer.setData(points);
-    map.layerManager.addLayer(heatmapLayer, 'webGLHeatmap', layerId, group);
-    if(options.gradientTexture) { // hack to trigger proper loading of the gradient
-      map.zoomOut();
-      setTimeout(function() {map.zoomIn();}, 500);
-    }
+    var heatmapLayer = L.heatLayer(points, options);
+    this.layerManager.addLayer(heatmapLayer, 'heatmap', layerId, group);
   }
 };
 
@@ -110,71 +92,54 @@ function getHeatmapCoords(geojson, intensityProperty) {
   return latlngs;
 }
 
-function addGenericWebGLGeoJSONHeatmap( widget, geojson, intensityProperty, layerId, group, options) {
+function addGenericGeoJSONHeatmap( widget, geojson, intensityProperty, layerId, group, options) {
   var heatmapCoords = getHeatmapCoords(geojson, intensityProperty);
 
   if(!$.isEmptyObject(heatmapCoords)) {
-
-    if(options.gradientTexture) {
-      var attachment =
-        document.getElementById("webgl-heatmap-"+options.gradientTexture+"-attachment")
-        if(!$.isEmptyObject(attachment)) {
-          options.gradientTexture = attachment.href;
-        } else {
-          delete options.gradientTexture;
-        }
-    }
-
-    var heatmapLayer = L.webGLHeatmap(options);
-    heatmapLayer.setData(heatmapCoords);
+    var heatmapLayer = L.heatLayer(heatmapCoords, options);
     widget.layerManager.addLayer(
-      heatmapLayer, 'webGLHeatmap', layerId, group);
-    if(options.gradientTexture) {
-      // hack to trigger proper loading of the gradient
-      widget.zoomOut();
-      setTimeout(function() {widget.zoomIn();}, 500);
-    }
+      heatmapLayer, 'heatmap', layerId, group);
   }
 }
 
-LeafletWidget.methods.addWebGLGeoJSONHeatmap = function(geojson, intensityProperty, layerId, group, options) {
+LeafletWidget.methods.addGeoJSONHeatmap = function(geojson, intensityProperty, layerId, group, options) {
   var self = this;
   if(LeafletWidget.utils.isURL(geojson)) {
     $.getJSON(geojson, function(geojsondata){
-      addGenericWebGLGeoJSONHeatmap(self,
+      addGenericGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
     });
   } else {
-    addGenericWebGLGeoJSONHeatmap(self,
+    addGenericGeoJSONHeatmap(self,
       geojson, intensityProperty, layerId, group, options);
   }
 };
 
-LeafletWidget.methods.addWebGLKMLHeatmap = function(kml, intensityProperty, layerId, group, options) {
+LeafletWidget.methods.addKMLHeatmap = function(kml, intensityProperty, layerId, group, options) {
   var self = this;
   if(LeafletWidget.utils.isURL(kml)) {
     $.getJSON(kml, function(data){
       var geojsondata = toGeoJSON.kml(
         LeafletWidget.utils.parseXML(data));
-      addGenericWebGLGeoJSONHeatmap(self,
+      addGenericGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
     });
   } else {
     var geojsondata = toGeoJSON.kml(
       LeafletWidget.utils.parseXML(kml));
-    addGenericWebGLGeoJSONHeatmap(self,
+    addGenericGeoJSONHeatmap(self,
       geojsondata, intensityProperty, layerId, group, options);
   }
 };
 
-LeafletWidget.methods.addWebGLCSVHeatmap = function(csv, intensityProperty, layerId, group, options, parserOptions) {
+LeafletWidget.methods.addCSVHeatmap = function(csv, intensityProperty, layerId, group, options, parserOptions) {
   var self = this;
   if(LeafletWidget.utils.isURL(csv)) {
     $.getJSON(csv, function(data){
       csv2geojson.csv2geojson(
         data, parserOptions || {},
         function(err, geojsondata) {
-          addGenericWebGLGeoJSONHeatmap(self,
+          addGenericGeoJSONHeatmap(self,
             geojsondata, intensityProperty, layerId, group, options);
         }
       );
@@ -183,34 +148,34 @@ LeafletWidget.methods.addWebGLCSVHeatmap = function(csv, intensityProperty, laye
     csv2geojson.csv2geojson(
       csv, parserOptions || {},
       function(err, geojsondata) {
-        addGenericWebGLGeoJSONHeatmap(self,
+        addGenericGeoJSONHeatmap(self,
           geojsondata, intensityProperty, layerId, group, options);
       }
     );
   }
 };
 
-LeafletWidget.methods.addWebGLGPXHeatmap = function(gpx, intensityProperty, layerId, group, options) {
+LeafletWidget.methods.addGPXHeatmap = function(gpx, intensityProperty, layerId, group, options) {
   var self = this;
   if(LeafletWidget.utils.isURL(gpx)) {
     $.getJSON(gpx, function(data){
       var geojsondata = toGeoJSON.gpx(
         LeafletWidget.utils.parseXML(data));
-      addGenericWebGLGeoJSONHeatmap(self,
+      addGenericGeoJSONHeatmap(self,
         geojsondata, intensityProperty, layerId, group, options);
     });
   } else {
     var geojsondata = toGeoJSON.gpx(
       LeafletWidget.utils.parseXML(gpx));
-    addGenericWebGLGeoJSONHeatmap(self,
+    addGenericGeoJSONHeatmap(self,
       geojsondata, intensityProperty, layerId, group, options);
   }
 };
 
-LeafletWidget.methods.removeWebGLHeatmap = function(layerId) {
-  this.layerManager.removeLayer('webGLHeatmap', layerId);
+LeafletWidget.methods.removeHeatmap = function(layerId) {
+  this.layerManager.removeLayer('heatmap', layerId);
 };
 
-LeafletWidget.methods.clearWebGLHeatmap = function() {
-  this.layerManager.clearLayers('webGLHeatmap');
+LeafletWidget.methods.clearHeatmap = function() {
+  this.layerManager.clearLayers('heatmap');
 };
