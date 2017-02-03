@@ -1,3 +1,10 @@
+# leaflet.extras 0.1.9008
+
+## New Features
+
+* Another option for heatmaps via [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat)
+* Also fixed gradientTexture option of WebGLHeatmap.
+
 # leaflet.extras 0.1.9007
 
 ## New Features

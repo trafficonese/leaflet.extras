@@ -39,7 +39,7 @@ webGLHeatmapDependency <- function() {
 #' @param data the data object from which the argument values are derived; by
 #'   default, it is the \code{data} object provided to \code{leaflet()}
 #'   initially, but can be overridden
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 addWebGLHeatmap = function(
   map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
@@ -87,7 +87,7 @@ addWebGLHeatmap = function(
 #' @param geojson The geojson or topojson url or contents as string.
 #' @param intensityProperty The property to use for determining the intensity at a point.
 #' Can be a 'string' or a JS function, or NULL.
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 addWebGLGeoJSONHeatmap = function(
   map, geojson, layerId = NULL, group = NULL,
@@ -116,7 +116,7 @@ addWebGLGeoJSONHeatmap = function(
 
 #' Adds a heatmap with data from a KML file/url
 #' @param kml The KML url or contents as string.
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 addWebGLKMLHeatmap = function(
   map, kml, layerId = NULL, group = NULL,
@@ -147,7 +147,7 @@ addWebGLKMLHeatmap = function(
 #' @param csv The CSV url or contents as string.
 #' @param csvParserOptions options for parsing the CSV.
 #' Use \code{\link{csvParserOptions}}() to supply csv parser options.
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 addWebGLCSVHeatmap = function(
   map, csv, csvParserOptions, layerId = NULL, group = NULL,
@@ -177,7 +177,7 @@ addWebGLCSVHeatmap = function(
 
 #' Adds a heatmap with data from a GPX file/url
 #' @param gpx The GPX url or contents as string.
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 addWebGLGPXHeatmap = function(
   map, gpx, layerId = NULL, group = NULL,
@@ -206,14 +206,14 @@ addWebGLGPXHeatmap = function(
 
 
 #' removes the webgl heatmap
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 removeWebGLHeatmap = function(map, layerId) {
     leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeWebGLHeatmap', layerId)
 }
 
 #' clears the webgl heatmap
-#' @rdname heatmap
+#' @rdname webglheatmap
 #' @export
 clearWebGLHeatmap = function(map) {
     leaflet::invokeMethod(map, NULL, 'clearWebGLHeatmap')

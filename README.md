@@ -12,10 +12,11 @@ devtools::install_github('bhaskarvk/leaflet.extras')
 
 ### Progress
 
-Plugins integrated so far
+Plugins integrated so far ...
 
 - [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse): Demo at [Rpubs - Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
 - [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers): Demo at [Rpubs - Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
+- [Leaflet Heat](https://github.com/Leaflet/Leaflet.heat): Demo at [Rpubs - Heatmaps](http://rpubs.com/bhaskarvk/leaflet-heat) **NEW**
 - [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet): Demo at [Rpubs - Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
 - [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached): Demo at [Rpubs - Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
 - [Leaflet Hash](https://github.com/mlevans/leaflet-hash)
@@ -34,7 +35,7 @@ Plugins integrated so far
 - [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path): Demo at [Rpubs: Measure Path](http://rpubs.com/bhaskarvk/measure-path)
 - [Leaflet-search](https://github.com/stefanocudini/leaflet-search): Demo at [Rpubs: Leaflet Search](http://rpubs.com/bhaskarvk/leaflet-search)
 - [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
-- [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
+- [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll) **NEW**
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new).
 

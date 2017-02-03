@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a webgl heatmap — addWebGLHeatmap • leaflet.extras</title>
+<title>Add a heatmap — addHeatmap • leaflet.extras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -74,11 +74,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a webgl heatmap</h1>
+    <h1>Add a heatmap</h1>
     </div>
 
     
-    <p>Add a webgl heatmap</p>
+    <p>Add a heatmap</p>
 
     <p>Adds a heatmap with data from a GeoJSON/TopoJSON file/url</p>
 
@@ -88,40 +88,40 @@
 
     <p>Adds a heatmap with data from a GPX file/url</p>
 
-    <p>removes the webgl heatmap</p>
+    <p>removes the heatmap</p>
 
-    <p>clears the webgl heatmap</p>
+    <p>clears the heatmap</p>
     
 
-    <pre><span class='fu'>addWebGLHeatmap</span>(<span class='no'>map</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>intensity</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"30000"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"m"</span>,
-  <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gradientTexture</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alphaRange</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre><span class='fu'>addHeatmap</span>(<span class='no'>map</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>intensity</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>minOpacity</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>blur</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>gradient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cellSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>leaflet</span><span class='kw'>::</span><span class='fu'>getMapData</span>(<span class='no'>map</span>))
 
-<span class='fu'>addWebGLGeoJSONHeatmap</span>(<span class='no'>map</span>, <span class='no'>geojson</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"30000"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"m"</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>gradientTexture</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alphaRange</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>addGeoJSONHeatmap</span>(<span class='no'>map</span>, <span class='no'>geojson</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>minOpacity</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>blur</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>gradient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cellSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>addWebGLKMLHeatmap</span>(<span class='no'>map</span>, <span class='no'>kml</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"30000"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"m"</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>gradientTexture</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alphaRange</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>addKMLHeatmap</span>(<span class='no'>map</span>, <span class='no'>kml</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>minOpacity</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>blur</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>gradient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cellSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>addWebGLCSVHeatmap</span>(<span class='no'>map</span>, <span class='no'>csv</span>, <span class='no'>csvParserOptions</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"30000"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"m"</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>gradientTexture</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alphaRange</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>addCSVHeatmap</span>(<span class='no'>map</span>, <span class='no'>csv</span>, <span class='no'>csvParserOptions</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>minOpacity</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>blur</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>gradient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cellSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>addWebGLGPXHeatmap</span>(<span class='no'>map</span>, <span class='no'>gpx</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"30000"</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"m"</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>gradientTexture</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alphaRange</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>addGPXHeatmap</span>(<span class='no'>map</span>, <span class='no'>gpx</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>intensityProperty</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>minOpacity</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>blur</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>gradient</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cellSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>removeWebGLHeatmap</span>(<span class='no'>map</span>, <span class='no'>layerId</span>)
+<span class='fu'>removeHeatmap</span>(<span class='no'>map</span>, <span class='no'>layerId</span>)
 
-<span class='fu'>clearWebGLHeatmap</span>(<span class='no'>map</span>)</pre>
+<span class='fu'>clearHeatmap</span>(<span class='no'>map</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>map</dt>
-      <dd>the map to add pulse Markers to.</dd>
+      <dd>the map widget.</dd>
       <dt>lng</dt>
       <dd>a numeric vector of longitudes, or a one-sided formula of the form
 <code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
@@ -142,16 +142,24 @@ the latitude column from <code>data</code>)</dd>
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.</dd>
-      <dt>size</dt>
-      <dd>in meters or pixels</dd>
-      <dt>units</dt>
-      <dd>either &#39;m&#39; or &#39;px&#39;</dd>
-      <dt>opacity</dt>
-      <dd>for the canvas element</dd>
-      <dt>gradientTexture</dt>
-      <dd>image url or image</dd>
-      <dt>alphaRange</dt>
-      <dd>adjust transparency by changing to value between 0 and 1</dd>
+      <dt>minOpacity</dt>
+      <dd>minimum opacity at which the heat will start</dd>
+      <dt>max</dt>
+      <dd>maximum point intensity. The default is <code>1.0</code></dd>
+      <dt>radius</dt>
+      <dd>radius of each &quot;point&quot; of the heatmap.  The default is
+<code>25</code>.</dd>
+      <dt>blur</dt>
+      <dd>amount of blur to apply.  The default is <code>15</code>.
+<code>blur=1</code> means no blur.</dd>
+      <dt>gradient</dt>
+      <dd>palette name from <code>RColorBrewer</code> or an array of
+of colors to be provided to <code>colorNumeric</code>, or
+a color mapping function returned from <code>colorNumeric</code></dd>
+      <dt>cellSize</dt>
+      <dd>the cell size in the grid. Points which are closer
+than this may be merged. Defaults to `radius / 2`.s
+Set to `1` to do almost no merging.</dd>
       <dt>data</dt>
       <dd>the data object from which the argument values are derived; by
 default, it is the <code>data</code> object provided to <code>leaflet()</code>
