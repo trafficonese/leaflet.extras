@@ -191,7 +191,8 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
       delete map.drawToolbar;
     }
     if(map._editableFeatureGroupName && clearFeatures) {
-      map.layerManager.clearGroup(map._editableFeatureGroupName);
+      featureGroup = map.layerManager.getLayerGroup(map._editableFeatureGroupName, false)
+      featureGroup.clearLayers();
     }
     map._editableFeatureGroupName = null;
     if(map._editableGeoJSONLayerId && clearFeatures) {
