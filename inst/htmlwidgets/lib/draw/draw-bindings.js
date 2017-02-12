@@ -82,6 +82,12 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     });
 
     map.on(L.Draw.Event.CREATED, function (e) {
+      if (options.draw.singleFeature){
+  		  if (editableFeatureGroup.getLayers().length > 0) {
+          editableFeatureGroup.clearLayers();
+  		  }
+      }
+
       var layer = e.layer;
       editableFeatureGroup.addLayer(layer);
 

@@ -26,6 +26,7 @@ drawDependencies <- function() {
 #' @param rectangleOptions See \code{\link{drawRectangeOptions}}(). Set to FALSE to disable rectangle drawing.
 #' @param markerOptions See \code{\link{drawMarkerOptions}}(). Set to FALSE to disable marker drawing.
 #' @param editOptions By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().
+#' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @export
 #' @rdname draw
 addDrawToolbar <- function(
@@ -36,7 +37,8 @@ addDrawToolbar <- function(
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangeOptions(),
   markerOptions = drawMarkerOptions(),
-  editOptions = FALSE
+  editOptions = FALSE,
+  singleFeature = FALSE
 ) {
 
   if(!is.null(targetGroup) && !is.null(targetLayerId)) {
@@ -68,7 +70,8 @@ addDrawToolbar <- function(
       polygon = polygonOptions,
       circle = circleOptions,
       rectangle = rectangleOptions,
-      marker = markerOptions )),
+      marker = markerOptions,
+      singleFeature = singleFeature)),
     edit = editOptions )
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), "addDrawToolbar",
