@@ -1,7 +1,7 @@
 Package: leaflet.extras
 Type: Package
 Title: Extra Functionality for Leaflet Package
-Version: 0.1.9008
+Version: 0.1.9009
 Authors@R: c(
     person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),

@@ -1,3 +1,10 @@
+# leaflet.extras 0.1.9009
+
+## Bug Fixes
+
+- Fixed #61 by merging #62 (Thanks @RCura!)
+- Upgraded Draw Plugin now supports clearing all features. Fixes #55.
+
 # leaflet.extras 0.1.9008
 
 ## New Features
