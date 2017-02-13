@@ -1,5 +1,5 @@
 /*
- Leaflet.draw 0.4.7+7381569, a plugin that adds drawing and editing tools to Leaflet powered maps.
+ Leaflet.draw 0.4.9+818af15, a plugin that adds drawing and editing tools to Leaflet powered maps.
  (c) 2012-2017, Jacob Toye, Jon West, Smartrak, Leaflet
 
  https://github.com/Leaflet/Leaflet.draw
@@ -8,7 +8,7 @@
 (function (window, document, undefined) {/**
  * Leaflet.draw assumes that you have already included the Leaflet library.
  */
-L.drawVersion = "0.4.7+7381569";
+L.drawVersion = "0.4.9+818af15";
 /**
  * @class L.Draw
  * @aka Draw
@@ -79,6 +79,14 @@ L.Draw = {};
  *  **Please note the edit toolbar is not enabled by default.**
  */
 L.drawLocal = {
+	// format: {
+	// 	numeric: {
+	// 		delimiters: {
+	// 			thousands: ',',
+	// 			decimal: '.'
+	// 		}
+	// 	}
+	// },
 	draw: {
 		toolbar: {
 			// #TODO: this should be reorganized where actions are nested in actions
@@ -152,6 +160,10 @@ L.drawLocal = {
 				cancel: {
 					title: 'Cancel editing, discards all changes.',
 					text: 'Cancel'
+				},
+				clearAll:{
+					title: 'clear all layers.',
+					text: 'Clear All'
 				}
 			},
 			buttons: {
@@ -534,10 +546,10 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 			}
 
 			this._mouseMarker
-				.on('mousedown', this._onMouseDown, this)
 				.on('mouseout', this._onMouseOut, this)
-				.on('mouseup', this._onMouseUp, this) // Necessary for 0.8 compatibility
 				.on('mousemove', this._onMouseMove, this) // Necessary to prevent 0.8 stutter
+				.on('mousedown', this._onMouseDown, this)
+				.on('mouseup', this._onMouseUp, this) // Necessary for 0.8 compatibility
 				.addTo(this._map);
 
 			this._map
@@ -546,6 +558,7 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 				.on('zoomlevelschange', this._onZoomEnd, this)
 				.on('touchstart', this._onTouch, this)
 				.on('zoomend', this._onZoomEnd, this);
+
 		}
 	},
 
@@ -613,8 +626,8 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 	// Add a vertex to the end of the polyline
 	addVertex: function (latlng) {
 		var markersLength = this._markers.length;
-
-		if (markersLength > 0 && !this.options.allowIntersection && this._poly.newLatLngIntersects(latlng)) {
+		// markersLength must be greater than or equal to 2 before intersections can occur
+		if (markersLength >= 2 && !this.options.allowIntersection && this._poly.newLatLngIntersects(latlng)) {
 			this._showErrorTooltip();
 			return;
 		}
@@ -707,12 +720,17 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 	},
 
 	_onMouseDown: function (e) {
-		var originalEvent = e.originalEvent;
-		var clientX = originalEvent.clientX;
-		var clientY = originalEvent.clientY;
-		this._startPoint.call(this, clientX, clientY);
-
+		if (!this._clickHandled && !this._touchHandled && !this._disableMarkers) {
+			this._onMouseMove(e);
+			this._clickHandled = true;
+			this._disableNewMarkers();
+			var originalEvent = e.originalEvent;
+			var clientX = originalEvent.clientX;
+			var clientY = originalEvent.clientY;
+			this._startPoint.call(this, clientX, clientY);
+		}
 	},
+
 	_startPoint: function (clientX, clientY) {
 		this._mouseDownOrigin = L.point(clientX, clientY);
 	},
@@ -722,34 +740,74 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 		var clientX = originalEvent.clientX;
 		var clientY = originalEvent.clientY;
 		this._endPoint.call(this, clientX, clientY, e);
+		this._clickHandled = null;
 	},
+
 	_endPoint: function (clientX, clientY, e) {
 		if (this._mouseDownOrigin) {
-			var distance = L.point(clientX, clientY)
+			var dragCheckDistance = L.point(clientX, clientY)
 				.distanceTo(this._mouseDownOrigin);
-			if (Math.abs(distance) < 9 * (window.devicePixelRatio || 1)) {
+			var lastPtDistance = this._calculateFinishDistance(e.latlng);
+			if (lastPtDistance < 10 && L.Browser.touch) {
+				this._finishShape();
+			} else if (Math.abs(dragCheckDistance) < 9 * (window.devicePixelRatio || 1)) {
 				this.addVertex(e.latlng);
 			}
+			this._enableNewMarkers(); // after a short pause, enable new markers
 		}
 		this._mouseDownOrigin = null;
 	},
 
+	// ontouch prevented by clickHandled flag because some browsers fire both click/touch events,
+	// causing unwanted behavior
 	_onTouch: function (e) {
 		var originalEvent = e.originalEvent;
 		var clientX;
 		var clientY;
-		if (originalEvent.touches && originalEvent.touches[0]) {
+		if (originalEvent.touches && originalEvent.touches[0] && !this._clickHandled && !this._touchHandled && !this._disableMarkers) {
 			clientX = originalEvent.touches[0].clientX;
 			clientY = originalEvent.touches[0].clientY;
+			this._disableNewMarkers();
+			this._touchHandled = true;
 			this._startPoint.call(this, clientX, clientY);
 			this._endPoint.call(this, clientX, clientY, e);
+			this._touchHandled = null;
 		}
+		this._clickHandled = null;
 	},
 
 	_onMouseOut: function () {
 		if (this._tooltip) {
 			this._tooltip._onMouseOut.call(this._tooltip);
 		}
+	},
+
+	// calculate if we are currently within close enough distance
+	// of the closing point (first point for shapes, last point for lines)
+	// this is semi-ugly code but the only reliable way i found to get the job done
+	// note: calculating point.distanceTo between mouseDownOrigin and last marker did NOT work
+	_calculateFinishDistance: function (potentialLatLng) {
+		var lastPtDistance
+		if (this._markers.length > 0) {
+				var finishMarker;
+				if (this.type === L.Draw.Polyline.TYPE) {
+					finishMarker = this._markers[this._markers.length - 1];
+				} else if (this.type === L.Draw.Polygon.TYPE) {
+					finishMarker = this._markers[0];
+				} else {
+					return Infinity;
+				}
+				var lastMarkerPoint = this._map.latLngToContainerPoint(finishMarker.getLatLng()),
+				potentialMarker = new L.Marker(potentialLatLng, {
+					icon: this.options.icon,
+					zIndexOffset: this.options.zIndexOffset * 2
+				});
+				var potentialMarkerPint = this._map.latLngToContainerPoint(potentialMarker.getLatLng());
+				lastPtDistance = lastMarkerPoint.distanceTo(potentialMarkerPint);
+			} else {
+				lastPtDistance = Infinity;
+			}
+			return lastPtDistance;
 	},
 
 	_updateFinishHandler: function () {
@@ -858,7 +916,9 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 	_getTooltipText: function () {
 		var showLength = this.options.showLength,
 			labelText, distanceStr;
-
+		if (L.Browser.touch) {
+			showLength = false; // if there's a better place to put this, feel free to move it
+		}
 		if (this._markers.length === 0) {
 			labelText = {
 				text: L.drawLocal.draw.handlers.polyline.tooltip.start
@@ -943,6 +1003,19 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 			clearTimeout(this._hideErrorTimeout);
 			this._hideErrorTimeout = null;
 		}
+	},
+
+	// disable new markers temporarily;
+	// this is to prevent duplicated touch/click events in some browsers
+	_disableNewMarkers: function () {
+		this._disableMarkers = true;
+	},
+
+	// see _disableNewMarkers
+	_enableNewMarkers: function () {
+		setTimeout(function() {
+			this._disableMarkers = false;
+		}.bind(this), 50);
 	},
 
 	_cleanUpShape: function () {
@@ -2801,6 +2874,28 @@ L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
 		return Math.abs(area);
 	},
 
+    // @method formattedNumber(n, precision): string
+    // Returns n in specified number format (if defined) and precision
+    formattedNumber: function (n, precision) {
+        var formatted = n.toFixed(precision);
+
+        var format = L.drawLocal.format && L.drawLocal.format.numeric,
+            delimiters = format && format.delimiters,
+            thousands = delimiters && delimiters.thousands,
+        	decimal = delimiters && delimiters.decimal;
+
+        if (thousands || decimal) {
+            var splitValue = formatted.split('.');
+			formatted = thousands ? splitValue[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + thousands) : splitValue[0];
+			decimal = decimal || '.';
+            if (splitValue.length > 1) {
+                formatted = formatted + decimal + splitValue[1];
+            }
+        }
+
+        return formatted;
+    },
+
 	// @method readableArea(area, isMetric): string
 	// Returns a readable area string in yards or metric
 	readableArea: function (area, isMetric) {
@@ -2808,19 +2903,19 @@ L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
 
 		if (isMetric) {
 			if (area >= 10000) {
-				areaStr = (area * 0.0001).toFixed(2) + ' ha';
+				areaStr = L.GeometryUtil.formattedNumber(area * 0.0001, 2) + ' ha';
 			} else {
-				areaStr = area.toFixed(2) + ' m&sup2;';
+				areaStr = L.GeometryUtil.formattedNumber(area, 2) + ' m&sup2;';
 			}
 		} else {
 			area /= 0.836127; // Square yards in 1 meter
 
 			if (area >= 3097600) { //3097600 square yards in 1 square mile
-				areaStr = (area / 3097600).toFixed(2) + ' mi&sup2;';
+				areaStr = L.GeometryUtil.formattedNumber(area / 3097600, 2) + ' mi&sup2;';
 			} else if (area >= 4840) {//48040 square yards in 1 acre
-				areaStr = (area / 4840).toFixed(2) + ' acres';
+				areaStr = L.GeometryUtil.formattedNumber(area / 4840, 2) + ' acres';
 			} else {
-				areaStr = Math.ceil(area) + ' yd&sup2;';
+				areaStr = L.GeometryUtil.formattedNumber(Math.ceil(area)) + ' yd&sup2;';
 			}
 		}
 
@@ -2855,28 +2950,28 @@ L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
 		case 'metric':
 			// show metres when distance is < 1km, then show km
 			if (distance > 1000) {
-				distanceStr = (distance / 1000).toFixed(2) + ' km';
+				distanceStr = L.GeometryUtil.formattedNumber(distance / 1000, 2) + ' km';
 			} else {
-				distanceStr = Math.ceil(distance) + ' m';
+				distanceStr = L.GeometryUtil.formattedNumber(Math.ceil(distance)) + ' m';
 			}
 			break;
 		case 'feet':
 			distance *= 1.09361 * 3;
-			distanceStr = Math.ceil(distance) + ' ft';
+			distanceStr = L.GeometryUtil.formattedNumber(Math.ceil(distance)) + ' ft';
 
 			break;
 		case 'nauticalMile':
 			distance *= 0.53996;
-			distanceStr = (distance / 1000).toFixed(2) + ' nm';
+			distanceStr = L.GeometryUtil.formattedNumber(distance / 1000, 2) + ' nm';
 			break;
 		case 'yards':
 		default:
 			distance *= 1.09361;
 
 			if (distance > 1760) {
-				distanceStr = (distance / 1760).toFixed(2) + ' miles';
+				distanceStr = L.GeometryUtil.formattedNumber(distance / 1760, 2) + ' miles';
 			} else {
-				distanceStr = Math.ceil(distance) + ' yd';
+				distanceStr = L.GeometryUtil.formattedNumber(Math.ceil(distance)) + ' yd';
 			}
 			break;
 		}
@@ -3356,20 +3451,27 @@ L.Toolbar = L.Class.extend({
 	_createButton: function (options) {
 
 		var link = L.DomUtil.create('a', options.className || '', options.container);
-		link.href = '#';
+		// Screen reader tag
+		var sr = L.DomUtil.create('span', 'sr-only', options.container);
 
-		if (options.text) {
-			link.innerHTML = options.text;
-		}
+		link.href = '#';
+		link.appendChild(sr);
 
 		if (options.title) {
 			link.title = options.title;
+			sr.innerHTML = options.title;
+		}
+
+		if (options.text) {
+			link.innerHTML = options.text;
+			sr.innerHTML = options.text;
 		}
 
 		L.DomEvent
 			.on(link, 'click', L.DomEvent.stopPropagation)
 			.on(link, 'mousedown', L.DomEvent.stopPropagation)
 			.on(link, 'dblclick', L.DomEvent.stopPropagation)
+			.on(link, 'touchstart', L.DomEvent.stopPropagation)
 			.on(link, 'click', L.DomEvent.preventDefault)
 			.on(link, 'click', options.callback, options.context);
 
@@ -3381,6 +3483,7 @@ L.Toolbar = L.Class.extend({
 			.off(button, 'click', L.DomEvent.stopPropagation)
 			.off(button, 'mousedown', L.DomEvent.stopPropagation)
 			.off(button, 'dblclick', L.DomEvent.stopPropagation)
+			.off(button, 'touchstart', L.DomEvent.stopPropagation)
 			.off(button, 'click', L.DomEvent.preventDefault)
 			.off(button, 'click', callback);
 	},
@@ -3794,6 +3897,12 @@ L.EditToolbar = L.Toolbar.extend({
 				text: L.drawLocal.edit.toolbar.actions.cancel.text,
 				callback: this.disable,
 				context: this
+			},
+			{
+				title: L.drawLocal.edit.toolbar.actions.clearAll.title,
+				text: L.drawLocal.edit.toolbar.actions.clearAll.text,
+				callback: this._clearAllLayers,
+				context: this
 			}
 		];
 	},
@@ -3832,6 +3941,13 @@ L.EditToolbar = L.Toolbar.extend({
 
 	_save: function () {
 		this._activeMode.handler.save();
+		if (this._activeMode) {
+			this._activeMode.handler.disable();
+		}
+	},
+
+	_clearAllLayers:function(){
+		this._activeMode.handler.removeAllLayers();
 		if (this._activeMode) {
 			this._activeMode.handler.disable();
 		}
@@ -4276,6 +4392,16 @@ L.EditToolbar.Delete = L.Handler.extend({
 	// Save deleted layers
 	save: function () {
 		this._map.fire(L.Draw.Event.DELETED, { layers: this._deletedLayers });
+	},
+
+	// @method removeAllLayers(): void
+	// Remove all delateable layers
+	removeAllLayers: function(){
+		// Iterate of the delateable layers and add remove them
+		this._deletableLayers.eachLayer(function (layer) {
+			this._removeLayer({layer:layer});
+		}, this);
+		this.save();
 	},
 
 	_enableLayerDelete: function (e) {
