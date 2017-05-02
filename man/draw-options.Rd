@@ -22,7 +22,7 @@ drawPolylineOptions(allowIntersection = TRUE, drawError = list(color =
   feet = TRUE, nautic = FALSE, zIndexOffset = 2000,
   shapeOptions = drawShapeOptions(fill = FALSE), repeatMode = FALSE)
 
-drawPolygonOptions(showArea = TRUE, metric = TRUE,
+drawPolygonOptions(showArea = FALSE, metric = TRUE,
   shapeOptions = drawShapeOptions(), repeatMode = FALSE)
 
 drawRectangleOptions(showArea = TRUE, metric = TRUE,
