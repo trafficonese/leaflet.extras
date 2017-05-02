@@ -34,4 +34,4 @@ Suggests: V8,
     memoise
 URL: https://github.com/bhaskarvk/leaflet.extras
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1

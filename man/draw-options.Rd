@@ -4,7 +4,7 @@
 \alias{drawShapeOptions}
 \alias{drawPolylineOptions}
 \alias{drawPolygonOptions}
-\alias{drawRectangeOptions}
+\alias{drawRectangleOptions}
 \alias{drawCircleOptions}
 \alias{drawMarkerOptions}
 \alias{selectedPathOptions}
@@ -17,18 +17,19 @@ drawShapeOptions(stroke = TRUE, color = "#03f", weight = 1, opacity = 1,
   pointerEvents = NULL, smoothFactor = 1, noClip = TRUE)
 
 drawPolylineOptions(allowIntersection = TRUE, drawError = list(color =
-  "#b00b00", timeout = 2500), guidelineDistance = 20, metric = TRUE,
-  zIndexOffset = 2000, shapeOptions = drawShapeOptions(fill = FALSE),
-  repeatMode = FALSE)
+  "#b00b00", timeout = 2500), guidelineDistance = 20,
+  maxGuideLineLength = 4000, showLength = TRUE, metric = TRUE,
+  feet = TRUE, nautic = FALSE, zIndexOffset = 2000,
+  shapeOptions = drawShapeOptions(fill = FALSE), repeatMode = FALSE)
 
-drawPolygonOptions(showArea = TRUE, shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE)
+drawPolygonOptions(showArea = TRUE, metric = TRUE,
+  shapeOptions = drawShapeOptions(), repeatMode = FALSE)
 
-drawRectangeOptions(showArea = TRUE, shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE)
+drawRectangleOptions(showArea = TRUE, metric = TRUE,
+  shapeOptions = drawShapeOptions(), repeatMode = FALSE)
 
-drawCircleOptions(showRadius = TRUE, shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE)
+drawCircleOptions(showRadius = TRUE, metric = TRUE, feet = TRUE,
+  nautic = FALSE, shapeOptions = drawShapeOptions(), repeatMode = FALSE)
 
 drawMarkerOptions(markerIcon = NULL, zIndexOffset = 2000,
   repeatMode = FALSE)
@@ -75,7 +76,15 @@ editToolbarOptions(edit = TRUE, remove = TRUE, selectedPathOptions = NULL,
 
 \item{guidelineDistance}{Distance in pixels between each guide dash.}
 
+\item{maxGuideLineLength}{Maximum length of the guide lines.}
+
+\item{showLength}{Whether to display the distance in the tooltip.}
+
 \item{metric}{Determines which measurement system (metric or imperial) is used.}
+
+\item{feet}{When not metric, use feet instead of yards for display.}
+
+\item{nautic}{When not metric, not feet, use nautic mile for display.}
 
 \item{zIndexOffset}{This should be a high number to ensure that you can draw over all other layers on the map.}
 
@@ -85,7 +94,7 @@ editToolbarOptions(edit = TRUE, remove = TRUE, selectedPathOptions = NULL,
 
 \item{showArea}{Show the area of the drawn polygon in m², ha or km². The area is only approximate and become less accurate the larger the polygon is.}
 
-\item{showRadius}{Show the area of the drawn circle in m², ha or km². The area is only approximate and become less accurate the larger the circle is.}
+\item{showRadius}{Show the radius of the drawn circle in m, km, ft (feet), or nm (nautical mile).}
 
 \item{markerIcon}{Can be either \code{\link[leaflet]{makeIcon}}() OR \code{\link[leaflet]{makeAwesomeIcon}}}
 
@@ -104,7 +113,7 @@ Options for drawing polylines
 
 Options for drawing polygons
 
-Options for drawing rectanges
+Options for drawing rectangles
 
 Options for drawing Circles
 

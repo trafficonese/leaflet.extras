@@ -53,7 +53,11 @@ drawShapeOptions <- function(
 #' @param allowIntersection	Determines if line segments can cross.
 #' @param drawError	Configuration options for the error that displays if an intersection is detected.
 #' @param guidelineDistance	Distance in pixels between each guide dash.
+#' @param maxGuideLineLength Maximum length of the guide lines.
+#' @param showLength Whether to display the distance in the tooltip.
 #' @param metric	Determines which measurement system (metric or imperial) is used.
+#' @param feet When not metric, use feet instead of yards for display.
+#' @param nautic When not metric, not feet, use nautic mile for display.
 #' @param zIndexOffset	This should be a high number to ensure that you can draw over all other layers on the map.
 #' @param shapeOptions	Leaflet Polyline options	See \code{\link{drawShapeOptions}}().
 #' @param repeatMode	Determines if the draw tool remains enabled after drawing a shape.
@@ -63,16 +67,24 @@ drawPolylineOptions <- function(
   allowIntersection = TRUE,
   drawError = list(color = '#b00b00', timeout = 2500),
   guidelineDistance = 20,
+  maxGuideLineLength = 4000,
+  showLength = TRUE,
   metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
   zIndexOffset = 2000,
-  shapeOptions = drawShapeOptions(fill=FALSE),
+  shapeOptions = drawShapeOptions(fill = FALSE),
   repeatMode = FALSE
 ) {
   leaflet::filterNULL(list(
     allowIntersection = allowIntersection,
     drawError = drawError,
     guidelineDistance = guidelineDistance,
+    maxGuideLineLength = maxGuideLineLength,
+    showLength = showLength,
     metric = metric,
+    feet = feet,
+    nautic = nautic,
     zIndexOffset = zIndexOffset,
     shapeOptions = shapeOptions,
     repeatMode = repeatMode
@@ -84,27 +96,31 @@ drawPolylineOptions <- function(
 #' @rdname draw-options
 #' @export
 drawPolygonOptions <- function(
-  showArea = TRUE,
+  showArea = FALSE,
+  metric = TRUE,
   shapeOptions = drawShapeOptions(),
   repeatMode = FALSE
 ) {
   leaflet::filterNULL(list(
     showArea = showArea,
+    metric = metric,
     shapeOptions = shapeOptions,
     repeatMode = repeatMode
-    ))
+  ))
 }
 
-#' Options for drawing rectanges
+#' Options for drawing rectangles
 #' @rdname draw-options
 #' @export
-drawRectangeOptions <- function(
+drawRectangleOptions <- function(
   showArea = TRUE,
+  metric = TRUE,
   shapeOptions = drawShapeOptions(),
   repeatMode = FALSE
 ) {
   leaflet::filterNULL(list(
     showArea = showArea,
+    metric = metric,
     shapeOptions = shapeOptions,
     repeatMode = repeatMode
   ))
@@ -112,17 +128,23 @@ drawRectangeOptions <- function(
 
 #' Options for drawing Circles
 #' @rdname draw-options
-#' @param showRadius Show the area of the drawn circle in m², ha or km². The area is only approximate and become less accurate the larger the circle is.
+#' @param showRadius Show the radius of the drawn circle in m, km, ft (feet), or nm (nautical mile).
 #' @export
 drawCircleOptions <- function(
   showRadius = TRUE,
+  metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
   shapeOptions = drawShapeOptions(),
   repeatMode = FALSE
 ) {
   leaflet::filterNULL(list(
     shapeOptions = shapeOptions,
     repeatMode = repeatMode,
-    showRadius = showRadius
+    showRadius = showRadius,
+    metric = metric,
+    feet = feet,
+    nautic = nautic
   ))
 }
 
