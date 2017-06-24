@@ -15,7 +15,7 @@ fullscreenDependency <- function() {
 #' @description Add a fullscreen control button
 #' @param map The leaflet map
 #' @param position position of control: 'topleft', 'topright', 'bottomleft', or 'bottomright'
-#' # @param pseudoFullscreen if true, fullscreen to page width and height
+#' @param pseudoFullscreen if true, fullscreen to page width and height
 #' @rdname fullscreen
 #' @export
 #' @examples

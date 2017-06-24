@@ -98,7 +98,7 @@ drawPolygonOptions <- function(
 #' Options for drawing rectanges
 #' @rdname draw-options
 #' @export
-drawRectangeOptions <- function(
+drawRectangleOptions <- function(
   showArea = TRUE,
   shapeOptions = drawShapeOptions(),
   repeatMode = FALSE

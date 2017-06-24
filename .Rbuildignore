@@ -10,4 +10,7 @@
 ^\.travis\.yml$
 ^docs$
 ^inst/htmlwidgets/lib/.eslintrc.js$
+^inst/examples/virginia.rds$
+^inst/htmlwidgets/lib/mapshaper$
+^inst/htmlwidgets/lib/turf$
 ^CONDUCT\.md$

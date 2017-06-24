@@ -9,6 +9,8 @@ suspendScroll(map, sleep = TRUE, sleepTime = 750, wakeTime = 750,
   wakeMessage = "Click or Hover to Wake", sleepOpacity = 0.7)
 }
 \arguments{
+\item{map}{The leaflet map}
+
 \item{sleep}{false if you want an unruly map}
 
 \item{sleepTime}{time(ms) until map sleeps on mouseout}

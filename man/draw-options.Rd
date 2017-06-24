@@ -4,7 +4,7 @@
 \alias{drawShapeOptions}
 \alias{drawPolylineOptions}
 \alias{drawPolygonOptions}
-\alias{drawRectangeOptions}
+\alias{drawRectangleOptions}
 \alias{drawCircleOptions}
 \alias{drawMarkerOptions}
 \alias{selectedPathOptions}
@@ -24,7 +24,7 @@ drawPolylineOptions(allowIntersection = TRUE, drawError = list(color =
 drawPolygonOptions(showArea = TRUE, shapeOptions = drawShapeOptions(),
   repeatMode = FALSE)
 
-drawRectangeOptions(showArea = TRUE, shapeOptions = drawShapeOptions(),
+drawRectangleOptions(showArea = TRUE, shapeOptions = drawShapeOptions(),
   repeatMode = FALSE)
 
 drawCircleOptions(showRadius = TRUE, shapeOptions = drawShapeOptions(),

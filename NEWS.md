@@ -1,3 +1,10 @@
+# leaflet.extras 0.2
+
+## Bug Fixes
+
+- Fixed #86
+- Made CRAN Ready #87 (Thanks @timelyportfolio!)
+
 # leaflet.extras 0.1.9009
 
 ## Bug Fixes

@@ -11,6 +11,7 @@ sleepDependency <- function() {
 
 #' Prevents accidental map scrolling when scrolling in a document.
 #' @rdname sleep
+#' @param  map The leaflet map
 #' @param  sleep false if you want an unruly map
 #' @param  sleepTime time(ms) until map sleeps on mouseout
 #' @param  wakeTime time(ms) until map wakes on mouseover
