@@ -8,6 +8,8 @@
 ^NEWS\.md$
 ^README\.md$
 ^\.travis\.yml$
+^appveyor\.yml$
+^\_pkgdown\.yaml$
 ^docs$
 ^inst/htmlwidgets/lib/.eslintrc.js$
 ^inst/examples/virginia.rds$
