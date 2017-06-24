@@ -1,16 +1,16 @@
 Package: leaflet.extras
 Type: Package
-Title: Extra Functionality for Leaflet Package
+Title: Extra Functionality for 'leaflet' Package
 Version: 0.2
 Authors@R: c(
     person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
       comment = "Leaflet-search and Leaflet-GPS plugin integration")
     )
-Description: Leaflet Javascript library provides many plugins some of which
-    are available in the core leaflet package, but there are many more. It is not
-    possible to support them all in the core leaflet package. This package serves
-    as an addon to the leaflet pacakge by providing extra functionality via leaflet
+Description: The 'leaflet' Javascript library provides many plugins some of which
+    are available in the core 'leaflet' package, but there are many more. It is not
+    possible to support them all in the core 'leaflet' package. This package serves
+    as an addon to the 'leaflet' package by providing extra functionality via 'leaflet'
     plugins.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
