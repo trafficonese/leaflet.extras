@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -31,6 +31,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -79,10 +81,8 @@
 
     
     <p>Options for search control.</p>
-
-    <p>Customized searchOptions for opensteetmap search</p>
-
-    <p>Customized searchOptions for Marker Search</p>
+<p>Customized searchOptions for opensteetmap search</p>
+<p>Customized searchOptions for Marker Search</p>
     
 
     <pre><span class='fu'>searchOptions</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>sourceData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>jsonpParam</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -106,68 +106,129 @@
   <span class='kw'>openPopup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>url</dt>
-      <dd>url for search by ajax request, ex: &quot;search.php?q=s&quot;. Can be function that returns string for dynamic parameter setting.</dd>
-      <dt>sourceData</dt>
-      <dd>function that fill _recordsCache, passed searching text by first param and callback in second.</dd>
-      <dt>jsonpParam</dt>
-      <dd>jsonp param name for search by jsonp service, ex: &quot;callback&quot;.</dd>
-      <dt>propertyLoc</dt>
-      <dd>field for remapping location, using array: [&#39;latname&#39;,&#39;lonname&#39;] for select double fields(ex. [&#39;lat&#39;,&#39;lon&#39;] ) support dotted format: &#39;prop.subprop.title&#39;.</dd>
-      <dt>propertyName</dt>
-      <dd>property in marker.options(or feature.properties for vector layer) trough filter elements in layer,.</dd>
-      <dt>formatData</dt>
-      <dd>callback for reformat all data from source to indexed data object.</dd>
-      <dt>filterData</dt>
-      <dd>callback for filtering data from text searched, params: textSearch, allRecords.</dd>
-      <dt>moveToLocation</dt>
-      <dd>whether to move to the found location.</dd>
-      <dt>zoom</dt>
-      <dd>zoom to this level when moving to location</dd>
-      <dt>buildTip</dt>
-      <dd>function that return row tip html node(or html string), receive text tooltip in first param.</dd>
-      <dt>container</dt>
-      <dd>container id to insert Search Control.</dd>
-      <dt>minLength</dt>
-      <dd>minimal text length for autocomplete.</dd>
-      <dt>initial</dt>
-      <dd>search elements only by initial text.</dd>
-      <dt>casesensitive</dt>
-      <dd>search elements in case sensitive text.</dd>
-      <dt>autoType</dt>
-      <dd>complete input with first suggested result and select this filled-in text..</dd>
-      <dt>delayType</dt>
-      <dd>delay while typing for show tooltip.</dd>
-      <dt>tooltipLimit</dt>
-      <dd>limit max results to show in tooltip. -1 for no limit..</dd>
-      <dt>tipAutoSubmit</dt>
-      <dd>auto map panTo when click on tooltip.</dd>
-      <dt>firstTipSubmit</dt>
-      <dd>auto select first result con enter click.</dd>
-      <dt>autoResize</dt>
-      <dd>autoresize on input change.</dd>
-      <dt>collapsed</dt>
-      <dd>collapse search control at startup.</dd>
-      <dt>autoCollapse</dt>
-      <dd>collapse search control after submit(on button or on tips if enabled tipAutoSubmit).</dd>
-      <dt>autoCollapseTime</dt>
-      <dd>delay for autoclosing alert and collapse after blur.</dd>
-      <dt>textErr</dt>
-      <dd>&#39;Location not error message.</dd>
-      <dt>textCancel</dt>
-      <dd>title in cancel button.</dd>
-      <dt>textPlaceholder</dt>
-      <dd>placeholder value.</dd>
-      <dt>position</dt>
-      <dd>&#39;topleft&#39;.</dd>
-      <dt>hideMarkerOnCollapse</dt>
-      <dd>remove circle and marker on search control collapsed.</dd>
-      <dt>...</dt>
-      <dd>other options for <code>searchOptions</code>().</dd>
-      <dt>openPopup</dt>
-      <dd>whether to open the popup associated with the marker when the marker is searched for</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>url</th>
+      <td><p>url for search by ajax request, ex: "search.php?q=s". Can be function that returns string for dynamic parameter setting.</p></td>
+    </tr>
+    <tr>
+      <th>sourceData</th>
+      <td><p>function that fill _recordsCache, passed searching text by first param and callback in second.</p></td>
+    </tr>
+    <tr>
+      <th>jsonpParam</th>
+      <td><p>jsonp param name for search by jsonp service, ex: "callback".</p></td>
+    </tr>
+    <tr>
+      <th>propertyLoc</th>
+      <td><p>field for remapping location, using array: ['latname','lonname'] for select double fields(ex. ['lat','lon'] ) support dotted format: 'prop.subprop.title'.</p></td>
+    </tr>
+    <tr>
+      <th>propertyName</th>
+      <td><p>property in marker.options(or feature.properties for vector layer) trough filter elements in layer,.</p></td>
+    </tr>
+    <tr>
+      <th>formatData</th>
+      <td><p>callback for reformat all data from source to indexed data object.</p></td>
+    </tr>
+    <tr>
+      <th>filterData</th>
+      <td><p>callback for filtering data from text searched, params: textSearch, allRecords.</p></td>
+    </tr>
+    <tr>
+      <th>moveToLocation</th>
+      <td><p>whether to move to the found location.</p></td>
+    </tr>
+    <tr>
+      <th>zoom</th>
+      <td><p>zoom to this level when moving to location</p></td>
+    </tr>
+    <tr>
+      <th>buildTip</th>
+      <td><p>function that return row tip html node(or html string), receive text tooltip in first param.</p></td>
+    </tr>
+    <tr>
+      <th>container</th>
+      <td><p>container id to insert Search Control.</p></td>
+    </tr>
+    <tr>
+      <th>minLength</th>
+      <td><p>minimal text length for autocomplete.</p></td>
+    </tr>
+    <tr>
+      <th>initial</th>
+      <td><p>search elements only by initial text.</p></td>
+    </tr>
+    <tr>
+      <th>casesensitive</th>
+      <td><p>search elements in case sensitive text.</p></td>
+    </tr>
+    <tr>
+      <th>autoType</th>
+      <td><p>complete input with first suggested result and select this filled-in text..</p></td>
+    </tr>
+    <tr>
+      <th>delayType</th>
+      <td><p>delay while typing for show tooltip.</p></td>
+    </tr>
+    <tr>
+      <th>tooltipLimit</th>
+      <td><p>limit max results to show in tooltip. -1 for no limit..</p></td>
+    </tr>
+    <tr>
+      <th>tipAutoSubmit</th>
+      <td><p>auto map panTo when click on tooltip.</p></td>
+    </tr>
+    <tr>
+      <th>firstTipSubmit</th>
+      <td><p>auto select first result con enter click.</p></td>
+    </tr>
+    <tr>
+      <th>autoResize</th>
+      <td><p>autoresize on input change.</p></td>
+    </tr>
+    <tr>
+      <th>collapsed</th>
+      <td><p>collapse search control at startup.</p></td>
+    </tr>
+    <tr>
+      <th>autoCollapse</th>
+      <td><p>collapse search control after submit(on button or on tips if enabled tipAutoSubmit).</p></td>
+    </tr>
+    <tr>
+      <th>autoCollapseTime</th>
+      <td><p>delay for autoclosing alert and collapse after blur.</p></td>
+    </tr>
+    <tr>
+      <th>textErr</th>
+      <td><p>'Location not error message.</p></td>
+    </tr>
+    <tr>
+      <th>textCancel</th>
+      <td><p>title in cancel button.</p></td>
+    </tr>
+    <tr>
+      <th>textPlaceholder</th>
+      <td><p>placeholder value.</p></td>
+    </tr>
+    <tr>
+      <th>position</th>
+      <td><p>'topleft'.</p></td>
+    </tr>
+    <tr>
+      <th>hideMarkerOnCollapse</th>
+      <td><p>remove circle and marker on search control collapsed.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other options for <code>searchOptions</code>().</p></td>
+    </tr>
+    <tr>
+      <th>openPopup</th>
+      <td><p>whether to open the popup associated with the marker when the marker is searched for</p></td>
+    </tr>
+    </table>
     
 
   </div>
@@ -182,7 +243,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bhaskar Karambelkar.</p>
+  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>.</p>
 </div>
 
 <div class="pkgdown">
@@ -191,6 +252,23 @@
 
       </footer>
    </div>
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//apps.karambelkar.info/pk/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '4']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//apps.karambelkar.info/pk/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 
   </body>
 </html>

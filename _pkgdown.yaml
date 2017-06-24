@@ -7,3 +7,52 @@ template:
   package: pkgdown.bvk
   params:
     bootswatch: yeti
+
+reference:
+- title: Package Documentation
+  desc: ~
+  contents:
+  - '`leaflet.extras`'
+- title: Useful Dependencies
+  desc: ~
+  contents:
+  - '`addAwesomeMarkersDependencies`'
+  - '`addBootstrapDependency`'
+  - '`leafletExtrasDependencies`'
+- title: Draw on Map
+  desc: ~
+  contents:
+  - '`drawShapeOptions`'
+  - '`addDrawToolbar`'
+  - '`addStyleEditor`'
+  - '`enableMeasurePath`'
+- title: Heatmaps
+  desc: ~
+  contents:
+  - '`addHeatmap`'
+  - '`addWebGLHeatmap`'
+- title: GeoJSON/TopoJSON
+  desc: ~
+  contents:
+  - '`addGeoJSONv2`'
+  - '`propsToHTML`'
+- title: Extra Icons
+  desc: ~
+  contents:
+  - '`pulseIconList`'
+  - '`weatherIconList`'
+- title: Search Markers/Shapes
+  desc: ~
+  contents:
+  - '`searchOptions`'
+  - '`addSearchOSM`'
+- title: Miscellaneous Features
+  desc: ~
+  contents:
+  - '`addGeodesicPolylines`'
+  - '`addFullscreenControl`'
+  - '`gpsOptions`'
+  - '`addHash`'
+  - '`suspendScroll`'
+  - '`enableTileCaching`'
+  - '`addWMSLegend`'
