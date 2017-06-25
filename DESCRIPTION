@@ -7,28 +7,28 @@ Authors@R: c(
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
       comment = "Leaflet-search and Leaflet-GPS plugin integration")
     )
-Description: The 'leaflet' Javascript library provides many plugins some of which
+Description: The 'leaflet' JavaScript library provides many plugins some of which
     are available in the core 'leaflet' package, but there are many more. It is not
     possible to support them all in the core 'leaflet' package. This package serves
-    as an addon to the 'leaflet' package by providing extra functionality via 'leaflet'
+    as an add-on to the 'leaflet' package by providing extra functionality via 'leaflet'
     plugins.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.1.0),
-    leaflet (>= 1.0.2.9008),
+    leaflet (>= 1.1.0)
 Imports:
     shiny,
     htmlwidgets,
     htmltools,
+    stringr,
     magrittr
 Suggests: V8,
     dplyr,
     geojsonio,
     purrr,
     readr,
-    stringr,
     rmapshaper,
     htmlTable,
     memoise
