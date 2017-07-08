@@ -7,7 +7,9 @@ Authors@R: c(
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
       comment = "Leaflet-search and Leaflet-GPS plugin integration"),
     person("Robin", "Cura", email= "robin@cura.info", role = c("ctb"),
-      comment = "Fixes for Draw Options")
+      comment = "Fixes for Draw Options"),
+    person("Markus", "Voge", email= "markus.voge@ea-aw.de", role = c("ctb"),
+      comment = "Enhancements for Draw Options")
     )
 Description: The 'leaflet' JavaScript library provides many plugins some of which
     are available in the core 'leaflet' package, but there are many more. It is not

@@ -109,7 +109,7 @@ drawPolygonOptions <- function(
   ))
 }
 
-#' Options for drawing rectanges
+#' Options for drawing rectangles
 #' @rdname draw-options
 #' @export
 drawRectangleOptions <- function(

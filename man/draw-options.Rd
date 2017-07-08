@@ -113,7 +113,7 @@ Options for drawing polylines
 
 Options for drawing polygons
 
-Options for drawing rectanges
+Options for drawing rectangles
 
 Options for drawing Circles
 
