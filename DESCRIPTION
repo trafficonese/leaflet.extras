@@ -1,11 +1,13 @@
 Package: leaflet.extras
 Type: Package
 Title: Extra Functionality for 'leaflet' Package
-Version: 0.2
+Version: 0.2.9000
 Authors@R: c(
     person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
-      comment = "Leaflet-search and Leaflet-GPS plugin integration")
+      comment = "Leaflet-search and Leaflet-GPS plugin integration"),
+    person("Robin", "Cura", email= "robin@cura.info", role = c("ctb"),
+      comment = "Fixes for Draw Options")
     )
 Description: The 'leaflet' JavaScript library provides many plugins some of which
     are available in the core 'leaflet' package, but there are many more. It is not
@@ -32,6 +34,6 @@ Suggests: V8,
     rmapshaper,
     htmlTable,
     memoise
-URL: https://github.com/bhaskarvk/leaflet.extras
+URL: https://github.com/bhaskarvk/leaflet.extras, https://bhaskarvk.github.io/leaflet.extras/
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
 RoxygenNote: 6.0.1
