@@ -28,7 +28,7 @@ LeafletWidget.methods.addSearchOSM = function(options) {
     map.searchControl.on('search:locationfound', function(e){
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_search_location_found',e);
+      Shiny.onInputChange(map.id+'_search_location_found',e.latlng);
     });
 
   }).call(this);
@@ -62,7 +62,7 @@ LeafletWidget.methods.addSearchMarker = function(targetLayerId, targetGroup, opt
       };
     }
 
-    
+
     // FeatureGroup that will be searched
     // This can be an existing GeoJSON layer or an existing FeatureGroup
     var searchFeatureGroup;

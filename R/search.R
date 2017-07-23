@@ -107,7 +107,7 @@ searchOptions <- function(
 #' @rdname search-options
 #' @export
 searchOSMOptions <- function(
-    url = '//nominatim.openstreetmap.org/search?format=json&q={s}',
+    url = 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
     jsonpParam = 'json_callback',
     propertyName = 'display_name',
     propertyLoc = c('lat','lon'),

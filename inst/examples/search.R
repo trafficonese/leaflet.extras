@@ -7,6 +7,13 @@
 
 library(leaflet.extras)
 
+#' ### Geocoding using OSM
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addSearchOSM(
+    options = searchOSMOptions(
+      position = 'topleft'))
+
 #' ### Search Markers
 cities <- read.csv(textConnection("
 City,Lat,Long,Pop

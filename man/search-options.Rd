@@ -18,7 +18,7 @@ searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
   hideMarkerOnCollapse = FALSE)
 
 
-  searchOSMOptions(url = "//nominatim.openstreetmap.org/search?format=json&q={s}",
+  searchOSMOptions(url = "https://nominatim.openstreetmap.org/search?format=json&q={s}",
   jsonpParam = "json_callback", propertyName = "display_name",
   propertyLoc = c("lat", "lon"), autoType = FALSE, autoCollapse = TRUE,
   minLength = 2, ...)
