@@ -2,24 +2,56 @@
 % Please edit documentation in R/search.R
 \name{addSearchOSM}
 \alias{addSearchOSM}
-\alias{addSearchMarker}
+\alias{removeSearchOSM}
+\alias{addSearchGoogle}
+\alias{removeSearchGoogle}
+\alias{addSearchControl}
+\alias{removeSearchControl}
 \title{Add a OSM search control to the map.}
 \usage{
 addSearchOSM(map, options = searchOSMOptions())
 
-addSearchMarker(map, targetLayerId = NULL, targetGroup = NULL,
-  options = searchMarkersOptions())
+removeSearchOSM(map)
+
+addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  options = searchGoogleOptions())
+
+removeSearchGoogle(map)
+
+addSearchControl(map, targetGroups, options = searchFeaturesOptions())
+
+removeSearchControl(map, clearFeatures = FALSE)
 }
 \arguments{
 \item{map}{a map widget object}
 
 \item{options}{Search Options}
 
-\item{targetLayerId}{An optional layerId of a GeoJSON/TopoJSON layer whose features need to be searched.}
+\item{apikey}{String. API Key for Google GeoCoding Service.}
 
-\item{targetGroup}{An optional group name of a Feature Group whose features need to be searched.}
+\item{clearFeatures}{Boolean. If TRUE the features that this control searches will be removed too.}
+
+\item{map}{a map widget object}
+
+\item{map}{a map widget object}
+
+\item{options}{Search Options}
+
+\item{map}{a map widget object}
+
+\item{targetGroup}{A vector of group names of groups whose features need to be searched.}
+
+\item{map}{a map widget object}
 }
 \value{
+modified map
+
+modified map
+
+modified map
+
+modified map
+
 modified map
 
 modified map
@@ -27,5 +59,13 @@ modified map
 \description{
 Add a OSM search control to the map.
 
-Add a marker search control to the map.
+Removes the OSM search control from the map.
+
+Add a Google search control to the map.
+
+Removes the Google search control from the map.
+
+Add a feature search control to the map.
+
+Removes the feature search control from the map.
 }

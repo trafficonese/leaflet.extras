@@ -3,7 +3,8 @@
 \name{searchOptions}
 \alias{searchOptions}
 \alias{searchOSMOptions}
-\alias{searchMarkersOptions}
+\alias{searchGoogleOptions}
+\alias{searchFeaturesOptions}
 \title{Options for search control.}
 \usage{
 searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
@@ -23,7 +24,10 @@ searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
   propertyLoc = c("lat", "lon"), autoType = FALSE, autoCollapse = TRUE,
   minLength = 2, ...)
 
-searchMarkersOptions(propertyName = "label", initial = FALSE,
+searchGoogleOptions(markerLocation = TRUE, autoType = FALSE,
+  autoCollapse = TRUE, minLength = 2, ...)
+
+searchFeaturesOptions(propertyName = "label", initial = FALSE,
   openPopup = FALSE, ...)
 }
 \arguments{
@@ -85,12 +89,18 @@ searchMarkersOptions(propertyName = "label", initial = FALSE,
 
 \item{...}{other options for \code{searchOptions}().}
 
-\item{openPopup}{whether to open the popup associated with the marker when the marker is searched for}
+\item{markerLocation}{Boolean.}
+
+\item{openPopup}{whether to open the popup associated with the feature when the feature is searched for}
+
+\item{...}{other options for \code{searchOptions}().}
 }
 \description{
 Options for search control.
 
 Customized searchOptions for opensteetmap search
 
-Customized searchOptions for Marker Search
+Customized searchOptions for google search
+
+Customized searchOptions for Feature Search
 }

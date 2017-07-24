@@ -1,7 +1,7 @@
 /* 
- * Leaflet Control Search v2.7.0 - 2016-09-13 
+ * Leaflet Control Search v2.7.2 - 2017-07-25 
  * 
- * Copyright 2016 Stefano Cudini 
+ * Copyright 2017 Stefano Cudini 
  * stefano.cudini@gmail.com 
  * http://labs.easyblog.it/ 
  * 
@@ -44,7 +44,7 @@
 	margin:3px 0 3px 3px;
 }
 .leaflet-control-search.search-load .search-input {
-	background: url('../images/loader.gif') no-repeat center right #fff;
+	background: url('images/loader.gif') no-repeat center right #fff;
 }
 .leaflet-control-search.search-load .search-cancel {
 	visibility:hidden;
@@ -56,7 +56,7 @@
 	position:absolute;
 	right:22px;
 	margin:3px 0;
-	background: url('../images/search-icon.png') no-repeat 0 -46px;
+	background: url('images/search-icon.png') no-repeat 0 -46px;
 	text-decoration:none;
 	filter: alpha(opacity=80);
 	opacity: 0.8;		
@@ -80,11 +80,11 @@
 	float:left;
 	width:26px;
 	height:26px;	
-	background: url('../images/search-icon.png') no-repeat 2px 2px #fff;
+	background: url('images/search-icon.png') no-repeat 2px 2px #fff;
 	border-radius:4px;
 }
 .leaflet-control-search .search-button:hover {
-	background: url('../images/search-icon.png') no-repeat 2px -22px #fafafa;
+	background: url('images/search-icon.png') no-repeat 2px -22px #fafafa;
 }
 .leaflet-control-search .search-tooltip {
 	position:absolute;

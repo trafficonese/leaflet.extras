@@ -1,15 +1,32 @@
-/* global LeafletWidget, L, Shiny, HTMLWidgets */
+/* global $, LeafletWidget, L, Shiny, HTMLWidgets */
+
+// helper function to conver JS event to Shiny Event
+function eventToShiny(e) {
+  var shinyEvent = {};
+  shinyEvent.latlng = e.latlng;
+  if(!$.isEmptyObject(e.title)) {
+    shinyEvent.title = e.title;
+  }
+  if(!$.isEmptyObject(e.layer)) {
+    shinyEvent.title = e.layer.toGeoJSON();
+  }
+  return shinyEvent;
+}
+
 LeafletWidget.methods.addSearchOSM = function(options) {
 
   (function(){
     var map = this;
 
-    if(map.searchControl) {
-      map.search.removeFrom(map);
-      delete map.searchControl;
+    if(map.searchControlOSM) {
+      map.searchControlOSM.removeFrom(map);
+      delete map.searchControlOSM;
     }
 
     options = options || {};
+
+    // https://github.com/stefanocudini/leaflet-search/issues/129
+    options.marker = L.circleMarker([0,0],{radius:30});
 
     if(options.moveToLocation) {
       options.moveToLocation = function(latlng, title, map) {
@@ -22,30 +39,112 @@ LeafletWidget.methods.addSearchOSM = function(options) {
       };
     }
 
-    map.searchControl = new L.Control.Search(options);
-    map.searchControl.addTo(map);
+    map.searchControlOSM = new L.Control.Search(options);
+    map.searchControlOSM.addTo(map);
 
-    map.searchControl.on('search:locationfound', function(e){
+    map.searchControlOSM.on('search:locationfound', function(e){
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_search_location_found',e.latlng);
+      Shiny.onInputChange(map.id+'_search_location_found', eventToShiny(e));
     });
 
   }).call(this);
 };
 
-LeafletWidget.methods.addSearchMarker = function(targetLayerId, targetGroup, options){
+LeafletWidget.methods.removeSearchOSM = function() {
+  (function(){
+
+    var map = this;
+
+    if(map.searchControlOSM) {
+      map.searchControlOSM.removeFrom(map);
+      delete map.searchControlOSM;
+    }
+  }).call(this);
+};
+
+LeafletWidget.methods.addSearchGoogle = function(options) {
 
   (function(){
     var map = this;
 
-    if((!targetLayerId || !targetLayerId.trim() ) &&
-      (!targetGroup || !targetGroup.trim())) {
-      throw 'Need either a targetLayerId or targetGroup';
+    if(map.searchControlGoogle) {
+      map.searchControlGoogle.removeFrom(map);
+      delete map.searchControlGoogle;
     }
 
+    var geocoder = new google.maps.Geocoder();
+
+  	function googleGeocoding(text, callResponse) {
+  		geocoder.geocode({address: text}, callResponse);
+  	}
+
+  	function formatJSON(rawjson) {
+  		var json = {},
+  			key, loc, disp = [];
+
+  		for(var i in rawjson) {
+  			key = rawjson[i].formatted_address;
+
+  			loc = L.latLng( rawjson[i].geometry.location.lat(), rawjson[i].geometry.location.lng() );
+
+  			json[ key ]= loc;	//key,value format
+  		}
+
+  		return json;
+  	}
+
+    options = options || {};
+
+    // https://github.com/stefanocudini/leaflet-search/issues/129
+    options.marker = L.circleMarker([0,0],{radius:30});
+
+    if(options.moveToLocation) {
+      options.moveToLocation = function(latlng, title, map) {
+        var zoom = options.zoom || 16;
+        var maxZoom = map.getMaxZoom();
+        if(maxZoom && zoom > maxZoom) {
+          zoom = maxZoom;
+        }
+        map.setView(latlng, zoom);
+      };
+    }
+
+    options.sourceData = googleGeocoding;
+		options.formatData = formatJSON;
+
+    map.searchControlGoogle = new L.Control.Search(options);
+    map.searchControlGoogle.addTo(map);
+
+    map.searchControlGoogle.on('search:locationfound', function(e){
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_search_location_found', eventToShiny(e));
+    });
+
+  }).call(this);
+};
+
+LeafletWidget.methods.removeSearchGoogle = function() {
+  (function(){
+
+    var map = this;
+
+    if(map.searchControlGoogle) {
+      map.searchControlGoogle.removeFrom(map);
+      delete map.searchControlGoogle;
+    }
+  }).call(this);
+};
+
+
+LeafletWidget.methods.addSearchControl = function(targetGroups, options){
+
+  (function(){
+    var map = this;
+
     if(map.searchControl) {
-      map.search.removeFrom(map);
+      map.searchControl.removeFrom(map);
       delete map.searchControl;
     }
 
@@ -62,32 +161,37 @@ LeafletWidget.methods.addSearchMarker = function(targetLayerId, targetGroup, opt
       };
     }
 
-
     // FeatureGroup that will be searched
-    // This can be an existing GeoJSON layer or an existing FeatureGroup
     var searchFeatureGroup;
 
-    if(targetLayerId) {
-      // If we're given an existing GeoJSON layer find it and use it
-      searchFeatureGroup = map.layerManager.getLayer('geojson', targetLayerId);
-      if(searchFeatureGroup) {
-        map._searchGeoJSONLayerId = targetLayerId;
-      } else {
-        // throw an error if we can't find the target GeoJSON layer
-        throw 'GeoJSON layer with ID '+targetLayerId+' not Found';
-      }
-    } else {
-      searchFeatureGroup = map.layerManager.getLayerGroup(targetGroup, false);
-      if(searchFeatureGroup) {
-        map._searchFeatureGroupName = targetGroup;
+    // if we have just one group to search use it.
+    if(!L.Util.isArray(targetGroups)) {
+      var target = map.layerManager.getLayerGroup(targetGroups, false);
+      if(target) {
+        searchFeatureGroup = target;
+        map._searchFeatureGroupName = targetGroups;
       } else {
         // throw an error if we can't find the target FeatureGroup layer
-        throw 'Feature Group with ID '+targetGroup+' not Found';
+        throw 'Group with ID "'+targetGroups+'" not found';
       }
+    } else { // if we have more than one groups to search create a new seach group with them.
+
+      searchFeatureGroup = map.layerManager.getLayerGroup("search", true);
+      map._searchFeatureGroupName = "search";
+
+      $.each(targetGroups, function(k, v) {
+        var target = map.layerManager.getLayerGroup(v, false);
+        // may be remove target from map before adding to searchFeatureGroup
+        if(target) {
+          searchFeatureGroup.addLayer(target);
+        } else {
+          console.warn('Group with ID "' + v + '" not Found, skipping');
+        }
+      });
     }
 
+    L.stamp(searchFeatureGroup);
     options.layer = searchFeatureGroup;
-
     map.searchControl = new L.Control.Search(options);
     map.searchControl.addTo(map);
 
@@ -97,13 +201,13 @@ LeafletWidget.methods.addSearchMarker = function(targetLayerId, targetGroup, opt
       }
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_search_location_found',e);
+      Shiny.onInputChange(map.id+'_search_location_found', eventToShiny(e));
     });
 
   }).call(this);
 };
 
-LeafletWidget.methods.removeSearch = function(clearFeatures) {
+LeafletWidget.methods.removeSearchControl = function(clearFeatures) {
   (function(){
 
     var map = this;
@@ -112,14 +216,10 @@ LeafletWidget.methods.removeSearch = function(clearFeatures) {
       map.searchControl.removeFrom(map);
       delete map.searchControl;
     }
-    if(map._searchFeatureGroupName && clearFeatures) {
+    if(clearFeatures && map._searchFeatureGroupName) {
       map.layerManager.clearGroup(map._searchFeatureGroupName);
+      delete map._searchFeatureGroupName ;
     }
-    map._searchFeatureGroupName = null;
-    if(map._searchGeoJSONLayerId && clearFeatures) {
-      map.layerManager.removeLayer('geojson', map._searchGeoJSONLayerId);
-    }
-    map._searchGeoJSONLayerId = null;
   }).call(this);
 
 };

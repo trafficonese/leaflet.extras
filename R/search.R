@@ -4,8 +4,14 @@ leafletSearchDependencies <- function() {
       "leaflet-search",
       "2.7.0",
       system.file("htmlwidgets/lib/search", package = "leaflet.extras"),
-      script = c("leaflet-search.min.js", "leaflet-search-binding.js"),
+      script = c("leaflet-search.src.js", "leaflet-search-binding.js"),
       stylesheet = "leaflet-search.min.css"
+    ),
+    htmltools::htmlDependency(
+      "fuse",
+      "3.0.5",
+      system.file("htmlwidgets/lib/fuse", package="leaflet.extras"),
+      script = c("fuse.js")
     ))
 }
 
@@ -127,24 +133,6 @@ searchOSMOptions <- function(
     ...)
 }
 
-#' Customized searchOptions for Marker Search
-#' @param openPopup whether to open the popup associated with the marker when the marker is searched for
-#' @rdname search-options
-#' @export
-searchMarkersOptions <- function(
-    propertyName = 'label',
-    initial = FALSE,
-    openPopup = FALSE,
-    ...
-) {
-  c(openPopup = openPopup,
-    searchOptions(
-       propertyName = propertyName,
-       initial = initial,
-       ...))
-}
-#'
-
 #' Add a OSM search control to the map.
 #'
 #' @param map a map widget object
@@ -165,32 +153,138 @@ addSearchOSM <- function(
   )
 }
 
-
-
-#' Add a marker search control to the map.
+#' Removes the OSM search control from the map.
 #'
-#' @param targetLayerId An optional layerId of a GeoJSON/TopoJSON layer whose features need to be searched.
-#' @param targetGroup An optional group name of a Feature Group whose features need to be searched.
+#' @param map a map widget object
 #' @return modified map
 #' @rdname search
 #' @export
-addSearchMarker <- function(
+removeSearchOSM <- function(map) {
+  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
     map,
-    targetLayerId = NULL,
-    targetGroup = NULL,
-    options = searchMarkersOptions()
+    getMapData(map),
+    'removeSearchOSM'
+  )
+}
+
+#' Customized searchOptions for google search
+#' @param markerLocation Boolean.
+#' @param ... other options for \code{searchOptions}().
+#' @rdname search-options
+#' @export
+searchGoogleOptions <- function(
+  markerLocation = TRUE,
+  autoType = FALSE,
+  autoCollapse = TRUE,
+  minLength = 2,
+  ...
 ) {
-  if(!is.null(targetGroup) && !is.null(targetLayerId) ||
-     (is.null(targetGroup) && is.null(targetLayerId))) {
-      stop("To search existing features either specify a targetGroup or a targetLayerId, but not both")
+  c(markerLocation = markerLocation,
+    searchOptions(
+      autoType = autoType,
+      autoCollapse = autoCollapse,
+      minLength = minLength,
+      ...))
+}
+
+
+#' Add a Google search control to the map.
+#'
+#' @param map a map widget object
+#' @param apikey String. API Key for Google GeoCoding Service.
+#' @param options Search Options
+#' @return modified map
+#' @rdname search
+#' @export
+addSearchGoogle <- function(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  options = searchGoogleOptions()
+) {
+  if(is.null(apikey)) {
+    stop("Google Geocoding requires an apikey")
   }
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    'addSearchGoogle',
+    options
+  ) %>%
+    htmlwidgets::appendContent(
+      htmltools::tags$script(
+        src=paste0("https://maps.googleapis.com/maps/api/js?v=3&key=", apikey)))
+}
+
+#' Removes the Google search control from the map.
+#'
+#' @param map a map widget object
+#' @return modified map
+#' @rdname search
+#' @export
+removeSearchGoogle <- function(map) {
+  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    'removeSearchGoogle'
+  )
+}
+
+#' Customized searchOptions for Feature Search
+#' @param openPopup whether to open the popup associated with the feature when the feature is searched for
+#' @rdname search-options
+#' @export
+searchFeaturesOptions <- function(
+    propertyName = 'label',
+    initial = FALSE,
+    openPopup = FALSE,
+    ...
+) {
+  c(openPopup = openPopup,
+    searchOptions(
+       propertyName = propertyName,
+       initial = initial,
+       ...))
+}
+
+
+#' Add a feature search control to the map.
+#'
+#' @param targetGroup A vector of group names of groups whose features need to be searched.
+#' @return modified map
+#' @rdname search
+#' @export
+addSearchControl <- function(
+    map,
+    targetGroups,
+    options = searchFeaturesOptions()
+) {
     map$dependencies <- c(map$dependencies, leafletSearchDependencies())
     invokeMethod(
         map,
         getMapData(map),
-        'addSearchMarker',
-        targetLayerId,
-        targetGroup,
+        'addSearchControl',
+        targetGroups,
         options
     )
 }
+
+#' Removes the feature search control from the map.
+#'
+#' @param map a map widget object
+#' @param clearFeatures Boolean. If TRUE the features that this control searches will be removed too.
+#' @return modified map
+#' @rdname search
+#' @export
+removeSearchControl <- function(map, clearFeatures=FALSE) {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    'removeSearchControl',
+    clearFeatures
+  )
+}
+
