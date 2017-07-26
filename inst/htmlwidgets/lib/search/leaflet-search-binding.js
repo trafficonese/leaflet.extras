@@ -3,12 +3,14 @@
 // helper function to conver JS event to Shiny Event
 function eventToShiny(e) {
   var shinyEvent = {};
-  shinyEvent.latlng = e.latlng;
+  shinyEvent.latlng = {};
+  shinyEvent.latlng.lat = e.latlng.lat;
+  shinyEvent.latlng.lng = e.latlng.lng;
   if(!$.isEmptyObject(e.title)) {
     shinyEvent.title = e.title;
   }
   if(!$.isEmptyObject(e.layer)) {
-    shinyEvent.title = e.layer.toGeoJSON();
+    shinyEvent.layer = e.layer.toGeoJSON();
   }
   return shinyEvent;
 }

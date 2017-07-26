@@ -136,14 +136,21 @@ leaf.world %>%
              position='bottomright')
 
 #' ### Search Multiple GeoJSON Layers
-artsAndCultures <- 'https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson'
-bankLocations <- 'https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/bank-locations.geojson'
+artsAndCultures <- readr::read_file(
+  'https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson')
+bankLocations <- readr::read_file(
+  'https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/bank-locations.geojson')
 
 artsAndCulture <- makeAwesomeIcon(icon='paintbrush', library='ion', markerColor = 'red', iconColor = 'black')
 bankLocation <- makeAwesomeIcon(icon='cash', library='ion', markerColor = 'green', iconColor = 'black')
 
 leaf <- leaflet() %>%
-  addProviderTiles(providers$CartoDB.Positron)
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addEasyButton(easyButton(
+    icon = 'ion-arrow-shrink',
+    title = 'Reset View',
+    onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>%
+  htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}"))
 
 leaf %>% setView(-77.0369, 38.9072, 12) %>%
   addBootstrapDependency() %>%
@@ -171,7 +178,7 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
   addSearchControl(
     targetGroups =  c('Arts-n-Culture', 'Bank Locations'),
     options = searchFeaturesOptions(
-      propertyName='NAME', zoom=12, openPopup = TRUE, firstTipSubmit = TRUE,
+      propertyName='NAME', zoom=18, openPopup = TRUE, firstTipSubmit = TRUE,
       autoCollapse = TRUE, hideMarkerOnCollapse = TRUE, position = "topleft" )) %>%
   addControl("<P><B>Hint!</B> Search for Arts-N-Culture or Bank Locations</P>",
              position='bottomright')
