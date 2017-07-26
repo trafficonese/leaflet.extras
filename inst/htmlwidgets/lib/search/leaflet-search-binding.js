@@ -25,7 +25,12 @@ LeafletWidget.methods.addSearchOSM = function(options) {
       delete map.searchControlOSM;
     }
 
-    options = options || {};
+    var options = options || {};
+    options.textPlaceholder = "Search using OSM Geocoder";
+    options.url = 'https://nominatim.openstreetmap.org/search?format=json&q={s}';
+    options.jsonpParam = 'json_callback';
+    options.propertyName = 'display_name';
+    options.propertyLoc = ['lat','lon'];
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});
@@ -87,16 +92,15 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
 
   		for(var i in rawjson) {
   			key = rawjson[i].formatted_address;
-
   			loc = L.latLng( rawjson[i].geometry.location.lat(), rawjson[i].geometry.location.lng() );
-
   			json[ key ]= loc;	//key,value format
   		}
-
   		return json;
   	}
 
-    options = options || {};
+    var options = options || {};
+    options.markerLocation = true;
+    options.textPlaceholder = "Search using Google Geocoder";
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});
@@ -139,8 +143,76 @@ LeafletWidget.methods.removeSearchGoogle = function() {
   }).call(this);
 };
 
+LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
 
-LeafletWidget.methods.addSearchControl = function(targetGroups, options){
+  (function(){
+    var map = this;
+
+    if(map.searchControlUSCensusBureau) {
+      map.searchControlUSCensusBureau.removeFrom(map);
+      delete map.searchControlUSCensusBureau;
+    }
+
+    function formatJSON(rawjson) {
+      var json = {},
+        key, loc, disp = [];
+
+      for (var i in rawjson.result.addressMatches) {
+        key = rawjson.result.addressMatches[i].matchedAddress;
+        loc = L.latLng(rawjson.result.addressMatches[i].coordinates.y, rawjson.result.addressMatches[i].coordinates.x);
+        json[key] = loc; //key,value format
+      }
+      return json;
+    }
+
+    options = options || {};
+
+    options.url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
+    options.textPlaceholder = "Search using US Census Bureau";
+    options.jsonpParam = 'callback';
+    options.formatData = formatJSON;
+    options.minLength = 20;
+
+    // https://github.com/stefanocudini/leaflet-search/issues/129
+    options.marker = L.circleMarker([0,0],{radius:30});
+
+    if(options.moveToLocation) {
+      options.moveToLocation = function(latlng, title, map) {
+        var zoom = options.zoom || 16;
+        var maxZoom = map.getMaxZoom();
+        if(maxZoom && zoom > maxZoom) {
+          zoom = maxZoom;
+        }
+        map.setView(latlng, zoom);
+      };
+    }
+
+    map.searchControlUSCensusBureau = new L.Control.Search(options);
+    map.searchControlUSCensusBureau.addTo(map);
+
+    map.searchControlUSCensusBureau.on('search:locationfound', function(e){
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_search_location_found', eventToShiny(e));
+    });
+
+  }).call(this);
+};
+
+LeafletWidget.methods.removeSearchUSCensusBureau = function() {
+  (function(){
+
+    var map = this;
+
+    if(map.searchControlUSCensusBureau) {
+      map.searchControlUSCensusBureau.removeFrom(map);
+      delete map.searchControlUSCensusBureau;
+    }
+  }).call(this);
+};
+
+
+LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
 
   (function(){
     var map = this;
@@ -209,7 +281,7 @@ LeafletWidget.methods.addSearchControl = function(targetGroups, options){
   }).call(this);
 };
 
-LeafletWidget.methods.removeSearchControl = function(clearFeatures) {
+LeafletWidget.methods.removeSearchFeatures = function(clearFeatures) {
   (function(){
 
     var map = this;

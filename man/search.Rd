@@ -5,22 +5,28 @@
 \alias{removeSearchOSM}
 \alias{addSearchGoogle}
 \alias{removeSearchGoogle}
-\alias{addSearchControl}
-\alias{removeSearchControl}
+\alias{addSearchUSCensusBureau}
+\alias{removeSearchUSCensusBureau}
+\alias{addSearchFeatures}
+\alias{removeSearchFeatures}
 \title{Add a OSM search control to the map.}
 \usage{
-addSearchOSM(map, options = searchOSMOptions())
+addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
 removeSearchOSM(map)
 
 addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  options = searchGoogleOptions())
+  options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
 removeSearchGoogle(map)
 
-addSearchControl(map, targetGroups, options = searchFeaturesOptions())
+addSearchUSCensusBureau(map, options = searchOptions())
 
-removeSearchControl(map, clearFeatures = FALSE)
+removeSearchUSCensusBureau(map)
+
+addSearchFeatures(map, targetGroups, options = searchFeaturesOptions())
+
+removeSearchFeatures(map, clearFeatures = FALSE)
 }
 \arguments{
 \item{map}{a map widget object}
@@ -30,6 +36,12 @@ removeSearchControl(map, clearFeatures = FALSE)
 \item{apikey}{String. API Key for Google GeoCoding Service.}
 
 \item{clearFeatures}{Boolean. If TRUE the features that this control searches will be removed too.}
+
+\item{map}{a map widget object}
+
+\item{map}{a map widget object}
+
+\item{options}{Search Options}
 
 \item{map}{a map widget object}
 
@@ -55,6 +67,10 @@ modified map
 modified map
 
 modified map
+
+modified map
+
+modified map
 }
 \description{
 Add a OSM search control to the map.
@@ -64,6 +80,10 @@ Removes the OSM search control from the map.
 Add a Google search control to the map.
 
 Removes the Google search control from the map.
+
+Add a US Census Bureau search control to the map.
+
+Removes the US Census Bureau search control from the map.
 
 Add a feature search control to the map.
 

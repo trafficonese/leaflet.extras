@@ -108,31 +108,6 @@ searchOptions <- function(
     ))
 }
 
-#' Customized searchOptions for opensteetmap search
-#' @param ... other options for \code{searchOptions}().
-#' @rdname search-options
-#' @export
-searchOSMOptions <- function(
-    url = 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-    jsonpParam = 'json_callback',
-    propertyName = 'display_name',
-    propertyLoc = c('lat','lon'),
-    autoType = FALSE,
-    autoCollapse = TRUE,
-    minLength = 2,
-    ...
-) {
-  searchOptions(
-    url = url,
-    jsonpParam = jsonpParam,
-    propertyName = propertyName,
-    propertyLoc = propertyLoc,
-    autoType = autoType,
-    autoCollapse = autoCollapse,
-    minLength = minLength,
-    ...)
-}
-
 #' Add a OSM search control to the map.
 #'
 #' @param map a map widget object
@@ -142,7 +117,7 @@ searchOSMOptions <- function(
 #' @export
 addSearchOSM <- function(
   map,
-  options = searchOSMOptions()
+  options = searchOptions(autoCollapse = TRUE, minLength = 2)
 ) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
@@ -168,27 +143,6 @@ removeSearchOSM <- function(map) {
   )
 }
 
-#' Customized searchOptions for google search
-#' @param markerLocation Boolean.
-#' @param ... other options for \code{searchOptions}().
-#' @rdname search-options
-#' @export
-searchGoogleOptions <- function(
-  markerLocation = TRUE,
-  autoType = FALSE,
-  autoCollapse = TRUE,
-  minLength = 2,
-  ...
-) {
-  c(markerLocation = markerLocation,
-    searchOptions(
-      autoType = autoType,
-      autoCollapse = autoCollapse,
-      minLength = minLength,
-      ...))
-}
-
-
 #' Add a Google search control to the map.
 #'
 #' @param map a map widget object
@@ -200,7 +154,7 @@ searchGoogleOptions <- function(
 addSearchGoogle <- function(
   map,
   apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  options = searchGoogleOptions()
+  options = searchOptions(autoCollapse = TRUE, minLength = 2)
 ) {
   if(is.null(apikey)) {
     stop("Google Geocoding requires an apikey")
@@ -232,6 +186,41 @@ removeSearchGoogle <- function(map) {
   )
 }
 
+#' Add a US Census Bureau search control to the map.
+#'
+#' @param map a map widget object
+#' @param options Search Options
+#' @return modified map
+#' @rdname search
+#' @export
+addSearchUSCensusBureau <- function(
+  map,
+  options = searchOptions()
+) {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    'addSearchUSCensusBureau',
+    options
+  )
+}
+
+#' Removes the US Census Bureau search control from the map.
+#'
+#' @param map a map widget object
+#' @return modified map
+#' @rdname search
+#' @export
+removeSearchUSCensusBureau <- function(map) {
+  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    'removeSearchUSCensusBureau'
+  )
+}
+
 #' Customized searchOptions for Feature Search
 #' @param openPopup whether to open the popup associated with the feature when the feature is searched for
 #' @rdname search-options
@@ -256,7 +245,7 @@ searchFeaturesOptions <- function(
 #' @return modified map
 #' @rdname search
 #' @export
-addSearchControl <- function(
+addSearchFeatures <- function(
     map,
     targetGroups,
     options = searchFeaturesOptions()
@@ -265,7 +254,7 @@ addSearchControl <- function(
     invokeMethod(
         map,
         getMapData(map),
-        'addSearchControl',
+        'addSearchFeatures',
         targetGroups,
         options
     )
@@ -278,12 +267,12 @@ addSearchControl <- function(
 #' @return modified map
 #' @rdname search
 #' @export
-removeSearchControl <- function(map, clearFeatures=FALSE) {
+removeSearchFeatures <- function(map, clearFeatures=FALSE) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
     getMapData(map),
-    'removeSearchControl',
+    'removeSearchFeatures',
     clearFeatures
   )
 }

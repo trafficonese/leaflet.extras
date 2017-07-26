@@ -8,20 +8,23 @@
 library(leaflet)
 library(leaflet.extras)
 
-#' ### Geocoding using OSM
+#' ### Geocoding using OSM Geocoder
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
   addSearchOSM(
-    options = searchOSMOptions(
-      position = 'topleft'))
+    options = searchOptions(position = 'topleft'))
 
-#' ### Geocoding using Google
+#' ### Geocoding using Google Geocoder
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
   addSearchGoogle(
-    options = searchGoogleOptions(
-      position = 'topleft'))
+    options = searchOptions( position = 'topleft'))
 
+#' ### Geocoding using US Census Bureau Geocoder
+leaflet() %>%
+  addProviderTiles(providers$Esri.WorldStreetMap) %>%
+  addSearchUSCensusBureau(
+    options = searchOptions( position = 'topleft'))
 
 #' ### Search Markers
 cities <- read.csv(textConnection("
@@ -37,7 +40,7 @@ Providence,41.8236,-71.4222,177994
 leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
   addCircleMarkers(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity=0.5,
              radius = ~sqrt(Pop)/50 , popup = ~City, label=~City, group ='cities') %>%
-  addSearchControl(
+  addSearchFeatures(
     targetGroups = 'cities',
     options = searchFeaturesOptions(
       zoom=12, openPopup = TRUE, firstTipSubmit = TRUE,
@@ -69,7 +72,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
     markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
     clusterOptions = markerClusterOptions(),
     group = 'pubs') %>%
-  addSearchControl(
+  addSearchFeatures(
     targetGroups = 'pubs',
     options = searchFeaturesOptions(
       propertyName = 'name', zoom=18, openPopup = TRUE, firstTipSubmit = TRUE,
@@ -127,7 +130,7 @@ leaf.world %>%
       fillOpacity=1, weight=2, opacity=1, color='#ff0000',
       bringToFront=TRUE, sendToBack = TRUE),
     legendOptions = legendOptions(title='Population Density (2005)')) %>%
-  addSearchControl(
+  addSearchFeatures(
     targetGroups = 'pop_density',
     options = searchFeaturesOptions(
       propertyName='NAME', zoom=2, openPopup = TRUE, firstTipSubmit = TRUE,
@@ -175,7 +178,7 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
   addLayersControl(
     overlayGroups =  c('Arts-n-Culture', 'Bank Locations'),
     options = layersControlOptions(collapsed=F)) %>%
-  addSearchControl(
+  addSearchFeatures(
     targetGroups =  c('Arts-n-Culture', 'Bank Locations'),
     options = searchFeaturesOptions(
       propertyName='NAME', zoom=18, openPopup = TRUE, firstTipSubmit = TRUE,

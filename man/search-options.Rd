@@ -2,8 +2,6 @@
 % Please edit documentation in R/search.R
 \name{searchOptions}
 \alias{searchOptions}
-\alias{searchOSMOptions}
-\alias{searchGoogleOptions}
 \alias{searchFeaturesOptions}
 \title{Options for search control.}
 \usage{
@@ -17,15 +15,6 @@ searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
   textErr = "Location Not Found", textCancel = "Cancel",
   textPlaceholder = "Search...", position = "topright",
   hideMarkerOnCollapse = FALSE)
-
-
-  searchOSMOptions(url = "https://nominatim.openstreetmap.org/search?format=json&q={s}",
-  jsonpParam = "json_callback", propertyName = "display_name",
-  propertyLoc = c("lat", "lon"), autoType = FALSE, autoCollapse = TRUE,
-  minLength = 2, ...)
-
-searchGoogleOptions(markerLocation = TRUE, autoType = FALSE,
-  autoCollapse = TRUE, minLength = 2, ...)
 
 searchFeaturesOptions(propertyName = "label", initial = FALSE,
   openPopup = FALSE, ...)
@@ -87,20 +76,10 @@ searchFeaturesOptions(propertyName = "label", initial = FALSE,
 
 \item{hideMarkerOnCollapse}{remove circle and marker on search control collapsed.}
 
-\item{...}{other options for \code{searchOptions}().}
-
-\item{markerLocation}{Boolean.}
-
 \item{openPopup}{whether to open the popup associated with the feature when the feature is searched for}
-
-\item{...}{other options for \code{searchOptions}().}
 }
 \description{
 Options for search control.
-
-Customized searchOptions for opensteetmap search
-
-Customized searchOptions for google search
 
 Customized searchOptions for Feature Search
 }
