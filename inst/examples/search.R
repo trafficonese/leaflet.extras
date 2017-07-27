@@ -8,14 +8,18 @@
 library(leaflet)
 library(leaflet.extras)
 
+
 #' ### Geocoding using Various Geocoder
+# GeoCoding ----
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
+  addResetMapButtion() %>%
   addSearchOSM() %>%
   addSearchGoogle() %>%
   addSearchUSCensusBureau()
 
 #' ### Search Markers
+# Markers ----
 cities <- read.csv(textConnection("
 City,Lat,Long,Pop
 Boston,42.3601,-71.0589,645966
@@ -29,6 +33,7 @@ Providence,41.8236,-71.4222,177994
 leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
   addCircleMarkers(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity=0.5,
              radius = ~sqrt(Pop)/50 , popup = ~City, label=~City, group ='cities') %>%
+  addResetMapButtion() %>%
   addSearchFeatures(
     targetGroups = 'cities',
     options = searchFeaturesOptions(
@@ -37,7 +42,19 @@ leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
   addControl("<P><B>Hint!</B> Search for ...<br/><ul><li>New York</li><li>Boston</li><li>Hartford</li><li>Philadelphia</li><li>Pittsburgh</li><li>Providence</li></ul></P>",
              position='bottomright')
 
+#' ### Search Polygons
+# Polygons ----
+nc <- sf::st_read(system.file("shape/nc.shp", package="sf"))
+leaflet(nc) %>%
+  addTiles() %>%
+  addPolygons(label=~NAME, popup=~NAME, group='nc') %>%
+  addResetMapButtion() %>%
+  addSearchFeatures(
+    targetGroups  = 'nc',
+    options = searchFeaturesOptions(zoom=10, openPopup=TRUE))
+
 #' ### Search GeoJSON Markers
+# GeoJSON w/ Markers ----
 jsURL <- 'https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js'
 v8 <- V8::v8()
 v8$source(jsURL)
@@ -61,6 +78,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
     markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
     clusterOptions = markerClusterOptions(),
     group = 'pubs') %>%
+  addResetMapButtion() %>%
   addSearchFeatures(
     targetGroups = 'pubs',
     options = searchFeaturesOptions(
@@ -71,6 +89,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
 
 
 #' ### Search GeoJSON Polygons
+# GeoJSON w/ Polygons ----
 
 fName <- 'https://raw.githubusercontent.com/MinnPost/simple-map-d3/master/example-data/world-population.geo.json'
 geoJson <- jsonlite::fromJSON(readr::read_file(fName))
@@ -128,6 +147,7 @@ leaf.world %>%
              position='bottomright')
 
 #' ### Search Multiple GeoJSON Layers
+# GeoJSON Groups w/ Markers ----
 artsAndCultures <- readr::read_file(
   'https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson')
 bankLocations <- readr::read_file(
@@ -138,11 +158,7 @@ bankLocation <- makeAwesomeIcon(icon='cash', library='ion', markerColor = 'green
 
 leaf <- leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addEasyButton(easyButton(
-    icon = 'ion-arrow-shrink',
-    title = 'Reset View',
-    onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>%
-  htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}"))
+  addResetMapButtion()
 
 leaf %>% setView(-77.0369, 38.9072, 12) %>%
   addBootstrapDependency() %>%
@@ -174,4 +190,3 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
       autoCollapse = TRUE, hideMarkerOnCollapse = TRUE, position = "topleft" )) %>%
   addControl("<P><B>Hint!</B> Search for Arts-N-Culture or Bank Locations</P>",
              position='bottomright')
-

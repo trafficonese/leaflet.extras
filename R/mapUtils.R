@@ -26,3 +26,16 @@ setMapWidgetStyle <- function(
 debugMap <- function(map) {
   map %>% htmlwidgets::onRender(htmlwidgets::JS("function(el, x){var map=this; debugger;}"))
 }
+
+#' Reset map's view to original view
+#' @param map The map widget
+#' @export
+addResetMapButtion <- function(map) {
+  map %>%
+  addEasyButton(easyButton(
+    icon = 'ion-arrow-shrink',
+    title = 'Reset View',
+    onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>%
+  htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}"))
+
+}
