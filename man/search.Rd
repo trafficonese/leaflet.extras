@@ -20,7 +20,8 @@ addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
 
 removeSearchGoogle(map)
 
-addSearchUSCensusBureau(map, options = searchOptions())
+addSearchUSCensusBureau(map, options = searchOptions(autoCollapse = TRUE,
+  minLength = 20))
 
 removeSearchUSCensusBureau(map)
 

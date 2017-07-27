@@ -8,23 +8,12 @@
 library(leaflet)
 library(leaflet.extras)
 
-#' ### Geocoding using OSM Geocoder
+#' ### Geocoding using Various Geocoder
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
-  addSearchOSM(
-    options = searchOptions(position = 'topleft'))
-
-#' ### Geocoding using Google Geocoder
-leaflet() %>%
-  addProviderTiles(providers$Esri.WorldStreetMap) %>%
-  addSearchGoogle(
-    options = searchOptions( position = 'topleft'))
-
-#' ### Geocoding using US Census Bureau Geocoder
-leaflet() %>%
-  addProviderTiles(providers$Esri.WorldStreetMap) %>%
-  addSearchUSCensusBureau(
-    options = searchOptions( position = 'topleft'))
+  addSearchOSM() %>%
+  addSearchGoogle() %>%
+  addSearchUSCensusBureau()
 
 #' ### Search Markers
 cities <- read.csv(textConnection("
@@ -102,7 +91,7 @@ leaf.world <- leaflet(
   addEasyButton(easyButton(
     icon = 'ion-arrow-shrink',
     title = 'Reset View',
-    onClick = JS("function(btn, map){ map.setView([0,0],0); }"))) %>%
+    onClick = JS("function(btn, map){ map.setView([0,0],1); }"))) %>%
   setMapWidgetStyle(list(background='white'))
 
 

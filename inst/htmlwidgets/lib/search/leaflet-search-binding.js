@@ -25,7 +25,7 @@ LeafletWidget.methods.addSearchOSM = function(options) {
       delete map.searchControlOSM;
     }
 
-    var options = options || {};
+    options = options || {};
     options.textPlaceholder = "Search using OSM Geocoder";
     options.url = 'https://nominatim.openstreetmap.org/search?format=json&q={s}';
     options.jsonpParam = 'json_callback';
@@ -98,7 +98,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
   		return json;
   	}
 
-    var options = options || {};
+    options = options || {};
     options.markerLocation = true;
     options.textPlaceholder = "Search using Google Geocoder";
 
@@ -171,7 +171,6 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     options.textPlaceholder = "Search using US Census Bureau";
     options.jsonpParam = 'callback';
     options.formatData = formatJSON;
-    options.minLength = 20;
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});

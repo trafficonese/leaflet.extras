@@ -13,7 +13,7 @@ searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
   tipAutoSubmit = TRUE, firstTipSubmit = FALSE, autoResize = TRUE,
   collapsed = TRUE, autoCollapse = FALSE, autoCollapseTime = 1200,
   textErr = "Location Not Found", textCancel = "Cancel",
-  textPlaceholder = "Search...", position = "topright",
+  textPlaceholder = "Search...", position = "topleft",
   hideMarkerOnCollapse = FALSE)
 
 searchFeaturesOptions(propertyName = "label", initial = FALSE,

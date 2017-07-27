@@ -73,7 +73,7 @@ searchOptions <- function(
     textErr='Location Not Found',
     textCancel='Cancel',
     textPlaceholder='Search...',
-    position='topright',
+    position='topleft',
     hideMarkerOnCollapse=FALSE
 ) {
     leaflet::filterNULL(list(
@@ -156,8 +156,11 @@ addSearchGoogle <- function(
   apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
   options = searchOptions(autoCollapse = TRUE, minLength = 2)
 ) {
+  url <- "https://maps.googleapis.com/maps/api/js?v=3"
   if(is.null(apikey)) {
-    stop("Google Geocoding requires an apikey")
+    warning("Google Geocoding works best with an apikey")
+  } else {
+   url <- paste0(url, "&key=", apikey)
   }
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
@@ -166,9 +169,7 @@ addSearchGoogle <- function(
     'addSearchGoogle',
     options
   ) %>%
-    htmlwidgets::appendContent(
-      htmltools::tags$script(
-        src=paste0("https://maps.googleapis.com/maps/api/js?v=3&key=", apikey)))
+    htmlwidgets::appendContent(htmltools::tags$script(src=url))
 }
 
 #' Removes the Google search control from the map.
@@ -195,7 +196,7 @@ removeSearchGoogle <- function(map) {
 #' @export
 addSearchUSCensusBureau <- function(
   map,
-  options = searchOptions()
+  options = searchOptions(autoCollapse = TRUE, minLength = 20)
 ) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
