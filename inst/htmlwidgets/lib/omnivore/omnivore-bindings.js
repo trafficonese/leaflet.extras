@@ -217,9 +217,6 @@ function addGeoJSONLayer(
       }
     }
 
-    if(cluster) {
-      clusterGroup.clusterLayerStore.add(layer);
-    }
     return layer;
   }
 
@@ -235,9 +232,11 @@ function addGeoJSONLayer(
 
   var gjlayer = geojsonLayerFunction(geojsonOptions);
 
-  self.layerManager.addLayer(gjlayer, 'geojson', layerId, thisGroup);
   if (cluster) {
+    clusterGroup.clusterLayerStore.add(gjlayer);
     self.layerManager.addLayer(clusterGroup, 'cluster', clusterId, group);
+  } else {
+    self.layerManager.addLayer(gjlayer, 'geojson', layerId, thisGroup);
   }
 
 }

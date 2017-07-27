@@ -28,18 +28,20 @@ factpal <- colorFactor(topo.colors(nrow(geoJson$features$properties)),
                        geoJson$features$properties$NAME)
 
 # Generate one HTML Table per feature with all properties of a feature.
-popups <-
-  purrr::by_row(geoJson$features$properties,
-                function(row) {
-                  htmlTable::htmlTable(
-                    t(row),
-                    caption='Ward Details',
-                    align='left',
-                    align.header='left',
-                    col.rgroup=c('#ffffff','#eeeeee'))},
-                .collate = 'list', .labels = F)
+geoJson$features$properties <-
+  dplyr::rowwise(geoJson$features$properties) %>%
+  dplyr::do({
+    result = dplyr::as_data_frame(.)
+    result$popup = purrr::map_chr(
+      htmlTable::htmlTable(
+        t(result),
+        caption='Ward Details',
+        align='left',
+        align.header='left',
+        col.rgroup=c('#ffffff','#eeeeee')),~as.character(.))
+    result
+  })
 
-geoJson$features$properties$popup = purrr::map_chr(popups$.out,~as.character(.))
 geoJson$features$properties$style = purrr::map(factpal(geoJson$features$properties$NAME),~list(fillColor=., color=.))
 
 leaf %>% setView(-77.0369, 38.9072, 11) %>%
@@ -67,8 +69,8 @@ leaf.world <- leaflet(
       crsClass="L.Proj.CRS", code='ESRI:53009',
       proj4def= '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs',
       resolutions = c(65536, 32768, 16384, 8192, 4096, 2048)))) %>%
-  addGraticule(style= list(color= '#999', weight= 0.5, opacity= 1)) %>%
-  addGraticule(sphere = TRUE, style= list(color= '#777', weight= 1, opacity= 0.25)) %>%
+  addGraticule(style= list(color= '#999', weight= 0.5, opacity= 1, fill=NA)) %>%
+  addGraticule(sphere = TRUE, style= list(color= '#777', weight= 1, opacity= 0.25, fill=NA)) %>%
   addEasyButton(easyButton(
     icon = 'ion-arrow-shrink',
     title = 'Reset View',
@@ -89,18 +91,20 @@ pal <- colorNumeric(
   geoJson$features$properties$POP_DENSITY)
 
 # Generate one HTML Table per feature with all properties of a feature.
-popups <-
-  purrr::by_row(geoJson$features$properties,
-                function(row) {
-                  htmlTable::htmlTable(
-                    t(row),
-                    caption='Country Details',
-                    align='left',
-                    align.header='left',
-                    col.rgroup=c('#ffffff','#eeeeee'))},
-                .collate = 'list', .labels = F)
+geoJson$features$properties <-
+  dplyr::rowwise(geoJson$features$properties) %>%
+  dplyr::do({
+    result = dplyr::as_data_frame(.)
+    result$popup = purrr::map_chr(
+      htmlTable::htmlTable(
+        t(result),
+        caption='Ward Details',
+        align='left',
+        align.header='left',
+        col.rgroup=c('#ffffff','#eeeeee')),~as.character(.))
+    result
+  })
 
-geoJson$features$properties$popup = purrr::map_chr(popups$.out,~as.character(.))
 geoJson$features$properties$style = purrr::map(pal(geoJson$features$properties$POP_DENSITY),~list(fillColor=.))
 
 leaf.world %>%

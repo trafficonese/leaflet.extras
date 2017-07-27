@@ -19,3 +19,10 @@ setMapWidgetStyle <- function(
   map$dependencies <- c(map$dependencies, utilsDependencies())
   invokeMethod(map, getMapData(map), 'setMapWidgetStyle', style)
 }
+
+#' For debugging a leaflet map
+#' @param map The map widget
+#' @export
+debugMap <- function(map) {
+  map %>% htmlwidgets::onRender(htmlwidgets::JS("function(el, x){var map=this; debugger;}"))
+}
