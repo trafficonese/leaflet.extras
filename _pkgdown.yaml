@@ -56,3 +56,5 @@ reference:
   - '`suspendScroll`'
   - '`enableTileCaching`'
   - '`addWMSLegend`'
+  - '`debugMap`'
+  - '`addResetMapButton`'

@@ -13,7 +13,7 @@ library(leaflet.extras)
 # GeoCoding ----
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
-  addResetMapButtion() %>%
+  addResetMapButton() %>%
   addSearchOSM() %>%
   addSearchGoogle() %>%
   addSearchUSCensusBureau()
@@ -22,7 +22,7 @@ leaflet() %>%
 # Reverse Geocoding ----
 leaflet()  %>%
   addProviderTiles(providers$OpenStreetMap) %>%
-  addResetMapButtion() %>%
+  addResetMapButton() %>%
   addReverseSearchOSM()
 
 #' ### Search Markers
@@ -40,7 +40,7 @@ Providence,41.8236,-71.4222,177994
 leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
   addCircleMarkers(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity=0.5,
              radius = ~sqrt(Pop)/50 , popup = ~City, label=~City, group ='cities') %>%
-  addResetMapButtion() %>%
+  addResetMapButton() %>%
   addSearchFeatures(
     targetGroups = 'cities',
     options = searchFeaturesOptions(
@@ -55,7 +55,7 @@ nc <- sf::st_read(system.file("shape/nc.shp", package="sf"))
 leaflet(nc) %>%
   addTiles() %>%
   addPolygons(label=~NAME, popup=~NAME, group='nc') %>%
-  addResetMapButtion() %>%
+  addResetMapButton() %>%
   addSearchFeatures(
     targetGroups  = 'nc',
     options = searchFeaturesOptions(zoom=10, openPopup=TRUE))
@@ -85,7 +85,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
     markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
     clusterOptions = markerClusterOptions(),
     group = 'pubs') %>%
-  addResetMapButtion() %>%
+  addResetMapButton() %>%
   addSearchFeatures(
     targetGroups = 'pubs',
     options = searchFeaturesOptions(
@@ -165,7 +165,7 @@ bankLocation <- makeAwesomeIcon(icon='cash', library='ion', markerColor = 'green
 
 leaf <- leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addResetMapButtion()
+  addResetMapButton()
 
 leaf %>% setView(-77.0369, 38.9072, 12) %>%
   addBootstrapDependency() %>%

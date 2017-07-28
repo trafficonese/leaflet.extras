@@ -30,7 +30,7 @@ debugMap <- function(map) {
 #' Reset map's view to original view
 #' @param map The map widget
 #' @export
-addResetMapButtion <- function(map) {
+addResetMapButton <- function(map) {
   map %>%
   addEasyButton(easyButton(
     icon = 'ion-arrow-shrink',
