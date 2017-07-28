@@ -135,11 +135,51 @@ addSearchOSM <- function(
 #' @rdname search
 #' @export
 removeSearchOSM <- function(map) {
-  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
     getMapData(map),
     'removeSearchOSM'
+  )
+}
+
+#' @param map a map widget object
+#' @param showSearchLocation Boolean. If TRUE displays a Marker on the searched location's coordinates.
+#' @param showBounds Boolean. If TRUE show the bounding box of the found feature.
+#' @param showFeature Boolean. If TRUE show the found feature.
+#'   Depending upon the feature found this can be a marker, a line or a polygon.
+#' @param fitBounds Boolean. If TRUE set maps bounds to queried and found location.
+#'   For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \code{showFeature} shoule also be TRUE.
+#' @param displayText Boolean. If TRUE show a text box with found location's name on the map.
+#' @param group String. An optional group to hold all the searched locations and their results.
+#' @return modified map
+#' @rdname search
+#' @export
+addReverseSearchOSM <- function(
+  map,
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL) {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  if(displayText == TRUE) {
+    map <- map %>%
+      addControl("Click anywhere on the map to reverse geocode",
+                 position="topright", layerId = 'reverseSearchOSM')
+  }
+  invokeMethod(
+    map,
+    getMapData(map),
+    'addReverseSearchOSM',
+    list(
+      showSearchLocation = showSearchLocation,
+      fitBounds = fitBounds,
+      showBounds = showBounds,
+      showFeature = showFeature
+    ),
+    group
   )
 }
 
@@ -179,12 +219,51 @@ addSearchGoogle <- function(
 #' @rdname search
 #' @export
 removeSearchGoogle <- function(map) {
-  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
     getMapData(map),
     'removeSearchGoogle'
   )
+}
+
+#' @return modified map
+#' @rdname search
+#' @export
+addReverseSearchGoogle <- function(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL) {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  url <- "https://maps.googleapis.com/maps/api/js?v=3"
+  if(is.null(apikey)) {
+    warning("Google Geocoding works best with an apikey")
+  } else {
+   url <- paste0(url, "&key=", apikey)
+  }
+  if(displayText == TRUE) {
+    map <- map %>%
+      addControl("Click anywhere on the map to reverse geocode",
+                 position="topright", layerId = 'reverseSearchGoogle')
+  }
+  invokeMethod(
+    map,
+    getMapData(map),
+    'addReverseSearchGoogle',
+    list(
+      showSearchLocation = showSearchLocation,
+      fitBounds = fitBounds,
+      showBounds = showBounds,
+      showFeature = showFeature
+    ),
+    group
+  ) %>%
+    htmlwidgets::appendContent(htmltools::tags$script(src=url))
 }
 
 #' Add a US Census Bureau search control to the map.
@@ -214,7 +293,7 @@ addSearchUSCensusBureau <- function(
 #' @rdname search
 #' @export
 removeSearchUSCensusBureau <- function(map) {
-  #map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
     getMapData(map),

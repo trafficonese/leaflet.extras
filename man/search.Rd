@@ -3,8 +3,10 @@
 \name{addSearchOSM}
 \alias{addSearchOSM}
 \alias{removeSearchOSM}
+\alias{addReverseSearchOSM}
 \alias{addSearchGoogle}
 \alias{removeSearchGoogle}
+\alias{addReverseSearchGoogle}
 \alias{addSearchUSCensusBureau}
 \alias{removeSearchUSCensusBureau}
 \alias{addSearchFeatures}
@@ -15,10 +17,18 @@ addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
 removeSearchOSM(map)
 
+addReverseSearchOSM(map, showSearchLocation = TRUE, showBounds = FALSE,
+  showFeature = TRUE, fitBounds = TRUE, displayText = TRUE,
+  group = NULL)
+
 addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
   options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
 removeSearchGoogle(map)
+
+addReverseSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  showSearchLocation = TRUE, showBounds = FALSE, showFeature = TRUE,
+  fitBounds = TRUE, displayText = TRUE, group = NULL)
 
 addSearchUSCensusBureau(map, options = searchOptions(autoCollapse = TRUE,
   minLength = 20))
@@ -34,9 +44,25 @@ removeSearchFeatures(map, clearFeatures = FALSE)
 
 \item{options}{Search Options}
 
+\item{showSearchLocation}{Boolean. If TRUE displays a Marker on the searched location's coordinates.}
+
+\item{showBounds}{Boolean. If TRUE show the bounding box of the found feature.}
+
+\item{showFeature}{Boolean. If TRUE show the found feature.
+Depending upon the feature found this can be a marker, a line or a polygon.}
+
+\item{fitBounds}{Boolean. If TRUE set maps bounds to queried and found location.
+For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \code{showFeature} shoule also be TRUE.}
+
+\item{displayText}{Boolean. If TRUE show a text box with found location's name on the map.}
+
+\item{group}{String. An optional group to hold all the searched locations and their results.}
+
 \item{apikey}{String. API Key for Google GeoCoding Service.}
 
 \item{clearFeatures}{Boolean. If TRUE the features that this control searches will be removed too.}
+
+\item{map}{a map widget object}
 
 \item{map}{a map widget object}
 
@@ -57,6 +83,10 @@ removeSearchFeatures(map, clearFeatures = FALSE)
 \item{map}{a map widget object}
 }
 \value{
+modified map
+
+modified map
+
 modified map
 
 modified map

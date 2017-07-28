@@ -18,6 +18,13 @@ leaflet() %>%
   addSearchGoogle() %>%
   addSearchUSCensusBureau()
 
+#' Reverse Geocoding using OSM
+# Reverse Geocoding ----
+leaflet()  %>%
+  addProviderTiles(providers$OpenStreetMap) %>%
+  addResetMapButtion() %>%
+  addReverseSearchOSM()
+
 #' ### Search Markers
 # Markers ----
 cities <- read.csv(textConnection("

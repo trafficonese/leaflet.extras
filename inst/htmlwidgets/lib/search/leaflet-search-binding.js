@@ -70,6 +70,116 @@ LeafletWidget.methods.removeSearchOSM = function() {
   }).call(this);
 };
 
+LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
+  (function() {
+
+    var map = this;
+
+    group = group || "reverse_search_osm" ;
+    map.layerManager.clearGroup(group);
+
+    var displayControl = document.getElementById('reverseSearchOSM');
+
+    var searchURL = 'https://nominatim.openstreetmap.org/reverse?format=json&polygon_geojson=1';
+
+    map.on('click', function(e){
+
+      var latlng = e.latlng;
+
+      // This will hold the query, boundingbox, and found feature layers
+      var container = L.featureGroup();
+      var layerID = L.stamp(container);
+
+      if(options.showSearchLocation) {
+        var marker = L.marker(e.latlng,{'type': 'query'}).bindLabel(
+          "lat="+latlng.lat+" lng="+latlng.lng+"</P>");
+        var m_layerID = L.stamp(marker);
+        container.addLayer(marker);
+      }
+
+      var query = searchURL + '&lat=' + latlng.lat + '&lon=' + latlng.lng;
+
+      $.ajax({url: query, dataType: 'json'}).done(function(result){
+
+        if(!$.isEmptyObject(displayControl)) {
+          var displayText = '<div>';
+          displayText = displayText + 'Display Name: ' +
+            ( (result.display_name) ?  result.display_name : '' ) + '<br/>';
+          displayText =  displayText + '</div>';
+          displayControl.innerHTML = displayText;
+        }
+
+        var bb = L.latLngBounds(
+          L.latLng(result.boundingbox[0],result.boundingbox[2]),
+          L.latLng(result.boundingbox[1], result.boundingbox[3]));
+
+        if(options.showBounds) {
+          var rect = L.rectangle(bb, {
+            weight:2, color: '#444444', clickable: false,
+            dashArray: '5,10', 'type': 'result_boundingbox'});
+          var bb_layerID = L.stamp(rect);
+          container.addLayer(rect);
+        }
+
+        if(options.showFeature) {
+          var feature = L.geoJson(result.geojson,
+            {
+              weight:2, color: 'red', dashArray: '5,10',
+              clickable : false, 'type': 'result_feature',
+              pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng,{
+                  weight:2, color: 'red', dashArray: '5,10', clickable : false});
+              }
+            });
+
+          var f_layerID = L.stamp(feature);
+          container.addLayer(feature);
+        }
+
+        var tmp = container.getLayers();
+        if(!$.isEmptyObject(tmp) && tmp.length >= 0) {
+
+          if(!$.isEmptyObject(marker)) {
+            marker.on("mouseover", function(e){
+              if(!$.isEmptyObject(rect)) {
+               rect.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+               rect.bringToFront();
+              }
+              if(!$.isEmptyObject(feature)) {
+               feature.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+               feature.bringToFront();
+              }
+            });
+            marker.on("mouseout", function(e){
+              if(!$.isEmptyObject(rect)) {
+               rect.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+               rect.bringToBack();
+              }
+              if(!$.isEmptyObject(feature)) {
+               feature.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+               feature.bringToBack();
+              }
+            });
+          }
+
+          map.layerManager.addLayer(container, "search", layerID, group);
+          if(options.fitBounds)
+            map.fitBounds(container.getBounds());
+        }
+
+        if (HTMLWidgets.shinyMode) {
+          Shiny.onInputChange(map.id+'_reverse_search_feature_found',{
+            'query': {'lat': latlng.lat, 'lng': latlng.lng},
+            'result': result
+          });
+        }
+
+      });
+   });
+
+  }).call(this);
+};
+
 LeafletWidget.methods.addSearchGoogle = function(options) {
 
   (function(){
@@ -142,6 +252,131 @@ LeafletWidget.methods.removeSearchGoogle = function() {
     }
   }).call(this);
 };
+
+LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
+  (function() {
+
+    var map = this;
+
+    group = group || "reverse_search_google" ;
+    map.layerManager.clearGroup(group);
+
+    var displayControl = document.getElementById('reverseSearchGoogle');
+
+    var geocoder = new google.maps.Geocoder();
+
+    map.on('click', function(e){
+
+      var latlng = e.latlng;
+
+      // This will hold the query, boundingbox, and found feature layers
+      var container = L.featureGroup();
+      var layerID = L.stamp(container);
+
+      if(options.showSearchLocation) {
+        var marker = L.marker(e.latlng,{'type': 'query'}).bindLabel(
+          "lat="+latlng.lat+" lng="+latlng.lng+"</P>");
+        var m_layerID = L.stamp(marker);
+        container.addLayer(marker);
+      }
+
+      geocoder.geocode(
+        {
+          'location': {'lat': latlng.lat, 'lng': latlng.lng}},
+          function(results, status) {
+
+            if(status === 'OK') {
+              if(results[0]) {
+                var result = results[0];
+
+                if(!$.isEmptyObject(displayControl)) {
+                  var displayText = '<div>';
+                  displayText = displayText + 'Address: ' +
+                    ( (result.formatted_address) ?  result.formatted_address : '' ) + '<br/>';
+                  displayText =  displayText + '</div>';
+                  displayControl.innerHTML = displayText;
+                }
+
+                var bb = L.latLngBounds(
+                  L.latLng(result.geometry.viewport.f.f,
+                    result.geometry.viewport.b.b),
+                  L.latLng(result.geometry.viewport.f.b,
+                    result.geometry.viewport.b.f));
+
+                if(options.showBounds) {
+                  var rect = L.rectangle(bb, {
+                    weight:2, color: '#444444', clickable: false,
+                    dashArray: '5,10', 'type': 'result_boundingbox'});
+                  var bb_layerID = L.stamp(rect);
+                  container.addLayer(rect);
+                }
+
+                if(options.showFeature) {
+                  var feature = L.circleMarker(L.latLng(
+                    result.geometry.location.lat(),
+                    result.geometry.location.lng()
+                  ), {
+                      weight:2, color: 'red', dashArray: '5,10',
+                      clickable : false, 'type': 'result_feature'
+                    });
+
+                  var f_layerID = L.stamp(feature);
+                  container.addLayer(feature);
+                }
+
+                var tmp = container.getLayers();
+                if(!$.isEmptyObject(tmp) && tmp.length >= 0) {
+
+                  if(!$.isEmptyObject(marker)) {
+                    marker.on("mouseover", function(e){
+                      if(!$.isEmptyObject(rect)) {
+                       rect.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+                       rect.bringToFront();
+                      }
+                      if(!$.isEmptyObject(feature)) {
+                       feature.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+                       feature.bringToFront();
+                      }
+                    });
+                    marker.on("mouseout", function(e){
+                      if(!$.isEmptyObject(rect)) {
+                       rect.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+                       rect.bringToBack();
+                      }
+                      if(!$.isEmptyObject(feature)) {
+                       feature.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+                       feature.bringToBack();
+                      }
+                    });
+                  }
+
+                  map.layerManager.addLayer(container, "search", layerID, group);
+                  if(options.fitBounds)
+                    map.fitBounds(container.getBounds());
+                }
+
+                if (HTMLWidgets.shinyMode) {
+                  Shiny.onInputChange(map.id+'_reverse_search_feature_found',{
+                    'query': {'lat': latlng.lat, 'lng': latlng.lng},
+                    'result': result
+                  });
+                }
+              } else {
+                if(!$.isEmptyObject(displayControl))
+                  displayControl.innerHTML = "No Results Found";
+                console.error("No Results Found");
+              }
+            } else {
+              if(!$.isEmptyObject(displayControl))
+                displayControl.innerHTML = "Reverse Geocoding failed due to: " + status;
+              console.error("Reverse Geocoing failed due to: " + status);
+            }
+      });
+   });
+
+  }).call(this);
+};
+
 
 LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
 
