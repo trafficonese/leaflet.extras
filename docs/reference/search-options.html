@@ -51,6 +51,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -81,8 +87,7 @@
 
     
     <p>Options for search control.</p>
-<p>Customized searchOptions for opensteetmap search</p>
-<p>Customized searchOptions for Marker Search</p>
+<p>Customized searchOptions for Feature Search</p>
     
 
     <pre><span class='fu'>searchOptions</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>sourceData</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>jsonpParam</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -93,16 +98,10 @@
   <span class='kw'>tipAutoSubmit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>firstTipSubmit</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoResize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>collapsed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>autoCollapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoCollapseTime</span> <span class='kw'>=</span> <span class='fl'>1200</span>,
   <span class='kw'>textErr</span> <span class='kw'>=</span> <span class='st'>"Location Not Found"</span>, <span class='kw'>textCancel</span> <span class='kw'>=</span> <span class='st'>"Cancel"</span>,
-  <span class='kw'>textPlaceholder</span> <span class='kw'>=</span> <span class='st'>"Search..."</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"topright"</span>,
+  <span class='kw'>textPlaceholder</span> <span class='kw'>=</span> <span class='st'>"Search..."</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>,
   <span class='kw'>hideMarkerOnCollapse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-
-  <span class='fu'>searchOSMOptions</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>"//nominatim.openstreetmap.org/search?format=json&amp;q={s}"</span>,
-  <span class='kw'>jsonpParam</span> <span class='kw'>=</span> <span class='st'>"json_callback"</span>, <span class='kw'>propertyName</span> <span class='kw'>=</span> <span class='st'>"display_name"</span>,
-  <span class='kw'>propertyLoc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"lat"</span>, <span class='st'>"lon"</span>), <span class='kw'>autoType</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>autoCollapse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>minLength</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>...</span>)
-
-<span class='fu'>searchMarkersOptions</span>(<span class='kw'>propertyName</span> <span class='kw'>=</span> <span class='st'>"label"</span>, <span class='kw'>initial</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='fu'>searchFeaturesOptions</span>(<span class='kw'>propertyName</span> <span class='kw'>=</span> <span class='st'>"label"</span>, <span class='kw'>initial</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>openPopup</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -221,12 +220,8 @@
       <td><p>remove circle and marker on search control collapsed.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other options for <code>searchOptions</code>().</p></td>
-    </tr>
-    <tr>
       <th>openPopup</th>
-      <td><p>whether to open the popup associated with the marker when the marker is searched for</p></td>
+      <td><p>whether to open the popup associated with the feature when the feature is searched for</p></td>
     </tr>
     </table>
     

@@ -1,3 +1,9 @@
+# leaflet.extras 0.3
+
+## Improvements
+
+- Major Changes to search
+
 # leaflet.extras 0.2
 
 ## Bug Fixes
