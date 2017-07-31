@@ -111,7 +111,7 @@ debugger;
       map.layerManager.addLayer(
         layer,
         null,  //category
-        String(L.stamp(layer)),  //layerId use stamp
+        layer.options.layerId || String(L.stamp(layer)),  //layerId or if no layerId use stamp
         targetGroup  //group which is targetGroup
       );
 
@@ -188,9 +188,26 @@ debugger;
         //  for proper R side methods
         //  layerManager only supports removal with category and layerId
         //  as far as I can tell
+
+        // if feature not from Leaflet.draw then need to find category
+        //  probably should make this a separate testable function
+        var category = null;
+        // layerManager does not expose category getter for us
+        //   so have to rely on internal _byCategory
+        if(Object.keys(map.layerManager._byCategory)) {
+          // surely there is a better way
+          Object.keys(map.layerManager._byCategory).forEach(function(cat) {
+            if(
+              Object.keys(map.layerManager._byCategory[cat]).indexOf(String(L.stamp(layer))) > -1
+            ) {
+              category = cat;
+            }
+          });
+        }
+
         map.layerManager.removeLayer(
-          "null",  //category
-          String(L.stamp(layer)) // layerId - we used L.stamp
+          category || "null",  //category
+          layer.options.layerId || String(L.stamp(layer)) // layerId - we used L.stamp
         );
       });
 
