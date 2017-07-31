@@ -89,7 +89,6 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
       }
 
       var layer = e.layer;
-      editableFeatureGroup.addLayer(layer);
 
       // assign a unique key to the newly created feature
       var featureId = L.stamp(layer);
@@ -106,6 +105,15 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
       if(typeof layer.getRadius === 'function') {
         layer.feature.properties.radius = layer.getRadius();
       }
+debugger;
+      // add the newly drawn shape/feature to layerManager
+      //  so that can be used from R side methods
+      map.layerManager.addLayer(
+        layer,
+        null,  //category
+        String(L.stamp(layer)),  //layerId use stamp
+        targetGroup  //group which is targetGroup
+      );
 
       if (!HTMLWidgets.shinyMode) return;
 
@@ -174,6 +182,16 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         if(typeof layer.getRadius === 'function') {
           layer.feature.properties.radius = layer.getRadius();
         }
+
+
+        // remove the deleted shape/feature from layerManager
+        //  for proper R side methods
+        //  layerManager only supports removal with category and layerId
+        //  as far as I can tell
+        map.layerManager.removeLayer(
+          "null",  //category
+          String(L.stamp(layer)) // layerId - we used L.stamp
+        );
       });
 
       if (!HTMLWidgets.shinyMode) return;
