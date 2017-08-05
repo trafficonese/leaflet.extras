@@ -9,8 +9,6 @@
 \alias{addReverseSearchGoogle}
 \alias{addSearchUSCensusBureau}
 \alias{removeSearchUSCensusBureau}
-\alias{addSearchFeatures}
-\alias{removeSearchFeatures}
 \title{Add a OSM search control to the map.}
 \usage{
 addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
@@ -34,10 +32,6 @@ addSearchUSCensusBureau(map, options = searchOptions(autoCollapse = TRUE,
   minLength = 20))
 
 removeSearchUSCensusBureau(map)
-
-addSearchFeatures(map, targetGroups, options = searchFeaturesOptions())
-
-removeSearchFeatures(map, clearFeatures = FALSE)
 }
 \arguments{
 \item{map}{a map widget object}
@@ -59,34 +53,8 @@ For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \c
 \item{group}{String. An optional group to hold all the searched locations and their results.}
 
 \item{apikey}{String. API Key for Google GeoCoding Service.}
-
-\item{clearFeatures}{Boolean. If TRUE the features that this control searches will be removed too.}
-
-\item{map}{a map widget object}
-
-\item{map}{a map widget object}
-
-\item{map}{a map widget object}
-
-\item{options}{Search Options}
-
-\item{map}{a map widget object}
-
-\item{map}{a map widget object}
-
-\item{options}{Search Options}
-
-\item{map}{a map widget object}
-
-\item{targetGroup}{A vector of group names of groups whose features need to be searched.}
-
-\item{map}{a map widget object}
 }
 \value{
-modified map
-
-modified map
-
 modified map
 
 modified map
@@ -115,8 +83,4 @@ Removes the Google search control from the map.
 Add a US Census Bureau search control to the map.
 
 Removes the US Census Bureau search control from the map.
-
-Add a feature search control to the map.
-
-Removes the feature search control from the map.
 }

@@ -1,5 +1,9 @@
 # leaflet.extras 0.3
 
+## New Features
+
+- [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
+
 ## Improvements
 
 - Major Changes to search

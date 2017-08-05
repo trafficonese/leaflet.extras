@@ -113,7 +113,7 @@ searchOptions <- function(
 #' @param map a map widget object
 #' @param options Search Options
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 addSearchOSM <- function(
   map,
@@ -130,9 +130,8 @@ addSearchOSM <- function(
 
 #' Removes the OSM search control from the map.
 #'
-#' @param map a map widget object
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 removeSearchOSM <- function(map) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
@@ -143,7 +142,6 @@ removeSearchOSM <- function(map) {
   )
 }
 
-#' @param map a map widget object
 #' @param showSearchLocation Boolean. If TRUE displays a Marker on the searched location's coordinates.
 #' @param showBounds Boolean. If TRUE show the bounding box of the found feature.
 #' @param showFeature Boolean. If TRUE show the found feature.
@@ -153,7 +151,7 @@ removeSearchOSM <- function(map) {
 #' @param displayText Boolean. If TRUE show a text box with found location's name on the map.
 #' @param group String. An optional group to hold all the searched locations and their results.
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 addReverseSearchOSM <- function(
   map,
@@ -185,11 +183,9 @@ addReverseSearchOSM <- function(
 
 #' Add a Google search control to the map.
 #'
-#' @param map a map widget object
 #' @param apikey String. API Key for Google GeoCoding Service.
-#' @param options Search Options
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 addSearchGoogle <- function(
   map,
@@ -214,9 +210,8 @@ addSearchGoogle <- function(
 
 #' Removes the Google search control from the map.
 #'
-#' @param map a map widget object
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 removeSearchGoogle <- function(map) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
@@ -228,7 +223,7 @@ removeSearchGoogle <- function(map) {
 }
 
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 addReverseSearchGoogle <- function(
   map,
@@ -268,10 +263,8 @@ addReverseSearchGoogle <- function(
 
 #' Add a US Census Bureau search control to the map.
 #'
-#' @param map a map widget object
-#' @param options Search Options
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 addSearchUSCensusBureau <- function(
   map,
@@ -288,9 +281,8 @@ addSearchUSCensusBureau <- function(
 
 #' Removes the US Census Bureau search control from the map.
 #'
-#' @param map a map widget object
 #' @return modified map
-#' @rdname search
+#' @rdname search-geocoding
 #' @export
 removeSearchUSCensusBureau <- function(map) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
@@ -303,6 +295,7 @@ removeSearchUSCensusBureau <- function(map) {
 
 #' Customized searchOptions for Feature Search
 #' @param openPopup whether to open the popup associated with the feature when the feature is searched for
+#' @param ... Other options to pass to \code{\link{searchOptions}()} function.
 #' @rdname search-options
 #' @export
 searchFeaturesOptions <- function(
@@ -321,9 +314,11 @@ searchFeaturesOptions <- function(
 
 #' Add a feature search control to the map.
 #'
-#' @param targetGroup A vector of group names of groups whose features need to be searched.
+#' @param map a map widget object
+#' @param targetGroups A vector of group names of groups whose features need to be searched.
+#' @param options Search Options
 #' @return modified map
-#' @rdname search
+#' @rdname search-features
 #' @export
 addSearchFeatures <- function(
     map,
@@ -342,10 +337,9 @@ addSearchFeatures <- function(
 
 #' Removes the feature search control from the map.
 #'
-#' @param map a map widget object
 #' @param clearFeatures Boolean. If TRUE the features that this control searches will be removed too.
 #' @return modified map
-#' @rdname search
+#' @rdname search-features
 #' @export
 removeSearchFeatures <- function(map, clearFeatures=FALSE) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())

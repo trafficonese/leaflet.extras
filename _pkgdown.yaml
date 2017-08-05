@@ -46,6 +46,7 @@ reference:
   contents:
   - '`searchOptions`'
   - '`addSearchOSM`'
+  - '`addSearchFeatures`'
 - title: Miscellaneous Features
   desc: ~
   contents:
@@ -58,3 +59,4 @@ reference:
   - '`addWMSLegend`'
   - '`debugMap`'
   - '`addResetMapButton`'
+  - '`addBingTiles`'
