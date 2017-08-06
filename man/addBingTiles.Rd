@@ -5,10 +5,8 @@
 \title{Adds Bing Tiles Layer}
 \usage{
 addBingTiles(map, apikey = Sys.getenv("BING_MAPS_API_KEY"),
-  imagerySet = c("Aerial", "AerialWithLabels", "Birdseye",
-  "BirdseyeWithLabels", "BirdseyeV2", "BirdseyeV2WithLabels", "CanvasDark",
-  "CanvasLight", "CanvasGray", "Road", "RoadOnDemand", "OrdnanceSurvey"),
-  layerId = NULL, group = NULL, ...)
+  imagerySet = c("Aerial", "AerialWithLabels", "CanvasDark", "CanvasLight",
+  "CanvasGray", "Road"), layerId = NULL, group = NULL, ...)
 }
 \arguments{
 \item{map}{The Map widget}
