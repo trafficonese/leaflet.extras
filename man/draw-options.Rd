@@ -7,6 +7,7 @@
 \alias{drawRectangleOptions}
 \alias{drawCircleOptions}
 \alias{drawMarkerOptions}
+\alias{drawCircleMarkerOptions}
 \alias{selectedPathOptions}
 \alias{editToolbarOptions}
 \title{Options for drawn shapes}
@@ -33,6 +34,10 @@ drawCircleOptions(showRadius = TRUE, metric = TRUE, feet = TRUE,
 
 drawMarkerOptions(markerIcon = NULL, zIndexOffset = 2000,
   repeatMode = FALSE)
+
+drawCircleMarkerOptions(stroke = TRUE, color = "#3388ff", weight = 4,
+  opacity = 0.5, fill = TRUE, fillColor = NULL, fillOpacity = 0.2,
+  clickable = TRUE, zIndexOffset = 2000, repeatMode = FALSE)
 
 selectedPathOptions(dashArray = c("10, 10"), weight = 2, color = "black",
   fill = TRUE, fillColor = "black", fillOpacity = 0.6,
@@ -105,6 +110,8 @@ editToolbarOptions(edit = TRUE, remove = TRUE, selectedPathOptions = NULL,
 \item{remove}{Set to false to disable removing.}
 
 \item{selectedPathOptions}{To customize shapes in editing mode pass \code{\link{selectedPathOptions}}().}
+
+\item{markerIcon}{Can be either \code{\link[leaflet]{makeIcon}}() OR \code{\link[leaflet]{makeAwesomeIcon}}}
 }
 \description{
 Options for drawn shapes
@@ -116,6 +123,8 @@ Options for drawing polygons
 Options for drawing rectangles
 
 Options for drawing Circles
+
+Options for drawing markers
 
 Options for drawing markers
 
