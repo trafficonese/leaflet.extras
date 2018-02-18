@@ -165,7 +165,6 @@ drawMarkerOptions <- function(
 }
 
 #' Options for drawing markers
-#' @param markerIcon Can be either \code{\link[leaflet]{makeIcon}}() OR \code{\link[leaflet]{makeAwesomeIcon}}
 #' @rdname draw-options
 #' @export
 drawCircleMarkerOptions <- function(

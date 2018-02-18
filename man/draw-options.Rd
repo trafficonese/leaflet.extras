@@ -110,8 +110,6 @@ editToolbarOptions(edit = TRUE, remove = TRUE, selectedPathOptions = NULL,
 \item{remove}{Set to false to disable removing.}
 
 \item{selectedPathOptions}{To customize shapes in editing mode pass \code{\link{selectedPathOptions}}().}
-
-\item{markerIcon}{Can be either \code{\link[leaflet]{makeIcon}}() OR \code{\link[leaflet]{makeAwesomeIcon}}}
 }
 \description{
 Options for drawn shapes
