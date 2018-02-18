@@ -1,7 +1,7 @@
 drawDependencies <- function() {
   list(
     htmltools::htmlDependency(
-      "draw",version = "0.1.0",
+      "draw",version = "1.0.2",
       system.file("htmlwidgets/lib/draw", package = "leaflet.extras"),
       script = c(
         'leaflet.draw-src.js',
