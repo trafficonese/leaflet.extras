@@ -1,5 +1,5 @@
 #' Options for drawn shapes
-#' @param  stroke	Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.
+#' @param stroke	Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.
 #' @param color	Stroke color.
 #' @param weight	Stroke width in pixels.
 #' @param opacity	Stroke opacity.
@@ -159,6 +159,36 @@ drawMarkerOptions <- function(
 ) {
   leaflet::filterNULL(list(
     markerIcon = markerIcon,
+    zIndexOffset = zIndexOffset,
+    repeatMode = repeatMode
+  ))
+}
+
+#' Options for drawing markers
+#' @param markerIcon Can be either \code{\link[leaflet]{makeIcon}}() OR \code{\link[leaflet]{makeAwesomeIcon}}
+#' @rdname draw-options
+#' @export
+drawCircleMarkerOptions <- function(
+  stroke = TRUE,
+  color = '#3388ff',
+  weight = 4,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = NULL, #same as color by default
+  fillOpacity = 0.2,
+  clickable = TRUE,
+  zIndexOffset = 2000,
+  repeatMode = FALSE
+) {
+  leaflet::filterNULL(list(
+    stroke = stroke,
+    color = color,
+    weight = weight,
+    opacity = opacity,
+    fill = fill,
+    fillColor = fillColor, #same as color by default
+    fillOpacity = fillOpacity,
+    clickable = clickable,
     zIndexOffset = zIndexOffset,
     repeatMode = repeatMode
   ))
