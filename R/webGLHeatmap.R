@@ -8,7 +8,13 @@ webGLHeatmapDependency <- function() {
       script = c("webgl-heatmap.js", "webgl-heatmap-leaflet.js",
                  "webgl-heatmap-bindings.js"),
       attachment = c("skyline" = "skyline-gradient.png",
-                     "deep-sea" = "deep-sea-gradient.png")
+                     "deep-sea" = "deep-sea-gradient.png",
+                     # new colour gradients generated from http://patorjk.com/gradient-image-generator/
+                     "green"  = "green.png",
+                     "orange" = "orange.png",
+                     "red"    = "red.png",
+                     "rose"   = "rose.png",
+                     "yellow" = "yellow.png")
     )
   )
 }
@@ -54,8 +60,8 @@ addWebGLHeatmap = function(
                         webGLHeatmapDependency())
 
   if(!is.null(gradientTexture) &&
-     !gradientTexture %in% c("skyline", "deep-sea")) {
-    stop("Only allowed values for gradientTexture are 'skyline' and 'deep-sea'")
+     !gradientTexture %in% c("skyline", "deep-sea", "rose", "green", "orange", "red", "yellow")) {
+    stop("Only allowed values for gradientTexture are 'skyline', 'deep-sea', 'green', 'orange', 'red', 'rose' and 'yellow'")
   }
 
   pts = leaflet::derivePoints(
