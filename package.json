@@ -1,0 +1,40 @@
+{
+  "name": "leaflet.extras",
+  "version": "0.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "man": "man"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schloerke/leaflet.extras.git"
+  },
+  "author": "",
+  "license": "GPL-3",
+  "bugs": {
+    "url": "https://github.com/schloerke/leaflet.extras/issues"
+  },
+  "homepage": "https://github.com/schloerke/leaflet.extras#readme",
+  "dependencies": {
+    "@mapbox/leaflet-omnivore": "^0.3.4",
+    "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
+    "leaflet-draw": "^1.0.2",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet-gps": "^1.7.0",
+    "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
+    "leaflet-measure-path": "^1.3.1",
+    "leaflet-plugins": "^3.0.2",
+    "leaflet-pulse-icon": "0.1.0",
+    "leaflet-search": "^2.3.7",
+    "leaflet-sleep": "^0.5.1",
+    "leaflet-webgl-heatmap": "^0.2.7",
+    "leaflet-wms-legend": "github:schloerke/leaflet-wms-legend#c97fde8",
+    "leaflet.heat": "^0.2.0",
+    "leaflet.tilelayer.pouchdbcached": "^0.3.0",
+    "leaflet.weather-markers": "github:schloerke/Leaflet.weather-markers#a4389f1"
+  }
+}

@@ -26,15 +26,18 @@ devtools::install_github('bhaskarvk/leaflet.extras')
 
 Plugins integrated so far ...
 
--   [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse): Demo at [Rpubs - Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
--   [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers): Demo at [Rpubs - Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
--   [Leaflet Heat](https://github.com/Leaflet/Leaflet.heat): Demo at [Rpubs - Heatmaps](http://rpubs.com/bhaskarvk/leaflet-heat)
--   [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet): Demo at [Rpubs - Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
--   [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached): Demo at [Rpubs - Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
--   [Leaflet Hash](https://github.com/mlevans/leaflet-hash)
--   [Fullscreen Control](https://github.com/Leaflet/Leaflet.fullscreen)
--   [WMS Legend](https://github.com/kartoza/leaflet-wms-legend)
--   [Omnivore](https://github.com/mapbox/leaflet-omnivore): Allows adding data from various geospatial file formats.
+-  [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse): Demo at [Rpubs - Pulse Icons](http://rpubs.com/bhaskarvk/leaflet-pulseIcon)
+-  [Weather Markers](https://github.com/schloerke/Leaflet.weather-markers): Demo at [Rpubs - Weather Icons](http://rpubs.com/bhaskarvk/leaflet-weather)
+  - [ ] [Shallow fork being used](https://github.com/schloerke/Leaflet.weather-markers)
+-  [Leaflet Heat](https://github.com/Leaflet/Leaflet.heat): Demo at [Rpubs - Heatmaps](http://rpubs.com/bhaskarvk/leaflet-heat)
+-  [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet): Demo at [Rpubs - Heatmap](http://rpubs.com/bhaskarvk/leaflet-heatmap)
+-  [Tile Caching](https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached): Demo at [Rpubs - Tile Caching](http://rpubs.com/bhaskarvk/TileLayer-Caching)
+-  [Leaflet Hash](https://github.com/PowerPan/leaflet-hash)
+-  [Fullscreen Control](https://github.com/Leaflet/Leaflet.fullscreen)
+-  [WMS Legend](https://github.com/kartoza/leaflet-wms-legend)
+  - [ ] [Shallow fork being used](https://github.com/schloerke/leaflet-wms-legend)
+  - [ ] [Update to leaflet.js 1.x](https://github.com/kartoza/leaflet-wms-legend/issues/5)
+-  [Omnivore](https://github.com/mapbox/leaflet-omnivore): Allows adding data from various geospatial file formats.
     -   GeoJSON: Demo at [Rpubs - GeoJSON](http://rpubs.com/bhaskarvk/geojsonv2)
     -   TopoJSON: Demo at [Rpubs - TopoJSON](http://rpubs.com/bhaskarvk/topojsonv2)
     -   KML: Demo at [Rpubs - KML](http://rpubs.com/bhaskarvk/kml)
@@ -42,13 +45,13 @@ Plugins integrated so far ...
     -   GPX: Demo at [Rpubs - GPX](http://rpubs.com/bhaskarvk/gpx)
     -   ~~WKT~~: Will not be implemented.
     -   ~~Polyline~~: Will not be implemented.
--   [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) & [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor): Demo at [Rpubs: leaflet-draw](http://rpubs.com/bhaskarvk/leaflet-draw)
--   [Leaflet.Geodesic](https://github.com/henrythasler/Leaflet.Geodesic): Demo at [Rpubs: Geodesic Lines](http://rpubs.com/bhaskarvk/geodesic)
--   [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path): Demo at [Rpubs: Measure Path](http://rpubs.com/bhaskarvk/measure-path)
--   [Leaflet-search](https://github.com/stefanocudini/leaflet-search): Demo at [Rpubs: Leaflet Search](http://rpubs.com/bhaskarvk/leaflet-search)
--   [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
--   [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
--   [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
+-  [Leaflet.Draw](https://github.com/Leaflet/Leaflet.draw) & [Style Editor](https://github.com/dwilhelm89/Leaflet.StyleEditor): Demo at [Rpubs: leaflet-draw](http://rpubs.com/bhaskarvk/leaflet-draw)
+-  [Leaflet.Geodesic](https://github.com/henrythasler/Leaflet.Geodesic): Demo at [Rpubs: Geodesic Lines](http://rpubs.com/bhaskarvk/geodesic)
+-  [Leaflet-measure-path](https://github.com/ProminentEdge/leaflet-measure-path): Demo at [Rpubs: Measure Path](http://rpubs.com/bhaskarvk/measure-path)
+-  [Leaflet-search](https://github.com/stefanocudini/leaflet-search): Demo at [Rpubs: Leaflet Search](http://rpubs.com/bhaskarvk/leaflet-search)
+-  [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
+-  [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
+-  [Bing Tiles](https://github.com/shramov/leaflet-plugins/)
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new). See the [FAQ](#FAQ) section below for details.
 
