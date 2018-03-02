@@ -7,3 +7,4 @@ inst/examples/rsconnect
 inst/examples/*.Rmd
 .Rprofile
 *.swp
+node_modules
