@@ -7,6 +7,7 @@
     "man": "man"
   },
   "scripts": {
+    "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,21 +21,39 @@
   },
   "homepage": "https://github.com/schloerke/leaflet.extras#readme",
   "dependencies": {
-    "@mapbox/leaflet-omnivore": "^0.3.4",
+    "@mapbox/leaflet-omnivore": "0.3.4",
     "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-    "leaflet-draw": "^1.0.2",
-    "leaflet-fullscreen": "^1.0.2",
-    "leaflet-gps": "^1.7.0",
+    "csv2geojson": "5.0.2",
+    "fuse.js": "3.2.0",
+    "leaflet-choropleth": "1.1.4",
+    "leaflet-draw": "1.0.2",
+    "leaflet-draw-drag": "0.4.5",
+    "leaflet-fullscreen": "1.0.2",
+    "leaflet-gps": "1.7.0",
     "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
-    "leaflet-measure-path": "^1.3.1",
-    "leaflet-plugins": "^3.0.2",
+    "leaflet-measure-path": "1.3.1",
+    "leaflet-plugins": "3.0.2",
     "leaflet-pulse-icon": "0.1.0",
-    "leaflet-search": "^2.3.7",
-    "leaflet-sleep": "^0.5.1",
-    "leaflet-webgl-heatmap": "^0.2.7",
+    "leaflet-search": "2.3.7",
+    "leaflet-sleep": "0.5.1",
+    "leaflet-webgl-heatmap": "0.2.7",
     "leaflet-wms-legend": "github:schloerke/leaflet-wms-legend#c97fde8",
-    "leaflet.heat": "^0.2.0",
-    "leaflet.tilelayer.pouchdbcached": "^0.3.0",
-    "leaflet.weather-markers": "github:schloerke/Leaflet.weather-markers#a4389f1"
+    "leaflet.gridlayer.googlemutant": "^0.6.4",
+    "leaflet.heat": "0.2.0",
+    "leaflet.tilelayer.pouchdbcached": "0.3.0",
+    "leaflet.weather-markers": "github:schloerke/Leaflet.weather-markers#a4389f1",
+    "pouchdb": "6.4.3",
+    "togeojson": "0.16.0",
+    "topojson": "3.0.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.10",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.0.6",
+    "path": "^0.12.7",
+    "script-loader": "^0.7.2",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
   }
 }
