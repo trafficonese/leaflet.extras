@@ -1,11 +1,17 @@
 # Source https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached
 tileLayer.PouchDBCachedDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "tileLayer.PouchDBCached",version = "0.1.1",
+  #     system.file("htmlwidgets/lib/TileLayer.PouchDBCached", package = "leaflet.extras"),
+  #     script = c("pouchdb-6.0.7.js","L.TileLayer.PouchDBCached.js")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "tileLayer.PouchDBCached",version = "0.1.1",
-      system.file("htmlwidgets/lib/TileLayer.PouchDBCached", package = "leaflet.extras"),
-      script = c("pouchdb-6.0.7.js","L.TileLayer.PouchDBCached.js")
-    )
+    # // "pouchdb": "6.4.3",
+    html_dep_prod("pouchdb", "6.4.3"),
+    # // "leaflet.tilelayer.pouchdbcached": "0.3.0",
+    html_dep_prod("leaflet-tilelayer-pouchdbcached", "0.3.0")
   )
 }
 

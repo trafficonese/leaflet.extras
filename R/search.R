@@ -1,18 +1,25 @@
 leafletSearchDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "leaflet-search",
+  #     "2.7.0",
+  #     system.file("htmlwidgets/lib/search", package = "leaflet.extras"),
+  #     script = c("leaflet-search.src.js", "leaflet-search-binding.js"),
+  #     stylesheet = "leaflet-search.min.css"
+  #   ),
+  #   htmltools::htmlDependency(
+  #     "fuse",
+  #     "3.0.5",
+  #     system.file("htmlwidgets/lib/fuse", package="leaflet.extras"),
+  #     script = c("fuse.js")
+  #   ))
   list(
-    htmltools::htmlDependency(
-      "leaflet-search",
-      "2.7.0",
-      system.file("htmlwidgets/lib/search", package = "leaflet.extras"),
-      script = c("leaflet-search.src.js", "leaflet-search-binding.js"),
-      stylesheet = "leaflet-search.min.css"
-    ),
-    htmltools::htmlDependency(
-      "fuse",
-      "3.0.5",
-      system.file("htmlwidgets/lib/fuse", package="leaflet.extras"),
-      script = c("fuse.js")
-    ))
+    # // "fuse.js": "3.2.0",
+    # // "leaflet-search": "2.3.7",
+    html_dep_prod("fuse_js", "3.2.0"),
+    html_dep_prod("leaflet-search", "2.3.7"),
+    html_dep_binding("leaflet-search", "1.0.0")
+  )
 }
 
 #' Options for search control.
@@ -350,4 +357,3 @@ removeSearchFeatures <- function(map, clearFeatures=FALSE) {
     clearFeatures
   )
 }
-

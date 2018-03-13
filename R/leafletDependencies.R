@@ -32,7 +32,7 @@ addAwesomeMarkersDependencies <- function(map, libs) {
 #' Various leaflet dependency functions for use in downstream packages
 #' @export
 leafletExtrasDependencies <- list(
-  omnivore = function() {omnivoreDependencies()},
+  omnivore = function() {omnivoreDependencies2()},
   choropleth = function() {geoJSONChoroplethDependency()},
   weatherIcons = function(){weatherIconDependency()},
   pulseIcons = function(){pulseIconDependency()},

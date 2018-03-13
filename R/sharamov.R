@@ -1,22 +1,27 @@
 bingLayerDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "sharamov-leaflet-plugins",
+  #     "2.0.0",
+  #     system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
+  #     script = c("Bing.js", "Bing-bindings.js")
+  #   ))
   list(
-    htmltools::htmlDependency(
-      "sharamov-leaflet-plugins",
-      "2.0.0",
-      system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-      script = c("Bing.js", "Bing-bindings.js")
-    ))
+    # // "leaflet-plugins": "3.0.2",
+    html_dep_prod("tile-bing", "3.0.2"),
+    html_dep_binding("tile-bing", "1.0.0")
+  )
 }
 
-googleLayerDependencies <- function() {
-  list(
-    htmltools::htmlDependency(
-      "sharamov-leaflet-plugins",
-      "2.0.0",
-      system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-      script = c("Google.js", "Google-bindings.js")
-    ))
-}
+# googleLayerDependencies <- function() {
+#   list(
+#     htmltools::htmlDependency(
+#       "sharamov-leaflet-plugins",
+#       "2.0.0",
+#       system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
+#       script = c("Google.js", "Google-bindings.js")
+#     ))
+# }
 
 #' Adds Bing Tiles Layer
 #'
@@ -44,7 +49,6 @@ addBingTiles <- function(
   imagerySet <- match.arg(imagerySet)
 
   map$dependencies <- c(map$dependencies, bingLayerDependencies())
-  invokeMethod(map, getMapData(map), 'addBingTiles', layerId, group, 
+  invokeMethod(map, getMapData(map), 'addBingTiles', layerId, group,
                list(apikey = apikey, type = imagerySet, ...))
 }
-

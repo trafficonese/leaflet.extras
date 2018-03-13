@@ -1,25 +1,44 @@
 omnivoreDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "leaflet.extras-omnivore",version = "0.1.0",
+  #     system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
+  #     script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
+  #                "polyline.js", "csv2geojson.js",
+  #                "omnivore-bindings.js")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "leaflet.extras-omnivore",version = "0.1.0",
-      system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
-      script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
-                 "polyline.js", "csv2geojson.js",
-                 "omnivore-bindings.js")
-    )
+    # // "csv2geojson": "5.0.2",
+    # // "togeojson": "0.16.0",
+    # // "topojson": "3.0.2"
+    html_dep_prod("csv2geojson", "5.0.2"),
+    html_dep_prod("togeojson", "0.16.0"),
+    html_dep_prod("topojson", "3.0.2"),
+    # polyline is not implemented
+    # wellknown is not implemented
+
+    # // "@mapbox/leaflet-omnivore": "0.3.4",
+    html_dep_prod("leaflet-omnivore", "3.0.2"),
+    html_dep_binding("leaflet-omnivore", "1.0.0")
   )
 }
 
 # Source https://github.com/timwis/leaflet-choropleth
 geoJSONChoroplethDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "geojson-choropleth",version = "1.1.2",
+  #     system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
+  #     script = c("choropleth.js")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "geojson-choropleth",version = "1.1.2",
-      system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
-      script = c("choropleth.js")
-    )
+    # // "leaflet-choropleth": "1.1.4",
+    html_dep_prod("leaflet-choropleth", "1.1.4")
   )
 }
+
 
 # Utility Function
 invokeJSAddMethod <- function(
@@ -48,7 +67,7 @@ invokeJSAddMethod <- function(
     stop("markerType if specified then it needs to be either 'marker' or 'clusterMarker'")
   }
 
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
 
   if (!is.null(clusterOptions)) {
     map$dependencies = c(map$dependencies,
@@ -255,7 +274,7 @@ addGeoJSONChoropleth = function(
   highlightOptions = NULL,
   legendOptions = NULL
 ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
 
@@ -359,7 +378,7 @@ addKMLChoropleth = function(
   highlightOptions = NULL,
   legendOptions = NULL
 ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
   channelMode <- match.arg(channelMode)

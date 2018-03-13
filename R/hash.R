@@ -1,11 +1,15 @@
 # Source https://github.com/mlevans/leaflet-hash
 hashDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "hash",version = "0.2.1",
+  #     system.file("htmlwidgets/lib/hash", package = "leaflet.extras"),
+  #     script = c("leaflet-hash.js")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "hash",version = "0.2.1",
-      system.file("htmlwidgets/lib/hash", package = "leaflet.extras"),
-      script = c("leaflet-hash.js")
-    )
+    # // "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
+    html_dep_prod("leaflet-hash", "1.0.1")
   )
 }
 

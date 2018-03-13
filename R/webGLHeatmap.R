@@ -1,15 +1,24 @@
 
 # Source https://github.com/ursudio/webgl-heatmap-leaflet
 webGLHeatmapDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "webgl-heatmap",version = "0.1.0",
+  #     system.file("htmlwidgets/lib/webgl-heatmap", package = "leaflet.extras"),
+  #     script = c("webgl-heatmap.js", "webgl-heatmap-leaflet.js",
+  #                "webgl-heatmap-bindings.js"),
+  #     attachment = c("skyline" = "skyline-gradient.png",
+  #                    "deep-sea" = "deep-sea-gradient.png")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "webgl-heatmap",version = "0.1.0",
-      system.file("htmlwidgets/lib/webgl-heatmap", package = "leaflet.extras"),
-      script = c("webgl-heatmap.js", "webgl-heatmap-leaflet.js",
-                 "webgl-heatmap-bindings.js"),
+    # // "leaflet-webgl-heatmap": "0.2.7",
+    html_dep_prod(
+      "leaflet-webgl-heatmap", "0.2.7",
       attachment = c("skyline" = "skyline-gradient.png",
                      "deep-sea" = "deep-sea-gradient.png")
-    )
+    ),
+    html_dep_binding("leaflet-webgl-heatmap")
   )
 }
 
@@ -51,7 +60,7 @@ addWebGLHeatmap = function(
   data = leaflet::getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies,
-                        webGLHeatmapDependency())
+                        webGLHeatmapDependency2())
 
   if(!is.null(gradientTexture) &&
      !gradientTexture %in% c("skyline", "deep-sea")) {
@@ -99,7 +108,7 @@ addWebGLGeoJSONHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -128,7 +137,7 @@ addWebGLKMLHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -158,8 +167,8 @@ addWebGLCSVHeatmap = function(
   gradientTexture = NULL,
   alphaRange = 1
   ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -189,7 +198,7 @@ addWebGLGPXHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),

@@ -1,10 +1,15 @@
 geodesicDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "geodesic",version = "0.1.0",
+  #     system.file("htmlwidgets/lib/geodesic", package = "leaflet.extras"),
+  #     script = c('Leaflet.Geodesic.min.js', 'geodesic-bindings.js')
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "geodesic",version = "0.1.0",
-      system.file("htmlwidgets/lib/geodesic", package = "leaflet.extras"),
-      script = c('Leaflet.Geodesic.min.js', 'geodesic-bindings.js')
-    )
+    # // "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
+    html_dep_prod("leaflet-geodesic", "1.1.0"),
+    html_dep_binding("leaflet-geodesic", "1.0.0")
   )
 }
 

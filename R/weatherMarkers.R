@@ -1,14 +1,19 @@
 
 # Source https://github.com/mapshakers/leaflet-icon-weather
 weatherIconDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "leaflet-icon-weather",version = "3.0.0",
+  #     system.file("htmlwidgets/lib/weather-markers", package = "leaflet.extras"),
+  #     script = c("leaflet.weather-markers.min.js", "plugin-weatherMarkers-bindings.js"),
+  #     stylesheet =c("weather-icons.min.css", "weather-icons-wind.min.css",
+  #                   "leaflet.weather-markers.css" )
+  #     )
+  # )
   list(
-    htmltools::htmlDependency(
-      "leaflet-icon-weather",version = "3.0.0",
-      system.file("htmlwidgets/lib/weather-markers", package = "leaflet.extras"),
-      script = c("leaflet.weather-markers.min.js", "plugin-weatherMarkers-bindings.js"),
-      stylesheet =c("weather-icons.min.css", "weather-icons-wind.min.css",
-                    "leaflet.weather-markers.css" )
-      )
+    # napa tallsam/Leaflet.weather-markers#afda5b3
+    html_dep_prod("leaflet-weather-markers", "3.0.0"),
+    html_dep_bindings("leaflet-weather-markers")
   )
 }
 
