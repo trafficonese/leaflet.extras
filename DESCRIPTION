@@ -22,7 +22,7 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.1.0),
-    leaflet (>= 2.0.0)
+    leaflet (> 1.1.1)
 Remotes:
     schloerke/leaflet@v1x
 Imports:
