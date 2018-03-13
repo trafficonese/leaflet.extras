@@ -6,10 +6,6 @@
     "doc": "docs",
     "man": "man"
   },
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/schloerke/leaflet.extras.git"
@@ -20,9 +16,15 @@
     "url": "https://github.com/schloerke/leaflet.extras/issues"
   },
   "homepage": "https://github.com/schloerke/leaflet.extras#readme",
+  "scripts": {
+    "install": "napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend",
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@mapbox/leaflet-omnivore": "0.3.4",
     "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
+    "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
     "csv2geojson": "5.0.2",
     "fuse.js": "3.2.0",
     "leaflet-choropleth": "1.1.4",
@@ -37,19 +39,19 @@
     "leaflet-search": "2.3.7",
     "leaflet-sleep": "0.5.1",
     "leaflet-webgl-heatmap": "0.2.7",
-    "leaflet-wms-legend": "github:schloerke/leaflet-wms-legend#c97fde8",
     "leaflet.gridlayer.googlemutant": "^0.6.4",
     "leaflet.heat": "0.2.0",
     "leaflet.tilelayer.pouchdbcached": "0.3.0",
-    "leaflet.weather-markers": "github:schloerke/Leaflet.weather-markers#a4389f1",
     "pouchdb": "6.4.3",
     "togeojson": "0.16.0",
     "topojson": "3.0.2"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.0.6",
+    "napa": "^3.0.0",
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^0.20.3",
