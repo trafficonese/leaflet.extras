@@ -3,10 +3,10 @@
 LeafletWidget.methods.addBingTiles = function(layerId, group, options) {
   (function(){
     var map = this;
-    var apikey = options.apikey;
-    delete options.apikey;
+    var apiKey = options.apiKey;
+    delete options.apiKey;
 
-    map.layerManager.addLayer(L.bingLayer(apikey, options), "tile", layerId, group);
+    map.layerManager.addLayer(L.bingLayer(apiKey, options), "tile", layerId, group);
 
   }).call(this);
 };
