@@ -33,7 +33,7 @@ html_dep_binding <- function(name, version, ...) {
   html_dependency(
     name, version,
     paste0(name, "-bindings.js"),
-    file.path("htmlwidgets", "src", "bindings", name),
+    file.path("htmlwidgets", "bindings"),
     ...
   )
 }
@@ -43,7 +43,7 @@ html_dep_util <- function(name, version, ...) {
   html_dependency(
     name, version,
     paste0(name, ".js"),
-    file.path("htmlwidgets", "src", "utils", name),
+    file.path("htmlwidgets", "utils"),
     ...
   )
 }
