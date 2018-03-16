@@ -126,7 +126,7 @@ const config = [
   library_prod_externals({
     topojson: "topojson",
     csv2geojson: "csv2geojson",
-    togeojson: "togeojson",
+    togeojson: "toGeoJSON",
   }, "@mapbox/leaflet-omnivore", "leaflet-omnivore"),
   // library_binding("leaflet-omnivore"),
 
