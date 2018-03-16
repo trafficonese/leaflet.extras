@@ -23,7 +23,8 @@ html_dep_prod <- function(name, version, ...) {
   html_dependency(
     name, version,
     paste0(name, "-prod.js"),
-    file.path("htmlwidgets", "build"),
+    file.path("htmlwidgets", "build", name),
+    all_files = TRUE,
     ...
   )
 }
@@ -34,6 +35,7 @@ html_dep_binding <- function(name, version, ...) {
     name, version,
     paste0(name, "-bindings.js"),
     file.path("htmlwidgets", "bindings"),
+    all_files = FALSE,
     ...
   )
 }
@@ -44,6 +46,7 @@ html_dep_util <- function(name, version, ...) {
     name, version,
     paste0(name, ".js"),
     file.path("htmlwidgets", "utils"),
+    all_files = FALSE,
     ...
   )
 }

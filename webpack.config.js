@@ -41,7 +41,7 @@ library_prod = function(name, filename = name, library = undefined) {
     output: {
       // library: library,
       filename: filename + ".js",
-      path: build_path
+      path: build_path + "/" + foldername
     }
   }
   if (typeof library != 'undefined') {
