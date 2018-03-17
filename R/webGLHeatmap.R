@@ -60,7 +60,7 @@ addWebGLHeatmap = function(
   data = leaflet::getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies,
-                        webGLHeatmapDependency2())
+                        webGLHeatmapDependency())
 
   if(!is.null(gradientTexture) &&
      !gradientTexture %in% c("skyline", "deep-sea")) {
@@ -108,7 +108,7 @@ addWebGLGeoJSONHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -137,7 +137,7 @@ addWebGLKMLHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -167,8 +167,8 @@ addWebGLCSVHeatmap = function(
   gradientTexture = NULL,
   alphaRange = 1
   ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
@@ -198,7 +198,7 @@ addWebGLGPXHeatmap = function(
   alphaRange = 1
   ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency2())
+  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),

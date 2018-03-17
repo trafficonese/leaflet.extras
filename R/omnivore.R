@@ -67,7 +67,7 @@ invokeJSAddMethod <- function(
     stop("markerType if specified then it needs to be either 'marker' or 'clusterMarker'")
   }
 
-  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
 
   if (!is.null(clusterOptions)) {
     map$dependencies = c(map$dependencies,
@@ -274,7 +274,7 @@ addGeoJSONChoropleth = function(
   highlightOptions = NULL,
   legendOptions = NULL
 ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
 
@@ -378,7 +378,7 @@ addKMLChoropleth = function(
   highlightOptions = NULL,
   legendOptions = NULL
 ) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies2())
+  map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
                         geoJSONChoroplethDependency())
   channelMode <- match.arg(channelMode)
