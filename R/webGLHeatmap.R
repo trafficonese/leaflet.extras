@@ -18,7 +18,7 @@ webGLHeatmapDependency <- function() {
       attachment = c("skyline" = "skyline-gradient.png",
                      "deep-sea" = "deep-sea-gradient.png")
     ),
-    html_dep_binding("leaflet-webgl-heatmap")
+    html_dep_binding("leaflet-webgl-heatmap", "1.0.0")
   )
 }
 
