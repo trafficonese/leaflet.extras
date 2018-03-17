@@ -49,6 +49,12 @@ library_prod = function(name, filename = name, library = undefined) {
   }
   return ret;
 }
+library_prod_css = function(version, name, filename, library = undefined) {
+  var ret = library_prod(name, filename, library);
+  ret.module = library_module(filename);
+  ret.output.publicPath = "lib/" + filename + "-" + version + "/";
+  return ret;
+}
 library_prod_externals = function(externals, ...info) {
   var ret = library_prod(...info);
   ret.externals = externals;
@@ -135,7 +141,8 @@ const config = [
   // library_binding("leaflet-geodesic"),
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
-  library_prod(
+  library_prod_css(
+    "0.1.6",
     ["Leaflet.StyleEditor", "Leaflet.StyleEditor/dist/css/Leaflet.StyleEditor.min.css"],
     "leaflet-styleeditor"
   ),
@@ -147,7 +154,8 @@ const config = [
 
   // "leaflet-draw": "1.0.2",
   // "leaflet-draw-drag": "1.0.2",
-  library_prod(
+  library_prod_css(
+    "1.0.2",
     ["leaflet-draw", "leaflet-draw/dist/leaflet.draw.css"],
     "leaflet-draw"
   ),
@@ -155,13 +163,15 @@ const config = [
   // library_binding("leaflet-draw"),
 
   // "leaflet-fullscreen": "1.0.2",
-  library_prod(
+  library_prod_css(
+    "1.0.2",
     ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
     "leaflet-fullscreen"
   ),
 
   // "leaflet-gps": "1.7.0",
-  library_prod(
+  library_prod_css(
+    "1.7.0",
     ["leaflet-gps", "leaflet-gps/dist/leaflet-gps.min.css"],
     "leaflet-gps"
   ),
@@ -170,7 +180,8 @@ const config = [
   library_prod("leaflet-hash/dist/leaflet-hash.min.js", "leaflet-hash"),
 
   // "leaflet-measure-path": "1.3.1",
-  library_prod(
+  library_prod_css(
+    "1.3.1",
     ["leaflet-measure-path", "leaflet-measure-path/leaflet-measure-path.css"],
     "leaflet-measure-path"
   ),
@@ -183,7 +194,8 @@ const config = [
     // "leaflet.gridlayer.googlemutant": "^0.6.4",
 
   // "leaflet-pulse-icon": "0.1.0",
-  library_prod(
+  library_prod_css(
+    "0.1.0",
     ["leaflet-pulse-icon", "leaflet-pulse-icon/src/L.Icon.Pulse.css"],
     "leaflet-pulse-icon"
   ),
@@ -192,7 +204,8 @@ const config = [
   // "fuse.js": "3.2.0",
   // "leaflet-search": "2.3.7",
   library_prod("fuse.js", "fuse_js", "Fuse"),
-  library_prod(
+  library_prod_css(
+    "2.3.7",
     ["leaflet-search", "leaflet-search/dist/leaflet-search.min.css"],
     "leaflet-search"
   ),
@@ -211,7 +224,8 @@ const config = [
   // library_binding("leaflet-webgl-heatmap"),
 
   // napa kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend
-  library_prod(
+  library_prod_css(
+    "0.0.1",
     ["leaflet-wms-legend/leaflet.wmslegend.js", "leaflet-wms-legend/leaflet.wmslegend.css"],
     "leaflet-wms-legend"
   ),
@@ -228,7 +242,8 @@ const config = [
   library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer-pouchdbcached"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
-  library_prod(
+  library_prod_css(
+    "3.0.0",
     [
       "leaflet-weather-markers/dist/leaflet.weather-markers.js",
       "leaflet-weather-markers/dist/leaflet.weather-markers.css",
