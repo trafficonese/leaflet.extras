@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/schloerke/leaflet.extras#readme",
   "scripts": {
-    "install": "napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend",
+    "install": "napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend pyalot/webgl-heatmap#995d541:webgl-heatmap",
     "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

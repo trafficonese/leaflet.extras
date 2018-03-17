@@ -216,9 +216,9 @@ const config = [
 
   // "leaflet-webgl-heatmap": "0.2.7",
   library_prod_attachements(
-    "node_modules/leaflet-webgl-heatmap/src/webgl-heatmap/*.png",
+    "node_modules/webgl-heatmap/*.png",
     "leaflet-webgl-heatmap",
-    ["leaflet-webgl-heatmap", "leaflet-webgl-heatmap/src/leaflet-webgl-heatmap.js"],
+    ["webgl-heatmap/webgl-heatmap.js", "leaflet-webgl-heatmap"],
     "leaflet-webgl-heatmap"
   ),
   // library_binding("leaflet-webgl-heatmap"),
