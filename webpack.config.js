@@ -76,6 +76,7 @@ library_prod_attachements = function(attachments, output_folder, ...info) {
 
 library_raw = function(entry, filename, foldername) {
   return {
+    mode: "development",
     entry: entry,
     output: {
       filename: filename,
@@ -104,7 +105,7 @@ library_binding = function(name) {
   var filename = name + "-bindings"
   var folder = "bindings"
   return library_raw(
-    src_path + folder + "/" + filename + ".js",
+    folder + "/" + filename + ".js",
     filename + ".js",
     name
   )
