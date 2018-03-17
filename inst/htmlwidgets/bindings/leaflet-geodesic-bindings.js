@@ -18,7 +18,7 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
       function(df, i) {
         var shapes = df.get(i, "shapes");
         for (let j = 0; j < shapes.length; j++) {
-          shapes[j] = HTMLWidgets.dataframeToD3(shapes[j]);
+          shapes[j] = HTMLWidgets.dataframeToD3(shapes[j][0]);
         }
         return L.geodesic(shapes, df.get(i));
       });
