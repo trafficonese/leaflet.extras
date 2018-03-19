@@ -159,23 +159,23 @@ function addGeoJSONLayer(
     if (typeof labelProperty !== 'undefined' && labelProperty !== null) {
       if(typeof labelProperty == 'string') {
         if(!$.isEmptyObject(labelOptions)) {
-          if(labelOptions.noHide) {
-            layer.bindLabel(feature.properties[labelProperty], labelOptions).showLabel();
+          if(labelOptions.permanent) {
+            layer.bindTooltip(feature.properties[labelProperty], labelOptions).showLabel();
           } else {
-            layer.bindLabel(feature.properties[labelProperty], labelOptions);
+            layer.bindTooltip(feature.properties[labelProperty], labelOptions);
           }
         } else {
-          layer.bindLabel(feature.properties[labelProperty]);
+          layer.bindTooltip(feature.properties[labelProperty]);
         }
       } else if(typeof labelProperty == 'function') {
         if(!$.isEmptyObject(labelOptions)) {
           if(labelOptions.noHide) {
-            layer.bindLabel(labelProperty(feature), labelOptions).showLabel();
+            layer.bindTooltip(labelProperty(feature), labelOptions).showLabel();
           } else {
-            layer.bindLabel(labelProperty(feature), labelOptions);
+            layer.bindTooltip(labelProperty(feature), labelOptions);
           }
         } else {
-          layer.bindLabel(labelProperty(feature));
+          layer.bindTooltip(labelProperty(feature));
         }
       }
     }
