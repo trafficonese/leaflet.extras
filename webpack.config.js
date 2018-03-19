@@ -34,7 +34,7 @@ library_prod = function(name, filename = name, library = undefined) {
   foldername = filename
   filename = filename + "-prod"
   var ret = {
-    mode: "production",
+    mode: "development",
     entry: name,
     // devtool: "source-map",
     module: library_module(foldername),
