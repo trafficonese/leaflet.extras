@@ -41,8 +41,8 @@
     "leaflet-webgl-heatmap": "0.2.7",
     "leaflet.gridlayer.googlemutant": "^0.6.4",
     "leaflet.heat": "0.2.0",
-    "leaflet.tilelayer.pouchdbcached": "0.3.0",
-    "pouchdb": "6.4.3",
+    "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
+    "pouchdb-browser": "6.4.3",
     "togeojson": "0.16.0",
     "topojson": "3.0.2"
   },

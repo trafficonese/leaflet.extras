@@ -239,9 +239,9 @@ const config = [
   library_prod(lib_path + "heat/leaflet-heat.js", "leaflet-heat"),
   // library_binding("leaflet-heat"),
 
-  // "pouchdb": "6.4.3",
-  // "leaflet.tilelayer.pouchdbcached": "0.3.0",
-  library_prod("pouchdb", "pouchdb", "PouchDB"),
+  // "pouchdb-browser": "6.4.3",
+  // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
+  library_prod("pouchdb-browser/lib/index.js", "pouchdb", "PouchDB"),
   library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer-pouchdbcached"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers

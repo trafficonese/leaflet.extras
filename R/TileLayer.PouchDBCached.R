@@ -8,9 +8,9 @@ tileLayer.PouchDBCachedDependency <- function() {
   #   )
   # )
   list(
-    # // "pouchdb": "6.4.3",
-    html_dep_prod("pouchdb", "6.4.3"),
-    # // "leaflet.tilelayer.pouchdbcached": "0.3.0",
+    # // "pouchdb-browser": "6.4.3",
+    html_dep_prod("pouchdb-browser", "6.4.3"),
+    # // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
     html_dep_prod("leaflet-tilelayer-pouchdbcached", "0.3.0")
   )
 }
@@ -24,7 +24,7 @@ tileLayer.PouchDBCachedDependency <- function() {
 #' \dontrun{
 #' leaflet() %>%
 #'   enableTileCaching() %>%
-#'   addTiles(options=tileOptions(useCache=TRUE,crossOrigin=TRUE))
+#'   addTiles(options = tileOptions(useCache = TRUE, crossOrigin = TRUE))
 #' }
 enableTileCaching <- function(map) {
   map$dependencies <- c(map$dependencies, tileLayer.PouchDBCachedDependency())
