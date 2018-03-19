@@ -1,7 +1,8 @@
 const path = require("path");
 // const webpack = require('webpack');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const src_path = "./inst/htmlwidgets/src/";
 const lib_path = "./inst/htmlwidgets/lib/";
@@ -90,18 +91,6 @@ library_raw = function(entry, filename, foldername) {
       ]
     }
   }
-
-  // return {
-  //   entry: entry,
-  //   output: {
-  //     filename: filename,
-  //     path: build_path + "/" + foldername
-  //   },
-  //   module: library_module(filename),
-  //   // devtool: "source-map",
-  //   devtool: "inline-source-map",
-  //   mode: "development"
-  // }
 }
 library_binding = function(name) {
   var filename = name + "-bindings"
@@ -171,6 +160,11 @@ const config = [
     ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
     "leaflet-fullscreen"
   ),
+  // library_raw(
+  //   "leaflet-fullscreen/dist/leaflet.fullscreen.css",
+  //   "leaflet-fullscreen" + ".css",
+  //   "leaflet-fullscreen"
+  // ),
 
   // "leaflet-gps": "1.7.0",
   library_prod_css(

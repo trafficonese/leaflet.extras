@@ -17,9 +17,15 @@
   },
   "homepage": "https://github.com/schloerke/leaflet.extras#readme",
   "scripts": {
-    "install": "napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend pyalot/webgl-heatmap#995d541:webgl-heatmap",
-    "build": "webpack --config webpack.config.js",
+    "napa": "napa",
+    "build": "napa & webpack --config webpack.config.js",
+    "watch": "napa & webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "napa": {
+    "leaflet-weather-markers": "tallsam/Leaflet.weather-markers#afda5b3",
+    "leaflet-wms-legend": "kartoza/leaflet-wms-legend#0f59578",
+    "webgl-heatmap": "pyalot/webgl-heatmap#995d541"
   },
   "dependencies": {
     "@mapbox/leaflet-omnivore": "0.3.4",
@@ -50,12 +56,11 @@
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.10",
     "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.0.6",
     "napa": "^3.0.0",
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.11"
+    "webpack-cli": "^2.0.12"
   }
 }
