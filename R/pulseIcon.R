@@ -10,8 +10,8 @@ pulseIconDependency <- function() {
   # )
   list(
     # // "leaflet-pulse-icon": "0.1.0",
-    html_dep_prod("leaflet-pulse-icon"),
-    html_dep_binding("leaflet-pulse-icon")
+    html_dep_prod("leaflet-pulse-icon", "0.1.0"),
+    html_dep_binding("leaflet-pulse-icon", "1.0.0")
   )
 }
 
