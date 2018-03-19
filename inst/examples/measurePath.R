@@ -71,4 +71,3 @@ leaflet() %>% addTiles() %>%
                           measurePathOptions(imperial = TRUE,
                                              minPixelDistance = 100,
                                              showDistances = FALSE))
-
