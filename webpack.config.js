@@ -37,7 +37,9 @@ library_prod = function(name, filename = name, library = undefined) {
     mode: "development",
     entry: name,
     // devtool: "source-map",
-    module: library_module(foldername),
+    externals: {
+      leaflet: "L",
+    },
     output: {
       // library: library,
       filename: filename + ".js",
@@ -57,7 +59,7 @@ library_prod_css = function(version, name, filename, library = undefined) {
 }
 library_prod_externals = function(externals, ...info) {
   var ret = library_prod(...info);
-  ret.externals = externals;
+  ret.externals = Object.assign({}, ret.externals, externals);
   return ret;
 }
 library_prod_attachements = function(attachments, output_folder, ...info) {
