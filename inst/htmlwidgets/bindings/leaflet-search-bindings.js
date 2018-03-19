@@ -91,7 +91,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
       var layerID = L.stamp(container);
 
       if(options.showSearchLocation) {
-        var marker = L.marker(e.latlng,{'type': 'query'}).bindLabel(
+        var marker = L.marker(e.latlng,{'type': 'query'}).bindTooltip(
           "lat="+latlng.lat+" lng="+latlng.lng+"</P>");
         var m_layerID = L.stamp(marker);
         container.addLayer(marker);
@@ -274,7 +274,7 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
       var layerID = L.stamp(container);
 
       if(options.showSearchLocation) {
-        var marker = L.marker(e.latlng,{'type': 'query'}).bindLabel(
+        var marker = L.marker(e.latlng,{'type': 'query'}).bindTooltip(
           "lat="+latlng.lat+" lng="+latlng.lng+"</P>");
         var m_layerID = L.stamp(marker);
         container.addLayer(marker);
