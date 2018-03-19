@@ -27,11 +27,11 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' @examples
 #'
 #' iconSet = weatherIconList(
-#'   hurricane = makeWeatherIcon(icon='hurricane'),
-#'   tornado = makeWeatherIcon(icon='tornado')
+#'   hurricane = makeWeatherIcon(icon = "hurricane"),
+#'   tornado = makeWeatherIcon(icon = "tornado")
 #' )
 #'
-#' iconSet[c('hurricane', 'tornado')]
+#' iconSet[c("hurricane", "tornado")]
 #' @rdname weatherMarkers
 weatherIconList = function(...) {
   res = structure(
