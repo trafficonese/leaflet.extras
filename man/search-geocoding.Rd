@@ -84,3 +84,14 @@ Add a US Census Bureau search control to the map.
 
 Removes the US Census Bureau search control from the map.
 }
+\examples{
+leaflet() \%>\%
+  addProviderTiles(providers$Esri.WorldStreetMap) \%>\%
+  addResetMapButton() \%>\%
+  addSearchGoogle()
+
+## for more examples see
+# browseURL(system.file("examples/search.R", package = "leaflet.extras"))
+
+
+}

@@ -17,8 +17,7 @@ addFullscreenControl(map, position = "topleft", pseudoFullscreen = FALSE)
 Add a fullscreen control button
 }
 \examples{
-\dontrun{
-leaflet() \%>\% addTiles() \%>\%
+leaflet() \%>\%
+  addTiles() \%>\%
   addFullscreenControl()
-}
 }

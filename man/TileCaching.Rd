@@ -13,9 +13,10 @@ enableTileCaching(map)
 Enables caching of tiles locally in browser. See \url{https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached} for details. In addition to invoking this function, you should also pass \code{useCache=TRUE} & \code{crossOrigin=TRUE} in the \code{\link[leaflet]{tileOptions}} call and pass that to your \code{\link[leaflet]{addTiles}}'s \code{options} parameter.
 }
 \examples{
-\dontrun{
 leaflet() \%>\%
   enableTileCaching() \%>\%
-  addTiles(options=tileOptions(useCache=TRUE,crossOrigin=TRUE))
-}
+  addTiles(options = tileOptions(useCache = TRUE, crossOrigin = TRUE))
+
+## for more examples see
+# browseURL(system.file("examples/TileLayer-Caching.R", package = "leaflet.extras"))
 }
