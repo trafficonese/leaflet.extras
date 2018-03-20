@@ -10,7 +10,7 @@ leafletGPSDependencies <- function() {
   # )
   list(
     # // "leaflet-gps": "1.7.0",
-    html_dep_prod("leaflet-gps", "1.7.0"),
+    html_dep_prod("leaflet-gps", "1.7.0", has_style = TRUE),
     html_dep_binding("leaflet-gps", "1.0.0")
   )
 }

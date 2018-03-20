@@ -8,7 +8,7 @@ styleEditorDependencies <- function() {
   #   )
   # )
   list(
-    html_dep_prod("leaflet-styleeditor", "0.1.6"),
+    html_dep_prod("leaflet-styleeditor", "0.1.6", has_style = TRUE),
     html_dep_binding("leaflet-styleeditor", "1.0.0")
   )
 }

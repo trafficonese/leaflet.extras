@@ -10,7 +10,7 @@ wms.legendDependency <- function() {
   # )
   list(
     # // napa kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend
-    html_dep_prod("leaflet-wms-legend", "0.0.1")
+    html_dep_prod("leaflet-wms-legend", "0.0.1", has_style = TRUE)
   )
 }
 

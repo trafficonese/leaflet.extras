@@ -19,13 +19,19 @@ html_dependency <- function(name, version, script, folder, ...) {
 }
 
 # match the npm version
-html_dep_prod <- function(name, version, ...) {
+html_dep_prod <- function(name, version, has_style = FALSE, ..., stylesheet) {
+  if (isTRUE(has_style)) {
+    if (missing(stylesheet)) {
+      stylesheet <- paste0(name, "-prod.css")
+    }
+  }
   html_dependency(
     name, version,
     paste0(name, "-prod.js"),
     file.path("htmlwidgets", "build", name),
     all_files = TRUE,
-    ...
+    ...,
+    stylesheet = stylesheet
   )
 }
 

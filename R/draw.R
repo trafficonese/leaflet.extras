@@ -14,7 +14,7 @@ drawDependencies <- function() {
     # // "leaflet-draw": "1.0.2",
     # // "leaflet-draw-drag": "1.0.2",
     # draw bindings
-    html_dep_prod("leaflet-draw", "1.0.2"),
+    html_dep_prod("leaflet-draw", "1.0.2", has_style = TRUE),
     html_dep_prod("leaflet-draw-drag", "1.0.2"),
     html_dep_binding("leaflet-draw", "1.0.0")
   )

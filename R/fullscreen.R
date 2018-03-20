@@ -10,7 +10,7 @@ fullscreenDependency <- function() {
   # )
   list(
     # // "leaflet-fullscreen": "1.0.2",
-    html_dep_prod("leaflet-fullscreen", "1.0.2")
+    html_dep_prod("leaflet-fullscreen", "1.0.2", has_style = TRUE)
   )
 }
 

@@ -12,7 +12,7 @@ weatherIconDependency <- function() {
   # )
   list(
     # napa tallsam/Leaflet.weather-markers#afda5b3
-    html_dep_prod("leaflet-weather-markers", "3.0.0"),
+    html_dep_prod("leaflet-weather-markers", "3.0.0", has_style = TRUE),
     html_dep_binding("leaflet-weather-markers", "1.0.0")
   )
 }
