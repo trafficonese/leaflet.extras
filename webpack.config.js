@@ -117,7 +117,7 @@ const config = [
   // "togeojson": "0.16.0",
   // "topojson": "3.0.2"
   library_prod("csv2geojson", "csv2geojson", "csv2geojson"),
-  library_prod("togeojson", "togeojson", "toGeoJSON"),
+  library_prod("@mapbox/togeojson", "togeojson", "toGeoJSON"),
   library_prod("topojson", "topojson", "topojson"),
 
   // "@mapbox/leaflet-omnivore": "0.3.4",
