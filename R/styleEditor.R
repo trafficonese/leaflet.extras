@@ -21,6 +21,19 @@ styleEditorDependencies <- function() {
 #' @param ... other options. See \href{https://github.com/dwilhelm89/Leaflet.StyleEditor/blob/master/src/javascript/Leaflet.StyleEditor.js}{plugin code}
 #' @rdname style-editor
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   setView(0, 0, 2) %>%
+#'   addProviderTiles(providers$CartoDB.Positron) %>%
+#'   addDrawToolbar(
+#'     targetGroup = 'draw',
+#'     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions())
+#'   ) %>%
+#'   addLayersControl(
+#'     overlayGroups = c('draw'), options = layersControlOptions(collapsed = FALSE)
+#'   ) %>%
+#'   # add the style editor to alter shapes added to map
+#'   addStyleEditor()
 addStyleEditor <- function(
   map,
   position = c('topleft','topright','bottomleft','bottomright'),

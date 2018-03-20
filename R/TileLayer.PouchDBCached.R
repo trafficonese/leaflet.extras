@@ -21,11 +21,12 @@ tileLayer.PouchDBCachedDependency <- function() {
 #' @rdname TileCaching
 #' @export
 #' @examples
-#' \dontrun{
 #' leaflet() %>%
 #'   enableTileCaching() %>%
 #'   addTiles(options = tileOptions(useCache = TRUE, crossOrigin = TRUE))
-#' }
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/TileLayer-Caching.R", package = "leaflet.extras"))
 enableTileCaching <- function(map) {
   map$dependencies <- c(map$dependencies, tileLayer.PouchDBCachedDependency())
   map

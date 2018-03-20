@@ -45,6 +45,10 @@ gpsOptions <- function(
 #' @param options Options for the GPS control.
 #' @rdname gps
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addControlGPS()
 addControlGPS <- function(
   map,
   options = gpsOptions()

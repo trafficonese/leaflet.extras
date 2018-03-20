@@ -184,6 +184,21 @@ weatherIcons <- function(
 #'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname weatherMarkers
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addWeatherMarkers(
+#'     lng = -118.456554, lat = 34.078039,
+#'     label = "This is a label",
+#'     icon = makeWeatherIcon(
+#'       icon = "hot",
+#'       iconColor = "#ffffff77",
+#'       markerColor = "blue"
+#'     )
+#'   )
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/weatherIcons.R", package = "leaflet.extras"))
 addWeatherMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,

@@ -22,10 +22,9 @@ fullscreenDependency <- function() {
 #' @rdname fullscreen
 #' @export
 #' @examples
-#' \dontrun{
-#' leaflet() %>% addTiles() %>%
+#' leaflet() %>%
+#'   addTiles() %>%
 #'   addFullscreenControl()
-#' }
 addFullscreenControl <- function(
   map, position = 'topleft', pseudoFullscreen = FALSE) {
   map$dependencies <- c(map$dependencies, fullscreenDependency())

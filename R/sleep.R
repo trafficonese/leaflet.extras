@@ -24,6 +24,11 @@ sleepDependency <- function() {
 #' @param  wakeMessage a message to inform users about waking the map
 #' @param  sleepOpacity opacity for the sleeping map
 #' @export
+#' @examples
+#' leaflet(width = '100%') %>%
+#'   setView(0, 0, 1) %>%
+#'   addTiles() %>%
+#'   suspendScroll()
 suspendScroll <- function(
   map,
   sleep = TRUE,

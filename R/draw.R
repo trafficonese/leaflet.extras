@@ -37,6 +37,24 @@ drawDependencies <- function() {
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @export
 #' @rdname draw
+#' @examples
+#' leaflet() %>%
+#'   setView(0,0,2) %>%
+#'   addProviderTiles(providers$CartoDB.Positron) %>%
+#'   addDrawToolbar(
+#'     targetGroup = "draw",
+#'     editOptions = editToolbarOptions(
+#'       selectedPathOptions = selectedPathOptions()
+#'     )
+#'   )  %>%
+#'   addLayersControl(
+#'     overlayGroups = c("draw"),
+#'     options = layersControlOptions(collapsed = FALSE)
+#'   ) %>%
+#'   addStyleEditor()
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
 addDrawToolbar <- function(
   map, targetLayerId = NULL, targetGroup = NULL,
   position = c('topleft','topright','bottomleft','bottomright'),

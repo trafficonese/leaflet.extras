@@ -193,6 +193,16 @@ addReverseSearchOSM <- function(
 #' @param apikey String. API Key for Google GeoCoding Service.
 #' @return modified map
 #' @rdname search-geocoding
+#' @examples
+#' leaflet() %>%
+#'   addProviderTiles(providers$Esri.WorldStreetMap) %>%
+#'   addResetMapButton() %>%
+#'   addSearchGoogle()
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
+#'
+#'
 #' @export
 addSearchGoogle <- function(
   map,

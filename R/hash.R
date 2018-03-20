@@ -19,10 +19,9 @@ hashDependency <- function() {
 #' @rdname leaflethash
 #' @export
 #' @examples
-#' \dontrun{
-#' leaflet() %>% addTiles() %>%
+#' leaflet() %>%
+#'   addTiles() %>%
 #'   addHash()
-#' }
 addHash <- function(map) {
   map$dependencies <- c(map$dependencies, hashDependency())
   htmlwidgets::onRender(map,JS("function(el,x,data){var hash = new L.Hash(this);}"))

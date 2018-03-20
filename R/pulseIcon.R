@@ -19,6 +19,7 @@ pulseIconDependency <- function() {
 #' Make pulse-icon set
 #'
 #' @param ... icons created from \code{\link{makePulseIcon}()}
+#' @rdname pulseMarkers
 #' @export
 #' @examples
 #'
@@ -28,7 +29,7 @@ pulseIconDependency <- function() {
 #' )
 #'
 #' iconSet[c('red', 'blue')]
-#' @rdname pulseMarkers
+#'
 pulseIconList = function(...) {
   res = structure(
     list(...),
@@ -157,6 +158,18 @@ pulseIcons <- function(
 #'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname pulseMarkers
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPulseMarkers(
+#'     lng = -118.456554, lat = 34.078039,
+#'     label = "This is a label",
+#'     icon = makePulseIcon(heartbeat = 0.5)
+#'   )
+#'
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))
 addPulseMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,
