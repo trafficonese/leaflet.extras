@@ -143,7 +143,7 @@ leaflet() \%>\% setView(-77.0369, 38.9072, 12) \%>\%
     kml,
     markerType = "circleMarker",
     stroke=FALSE, fillColor="black", fillOpacity = 1,
-    markerOptions = leaflet::markerOptions(radius=1))
+    markerOptions = markerOptions(radius=1))
 
 
 ## addWebGLCSVHeatmap
@@ -181,7 +181,7 @@ leaflet() \%>\%
     airports,
     markerType = "circleMarker",
     stroke=FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = leaflet::markerOptions(radius=1.5),
+    markerOptions = markerOptions(radius=1.5),
     group = "airports"
   )
 

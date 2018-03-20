@@ -170,7 +170,7 @@ addWebGLGeoJSONHeatmap = function(
 #'     kml,
 #'     markerType = "circleMarker",
 #'     stroke=FALSE, fillColor="black", fillOpacity = 1,
-#'     markerOptions = leaflet::markerOptions(radius=1))
+#'     markerOptions = markerOptions(radius=1))
 #'
 #'
 addWebGLKMLHeatmap = function(
@@ -271,7 +271,7 @@ addWebGLCSVHeatmap = function(
 #'     airports,
 #'     markerType = "circleMarker",
 #'     stroke=FALSE, fillColor = "black", fillOpacity = 1,
-#'     markerOptions = leaflet::markerOptions(radius=1.5),
+#'     markerOptions = markerOptions(radius=1.5),
 #'     group = "airports"
 #'   )
 #'

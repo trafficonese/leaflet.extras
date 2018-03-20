@@ -149,7 +149,7 @@ addGeoJSONHeatmap = function(
 #'     kml,
 #'     markerType = 'circleMarker',
 #'     stroke=FALSE, fillColor='black', fillOpacity = 1,
-#'     markerOptions = leaflet::markerOptions(radius=1))
+#'     markerOptions = markerOptions(radius=1))
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))
