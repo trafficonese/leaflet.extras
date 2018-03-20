@@ -24,7 +24,7 @@ Depends:
     R (>= 3.1.0),
     leaflet (> 1.1.1)
 Remotes:
-    schloerke/leaflet@v1x
+    schloerke/leaflet@barret/v1x
 Imports:
     shiny,
     htmlwidgets,
