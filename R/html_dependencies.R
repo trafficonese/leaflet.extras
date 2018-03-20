@@ -19,7 +19,7 @@ html_dependency <- function(name, version, script, folder, ...) {
 }
 
 # match the npm version
-html_dep_prod <- function(name, version, has_style = FALSE, ..., stylesheet) {
+html_dep_prod <- function(name, version, has_style = FALSE, ..., stylesheet = NULL) {
   if (isTRUE(has_style)) {
     if (missing(stylesheet)) {
       stylesheet <- paste0(name, "-prod.css")
