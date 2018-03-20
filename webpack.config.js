@@ -229,7 +229,6 @@ const config = [
 
 
   // "leaflet.heat": "0.2.0",
-  // TODO!!! use distributed version from somewhere
   library_prod(lib_path + "heat/leaflet-heat.js", "leaflet-heat"),
   // library_binding("leaflet-heat"),
 
