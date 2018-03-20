@@ -235,7 +235,7 @@ const config = [
 
   // "pouchdb-browser": "6.4.3",
   // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
-  library_prod("pouchdb-browser/lib/index.js", "pouchdb", "PouchDB"),
+  library_prod("pouchdb-browser/lib/index.js", "pouchdb-browser", "PouchDB"),
   library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer-pouchdbcached"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
