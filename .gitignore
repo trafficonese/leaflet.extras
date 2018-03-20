@@ -8,3 +8,7 @@ inst/examples/*.Rmd
 .Rprofile
 *.swp
 node_modules
+inst/htmlwidgets/build
+revdep/checks*
+revdep/library*
+revdep/data*
