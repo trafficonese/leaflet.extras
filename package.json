@@ -1,6 +1,7 @@
 {
   "name": "leaflet.extras",
   "version": "0.0.0",
+  "private": true,
   "main": "index.js",
   "directories": {
     "doc": "docs",
@@ -11,7 +12,6 @@
     "url": "git+https://github.com/schloerke/leaflet.extras.git"
   },
   "author": "",
-  "license": "GPL-3",
   "bugs": {
     "url": "https://github.com/schloerke/leaflet.extras/issues"
   },
