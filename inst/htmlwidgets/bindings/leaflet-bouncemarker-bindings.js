@@ -1,3 +1,5 @@
+/* global LeafletWidget, $, L */
+
 LeafletWidget.methods.addBounceMarkers = function(lat, lng, duration, height) {
   (function() {
    L.marker([lat, lng],
@@ -8,4 +10,3 @@ LeafletWidget.methods.addBounceMarkers = function(lat, lng, duration, height) {
   }).addTo(this);
   }).call(this);
 };
-
