@@ -12,3 +12,4 @@ inst/htmlwidgets/build
 revdep/checks*
 revdep/library*
 revdep/data*
+viztest-*
