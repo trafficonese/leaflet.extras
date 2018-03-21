@@ -61,6 +61,7 @@ Plugins integrated so far ...
 - [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
 - [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
 - [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
+- [Bounce Marker](https://github.com/maximeh/leaflet.bouncemarker)
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new).
 See the [FAQ](#FAQ) section below for details.
