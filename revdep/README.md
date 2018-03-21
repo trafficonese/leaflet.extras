@@ -8,8 +8,8 @@
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
-|tz       |NA                           |
-|date     |2018-03-20                   |
+|tz       |America/Los_Angeles          |
+|date     |2018-03-21                   |
 
 # Dependencies
 
