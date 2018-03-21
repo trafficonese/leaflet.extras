@@ -47,20 +47,20 @@ leaflet() \%>\%
   enableMeasurePath() \%>\%
   addGeoJSONChoropleth(
     geoJson,
-    valueProperty = 'AREASQMI',
-    scale = c('white','red'),
-    mode = 'q',
+    valueProperty = "AREASQMI",
+    scale = c("white","red"),
+    mode = "q",
     steps = 4,
     padding = c(0.2,0),
-    labelProperty = 'NAME',
+    labelProperty = "NAME",
     popupProperty = propstoHTMLTable(
-      props = c('NAME', 'AREASQMI', 'REP_NAME', 'WEB_URL', 'REP_PHONE', 'REP_EMAIL', 'REP_OFFICE'),
-      table.attrs = list(class = 'table table-striped table-bordered'),
+      props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
+      table.attrs = list(class = "table table-striped table-bordered"),
       drop.na = TRUE
     ),
-    color = '#ffffff', weight = 1, fillOpacity = 0.7,
+    color = "#ffffff", weight = 1, fillOpacity = 0.7,
     highlightOptions = highlightOptions(
-      weight = 2, color = '#000000',
+      weight = 2, color = "#000000",
       fillOpacity = 1, opacity = 1,
       bringToFront = TRUE, sendToBack = TRUE),
     pathOptions = pathOptions(

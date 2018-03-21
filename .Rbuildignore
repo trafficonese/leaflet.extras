@@ -19,3 +19,8 @@
 ^CONDUCT\.md$
 ^node_modules
 ^package.*\.json
+^revdep
+^viztest
+^\.lintr$
+^scripts
+^webpack\.config\.js

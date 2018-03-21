@@ -31,7 +31,7 @@ addWeatherMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
 
 \item{i}{offset}
 
-\item{icon}{the weather icon name w/o the 'wi-' prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}}
+\item{icon}{the weather icon name w/o the "wi-" prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}}
 
 \item{markerColor}{color of the marker}
 

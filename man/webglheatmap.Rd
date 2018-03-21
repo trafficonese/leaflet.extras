@@ -60,7 +60,7 @@ layers (e.g. markers and polygons) can share the same group name.}
 
 \item{size}{in meters or pixels}
 
-\item{units}{either 'm' or 'px'}
+\item{units}{either "m" or "px"}
 
 \item{opacity}{for the canvas element}
 
@@ -76,7 +76,7 @@ initially, but can be overridden}
 \item{geojson}{The geojson or topojson url or contents as string.}
 
 \item{intensityProperty}{The property to use for determining the intensity at a point.
-Can be a 'string' or a JS function, or NULL.}
+Can be a "string" or a JS function, or NULL.}
 
 \item{kml}{The KML url or contents as string.}
 
@@ -125,7 +125,7 @@ leaflet() \%>\%
     geoJson,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
-    markerOptions = markerOptions(radius=2)
+    markerOptions = markerOptions(radius = 2)
   )
 
 ## for more examples see
@@ -142,8 +142,8 @@ leaflet() \%>\% setView(-77.0369, 38.9072, 12) \%>\%
   addKML(
     kml,
     markerType = "circleMarker",
-    stroke=FALSE, fillColor="black", fillOpacity = 1,
-    markerOptions = markerOptions(radius=1))
+    stroke = FALSE, fillColor = "black", fillOpacity = 1,
+    markerOptions = markerOptions(radius = 1))
 
 
 ## addWebGLCSVHeatmap
@@ -152,12 +152,12 @@ csv <- readr::read_file(
 )
 
 leaflet() \%>\%
-  setView(0,0, 2) \%>\%
+  setView(0, 0, 2) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatterNoLabels) \%>\%
   addWebGLCSVHeatmap(
     csv,
-    csvParserOptions("latitude_deg","longitude_deg"),
-    size = 10, units="px")
+    csvParserOptions("latitude_deg", "longitude_deg"),
+    size = 10, units = "px")
 
 
 airports <- readr::read_file(
@@ -180,8 +180,8 @@ leaflet() \%>\%
   addGPX(
     airports,
     markerType = "circleMarker",
-    stroke=FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius=1.5),
+    stroke = FALSE, fillColor = "black", fillOpacity = 1,
+    markerOptions = markerOptions(radius = 1.5),
     group = "airports"
   )
 

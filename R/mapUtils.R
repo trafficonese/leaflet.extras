@@ -18,7 +18,10 @@ utilsDependencies <- function() {
 #' @export
 #' @examples
 #' geoJson <- jsonlite::fromJSON(readr::read_file(
-#'    "https://raw.githubusercontent.com/MinnPost/simple-map-d3/master/example-data/world-population.geo.json"
+#'   paste0(
+#'     "https://raw.githubusercontent.com/MinnPost/simple-map-d3",
+#'     "/master/example-data/world-population.geo.json"
+#'   )
 #' ))
 #'
 #' world <- leaflet(

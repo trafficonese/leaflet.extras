@@ -83,7 +83,7 @@ initially, but can be overridden}
 \item{geojson}{The geojson or topojson url or contents as string.}
 
 \item{intensityProperty}{The property to use for determining the intensity at a point.
-Can be a 'string' or a JS function, or NULL.}
+Can be a "string" or a JS function, or NULL.}
 
 \item{kml}{The KML url or contents as string.}
 
@@ -121,7 +121,7 @@ leaflet(quakes) \%>\%
 ## for more examples see
 # browseURL(system.file("examples/heatmaps.R", package = "leaflet.extras"))
 kml <- readr::read_file(
-  system.file('examples/data/kml/crimes.kml.zip', package = 'leaflet.extras')
+  system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
 leaflet() \%>\%
@@ -130,9 +130,9 @@ leaflet() \%>\%
   addKMLHeatmap(kml, radius = 7) \%>\%
   addKML(
     kml,
-    markerType = 'circleMarker',
-    stroke=FALSE, fillColor='black', fillOpacity = 1,
-    markerOptions = markerOptions(radius=1))
+    markerType = "circleMarker",
+    stroke = FALSE, fillColor = "black", fillOpacity = 1,
+    markerOptions = markerOptions(radius = 1))
 
 ## for more examples see
 # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))

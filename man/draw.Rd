@@ -24,7 +24,7 @@ removeDrawToolbar(map, clearFeatures = FALSE)
 Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.}
 
 \item{targetGroup}{An optional group name of a Feature Group whose features need to be editable.
-Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+Used for adding shapes(markers, lines, polygons) and then editing them using the draw plugin.
 You can either set layerId or group or none but not both.}
 
 \item{position}{The position where the toolbar should appear.}
@@ -54,7 +54,7 @@ Removes the draw toolbar
 }
 \examples{
 leaflet() \%>\%
-  setView(0,0,2) \%>\%
+  setView(0, 0, 2) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addDrawToolbar(
     targetGroup = "draw",

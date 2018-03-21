@@ -61,7 +61,8 @@ geodesicDependencies <- function() {
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addGeodesicPolylines(lng = ~lng, lat = ~lat, weight = 2, color = "red",
 #'                        steps = 50, opacity = 1) %>%
-#'   addCircleMarkers(df,lat = ~lat,lng = ~lng, radius = 3, stroke = F, fillColor = "black", fillOpacity = 1)
+#'   addCircleMarkers(df, lat = ~lat,lng = ~lng, radius = 3, stroke = FALSE,
+#'                    fillColor = "black", fillOpacity = 1)
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))

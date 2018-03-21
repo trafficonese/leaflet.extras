@@ -89,7 +89,7 @@ addGPX(map, gpx, layerId = NULL, group = NULL, markerType = NULL,
 \item{group}{the name of the group this raster image should belong to (see
 the same parameter under \code{\link{addTiles}})}
 
-\item{markerType}{The type of marker.  either 'marker' or 'circleMarker'}
+\item{markerType}{The type of marker.  either "marker" or "circleMarker"}
 
 \item{markerIcons}{Icons for Marker.
 Can be a single marker using \code{\link[leaflet]{makeIcon}}
@@ -166,7 +166,7 @@ options for each label. Default \code{NULL}
 
 \item{mode}{q for quantile, e for equidistant, k for k-means}
 
-\item{channelMode}{Default 'rgb', can be one of 'rgb', 'lab', 'hsl', 'lch'}
+\item{channelMode}{Default "rgb", can be one of "rgb", "lab", "hsl", "lch"}
 
 \item{padding}{either a single number or a 2 number vector for clipping color values at ends.}
 
@@ -214,19 +214,19 @@ Adds a GPX to the leaflet map.
 \examples{
 ## addGeoJSONv2
 geoJson <- readr::read_file(
-  'https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson'
+  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
 leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLGeoJSONHeatmap(
-    geoJson, size = 30 , units = 'px'
+    geoJson, size = 30 , units = "px"
   ) \%>\%
   addGeoJSONv2(
     geoJson,
-    markerType = 'circleMarker',
-    stroke = FALSE, fillColor = 'black', fillOpacity = 0.7,
+    markerType = "circleMarker",
+    stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
     markerOptions = markerOptions(radius = 2)
   )
 
@@ -249,20 +249,20 @@ leaflet() \%>\%
   enableMeasurePath() \%>\%
   addGeoJSONChoropleth(
     geoJson,
-    valueProperty = 'AREASQMI',
-    scale = c('white','red'),
-    mode = 'q',
+    valueProperty = "AREASQMI",
+    scale = c("white", "red"),
+    mode = "q",
     steps = 4,
-    padding = c(0.2,0),
-    labelProperty = 'NAME',
+    padding = c(0.2, 0),
+    labelProperty = "NAME",
     popupProperty = propstoHTMLTable(
-      props = c('NAME', 'AREASQMI', 'REP_NAME', 'WEB_URL', 'REP_PHONE', 'REP_EMAIL', 'REP_OFFICE'),
-      table.attrs = list(class = 'table table-striped table-bordered'),
+      props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
+      table.attrs = list(class = "table table-striped table-bordered"),
       drop.na = TRUE
     ),
-    color = '#ffffff', weight = 1, fillOpacity = 0.7,
+    color = "#ffffff", weight = 1, fillOpacity = 0.7,
     highlightOptions = highlightOptions(
-      weight = 2, color = '#000000',
+      weight = 2, color = "#000000",
       fillOpacity = 1, opacity = 1,
       bringToFront = TRUE, sendToBack = TRUE),
     pathOptions = pathOptions(
@@ -278,24 +278,24 @@ leaflet() \%>\%
 
 ## addKML
 kml <- readr::read_file(
-  system.file('examples/data/kml/crimes.kml.zip', package = 'leaflet.extras')
+  system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
 leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
-  addWebGLKMLHeatmap(kml, size = 20, units = 'px') \%>\%
+  addWebGLKMLHeatmap(kml, size = 20, units = "px") \%>\%
   addKML(
     kml,
-    markerType = 'circleMarker',
-    stroke = FALSE, fillColor = 'black', fillOpacity = 1,
+    markerType = "circleMarker",
+    stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1)
   )
 
 
 ## addKMLChoropleth
 kml <- readr::read_file(
-  system.file('examples/data/kml/cb_2015_us_state_20m.kml.zip', package = 'leaflet.extras')
+  system.file("examples/data/kml/cb_2015_us_state_20m.kml.zip", package = "leaflet.extras")
 )
 
 leaflet() \%>\%
@@ -312,19 +312,19 @@ leaflet() \%>\%
          return 100*awater/(awater+aland);
       }'
     ),
-    scale = 'OrRd', mode='q', steps = 5,
-    padding = c(0.2,0),
-    popupProperty = 'description',
-    labelProperty = 'NAME',
-    color = '#ffffff', weight = 1, fillOpacity = 1,
+    scale = "OrRd", mode = "q", steps = 5,
+    padding = c(0.2, 0),
+    popupProperty = "description",
+    labelProperty = "NAME",
+    color = "#ffffff", weight = 1, fillOpacity = 1,
     highlightOptions = highlightOptions(
-      fillOpacity = 1, weight = 2, opacity=1, color = '#000000',
+      fillOpacity = 1, weight = 2, opacity = 1, color = "#000000",
       bringToFront = TRUE, sendToBack = TRUE
     ),
     legendOptions = legendOptions(
-      title = '\% of Water Area',
+      title = "\% of Water Area",
       numberFormatOptions = list(
-        style = 'decimal',
+        style = "decimal",
         maximumFractionDigits = 2
       )
     )
@@ -333,7 +333,7 @@ leaflet() \%>\%
 
 ## addCSV
 csv <- readr::read_file(
-  system.file('examples/data/csv/world_airports.csv.zip', package = 'leaflet.extras')
+  system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 )
 
 leaflet() \%>\%
@@ -341,15 +341,15 @@ leaflet() \%>\%
   addProviderTiles(providers$CartoDB.DarkMatterNoLabels) \%>\%
   addCSV(
     csv,
-    csvParserOptions('latitude_deg','longitude_deg'),
-    markerType = 'circleMarker',
-    stroke = FALSE, fillColor = 'red', fillOpacity = 1,
+    csvParserOptions("latitude_deg", "longitude_deg"),
+    markerType = "circleMarker",
+    stroke = FALSE, fillColor = "red", fillOpacity = 1,
     markerOptions = markerOptions(radius = 0.5))
 
 
 ## addGPX
 airports <- readr::read_file(
-  system.file('examples/data/gpx/md-airports.gpx.zip', package = 'leaflet.extras')
+  system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 )
 
 leaflet() \%>\%
@@ -359,13 +359,13 @@ leaflet() \%>\%
     providers$CartoDB.Positron,
     options = providerTileOptions(detectRetina = TRUE)
   ) \%>\%
-  addWebGLGPXHeatmap(airports, size = 20000, group = 'airports', opacity = 0.9) \%>\%
+  addWebGLGPXHeatmap(airports, size = 20000, group = "airports", opacity = 0.9) \%>\%
   addGPX(
     airports,
-    markerType = 'circleMarker',
-    stroke = FALSE, fillColor = 'black', fillOpacity = 1,
+    markerType = "circleMarker",
+    stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1.5),
-    group = 'airports'
+    group = "airports"
   )
 
 ## for a larger example see

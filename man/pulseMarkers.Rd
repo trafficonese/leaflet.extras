@@ -101,11 +101,11 @@ Add Pulse Markers
 \examples{
 
 iconSet = pulseIconList(
-  red = makePulseIcon(color='#ff0000'),
-  blue = makePulseIcon(color='#0000ff')
+  red = makePulseIcon(color = "#ff0000"),
+  blue = makePulseIcon(color = "#0000ff")
 )
 
-iconSet[c('red', 'blue')]
+iconSet[c("red", "blue")]
 
 leaflet() \%>\%
   addTiles() \%>\%

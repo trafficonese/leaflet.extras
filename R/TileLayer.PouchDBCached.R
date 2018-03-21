@@ -11,7 +11,7 @@ tileLayer.PouchDBCachedDependency <- function() {
     # // "pouchdb-browser": "6.4.3",
     html_dep_prod("pouchdb-browser", "6.4.3"),
     # // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
-    html_dep_prod("leaflet-tilelayer-pouchdbcached", "0.3.0")
+    html_dep_prod("leaflet-tilelayer", "0.3.0")
   )
 }
 

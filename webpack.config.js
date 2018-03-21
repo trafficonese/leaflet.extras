@@ -5,7 +5,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const src_path = "./inst/htmlwidgets/src/";
-const lib_path = "./inst/htmlwidgets/lib/";
 const build_path = path.resolve(__dirname, "./inst/htmlwidgets/build");
 
 library_module = function(name) {
@@ -17,7 +16,7 @@ library_module = function(name) {
           {
             loader: 'file-loader',
             options: {
-              name: name + "_css/" + name + "-[hash].[ext]"
+              name: "css/" + name + ".[ext]"
             }
           }
         ]
@@ -227,21 +226,21 @@ const config = [
 
 
   // "leaflet.heat": "0.2.0",
-  library_prod(lib_path + "heat/leaflet-heat.js", "leaflet-heat"),
+  library_prod(src_path + "heat/leaflet-heat.js", "leaflet-heat"),
   // library_binding("leaflet-heat"),
 
   // "pouchdb-browser": "6.4.3",
   // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
   library_prod("pouchdb-browser/lib/index.js", "pouchdb-browser", "PouchDB"),
-  library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer-pouchdbcached"),
+  library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
   library_prod(
     [
       "leaflet-weather-markers/dist/leaflet.weather-markers.js",
       "leaflet-weather-markers/dist/leaflet.weather-markers.css",
-      lib_path + "weather-icons/weather-icons.min.css",
-      lib_path + "weather-icons/weather-icons-wind.min.css"
+      src_path + "weather-icons/weather-icons.min.css",
+      src_path + "weather-icons/weather-icons-wind.min.css"
     ],
     "leaflet-weather-markers"
   ),
