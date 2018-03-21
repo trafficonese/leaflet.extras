@@ -21,9 +21,9 @@ addBounceMarkers(map, lat, lng, duration = 1000, height = 100)
 Add Bounce Markers to map
 }
 \examples{
-\dontrun{
-leaflet() \%>\% addTiles() \%>\% addBounceMarkers(49, 11)
-}
+leaflet() \%>\%
+  addTiles() \%>\%
+  addBounceMarkers(49, 11)
 }
 \seealso{
 \href{https://github.com/maximeh/leaflet.bouncemarker}{Github: leaflet.bouncemarker}
