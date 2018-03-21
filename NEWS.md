@@ -1,13 +1,19 @@
 # leaflet.extras 1.0.0
 
+## leaflet.js
+
+`leaflet.extras` depends upon `leaflet` (>= 2.0.0). As of `leaflet` 2.0.0, it is built using `leaflet.js` version 1.3.1.  All plugins have been updated to their latest compatible version of `leaflet.js` v1.3.1.
+
 ## leaflet-omnivore
 
-- Removed shipped javascript files of `wellknown` and `polyline`
+- Removed shipped javascript files of `wellknown.js` and `polyline.js`
 - [Leaflet.label](https://github.com/Leaflet/Leaflet.label/blob/0a4e3a6422c9e5a799a9cde106de5bcfdb5ab741/README.md#upgrade-path-to-ltooltip) has updated to v1.x of leaflet.js changing default behavior. Mainly... "bindLabel, openLabel and so should be replaced by bindTooltip, openTooltip, etc".
 
 ## New Features
 
 - [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
+
+- [Bounce Markers](https://github.com/maximeh/leaflet.bouncemarker)
 
 ## Improvements
 
