@@ -33,6 +33,7 @@ drawDependencies <- function() {
 #' @param circleOptions See \code{\link{drawCircleOptions}}(). Set to FALSE to disable circle drawing.
 #' @param rectangleOptions See \code{\link{drawRectangleOptions}}(). Set to FALSE to disable rectangle drawing.
 #' @param markerOptions See \code{\link{drawMarkerOptions}}(). Set to FALSE to disable marker drawing.
+#' @param circleMarkerOptions See \code{\link{drawCircleMarkerOptions}}(). Set to FALSE to disable circle marker drawing.
 #' @param editOptions By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @export
@@ -63,6 +64,7 @@ addDrawToolbar <- function(
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangleOptions(),
   markerOptions = drawMarkerOptions(),
+  circleMarkerOptions = drawCircleMarkerOptions(),
   editOptions = FALSE,
   singleFeature = FALSE
 ) {
@@ -97,6 +99,7 @@ addDrawToolbar <- function(
       circle = circleOptions,
       rectangle = rectangleOptions,
       marker = markerOptions,
+      circlemarker = circleMarkerOptions,
       singleFeature = singleFeature)),
     edit = editOptions )
 
