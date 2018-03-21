@@ -17,7 +17,6 @@ barrow <- c(71.29, -156.76)
 df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
 names(df) <- c('lat','lng')
 
-library(leaflet)
 library(leaflet.extras)
 library(sp)
 
@@ -86,5 +85,3 @@ leaflet(df) %>% addProviderTiles(providers$CartoDB.Positron) %>%
   addGreatCircles(radius = 2000000, steps = 100, group = 'circle')  %>%
   setView(0,35,1) %>%
   addLayersControl(overlayGroups = c('circle'))
-
-

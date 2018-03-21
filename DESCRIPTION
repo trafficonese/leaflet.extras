@@ -4,6 +4,7 @@ Title: Extra Functionality for 'leaflet' Package
 Version: 0.2.9002
 Authors@R: c(
     person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
+    person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("ctb")),
     person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
       comment = "Leaflet-search and Leaflet-GPS plugin integration"),
     person("Robin", "Cura", email= "robin@cura.info", role = c("ctb"),
@@ -21,14 +22,17 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.1.0),
-    leaflet (>= 1.1.0)
+    leaflet (> 1.1.1)
+Remotes:
+    schloerke/leaflet@barret/v1x
 Imports:
     shiny,
     htmlwidgets,
     htmltools,
     stringr,
     magrittr
-Suggests: V8,
+Suggests:
+    V8,
     dplyr,
     geojsonio,
     purrr,

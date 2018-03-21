@@ -67,7 +67,7 @@ See the [FAQ](#FAQ) section below for details.
 
 ### Documentation
 
-The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation. 
+The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
 
 Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/bhaskarvk/leaflet.extras/tree/master/inst/examples) available. You can see most of these examples in action at [Rpubs:bhaskarvk](http://rpubs.com/bhaskarvk).
 
@@ -91,9 +91,8 @@ _I found a bug._
 
 _I need a plugin which requires 1.x version of the leaflet JavaScript library_
 
-The R `leaflet` package is still using the version 0.7.x of the leaflet JavaScript library. 1.x support is planned but not currently available. When that happens `leaflet.extras` can begin to integrate plugins which require the 1.x version.
+As of version 1.0.0, `leaflet.extras` supports leaflet.js version 1.x.
 
 
 ### Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-

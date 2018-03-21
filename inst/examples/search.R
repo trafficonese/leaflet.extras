@@ -5,7 +5,6 @@
 #'     self_contained: true
 #' ---
 
-library(leaflet)
 library(leaflet.extras)
 
 

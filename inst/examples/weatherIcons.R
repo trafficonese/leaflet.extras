@@ -1,8 +1,7 @@
 library(leaflet.extras)
 
-leaf <- leaflet() %>% addTiles()
-
-leaf %>%
+leaflet() %>% 
+  addTiles() %>%
   addWeatherMarkers(
     lng=-118.456554, lat=34.078039,
     label='This is a label',
@@ -75,7 +74,3 @@ leaflet(cities) %>% addProviderTiles(providers$CartoDB.Positron) %>%
                     label = ~City,
                     icon = cities.icons,
                     popup = cities.popups)
-
-
-
-

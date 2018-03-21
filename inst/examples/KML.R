@@ -20,7 +20,7 @@ leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
     kml,
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='black', fillOpacity = 1,
-    markerOptions = leaflet::markerOptions(radius=1))
+    markerOptions = markerOptions(radius=1))
 
 #' ## Shape Data
 
@@ -36,7 +36,7 @@ leaflet() %>%
   addBootstrapDependency() %>%
   setView(-98.583333, 39.833333, 4) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  leaflet.extras::addKMLChoropleth(
+  addKMLChoropleth(
     kml,
     valueProperty = JS(
       'function(feature){

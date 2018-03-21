@@ -1,12 +1,17 @@
 
 # Source https://github.com/mapshakers/leaflet-icon-pulse
 pulseIconDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "leaflet-icon-pulse",version = "0.1.0",
+  #     system.file("htmlwidgets/lib/icon-pulse", package = "leaflet.extras"),
+  #     script = c("L.Icon.Pulse.js", "plugin-pulseIcon-bindings.js"),
+  #     stylesheet ="L.Icon.Pulse.css" )
+  # )
   list(
-    htmltools::htmlDependency(
-      "leaflet-icon-pulse",version = "0.1.0",
-      system.file("htmlwidgets/lib/icon-pulse", package = "leaflet.extras"),
-      script = c("L.Icon.Pulse.js", "plugin-pulseIcon-bindings.js"),
-      stylesheet ="L.Icon.Pulse.css" )
+    # // "leaflet-pulse-icon": "0.1.0",
+    html_dep_prod("leaflet-pulse-icon", "0.1.0", has_style = TRUE),
+    html_dep_binding("leaflet-pulse-icon", "1.0.0")
   )
 }
 
@@ -14,6 +19,7 @@ pulseIconDependency <- function() {
 #' Make pulse-icon set
 #'
 #' @param ... icons created from \code{\link{makePulseIcon}()}
+#' @rdname pulseMarkers
 #' @export
 #' @examples
 #'
@@ -23,7 +29,7 @@ pulseIconDependency <- function() {
 #' )
 #'
 #' iconSet[c('red', 'blue')]
-#' @rdname pulseMarkers
+#'
 pulseIconList = function(...) {
   res = structure(
     list(...),
@@ -152,6 +158,18 @@ pulseIcons <- function(
 #'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname pulseMarkers
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPulseMarkers(
+#'     lng = -118.456554, lat = 34.078039,
+#'     label = "This is a label",
+#'     icon = makePulseIcon(heartbeat = 0.5)
+#'   )
+#'
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))
 addPulseMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,

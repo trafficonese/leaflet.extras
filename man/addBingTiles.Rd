@@ -24,3 +24,6 @@ addBingTiles(map, apikey = Sys.getenv("BING_MAPS_API_KEY"),
 \description{
 Adds Bing Tiles Layer
 }
+\seealso{
+Get a Bing Maps API Key: \url{https://msdn.microsoft.com/en-us/library/ff428642.aspx}
+}

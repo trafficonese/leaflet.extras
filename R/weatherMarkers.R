@@ -1,14 +1,19 @@
 
 # Source https://github.com/mapshakers/leaflet-icon-weather
 weatherIconDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "leaflet-icon-weather",version = "3.0.0",
+  #     system.file("htmlwidgets/lib/weather-markers", package = "leaflet.extras"),
+  #     script = c("leaflet.weather-markers.min.js", "plugin-weatherMarkers-bindings.js"),
+  #     stylesheet =c("weather-icons.min.css", "weather-icons-wind.min.css",
+  #                   "leaflet.weather-markers.css" )
+  #     )
+  # )
   list(
-    htmltools::htmlDependency(
-      "leaflet-icon-weather",version = "3.0.0",
-      system.file("htmlwidgets/lib/weather-markers", package = "leaflet.extras"),
-      script = c("leaflet.weather-markers.min.js", "plugin-weatherMarkers-bindings.js"),
-      stylesheet =c("weather-icons.min.css", "weather-icons-wind.min.css",
-                    "leaflet.weather-markers.css" )
-      )
+    # napa tallsam/Leaflet.weather-markers#afda5b3
+    html_dep_prod("leaflet-weather-markers", "3.0.0", has_style = TRUE),
+    html_dep_binding("leaflet-weather-markers", "1.0.0")
   )
 }
 
@@ -22,11 +27,11 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' @examples
 #'
 #' iconSet = weatherIconList(
-#'   hurricane = makeWeatherIcon(icon='hurricane'),
-#'   tornado = makeWeatherIcon(icon='tornado')
+#'   hurricane = makeWeatherIcon(icon = "hurricane"),
+#'   tornado = makeWeatherIcon(icon = "tornado")
 #' )
 #'
-#' iconSet[c('hurricane', 'tornado')]
+#' iconSet[c("hurricane", "tornado")]
 #' @rdname weatherMarkers
 weatherIconList = function(...) {
   res = structure(
@@ -179,6 +184,21 @@ weatherIcons <- function(
 #'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname weatherMarkers
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addWeatherMarkers(
+#'     lng = -118.456554, lat = 34.078039,
+#'     label = "This is a label",
+#'     icon = makeWeatherIcon(
+#'       icon = "hot",
+#'       iconColor = "#ffffff77",
+#'       markerColor = "blue"
+#'     )
+#'   )
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/weatherIcons.R", package = "leaflet.extras"))
 addWeatherMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,

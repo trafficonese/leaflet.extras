@@ -269,5 +269,4 @@ leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
     geoJson,
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='black', fillOpacity = 0.7,
-    markerOptions = leaflet::markerOptions(radius=2))
-
+    markerOptions = markerOptions(radius=2))

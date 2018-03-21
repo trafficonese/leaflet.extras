@@ -1,13 +1,16 @@
 # Source https://github.com/mlevans/leaflet-fullscreen
 fullscreenDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "fullscreen",version = "1.0.1",
+  #     system.file("htmlwidgets/lib/fullscreen", package = "leaflet.extras"),
+  #     script = c("Leaflet.fullscreen.min.js"),
+  #     stylesheet = c("leaflet.fullscreen.css")
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "fullscreen",version = "1.0.1",
-      system.file("htmlwidgets/lib/fullscreen", package = "leaflet.extras"),
-      script = c("Leaflet.fullscreen.min.js"),
-      stylesheet = c("leaflet.fullscreen.css")
-
-    )
+    # // "leaflet-fullscreen": "1.0.2",
+    html_dep_prod("leaflet-fullscreen", "1.0.2", has_style = TRUE)
   )
 }
 
@@ -19,10 +22,9 @@ fullscreenDependency <- function() {
 #' @rdname fullscreen
 #' @export
 #' @examples
-#' \dontrun{
-#' leaflet() %>% addTiles() %>%
+#' leaflet() %>%
+#'   addTiles() %>%
 #'   addFullscreenControl()
-#' }
 addFullscreenControl <- function(
   map, position = 'topleft', pseudoFullscreen = FALSE) {
   map$dependencies <- c(map$dependencies, fullscreenDependency())

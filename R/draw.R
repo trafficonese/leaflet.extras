@@ -1,14 +1,22 @@
 drawDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "draw",version = "0.1.0",
+  #     system.file("htmlwidgets/lib/draw", package = "leaflet.extras"),
+  #     script = c(
+  #       'leaflet.draw-src.js',
+  #       'Leaflet.draw.drag-src.js',
+  #       'draw-bindings.js'),
+  #     stylesheet = c('leaflet.draw.css')
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "draw",version = "0.1.0",
-      system.file("htmlwidgets/lib/draw", package = "leaflet.extras"),
-      script = c(
-        'leaflet.draw-src.js',
-        'Leaflet.draw.drag-src.js',
-        'draw-bindings.js'),
-      stylesheet = c('leaflet.draw.css')
-    )
+    # // "leaflet-draw": "1.0.2",
+    # // "leaflet-draw-drag": "1.0.2",
+    # draw bindings
+    html_dep_prod("leaflet-draw", "1.0.2", has_style = TRUE),
+    html_dep_prod("leaflet-draw-drag", "1.0.2"),
+    html_dep_binding("leaflet-draw", "1.0.0")
   )
 }
 
@@ -29,6 +37,24 @@ drawDependencies <- function() {
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @export
 #' @rdname draw
+#' @examples
+#' leaflet() %>%
+#'   setView(0,0,2) %>%
+#'   addProviderTiles(providers$CartoDB.Positron) %>%
+#'   addDrawToolbar(
+#'     targetGroup = "draw",
+#'     editOptions = editToolbarOptions(
+#'       selectedPathOptions = selectedPathOptions()
+#'     )
+#'   )  %>%
+#'   addLayersControl(
+#'     overlayGroups = c("draw"),
+#'     options = layersControlOptions(collapsed = FALSE)
+#'   ) %>%
+#'   addStyleEditor()
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
 addDrawToolbar <- function(
   map, targetLayerId = NULL, targetGroup = NULL,
   position = c('topleft','topright','bottomleft','bottomright'),

@@ -1,4 +1,9 @@
-# leaflet.extras 0.3
+# leaflet.extras 1.0.0
+
+## leaflet-omnivore
+
+- Removed shipped javascript files of `wellknown` and `polyline`
+- [Leaflet.label](https://github.com/Leaflet/Leaflet.label/blob/0a4e3a6422c9e5a799a9cde106de5bcfdb5ab741/README.md#upgrade-path-to-ltooltip) has updated to v1.x of leaflet.js changing default behavior. Mainly... "bindLabel, openLabel and so should be replaced by bindTooltip, openTooltip, etc".
 
 ## New Features
 
@@ -102,7 +107,7 @@
 
 * Added addGeoJSONv2 for better GeoJSON support.
 
-## Improvements 
+## Improvements
 
 * Refactored GeoJSON/TopoJSON Chropleths.
 

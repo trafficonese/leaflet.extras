@@ -1,4 +1,3 @@
-library(leaflet)
 library(leaflet.extras)
 library(shiny)
 

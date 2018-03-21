@@ -24,7 +24,7 @@ leaf %>%
     csvParserOptions('latitude_deg','longitude_deg'),
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='red', fillOpacity = 1,
-    markerOptions = leaflet::markerOptions(radius=0.5))
+    markerOptions = markerOptions(radius=0.5))
 
 #' <br/><br/>Same data as a heatmap.
 

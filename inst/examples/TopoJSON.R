@@ -22,7 +22,7 @@ leaflet() %>%
     topoJson,
     markerType = 'circleMarker',
     stroke=FALSE, fillColor='black', fillOpacity = 1,
-    markerOptions = leaflet::markerOptions(radius=1))
+    markerOptions = markerOptions(radius=1))
 
 #' ## Shape Data
 
@@ -70,4 +70,3 @@ leaflet() %>%
     group = 'yellow-black'
   ) %>%
   addLayersControl(baseGroups = c('orange-red','yellow-black'))
-

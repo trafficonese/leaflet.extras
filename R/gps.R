@@ -1,12 +1,17 @@
 leafletGPSDependencies <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "gps",
+  #     "1.5.0",
+  #     system.file("htmlwidgets/lib/gps", package = "leaflet.extras"),
+  #     script = c('leaflet-gps.min.js', 'gps-bindings.js'),
+  #     stylesheet = c('leaflet-gps.min.css')
+  #   )
+  # )
   list(
-    htmltools::htmlDependency(
-      "gps",
-      "1.5.0",
-      system.file("htmlwidgets/lib/gps", package = "leaflet.extras"),
-      script = c('leaflet-gps.min.js', 'gps-bindings.js'),
-      stylesheet = c('leaflet-gps.min.css')
-    )
+    # // "leaflet-gps": "1.7.0",
+    html_dep_prod("leaflet-gps", "1.7.0", has_style = TRUE),
+    html_dep_binding("leaflet-gps", "1.0.0")
   )
 }
 
@@ -40,6 +45,10 @@ gpsOptions <- function(
 #' @param options Options for the GPS control.
 #' @rdname gps
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addControlGPS()
 addControlGPS <- function(
   map,
   options = gpsOptions()

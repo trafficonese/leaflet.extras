@@ -17,3 +17,5 @@
 ^inst/htmlwidgets/lib/mapshaper$
 ^inst/htmlwidgets/lib/turf$
 ^CONDUCT\.md$
+^node_modules
+^package.*\.json

@@ -106,4 +106,16 @@ iconSet = pulseIconList(
 )
 
 iconSet[c('red', 'blue')]
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addPulseMarkers(
+    lng = -118.456554, lat = 34.078039,
+    label = "This is a label",
+    icon = makePulseIcon(heartbeat = 0.5)
+  )
+
+
+## for more examples see
+# browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))
 }
