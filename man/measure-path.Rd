@@ -36,8 +36,9 @@ Options for measure-path
 Adds a toolbar to enable/disable measuing path distances/areas
 }
 \examples{
-fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson'
-geoJson <- readr::read_file(fName)
+geoJson <- readr::read_file(
+  "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+)
 
 leaflet() \%>\%
   addTiles() \%>\%
