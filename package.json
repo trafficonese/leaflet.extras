@@ -34,7 +34,7 @@
     "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
     "csv2geojson": "5.0.2",
     "fuse.js": "3.2.0",
-    "leaflet-choropleth": "1.1.4",
+    "leaflet-choropleth": "github:bhaskarvk/leaflet-choropleth#f8d1ed4",
     "leaflet-draw": "1.0.2",
     "leaflet-draw-drag": "0.4.5",
     "leaflet-fullscreen": "1.0.2",
