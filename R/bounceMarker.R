@@ -1,12 +1,19 @@
 # Source: https://github.com/maximeh/leaflet.bouncemarker
 bounceMarkerDependency <- function() {
+  # list(
+  #   htmltools::htmlDependency(
+  #     "bouncemarker",
+  #     "0.1.0",
+  #     system.file("htmlwidgets/lib/bouncemarker", package = "leaflet.extras"),
+  #     script = c("bouncemarker.js", "bouncemarker-binding.js")
+  #   ))
   list(
-    htmltools::htmlDependency(
-      "bouncemarker",
-      "0.1.0",
-      system.file("htmlwidgets/lib/bouncemarker", package = "leaflet.extras"),
-      script = c("bouncemarker.js", "bouncemarker-binding.js")
-    ))
+    # // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
+    # bounce bindings
+    html_dep_prod("leaflet-bouncemarker", "1.1.0"),
+    html_dep_binding("leaflet-bouncemarker", "1.0.0")
+  )
+
 }
 
 #' Add Bounce Markers to map

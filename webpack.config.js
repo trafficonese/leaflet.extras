@@ -247,6 +247,12 @@ const config = [
   // library_binding("leaflet-weather-markers")
 
 
+  // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
+  library_prod("leaflet.BounceMarker", "leaflet-bouncemarker")
+  // library_binding("leaflet-bounce-marker")
+
+
+
 
 ];
 
