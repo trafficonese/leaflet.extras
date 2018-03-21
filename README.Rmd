@@ -94,6 +94,17 @@ _I need a plugin which requires 1.x version of the leaflet JavaScript library_
 
 As of version 1.0.0, `leaflet.extras` supports leaflet.js version 1.x.
 
+### Development
+
+To make additions to the plugin dependencies, please add the plugin using `npm`.  Make sure it is compiled within the `webpack.config.js`.  Finally, make sure htmlwidgets finds it within your plugin's dependency function.
+
+To build the latest version of the plugins, please make sure Node.js is installed on your system, then run:
+
+```
+npm install
+npm run build
+```
+
 
 ### Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
