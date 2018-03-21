@@ -1,10 +1,10 @@
 styleEditorDependencies <- function() {
   # list(
   #   htmltools::htmlDependency(
-  #     "style-editor",version = "0.1.6",
+  #     "style-editor", version = "0.1.6",
   #     system.file("htmlwidgets/lib/style-editor", package = "leaflet.extras"),
-  #     script = c('Leaflet.StyleEditor.min.js', 'styleEditor-bindings.js'),
-  #     stylesheet = c('Leaflet.StyleEditor.min.css')
+  #     script = c("Leaflet.StyleEditor.min.js", "styleEditor-bindings.js"),
+  #     stylesheet = c("Leaflet.StyleEditor.min.css")
   #   )
   # )
   list(
@@ -26,17 +26,17 @@ styleEditorDependencies <- function() {
 #'   setView(0, 0, 2) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addDrawToolbar(
-#'     targetGroup = 'draw',
+#'     targetGroup = "draw",
 #'     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions())
 #'   ) %>%
 #'   addLayersControl(
-#'     overlayGroups = c('draw'), options = layersControlOptions(collapsed = FALSE)
+#'     overlayGroups = c("draw"), options = layersControlOptions(collapsed = FALSE)
 #'   ) %>%
 #'   # add the style editor to alter shapes added to map
 #'   addStyleEditor()
 addStyleEditor <- function(
   map,
-  position = c('topleft','topright','bottomleft','bottomright'),
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
   openOnLeafletDraw = TRUE, useGrouping = FALSE,
   ...) {
 
@@ -50,12 +50,12 @@ addStyleEditor <- function(
     useGrouping = useGrouping,
     ...
   ))
-  leaflet::invokeMethod(map, leaflet::getMapData(map), 'addStyleEditor', options)
+  leaflet::invokeMethod(map, leaflet::getMapData(map), "addStyleEditor", options)
 }
 
 #' Remove style editor
 #' @rdname style-editor
 #' @export
 removeStyleEditor <- function(map) {
-  leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeStyleEditor')
+  leaflet::invokeMethod(map, leaflet::getMapData(map), "removeStyleEditor")
 }

@@ -25,7 +25,7 @@ sleepDependency <- function() {
 #' @param  sleepOpacity opacity for the sleeping map
 #' @export
 #' @examples
-#' leaflet(width = '100%') %>%
+#' leaflet(width = "100%") %>%
 #'   setView(0, 0, 1) %>%
 #'   addTiles() %>%
 #'   suspendScroll()
@@ -36,8 +36,8 @@ suspendScroll <- function(
   wakeTime = 750,
   sleepNote = TRUE,
   hoverToWake = TRUE,
-  wakeMessage = 'Click or Hover to Wake',
-  #sleepButton = 'L.Control.sleepMapControl',
+  wakeMessage = "Click or Hover to Wake",
+  #sleepButton = "L.Control.sleepMapControl",
   sleepOpacity = .7
 ) {
   sleepOptions <- list(

@@ -4,8 +4,8 @@ leafletGPSDependencies <- function() {
   #     "gps",
   #     "1.5.0",
   #     system.file("htmlwidgets/lib/gps", package = "leaflet.extras"),
-  #     script = c('leaflet-gps.min.js', 'gps-bindings.js'),
-  #     stylesheet = c('leaflet-gps.min.css')
+  #     script = c("leaflet-gps.min.js", "gps-bindings.js"),
+  #     stylesheet = c("leaflet-gps.min.css")
   #   )
   # )
   list(
@@ -24,7 +24,7 @@ leafletGPSDependencies <- function() {
 #' @rdname gps
 #' @export
 gpsOptions <- function(
-  position = 'topleft',
+  position = "topleft",
   activate = FALSE,
   autoCenter = FALSE,
   maxZoom = NULL,
@@ -57,7 +57,7 @@ addControlGPS <- function(
   invokeMethod(
     map,
     getMapData(map),
-    'addControlGPS',
+    "addControlGPS",
     leaflet::filterNULL(options)
   )
 }
@@ -70,7 +70,7 @@ removeControlGPS <- function(map) {
   invokeMethod(
     map,
     getMapData(map),
-    'removeControlGPS'
+    "removeControlGPS"
   )
 }
 
@@ -83,7 +83,7 @@ activateGPS <- function(map) {
   invokeMethod(
     map,
     getMapData(map),
-    'activateGPS'
+    "activateGPS"
   )
 }
 
@@ -96,6 +96,6 @@ deactivateGPS <- function(map) {
   invokeMethod(
     map,
     getMapData(map),
-    'deactivateGPS'
+    "deactivateGPS"
   )
 }

@@ -9,10 +9,10 @@ server <- function(input, output, session) {
       addProviderTiles(providers$CartoDB.Positron) %>%
       addSearchOSM(
         options = searchOSMOptions(
-          position = 'topleft'))
+          position = "topleft"))
   })
 
-  observeEvent(input$leafmap_search_location_found,{
+  observeEvent(input$leafmap_search_location_found, {
     print("Location Found")
     print(input$leafmap_search_location_found)
   })

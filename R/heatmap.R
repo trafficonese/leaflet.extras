@@ -3,7 +3,7 @@
 heatmapDependency <- function() {
   # list(
   #   htmltools::htmlDependency(
-  #     "Leaflet.heat",version = "0.1.0",
+  #     "Leaflet.heat", version = "0.1.0",
   #     system.file("htmlwidgets/lib/heat", package = "leaflet.extras"),
   #     script = c("leaflet-heat.js", "heat-bindings.js")
   #   )
@@ -79,17 +79,17 @@ addHeatmap = function(
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addHeatmap")
 
-  if(is.null(intensity)) {
+  if (is.null(intensity)) {
     points <- cbind(pts$lat, pts$lng)
   } else {
-    if(inherits(intensity,'formula')) {
+    if (inherits(intensity, "formula")) {
       intensity <- eval(intensity[[2]], data, environment(intensity))
     }
     points <- cbind(pts$lat, pts$lng, intensity)
   }
 
   leaflet::invokeMethod(
-    map, data, 'addHeatmap', points,
+    map, data, "addHeatmap", points,
     layerId, group,
     leaflet::filterNULL(list(
       minOpacity = minOpacity,
@@ -105,7 +105,7 @@ addHeatmap = function(
 #' Adds a heatmap with data from a GeoJSON/TopoJSON file/url
 #' @param geojson The geojson or topojson url or contents as string.
 #' @param intensityProperty The property to use for determining the intensity at a point.
-#' Can be a 'string' or a JS function, or NULL.
+#' Can be a "string" or a JS function, or NULL.
 #' @rdname heatmap
 #' @export
 addGeoJSONHeatmap = function(
@@ -120,7 +120,7 @@ addGeoJSONHeatmap = function(
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
-    'addGeoJSONHeatmap', geojson, intensityProperty,
+    "addGeoJSONHeatmap", geojson, intensityProperty,
     layerId, group,
     leaflet::filterNULL(list(
       minOpacity = minOpacity,
@@ -138,7 +138,7 @@ addGeoJSONHeatmap = function(
 #' @export
 #' @examples
 #' kml <- readr::read_file(
-#'   system.file('examples/data/kml/crimes.kml.zip', package = 'leaflet.extras')
+#'   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 #' )
 #'
 #' leaflet() %>%
@@ -147,9 +147,9 @@ addGeoJSONHeatmap = function(
 #'   addKMLHeatmap(kml, radius = 7) %>%
 #'   addKML(
 #'     kml,
-#'     markerType = 'circleMarker',
-#'     stroke=FALSE, fillColor='black', fillOpacity = 1,
-#'     markerOptions = markerOptions(radius=1))
+#'     markerType = "circleMarker",
+#'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
+#'     markerOptions = markerOptions(radius = 1))
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))
@@ -165,7 +165,7 @@ addKMLHeatmap = function(
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
-    'addKMLHeatmap', kml, intensityProperty,
+    "addKMLHeatmap", kml, intensityProperty,
     layerId, group,
     leaflet::filterNULL(list(
       minOpacity = minOpacity,
@@ -195,7 +195,7 @@ addCSVHeatmap = function(
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
-    'addCSVHeatmap', csv, intensityProperty,
+    "addCSVHeatmap", csv, intensityProperty,
     layerId, group,
     leaflet::filterNULL(list(
       minOpacity = minOpacity,
@@ -224,7 +224,7 @@ addGPXHeatmap = function(
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
-    'addGPXHeatmap', gpx, intensityProperty,
+    "addGPXHeatmap", gpx, intensityProperty,
     layerId, group,
     leaflet::filterNULL(list(
       minOpacity = minOpacity,
@@ -241,12 +241,12 @@ addGPXHeatmap = function(
 #' @rdname heatmap
 #' @export
 removeHeatmap = function(map, layerId) {
-    leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeHeatmap', layerId)
+    leaflet::invokeMethod(map, leaflet::getMapData(map), "removeHeatmap", layerId)
 }
 
 #' clears the heatmap
 #' @rdname heatmap
 #' @export
 clearHeatmap = function(map) {
-    leaflet::invokeMethod(map, NULL, 'clearHeatmap')
+    leaflet::invokeMethod(map, NULL, "clearHeatmap")
 }

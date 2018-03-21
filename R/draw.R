@@ -1,13 +1,13 @@
 drawDependencies <- function() {
   # list(
   #   htmltools::htmlDependency(
-  #     "draw",version = "0.1.0",
+  #     "draw", version = "0.1.0",
   #     system.file("htmlwidgets/lib/draw", package = "leaflet.extras"),
   #     script = c(
-  #       'leaflet.draw-src.js',
-  #       'Leaflet.draw.drag-src.js',
-  #       'draw-bindings.js'),
-  #     stylesheet = c('leaflet.draw.css')
+  #       "leaflet.draw-src.js",
+  #       "Leaflet.draw.drag-src.js",
+  #       "draw-bindings.js"),
+  #     stylesheet = c("leaflet.draw.css")
   #   )
   # )
   list(
@@ -25,7 +25,7 @@ drawDependencies <- function() {
 #' @param targetLayerId An optional layerId of a GeoJSON/TopoJSON layer whose features need to be editable.
 #'  Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.
 #' @param targetGroup An optional group name of a Feature Group whose features need to be editable.
-#'  Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+#'  Used for adding shapes(markers, lines, polygons) and then editing them using the draw plugin.
 #'  You can either set layerId or group or none but not both.
 #' @param position The position where the toolbar should appear.
 #' @param polylineOptions See \code{\link{drawPolylineOptions}}(). Set to FALSE to disable polyline drawing.
@@ -40,7 +40,7 @@ drawDependencies <- function() {
 #' @rdname draw
 #' @examples
 #' leaflet() %>%
-#'   setView(0,0,2) %>%
+#'   setView(0, 0, 2) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addDrawToolbar(
 #'     targetGroup = "draw",
@@ -58,7 +58,7 @@ drawDependencies <- function() {
 #' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
 addDrawToolbar <- function(
   map, targetLayerId = NULL, targetGroup = NULL,
-  position = c('topleft','topright','bottomleft','bottomright'),
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
   polylineOptions = drawPolylineOptions(),
   polygonOptions = drawPolygonOptions(),
   circleOptions = drawCircleOptions(),
@@ -69,22 +69,22 @@ addDrawToolbar <- function(
   singleFeature = FALSE
 ) {
 
-  if(!is.null(targetGroup) && !is.null(targetLayerId)) {
+  if (!is.null(targetGroup) && !is.null(targetLayerId)) {
       stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
 
   map$dependencies <- c(map$dependencies, drawDependencies())
 
   markerIconFunction <- NULL
-  if(inherits(markerOptions, 'list') && !is.null(markerOptions$markerIcon)) {
-     if(inherits(markerOptions$markerIcon, 'leaflet_icon')) {
+  if (inherits(markerOptions, "list") && !is.null(markerOptions$markerIcon)) {
+     if (inherits(markerOptions$markerIcon, "leaflet_icon")) {
        markerIconFunction <- defIconFunction
-     } else if(inherits(markerOptions$markerIcon, 'leaflet_awesome_icon')) {
+     } else if (inherits(markerOptions$markerIcon, "leaflet_awesome_icon")) {
        map <- addAwesomeMarkersDependencies(
          map, markerOptions$markerIcon$library)
        markerIconFunction <- awesomeIconFunction
      } else {
-       stop('markerIcon should be created using either leaflet::makeIcon() or leaflet::makeAwesomeIcon()')
+       stop("markerIcon should be created using either leaflet::makeIcon() or leaflet::makeAwesomeIcon()")
      }
     markerOptions$markerIconFunction <- markerIconFunction
   }
@@ -111,6 +111,6 @@ addDrawToolbar <- function(
 #' @param clearFeatures whether to clear the map of drawn features.
 #' @rdname draw
 #' @export
-removeDrawToolbar <- function(map, clearFeatures=FALSE) {
-  leaflet::invokeMethod(map, leaflet::getMapData(map), 'removeDrawToolbar', clearFeatures)
+removeDrawToolbar <- function(map, clearFeatures = FALSE) {
+  leaflet::invokeMethod(map, leaflet::getMapData(map), "removeDrawToolbar", clearFeatures)
 }

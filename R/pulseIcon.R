@@ -6,7 +6,7 @@ pulseIconDependency <- function() {
   #     "leaflet-icon-pulse",version = "0.1.0",
   #     system.file("htmlwidgets/lib/icon-pulse", package = "leaflet.extras"),
   #     script = c("L.Icon.Pulse.js", "plugin-pulseIcon-bindings.js"),
-  #     stylesheet ="L.Icon.Pulse.css" )
+  #     stylesheet = "L.Icon.Pulse.css" )
   # )
   list(
     # // "leaflet-pulse-icon": "0.1.0",
@@ -24,20 +24,20 @@ pulseIconDependency <- function() {
 #' @examples
 #'
 #' iconSet = pulseIconList(
-#'   red = makePulseIcon(color='#ff0000'),
-#'   blue = makePulseIcon(color='#0000ff')
+#'   red = makePulseIcon(color = "#ff0000"),
+#'   blue = makePulseIcon(color = "#0000ff")
 #' )
 #'
-#' iconSet[c('red', 'blue')]
+#' iconSet[c("red", "blue")]
 #'
 pulseIconList = function(...) {
   res = structure(
     list(...),
     class = "leaflet_pulse_icon_set"
   )
-  cls = unlist(lapply(res, inherits, 'leaflet_pulse_icon'))
+  cls = unlist(lapply(res, inherits, "leaflet_pulse_icon"))
   if (any(!cls))
-    stop('Arguments passed to pulseIconList() must be icon objects returned from makePulseIcon()')
+    stop("Arguments passed to pulseIconList() must be icon objects returned from makePulseIcon()")
   res
 }
 
@@ -67,7 +67,7 @@ pulseIconSetToPulseIcons = function(x) {
     # unnamed list (or vector if possible).
     colVals = unname(sapply(x, `[[`, col))
 
-    # If this is the common case where there's lots of values but they're all
+    # If this is the common case where there"s lots of values but they"re all
     # actually the same exact thing, then just return one value; this will be
     # much cheaper to send to the client, and we'll do recycling on the client
     # side anyway.
@@ -85,7 +85,7 @@ pulseIconSetToPulseIcons = function(x) {
 #' @export
 #' @rdname pulseMarkers
 makePulseIcon <- function(
-  color = '#ff0000',
+  color = "#ff0000",
   iconSize = 12,
   animate = TRUE,
   heartbeat = 1
@@ -111,7 +111,7 @@ makePulseIcon <- function(
 #' @export
 #' @rdname pulseMarkers
 pulseIcons <- function(
-  color = '#ff0000',
+  color = "#ff0000",
   iconSize = 12,
   animate = TRUE,
   heartbeat = 1
@@ -202,7 +202,7 @@ addPulseMarkers = function(
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addPulseMarkers")
   leaflet::invokeMethod(
-    map, data, 'addPulseMarkers', pts$lat, pts$lng, icon, layerId,
+    map, data, "addPulseMarkers", pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,
     clusterOptions, clusterId, leaflet::safeLabel(label, data), labelOptions
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
