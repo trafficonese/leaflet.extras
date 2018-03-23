@@ -1,18 +1,4 @@
 leafletSearchDependencies <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "leaflet-search",
-  #     "2.7.0",
-  #     system.file("htmlwidgets/lib/search", package = "leaflet.extras"),
-  #     script = c("leaflet-search.src.js", "leaflet-search-binding.js"),
-  #     stylesheet = "leaflet-search.min.css"
-  #   ),
-  #   htmltools::htmlDependency(
-  #     "fuse",
-  #     "3.0.5",
-  #     system.file("htmlwidgets/lib/fuse", package = "leaflet.extras"),
-  #     script = c("fuse.js")
-  #   ))
   list(
     # // "fuse.js": "3.2.0",
     # // "leaflet-search": "2.3.7",

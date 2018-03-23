@@ -1,13 +1,5 @@
 
-# Source https://github.com/mapshakers/leaflet-icon-pulse
 pulseIconDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "leaflet-icon-pulse",version = "0.1.0",
-  #     system.file("htmlwidgets/lib/icon-pulse", package = "leaflet.extras"),
-  #     script = c("L.Icon.Pulse.js", "plugin-pulseIcon-bindings.js"),
-  #     stylesheet = "L.Icon.Pulse.css" )
-  # )
   list(
     # // "leaflet-pulse-icon": "0.1.0",
     html_dep_prod("leaflet-pulse-icon", "0.1.0", has_style = TRUE),

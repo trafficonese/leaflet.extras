@@ -1,13 +1,4 @@
 omnivoreDependencies <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "leaflet.extras-omnivore", version = "0.1.0",
-  #     system.file("htmlwidgets/lib/omnivore", package = "leaflet.extras"),
-  #     script = c("topojson.js", "toGeoJSON.js", "wellknown.js",
-  #                "polyline.js", "csv2geojson.js",
-  #                "omnivore-bindings.js")
-  #   )
-  # )
   list(
     # // "csv2geojson": "5.0.2",
     # // "togeojson": "0.16.0",
@@ -26,13 +17,6 @@ omnivoreDependencies <- function() {
 
 # Source https://github.com/timwis/leaflet-choropleth
 geoJSONChoroplethDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "geojson-choropleth", version = "1.1.2",
-  #     system.file("htmlwidgets/lib/geojson-choropleth", package = "leaflet.extras"),
-  #     script = c("choropleth.js")
-  #   )
-  # )
   list(
     # // "leaflet-choropleth": "1.1.4",
     html_dep_prod("leaflet-choropleth", "1.1.4")

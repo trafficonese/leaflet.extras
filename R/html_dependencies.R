@@ -1,12 +1,3 @@
-# html_dependency <- function(name, version, script) {
-#   htmltools::htmlDependency(
-#     name,
-#     version = version,
-#     system.file(file.path("htmlwidgets", "build"), package = "leaflet.extras"),
-#     script = script,
-#     ...
-#   )
-# }
 
 html_dependency <- function(name, version, script, folder, ...) {
   htmltools::htmlDependency(

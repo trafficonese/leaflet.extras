@@ -1,13 +1,5 @@
 # Source https://github.com/kartoza/leaflet-wms-legend
 wms.legendDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "wms-legend",version = "0.0.1",
-  #     system.file("htmlwidgets/lib/wms-legend", package = "leaflet.extras"),
-  #     script = c("leaflet.wmslegend.js"),
-  #     stylesheet = c("leaflet.wmslegend.css")
-  #   )
-  # )
   list(
     # // napa kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend
     html_dep_prod("leaflet-wms-legend", "0.0.1", has_style = TRUE)

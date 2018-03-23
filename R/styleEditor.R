@@ -1,12 +1,4 @@
 styleEditorDependencies <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "style-editor", version = "0.1.6",
-  #     system.file("htmlwidgets/lib/style-editor", package = "leaflet.extras"),
-  #     script = c("Leaflet.StyleEditor.min.js", "styleEditor-bindings.js"),
-  #     stylesheet = c("Leaflet.StyleEditor.min.css")
-  #   )
-  # )
   list(
     html_dep_prod("leaflet-styleeditor", "0.1.6", has_style = TRUE),
     html_dep_binding("leaflet-styleeditor", "1.0.0")

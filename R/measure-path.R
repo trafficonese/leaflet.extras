@@ -1,12 +1,4 @@
 measurePathDependencies <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "measurePath",version = "1.3.1",
-  #     system.file("htmlwidgets/lib/measure-path", package = "leaflet.extras"),
-  #     script = c("leaflet-measure-path.js", "measure-path-bindings.js"),
-  #     stylesheet = c("leaflet-measure-path.css")
-  #   )
-  # )
   list(
     # // "leaflet-measure-path": "1.3.1",
     html_dep_prod("leaflet-measure-path", "1.3.1", has_style = TRUE),

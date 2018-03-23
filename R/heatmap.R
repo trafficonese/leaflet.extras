@@ -1,13 +1,6 @@
 
 # Source https://github.com/Leaflet/Leaflet.heat
 heatmapDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "Leaflet.heat", version = "0.1.0",
-  #     system.file("htmlwidgets/lib/heat", package = "leaflet.extras"),
-  #     script = c("leaflet-heat.js", "heat-bindings.js")
-  #   )
-  # )
   list(
     html_dep_prod("leaflet-heat", "0.1.0"),
     html_dep_binding("leaflet-heat", "1.0.0")

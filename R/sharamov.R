@@ -1,27 +1,10 @@
 bingLayerDependencies <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "sharamov-leaflet-plugins",
-  #     "2.0.0",
-  #     system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-  #     script = c("Bing.js", "Bing-bindings.js")
-  #   ))
   list(
     # // "leaflet-plugins": "3.0.2",
     html_dep_prod("tile-bing", "3.0.2"),
     html_dep_binding("tile-bing", "1.0.0")
   )
 }
-
-# googleLayerDependencies <- function() {
-#   list(
-#     htmltools::htmlDependency(
-#       "sharamov-leaflet-plugins",
-#       "2.0.0",
-#       system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-#       script = c("Google.js", "Google-bindings.js")
-#     ))
-# }
 
 #' Adds Bing Tiles Layer
 #'

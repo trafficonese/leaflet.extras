@@ -1,12 +1,5 @@
 # Source: https://github.com/maximeh/leaflet.bouncemarker
 bounceMarkerDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "bouncemarker",
-  #     "0.1.0",
-  #     system.file("htmlwidgets/lib/bouncemarker", package = "leaflet.extras"),
-  #     script = c("bouncemarker.js", "bouncemarker-binding.js")
-  #   ))
   list(
     # // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
     # bounce bindings

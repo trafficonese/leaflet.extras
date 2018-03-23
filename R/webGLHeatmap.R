@@ -1,16 +1,5 @@
 
-# Source https://github.com/ursudio/webgl-heatmap-leaflet
 webGLHeatmapDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "webgl-heatmap", version = "0.1.0",
-  #     system.file("htmlwidgets/lib/webgl-heatmap", package = "leaflet.extras"),
-  #     script = c("webgl-heatmap.js", "webgl-heatmap-leaflet.js",
-  #                "webgl-heatmap-bindings.js"),
-  #     attachment = c("skyline" = "skyline-gradient.png",
-  #                    "deep-sea" = "deep-sea-gradient.png")
-  #   )
-  # )
   list(
     # // "leaflet-webgl-heatmap": "0.2.7",
     html_dep_prod(

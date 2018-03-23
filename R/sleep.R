@@ -1,12 +1,4 @@
-# Source https://github.com/CliffCloud/Leaflet.Sleep
 sleepDependency <- function() {
-  # list(
-  #   htmltools::htmlDependency(
-  #     "sleep",version = "0.5.1",
-  #     system.file("htmlwidgets/lib/sleep", package = "leaflet.extras"),
-  #     script = c("Leaflet.Sleep.js")
-  #   )
-  # )
   list(
     # // "leaflet-sleep": "0.5.1",
     html_dep_prod("leaflet-sleep", "0.5.1")
