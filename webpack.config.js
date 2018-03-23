@@ -61,7 +61,7 @@ let add_externals = function(config, externals) {
   return config;
 }
 let add_attachements = function(config, attachments, output_folder) {
-  config.plugins = config.plugins.concat([
+  config.plugins.push([
     new CopyWebpackPlugin(
       [{
         from: attachments,
