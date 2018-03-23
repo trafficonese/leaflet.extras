@@ -60,7 +60,7 @@ weatherIconSetToWeatherIcons = function(x) {
     # unnamed list (or vector if possible).
     colVals = unname(sapply(x, `[[`, col))
 
-    # If this is the common case where there"s lots of values but they"re all
+    # If this is the common case where there's lots of values but they're all
     # actually the same exact thing, then just return one value; this will be
     # much cheaper to send to the client, and we'll do recycling on the client
     # side anyway.
