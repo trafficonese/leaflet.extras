@@ -1,6 +1,6 @@
 utilsDependencies <- function() {
   list(
-    html_dep_util("leaflet_extras-utils", "1.0.0")
+    html_dep_binding("map-widget-style", "1.0.0")
   )
 }
 

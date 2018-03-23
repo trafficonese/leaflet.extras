@@ -36,14 +36,3 @@ html_dep_binding <- function(name, version, ...) {
     ...
   )
 }
-
-# keep the version at the lastest release version where the bindings were updated
-html_dep_util <- function(name, version, ...) {
-  html_dependency(
-    name, version,
-    paste0(name, ".js"),
-    file.path("htmlwidgets", "utils"),
-    all_files = FALSE,
-    ...
-  )
-}

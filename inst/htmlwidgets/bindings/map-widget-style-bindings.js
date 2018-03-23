@@ -1,3 +1,5 @@
+/* global LeafletWidget, $ */
+
 LeafletWidget.methods.setMapWidgetStyle = function(style) {
   var widget = this;
   if($.isEmptyObject(widget._container.style)) {
@@ -7,4 +9,3 @@ LeafletWidget.methods.setMapWidgetStyle = function(style) {
     widget._container.style[key] = value;
   });
 };
-

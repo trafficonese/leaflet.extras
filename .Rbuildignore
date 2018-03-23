@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^inst/htmlwidgets/lib/.*/node_modules.*$
 ^inst/examples/.*\.Rmd
 ^inst/examples/.*\.html
 ^inst/examples/rsconnect
@@ -12,10 +11,7 @@
 ^appveyor\.yml$
 ^\_pkgdown\.yaml$
 ^docs$
-^inst/htmlwidgets/lib/.eslintrc.js$
 ^inst/examples/virginia.rds$
-^inst/htmlwidgets/lib/mapshaper$
-^inst/htmlwidgets/lib/turf$
 ^CONDUCT\.md$
 ^node_modules
 ^package.*\.json
@@ -24,3 +20,5 @@
 ^\.lintr$
 ^scripts
 ^webpack\.config\.js
+^inst/htmlwidgets/bindings
+^inst/htmlwidgets/src

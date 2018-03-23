@@ -1,4 +1,4 @@
-/* global LeafletWidget, $, L */
+/* global LeafletWidget, L */
 
 LeafletWidget.methods.addBounceMarkers = function(lat, lng, duration, height) {
   (

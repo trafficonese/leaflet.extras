@@ -7,12 +7,12 @@ LeafletWidget.methods.addWebGLHeatmap = function(points, layerId, group, options
 
     if(options.gradientTexture) {
       var attachment =
-        document.getElementById("webgl-heatmap-"+options.gradientTexture+"-attachment")
-        if(!$.isEmptyObject(attachment)) {
-          options.gradientTexture = attachment.href;
-        } else {
-          delete options.gradientTexture;
-        }
+        document.getElementById('webgl-heatmap-'+options.gradientTexture+'-attachment');
+      if(!$.isEmptyObject(attachment)) {
+        options.gradientTexture = attachment.href;
+      } else {
+        delete options.gradientTexture;
+      }
     }
 
     var heatmapLayer = L.webGLHeatmap(options);
@@ -117,12 +117,12 @@ function addGenericWebGLGeoJSONHeatmap( widget, geojson, intensityProperty, laye
 
     if(options.gradientTexture) {
       var attachment =
-        document.getElementById("webgl-heatmap-"+options.gradientTexture+"-attachment")
-        if(!$.isEmptyObject(attachment)) {
-          options.gradientTexture = attachment.href;
-        } else {
-          delete options.gradientTexture;
-        }
+        document.getElementById('webgl-heatmap-'+options.gradientTexture+'-attachment');
+      if(!$.isEmptyObject(attachment)) {
+        options.gradientTexture = attachment.href;
+      } else {
+        delete options.gradientTexture;
+      }
     }
 
     var heatmapLayer = L.webGLHeatmap(options);

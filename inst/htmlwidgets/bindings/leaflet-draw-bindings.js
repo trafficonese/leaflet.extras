@@ -84,9 +84,9 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
 
     map.on(L.Draw.Event.CREATED, function (e) {
       if (options.draw.singleFeature){
-  		  if (editableFeatureGroup.getLayers().length > 0) {
+        if (editableFeatureGroup.getLayers().length > 0) {
           editableFeatureGroup.clearLayers();
-  		  }
+        }
       }
 
       var layer = e.layer;
@@ -117,13 +117,13 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     });
 
     map.on(L.Draw.Event.EDITSTART, function (e) {
-          if (!HTMLWidgets.shinyMode) return;
-          Shiny.onInputChange(map.id+'_draw_editstart', true);
-      });
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_editstart', true);
+    });
     map.on(L.Draw.Event.EDITSTOP, function (e) {
-          if (!HTMLWidgets.shinyMode) return;
-          Shiny.onInputChange(map.id+'_draw_editstop', true);
-      });
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_editstop', true);
+    });
 
     map.on(L.Draw.Event.EDITED, function (e) {
       var layers = e.layers;
@@ -151,13 +151,13 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     });
 
     map.on(L.Draw.Event.DELETESTART, function (e) {
-        if (!HTMLWidgets.shinyMode) return;
-        Shiny.onInputChange(map.id+'_draw_deletestart', true);
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_deletestart', true);
     });
 
     map.on(L.Draw.Event.DELETESTOP, function (e) {
-        if (!HTMLWidgets.shinyMode) return;
-        Shiny.onInputChange(map.id+'_draw_deletestop', true);
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_draw_deletestop', true);
     });
 
     map.on(L.Draw.Event.DELETED, function (e) {
@@ -198,7 +198,7 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
       delete map.drawToolbar;
     }
     if(map._editableFeatureGroupName && clearFeatures) {
-      featureGroup = map.layerManager.getLayerGroup(map._editableFeatureGroupName, false)
+      var featureGroup = map.layerManager.getLayerGroup(map._editableFeatureGroupName, false);
       featureGroup.clearLayers();
     }
     map._editableFeatureGroupName = null;

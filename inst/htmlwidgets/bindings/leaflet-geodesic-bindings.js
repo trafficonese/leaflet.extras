@@ -1,8 +1,8 @@
-/* global LeafletWidget, L, HTMLWidgets */
+/* global $, LeafletWidget, L, HTMLWidgets */
 LeafletWidget.methods.addGeodesicPolylines  = function(
   polygons, layerId, group, options, popup, popupOptions,
   label, labelOptions, highlightOptions) {
-  if(polygons.length>0) {
+  if(polygons.length > 0) {
     var df = new LeafletWidget.DataFrame()
       .col('shapes', polygons)
       .col('layerId', layerId)
@@ -16,11 +16,16 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
 
     LeafletWidget.methods.addGenericLayers(this, 'shape', df,
       function(df, i) {
-        var shapes = df.get(i, "shapes");
-        for (let j = 0; j < shapes.length; j++) {
-          shapes[j] = HTMLWidgets.dataframeToD3(shapes[j][0]);
+        var shapes = df.get(i, 'shapes');
+        var ret_shapes = [];
+        for (var j = 0; j < shapes.length; j++) {
+          for (var k = 0; k < shapes[j].length; k++) {
+            ret_shapes.push(
+              HTMLWidgets.dataframeToD3(shapes[j][k])
+            );
+          }
         }
-        return L.geodesic(shapes, df.get(i));
+        return L.geodesic(ret_shapes, df.get(i));
       });
   }
 };
