@@ -184,7 +184,7 @@ options for each label. Default \code{NULL}
 
 \item{lonfield}{field name for longitude}
 
-\item{delimiter}{field seperator}
+\item{delimiter}{field separator}
 
 \item{csv}{a CSV URL or contents in a character vector.}
 

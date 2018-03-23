@@ -519,7 +519,7 @@ addKMLChoropleth = function(
 #' Options for parsing CSV
 #' @param latfield field name for latitude
 #' @param lonfield field name for longitude
-#' @param delimiter field seperator
+#' @param delimiter field separator
 #' @rdname omnivore
 #' @export
 csvParserOptions <- function(
