@@ -1,21 +1,6 @@
 {
   "name": "leaflet.extras",
-  "version": "0.0.0",
   "private": true,
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "man": "man"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/schloerke/leaflet.extras.git"
-  },
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/schloerke/leaflet.extras/issues"
-  },
-  "homepage": "https://github.com/schloerke/leaflet.extras#readme",
   "scripts": {
     "napa": "napa",
     "build": "napa; webpack --config webpack.config.js",
