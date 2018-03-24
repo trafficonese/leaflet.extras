@@ -1,7 +1,7 @@
 sleepDependency <- function() {
   list(
     # // "leaflet-sleep": "0.5.1",
-    html_dep_prod("leaflet-sleep", "0.5.1")
+    html_dep_prod("lfx-sleep", "0.5.1")
   )
 }
 

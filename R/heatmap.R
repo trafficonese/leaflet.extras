@@ -2,8 +2,7 @@
 # Source https://github.com/Leaflet/Leaflet.heat
 heatmapDependency <- function() {
   list(
-    html_dep_prod("leaflet-heat", "0.1.0"),
-    html_dep_binding("leaflet-heat", "1.0.0")
+    html_dep_prod("lfx-heat", "0.1.0", has_binding = TRUE)
   )
 }
 

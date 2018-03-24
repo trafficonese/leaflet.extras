@@ -1,8 +1,7 @@
 measurePathDependencies <- function() {
   list(
     # // "leaflet-measure-path": "1.3.1",
-    html_dep_prod("leaflet-measure-path", "1.3.1", has_style = TRUE),
-    html_dep_binding("leaflet-measure-path", "1.0.0")
+    html_dep_prod("lfx-measure-path", "1.3.1", has_style = TRUE, has_binding = TRUE)
   )
 }
 

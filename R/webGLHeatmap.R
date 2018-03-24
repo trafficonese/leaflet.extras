@@ -3,11 +3,11 @@ webGLHeatmapDependency <- function() {
   list(
     # // "leaflet-webgl-heatmap": "0.2.7",
     html_dep_prod(
-      "leaflet-webgl-heatmap", "0.2.7",
+      "lfx-webgl-heatmap", "0.2.7",
       attachment = c("skyline" = "skyline-gradient.png",
-                     "deep-sea" = "deep-sea-gradient.png")
-    ),
-    html_dep_binding("leaflet-webgl-heatmap", "1.0.0")
+                     "deep-sea" = "deep-sea-gradient.png"),
+      has_binding = TRUE
+    )
   )
 }
 

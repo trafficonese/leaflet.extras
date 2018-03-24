@@ -3,8 +3,7 @@ leafletSearchDependencies <- function() {
     # // "fuse.js": "3.2.0",
     # // "leaflet-search": "2.3.7",
     html_dep_prod("fuse_js", "3.2.0"),
-    html_dep_prod("leaflet-search", "2.3.7", has_style = TRUE),
-    html_dep_binding("leaflet-search", "1.0.0")
+    html_dep_prod("lfx-search", "2.3.7", has_style = TRUE, has_binding = TRUE)
   )
 }
 

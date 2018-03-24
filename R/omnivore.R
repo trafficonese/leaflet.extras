@@ -10,8 +10,7 @@ omnivoreDependencies <- function() {
     # wellknown is not implemented
 
     # // "@mapbox/leaflet-omnivore": "0.3.4",
-    html_dep_prod("leaflet-omnivore", "3.0.2"),
-    html_dep_binding("leaflet-omnivore", "1.0.0")
+    html_dep_prod("lfx-omnivore", "3.0.2", has_binding = TRUE)
   )
 }
 
@@ -19,7 +18,7 @@ omnivoreDependencies <- function() {
 geoJSONChoroplethDependency <- function() {
   list(
     # // "leaflet-choropleth": "1.1.4",
-    html_dep_prod("leaflet-choropleth", "1.1.4")
+    html_dep_prod("lfx-choropleth", "1.1.4")
   )
 }
 

@@ -61,7 +61,7 @@ let add_externals = function(config, externals) {
   return config;
 }
 let add_attachements = function(config, attachments, output_folder) {
-  config.plugins.push([
+  config.plugins = config.plugins.concat([
     new CopyWebpackPlugin(
       [{
         from: attachments,
@@ -78,7 +78,7 @@ let library_binding = function(name) {
   return {
     mode: "production", // minify everything
     devtool: "source-map", // include external map file
-    entry: filename,
+    entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
         {
@@ -91,7 +91,7 @@ let library_binding = function(name) {
     // save bindings to build bindings folder
     output: {
       filename: name + "-bindings.js", // save file in path on next line
-      path: build_path + "/bindings" // save all files in this path
+      path: build_path + "/" + name // save all files in this path
     }
   }
 }
@@ -110,59 +110,59 @@ const config = [
 
   // "@mapbox/leaflet-omnivore": "0.3.4",
   add_externals(
-    library_prod("@mapbox/leaflet-omnivore", "leaflet-omnivore"),
+    library_prod("@mapbox/leaflet-omnivore", "lfx-omnivore"),
     {
       topojson: "topojson",
       csv2geojson: "csv2geojson",
       togeojson: "toGeoJSON"
     }
   ),
-  library_binding("leaflet-omnivore"),
+  library_binding("lfx-omnivore"),
 
   // "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-  library_prod("Leaflet.Geodesic", "leaflet-geodesic"),
-  library_binding("leaflet-geodesic"),
+  library_prod("Leaflet.Geodesic", "lfx-geodesic"),
+  library_binding("lfx-geodesic"),
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
   library_prod(
     ["Leaflet.StyleEditor", "Leaflet.StyleEditor/dist/css/Leaflet.StyleEditor.min.css"],
-    "leaflet-styleeditor"
+    "lfx-styleeditor"
   ),
-  library_binding("leaflet-styleeditor"),
+  library_binding("lfx-styleeditor"),
 
   // "leaflet-choropleth": "1.1.4",
-  library_prod("leaflet-choropleth"),
+  library_prod("leaflet-choropleth", "lfx-choropleth"),
 
   // "leaflet-draw": "1.0.2",
   // "leaflet-draw-drag": "1.0.2",
   library_prod(
     ["leaflet-draw", "leaflet-draw/dist/leaflet.draw.css"],
-    "leaflet-draw"
+    "lfx-draw"
   ),
-  library_prod("leaflet-draw-drag"),
-  library_binding("leaflet-draw"),
+  library_prod("leaflet-draw-drag", "lfx-draw-drag"),
+  library_binding("lfx-draw"),
 
   // "leaflet-fullscreen": "1.0.2",
   library_prod(
     ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
-    "leaflet-fullscreen"
+    "lfx-fullscreen"
   ),
 
   // "leaflet-gps": "1.7.0",
   library_prod(
     ["leaflet-gps", "leaflet-gps/dist/leaflet-gps.min.css"],
-    "leaflet-gps"
+    "lfx-gps"
   ),
 
   // "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
-  library_prod("leaflet-hash/dist/leaflet-hash.min.js", "leaflet-hash"),
+  library_prod("leaflet-hash/dist/leaflet-hash.min.js", "lfx-hash"),
 
   // "leaflet-measure-path": "1.3.1",
   library_prod(
     ["leaflet-measure-path", "leaflet-measure-path/leaflet-measure-path.css"],
-    "leaflet-measure-path"
+    "lfx-measure-path"
   ),
-  library_binding("leaflet-measure-path"),
+  library_binding("lfx-measure-path"),
 
   // "leaflet-plugins": "3.0.2",
   library_prod("leaflet-plugins/layer/tile/Bing.js", "tile-bing"),
@@ -173,47 +173,47 @@ const config = [
   // "leaflet-pulse-icon": "0.1.0",
   library_prod(
     ["leaflet-pulse-icon", "leaflet-pulse-icon/src/L.Icon.Pulse.css"],
-    "leaflet-pulse-icon"
+    "lfx-pulse-icon"
   ),
-  library_binding("leaflet-pulse-icon"),
+  library_binding("lfx-pulse-icon"),
 
   // "fuse.js": "3.2.0",
   // "leaflet-search": "2.3.7",
   library_prod("fuse.js", "fuse_js", "Fuse"),
   library_prod(
     ["leaflet-search", "leaflet-search/dist/leaflet-search.min.css"],
-    "leaflet-search"
+    "lfx-search"
   ),
-  library_binding("leaflet-search"),
+  library_binding("lfx-search"),
 
   // "leaflet-sleep": "0.5.1",
-  library_prod("leaflet-sleep"),
+  library_prod("leaflet-sleep", "lfx-sleep"),
 
   // "leaflet-webgl-heatmap": "0.2.7",
   add_attachements(
     library_prod(
       ["webgl-heatmap/webgl-heatmap.js", "leaflet-webgl-heatmap"],
-      "leaflet-webgl-heatmap"
+      "lfx-webgl-heatmap"
     ),
     "node_modules/webgl-heatmap/*.png",
-    "leaflet-webgl-heatmap"
+    "lfx-webgl-heatmap"
   ),
-  library_binding("leaflet-webgl-heatmap"),
+  library_binding("lfx-webgl-heatmap"),
 
   // napa kartoza/leaflet-wms-legend#0f59578:leaflet-wms-legend
   library_prod(
     ["leaflet-wms-legend/leaflet.wmslegend.js", "leaflet-wms-legend/leaflet.wmslegend.css"],
-    "leaflet-wms-legend"
+    "lfx-wms-legend"
   ),
 
   // "leaflet.heat": "0.2.0",
-  library_prod(src_path + "heat/leaflet-heat.js", "leaflet-heat"),
-  library_binding("leaflet-heat"),
+  library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
+  library_binding("lfx-heat"),
 
   // "pouchdb-browser": "6.4.3",
   // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
   library_prod("pouchdb-browser/lib/index.js", "pouchdb-browser", "PouchDB"),
-  library_prod("leaflet.tilelayer.pouchdbcached", "leaflet-tilelayer"),
+  library_prod("leaflet.tilelayer.pouchdbcached", "lfx-tilelayer"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
   library_prod(
@@ -223,13 +223,13 @@ const config = [
       src_path + "weather-icons/weather-icons.min.css",
       src_path + "weather-icons/weather-icons-wind.min.css"
     ],
-    "leaflet-weather-markers"
+    "lfx-weather-markers"
   ),
-  library_binding("leaflet-weather-markers"),
+  library_binding("lfx-weather-markers"),
 
   // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
-  library_prod("leaflet.BounceMarker", "leaflet-bouncemarker"),
-  library_binding("leaflet-bouncemarker"),
+  library_prod("leaflet.BounceMarker", "lfx-bouncemarker"),
+  library_binding("lfx-bouncemarker"),
 
 
   library_binding("map-widget-style")

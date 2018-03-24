@@ -3,8 +3,7 @@ bounceMarkerDependency <- function() {
   list(
     # // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
     # bounce bindings
-    html_dep_prod("leaflet-bouncemarker", "1.1.0"),
-    html_dep_binding("leaflet-bouncemarker", "1.0.0")
+    html_dep_prod("lfx-bouncemarker", "1.1.0", has_binding = TRUE)
   )
 
 }

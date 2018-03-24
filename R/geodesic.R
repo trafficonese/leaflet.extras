@@ -1,8 +1,7 @@
 geodesicDependencies <- function() {
   list(
     # // "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-    html_dep_prod("leaflet-geodesic", "1.1.0"),
-    html_dep_binding("leaflet-geodesic", "1.0.0")
+    html_dep_prod("lfx-geodesic", "1.1.0", has_binding = TRUE)
   )
 }
 

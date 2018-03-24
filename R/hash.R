@@ -2,7 +2,7 @@
 hashDependency <- function() {
   list(
     # // "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
-    html_dep_prod("leaflet-hash", "1.0.1")
+    html_dep_prod("lfx-hash", "1.0.1")
   )
 }
 
