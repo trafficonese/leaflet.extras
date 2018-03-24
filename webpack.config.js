@@ -60,7 +60,7 @@ let add_externals = function(config, externals) {
   config.externals = Object.assign(config.externals, externals);
   return config;
 }
-let add_attachements = function(config, attachments, output_folder) {
+let add_attachments = function(config, attachments, output_folder) {
   config.plugins = config.plugins.concat([
     new CopyWebpackPlugin(
       [{
@@ -190,7 +190,7 @@ const config = [
   library_prod("leaflet-sleep", "lfx-sleep"),
 
   // "leaflet-webgl-heatmap": "0.2.7",
-  add_attachements(
+  add_attachments(
     library_prod(
       ["webgl-heatmap/webgl-heatmap.js", "leaflet-webgl-heatmap"],
       "lfx-webgl-heatmap"
