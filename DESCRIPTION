@@ -3,15 +3,36 @@ Type: Package
 Title: Extra Functionality for 'leaflet' Package
 Version: 1.0.0
 Authors@R: c(
-    person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
-    person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("aut")),
-    person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
-      comment = "Leaflet-search and Leaflet-GPS plugin integration"),
-    person("Robin", "Cura", email= "robin@cura.info", role = c("ctb"),
-      comment = "Fixes for Draw Options"),
-    person("Markus", "Voge", email= "markus.voge@ea-aw.de", role = c("ctb"),
-      comment = "Enhancements for Draw Options"),
-    person("Markus", "Dumke", role = c("ctb"), comment = "Bounce Marker addition")
+      person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
+      person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("aut")),
+      person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
+        comment = "Leaflet-search and Leaflet-GPS plugin integration"),
+      person("Robin", "Cura", email= "robin@cura.info", role = c("ctb"),
+        comment = "Fixes for Draw Options"),
+      person("Markus", "Voge", email= "markus.voge@ea-aw.de", role = c("ctb"),
+        comment = "Enhancements for Draw Options"),
+      person("Markus", "Dumke", role = c("ctb"), comment = "Bounce Marker addition"),
+      person(family = "Mapbox", role = c("ctb", "cph"), comment = "leaflet-omnivore, csv2geojson, and togeojson libraries"),
+      person("Henry", "Thasler", role = c("ctb", "cph"), comment = "Leaflet.Geodesic library"),
+      person("Dennis", "Wilhelm", role = c("ctb", "cph"), comment = "Leaflet.StyleEditor library"),
+      person("Kirollos", "Risk", role = c("ctb", "cph"), comment = "fuse.js library"),
+      person("Tim", "Wisniewski", role = c("ctb", "cph"), comment = "leaflet-choropleth library"),
+      person(family = "Leaflet", role = c("ctb", "cph"), comment = "leaflet-draw library"),
+      person("Alexander", "Milevski", role = c("ctb", "cph"), comment = "leaflet-draw-drag library"),
+      person("John", "Firebaugh", role = c("ctb", "cph"), comment = "leaflet-fullscreen library"),
+      person("Stefano", "Cudini", role = c("ctb", "cph"), comment = "leaflet-gps library"),
+      person("Johannes", "Rudolph", role = c("ctb", "cph"), comment = "leaflet-hash library"),
+      person("Per", "Liedman", role = c("ctb", "cph"), comment = "leaflet-measure-path library"),
+      person("Pavel", "Shramov", role = c("ctb", "cph"), comment = "leaflet-plugins library"),
+      person("Filip", "Zavadil", role = c("ctb", "cph"), comment = "leaflet-pulse-icon library"),
+      person("Stefano", "Cudini", role = c("ctb", "cph"), comment = "leaflet-search library"),
+      person(family = "CliffCloud", role = c("ctb", "cph"), comment = "leaflet-sleep library"),
+      person(family = "Ursudio", role = c("ctb", "cph"), comment = "leaflet-webgl-heatmap library"),
+      person("Maxime", "Hadjinlian", role = c("ctb", "cph"), comment = "leaflet.BounceMarker library"),
+      person("Vladimir", "Agafonkin", role = c("ctb", "cph"), comment = "leaflet.heat library"),
+      person("Iván Sánchez", "Ortega", role = c("ctb", "cph"), comment = "leaflet.tilelayer.pouchdbcached library"),
+      person("Dale", "Harvey", role = c("ctb", "cph"), comment = "pouchdb-browser library"),
+      person("Mike", "Bostock", role = c("ctb", "cph"), comment = "topojson library")
     )
 Description: The 'leaflet' JavaScript library provides many plugins some of which
     are available in the core 'leaflet' package, but there are many more. It is not
