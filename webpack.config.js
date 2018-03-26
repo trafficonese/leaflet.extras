@@ -49,8 +49,10 @@ let library_prod = function(name, filename = name, library = undefined) {
   }
   // if saving the module to something...
   if (typeof library != 'undefined') {
+    // save the library as a variable
     // https://webpack.js.org/configuration/output/#output-library
     ret.output.library = library;
+    // do not use 'var' in the assignment
     // https://webpack.js.org/configuration/output/#output-librarytarget
     ret.output.libraryTarget = "assign";
   }
@@ -81,6 +83,7 @@ let library_binding = function(name) {
     entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
+        // lint the bindings using ./inst/htmlwidgets/bindings/.eslintrc.js
         {
           test: /\.js$/,
           exclude: /node_modules/,
