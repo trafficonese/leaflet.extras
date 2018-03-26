@@ -153,6 +153,7 @@ const config = [
     ["leaflet-gps", "leaflet-gps/dist/leaflet-gps.min.css"],
     "lfx-gps"
   ),
+  library_binding("lfx-gps"),
 
   // "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
   library_prod("leaflet-hash/dist/leaflet-hash.min.js", "lfx-hash"),
