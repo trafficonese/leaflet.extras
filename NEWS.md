@@ -6,7 +6,6 @@
 
 ## leaflet-omnivore
 
-- Removed shipped javascript files of `wellknown.js` and `polyline.js`
 - [Leaflet.label](https://github.com/Leaflet/Leaflet.label/blob/0a4e3a6422c9e5a799a9cde106de5bcfdb5ab741/README.md#upgrade-path-to-ltooltip) has updated to v1.x of leaflet.js changing default behavior. Mainly... "bindLabel, openLabel and so should be replaced by bindTooltip, openTooltip, etc".
 
 ## New Features
