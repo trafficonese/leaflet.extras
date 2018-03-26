@@ -1,3 +1,5 @@
+/* global LeafletWidget, L, HTMLWidgets, Shiny */
+
 LeafletWidget.methods.addControlGPS = function(options) {
   (function() {
     var map = this;
@@ -5,22 +7,22 @@ LeafletWidget.methods.addControlGPS = function(options) {
       map.gpscontrol.removeFrom(map);
       delete map.gpscontrol;
     }
-      map.gpscontrol = new L.Control.Gps(options);
+    map.gpscontrol = new L.Control.Gps(options);
 
-      map.gpscontrol.on('gps:located', function(e){
-        // Shiny stuff
-        if (!HTMLWidgets.shinyMode) return;
-        Shiny.onInputChange(map.id+'_gps_located',{
-          'coordinates' : e.latlng,
-          'radius': e.marker._radius
-          });
+    map.gpscontrol.on('gps:located', function(e){
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_gps_located',{
+        'coordinates' : e.latlng,
+        'radius': e.marker._radius
       });
-      map.gpscontrol.on('gps:disabled', function(e){
-        // Shiny stuff
-        if (!HTMLWidgets.shinyMode) return;
-        Shiny.onInputChange(map.id+'_gps_disabled',{});
-      });
-      map.gpscontrol.addTo(map);
+    });
+    map.gpscontrol.on('gps:disabled', function(e){
+      // Shiny stuff
+      if (!HTMLWidgets.shinyMode) return;
+      Shiny.onInputChange(map.id+'_gps_disabled',{});
+    });
+    map.gpscontrol.addTo(map);
   }).call(this);
 };
 
@@ -58,7 +60,7 @@ LeafletWidget.methods.getLocation = function() {
     if(map.gpscontrol) {
       return map.gpscontrol.getLocation();
     } else {
-      throw "GPS Control not added to the map";
+      throw 'GPS Control not added to the map';
     }
   }).call(this);
 };
