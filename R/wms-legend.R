@@ -29,7 +29,7 @@ wms.legendDependency <- function() {
 #' ) %>%
 #'   addWMSTiles(
 #'     baseUrl = paste0(
-#'       "http://maps.kartoza.com/cgi-bin/qgis_mapserv.fcgi?",
+#'       "http://maps.kartoza.com/web/?",
 #'       "map=/web/Boosmansbos/Boosmansbos.qgs"
 #'     ),
 #'     layers = "Boosmansbos",
@@ -41,7 +41,7 @@ wms.legendDependency <- function() {
 #'   ) %>%
 #'   addWMSLegend(
 #'     uri = paste0(
-#'       "http://maps.kartoza.com/cgi-bin/qgis_mapserv.fcgi?",
+#'       "http://maps.kartoza.com/web/?",
 #'       "map=/web/Boosmansbos/Boosmansbos.qgs&&SERVICE=WMS&VERSION=1.3.0",
 #'       "&SLD_VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/jpeg&LAYER=Boosmansbos&STYLE="
 #'     )
