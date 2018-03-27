@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(fig.retina=2, fig.path = "README_figs/README-")
