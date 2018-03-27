@@ -43,6 +43,8 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
+    "license-checker": "^18.0.0",
+    "lodash": "^4.17.5",
     "mini-css-extract-plugin": "^0.2.0",
     "napa": "^3.0.0",
     "path": "^0.12.7",
