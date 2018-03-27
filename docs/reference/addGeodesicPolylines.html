@@ -18,14 +18,21 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+<meta property="og:title" content="Add Geodesic Lines — addGeodesicPolylines" />
+
+<meta property="og:description" content="Add Geodesic Lines" />
+<meta name="twitter:card" content="summary" />
+
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -46,12 +53,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">leaflet.extras</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">leaflet.extras</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -60,7 +71,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -83,13 +94,14 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add Geodesic Lines</h1>
+    <small>Source: <a href='https://github.com/bhaskarvk/leaflet.extras/blob/master/R/geodesic.R'><code>R/geodesic.R</code></a></small>
     </div>
 
     
     <p>Add Geodesic Lines</p>
     
 
-    <pre><span class='fu'>addGeodesicPolylines</span>(<span class='no'>map</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>addGeodesicPolylines</span>(<span class='no'>map</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>wrap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#03F"</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>dashArray</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>smoothFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>noClip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>popup</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>popupOptions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -104,7 +116,7 @@
   <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'>pathOptions</span>(), <span class='kw'>highlightOptions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>getMapData</span>(<span class='no'>map</span>))</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -133,7 +145,7 @@
     </tr>
     <tr>
       <th>wrap</th>
-      <td><p>Wrap line at map border (date line). Set to 'false' if you want lines to cross the dateline (experimental, see noWrap-example on how to use)</p></td>
+      <td><p>Wrap line at map border (date line). Set to "false" if you want lines to cross the dateline (experimental, see noWrap-example on how to use)</p></td>
     </tr>
     <tr>
       <th>stroke</th>
@@ -215,6 +227,29 @@ a call to <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/m
 </ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>berlin</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>52.51</span>, <span class='fl'>13.4</span>)
+<span class='no'>losangeles</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>34.05</span>, -<span class='fl'>118.24</span>)
+<span class='no'>santiago</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(-<span class='fl'>33.44</span>, -<span class='fl'>70.71</span>)
+<span class='no'>tokio</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>35.69</span>, <span class='fl'>139.69</span>)
+<span class='no'>sydney</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(-<span class='fl'>33.91</span>, <span class='fl'>151.08</span>)
+<span class='no'>capetown</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(-<span class='fl'>33.91</span>, <span class='fl'>18.41</span>)
+<span class='no'>calgary</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>51.05</span>, -<span class='fl'>114.08</span>)
+<span class='no'>hammerfest</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>70.67</span>, <span class='fl'>23.68</span>)
+<span class='no'>barrow</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>71.29</span>, -<span class='fl'>156.76</span>)
+
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as.data.frame</span>(<span class='fu'>rbind</span>(<span class='no'>hammerfest</span>, <span class='no'>calgary</span>, <span class='no'>losangeles</span>, <span class='no'>santiago</span>, <span class='no'>capetown</span>, <span class='no'>tokio</span>, <span class='no'>barrow</span>))
+<span class='fu'>names</span>(<span class='no'>df</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"lat"</span>,<span class='st'>"lng"</span>)
+
+<span class='fu'>leaflet</span>(<span class='no'>df</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>addProviderTiles</span>(<span class='no'>providers</span>$<span class='no'>CartoDB.Positron</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>addGeodesicPolylines</span>(<span class='kw'>lng</span> <span class='kw'>=</span> ~<span class='no'>lng</span>, <span class='kw'>lat</span> <span class='kw'>=</span> ~<span class='no'>lat</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+                       <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>addCircleMarkers</span>(<span class='no'>df</span>, <span class='kw'>lat</span> <span class='kw'>=</span> ~<span class='no'>lat</span>,<span class='kw'>lng</span> <span class='kw'>=</span> ~<span class='no'>lng</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+                   <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+
+<span class='co'>## for more examples see</span>
+<span class='co'># browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -222,39 +257,25 @@ a call to <code><a href='http://www.rdocumentation.org/packages/leaflet/topics/m
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#functions">Functions</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>.</p>
+  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//apps.karambelkar.info/pk/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '4']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//apps.karambelkar.info/pk/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
   </body>
 </html>
+

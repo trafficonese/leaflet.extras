@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add style editor — addStyleEditor • leaflet.extras</title>
+<title>Add Bounce Markers to map — addBounceMarkers • leaflet.extras</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,10 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Add style editor — addStyleEditor" />
+<meta property="og:title" content="Add Bounce Markers to map — addBounceMarkers" />
 
-<meta property="og:description" content="Add style editor
-Remove style editor" />
+<meta property="og:description" content="Add Bounce Markers to map" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,67 +93,64 @@ Remove style editor" />
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add style editor</h1>
-    <small>Source: <a href='https://github.com/bhaskarvk/leaflet.extras/blob/master/R/styleEditor.R'><code>R/styleEditor.R</code></a></small>
+    <h1>Add Bounce Markers to map</h1>
+    <small>Source: <a href='https://github.com/bhaskarvk/leaflet.extras/blob/master/R/bounceMarker.R'><code>R/bounceMarker.R</code></a></small>
     </div>
 
     
-    <p>Add style editor</p>
-<p>Remove style editor</p>
+    <p>Add Bounce Markers to map</p>
     
 
-    <pre class="usage"><span class='fu'>addStyleEditor</span>(<span class='no'>map</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"topleft"</span>, <span class='st'>"topright"</span>, <span class='st'>"bottomleft"</span>,
-  <span class='st'>"bottomright"</span>), <span class='kw'>openOnLeafletDraw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>useGrouping</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='fu'>removeStyleEditor</span>(<span class='no'>map</span>)</pre>
+    <pre class="usage"><span class='fu'>addBounceMarkers</span>(<span class='no'>map</span>, <span class='no'>lat</span>, <span class='no'>lng</span>, <span class='kw'>duration</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>map</th>
-      <td><p>the map widget</p></td>
+      <td><p>map object created by <a href='http://www.rdocumentation.org/packages/leaflet/topics/leaflet'>leaflet::leaflet</a></p></td>
     </tr>
     <tr>
-      <th>position</th>
-      <td><p>position of the control</p></td>
+      <th>lat</th>
+      <td><p>numeric latitude</p></td>
     </tr>
     <tr>
-      <th>openOnLeafletDraw</th>
-      <td><p>whether to open automatically when used with <code><a href='draw.html'>addDrawToolbar</a></code>()</p></td>
+      <th>lng</th>
+      <td><p>numeric longitude</p></td>
     </tr>
     <tr>
-      <th>useGrouping</th>
-      <td><p>Should be false to work with <code><a href='draw.html'>addDrawToolbar</a></code>()</p></td>
+      <th>duration</th>
+      <td><p>integer scalar: The duration of the animation in milliseconds.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other options. See <a href='https://github.com/dwilhelm89/Leaflet.StyleEditor/blob/master/src/javascript/Leaflet.StyleEditor.js'>plugin code</a></p></td>
+      <th>height</th>
+      <td><p>integer scalar: Height at which the marker is dropped.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='https://github.com/maximeh/leaflet.bouncemarker'>Github: leaflet.bouncemarker</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>leaflet</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>setView</span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>addProviderTiles</span>(<span class='no'>providers</span>$<span class='no'>CartoDB.Positron</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='draw.html'>addDrawToolbar</a></span>(
-    <span class='kw'>targetGroup</span> <span class='kw'>=</span> <span class='st'>"draw"</span>,
-    <span class='kw'>editOptions</span> <span class='kw'>=</span> <span class='fu'><a href='draw-options.html'>editToolbarOptions</a></span>(<span class='kw'>selectedPathOptions</span> <span class='kw'>=</span> <span class='fu'><a href='draw-options.html'>selectedPathOptions</a></span>())
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'>addLayersControl</span>(
-    <span class='kw'>overlayGroups</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"draw"</span>), <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'>layersControlOptions</span>(<span class='kw'>collapsed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  ) <span class='kw'>%&gt;%</span>
-  <span class='co'># add the style editor to alter shapes added to map</span>
-  <span class='fu'>addStyleEditor</span>()</div></pre>
+  <span class='fu'>addTiles</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>addBounceMarkers</span>(<span class='fl'>49</span>, <span class='fl'>11</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Markus Dumke
 
   </div>
 </div>

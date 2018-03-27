@@ -18,14 +18,29 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+<meta property="og:title" content="Options for drawn shapes — drawShapeOptions" />
+
+<meta property="og:description" content="Options for drawn shapes
+Options for drawing polylines
+Options for drawing polygons
+Options for drawing rectangles
+Options for drawing Circles
+Options for drawing markers
+Options for drawing markers
+Options for path when in editMode
+Options for editing shapes" />
+<meta name="twitter:card" content="summary" />
+
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -46,12 +61,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">leaflet.extras</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">leaflet.extras</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -60,7 +79,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -83,6 +102,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Options for drawn shapes</h1>
+    <small>Source: <a href='https://github.com/bhaskarvk/leaflet.extras/blob/master/R/drawOptions.R'><code>R/drawOptions.R</code></a></small>
     </div>
 
     
@@ -92,11 +112,12 @@
 <p>Options for drawing rectangles</p>
 <p>Options for drawing Circles</p>
 <p>Options for drawing markers</p>
+<p>Options for drawing markers</p>
 <p>Options for path when in editMode</p>
 <p>Options for editing shapes</p>
     
 
-    <pre><span class='fu'>drawShapeOptions</span>(<span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#03f"</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>drawShapeOptions</span>(<span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#03f"</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"#03f"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>dashArray</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lineCap</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lineJoin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>clickable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>pointerEvents</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>smoothFactor</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>noClip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -119,6 +140,10 @@
 <span class='fu'>drawMarkerOptions</span>(<span class='kw'>markerIcon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>zIndexOffset</span> <span class='kw'>=</span> <span class='fl'>2000</span>,
   <span class='kw'>repeatMode</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
+<span class='fu'>drawCircleMarkerOptions</span>(<span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#3388ff"</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>opacity</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
+  <span class='kw'>clickable</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>zIndexOffset</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>repeatMode</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='fu'>selectedPathOptions</span>(<span class='kw'>dashArray</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"10, 10"</span>), <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
   <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
   <span class='kw'>maintainColor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
@@ -126,7 +151,7 @@
 <span class='fu'>editToolbarOptions</span>(<span class='kw'>edit</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>selectedPathOptions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>allowIntersection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -272,32 +297,16 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>.</p>
+  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//apps.karambelkar.info/pk/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '4']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//apps.karambelkar.info/pk/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
-
   </body>
 </html>
+
