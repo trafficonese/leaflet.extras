@@ -11,7 +11,8 @@ addDrawToolbar(map, targetLayerId = NULL, targetGroup = NULL,
   polygonOptions = drawPolygonOptions(),
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangleOptions(),
-  markerOptions = drawMarkerOptions(), editOptions = FALSE,
+  markerOptions = drawMarkerOptions(),
+  circleMarkerOptions = drawCircleMarkerOptions(), editOptions = FALSE,
   singleFeature = FALSE)
 
 removeDrawToolbar(map, clearFeatures = FALSE)
@@ -37,6 +38,8 @@ You can either set layerId or group or none but not both.}
 \item{rectangleOptions}{See \code{\link{drawRectangleOptions}}(). Set to FALSE to disable rectangle drawing.}
 
 \item{markerOptions}{See \code{\link{drawMarkerOptions}}(). Set to FALSE to disable marker drawing.}
+
+\item{circleMarkerOptions}{See \code{\link{drawCircleMarkerOptions}}(). Set to FALSE to disable circle marker drawing.}
 
 \item{editOptions}{By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().}
 
