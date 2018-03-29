@@ -1,21 +1,8 @@
 bingLayerDependencies <- function() {
   list(
-    htmltools::htmlDependency(
-      "sharamov-leaflet-plugins",
-      "2.0.0",
-      system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-      script = c("Bing.js", "Bing-bindings.js")
-    ))
-}
-
-googleLayerDependencies <- function() {
-  list(
-    htmltools::htmlDependency(
-      "sharamov-leaflet-plugins",
-      "2.0.0",
-      system.file("htmlwidgets/lib/sharamov-leaflet-plugins//layer/tile", package = "leaflet.extras"),
-      script = c("Google.js", "Google-bindings.js")
-    ))
+    # // "leaflet-plugins": "3.0.2",
+    html_dep_prod("tile-bing", "3.0.2", has_binding = TRUE)
+  )
 }
 
 #' Adds Bing Tiles Layer
@@ -26,6 +13,7 @@ googleLayerDependencies <- function() {
 #' @param layerId String. An optional unique ID for the layer
 #' @param group String. An optional group name for the layer
 #' @param ... Optional Parameters required by the Bing API described at \url{https://msdn.microsoft.com/en-us/library/ff701716.aspx}
+#' @seealso Get a Bing Maps API Key: \url{https://msdn.microsoft.com/en-us/library/ff428642.aspx}
 #' @export
 addBingTiles <- function(
   map,
@@ -38,13 +26,12 @@ addBingTiles <- function(
   ...
   ) {
 
-  if(is.null(apikey))
+  if (is.null(apikey))
     stop("Bing Tile Layer requires an apikey")
 
   imagerySet <- match.arg(imagerySet)
 
   map$dependencies <- c(map$dependencies, bingLayerDependencies())
-  invokeMethod(map, getMapData(map), 'addBingTiles', layerId, group, 
+  invokeMethod(map, getMapData(map), "addBingTiles", layerId, group,
                list(apikey = apikey, type = imagerySet, ...))
 }
-

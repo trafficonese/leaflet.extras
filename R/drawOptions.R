@@ -1,5 +1,5 @@
 #' Options for drawn shapes
-#' @param  stroke	Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.
+#' @param stroke	Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.
 #' @param color	Stroke color.
 #' @param weight	Stroke width in pixels.
 #' @param opacity	Stroke opacity.
@@ -17,11 +17,11 @@
 #' @export
 drawShapeOptions <- function(
   stroke = TRUE,
-  color	= '#03f',
+  color = "#03f",
   weight = 1,
   opacity = 1,
   fill = TRUE,
-  fillColor = '#03f',
+  fillColor = "#03f",
   fillOpacity = 0.4,
   dashArray = NULL,
   lineCap = NULL,
@@ -65,7 +65,7 @@ drawShapeOptions <- function(
 #' @rdname draw-options
 drawPolylineOptions <- function(
   allowIntersection = TRUE,
-  drawError = list(color = '#b00b00', timeout = 2500),
+  drawError = list(color = "#b00b00", timeout = 2500),
   guidelineDistance = 20,
   maxGuideLineLength = 4000,
   showLength = TRUE,
@@ -164,18 +164,47 @@ drawMarkerOptions <- function(
   ))
 }
 
+#' Options for drawing markers
+#' @rdname draw-options
+#' @export
+drawCircleMarkerOptions <- function(
+  stroke = TRUE,
+  color = "#3388ff",
+  weight = 4,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = NULL, #same as color by default
+  fillOpacity = 0.2,
+  clickable = TRUE,
+  zIndexOffset = 2000,
+  repeatMode = FALSE
+) {
+  leaflet::filterNULL(list(
+    stroke = stroke,
+    color = color,
+    weight = weight,
+    opacity = opacity,
+    fill = fill,
+    fillColor = fillColor, #same as color by default
+    fillOpacity = fillOpacity,
+    clickable = clickable,
+    zIndexOffset = zIndexOffset,
+    repeatMode = repeatMode
+  ))
+}
+
 #' Options for path when in editMode
 #' @param maintainColor Whether to maintain shape's original color
 #' @rdname draw-options
 #' @export
 selectedPathOptions <- function(
-  dashArray= c('10, 10'),
+  dashArray = c("10, 10"),
   weight = 2,
-  color = 'black',
-  fill= TRUE,
-  fillColor= 'black',
-  fillOpacity= 0.6,
-  maintainColor= FALSE
+  color = "black",
+  fill = TRUE,
+  fillColor = "black",
+  fillOpacity = 0.6,
+  maintainColor = FALSE
 ) {
   leaflet::filterNULL(list(
     dashArray = dashArray,

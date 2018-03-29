@@ -26,7 +26,7 @@ searchFeaturesOptions(propertyName = "label", initial = FALSE,
 
 \item{jsonpParam}{jsonp param name for search by jsonp service, ex: "callback".}
 
-\item{propertyLoc}{field for remapping location, using array: ['latname','lonname'] for select double fields(ex. ['lat','lon'] ) support dotted format: 'prop.subprop.title'.}
+\item{propertyLoc}{field for remapping location, using array: ["latname","lonname"] for select double fields(ex. ["lat","lon"] ) support dotted format: "prop.subprop.title".}
 
 \item{propertyName}{property in marker.options(or feature.properties for vector layer) trough filter elements in layer,.}
 
@@ -72,7 +72,7 @@ searchFeaturesOptions(propertyName = "label", initial = FALSE,
 
 \item{textPlaceholder}{placeholder value.}
 
-\item{position}{'topleft'.}
+\item{position}{"topleft".}
 
 \item{hideMarkerOnCollapse}{remove circle and marker on search control collapsed.}
 

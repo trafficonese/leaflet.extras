@@ -11,7 +11,8 @@ addDrawToolbar(map, targetLayerId = NULL, targetGroup = NULL,
   polygonOptions = drawPolygonOptions(),
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangleOptions(),
-  markerOptions = drawMarkerOptions(), editOptions = FALSE,
+  markerOptions = drawMarkerOptions(),
+  circleMarkerOptions = drawCircleMarkerOptions(), editOptions = FALSE,
   singleFeature = FALSE)
 
 removeDrawToolbar(map, clearFeatures = FALSE)
@@ -23,7 +24,7 @@ removeDrawToolbar(map, clearFeatures = FALSE)
 Used for adding  a GeoJSON/TopoJSON layer and then editing the features using the draw plugin.}
 
 \item{targetGroup}{An optional group name of a Feature Group whose features need to be editable.
-Used for adding shapes(markers,lines,polygons) and then editing them using the draw plugin.
+Used for adding shapes(markers, lines, polygons) and then editing them using the draw plugin.
 You can either set layerId or group or none but not both.}
 
 \item{position}{The position where the toolbar should appear.}
@@ -38,6 +39,8 @@ You can either set layerId or group or none but not both.}
 
 \item{markerOptions}{See \code{\link{drawMarkerOptions}}(). Set to FALSE to disable marker drawing.}
 
+\item{circleMarkerOptions}{See \code{\link{drawCircleMarkerOptions}}(). Set to FALSE to disable circle marker drawing.}
+
 \item{editOptions}{By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().}
 
 \item{singleFeature}{When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.}
@@ -48,4 +51,23 @@ You can either set layerId or group or none but not both.}
 Adds a Toolbar to draw shapes/points on the map.
 
 Removes the draw toolbar
+}
+\examples{
+leaflet() \%>\%
+  setView(0, 0, 2) \%>\%
+  addProviderTiles(providers$CartoDB.Positron) \%>\%
+  addDrawToolbar(
+    targetGroup = "draw",
+    editOptions = editToolbarOptions(
+      selectedPathOptions = selectedPathOptions()
+    )
+  )  \%>\%
+  addLayersControl(
+    overlayGroups = c("draw"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) \%>\%
+  addStyleEditor()
+
+## for more examples see
+# browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
 }

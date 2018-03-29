@@ -1,14 +1,8 @@
 
-# Source https://github.com/mapshakers/leaflet-icon-weather
 weatherIconDependency <- function() {
   list(
-    htmltools::htmlDependency(
-      "leaflet-icon-weather",version = "3.0.0",
-      system.file("htmlwidgets/lib/weather-markers", package = "leaflet.extras"),
-      script = c("leaflet.weather-markers.min.js", "plugin-weatherMarkers-bindings.js"),
-      stylesheet =c("weather-icons.min.css", "weather-icons-wind.min.css",
-                    "leaflet.weather-markers.css" )
-      )
+    # napa tallsam/Leaflet.weather-markers#afda5b3
+    html_dep_prod("lfx-weather-markers", "3.0.0", has_style = TRUE, has_binding = TRUE)
   )
 }
 
@@ -22,20 +16,20 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' @examples
 #'
 #' iconSet = weatherIconList(
-#'   hurricane = makeWeatherIcon(icon='hurricane'),
-#'   tornado = makeWeatherIcon(icon='tornado')
+#'   hurricane = makeWeatherIcon(icon = "hurricane"),
+#'   tornado = makeWeatherIcon(icon = "tornado")
 #' )
 #'
-#' iconSet[c('hurricane', 'tornado')]
+#' iconSet[c("hurricane", "tornado")]
 #' @rdname weatherMarkers
 weatherIconList = function(...) {
   res = structure(
     list(...),
     class = "leaflet_weather_icon_set"
   )
-  cls = unlist(lapply(res, inherits, 'leaflet_weather_icon'))
+  cls = unlist(lapply(res, inherits, "leaflet_weather_icon"))
   if (any(!cls))
-    stop('Arguments passed to weatherIconList() must be icon objects returned from makeWeatherIcon()')
+    stop("Arguments passed to weatherIconList() must be icon objects returned from makeWeatherIcon()")
   res
 }
 
@@ -84,20 +78,20 @@ weatherIconSetToWeatherIcons = function(x) {
 #' @rdname weatherMarkers
 makeWeatherIcon <- function(
   icon,
-  markerColor= 'red',
-  iconColor= 'white',
-  #iconSize= c(35, 45),
-  #iconAnchor=   c(17, 42),
-  #popupAnchor= c(1, -32),
-  #shadowAnchor= c(10, 12),
-  #shadowSize= c(36, 16),
-  #className= 'weather-marker',
-  #prefix= 'wi',
-  extraClasses= NULL
+  markerColor = "red",
+  iconColor = "white",
+  #iconSize = c(35, 45),
+  #iconAnchor =   c(17, 42),
+  #popupAnchor = c(1, -32),
+  #shadowAnchor = c(10, 12),
+  #shadowSize = c(36, 16),
+  #className = "weather-marker",
+  #prefix = "wi",
+  extraClasses = NULL
 ) {
 
-  if(!markerColor %in% markerColors) {
-    stop(sprintf("markerColor should be one of %s",paste(markerColors,collapse=', ')))
+  if (!markerColor %in% markerColors) {
+    stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
 
   icon = leaflet::filterNULL(list(
@@ -114,7 +108,7 @@ makeWeatherIcon <- function(
 #' ...)}. This function is vectorized over its arguments to create a list of
 #' icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 #' these arguments will be ignored.
-#' @param icon the weather icon name w/o the 'wi-' prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}
+#' @param icon the weather icon name w/o the "wi-" prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}
 #' @param markerColor color of the marker
 #' @param iconColor color of the weather icon
 #' @param extraClasses Character vector of extra classes.
@@ -122,20 +116,20 @@ makeWeatherIcon <- function(
 #' @rdname weatherMarkers
 weatherIcons <- function(
   icon,
-  markerColor= 'red',
-  iconColor= 'white',
-  #iconSize= c(35, 45),
-  #iconAnchor=   c(17, 42),
-  #popupAnchor= c(1, -32),
-  #shadowAnchor= c(10, 12),
-  #shadowSize= c(36, 16),
-  #className= 'weather-marker',
-  #prefix= 'wi',
-  extraClasses= NULL
+  markerColor = "red",
+  iconColor = "white",
+  #iconSize = c(35, 45),
+  #iconAnchor =   c(17, 42),
+  #popupAnchor = c(1, -32),
+  #shadowAnchor = c(10, 12),
+  #shadowSize = c(36, 16),
+  #className = "weather-marker",
+  #prefix = "wi",
+  extraClasses = NULL
 ) {
 
-  if(!any(markerColor %in% markerColors)) {
-    stop(sprintf("markerColor should be one of %s",paste(markerColors,collapse=', ')))
+  if (!any(markerColor %in% markerColors)) {
+    stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
 
   leaflet::filterNULL(list(
@@ -179,6 +173,21 @@ weatherIcons <- function(
 #'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname weatherMarkers
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addWeatherMarkers(
+#'     lng = -118.456554, lat = 34.078039,
+#'     label = "This is a label",
+#'     icon = makeWeatherIcon(
+#'       icon = "hot",
+#'       iconColor = "#ffffff77",
+#'       markerColor = "blue"
+#'     )
+#'   )
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/weatherIcons.R", package = "leaflet.extras"))
 addWeatherMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,
@@ -211,7 +220,7 @@ addWeatherMarkers = function(
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addWeatherMarkers")
   leaflet::invokeMethod(
-    map, data, 'addWeatherMarkers', pts$lat, pts$lng, icon, layerId,
+    map, data, "addWeatherMarkers", pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,
     clusterOptions, clusterId, leaflet::safeLabel(label, data), labelOptions
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)

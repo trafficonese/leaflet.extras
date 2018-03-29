@@ -6,6 +6,6 @@ library(leaflet.extras)
 #' blogdown or in HTML presentations. The map will not scroll unless you hover/click
 #' it. This prevents unintentional map scrolling when scrolling the document.
 
-leaflet(width = '100%') %>% setView(0,0,1) %>%
+leaflet(width = "100%") %>% setView(0, 0, 1) %>%
   addTiles() %>%
   suspendScroll()

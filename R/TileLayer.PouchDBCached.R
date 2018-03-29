@@ -1,11 +1,9 @@
-# Source https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached
 tileLayer.PouchDBCachedDependency <- function() {
   list(
-    htmltools::htmlDependency(
-      "tileLayer.PouchDBCached",version = "0.1.1",
-      system.file("htmlwidgets/lib/TileLayer.PouchDBCached", package = "leaflet.extras"),
-      script = c("pouchdb-6.0.7.js","L.TileLayer.PouchDBCached.js")
-    )
+    # // "pouchdb-browser": "6.4.3",
+    html_dep_prod("pouchdb-browser", "6.4.3"),
+    # // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
+    html_dep_prod("lfx-tilelayer", "0.3.0")
   )
 }
 
@@ -15,11 +13,12 @@ tileLayer.PouchDBCachedDependency <- function() {
 #' @rdname TileCaching
 #' @export
 #' @examples
-#' \dontrun{
 #' leaflet() %>%
 #'   enableTileCaching() %>%
-#'   addTiles(options=tileOptions(useCache=TRUE,crossOrigin=TRUE))
-#' }
+#'   addTiles(options = tileOptions(useCache = TRUE, crossOrigin = TRUE))
+#'
+#' ## for more examples see
+#' # browseURL(system.file("examples/TileLayer-Caching.R", package = "leaflet.extras"))
 enableTileCaching <- function(map) {
   map$dependencies <- c(map$dependencies, tileLayer.PouchDBCachedDependency())
   map

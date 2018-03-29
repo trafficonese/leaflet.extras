@@ -1,11 +1,7 @@
-# Source https://github.com/CliffCloud/Leaflet.Sleep
 sleepDependency <- function() {
   list(
-    htmltools::htmlDependency(
-      "sleep",version = "0.5.1",
-      system.file("htmlwidgets/lib/sleep", package = "leaflet.extras"),
-      script = c("Leaflet.Sleep.js")
-    )
+    # // "leaflet-sleep": "0.5.1",
+    html_dep_prod("lfx-sleep", "0.5.1")
   )
 }
 
@@ -20,6 +16,11 @@ sleepDependency <- function() {
 #' @param  wakeMessage a message to inform users about waking the map
 #' @param  sleepOpacity opacity for the sleeping map
 #' @export
+#' @examples
+#' leaflet(width = "100%") %>%
+#'   setView(0, 0, 1) %>%
+#'   addTiles() %>%
+#'   suspendScroll()
 suspendScroll <- function(
   map,
   sleep = TRUE,
@@ -27,8 +28,8 @@ suspendScroll <- function(
   wakeTime = 750,
   sleepNote = TRUE,
   hoverToWake = TRUE,
-  wakeMessage = 'Click or Hover to Wake',
-  #sleepButton = 'L.Control.sleepMapControl',
+  wakeMessage = "Click or Hover to Wake",
+  #sleepButton = "L.Control.sleepMapControl",
   sleepOpacity = .7
 ) {
   sleepOptions <- list(

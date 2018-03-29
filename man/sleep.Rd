@@ -28,3 +28,9 @@ suspendScroll(map, sleep = TRUE, sleepTime = 750, wakeTime = 750,
 \description{
 Prevents accidental map scrolling when scrolling in a document.
 }
+\examples{
+leaflet(width = "100\%") \%>\%
+  setView(0, 0, 1) \%>\%
+  addTiles() \%>\%
+  suspendScroll()
+}
