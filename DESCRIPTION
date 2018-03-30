@@ -46,9 +46,8 @@ Depends:
     R (>= 3.1.0),
     leaflet (>= 2.0.0)
 Remotes:
-    schloerke/leaflet@barret/v1x
+    rstudio/leaflet
 Imports:
-    shiny,
     htmlwidgets,
     htmltools,
     stringr,
