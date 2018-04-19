@@ -17,7 +17,7 @@ bounceMarkerDependency <- function() {
 #' @md
 #' @author Markus Dumke
 #' @export
-#' @seealso [Github: leaflet.bouncemarker](https://github.com/maximeh/leaflet.bouncemarker)
+#' @seealso [GitHub: leaflet.bouncemarker](https://github.com/maximeh/leaflet.bouncemarker)
 #' @examples
 #' leaflet() %>%
 #'   addTiles() %>%
