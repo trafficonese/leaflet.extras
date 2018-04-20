@@ -154,11 +154,11 @@ invokeJSAddMethod <- function(
 #' @export
 #' @examples
 #' ## addGeoJSONv2
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   setView(-77.0369, 38.9072, 12) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addWebGLGeoJSONHeatmap(
@@ -169,9 +169,7 @@ invokeJSAddMethod <- function(
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
 #'     markerOptions = markerOptions(radius = 2)
-#'   )
-#' if (interactive())
-#'   leaf
+#'   )}
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
@@ -262,11 +260,11 @@ legendOptions <- function(
 #' @export
 #' @examples
 #' ## addGeoJSONChoropleth
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   addTiles() %>%
 #'   setView(-77.0369, 38.9072, 11) %>%
 #'   addBootstrapDependency() %>%
@@ -291,9 +289,7 @@ legendOptions <- function(
 #'       bringToFront = TRUE, sendToBack = TRUE),
 #'     pathOptions = pathOptions(
 #'       showMeasurements = TRUE,
-#'       measurementOptions = measurePathOptions(imperial = TRUE)))
-#' if (interactive())
-#'   leaf
+#'       measurementOptions = measurePathOptions(imperial = TRUE)))}
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
@@ -370,7 +366,7 @@ addGeoJSONChoropleth = function(
 #'   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   setView(-77.0369, 38.9072, 12) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addWebGLKMLHeatmap(kml, size = 20, units = "px") %>%
@@ -380,8 +376,6 @@ addGeoJSONChoropleth = function(
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 1)
 #'   )
-#' if (interactive())
-#'   leaf
 #'
 #'
 addKML = function(
@@ -432,7 +426,7 @@ addKML = function(
 #'   system.file("examples/data/kml/cb_2015_us_state_20m.kml.zip", package = "leaflet.extras")
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   addBootstrapDependency() %>%
 #'   setView(-98.583333, 39.833333, 4) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -463,8 +457,6 @@ addKML = function(
 #'       )
 #'     )
 #'   )
-#' if (interactive())
-#'   leaf
 #'
 #'
 addKMLChoropleth = function(
@@ -553,7 +545,7 @@ csvParserOptions <- function(
 #'   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   setView(0, 0, 2) %>%
 #'   addProviderTiles(providers$CartoDB.DarkMatterNoLabels) %>%
 #'   addCSV(
@@ -562,8 +554,6 @@ csvParserOptions <- function(
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "red", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 0.5))
-#' if (interactive())
-#'   leaf
 #'
 #'
 addCSV = function(
@@ -615,7 +605,7 @@ addCSV = function(
 #'   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 #' )
 #'
-#' leaf <- leaflet() %>%
+#' leaflet() %>%
 #'   addBootstrapDependency() %>%
 #'   setView(-76.6413, 39.0458, 8) %>%
 #'   addProviderTiles(
@@ -630,8 +620,6 @@ addCSV = function(
 #'     markerOptions = markerOptions(radius = 1.5),
 #'     group = "airports"
 #'   )
-#' if (interactive())
-#'   leaf
 #'
 #' ## for a larger example see
 #' # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))

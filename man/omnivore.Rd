@@ -213,11 +213,11 @@ Adds a GPX to the leaflet map.
 }
 \examples{
 ## addGeoJSONv2
-geoJson <- readr::read_file(
+\donttest{geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLGeoJSONHeatmap(
@@ -228,9 +228,7 @@ leaf <- leaflet() \%>\%
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
     markerOptions = markerOptions(radius = 2)
-  )
-if (interactive())
-  leaf
+  )}
 
 ## for more examples see
 # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
@@ -240,11 +238,11 @@ if (interactive())
 
 
 ## addGeoJSONChoropleth
-geoJson <- readr::read_file(
+\donttest{geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
   setView(-77.0369, 38.9072, 11) \%>\%
   addBootstrapDependency() \%>\%
@@ -269,9 +267,7 @@ leaf <- leaflet() \%>\%
       bringToFront = TRUE, sendToBack = TRUE),
     pathOptions = pathOptions(
       showMeasurements = TRUE,
-      measurementOptions = measurePathOptions(imperial = TRUE)))
-if (interactive())
-  leaf
+      measurementOptions = measurePathOptions(imperial = TRUE)))}
 
 ## for more examples see
 # browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
@@ -285,7 +281,7 @@ kml <- readr::read_file(
   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLKMLHeatmap(kml, size = 20, units = "px") \%>\%
@@ -295,8 +291,6 @@ leaf <- leaflet() \%>\%
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1)
   )
-if (interactive())
-  leaf
 
 
 ## addKMLChoropleth
@@ -304,7 +298,7 @@ kml <- readr::read_file(
   system.file("examples/data/kml/cb_2015_us_state_20m.kml.zip", package = "leaflet.extras")
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   addBootstrapDependency() \%>\%
   setView(-98.583333, 39.833333, 4) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
@@ -335,8 +329,6 @@ leaf <- leaflet() \%>\%
       )
     )
   )
-if (interactive())
-  leaf
 
 
 ## addCSV
@@ -344,7 +336,7 @@ csv <- readr::read_file(
   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   setView(0, 0, 2) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatterNoLabels) \%>\%
   addCSV(
@@ -353,8 +345,6 @@ leaf <- leaflet() \%>\%
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "red", fillOpacity = 1,
     markerOptions = markerOptions(radius = 0.5))
-if (interactive())
-  leaf
 
 
 ## addGPX
@@ -362,7 +352,7 @@ airports <- readr::read_file(
   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 )
 
-leaf <- leaflet() \%>\%
+leaflet() \%>\%
   addBootstrapDependency() \%>\%
   setView(-76.6413, 39.0458, 8) \%>\%
   addProviderTiles(
@@ -377,8 +367,6 @@ leaf <- leaflet() \%>\%
     markerOptions = markerOptions(radius = 1.5),
     group = "airports"
   )
-if (interactive())
-  leaf
 
 ## for a larger example see
 # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
