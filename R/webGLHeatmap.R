@@ -97,7 +97,7 @@ addWebGLHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLGeoJSONHeatmap
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
@@ -112,7 +112,7 @@ addWebGLHeatmap = function(
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
 #'     markerOptions = markerOptions(radius = 2)
-#'   )
+#'   )}
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
@@ -148,7 +148,7 @@ addWebGLGeoJSONHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLKMLHeatmap
-#' kml <- readr::read_file(
+#' \donttest{kml <- readr::read_file(
 #'   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 #' )
 #'
@@ -159,7 +159,7 @@ addWebGLGeoJSONHeatmap = function(
 #'     kml,
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-#'     markerOptions = markerOptions(radius = 1))
+#'     markerOptions = markerOptions(radius = 1))}
 #'
 #'
 addWebGLKMLHeatmap = function(
@@ -195,7 +195,7 @@ addWebGLKMLHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLCSVHeatmap
-#' csv <- readr::read_file(
+#' \donttest{csv <- readr::read_file(
 #'   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 #' )
 #'
@@ -205,7 +205,7 @@ addWebGLKMLHeatmap = function(
 #'   addWebGLCSVHeatmap(
 #'     csv,
 #'     csvParserOptions("latitude_deg", "longitude_deg"),
-#'     size = 10, units = "px")
+#'     size = 10, units = "px")}
 #'
 addWebGLCSVHeatmap = function(
   map, csv, csvParserOptions, layerId = NULL, group = NULL,
@@ -239,7 +239,7 @@ addWebGLCSVHeatmap = function(
 #' @export
 #' @examples
 #'
-#' airports <- readr::read_file(
+#' \donttest{airports <- readr::read_file(
 #'   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 #' )
 #'
@@ -262,7 +262,7 @@ addWebGLCSVHeatmap = function(
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 1.5),
 #'     group = "airports"
-#'   )
+#'   )}
 #'
 #'
 #' ## for a larger example see
