@@ -4,7 +4,6 @@
 ^inst/examples/.*\.html
 ^inst/examples/rsconnect
 ^cran-comments\.md$
-^NEWS\.md$
 ^README\.md$
 ^README\.Rmd$
 ^\.travis\.yml$

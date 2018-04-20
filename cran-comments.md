@@ -80,7 +80,7 @@ I believe the warning and note below are transient within r-hub.
 
 * All revdep maintainers were notified on March 29, 2018 for a release date of April 16th.
 
-* I have run R CMD check on the 60 downstream dependencies.
+* I have run R CMD check on the 3 downstream dependencies.
   * https://github.com/bhaskarvk/leaflet.extras/blob/master/revdep/problems.md
 
 * No errors, warnings, or notes were introduced due to changes in leaflet.extras
