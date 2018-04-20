@@ -154,7 +154,7 @@ invokeJSAddMethod <- function(
 #' @export
 #' @examples
 #' ## addGeoJSONv2
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
@@ -169,7 +169,7 @@ invokeJSAddMethod <- function(
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
 #'     markerOptions = markerOptions(radius = 2)
-#'   )
+#'   )}
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
@@ -260,7 +260,7 @@ legendOptions <- function(
 #' @export
 #' @examples
 #' ## addGeoJSONChoropleth
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 #' )
 #'
@@ -289,7 +289,7 @@ legendOptions <- function(
 #'       bringToFront = TRUE, sendToBack = TRUE),
 #'     pathOptions = pathOptions(
 #'       showMeasurements = TRUE,
-#'       measurementOptions = measurePathOptions(imperial = TRUE)))
+#'       measurementOptions = measurePathOptions(imperial = TRUE)))}
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
@@ -362,7 +362,7 @@ addGeoJSONChoropleth = function(
 #' @export
 #' @examples
 #' ## addKML
-#' kml <- readr::read_file(
+#' \donttest{kml <- readr::read_file(
 #'   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 #' )
 #'
@@ -375,7 +375,7 @@ addGeoJSONChoropleth = function(
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 1)
-#'   )
+#'   )}
 #'
 #'
 addKML = function(
@@ -422,7 +422,7 @@ addKML = function(
 #' @export
 #' @examples
 #' ## addKMLChoropleth
-#' kml <- readr::read_file(
+#' \donttest{kml <- readr::read_file(
 #'   system.file("examples/data/kml/cb_2015_us_state_20m.kml.zip", package = "leaflet.extras")
 #' )
 #'
@@ -456,7 +456,7 @@ addKML = function(
 #'         maximumFractionDigits = 2
 #'       )
 #'     )
-#'   )
+#'   )}
 #'
 #'
 addKMLChoropleth = function(
@@ -541,7 +541,7 @@ csvParserOptions <- function(
 #' @export
 #' @examples
 #' ## addCSV
-#' csv <- readr::read_file(
+#' \donttest{csv <- readr::read_file(
 #'   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 #' )
 #'
@@ -553,7 +553,7 @@ csvParserOptions <- function(
 #'     csvParserOptions("latitude_deg", "longitude_deg"),
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "red", fillOpacity = 1,
-#'     markerOptions = markerOptions(radius = 0.5))
+#'     markerOptions = markerOptions(radius = 0.5))}
 #'
 #'
 addCSV = function(
@@ -601,7 +601,7 @@ addCSV = function(
 #' @export
 #' @examples
 #' ## addGPX
-#' airports <- readr::read_file(
+#' \donttest{airports <- readr::read_file(
 #'   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 #' )
 #'
@@ -619,11 +619,12 @@ addCSV = function(
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 1.5),
 #'     group = "airports"
-#'   )
+#'   )}
 #'
 #' ## for a larger example see
 #' # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
-
+#'
+#'
 addGPX = function(
   map, gpx, layerId = NULL, group = NULL,
   markerType = NULL, markerIcons = NULL,

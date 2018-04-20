@@ -10,7 +10,7 @@ measurePathDependencies <- function() {
 #' @rdname measure-path
 #' @export
 #' @examples
-#' geoJson <- readr::read_file(
+#' \donttest{geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 #' )
 #'
@@ -39,7 +39,9 @@ measurePathDependencies <- function() {
 #'       bringToFront = TRUE, sendToBack = TRUE),
 #'     pathOptions = pathOptions(
 #'       showMeasurements = TRUE,
-#'       measurementOptions = measurePathOptions(imperial = TRUE)))
+#'       measurementOptions = measurePathOptions(imperial = TRUE)))}
+#'
+#'
 enableMeasurePath <- function(map) {
   map$dependencies <- c(map$dependencies, measurePathDependencies())
   map

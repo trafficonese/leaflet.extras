@@ -10,7 +10,7 @@ utilsDependencies <- function() {
 #' @rdname utils
 #' @export
 #' @examples
-#' geoJson <- jsonlite::fromJSON(readr::read_file(
+#' \donttest{geoJson <- jsonlite::fromJSON(readr::read_file(
 #'   paste0(
 #'     "https://raw.githubusercontent.com/MinnPost/simple-map-d3",
 #'     "/master/example-data/world-population.geo.json"
@@ -31,7 +31,9 @@ utilsDependencies <- function() {
 #'
 #' # change background to white
 #' world %>%
-#'   setMapWidgetStyle(list(background = "white"))
+#'   setMapWidgetStyle(list(background = "white"))}
+#'
+#'
 setMapWidgetStyle <- function(
   map,
   style = list(background = "transparent")) {

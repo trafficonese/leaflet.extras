@@ -26,7 +26,7 @@ leaflet() \%>\%
   addBounceMarkers(49, 11)
 }
 \seealso{
-\href{https://github.com/maximeh/leaflet.bouncemarker}{Github: leaflet.bouncemarker}
+\href{https://github.com/maximeh/leaflet.bouncemarker}{GitHub: leaflet.bouncemarker}
 }
 \author{
 Markus Dumke

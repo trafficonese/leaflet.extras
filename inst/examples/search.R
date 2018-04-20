@@ -37,8 +37,8 @@ Providence,41.8236,-71.4222,177994
 "))
 
 leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
-  addCircleMarkers(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity = 0.5,
-             radius = ~sqrt(Pop) / 50, popup = ~City, label = ~City, group = "cities") %>%
+  addCircles(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity = 0.5,
+             radius = ~sqrt(Pop) * 10, popup = ~City, label = ~City, group = "cities") %>%
   addResetMapButton() %>%
   addSearchFeatures(
     targetGroups = "cities",

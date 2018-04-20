@@ -10,8 +10,9 @@ init:
 install:
   ps: Bootstrap
 
-cache:
-  - C:\RLibrary
+# cache is causing errors
+# cache:
+#   - C:\RLibrary
 
 # Adapt as necessary starting from here
 
