@@ -40,7 +40,7 @@ geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 )
 
-leaflet() \%>\%
+leaf <- leaflet() \%>\%
   addTiles() \%>\%
   setView(-77.0369, 38.9072, 11) \%>\%
   addBootstrapDependency() \%>\%
@@ -66,4 +66,8 @@ leaflet() \%>\%
     pathOptions = pathOptions(
       showMeasurements = TRUE,
       measurementOptions = measurePathOptions(imperial = TRUE)))
+if (interactive())
+  leaf
+
+
 }

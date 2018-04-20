@@ -14,7 +14,7 @@ measurePathDependencies <- function() {
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 #' )
 #'
-#' leaflet() %>%
+#' leaf <- leaflet() %>%
 #'   addTiles() %>%
 #'   setView(-77.0369, 38.9072, 11) %>%
 #'   addBootstrapDependency() %>%
@@ -40,6 +40,10 @@ measurePathDependencies <- function() {
 #'     pathOptions = pathOptions(
 #'       showMeasurements = TRUE,
 #'       measurementOptions = measurePathOptions(imperial = TRUE)))
+#' if (interactive())
+#'   leaf
+#'
+#'
 enableMeasurePath <- function(map) {
   map$dependencies <- c(map$dependencies, measurePathDependencies())
   map

@@ -52,9 +52,12 @@ world <- leaflet(
   addGraticule(style = list(color = "#999", weight = 0.5, opacity = 1, fill = NA)) \%>\%
   addGraticule(sphere = TRUE, style = list(color = "#777", weight = 1, opacity = 0.25, fill = NA))
 
-world
+if (interactive()) {
+  world
 
-# change background to white
-world \%>\%
-  setMapWidgetStyle(list(background = "white"))
+  # change background to white
+  world \%>\%
+    setMapWidgetStyle(list(background = "white"))
+}
+
 }
