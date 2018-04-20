@@ -111,7 +111,7 @@ leaflet(quakes) \%>\%
 ## for more examples see
 # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))
 ## addWebGLGeoJSONHeatmap
-geoJson <- readr::read_file(
+\donttest{geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
@@ -126,13 +126,13 @@ leaflet() \%>\%
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
     markerOptions = markerOptions(radius = 2)
-  )
+  )}
 
 ## for more examples see
 # browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
 # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 ## addWebGLKMLHeatmap
-kml <- readr::read_file(
+\donttest{kml <- readr::read_file(
   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
@@ -143,11 +143,11 @@ leaflet() \%>\% setView(-77.0369, 38.9072, 12) \%>\%
     kml,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 1))
+    markerOptions = markerOptions(radius = 1))}
 
 
 ## addWebGLCSVHeatmap
-csv <- readr::read_file(
+\donttest{csv <- readr::read_file(
   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 )
 
@@ -157,10 +157,10 @@ leaflet() \%>\%
   addWebGLCSVHeatmap(
     csv,
     csvParserOptions("latitude_deg", "longitude_deg"),
-    size = 10, units = "px")
+    size = 10, units = "px")}
 
 
-airports <- readr::read_file(
+\donttest{airports <- readr::read_file(
   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 )
 
@@ -183,7 +183,7 @@ leaflet() \%>\%
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1.5),
     group = "airports"
-  )
+  )}
 
 
 ## for a larger example see

@@ -8,8 +8,8 @@
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
-|tz       |America/Los_Angeles          |
-|date     |2018-03-29                   |
+|tz       |America/New_York             |
+|date     |2018-04-19                   |
 
 # Dependencies
 
@@ -29,7 +29,7 @@
 |gridExtra      |2.3     |2.3     |   |
 |gtable         |0.2.0   |0.2.0   |   |
 |htmltools      |0.3.6   |0.3.6   |   |
-|htmlwidgets    |1.0     |1.0     |   |
+|htmlwidgets    |1.2     |1.2     |   |
 |httpuv         |1.3.6.2 |1.3.6.2 |   |
 |jsonlite       |1.5     |1.5     |   |
 |labeling       |0.3     |0.3     |   |
