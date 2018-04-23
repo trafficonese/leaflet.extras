@@ -403,8 +403,8 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## addGeoJSONv2</span>
-<span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+    <pre class="examples"><div class='input'>## addGeoJSONv2
+</div><div class='input'><span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='st'>"https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"</span>
 )
 
@@ -419,17 +419,16 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
     <span class='kw'>markerType</span> <span class='kw'>=</span> <span class='st'>"circleMarker"</span>,
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.7</span>,
     <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-  )
+  )</div><div class='input'>
+## for more examples see
+# browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/search.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 
-<span class='co'>## for more examples see</span>
-<span class='co'># browseURL(system.file("examples/draw.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/search.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))</span>
 
-
-<span class='co'>## addGeoJSONChoropleth</span>
-<span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addGeoJSONChoropleth
+</div><div class='input'><span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='st'>"https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"</span>
 )
 
@@ -458,17 +457,16 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
       <span class='kw'>bringToFront</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sendToBack</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
     <span class='kw'>pathOptions</span> <span class='kw'>=</span> <span class='fu'>pathOptions</span>(
       <span class='kw'>showMeasurements</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-      <span class='kw'>measurementOptions</span> <span class='kw'>=</span> <span class='fu'><a href='measure-path.html'>measurePathOptions</a></span>(<span class='kw'>imperial</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)))
+      <span class='kw'>measurementOptions</span> <span class='kw'>=</span> <span class='fu'><a href='measure-path.html'>measurePathOptions</a></span>(<span class='kw'>imperial</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)))</div><div class='input'>
+## for more examples see
+# browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/measurePath.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/search.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 
-<span class='co'>## for more examples see</span>
-<span class='co'># browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/measurePath.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/search.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))</span>
 
-
-<span class='co'>## addKML</span>
-<span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addKML
+</div><div class='input'><span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/kml/crimes.kml.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -481,11 +479,10 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
     <span class='kw'>markerType</span> <span class='kw'>=</span> <span class='st'>"circleMarker"</span>,
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
     <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-  )
+  )</div><div class='input'>
 
-
-<span class='co'>## addKMLChoropleth</span>
-<span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addKMLChoropleth
+</div><div class='input'><span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/kml/cb_2015_us_state_20m.kml.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -519,11 +516,10 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
         <span class='kw'>maximumFractionDigits</span> <span class='kw'>=</span> <span class='fl'>2</span>
       )
     )
-  )
+  )</div><div class='input'>
 
-
-<span class='co'>## addCSV</span>
-<span class='no'>csv</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addCSV
+</div><div class='input'><span class='no'>csv</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/csv/world_airports.csv.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -535,11 +531,10 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
     <span class='fu'>csvParserOptions</span>(<span class='st'>"latitude_deg"</span>, <span class='st'>"longitude_deg"</span>),
     <span class='kw'>markerType</span> <span class='kw'>=</span> <span class='st'>"circleMarker"</span>,
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"red"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-    <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>0.5</span>))
+    <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>0.5</span>))</div><div class='input'>
 
-
-<span class='co'>## addGPX</span>
-<span class='no'>airports</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addGPX
+</div><div class='input'><span class='no'>airports</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/gpx/md-airports.gpx.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -557,10 +552,12 @@ Use <code>csvParserOptions</code>() to supply csv parser options.</p></td>
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
     <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>1.5</span>),
     <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"airports"</span>
-  )
+  )</div><div class='input'>
+## for a larger example see
+# browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
 
-<span class='co'>## for a larger example see</span>
-<span class='co'># browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))</span></div></pre>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
