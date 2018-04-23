@@ -243,8 +243,7 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
 
 <span class='co'>## for more examples see</span>
 <span class='co'># browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))</span>
-<span class='co'>## addWebGLGeoJSONHeatmap</span>
-<span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+<span class='co'>## addWebGLGeoJSONHeatmap</span></div><div class='input'><span class='no'>geoJson</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='st'>"https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"</span>
 )
 
@@ -259,13 +258,12 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
     <span class='kw'>markerType</span> <span class='kw'>=</span> <span class='st'>"circleMarker"</span>,
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>0.7</span>,
     <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-  )
-
-<span class='co'>## for more examples see</span>
-<span class='co'># browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))</span>
-<span class='co'># browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))</span>
-<span class='co'>## addWebGLKMLHeatmap</span>
-<span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+  )</div><div class='input'>
+## for more examples see
+# browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
+## addWebGLKMLHeatmap
+</div><div class='input'><span class='no'>kml</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/kml/crimes.kml.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -276,11 +274,10 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
     <span class='no'>kml</span>,
     <span class='kw'>markerType</span> <span class='kw'>=</span> <span class='st'>"circleMarker"</span>,
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-    <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>1</span>))
+    <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='input'>
 
-
-<span class='co'>## addWebGLCSVHeatmap</span>
-<span class='no'>csv</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+## addWebGLCSVHeatmap
+</div><div class='input'><span class='no'>csv</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/csv/world_airports.csv.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -290,10 +287,9 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
   <span class='fu'>addWebGLCSVHeatmap</span>(
     <span class='no'>csv</span>,
     <span class='fu'><a href='omnivore.html'>csvParserOptions</a></span>(<span class='st'>"latitude_deg"</span>, <span class='st'>"longitude_deg"</span>),
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"px"</span>)
+    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>"px"</span>)</div><div class='input'>
 
-
-<span class='no'>airports</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
+</div><div class='input'><span class='no'>airports</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/readr/topics/read_file'>read_file</a></span>(
   <span class='fu'>system.file</span>(<span class='st'>"examples/data/gpx/md-airports.gpx.zip"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"leaflet.extras"</span>)
 )
 
@@ -316,11 +312,11 @@ Use <code><a href='omnivore.html'>csvParserOptions</a></code>() to supply csv pa
     <span class='kw'>stroke</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fillColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fillOpacity</span> <span class='kw'>=</span> <span class='fl'>1</span>,
     <span class='kw'>markerOptions</span> <span class='kw'>=</span> <span class='fu'>markerOptions</span>(<span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>1.5</span>),
     <span class='kw'>group</span> <span class='kw'>=</span> <span class='st'>"airports"</span>
-  )
+  )</div><div class='input'>
 
-
-<span class='co'>## for a larger example see</span>
-<span class='co'># browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))</span></div></pre>
+## for a larger example see
+# browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
