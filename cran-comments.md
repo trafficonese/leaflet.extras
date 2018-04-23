@@ -1,5 +1,21 @@
 # Comments
 
+## 2018-4-21
+Resubmitting with leaflet added to cran.  Updated test environments below.
+
+Thank you for you patience!
+
+- Barret
+
+
+## 2018-4-20
+leafet accpeted
+- CRAN
+
+## 2018-4-20
+...submit leaflet first...
+- Uwe
+
 ## 2018-4-20
 This submission is in conjunction with the `leaflet` package submission.
 
@@ -13,52 +29,25 @@ This submission is done by Barret Schloerke <barret@rstudio.com> on behalf of Bh
   * * 0 errors | 0 warnings | 0 note
 * ubuntu 12.04 (on travis-ci), R version 3.4.4 (2017-01-27)
   * 0 errors | 0 warnings | 0 note
+* devtools::build_win() x86_64-w64-mingw32, R version 3.4.4 (2018-03-15)
+  * 0 errors | 0 warnings | 0 notes
 
-I believe the warning and note below are transient within r-hub.
-  * NOTE: Unknown, possibly mis-spelled, fields in DESCRIPTION
-    * This field has been removed in submission build.
-    * Was needed to test with rhub directly as the development branch of leaflet was required.
+* rhub
+  * Platform:   Windows Server 2008 R2 SP1, R-release, 32/64 bit
+    https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-d26059cae2d5494ba0a12bc7733ad893
+    0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
+  * Platform:   Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+    https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-01fadce20eef49c89de7c52d77f9a3b1
+    0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-* Platform:   Windows Server 2008 R2 SP1, R-release, 32/64 bit
-  https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-47538139e0924770aa9758bf8c718bdd
-  ❯ checking CRAN incoming feasibility ... NOTE
-    Maintainer: 'Bhaskar Karambelkar <bhaskarvk@gmail.com>'
+  * Platform:   Ubuntu Linux 16.04 LTS, R-release, GCC
+    https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-1e183a3a665648a28b434aa936f75121
+    0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-    Unknown, possibly mis-spelled, fields in DESCRIPTION:
-      'Remotes'
-
-  0 errors ✔ | 0 warnings ✔ | 1 notes ✖
-
-* Platform:   Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-4b6ec7d23fd84e019aa3146325e3e4cb
-  ❯ checking CRAN incoming feasibility ... NOTE
-    Maintainer: 'Bhaskar Karambelkar <bhaskarvk@gmail.com>'
-
-    Unknown, possibly mis-spelled, fields in DESCRIPTION:
-      'Remotes'
-
-  0 errors ✔ | 0 warnings ✔ | 1 notes ✖
-
-* Platform:   Ubuntu Linux 16.04 LTS, R-release, GCC
-  https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-57800762569b4dfc8ad5607b1ca88fc5
-  ❯ checking CRAN incoming feasibility ... NOTE
-    Maintainer: ‘Bhaskar Karambelkar <bhaskarvk@gmail.com>’
-
-    Unknown, possibly mis-spelled, fields in DESCRIPTION:
-      ‘Remotes’
-
-  0 errors ✔ | 0 warnings ✔ | 1 note ✖
-
-* Platform:   Fedora Linux, R-devel, clang, gfortran
-  https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-b5cab564ca684ee59cab8185a1343144
-  ❯ checking CRAN incoming feasibility ... NOTE
-    Maintainer: ‘Bhaskar Karambelkar <bhaskarvk@gmail.com>’
-
-    Unknown, possibly mis-spelled, fields in DESCRIPTION:
-      ‘Remotes’
-
-  0 errors ✔ | 0 warnings ✔ | 1 note ✖
+  * Platform:   Fedora Linux, R-devel, clang, gfortran
+    https://builder.r-hub.io/status/leaflet.extras_1.0.0.tar.gz-3919eac30a1d4f0bb9d60d18c627e582
+    0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 
 
