@@ -160,7 +160,7 @@ pulseIcons <- function(
 #'
 #'
 #' ## for more examples see
-#' # browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))
+#' # browseURL(system.file("examples/pulseIcon.R", package = "leaflet.extras"))
 addPulseMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,
