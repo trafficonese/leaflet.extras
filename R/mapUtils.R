@@ -61,6 +61,14 @@ addResetMapButton <- function(map) {
     icon = "ion-arrow-shrink",
     title = "Reset View",
     onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>%
-  htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}"))
-
+  htmlwidgets::onRender(JS(
+"
+function(el, x){ 
+  var map = this; 
+  map.whenReady(function(){
+    map._initialCenter = map.getCenter(); 
+    map._initialZoom = map.getZoom();
+  });
+}"
+  )) 
 }
