@@ -47,3 +47,8 @@ You should have already added the GPS control before calling this method.
 Deactivate the GPS Control.
 You should have already added the GPS control before calling this method.
 }
+\examples{
+leaflet() \%>\%
+  addTiles() \%>\%
+  addControlGPS()
+}

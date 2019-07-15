@@ -18,19 +18,34 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+<meta property="og:title" content="Make pulse-icon set — pulseIconList" />
+
+<meta property="og:description" content="Make pulse-icon set
+Make Pulse Icon
+An icon can be represented as a list of the form list(color, iconSize,
+...). This function is vectorized over its arguments to create a list of
+icon data. Shorter argument values will be re-cycled. NULL values for
+these arguments will be ignored.
+Add Pulse Markers" />
+<meta name="twitter:card" content="summary" />
+
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -46,12 +61,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">leaflet.extras</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">leaflet.extras</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -60,7 +79,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -72,6 +91,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -79,10 +99,12 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Make pulse-icon set</h1>
+    <small>Source: <a href='https://github.com/bhaskarvk/leaflet.extras/blob/master/R/pulseIcon.R'><code>R/pulseIcon.R</code></a></small>
+    <div class="hidden name"><code>pulseMarkers.Rd</code></div>
     </div>
 
     
@@ -95,7 +117,7 @@ these arguments will be ignored.</p>
 <p>Add Pulse Markers</p>
     
 
-    <pre>pulseIconList(...)
+    <pre class="usage">pulseIconList(...)
 
 # S3 method for leaflet_pulse_icon_set
 [(x, i)
@@ -112,7 +134,7 @@ addPulseMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
   clusterOptions = NULL, clusterId = NULL,
   data = leaflet::getMapData(map))</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -224,11 +246,11 @@ initially, but can be overridden</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>iconSet</span> <span class='kw'>=</span> <span class='fu'>pulseIconList</span>(
-  <span class='kw'>red</span> <span class='kw'>=</span> <span class='fu'>makePulseIcon</span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>'#ff0000'</span>),
-  <span class='kw'>blue</span> <span class='kw'>=</span> <span class='fu'>makePulseIcon</span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>'#0000ff'</span>)
+  <span class='kw'>red</span> <span class='kw'>=</span> <span class='fu'>makePulseIcon</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#ff0000"</span>),
+  <span class='kw'>blue</span> <span class='kw'>=</span> <span class='fu'>makePulseIcon</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#0000ff"</span>)
 )
 
-<span class='no'>iconSet</span>[<span class='fu'>c</span>(<span class='st'>'red'</span>, <span class='st'>'blue'</span>)]</div><div class='output co'>#&gt; $red
+<span class='no'>iconSet</span>[<span class='fu'>c</span>(<span class='st'>"red"</span>, <span class='st'>"blue"</span>)]</div><div class='output co'>#&gt; $red
 #&gt; $color
 #&gt; [1] "#ff0000"
 #&gt; 
@@ -261,7 +283,18 @@ initially, but can be overridden</p></td>
 #&gt; [1] "leaflet_pulse_icon"
 #&gt; 
 #&gt; attr(,"class")
-#&gt; [1] "leaflet_pulse_icon_set"</div></pre>
+#&gt; [1] "leaflet_pulse_icon_set"</div><div class='input'>
+<span class='fu'>leaflet</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>addTiles</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>addPulseMarkers</span>(
+    <span class='kw'>lng</span> <span class='kw'>=</span> -<span class='fl'>118.456554</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='fl'>34.078039</span>,
+    <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"This is a label"</span>,
+    <span class='kw'>icon</span> <span class='kw'>=</span> <span class='fu'>makePulseIcon</span>(<span class='kw'>heartbeat</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
+  )
+
+
+<span class='co'>## for more examples see</span>
+<span class='co'># browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -276,32 +309,18 @@ initially, but can be overridden</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>.</p>
+  <p>Developed by <a href='https://www.karambelkar.info/'>Bhaskar Karambelkar</a>, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//apps.karambelkar.info/pk/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '4']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//apps.karambelkar.info/pk/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+  
 
   </body>
 </html>
+

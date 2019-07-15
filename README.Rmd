@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(fig.retina=2, fig.path = "README_figs/README-")
@@ -7,12 +9,11 @@ knitr::opts_chunk$set(fig.retina=2, fig.path = "README_figs/README-")
 
 ```{r, echo = FALSE}
 description <- readLines(system.file("DESCRIPTION", package='leaflet.extras'))
-rvers <- stringr::str_match(grep("R \\(", description, value = TRUE), "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}")[1,1]
 version <- gsub(" ", "", gsub("Version:", "", grep("Version:", description, value = TRUE)))
 last_changed <- gsub('-', '--', Sys.Date())
 ```
 
-[![Project Status: Active – The project is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-`r last_changed`-green.svg)](/commits/master)  [![License: GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0) [![keybase verified](https://img.shields.io/badge/keybase-verified-brightgreen.svg)](https://gist.github.com/bhaskarvk/46fbf2ba7b5713151d7e) [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/leaflet.extras.svg?branch=master)](https://travis-ci.org/bhaskarvk/leaflet.extras) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/leaflet.extras?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/leaflet.extras) [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/) [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras) [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
+[![Project Status: Active – The project is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-`r last_changed`-green.svg)](/commits/master)  [![License: GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0) [![keybase verified](https://img.shields.io/badge/keybase-verified-brightgreen.svg)](https://gist.github.com/bhaskarvk/46fbf2ba7b5713151d7e) [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/leaflet.extras.svg?branch=master)](https://travis-ci.org/bhaskarvk/leaflet.extras) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/leaflet.extras?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/leaflet.extras)  [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras) [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
 
 ## leaflet.extras
 
@@ -61,13 +62,14 @@ Plugins integrated so far ...
 - [Leaflet-GPS](https://github.com/stefanocudini/leaflet-gps)
 - [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep): Demo at [Rpubs: Suspended Scrolling](http://rpubs.com/bhaskarvk/suspended-scroll)
 - [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
+- [Bounce Marker](https://github.com/maximeh/leaflet.bouncemarker)
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/bhaskarvk/leaflet.extras/issues/new).
 See the [FAQ](#FAQ) section below for details.
 
 ### Documentation
 
-The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation. 
+The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
 
 Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/bhaskarvk/leaflet.extras/tree/master/inst/examples) available. You can see most of these examples in action at [Rpubs:bhaskarvk](http://rpubs.com/bhaskarvk).
 
@@ -91,9 +93,19 @@ _I found a bug._
 
 _I need a plugin which requires 1.x version of the leaflet JavaScript library_
 
-The R `leaflet` package is still using the version 0.7.x of the leaflet JavaScript library. 1.x support is planned but not currently available. When that happens `leaflet.extras` can begin to integrate plugins which require the 1.x version.
+As of version 1.0.0, `leaflet.extras` supports leaflet.js version 1.x.
+
+### Development
+
+To make additions to the plugin dependencies, please add the plugin using `npm`.  Make sure it is compiled within the `webpack.config.js`.  Finally, make sure htmlwidgets finds it within your plugin's dependency function.
+
+To build the latest version of the plugins, please make sure Node.js is installed on your system, then run:
+
+```
+npm install
+npm run build
+```
 
 
 ### Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-

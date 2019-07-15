@@ -7,3 +7,8 @@ inst/examples/rsconnect
 inst/examples/*.Rmd
 .Rprofile
 *.swp
+node_modules
+revdep/checks*
+revdep/library*
+revdep/data*
+viztest-*

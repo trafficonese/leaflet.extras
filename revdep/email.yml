@@ -1,0 +1,5 @@
+my_version: 0.2
+release_version: 1.0.0
+release_date: "April 16th, 2018"
+rel_release_date: "two weeks"
+my_news_url: https://github.com/bhaskarvk/leaflet/blob/master/NEWS

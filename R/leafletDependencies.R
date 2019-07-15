@@ -14,15 +14,15 @@ addBootstrapDependency <- function(map)  {
 addAwesomeMarkersDependencies <- function(map, libs) {
   map$dependencies <- c(map$dependencies,
                         leaflet::leafletDependencies$awesomeMarkers())
-  if("fa" %in% libs) {
+  if ("fa" %in% libs) {
     map$dependencies <- c(map$dependencies,
                           leaflet::leafletDependencies$fontawesome())
   }
-  if("ion" %in% libs) {
+  if ("ion" %in% libs) {
     map$dependencies <- c(map$dependencies,
                           leaflet::leafletDependencies$ionicon())
   }
-  if("glyphicon" %in% libs) {
+  if ("glyphicon" %in% libs) {
     map$dependencies <- c(map$dependencies,
                           leaflet::leafletDependencies$bootstrap())
   }
@@ -32,9 +32,19 @@ addAwesomeMarkersDependencies <- function(map, libs) {
 #' Various leaflet dependency functions for use in downstream packages
 #' @export
 leafletExtrasDependencies <- list(
-  omnivore = function() {omnivoreDependencies()},
-  choropleth = function() {geoJSONChoroplethDependency()},
-  weatherIcons = function(){weatherIconDependency()},
-  pulseIcons = function(){pulseIconDependency()},
-  webGLHeatmap = function(){webGLHeatmapDependency()}
+  omnivore = function() {
+    omnivoreDependencies()
+  },
+  choropleth = function() {
+    geoJSONChoroplethDependency()
+  },
+  weatherIcons = function(){
+    weatherIconDependency()
+  },
+  pulseIcons = function(){
+    pulseIconDependency()
+  },
+  webGLHeatmap = function(){
+    webGLHeatmapDependency()
+  }
 )

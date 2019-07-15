@@ -4,13 +4,13 @@ library(leaflet.extras)
 
 #+ fig.width=10, fig.height=8
 leaflet() %>%
-  setView(0,0,2) %>%
+  setView(0, 0, 2) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addDrawToolbar(
-    targetGroup='draw',
+    targetGroup = "draw",
     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))  %>%
-  addLayersControl(overlayGroups = c('draw'), options =
-                     layersControlOptions(collapsed=FALSE)) %>%
+  addLayersControl(overlayGroups = c("draw"), options =
+                     layersControlOptions(collapsed = FALSE)) %>%
   addStyleEditor()
 
 #' <br/><br/>
@@ -30,12 +30,12 @@ Providence,41.8236,-71.4222,177994
 #+ fig.width=10, fig.height=8
 leaflet(cities) %>% addTiles() %>%
   addCircles(lng = ~Long, lat = ~Lat, weight = 1,
-             radius = ~sqrt(Pop) * 30, label = ~City, group ='cities') %>%
+             radius = ~sqrt(Pop) * 30, label = ~City, group = "cities") %>%
   addDrawToolbar(
-    targetGroup='cities',
+    targetGroup = "cities",
     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions()))  %>%
-  addLayersControl(overlayGroups = c('cities'), options =
-                     layersControlOptions(collapsed=FALSE)) %>%
+  addLayersControl(overlayGroups = c("cities"), options =
+                     layersControlOptions(collapsed = FALSE)) %>%
   addStyleEditor()
 
 #' <br/><br/>
@@ -54,12 +54,12 @@ model <- spTransform(model, "+init=epsg:4326")
 
 #+ fig.width=10, fig.height=8
 leaflet() %>% addTiles() %>%
-  addPolygons(data = model, group = 'model') %>%
-  addDrawToolbar(targetGroup = 'model',
+  addPolygons(data = model, group = "model") %>%
+  addDrawToolbar(targetGroup = "model",
     editOptions = editToolbarOptions(
       selectedPathOptions = selectedPathOptions())) %>%
-  addLayersControl(overlayGroups = c('model'), options =
-                     layersControlOptions(collapsed=FALSE)) %>%
+  addLayersControl(overlayGroups = c("model"), options =
+                     layersControlOptions(collapsed = FALSE)) %>%
   addStyleEditor()
 
 
@@ -67,19 +67,19 @@ leaflet() %>% addTiles() %>%
 #' ### Add GeoJSON and then edit it
 #' The layerId of the GeoJSON has to match the targetLayerId of `addDrawToolbar`. Also notice that we have to simplify the geometry quite a bit using `rmapshaper::ms_simplify`, otherwise the edit feature is very slow and will even hang the browser.
 
-fName <- 'https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson'
+fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 
 geoJson <- readr::read_file(fName)
-geoJson2 <- rmapshaper::ms_simplify(geoJson, keep=0.01)
+geoJson2 <- rmapshaper::ms_simplify(geoJson, keep = 0.01)
 
 #+ fig.width=10, fig.height=8
 leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 12) %>%
   addGeoJSONv2(geoJson2,
-    group = 'wards', layerId = 'dc-wards') %>%
+    group = "wards", layerId = "dc-wards") %>%
   addDrawToolbar(
-    targetLayerId='dc-wards',
+    targetLayerId = "dc-wards",
     editOptions = editToolbarOptions(
       selectedPathOptions = selectedPathOptions()))  %>%
-  addLayersControl(overlayGroups = c('wards'),
-                   options = layersControlOptions(collapsed=FALSE)) %>%
+  addLayersControl(overlayGroups = c("wards"),
+                   options = layersControlOptions(collapsed = FALSE)) %>%
   addStyleEditor()

@@ -12,3 +12,8 @@ addResetMapButton(map)
 \description{
 Reset map's view to original view
 }
+\examples{
+leaflet() \%>\%
+  addTiles() \%>\%
+  addResetMapButton()
+}

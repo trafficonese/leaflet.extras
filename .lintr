@@ -1,0 +1,7 @@
+linters: with_defaults(
+    camel_case_linter = NULL, # 717
+    line_length_linter(100),
+    commented_code_linter = NULL, # 44
+    absolute_paths_linter = NULL, # 4
+    NULL
+  )

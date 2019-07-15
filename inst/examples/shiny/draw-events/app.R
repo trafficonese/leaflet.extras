@@ -1,4 +1,3 @@
-library(leaflet)
 library(leaflet.extras)
 library(shiny)
 
@@ -12,38 +11,38 @@ server <- function(input, output, session) {
   })
 
   # Start of Drawing
-  observeEvent(input$leafmap_draw_start,{
+  observeEvent(input$leafmap_draw_start, {
     print("Start of drawing")
     print(input$leafmap_draw_start)
   })
 
   # Stop of Drawing
-  observeEvent(input$leafmap_draw_stop,{
+  observeEvent(input$leafmap_draw_stop, {
     print("Stopped drawing")
     print(input$leafmap_draw_stop)
   })
 
   # New Feature
-  observeEvent(input$leafmap_draw_new_feature,{
+  observeEvent(input$leafmap_draw_new_feature, {
     print("New Feature")
     print(input$leafmap_draw_new_feature)
   })
 
   # Edited Features
-  observeEvent(input$leafmap_draw_edited_features,{
+  observeEvent(input$leafmap_draw_edited_features, {
     print("Edited Features")
     print(input$leafmap_draw_edited_features)
   })
 
   # Deleted features
-  observeEvent(input$leafmap_draw_deleted_features,{
+  observeEvent(input$leafmap_draw_deleted_features, {
     print("Deleted Features")
     print(input$leafmap_draw_deleted_features)
   })
 
   # We also listen for draw_all_features which is called anytime
   # features are created/edited/deleted from the map
-  observeEvent(input$leafmap_draw_all_features,{
+  observeEvent(input$leafmap_draw_all_features, {
     print("All Features")
     print(input$leafmap_draw_all_features)
   })
