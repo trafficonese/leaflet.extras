@@ -6,8 +6,8 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     var map = this;
 
     if(map.drawToolbar) {
-      map.drawToolbar.removeFrom(map);
-      delete map.drawToobar;
+      map.drawToolbar.remove(map);
+      delete map.drawToolbar;
     }
 
     // FeatureGroup that will hold our drawn shapes/markers
@@ -194,7 +194,7 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
     var map = this;
 
     if(map.drawToolbar) {
-      map.drawToolbar.removeFrom(map);
+      map.drawToolbar.remove(map);
       delete map.drawToolbar;
     }
     if(map._editableFeatureGroupName && clearFeatures) {

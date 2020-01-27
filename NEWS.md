@@ -1,8 +1,12 @@
+# leaflet.extras 1.1.0
+
 ## New Features
 
 * Added support for [Leaflet-Reachability](https://github.com/traffordDataLab/leaflet.reachability).
 * Added support for [Leaflet-Velocity](https://github.com/danwild/leaflet-velocity).
 
+## Bug Fixes
+- Fixed #148, #156, #165
 
 # leaflet.extras 1.0.0
 
