@@ -1,3 +1,9 @@
+## New Features
+
+* Added support for [Leaflet-Reachability](https://github.com/traffordDataLab/leaflet.reachability).
+* Added support for [Leaflet-Velocity](https://github.com/danwild/leaflet-velocity).
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js

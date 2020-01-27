@@ -236,9 +236,15 @@ const config = [
   library_binding("lfx-bouncemarker"),
 
 
-  library_binding("map-widget-style")
+  library_binding("map-widget-style"),
 
+  // "leaflet.reachability": "github:traffordDataLab/leaflet.reachability#05c7e4f",
+  library_prod("leaflet.reachability", "lfx-reachability"),
+  library_binding("lfx-reachability"),
 
+  // "leaflet-velocity": "github:danwild/leaflet-velocity#b2a09f8",
+  library_prod("leaflet-velocity", "lfx-velocity"),
+  library_binding("lfx-velocity")
 
 ];
 

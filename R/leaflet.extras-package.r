@@ -7,6 +7,8 @@
 #' plugins.
 #'
 #' @importFrom magrittr %>%
+#' @importFrom htmltools htmlDependency
+#' @importFrom jsonlite fromJSON toJSON
 #' @import leaflet
 #'
 #' @name leaflet.extras

@@ -11,6 +11,7 @@
 ^\_pkgdown\.yaml$
 ^docs$
 ^inst/examples/virginia.rds$
+^inst/examples/velocity/wind-global.json$
 ^CONDUCT\.md$
 ^node_modules
 ^package.*\.json
