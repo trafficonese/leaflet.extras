@@ -1,3 +1,9 @@
+# leaflet.extras 1.1.0
+
+## New Features
+
+* Added support for [Leaflet-Side-by-Side](https://github.com/digidem/leaflet-side-by-side).
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
