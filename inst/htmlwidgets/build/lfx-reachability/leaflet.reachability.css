@@ -1,0 +1,95 @@
+/* Button to expand the reachability control in a toggleable state state */
+.reachability-control-expand-button {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.leaflet-touch .reachability-control-expand-button {
+    font-size: 22px;
+}
+
+/* Button to collapse the reachability control when in a toggleable state */
+.reachability-control-collapse-button {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 5px;
+    background-color: #f4f4f4;
+    border: 1px solid transparent;
+}
+
+.reachability-control-collapse-button:hover {
+    border: 1px dotted #757575;
+}
+
+/* The container for the reachability control user interface */
+.reachability-control-settings-container {
+    background: #fff;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+/* General class for styling the 'button' controls in the user interface container */
+.reachability-control-settings-button {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: 2px solid #757575;
+}
+
+.reachability-control-settings-button:last-child {
+    margin-right: 0px;
+}
+
+.reachability-control-settings-button, .reachability-control-collapse-button {
+    text-align: center;
+    cursor: pointer;
+    color: #757575;
+}
+
+.reachability-control-settings-button:hover {
+    background-color: #f4f4f4;
+}
+
+/* Dividers between the different UI sections */
+.reachability-control-settings-block-container {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #757575;
+}
+
+/* General class for highlighting the selected 'button' controls in the user interface container and the collapsed control if either the draw or delete mode is active */
+.reachability-control-active, .leaflet-touch .reachability-control-active, .reachability-control-active a, .leaflet-touch .reachability-control-active a {
+    border-color: #0073d4;
+    color: #0073d4;
+    box-shadow: 0 1px 5px rgba(0,115,212,0.65);
+}
+
+/* If something has gone wrong or the user tries to perform an action that isn't allowed e.g. trying to delete when there are no isolines */
+.reachability-control-error, .leaflet-touch .reachability-control-error {
+    border-color: red;
+    color: red;
+    box-shadow: 0 1px 5px rgba(255,0,0,0.65);
+}
+
+/* Container for the range titles - applies to both time and distance */
+.reachability-control-range-title {
+    font-weight: bold;
+    margin: 0 5px 5px 0;
+    display: inline-block;  /* change to 'block' if you want more space for the title */
+}
+
+.reachability-control-show-range-interval {
+    padding-left: 5px;
+}
+
+/* Used to hide elements of the control as necessary, e.g. when it is in its collapsed state etc. */
+.reachability-control-hide-content {
+    display: none;
+}
