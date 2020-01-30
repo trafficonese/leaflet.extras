@@ -8,6 +8,8 @@
 #'
 #' @importFrom magrittr %>%
 #' @import leaflet
+#' @importFrom htmltools htmlDependency
+#' @importFrom jsonlite fromJSON toJSON
 #'
 #' @name leaflet.extras
 #' @docType package

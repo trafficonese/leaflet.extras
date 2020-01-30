@@ -21,3 +21,4 @@
 ^webpack\.config\.js
 ^inst/htmlwidgets/bindings
 ^inst/htmlwidgets/src
+^inst/examples/velocity/wind-global.json$
