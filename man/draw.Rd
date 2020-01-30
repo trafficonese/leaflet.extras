@@ -13,7 +13,7 @@ addDrawToolbar(map, targetLayerId = NULL, targetGroup = NULL,
   rectangleOptions = drawRectangleOptions(),
   markerOptions = drawMarkerOptions(),
   circleMarkerOptions = drawCircleMarkerOptions(), editOptions = FALSE,
-  singleFeature = FALSE)
+  singleFeature = FALSE, toolbar = NULL, handlers = NULL)
 
 removeDrawToolbar(map, clearFeatures = FALSE)
 }
@@ -44,6 +44,10 @@ You can either set layerId or group or none but not both.}
 \item{editOptions}{By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().}
 
 \item{singleFeature}{When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.}
+
+\item{toolbar}{See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.}
+
+\item{handlers}{See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.}
 
 \item{clearFeatures}{whether to clear the map of drawn features.}
 }

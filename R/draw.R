@@ -24,6 +24,8 @@ drawDependencies <- function() {
 #' @param circleMarkerOptions See \code{\link{drawCircleMarkerOptions}}(). Set to FALSE to disable circle marker drawing.
 #' @param editOptions By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
+#' @param toolbar See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.
+#' @param handlers See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @export
 #' @rdname draw
 #' @examples
@@ -54,12 +56,17 @@ addDrawToolbar <- function(
   markerOptions = drawMarkerOptions(),
   circleMarkerOptions = drawCircleMarkerOptions(),
   editOptions = FALSE,
-  singleFeature = FALSE
+  singleFeature = FALSE,
+  toolbar = NULL,
+  handlers = NULL
 ) {
 
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
       stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
+
+  if (!inherits(toolbar, "list")) toolbar <- NULL
+  if (!inherits(handlers, "list")) handlers <- NULL
 
   map$dependencies <- c(map$dependencies, drawDependencies())
 
@@ -89,7 +96,9 @@ addDrawToolbar <- function(
       marker = markerOptions,
       circlemarker = circleMarkerOptions,
       singleFeature = singleFeature)),
-    edit = editOptions )
+    edit = editOptions,
+    toolbar = toolbar,
+    handlers = handlers)
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), "addDrawToolbar",
                         targetLayerId, targetGroup, options)
