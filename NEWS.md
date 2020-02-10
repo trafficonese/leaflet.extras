@@ -1,3 +1,10 @@
+# leaflet.extras 1.2.0
+
+## New Features
+
+- Added support for [Tangram Vector Tiles](https://github.com/tangrams/tangram)
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js

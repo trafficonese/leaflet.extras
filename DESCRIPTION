@@ -32,7 +32,9 @@ Authors@R: c(
       person("Vladimir", "Agafonkin", role = c("ctb", "cph"), comment = "leaflet.heat library"),
       person("Iván Sánchez", "Ortega", role = c("ctb", "cph"), comment = "leaflet.tilelayer.pouchdbcached library"),
       person("Dale", "Harvey", role = c("ctb", "cph"), comment = "pouchdb-browser library"),
-      person("Mike", "Bostock", role = c("ctb", "cph"), comment = "topojson library")
+      person("Mike", "Bostock", role = c("ctb", "cph"), comment = "topojson library"),
+      person("Sebastian", "Gatscha", email= "sebastian_gatscha@gmx.at", role = c("ctb"),
+        comment = "tangram library")
     )
 Description: The 'leaflet' JavaScript library provides many plugins some of which
     are available in the core 'leaflet' package, but there are many more. It is not

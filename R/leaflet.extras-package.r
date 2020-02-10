@@ -8,6 +8,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @import leaflet
+#' @importFrom htmltools htmlDependency
 #'
 #' @name leaflet.extras
 #' @docType package
