@@ -61,11 +61,6 @@ addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
     stop("The scene must point to a valid .yaml or .zip file.\n",
          "See the documentation for further information.")
   }
-  if (!requireNamespace("shiny")) {
-    stop("Package `shiny` must be loaded for Tangram")
-  }
-  shiny::addResourcePath("tangram", paste0(getwd(), "/www"))
-  scene <- basename(scene)
 
   options <- leaflet::filterNULL(c(scene = scene,
                                    options))
