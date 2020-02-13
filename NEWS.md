@@ -1,3 +1,9 @@
+# leaflet.extras 1.1.0
+
+## New Features
+
+- [MapkeyIcons](https://github.com/mapshakers/leaflet-mapkey-icon)
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
