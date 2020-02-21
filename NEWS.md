@@ -1,3 +1,10 @@
+# leaflet.extras 1.1.0
+
+## New Features
+
+- [easyPrint](https://github.com/rowanwins/leaflet-easyPrint)
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
