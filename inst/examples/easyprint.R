@@ -1,8 +1,3 @@
-# ----API-KEY---- tangram?
-#   kWmEXE7uRyioZGbnnGwj1Q
-
-
-
 
 library(shiny)
 library(shinycssloaders)
