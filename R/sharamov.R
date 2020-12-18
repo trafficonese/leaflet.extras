@@ -19,7 +19,7 @@ addBingTiles <- function(
   map,
   apikey = Sys.getenv("BING_MAPS_API_KEY"),
   imagerySet = c("Aerial", "AerialWithLabels",
-                 "CanvasDark", "CanvasLight", "CanvasGray",
+                 "CanvasDark", "CanvasLight", "CanvasGray","AerialWithLabelsOnDemand","BirdseyeV2WithLabels",
                  "Road"),
   layerId = NULL,
   group = NULL,
