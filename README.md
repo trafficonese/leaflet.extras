@@ -1,3 +1,12 @@
+# Project needs a new home
+
+Thank you all of you who have used this package and have contributed code/bugs/enhancements over the years. As you may have noticed I haven't been able to make any contributions to this project and others in the last two years. I was hoping to get back to developing/maintaining this package on a regular basis but my current work-life balance does not allow it and I don't see that situation changing anytime soon. 
+
+So here is my humble request to the R geospatial community, if anyone wants to take over this project and maintain/develop it for the greater good, I will be more than happy to transfer the project over to your repo. Send me an email at bhaskarvk AT <google's mail domain>. Same offer holds of any of my other R packages that you might be interested in taking over.
+
+**Please note that the javascripts being used in the current version are all almost 2 years old and counting and contain various security vulnerabilities. So I don't recommend anyone use this package anymore unless it is taken over and brought up to date by someone else. Until that happens please consider this project as abandonware.**
+
+---
 
 [![Project Status: Active – The project is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--23-green.svg)](/commits/master) [![License: GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0) [![keybase verified](https://img.shields.io/badge/keybase-verified-brightgreen.svg)](https://gist.github.com/bhaskarvk/46fbf2ba7b5713151d7e) [![Travis-CI Build Status](https://travis-ci.org/bhaskarvk/leaflet.extras.svg?branch=master)](https://travis-ci.org/bhaskarvk/leaflet.extras) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bhaskarvk/leaflet.extras?branch=master&svg=true)](https://ci.appveyor.com/project/bhaskarvk/leaflet.extras) [![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](commits/master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras) [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
 
