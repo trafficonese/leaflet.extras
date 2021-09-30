@@ -236,3 +236,143 @@ editToolbarOptions <- function(
     allowIntersection = allowIntersection
   ))
 }
+
+
+#' Options for editing handlers
+#' @description Customize tooltips for \code{\link{addDrawToolbar}}
+#' @param polyline List of options for polyline tooltips.
+#' @param polygon List of options for polygon tooltips.
+#' @param rectangle List of options for rectangle tooltips.
+#' @param circle List of options for circle tooltips.
+#' @param marker List of options for marker tooltips.
+#' @param circlemarker List of options for circlemarker tooltips.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#' addTiles() %>%
+#'   addDrawToolbar(
+#'     handlers = handlersOptions(
+#'       polyline = list(tooltipStart = "Click It",
+#'                      tooltipCont = "Keep going",
+#'                      tooltipEnd = "Make it stop"),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = F, circleOptions = F,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+handlersOptions <- function(
+  polyline = list(
+    error = "<strong>Error:</strong> shape edges cannot cross!",
+    tooltipStart = "Click to start drawing line.",
+    tooltipCont = "Click to start drawing line.",
+    tooltipEnd = "Click to start drawing line."),
+  polygon = list(
+    tooltipStart = "Click to start drawing shape.",
+    tooltipCont = "Click to start drawing shape.",
+    tooltipEnd = "Click to start drawing shape."),
+  rectangle = list(
+    tooltipStart = "Click and drag to draw rectangle."),
+  circle = list(
+    tooltipStart = "Click map to place circle marker.",
+    radius = "Radius"),
+  marker = list(
+    tooltipStart = "Click map to place marker."),
+  circlemarker = list(
+    tooltipStart = "Click and drag to draw circle.")
+) {
+  leaflet::filterNULL(list(
+    polyline = list(
+      error = polyline$error,
+      tooltip = list(
+        start = polyline$tooltipStart,
+        cont = polyline$tooltipCont,
+        end = polyline$tooltipEnd
+      )),
+    polygon = list(
+      tooltip = list(
+        start = polygon$tooltipStart,
+        cont = polygon$tooltipCont,
+        end = polygon$tooltipEnd
+      )),
+    rectangle = list(tooltip = list(start = rectangle$tooltipStart)),
+    circle    = list(radius = circle$radius,
+                     tooltip = list(start = circle$tooltipStart)),
+    marker    = list(tooltip = list(start = marker$tooltipStart)),
+    circlemarker = list(tooltip = list(start = circlemarker$tooltipStart))
+  ))
+}
+
+
+#' Options for editing the toolbar
+#' @description Customize the toolbar for \code{\link{addDrawToolbar}}
+#' @param actions List of options for actions toolbar button.
+#' @param finish List of options for finish toolbar button.
+#' @param undo List of options for undo toolbar button.
+#' @param buttons List of options for buttons toolbar button.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addDrawToolbar(
+#'     toolbar = toolbarOptions(
+#'       actions = list(text = "STOP"),
+#'       finish = list(text = "DONE"),
+#'       buttons = list(polyline = "Draw a sexy polyline",
+#'                      rectangle = "Draw a gigantic rectangle",
+#'                      circlemarker = "Make a nice circle"),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = T,circleOptions = T,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+toolbarOptions <- function(
+  actions = list(
+    title = "Cancel drawing",
+    text = "Cancel"
+  ),
+  finish = list(
+    title = "Finish drawing",
+    text = "Finish"
+  ),
+  undo = list(
+    title = "Delete last point drawn",
+    text = "Delete last point"
+  ),
+  buttons = list(
+    polyline = "Draw a polyline",
+    polygon = "Draw a polygon",
+    rectangle = "Draw a rectangle",
+    circle = "Draw a circle",
+    marker = "Draw a marker",
+    circlemarker = "Draw a circlemarker"
+  )
+) {
+  leaflet::filterNULL(list(
+    actions = list(
+      title = actions$title,
+      text = actions$text
+    ),
+    finish = list(
+      title = finish$title,
+      text = finish$text
+    ),
+    undo = list(
+      title = undo$title,
+      text = undo$text
+    ),
+    buttons = list(
+      polyline = buttons$polyline,
+      polygon = buttons$polygon,
+      rectangle = buttons$rectangle,
+      circle = buttons$circle,
+      marker = buttons$marker,
+      circlemarker = buttons$circlemarker
+    )
+  ))
+}
+
+
