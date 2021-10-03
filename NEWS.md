@@ -1,3 +1,10 @@
+# leaflet.extras 1.1.0
+
+## New Features
+
+* Added support for [Leaflet.OpacityControls](https://github.com/lizardtechblog/Leaflet.OpacityControls).
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
