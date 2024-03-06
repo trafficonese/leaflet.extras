@@ -32,7 +32,6 @@
     "leaflet-sleep": "0.5.1",
     "leaflet-webgl-heatmap": "0.2.7",
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
-    "leaflet.heat": "bhaskarvk/Leaflet.heat#60cf4c4",
     "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
     "pouchdb-browser": "6.4.3",
     "topojson": "3.0.2"
