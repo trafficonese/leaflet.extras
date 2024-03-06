@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "napa": "napa",
-    "build": "napa; webpack --config webpack.config.js",
-    "watch": "napa; webpack --config webpack.config.js --watch --progress",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "napa": {
