@@ -4,17 +4,17 @@
 \alias{handlersOptions}
 \title{Options for editing handlers}
 \usage{
-handlersOptions(polyline = list(error =
-  "<strong>Error:</strong> shape edges cannot cross!", tooltipStart =
-  "Click to start drawing line.", tooltipCont = "Click to start drawing line.",
-  tooltipEnd = "Click to start drawing line."), polygon = list(tooltipStart =
-  "Click to start drawing shape.", tooltipCont =
-  "Click to start drawing shape.", tooltipEnd =
-  "Click to start drawing shape."), rectangle = list(tooltipStart =
-  "Click and drag to draw rectangle."), circle = list(tooltipStart =
-  "Click map to place circle marker.", radius = "Radius"),
+handlersOptions(
+  polyline = list(error = "<strong>Error:</strong> shape edges cannot cross!",
+    tooltipStart = "Click to start drawing line.", tooltipCont =
+    "Click to start drawing line.", tooltipEnd = "Click to start drawing line."),
+  polygon = list(tooltipStart = "Click to start drawing shape.", tooltipCont =
+    "Click to start drawing shape.", tooltipEnd = "Click to start drawing shape."),
+  rectangle = list(tooltipStart = "Click and drag to draw rectangle."),
+  circle = list(tooltipStart = "Click map to place circle marker.", radius = "Radius"),
   marker = list(tooltipStart = "Click map to place marker."),
-  circlemarker = list(tooltipStart = "Click and drag to draw circle."))
+  circlemarker = list(tooltipStart = "Click and drag to draw circle.")
+)
 }
 \arguments{
 \item{polyline}{List of options for polyline tooltips.}

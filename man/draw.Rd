@@ -5,15 +5,22 @@
 \alias{removeDrawToolbar}
 \title{Adds a Toolbar to draw shapes/points on the map.}
 \usage{
-addDrawToolbar(map, targetLayerId = NULL, targetGroup = NULL,
+addDrawToolbar(
+  map,
+  targetLayerId = NULL,
+  targetGroup = NULL,
   position = c("topleft", "topright", "bottomleft", "bottomright"),
   polylineOptions = drawPolylineOptions(),
   polygonOptions = drawPolygonOptions(),
   circleOptions = drawCircleOptions(),
   rectangleOptions = drawRectangleOptions(),
   markerOptions = drawMarkerOptions(),
-  circleMarkerOptions = drawCircleMarkerOptions(), editOptions = FALSE,
-  singleFeature = FALSE, toolbar = NULL, handlers = NULL)
+  circleMarkerOptions = drawCircleMarkerOptions(),
+  editOptions = FALSE,
+  singleFeature = FALSE,
+  toolbar = NULL,
+  handlers = NULL
+)
 
 removeDrawToolbar(map, clearFeatures = FALSE)
 }

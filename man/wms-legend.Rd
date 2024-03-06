@@ -39,8 +39,8 @@ leaflet(
     layers = "Boosmansbos",
     options = WMSTileOptions(format = "image/png", transparent = TRUE),
     attribution = paste0(
-      "(c)<a href= \\"http://kartoza.com\\">Kartoza.com</a> and ",
-      "<a href= \\"http://www.ngi.gov.za/\\">SA-NGI</a>"
+      "(c)<a href= \"http://kartoza.com\">Kartoza.com</a> and ",
+      "<a href= \"http://www.ngi.gov.za/\">SA-NGI</a>"
     )
   ) \%>\%
   addWMSLegend(

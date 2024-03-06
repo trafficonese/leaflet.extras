@@ -3,7 +3,6 @@
 \docType{package}
 \name{leaflet.extras}
 \alias{leaflet.extras}
-\alias{leaflet.extras-package}
 \title{leaflet.extras: Extra Functionality for 'leaflet' Package.}
 \description{
 Description: The 'leaflet' JavaScript library provides many plugins some of which

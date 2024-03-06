@@ -12,39 +12,91 @@
 \alias{editToolbarOptions}
 \title{Options for drawn shapes}
 \usage{
-drawShapeOptions(stroke = TRUE, color = "#03f", weight = 1, opacity = 1,
-  fill = TRUE, fillColor = "#03f", fillOpacity = 0.4, dashArray = NULL,
-  lineCap = NULL, lineJoin = NULL, clickable = TRUE,
-  pointerEvents = NULL, smoothFactor = 1, noClip = TRUE)
+drawShapeOptions(
+  stroke = TRUE,
+  color = "#03f",
+  weight = 1,
+  opacity = 1,
+  fill = TRUE,
+  fillColor = "#03f",
+  fillOpacity = 0.4,
+  dashArray = NULL,
+  lineCap = NULL,
+  lineJoin = NULL,
+  clickable = TRUE,
+  pointerEvents = NULL,
+  smoothFactor = 1,
+  noClip = TRUE
+)
 
-drawPolylineOptions(allowIntersection = TRUE, drawError = list(color =
-  "#b00b00", timeout = 2500), guidelineDistance = 20,
-  maxGuideLineLength = 4000, showLength = TRUE, metric = TRUE,
-  feet = TRUE, nautic = FALSE, zIndexOffset = 2000,
-  shapeOptions = drawShapeOptions(fill = FALSE), repeatMode = FALSE)
+drawPolylineOptions(
+  allowIntersection = TRUE,
+  drawError = list(color = "#b00b00", timeout = 2500),
+  guidelineDistance = 20,
+  maxGuideLineLength = 4000,
+  showLength = TRUE,
+  metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
+  zIndexOffset = 2000,
+  shapeOptions = drawShapeOptions(fill = FALSE),
+  repeatMode = FALSE
+)
 
-drawPolygonOptions(showArea = FALSE, metric = TRUE,
-  shapeOptions = drawShapeOptions(), repeatMode = FALSE)
+drawPolygonOptions(
+  showArea = FALSE,
+  metric = TRUE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+)
 
-drawRectangleOptions(showArea = TRUE, metric = TRUE,
-  shapeOptions = drawShapeOptions(), repeatMode = FALSE)
+drawRectangleOptions(
+  showArea = TRUE,
+  metric = TRUE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+)
 
-drawCircleOptions(showRadius = TRUE, metric = TRUE, feet = TRUE,
-  nautic = FALSE, shapeOptions = drawShapeOptions(), repeatMode = FALSE)
+drawCircleOptions(
+  showRadius = TRUE,
+  metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+)
 
-drawMarkerOptions(markerIcon = NULL, zIndexOffset = 2000,
-  repeatMode = FALSE)
+drawMarkerOptions(markerIcon = NULL, zIndexOffset = 2000, repeatMode = FALSE)
 
-drawCircleMarkerOptions(stroke = TRUE, color = "#3388ff", weight = 4,
-  opacity = 0.5, fill = TRUE, fillColor = NULL, fillOpacity = 0.2,
-  clickable = TRUE, zIndexOffset = 2000, repeatMode = FALSE)
+drawCircleMarkerOptions(
+  stroke = TRUE,
+  color = "#3388ff",
+  weight = 4,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = NULL,
+  fillOpacity = 0.2,
+  clickable = TRUE,
+  zIndexOffset = 2000,
+  repeatMode = FALSE
+)
 
-selectedPathOptions(dashArray = c("10, 10"), weight = 2, color = "black",
-  fill = TRUE, fillColor = "black", fillOpacity = 0.6,
-  maintainColor = FALSE)
+selectedPathOptions(
+  dashArray = c("10, 10"),
+  weight = 2,
+  color = "black",
+  fill = TRUE,
+  fillColor = "black",
+  fillOpacity = 0.6,
+  maintainColor = FALSE
+)
 
-editToolbarOptions(edit = TRUE, remove = TRUE, selectedPathOptions = NULL,
-  allowIntersection = TRUE)
+editToolbarOptions(
+  edit = TRUE,
+  remove = TRUE,
+  selectedPathOptions = NULL,
+  allowIntersection = TRUE
+)
 }
 \arguments{
 \item{stroke}{Whether to draw stroke along the path. Set it to false to disable borders on polygons or circles.}

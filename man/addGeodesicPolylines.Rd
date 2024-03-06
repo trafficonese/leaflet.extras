@@ -5,20 +5,54 @@
 \alias{addGreatCircles}
 \title{Add Geodesic Lines}
 \usage{
-addGeodesicPolylines(map, lng = NULL, lat = NULL, layerId = NULL,
-  group = NULL, steps = 10, wrap = TRUE, stroke = TRUE,
-  color = "#03F", weight = 5, opacity = 0.5, dashArray = NULL,
-  smoothFactor = 1, noClip = FALSE, popup = NULL, popupOptions = NULL,
-  label = NULL, labelOptions = NULL, options = pathOptions(),
-  highlightOptions = NULL, data = getMapData(map))
+addGeodesicPolylines(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  steps = 10,
+  wrap = TRUE,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
 
-addGreatCircles(map, lat_center = NULL, lng_center = NULL, radius,
-  layerId = NULL, group = NULL, steps = 10, wrap = TRUE,
-  stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
-  dashArray = NULL, smoothFactor = 1, noClip = FALSE, popup = NULL,
-  popupOptions = NULL, label = NULL, labelOptions = NULL,
-  options = pathOptions(), highlightOptions = NULL,
-  data = getMapData(map))
+addGreatCircles(
+  map,
+  lat_center = NULL,
+  lng_center = NULL,
+  radius,
+  layerId = NULL,
+  group = NULL,
+  steps = 10,
+  wrap = TRUE,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  data = getMapData(map)
+)
 }
 \arguments{
 \item{map}{map object}

@@ -55,4 +55,4 @@ Suggests:
     readr
 URL: https://github.com/bhaskarvk/leaflet.extras, https://bhaskarvk.github.io/leaflet.extras/
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1

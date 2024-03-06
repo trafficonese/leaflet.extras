@@ -11,73 +11,193 @@
 \alias{addGPX}
 \title{Adds a GeoJSON/TopoJSON to the leaflet map.}
 \usage{
-addGeoJSONv2(map, geojson, layerId = NULL, group = NULL,
-  markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
-  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
-  clusterId = NULL, labelProperty = NULL,
-  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
-  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
-  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+addGeoJSONv2(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  markerType = NULL,
+  markerIcons = NULL,
+  markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+)
 
-legendOptions(title = NULL, position = c("bottomleft", "bottomright",
-  "topleft", "topright"), locale = "en-US", numberFormatOptions = list(style
-  = "decimal", maximumFractionDigits = 2))
+legendOptions(
+  title = NULL,
+  position = c("bottomleft", "bottomright", "topleft", "topright"),
+  locale = "en-US",
+  numberFormatOptions = list(style = "decimal", maximumFractionDigits = 2)
+)
 
-addGeoJSONChoropleth(map, geojson, layerId = NULL, group = NULL,
-  valueProperty, labelProperty = NULL,
-  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
-  popupOptions = leaflet::popupOptions(), scale = c("white", "red"),
-  steps = 5, mode = "q", channelMode = c("rgb", "lab", "hsl", "lch"),
-  padding = NULL, correctLightness = FALSE, bezierInterpolate = FALSE,
-  colors = NULL, stroke = TRUE, color = "#03F", weight = 1,
-  opacity = 0.5, fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
-  noClip = FALSE, pathOptions = leaflet::pathOptions(),
-  highlightOptions = NULL, legendOptions = NULL)
+addGeoJSONChoropleth(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  valueProperty,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  scale = c("white", "red"),
+  steps = 5,
+  mode = "q",
+  channelMode = c("rgb", "lab", "hsl", "lch"),
+  padding = NULL,
+  correctLightness = FALSE,
+  bezierInterpolate = FALSE,
+  colors = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 1,
+  opacity = 0.5,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL,
+  legendOptions = NULL
+)
 
-addKML(map, kml, layerId = NULL, group = NULL, markerType = NULL,
-  markerIcons = NULL, markerIconProperty = NULL,
-  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
-  clusterId = NULL, labelProperty = NULL,
-  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
-  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
-  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+addKML(
+  map,
+  kml,
+  layerId = NULL,
+  group = NULL,
+  markerType = NULL,
+  markerIcons = NULL,
+  markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+)
 
-addKMLChoropleth(map, kml, layerId = NULL, group = NULL, valueProperty,
-  labelProperty = NULL, labelOptions = leaflet::labelOptions(),
-  popupProperty = NULL, popupOptions = leaflet::popupOptions(),
-  scale = c("white", "red"), steps = 5, mode = "q",
-  channelMode = c("rgb", "lab", "hsl", "lch"), padding = NULL,
-  correctLightness = FALSE, bezierInterpolate = FALSE, colors = NULL,
-  stroke = TRUE, color = "#03F", weight = 1, opacity = 0.5,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL,
-  legendOptions = NULL)
+addKMLChoropleth(
+  map,
+  kml,
+  layerId = NULL,
+  group = NULL,
+  valueProperty,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  scale = c("white", "red"),
+  steps = 5,
+  mode = "q",
+  channelMode = c("rgb", "lab", "hsl", "lch"),
+  padding = NULL,
+  correctLightness = FALSE,
+  bezierInterpolate = FALSE,
+  colors = NULL,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 1,
+  opacity = 0.5,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL,
+  legendOptions = NULL
+)
 
 csvParserOptions(latfield, lonfield, delimiter = ",")
 
-addCSV(map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  markerType = NULL, markerIcons = NULL, markerIconProperty = NULL,
-  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
-  clusterId = NULL, labelProperty = NULL,
-  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
-  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
-  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+addCSV(
+  map,
+  csv,
+  csvParserOptions,
+  layerId = NULL,
+  group = NULL,
+  markerType = NULL,
+  markerIcons = NULL,
+  markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+)
 
-addGPX(map, gpx, layerId = NULL, group = NULL, markerType = NULL,
-  markerIcons = NULL, markerIconProperty = NULL,
-  markerOptions = leaflet::markerOptions(), clusterOptions = NULL,
-  clusterId = NULL, labelProperty = NULL,
-  labelOptions = leaflet::labelOptions(), popupProperty = NULL,
-  popupOptions = leaflet::popupOptions(), stroke = TRUE, color = "#03F",
-  weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOptions = leaflet::pathOptions(), highlightOptions = NULL)
+addGPX(
+  map,
+  gpx,
+  layerId = NULL,
+  group = NULL,
+  markerType = NULL,
+  markerIcons = NULL,
+  markerIconProperty = NULL,
+  markerOptions = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  labelProperty = NULL,
+  labelOptions = leaflet::labelOptions(),
+  popupProperty = NULL,
+  popupOptions = leaflet::popupOptions(),
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOptions = leaflet::pathOptions(),
+  highlightOptions = NULL
+)
 }
 \arguments{
 \item{map}{the leaflet map widget}
@@ -196,20 +316,6 @@ Use \code{\link{csvParserOptions}}() to supply csv parser options.}
 \description{
 This is a feature rich alternative to the \code{\link[leaflet]{addGeoJSON}} & \code{\link[leaflet]{addTopoJSON}}
 with options to map feature properties to labels, popups, colors, markers etc.
-
-Options to customize a Choropleth Legend
-
-Adds a GeoJSON/TopoJSON Choropleth.
-
-Adds a KML to the leaflet map.
-
-Adds a KML Choropleth.
-
-Options for parsing CSV
-
-Adds a CSV to the leaflet map.
-
-Adds a GPX to the leaflet map.
 }
 \examples{
 ## addGeoJSONv2
