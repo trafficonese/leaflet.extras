@@ -117,12 +117,12 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     // Event Listeners
     map.on(L.Draw.Event.DRAWSTART, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType, 'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.DRAWSTOP, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType,'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.CREATED, function (e) {
