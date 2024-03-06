@@ -216,7 +216,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
 
     options = options || {};
     options.markerLocation = true;
-    options.textPlaceholder = 'Search using Google Geocoder';
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using Google Geocoder';
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});
@@ -418,9 +418,10 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
 
     options = options || {};
 
-    options.url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
-    options.textPlaceholder = 'Search using US Census Bureau';
-    options.jsonpParam = 'callback';
+    options.url = options.url ? options.url : 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using US Census Bureau';
+
+    options.jsonpParam = options.jsonpParam ? options.jsonpParam : 'callback';
     options.formatData = formatJSON;
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
