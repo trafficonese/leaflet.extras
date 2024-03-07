@@ -14,10 +14,8 @@
   },
   "dependencies": {
     "@mapbox/leaflet-omnivore": "0.3.4",
-    "@mapbox/togeojson": "0.16.0",
-    "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-    "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
-    "csv2geojson": "5.0.2",
+    "@mapbox/togeojson": "^0.16.2",
+    "csv2geojson": "^5.1.2",
     "fuse.js": "3.2.0",
     "leaflet-choropleth": "github:bhaskarvk/leaflet-choropleth#f8d1ed4",
     "leaflet-draw": "1.0.2",
@@ -32,24 +30,24 @@
     "leaflet-sleep": "0.5.1",
     "leaflet-webgl-heatmap": "0.2.7",
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
+    "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
+    "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
     "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
     "pouchdb-browser": "6.4.3",
-    "topojson": "3.0.2"
+    "topojson-client": "^3.1.0",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.10",
-    "eslint": "^4.19.1",
-    "eslint-loader": "^2.0.0",
-    "file-loader": "^1.1.11",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^6.10.0",
+    "eslint": "^8.57.0",
     "license-checker": "^18.0.0",
     "lodash": "^4.17.5",
-    "mini-css-extract-plugin": "^0.2.0",
     "napa": "^3.0.0",
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^0.20.3",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack": "^5.90.3"
   }
 }
