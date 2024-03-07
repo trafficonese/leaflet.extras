@@ -3,6 +3,8 @@ const webpack = require('webpack');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin'); // Import eslint-webpack-plugin
+
 
 const binding_path = "./inst/htmlwidgets/bindings/";
 const src_path = "./inst/htmlwidgets/src/";
@@ -82,14 +84,16 @@ let library_binding = function(name) {
     entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
-        // lint the bindings using ./inst/htmlwidgets/bindings/.eslintrc.js
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: "eslint-loader"
-        },
       ]
     },
+    plugins: [
+      new ESLintPlugin({
+        // Specify the files/paths to lint.
+        files: binding_path + name + "-bindings.js",
+        // If you have an ESLint configuration file at a custom path, you can specify it here:
+        context: path.resolve(__dirname, 'inst/htmlwidgets/bindings/.eslintrc.js'),
+      }),
+    ],
     // save bindings to build bindings folder
     output: {
       filename: name + "-bindings.js", // save file in path on next line
