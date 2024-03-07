@@ -17,17 +17,18 @@ jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_r
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- geojsonio::as.json(v8$get("pubsGeoJSON"))
-spdf <- geojsonio::geojson_sp(geoJson)
 
 #'
 #'
+spdf <- geojsonio::geojson_sp(geoJson)
 leaflet(spdf) %>%
   addProviderTiles(providers$Thunderforest.TransportDark) %>%
   addHeatmap(blur = 20, max = 0.05, radius = 15)
 
 #'
 #'
-leaflet(spdf) %>%
+spdf1 <- geojsonio::geojson_sf(geoJson)
+leaflet(spdf1) %>%
   addProviderTiles(providers$Thunderforest.Transport) %>%
   addHeatmap(blur = 20, max = 0.05, radius = 15, gradient = "Greys")
 

@@ -9,6 +9,7 @@ library(leaflet.extras)
 
 #' We plot US Airports both as individual points and as heatmap.
 
+## TODO - Find new JSON
 fName <- "https://rawgit.com/mbostock/4408297/raw/e7ff08dbcfce3e15663baf9078ab0ff51a72023c/airports.json"
 
 topoJson <- readr::read_file(fName)
@@ -31,6 +32,7 @@ leaflet() %>%
 fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
 topoJson <- readr::read_file(fName)
 
+## TODO - both together are not working
 leaflet() %>%
   addBootstrapDependency() %>%
   setView(-75.14, 40, zoom = 11) %>%

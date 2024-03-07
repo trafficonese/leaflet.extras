@@ -45,3 +45,4 @@ leaflet(cities) %>% addTiles() %>%
                     label = ~City,
                     labelOptions = rep(labelOptions(noHide = T), nrow(cities)),
                     icon = ~popIcons[PopCat] )
+
