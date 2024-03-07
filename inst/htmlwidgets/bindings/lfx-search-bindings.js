@@ -396,7 +396,6 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
 
 
 LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
-
   (function(){
     var map = this;
 
@@ -419,7 +418,7 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     options = options || {};
 
     options.url = options.url ? options.url : 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
-    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using US Census Bureau';
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using US Census Bureau TEST';
 
     options.jsonpParam = options.jsonpParam ? options.jsonpParam : 'callback';
     options.formatData = formatJSON;

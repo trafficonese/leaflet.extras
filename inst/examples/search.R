@@ -13,9 +13,11 @@ library(leaflet.extras)
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
   addResetMapButton() %>%
-  addSearchOSM() %>%
-  addSearchGoogle() %>%
-  addSearchUSCensusBureau()
+  addSearchOSM(options = searchOptions(autoCollapse = TRUE,
+                                       textPlaceholder = "Custom OSM Search",
+                                       minLength = 2)) %>%
+  addSearchGoogle(options = searchOptions(textPlaceholder = "Custom Google Search")) %>%
+  addSearchUSCensusBureau(options = searchOptions(textPlaceholder = "Custom Census Search"))
 
 #' Reverse Geocoding using OSM
 # Reverse Geocoding ----
