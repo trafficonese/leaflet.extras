@@ -1,5 +1,5 @@
 const path = require("path");
-// const webpack = require('webpack');
+const webpack = require('webpack');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -64,13 +64,12 @@ let add_externals = function(config, externals) {
 }
 let add_attachments = function(config, attachments, output_folder) {
   config.plugins = config.plugins.concat([
-    new CopyWebpackPlugin(
-      [{
+    new CopyWebpackPlugin({
+      patterns: [{
         from: attachments,
-        to: build_path + "/" + output_folder,
-        flatten: true
+        to: build_path + "/" + output_folder
       }]
-    )
+    })
   ]);
   return config;
 }
@@ -220,6 +219,7 @@ const config = [
   library_prod("leaflet.tilelayer.pouchdbcached", "lfx-tilelayer"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
+  /*
   library_prod(
     [
       "leaflet-weather-markers/dist/leaflet.weather-markers.js",
@@ -230,6 +230,7 @@ const config = [
     "lfx-weather-markers"
   ),
   library_binding("lfx-weather-markers"),
+  */
 
   // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
   library_prod("leaflet.BounceMarker", "lfx-bouncemarker"),
