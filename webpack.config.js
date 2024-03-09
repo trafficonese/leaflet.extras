@@ -177,9 +177,9 @@ const config = [
     // For google support!!
     // "leaflet.gridlayer.googlemutant": "^0.6.4",
 
-  // "leaflet-pulse-icon": "0.1.0",
+  // "leaflet-pulse-icon": "0.1.1",
   library_prod(
-    ["leaflet-pulse-icon", "leaflet-pulse-icon/src/L.Icon.Pulse.css"],
+    ["@ansur/leaflet-pulse-icon"],
     "lfx-pulse-icon"
   ),
   library_binding("lfx-pulse-icon"),
