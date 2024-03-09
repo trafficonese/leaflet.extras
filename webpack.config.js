@@ -149,8 +149,12 @@ const config = [
   library_binding("lfx-draw"),
 
   // "leaflet-fullscreen": "1.0.2",
-  library_prod(
-    ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
+  add_attachments(
+    library_prod(
+      ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
+      "lfx-fullscreen"
+    ),
+    "node_modules/leaflet-fullscreen/dist/*.png",
     "lfx-fullscreen"
   ),
 
