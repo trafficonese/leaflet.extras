@@ -8,7 +8,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addSearchOSM(
-        options = searchOSMOptions(
+        options = searchOptions(
           position = "topleft"))
   })
 
