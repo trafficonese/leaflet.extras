@@ -24,11 +24,10 @@ let library_prod = function(name, filename = name, library = undefined) {
     module: {
       rules: [
         // copy files to destination folder who have these extensions
-        { test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf|otf)$/,
-          use: [{
-              loader: 'file-loader',
-              options: {
-                name: "css/[name].[ext]"}}]},
+        {
+          test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf|otf)$/,
+          type: 'asset/resource'
+        },
         // copy from https://github.com/webpack-contrib/mini-css-extract-plugin/tree/e307e251a476e24f3d1827e74e0434de52ce6ea3
         { test: /\.css$/,
           use: [
@@ -148,13 +147,8 @@ const config = [
   library_prod("leaflet-draw-drag", "lfx-draw-drag"),
   library_binding("lfx-draw"),
 
-  // "leaflet-fullscreen": "1.0.2",
-  add_attachments(
-    library_prod(
-      ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
-      "lfx-fullscreen"
-    ),
-    "node_modules/leaflet-fullscreen/dist/*.png",
+  library_prod(
+    ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
     "lfx-fullscreen"
   ),
 
