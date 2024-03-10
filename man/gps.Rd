@@ -8,8 +8,13 @@
 \alias{deactivateGPS}
 \title{Options for the GPS Control}
 \usage{
-gpsOptions(position = "topleft", activate = FALSE, autoCenter = FALSE,
-  maxZoom = NULL, setView = FALSE)
+gpsOptions(
+  position = "topleft",
+  activate = FALSE,
+  autoCenter = FALSE,
+  maxZoom = NULL,
+  setView = FALSE
+)
 
 addControlGPS(map, options = gpsOptions())
 

@@ -1,3 +1,10 @@
+#' Create a list of weather icon data see
+#' @param icon the weather icon name w/o the "wi-" prefix. For a full list see \url{https://erikflowers.github.io/weather-icons/}
+#' @param markerColor color of the marker
+#' @param iconColor color of the weather icon
+#' @param extraClasses Character vector of extra classes.
+#' @name weatherMarkers
+NULL
 
 weatherIconDependency <- function() {
   list(
@@ -10,8 +17,6 @@ weatherIconDependency <- function() {
 markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "darkgreen", "lightgreen", "blue", "darkblue", "lightblue", "purple", "darkpurple", "pink", "cadetblue", "white", "gray", "lightgray", "black")
 
 #' Make weather-icon set
-#'
-#' @param ... icons created from \code{\link{makeWeatherIcon}()}
 #' @export
 #' @examples
 #'
@@ -20,6 +25,7 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #'   tornado = makeWeatherIcon(icon = "tornado")
 #' )
 #'
+#' @param ... icons created from \code{\link{makeWeatherIcon}()}
 #' iconSet[c("hurricane", "tornado")]
 #' @rdname weatherMarkers
 weatherIconList = function(...) {
@@ -33,9 +39,9 @@ weatherIconList = function(...) {
   res
 }
 
+#' @export
 #' @param x icons
 #' @param i offset
-#' @export
 #' @rdname weatherMarkers
 `[.leaflet_weather_icon_set` = function(x, i) {
   if (is.factor(i)) {
@@ -73,7 +79,6 @@ weatherIconSetToWeatherIcons = function(x) {
 
 #' Make Weather Icon
 #'
-#' @inheritParams weatherIcons
 #' @export
 #' @rdname weatherMarkers
 makeWeatherIcon <- function(

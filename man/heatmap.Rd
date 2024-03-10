@@ -10,26 +10,78 @@
 \alias{clearHeatmap}
 \title{Add a heatmap}
 \usage{
-addHeatmap(map, lng = NULL, lat = NULL, intensity = NULL,
-  layerId = NULL, group = NULL, minOpacity = 0.05, max = 1,
-  radius = 25, blur = 15, gradient = NULL, cellSize = NULL,
-  data = leaflet::getMapData(map))
+addHeatmap(
+  map,
+  lng = NULL,
+  lat = NULL,
+  intensity = NULL,
+  layerId = NULL,
+  group = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL,
+  data = leaflet::getMapData(map)
+)
 
-addGeoJSONHeatmap(map, geojson, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addGeoJSONHeatmap(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addKMLHeatmap(map, kml, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addKMLHeatmap(
+  map,
+  kml,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addCSVHeatmap(map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addCSVHeatmap(
+  map,
+  csv,
+  csvParserOptions,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addGPXHeatmap(map, gpx, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addGPXHeatmap(
+  map,
+  gpx,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
 removeHeatmap(map, layerId)
 

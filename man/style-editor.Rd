@@ -5,8 +5,13 @@
 \alias{removeStyleEditor}
 \title{Add style editor}
 \usage{
-addStyleEditor(map, position = c("topleft", "topright", "bottomleft",
-  "bottomright"), openOnLeafletDraw = TRUE, useGrouping = FALSE, ...)
+addStyleEditor(
+  map,
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
+  openOnLeafletDraw = TRUE,
+  useGrouping = FALSE,
+  ...
+)
 
 removeStyleEditor(map)
 }

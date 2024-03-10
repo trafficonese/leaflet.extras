@@ -5,19 +5,43 @@
 \alias{searchFeaturesOptions}
 \title{Options for search control.}
 \usage{
-searchOptions(url = "", sourceData = NULL, jsonpParam = NULL,
-  propertyLoc = "loc", propertyName = "title", formatData = NULL,
-  filterData = NULL, moveToLocation = TRUE, zoom = 17, buildTip = NULL,
-  container = "", minLength = 1, initial = TRUE, casesensitive = FALSE,
-  autoType = TRUE, delayType = 400, tooltipLimit = -1,
-  tipAutoSubmit = TRUE, firstTipSubmit = FALSE, autoResize = TRUE,
-  collapsed = TRUE, autoCollapse = FALSE, autoCollapseTime = 1200,
-  textErr = "Location Not Found", textCancel = "Cancel",
-  textPlaceholder = "Search...", position = "topleft",
-  hideMarkerOnCollapse = FALSE)
+searchOptions(
+  url = "",
+  sourceData = NULL,
+  jsonpParam = NULL,
+  propertyLoc = "loc",
+  propertyName = "title",
+  formatData = NULL,
+  filterData = NULL,
+  moveToLocation = TRUE,
+  zoom = 17,
+  buildTip = NULL,
+  container = "",
+  minLength = 1,
+  initial = TRUE,
+  casesensitive = FALSE,
+  autoType = TRUE,
+  delayType = 400,
+  tooltipLimit = -1,
+  tipAutoSubmit = TRUE,
+  firstTipSubmit = FALSE,
+  autoResize = TRUE,
+  collapsed = TRUE,
+  autoCollapse = FALSE,
+  autoCollapseTime = 1200,
+  textErr = "Location Not Found",
+  textCancel = "Cancel",
+  textPlaceholder = "Search...",
+  position = "topleft",
+  hideMarkerOnCollapse = FALSE
+)
 
-searchFeaturesOptions(propertyName = "label", initial = FALSE,
-  openPopup = FALSE, ...)
+searchFeaturesOptions(
+  propertyName = "label",
+  initial = FALSE,
+  openPopup = FALSE,
+  ...
+)
 }
 \arguments{
 \item{url}{url for search by ajax request, ex: "search.php?q={s}". Can be function that returns string for dynamic parameter setting.}
