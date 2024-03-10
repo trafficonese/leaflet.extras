@@ -212,7 +212,8 @@ const config = [
   ),
 
   // "leaflet.heat": "0.2.0",
-  library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
+  //library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
+  library_prod("leaflet-heat", "lfx-heat"),
   library_binding("lfx-heat"),
 
   // "pouchdb-browser": "6.4.3",
