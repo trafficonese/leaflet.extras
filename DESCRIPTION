@@ -3,7 +3,8 @@ Type: Package
 Title: Extra Functionality for 'leaflet' Package
 Version: 1.0.0
 Authors@R: c(
-      person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
+      person("Sebastian", "Gatscha", email = "kona1@gmx.at", role = c("aut", "cre")),
+      person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut")),
       person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("aut")),
       person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
         comment = "Leaflet-search and Leaflet-GPS plugin integration"),
@@ -55,3 +56,4 @@ Suggests:
     readr
 URL: https://github.com/bhaskarvk/leaflet.extras, https://bhaskarvk.github.io/leaflet.extras/
 BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
+RoxygenNote: 7.2.3
