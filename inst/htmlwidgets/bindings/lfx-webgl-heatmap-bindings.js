@@ -6,8 +6,7 @@ LeafletWidget.methods.addWebGLHeatmap = function(points, layerId, group, options
   if(!$.isEmptyObject(points)) {
 
     if(options.gradientTexture) {
-      var attachment =
-        document.getElementById('webgl-heatmap-'+options.gradientTexture+'-attachment');
+      var attachment = document.getElementById('lfx-webgl-heatmap-'+options.gradientTexture+'-attachment');
       if(!$.isEmptyObject(attachment)) {
         options.gradientTexture = attachment.href;
       } else {
@@ -117,7 +116,7 @@ function addGenericWebGLGeoJSONHeatmap( widget, geojson, intensityProperty, laye
 
     if(options.gradientTexture) {
       var attachment =
-        document.getElementById('webgl-heatmap-'+options.gradientTexture+'-attachment');
+        document.getElementById('lfx-webgl-heatmap-'+options.gradientTexture+'-attachment');
       if(!$.isEmptyObject(attachment)) {
         options.gradientTexture = attachment.href;
       } else {

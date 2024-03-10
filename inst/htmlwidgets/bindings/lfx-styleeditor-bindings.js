@@ -5,10 +5,10 @@ LeafletWidget.methods.addStyleEditor = function(options) {
     var map = this;
 
     if(map.styleEditor) {
-      map.styleEditor.removeFrom(map);
+      map.styleEditor.remove(map);
       map.styleEditor = null;
     }
-    
+
     var styleEditor = L.control.styleEditor(options);
     styleEditor.addTo(map);
     map.styleEditor = styleEditor;
@@ -21,7 +21,7 @@ LeafletWidget.methods.removeStyleEditor = function() {
     var map = this;
 
     if(map.styleEditor) {
-      map.styleEditor.removeFrom(map);
+      map.styleEditor.remove(map);
       map.styleEditor = null;
     }
   }).call(this);

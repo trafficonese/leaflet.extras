@@ -21,7 +21,7 @@ LeafletWidget.methods.addSearchOSM = function(options) {
     var map = this;
 
     if(map.searchControlOSM) {
-      map.searchControlOSM.removeFrom(map);
+      map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
 
@@ -64,7 +64,7 @@ LeafletWidget.methods.removeSearchOSM = function() {
     var map = this;
 
     if(map.searchControlOSM) {
-      map.searchControlOSM.removeFrom(map);
+      map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
   }).call(this);
@@ -192,7 +192,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     var map = this;
 
     if(map.searchControlGoogle) {
-      map.searchControlGoogle.removeFrom(map);
+      map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
     }
 
@@ -253,7 +253,7 @@ LeafletWidget.methods.removeSearchGoogle = function() {
     var map = this;
 
     if(map.searchControlGoogle) {
-      map.searchControlGoogle.removeFrom(map);
+      map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
     }
   }).call(this);
@@ -400,7 +400,7 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     var map = this;
 
     if(map.searchControlUSCensusBureau) {
-      map.searchControlUSCensusBureau.removeFrom(map);
+      map.searchControlUSCensusBureau.remove(map);
       delete map.searchControlUSCensusBureau;
     }
 
@@ -455,7 +455,7 @@ LeafletWidget.methods.removeSearchUSCensusBureau = function() {
     var map = this;
 
     if(map.searchControlUSCensusBureau) {
-      map.searchControlUSCensusBureau.removeFrom(map);
+      map.searchControlUSCensusBureau.remove(map);
       delete map.searchControlUSCensusBureau;
     }
   }).call(this);
@@ -468,7 +468,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
     var map = this;
 
     if(map.searchControl) {
-      map.searchControl.removeFrom(map);
+      map.searchControl.remove(map);
       delete map.searchControl;
     }
 
@@ -539,7 +539,7 @@ LeafletWidget.methods.removeSearchFeatures = function(clearFeatures) {
     var map = this;
 
     if(map.searchControl) {
-      map.searchControl.removeFrom(map);
+      map.searchControl.remove(map);
       delete map.searchControl;
     }
     if(clearFeatures && map._searchFeatureGroupName) {
