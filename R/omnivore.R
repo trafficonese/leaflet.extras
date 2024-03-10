@@ -248,6 +248,7 @@ legendOptions <- function(
 
 #' Adds a GeoJSON/TopoJSON Choropleth.
 #' @param valueProperty The property to use for coloring
+#' @param fillOpacityProperty The property to use for opacity
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
@@ -322,7 +323,8 @@ addGeoJSONChoropleth = function(
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL,
-  legendOptions = NULL
+  legendOptions = NULL,
+  fillOpacityProperty = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies,
@@ -332,6 +334,7 @@ addGeoJSONChoropleth = function(
 
   pathOptions = c(pathOptions, list(
     valueProperty = valueProperty,
+    fillOpacityProperty = fillOpacityProperty,
     scale = scale,
     steps = steps,
     mode = mode,

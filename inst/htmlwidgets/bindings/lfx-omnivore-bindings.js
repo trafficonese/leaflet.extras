@@ -121,6 +121,9 @@ function addGeoJSONLayer(
   }
   function resetFeature(e){
     var layer = e.target;
+    if (typeof style.style == 'function') {
+      $.extend(defaultStyle, style.style(layer.feature));
+    }
     layer.setStyle(defaultStyle);
     if(highlightStyle.sendToBack) {
       layer.bringToBack();
@@ -144,15 +147,15 @@ function addGeoJSONLayer(
     if (typeof popupProperty !== 'undefined' && popupProperty !== null) {
       if(typeof popupProperty == 'string') {
         if(!$.isEmptyObject(popupOptions)) {
-          layer.bindPopup(feature.properties[popupProperty], popupOptions);
+          layer.bindPopup('' + feature.properties[popupProperty], popupOptions);
         } else {
-          layer.bindPopup(feature.properties[popupProperty]);
+          layer.bindPopup('' +feature.properties[popupProperty]);
         }
       } else if(typeof popupProperty == 'function') {
         if(!$.isEmptyObject(popupOptions)) {
-          layer.bindPopup(popupProperty(feature), popupOptions);
+          layer.bindPopup('' +popupProperty(feature), popupOptions);
         } else {
-          layer.bindPopup(popupProperty(feature));
+          layer.bindPopup('' +popupProperty(feature));
         }
       }
     }
@@ -162,9 +165,9 @@ function addGeoJSONLayer(
       if(typeof labelProperty == 'string') {
         if(!$.isEmptyObject(labelOptions)) {
           if(labelOptions.permanent) {
-            layer.bindTooltip(feature.properties[labelProperty], labelOptions).showLabel();
+            layer.bindTooltip('' + feature.properties[labelProperty], labelOptions).showLabel();
           } else {
-            layer.bindTooltip(feature.properties[labelProperty], labelOptions);
+            layer.bindTooltip('' + feature.properties[labelProperty], labelOptions);
           }
         } else {
           layer.bindTooltip(feature.properties[labelProperty]);
@@ -172,12 +175,12 @@ function addGeoJSONLayer(
       } else if(typeof labelProperty == 'function') {
         if(!$.isEmptyObject(labelOptions)) {
           if(labelOptions.noHide) {
-            layer.bindTooltip(labelProperty(feature), labelOptions).showLabel();
+            layer.bindTooltip('' + labelProperty(feature), labelOptions).showLabel();
           } else {
-            layer.bindTooltip(labelProperty(feature), labelOptions);
+            layer.bindTooltip('' + labelProperty(feature), labelOptions);
           }
         } else {
-          layer.bindTooltip(labelProperty(feature));
+          layer.bindTooltip('' + labelProperty(feature));
         }
       }
     }
@@ -484,7 +487,8 @@ LeafletWidget.methods.addGeoJSONChoropleth = function(
           LeafletWidget.utils.getParsedGeoJSON(geojson),
           $.extend(pathOptions, geoJSONOptions), legendOptions);
       },
-      layerId, group,
+      layerId,
+      group,
       false,
       null, null,
       null, null, null,
