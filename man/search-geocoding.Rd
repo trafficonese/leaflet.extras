@@ -15,21 +15,39 @@ addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
 removeSearchOSM(map)
 
-addReverseSearchOSM(map, showSearchLocation = TRUE, showBounds = FALSE,
-  showFeature = TRUE, fitBounds = TRUE, displayText = TRUE,
-  group = NULL)
+addReverseSearchOSM(
+  map,
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL
+)
 
-addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  options = searchOptions(autoCollapse = TRUE, minLength = 2))
+addSearchGoogle(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  options = searchOptions(autoCollapse = TRUE, minLength = 2)
+)
 
 removeSearchGoogle(map)
 
-addReverseSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  showSearchLocation = TRUE, showBounds = FALSE, showFeature = TRUE,
-  fitBounds = TRUE, displayText = TRUE, group = NULL)
+addReverseSearchGoogle(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL
+)
 
-addSearchUSCensusBureau(map, options = searchOptions(autoCollapse = TRUE,
-  minLength = 20))
+addSearchUSCensusBureau(
+  map,
+  options = searchOptions(autoCollapse = TRUE, minLength = 20)
+)
 
 removeSearchUSCensusBureau(map)
 }

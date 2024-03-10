@@ -12,17 +12,26 @@ pulseIconList(...)
 
 \method{[}{leaflet_pulse_icon_set}(x, i)
 
-makePulseIcon(color = "#ff0000", iconSize = 12, animate = TRUE,
-  heartbeat = 1)
+makePulseIcon(color = "#ff0000", iconSize = 12, animate = TRUE, heartbeat = 1)
 
-pulseIcons(color = "#ff0000", iconSize = 12, animate = TRUE,
-  heartbeat = 1)
+pulseIcons(color = "#ff0000", iconSize = 12, animate = TRUE, heartbeat = 1)
 
-addPulseMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
-  group = NULL, icon = NULL, popup = NULL, popupOptions = NULL,
-  label = NULL, labelOptions = NULL, options = leaflet::markerOptions(),
-  clusterOptions = NULL, clusterId = NULL,
-  data = leaflet::getMapData(map))
+addPulseMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+)
 }
 \arguments{
 \item{...}{icons created from \code{\link{makePulseIcon}()}}
@@ -87,16 +96,10 @@ default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
-Make pulse-icon set
-
-Make Pulse Icon
-
 An icon can be represented as a list of the form \code{list(color, iconSize,
 ...)}. This function is vectorized over its arguments to create a list of
 icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
-
-Add Pulse Markers
 }
 \examples{
 
