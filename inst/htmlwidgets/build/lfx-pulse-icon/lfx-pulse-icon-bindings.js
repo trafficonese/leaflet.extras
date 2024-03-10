@@ -1,2 +1,62 @@
-LeafletWidget.methods.addPulseMarkers=function(e,t,i,n,c,l,o,a,r,s,u,d){(function(){var p,g;if(i&&(p=(new LeafletWidget.DataFrame).cbind(i),g=function(e){var t=p.get(e);return t?(t.iconSize=[t.iconSize,t.iconSize],new L.icon.pulse(t)):new L.icon.pulse}),!$.isEmptyObject(e)&&!$.isEmptyObject(t)||$.isNumeric(e)&&$.isNumeric(t)){var f=(new LeafletWidget.DataFrame).col("lat",e).col("lng",t).col("layerId",n).col("group",c).col("popup",o).col("popupOptions",a).col("label",u).col("labelOptions",d).cbind(l);i&&(p.effectiveLength=f.nrow()),LeafletWidget.methods.addGenericMarkers(this,f,c,r,s,(function(e,t){var n=e.get(t);return i&&(n.icon=g(t)),L.marker([e.get(t,"lat"),e.get(t,"lng")],n)}))}}).call(this)};
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**************************************************************!*\
+  !*** ./inst/htmlwidgets/bindings/lfx-pulse-icon-bindings.js ***!
+  \**************************************************************/
+/* global LeafletWidget, $, L */
+
+LeafletWidget.methods.addPulseMarkers = function(
+  lat, lng, icon, layerId, group, options,
+  popup, popupOptions, clusterOptions, clusterId, label, labelOptions) {
+  (function(){
+    var icondf;
+
+    var getIcon;
+    if (icon) {
+
+      // This cbinds the icon URLs and any other icon options; they're all
+      // present on the icon object.
+      icondf = new LeafletWidget.DataFrame().cbind(icon);
+
+      // Constructs an icon from a specified row of the icon dataframe.
+      getIcon = function(i) {
+        var opts = icondf.get(i);
+        if (!opts) {
+          return new L.icon.pulse();
+        }
+
+        opts.iconSize = [opts.iconSize, opts.iconSize];
+        return new L.icon.pulse(opts);
+      };
+    }
+
+    if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+      ($.isNumeric(lat) && $.isNumeric(lng))) {
+
+      var df = new LeafletWidget.DataFrame()
+        .col('lat', lat)
+        .col('lng', lng)
+        .col('layerId', layerId)
+        .col('group', group)
+        .col('popup', popup)
+        .col('popupOptions', popupOptions)
+        .col('label', label)
+        .col('labelOptions', labelOptions)
+        .cbind(options);
+
+      if (icon) icondf.effectiveLength = df.nrow();
+
+      LeafletWidget.methods.addGenericMarkers(
+        this, df, group, clusterOptions, clusterId, function(df, i) {
+          var options = df.get(i);
+          if (icon) options.icon = getIcon(i);
+          return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
+        });
+    }
+
+  }).call(this);
+};
+
+/******/ })()
+;
 //# sourceMappingURL=lfx-pulse-icon-bindings.js.map

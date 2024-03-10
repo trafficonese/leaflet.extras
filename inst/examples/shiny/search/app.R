@@ -1,10 +1,13 @@
 library(leaflet.extras)
 library(shiny)
 
-ui <- leafletOutput("leafmap")
+ui <- fluidPage(
+  actionButton("remove","remove"),
+  leafletOutput("map")
+)
 
 server <- function(input, output, session) {
-  output$leafmap <- renderLeaflet({
+  output$map <- renderLeaflet({
     leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addSearchOSM(
@@ -12,6 +15,10 @@ server <- function(input, output, session) {
           position = "topleft"))
   })
 
+  observeEvent(input$remove, {
+    leafletProxy("map") %>%
+      leaflet.extras::removeSearchOSM()
+  })
   observeEvent(input$leafmap_search_location_found, {
     print("Location Found")
     print(input$leafmap_search_location_found)
