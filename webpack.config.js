@@ -78,7 +78,8 @@ let add_attachments = function(config, attachments, output_folder) {
 let library_binding = function(name) {
   let filename = binding_path + name + "-bindings.js";
   return {
-    mode: "production", // minify everything
+    //mode: "production", // minify everything
+    mode: "development", // minify everything
     devtool: "source-map", // include external map file
     entry: binding_path + name + "-bindings.js",
     module: {

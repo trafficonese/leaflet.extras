@@ -55,10 +55,31 @@ LeafletWidget.methods.addGreatCircles  = function(
       function(df, i) {
         var options = df.get(i);
         var Geodesic = L.geodesic([], options);
-        var center = L.marker([df.get(i, 'lat'), df.get(i, 'lng')]);
+        var center = L.marker([df.get(i, 'lat'), df.get(i, 'lng')], {
+          draggable: true,
+          autoPan: false,
+          autoPanPadding: L.Point(50, 50),
+          autoPanSpeed: 10
+        });
 
+        console.log("addGenericLayers inside addGreatCircles is called");
+        debugger;
         map.on('layeradd', function(e) {
+          console.log("e"); console.log(e);
+          debugger;
           if(e.layer === Geodesic) {
+            center.on('dragend', function(e) {
+              debugger;
+              if(e.layer === Geodesic) {
+                console.log("dragend is triggered")
+              }
+            });
+            center.on('moveend', function(e) {
+              debugger;
+              if(e.layer === Geodesic) {
+                console.log("moveend is triggered")
+              }
+            });
             center.addTo(map);
           }
         });
