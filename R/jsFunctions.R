@@ -26,7 +26,7 @@ awesomeIconFunction <-
 #' @export
 #' @rdname utils
 propsToHTML <- function(props, elem = NULL, elem.attrs = NULL) {
-  if (!(inherits(props, "list") || (class(props) == "character")) ||  length(props) < 1 ) {
+  if (!(inherits(props, "list") || (inherits(props, "character"))) ||  length(props) < 1 ) {
     stop("props needs to to be a list/vector of character strings with at least one element")
   }
   if (!is.null(elem.attrs) &&
