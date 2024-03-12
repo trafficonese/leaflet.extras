@@ -1,2 +1,60 @@
-LeafletWidget.methods.setMeasurementOptions=function(e){(function(){this.measurementOptions=e}).call(this)},LeafletWidget.methods.enableMeasurements=function(){(function(){var e=this.measurementOptions||{};this.eachLayer((function(t){"function"==typeof t.showMeasurements&&t.showMeasurements(e)}))}).call(this)},LeafletWidget.methods.disableMeasurements=function(){(function(){this.eachLayer((function(e){"function"==typeof e.hideMeasurements&&e.hideMeasurements()}))}).call(this)},LeafletWidget.methods.refreshMeasurements=function(){(function(){this.eachLayer((function(e){"function"==typeof e.updateMeasurements&&e.updateMeasurements()}))}).call(this)};
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!****************************************************************!*\
+  !*** ./inst/htmlwidgets/bindings/lfx-measure-path-bindings.js ***!
+  \****************************************************************/
+/* global LeafletWidget */
+
+LeafletWidget.methods.setMeasurementOptions = function(measurementOptions) {
+  (function(){
+    var map = this;
+    map.measurementOptions = measurementOptions;
+  }).call(this);
+};
+
+LeafletWidget.methods.enableMeasurements = function() {
+  (function(){
+    var map = this;
+    var measurementOptions = map.measurementOptions || {};
+    map.eachLayer(
+      function(layer) {
+        if(typeof layer.showMeasurements === 'function') {
+          layer.showMeasurements(measurementOptions);
+        }
+      }
+    );
+
+  }).call(this);
+};
+
+LeafletWidget.methods.disableMeasurements = function() {
+  (function(){
+    var map = this;
+    map.eachLayer(
+      function(layer) {
+        if(typeof layer.hideMeasurements === 'function') {
+          layer.hideMeasurements();
+        }
+      }
+    );
+
+  }).call(this);
+};
+
+LeafletWidget.methods.refreshMeasurements = function() {
+  (function(){
+    var map = this;
+    map.eachLayer(
+      function(layer) {
+        if(typeof layer.updateMeasurements === 'function') {
+          layer.updateMeasurements();
+        }
+      }
+    );
+
+  }).call(this);
+};
+
+/******/ })()
+;
 //# sourceMappingURL=lfx-measure-path-bindings.js.map
