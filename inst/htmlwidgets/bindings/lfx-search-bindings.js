@@ -21,16 +21,16 @@ LeafletWidget.methods.addSearchOSM = function(options) {
     var map = this;
 
     if(map.searchControlOSM) {
-      map.searchControlOSM.removeFrom(map);
+      map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
 
     options = options || {};
-    options.textPlaceholder = 'Search using OSM Geocoder';
-    options.url = 'https://nominatim.openstreetmap.org/search?format=json&q={s}';
-    options.jsonpParam = 'json_callback';
-    options.propertyName = 'display_name';
-    options.propertyLoc = ['lat','lon'];
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using OSM Geocoder';
+    options.url = options.url ? options.url : 'https://nominatim.openstreetmap.org/search?format=json&q={s}';
+    options.jsonpParam = options.jsonpParam ? options.jsonpParam : 'json_callback';
+    options.propertyName = options.propertyName ? options.propertyName : 'display_name';
+    options.propertyLoc = options.propertyLoc ? options.propertyLoc : ['lat','lon'];
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});
@@ -64,7 +64,7 @@ LeafletWidget.methods.removeSearchOSM = function() {
     var map = this;
 
     if(map.searchControlOSM) {
-      map.searchControlOSM.removeFrom(map);
+      map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
   }).call(this);
@@ -192,7 +192,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     var map = this;
 
     if(map.searchControlGoogle) {
-      map.searchControlGoogle.removeFrom(map);
+      map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
     }
 
@@ -216,7 +216,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
 
     options = options || {};
     options.markerLocation = true;
-    options.textPlaceholder = 'Search using Google Geocoder';
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using Google Geocoder';
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     options.marker = L.circleMarker([0,0],{radius:30});
@@ -253,7 +253,7 @@ LeafletWidget.methods.removeSearchGoogle = function() {
     var map = this;
 
     if(map.searchControlGoogle) {
-      map.searchControlGoogle.removeFrom(map);
+      map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
     }
   }).call(this);
@@ -396,12 +396,11 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
 
 
 LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
-
   (function(){
     var map = this;
 
     if(map.searchControlUSCensusBureau) {
-      map.searchControlUSCensusBureau.removeFrom(map);
+      map.searchControlUSCensusBureau.remove(map);
       delete map.searchControlUSCensusBureau;
     }
 
@@ -418,9 +417,10 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
 
     options = options || {};
 
-    options.url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
-    options.textPlaceholder = 'Search using US Census Bureau';
-    options.jsonpParam = 'callback';
+    options.url = options.url ? options.url : 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?benchmark=Public_AR_Current&format=jsonp&address={s}';
+    options.textPlaceholder = options.textPlaceholder ? options.textPlaceholder : 'Search using US Census Bureau TEST';
+
+    options.jsonpParam = options.jsonpParam ? options.jsonpParam : 'callback';
     options.formatData = formatJSON;
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
@@ -455,7 +455,7 @@ LeafletWidget.methods.removeSearchUSCensusBureau = function() {
     var map = this;
 
     if(map.searchControlUSCensusBureau) {
-      map.searchControlUSCensusBureau.removeFrom(map);
+      map.searchControlUSCensusBureau.remove(map);
       delete map.searchControlUSCensusBureau;
     }
   }).call(this);
@@ -468,7 +468,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
     var map = this;
 
     if(map.searchControl) {
-      map.searchControl.removeFrom(map);
+      map.searchControl.remove(map);
       delete map.searchControl;
     }
 
@@ -539,7 +539,7 @@ LeafletWidget.methods.removeSearchFeatures = function(clearFeatures) {
     var map = this;
 
     if(map.searchControl) {
-      map.searchControl.removeFrom(map);
+      map.searchControl.remove(map);
       delete map.searchControl;
     }
     if(clearFeatures && map._searchFeatureGroupName) {

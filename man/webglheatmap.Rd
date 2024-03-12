@@ -10,26 +10,73 @@
 \alias{clearWebGLHeatmap}
 \title{Add a webgl heatmap}
 \usage{
-addWebGLHeatmap(map, lng = NULL, lat = NULL, intensity = NULL,
-  layerId = NULL, group = NULL, size = "30000", units = "m",
-  opacity = 1, gradientTexture = NULL, alphaRange = 1,
-  data = leaflet::getMapData(map))
+addWebGLHeatmap(
+  map,
+  lng = NULL,
+  lat = NULL,
+  intensity = NULL,
+  layerId = NULL,
+  group = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1,
+  data = leaflet::getMapData(map)
+)
 
-addWebGLGeoJSONHeatmap(map, geojson, layerId = NULL, group = NULL,
-  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
-  gradientTexture = NULL, alphaRange = 1)
+addWebGLGeoJSONHeatmap(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+)
 
-addWebGLKMLHeatmap(map, kml, layerId = NULL, group = NULL,
-  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
-  gradientTexture = NULL, alphaRange = 1)
+addWebGLKMLHeatmap(
+  map,
+  kml,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+)
 
-addWebGLCSVHeatmap(map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
-  gradientTexture = NULL, alphaRange = 1)
+addWebGLCSVHeatmap(
+  map,
+  csv,
+  csvParserOptions,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+)
 
-addWebGLGPXHeatmap(map, gpx, layerId = NULL, group = NULL,
-  intensityProperty = NULL, size = "30000", units = "m", opacity = 1,
-  gradientTexture = NULL, alphaRange = 1)
+addWebGLGPXHeatmap(
+  map,
+  gpx,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+)
 
 removeWebGLHeatmap(map, layerId)
 

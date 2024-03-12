@@ -4,7 +4,7 @@ LeafletWidget.methods.addControlGPS = function(options) {
   (function() {
     var map = this;
     if(map.gpscontrol) {
-      map.gpscontrol.removeFrom(map);
+      map.gpscontrol.remove(map);
       delete map.gpscontrol;
     }
     map.gpscontrol = new L.Control.Gps(options);
@@ -30,7 +30,7 @@ LeafletWidget.methods.removeControlGPS = function() {
   (function() {
     var map = this;
     if(map.gpscontrol) {
-      map.gpscontrol.removeFrom(map);
+      map.gpscontrol.remove(map);
       delete map.gpscontrol;
     }
   }).call(this);

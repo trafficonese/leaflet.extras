@@ -12,6 +12,7 @@
                  -1px  1px 0 white;
     white-space: nowrap;
     transform-origin: 0;
+    pointer-events: none;
 }
 
 .leaflet-measure-path-measurement > div {

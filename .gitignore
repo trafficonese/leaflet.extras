@@ -6,9 +6,11 @@ inst/examples/*html
 inst/examples/rsconnect
 inst/examples/*.Rmd
 .Rprofile
+docs
 *.swp
 node_modules
 revdep/checks*
 revdep/library*
 revdep/data*
 viztest-*
+__TODO.R

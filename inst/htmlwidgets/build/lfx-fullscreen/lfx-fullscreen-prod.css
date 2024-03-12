@@ -1,5 +1,5 @@
 .leaflet-control-fullscreen a {
-  background:#fff url(css/fullscreen.png) no-repeat 0 0;
+  background:#fff url(f2c17d21245758a145e8.png) no-repeat 0 0;
   background-size:26px 52px;
   }
   .leaflet-touch .leaflet-control-fullscreen a {
@@ -35,7 +35,7 @@
   (-webkit-min-device-pixel-ratio:2),
   (min-resolution:192dpi) {
     .leaflet-control-fullscreen a {
-      background-image:url(css/fullscreen@2x.png);
+      background-image:url(29e76bbe73634d791d3c.png);
     }
   }
 

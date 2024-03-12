@@ -8,8 +8,13 @@
 \usage{
 enableMeasurePath(map)
 
-measurePathOptions(showOnHover = FALSE, minPixelDistance = 30,
-  showDistances = TRUE, showArea = TRUE, imperial = FALSE)
+measurePathOptions(
+  showOnHover = FALSE,
+  minPixelDistance = 30,
+  showDistances = TRUE,
+  showArea = TRUE,
+  imperial = FALSE
+)
 
 addMeasurePathToolbar(map, options = measurePathOptions())
 }

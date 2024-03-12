@@ -4,9 +4,16 @@
 \alias{suspendScroll}
 \title{Prevents accidental map scrolling when scrolling in a document.}
 \usage{
-suspendScroll(map, sleep = TRUE, sleepTime = 750, wakeTime = 750,
-  sleepNote = TRUE, hoverToWake = TRUE,
-  wakeMessage = "Click or Hover to Wake", sleepOpacity = 0.7)
+suspendScroll(
+  map,
+  sleep = TRUE,
+  sleepTime = 750,
+  wakeTime = 750,
+  sleepNote = TRUE,
+  hoverToWake = TRUE,
+  wakeMessage = "Click or Hover to Wake",
+  sleepOpacity = 0.7
+)
 }
 \arguments{
 \item{map}{The leaflet map}

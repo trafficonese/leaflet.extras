@@ -15,6 +15,7 @@ omnivoreDependencies <- function() {
 }
 
 # Source https://github.com/timwis/leaflet-choropleth
+# Source New https://github.com/trafficonese/leaflet-choropleth
 geoJSONChoroplethDependency <- function() {
   list(
     # // "leaflet-choropleth": "1.1.4",

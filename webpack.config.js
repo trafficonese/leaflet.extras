@@ -1,8 +1,10 @@
 const path = require("path");
-// const webpack = require('webpack');
+const webpack = require('webpack');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin'); // Import eslint-webpack-plugin
+
 
 const binding_path = "./inst/htmlwidgets/bindings/";
 const src_path = "./inst/htmlwidgets/src/";
@@ -22,11 +24,10 @@ let library_prod = function(name, filename = name, library = undefined) {
     module: {
       rules: [
         // copy files to destination folder who have these extensions
-        { test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf|otf)$/,
-          use: [{
-              loader: 'file-loader',
-              options: {
-                name: "css/[name].[ext]"}}]},
+        {
+          test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf|otf)$/,
+          type: 'asset/resource'
+        },
         // copy from https://github.com/webpack-contrib/mini-css-extract-plugin/tree/e307e251a476e24f3d1827e74e0434de52ce6ea3
         { test: /\.css$/,
           use: [
@@ -64,13 +65,12 @@ let add_externals = function(config, externals) {
 }
 let add_attachments = function(config, attachments, output_folder) {
   config.plugins = config.plugins.concat([
-    new CopyWebpackPlugin(
-      [{
+    new CopyWebpackPlugin({
+      patterns: [{
         from: attachments,
-        to: build_path + "/" + output_folder,
-        flatten: true
+        to: build_path + "/" + output_folder
       }]
-    )
+    })
   ]);
   return config;
 }
@@ -83,14 +83,16 @@ let library_binding = function(name) {
     entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
-        // lint the bindings using ./inst/htmlwidgets/bindings/.eslintrc.js
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: "eslint-loader"
-        },
       ]
     },
+    plugins: [
+      new ESLintPlugin({
+        // Specify the files/paths to lint.
+        files: binding_path + name + "-bindings.js",
+        // If you have an ESLint configuration file at a custom path, you can specify it here:
+        context: path.resolve(__dirname, 'inst/htmlwidgets/bindings/.eslintrc.js'),
+      }),
+    ],
     // save bindings to build bindings folder
     output: {
       filename: name + "-bindings.js", // save file in path on next line
@@ -145,7 +147,6 @@ const config = [
   library_prod("leaflet-draw-drag", "lfx-draw-drag"),
   library_binding("lfx-draw"),
 
-  // "leaflet-fullscreen": "1.0.2",
   library_prod(
     ["leaflet-fullscreen", "leaflet-fullscreen/dist/leaflet.fullscreen.css"],
     "lfx-fullscreen"
@@ -174,9 +175,9 @@ const config = [
     // For google support!!
     // "leaflet.gridlayer.googlemutant": "^0.6.4",
 
-  // "leaflet-pulse-icon": "0.1.0",
+  // "leaflet-pulse-icon": "0.1.1",
   library_prod(
-    ["leaflet-pulse-icon", "leaflet-pulse-icon/src/L.Icon.Pulse.css"],
+    ["@ansur/leaflet-pulse-icon"],
     "lfx-pulse-icon"
   ),
   library_binding("lfx-pulse-icon"),
@@ -211,7 +212,8 @@ const config = [
   ),
 
   // "leaflet.heat": "0.2.0",
-  library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
+  //library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
+  library_prod("leaflet-heat", "lfx-heat"),
   library_binding("lfx-heat"),
 
   // "pouchdb-browser": "6.4.3",
