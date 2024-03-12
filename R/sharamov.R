@@ -19,8 +19,10 @@ addBingTiles <- function(
   map,
   apikey = Sys.getenv("BING_MAPS_API_KEY"),
   imagerySet = c("Aerial", "AerialWithLabels",
+                 "AerialWithLabelsOnDemand", "AerialWithLabelsOnDemand",
+                 "Birdseye","BirdseyeWithLabels","BirdseyeV2","BirdseyeV2WithLabels",
                  "CanvasDark", "CanvasLight", "CanvasGray",
-                 "Road"),
+                 "Road","RoadOnDemand","Streetside"),
   layerId = NULL,
   group = NULL,
   ...
@@ -30,6 +32,16 @@ addBingTiles <- function(
     stop("Bing Tile Layer requires an apikey")
 
   imagerySet <- match.arg(imagerySet)
+  if (imagerySet == "AerialWithLabels") {
+    warning("AerialWithLabels is Deprecated! Aerial imagery with a road overlay, using the legacy static tile service.\n",
+            "This service is deprecated and current data will not be refreshed.\n",
+            "New applications should instead use 'AerialWithLabelsOnDemand'.")
+  }
+  if (imagerySet == "Road") {
+    warning("Road is Deprecated! Roads without additional imagery, using the legacy static tile service.\n",
+            "This service is deprecated and current data will not be refreshed. \n",
+            "New applications should instead use 'RoadOnDemand'.")
+  }
 
   map$dependencies <- c(map$dependencies, bingLayerDependencies())
   invokeMethod(map, getMapData(map), "addBingTiles", layerId, group,
