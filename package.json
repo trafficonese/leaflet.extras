@@ -34,7 +34,7 @@
     "leaflet-sleep": "0.5.2",
     "leaflet-webgl-heatmap": "0.2.7",
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2",
-    "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
+    "leaflet.geodesic": "^2.7.1",
     "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
     "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
     "pouchdb-browser": "8.0.1",
