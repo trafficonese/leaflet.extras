@@ -14,11 +14,25 @@ cities_df$opacity  <- runif(nrow(cities_df), 0.1, 1)
 cities_df$steps  <- runif(nrow(cities_df), 5, 400)
 cities_df$color <- sample(c("green","red","blue","orange","black"), nrow(cities_df), replace = TRUE)
 
-cities_df <- cities_df[1:4,]
+cities_df <- cities_df
 
 ui <- fluidPage(
   leafletOutput("map", height = 600),
-  verbatimTextOutput("stats"))
+  splitLayout(cellWidths = c("30%","30%","30%"),
+    div("Stats after Drag", verbatimTextOutput("stats")),
+    div("Stats after Click", verbatimTextOutput("click")),
+    div("Stats after Over", verbatimTextOutput("over"))
+    )
+  )
+
+greenLeafIcon <- makeIcon(
+  iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "https://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
 
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
@@ -31,9 +45,9 @@ server <- function(input, output, session) {
                       color = ~color,
                       radius = ~radius,
                       layerId = ~paste0("ID_",city),
-                      fill = NULL,
+                      fill = T,
                       wrap = FALSE,
-                      showStats = TRUE,
+                      showStats = T,
                       statsFunction = NULL,
                       # statsFunction = JS("function(stats) {
                       #                      return('<h4>Custom Stats Info</h4>' +
@@ -41,11 +55,9 @@ server <- function(input, output, session) {
                       #                         '<div>Distance:  ' + stats.totalDistance + '</div>')
                       #                    }
                       #                    "),
+                      # popup = NULL,
                       popup = ~paste0("<h4>",city,"</h4>
                                       <div>radius = ",radius,"</div>
-                                      <div>weight = ",weight,"</div>
-                                      <div>opacity = ",opacity,"</div>
-                                      <div>color = ",color,"</div>
                                       <div>steps = ",steps,"</div>
                                       "),
                       label = ~paste(city, "-", color),
@@ -54,8 +66,8 @@ server <- function(input, output, session) {
                       # weight = ~weight,
                       weight = 4,
                       smoothFactor = 3,
-                      # dashArray = NULL,
                       dashArray = c(5, 10),
+                      icon = greenLeafIcon,
                       highlightOptions = highlightOptions(weight = 8, opacity = 1),
                       markerOptions = markerOptions(draggable = TRUE, title = "DRAG ME Title"))
       # addGeodesicPolylines(lng = ~lng, lat = ~lat, weight = 2, color = "red",
@@ -67,6 +79,10 @@ server <- function(input, output, session) {
   output$stats <- renderPrint({
     stats <- req(input$map_geodesic_stats)
     print(stats)
+  })
+  output$click <- renderPrint({
+    click <- req(input$map_geodesic_click)
+    print(click)
   })
 }
 shinyApp(ui, server)

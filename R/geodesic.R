@@ -116,6 +116,7 @@ addGreatCircles = function(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+  icon = NULL,
   fill = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
@@ -134,7 +135,7 @@ addGreatCircles = function(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),
     "addGreatCircles")
   leaflet::invokeMethod(
-    map, data, "addGreatCircles",  points$lat, points$lng, radius, layerId, group, options,
+    map, data, "addGreatCircles",  points$lat, points$lng, radius, layerId, group, options, icon,
     popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions, markerOptions) %>%
     leaflet::expandLimits(points$lat, points$lng)
 }

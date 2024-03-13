@@ -36,12 +36,74 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
 };
 
 
+// from https://github.com/rstudio/leaflet/blob/dc772e780317481e25335449b957c5f50082bcfd/javascript/src/methods.js#L221
+function unpackStrings(iconset) {
+  if (!iconset) {
+    return iconset;
+  }
+  if (typeof(iconset.index) === "undefined") {
+    return iconset;
+  }
+
+  iconset.data = asArray(iconset.data);
+  iconset.index = asArray(iconset.index);
+
+  return $.map(iconset.index, function(e, i) {
+    return iconset.data[e];
+  });
+}
+
 LeafletWidget.methods.addGreatCircles  = function(
-  lat, lng, radius, layerId, group, options, popup, popupOptions,
+  lat, lng, radius, layerId, group, options, icon, popup, popupOptions,
   label, labelOptions, highlightOptions, markerOptions) {
   if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
       ($.isNumeric(lat) && $.isNumeric(lng))) {
     const map = this;
+
+    let icondf;
+    let getIcon;
+
+    if (icon) {
+      // Unpack icons
+      icon.iconUrl         = unpackStrings(icon.iconUrl);
+      icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
+      icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+
+      // This cbinds the icon URLs and any other icon options; they're all
+      // present on the icon object.
+      icondf = new LeafletWidget.DataFrame().cbind(icon);
+
+      // Constructs an icon from a specified row of the icon dataframe.
+      getIcon = function(i) {
+        let opts = icondf.get(i);
+        if (!opts.iconUrl) {
+          return new L.Icon.Default();
+        }
+
+        // Composite options (like points or sizes) are passed from R with each
+        // individual component as its own option. We need to combine them now
+        // into their composite form.
+        if (opts.iconWidth) {
+          opts.iconSize = [opts.iconWidth, opts.iconHeight];
+        }
+        if (opts.shadowWidth) {
+          opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
+        }
+        if (opts.iconAnchorX) {
+          opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
+        }
+        if (opts.shadowAnchorX) {
+          opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
+        }
+        if (opts.popupAnchorX) {
+          opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
+        }
+
+        return new L.Icon(opts);
+      };
+    }
+    if (icon) icondf.effectiveLength = lat.length;
 
     // Function to normalize access to values, either from arrays or scalars
     const getValue = (prop, index) => Array.isArray(prop) ? (prop[index] || prop[prop.length - 1]) : prop;
@@ -51,6 +113,7 @@ LeafletWidget.methods.addGreatCircles  = function(
         locations.push({
             lat: getValue(lat, i),
             lng: getValue(lng, i),
+            layerId: getValue(layerId, i),
             radius: getValue(radius, i),
             popup: getValue(popup, i),
             label: getValue(label, i),
@@ -64,15 +127,10 @@ LeafletWidget.methods.addGreatCircles  = function(
     console.log("options");console.log(options);
 
     // Add GeodesicCircle and Center Marker
-    locations.forEach(location => {
+    locations.forEach((location, i) => {
       const latlong = new L.LatLng(location.lat, location.lng)
-      // Create a marker for each location
-      const marker = L.marker(latlong, markerOptions)
-        .bindTooltip(location.label, labelOptions)
-        .bindPopup(location.popup, popupOptions)
-        .addTo(map);
 
-      // Create a geodesic circle for each marker
+      // Create a geodesic circle for each location
       const geodesicCircle = new L.GeodesicCircle(latlong, {
           weight: location.weight,
           opacity: location.opacity,
@@ -83,7 +141,44 @@ LeafletWidget.methods.addGreatCircles  = function(
           dashArray: options.dashArray,
           smoothFactor: options.smoothFactor,
           noClip: options.noClip,
-      }).addTo(map);
+      })
+        //.addTo(map);
+      map.layerManager.addLayer(geodesicCircle, "shape", location.layerId, group)
+
+      if (label !== null) {
+        if (labelOptions !== null) {
+          geodesicCircle.bindTooltip(location.label, labelOptions)
+        } else {
+          geodesicCircle.bindTooltip(location.label)
+        }
+      }
+      if (popup !== null) {
+        if (popupOptions  !== null) {
+          geodesicCircle.bindPopup(location.popup, popupOptions)
+        } else {
+          geodesicCircle.bindPopup(location.popup)
+        }
+      }
+
+      if (icon) markerOptions.icon = getIcon(i);
+
+      // Create a marker for each location
+      const marker = L.marker(latlong, markerOptions)
+        .addTo(map);
+      if (label !== null) {
+        if (labelOptions !== null) {
+          marker.bindTooltip(location.label, labelOptions)
+        } else {
+          marker.bindTooltip(location.label)
+        }
+      }
+      if (popup !== null) {
+        if (popupOptions  !== null) {
+          marker.bindPopup(location.popup, popupOptions)
+        } else {
+          marker.bindPopup(location.popup)
+        }
+      }
 
       // Drag event listener for Center marker
       marker.on('drag', (e) => {
@@ -100,18 +195,19 @@ LeafletWidget.methods.addGreatCircles  = function(
             Shiny.onInputChange(map.id + "_geodesic_stats", geodesicCircle.statistics);
           }
       });
+      marker.on('click', (e) => {
+        console.log("click");console.log(e);
+        // Listen for Events in Shinymode
+        if (HTMLWidgets.shinyMode) {
+          Shiny.onInputChange(map.id + "_geodesic_click", geodesicCircle.statistics);
+        }
+      });
 
       // Highlight -
-      // TODO - Not working as Circle is a Polyline and therefore `mouseout` is not trigered
-      /*
       let highlightStyle = highlightOptions;
       if(!$.isEmptyObject(highlightStyle)) {
-        console.log("highlightOptions");console.log(highlightOptions);
         let defaultStyle = {};
         $.each(highlightStyle, function (k, v) {
-          console.log("location");console.log(location);
-          console.log("k");console.log(k);
-          console.log("v");console.log(v);
           if (k != "bringToFront" && k != "sendToBack"){
             if (location[k]) {
               defaultStyle[k] = location[k];
@@ -119,23 +215,19 @@ LeafletWidget.methods.addGreatCircles  = function(
           }
         });
 
-        geodesicCircle.on("mouseover",
-          function(e) {
+        geodesicCircle.on("mouseover", function(e) {
             this.setStyle(highlightStyle);
             if(highlightStyle.bringToFront) {
               this.bringToFront();
             }
           });
-        geodesicCircle.on("mouseout",
-          function(e) {
+        geodesicCircle.on("mouseout", function(e) {
             this.setStyle(defaultStyle);
             if(highlightStyle.sendToBack) {
               this.bringToBack();
             }
           });
       }
-      */
-
 
     });
 
