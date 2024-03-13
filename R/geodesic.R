@@ -120,7 +120,7 @@ addGreatCircles = function(
   fill = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
-  markerOptions = markerOptions(),
+  markerOptions = NULL,
   data = getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
