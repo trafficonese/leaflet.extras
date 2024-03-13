@@ -12,17 +12,36 @@ weatherIconList(...)
 
 \method{[}{leaflet_weather_icon_set}(x, i)
 
-makeWeatherIcon(icon, markerColor = "red", iconColor = "white",
-  extraClasses = NULL)
+makeWeatherIcon(
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  extraClasses = NULL
+)
 
-weatherIcons(icon, markerColor = "red", iconColor = "white",
-  extraClasses = NULL)
+weatherIcons(
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  extraClasses = NULL
+)
 
-addWeatherMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
-  group = NULL, icon = NULL, popup = NULL, popupOptions = NULL,
-  label = NULL, labelOptions = NULL, options = leaflet::markerOptions(),
-  clusterOptions = NULL, clusterId = NULL,
-  data = leaflet::getMapData(map))
+addWeatherMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+)
 }
 \arguments{
 \item{...}{icons created from \code{\link{makeWeatherIcon}()}}
@@ -85,16 +104,10 @@ default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
-Make weather-icon set
-
-Make Weather Icon
-
 An icon can be represented as a list of the form \code{list(icon, markerColor,
 ...)}. This function is vectorized over its arguments to create a list of
 icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
-
-Add Weather Markers
 }
 \examples{
 
