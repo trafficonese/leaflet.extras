@@ -118,6 +118,7 @@ addGreatCircles = function(
   highlightOptions = NULL,
   icon = NULL,
   fill = TRUE,
+  showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
@@ -129,7 +130,8 @@ addGreatCircles = function(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
-    fill = fill, showStats = showStats, statsFunction = statsFunction
+    fill = fill, showStats = showStats, statsFunction = statsFunction,
+    showCenter = showCenter
   ))
   points = leaflet::derivePoints(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),

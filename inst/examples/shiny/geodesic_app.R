@@ -28,34 +28,82 @@ greenLeafIcon <- makeIcon(
 
 ## UI ##########################
 ui <- fluidPage(
-  ## Actions ###########
-  div(
-    actionButton("add", "Add Geodesic via Proxy"),
-    actionButton("rem", "Remove by ID"),
-    actionButton("rema", "Remove All"),
-    actionButton("cle", "Clear by Group"),
-    actionButton("show", "Show by Group"),
-    actionButton("hide", "Hide by Group"),
-  ),
-  leafletOutput("map", height = 600),
-  ## Event Outputs ###########
-  h4("Leaflet Geodesic Events"),
-  splitLayout(cellWidths = c("30%","30%","30%"),
-    div("Stats after Drag", verbatimTextOutput("drag")),
-    div("Stats after Click", verbatimTextOutput("click")),
-    div("Stats after Over", verbatimTextOutput("over"))
+  navbarPage(
+    title = "Geodesic Plugin",
+    ## Lines ##################
+    tabPanel(
+      title = "Lines",
+      fluidRow(
+        column(width = 12,
+               ## Actions ###########
+               div(
+                 actionButton("add_lines", "Add Geodesic Lines via Proxy"),
+                 actionButton("rem_lines", "Remove by ID"),
+                 actionButton("rema_lines", "Remove All"),
+                 actionButton("cle_lines", "Clear by Group"),
+                 actionButton("show_lines", "Show by Group"),
+                 actionButton("hide_lines", "Hide by Group"),
+               ),
+               leafletOutput("map_lines", height = 600),
+               ## Event Outputs ###########
+               h4("Leaflet Geodesic Lines Events"),
+               splitLayout(cellWidths = c("30%","30%","30%"),
+                           div("Stats after Drag", verbatimTextOutput("drag_lines")),
+                           div("Stats after Click", verbatimTextOutput("click_lines")),
+                           div("Stats after Over", verbatimTextOutput("over_lines"))
+               ),
+               h4("Leaflet Events"),
+               splitLayout(cellWidths = c("30%","30%","30%"),
+                           div("Mouseout", verbatimTextOutput("leaf_out_lines")),
+                           div("Click", verbatimTextOutput("leaf_click_lines")),
+                           div("Mouseover", verbatimTextOutput("leaf_over_lines"))
+               )
+        )
+      )
     ),
-  h4("Leaflet Events"),
-  splitLayout(cellWidths = c("30%","30%","30%"),
-              div("Mouseout", verbatimTextOutput("leaf_out")),
-              div("Click", verbatimTextOutput("leaf_click")),
-              div("Mouseover", verbatimTextOutput("leaf_over"))
+    ## END Lines ##################
+    ## Circles ###########################
+    tabPanel(
+      title = "Circles",
+      fluidRow(
+        column(width = 12,
+               ## Actions ###########
+               div(
+                 actionButton("add", "Add Geodesic via Proxy"),
+                 actionButton("rem", "Remove by ID"),
+                 actionButton("rema", "Remove All"),
+                 actionButton("cle", "Clear by Group"),
+                 actionButton("show", "Show by Group"),
+                 actionButton("hide", "Hide by Group"),
+               ),
+               leafletOutput("map", height = 600),
+               ## Event Outputs ###########
+               h4("Leaflet Geodesic Events"),
+               splitLayout(cellWidths = c("30%","30%","30%"),
+                           div("Stats after Drag", verbatimTextOutput("drag")),
+                           div("Stats after Click", verbatimTextOutput("click")),
+                           div("Stats after Over", verbatimTextOutput("over"))
+               ),
+               h4("Leaflet Events"),
+               splitLayout(cellWidths = c("30%","30%","30%"),
+                           div("Mouseout", verbatimTextOutput("leaf_out")),
+                           div("Click", verbatimTextOutput("leaf_click")),
+                           div("Mouseover", verbatimTextOutput("leaf_over"))
+               )
+        )
+      )
+    )
+    ## END Circles ###########################
+
   )
 )
 ## END - UI ##########################
 
 ## Server ##########################
 server <- function(input, output, session) {
+  ##################################
+  ## CIRCLES ######################
+  ##################################
   output$map <- renderLeaflet({
     leaflet(cities_df) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -69,7 +117,8 @@ server <- function(input, output, session) {
                       layerId = ~paste0("ID_",city),
                       wrap = FALSE,
                       fill = T,
-                      showStats = T,
+                      # showCenter = FALSE,
+                      showStats = TRUE,
                       # statsFunction = NULL,
                       # statsFunction = JS("function(stats) {
                       #                      return('<h4>Custom Stats Info</h4>' +
@@ -109,7 +158,7 @@ server <- function(input, output, session) {
     input$map_geodesic_stats
   })
   output$click <- renderPrint({
-    input$map_geodesic_stats
+    input$map_geodesic_click
   })
   output$over <- renderPrint({
     input$map_geodesic_mouseover
@@ -179,6 +228,77 @@ server <- function(input, output, session) {
   observeEvent(input$hide, {
     leafletProxy("map") %>%
       leaflet::hideGroup(group = "circles")
+  })
+
+
+  ##################################
+  ## LINES ######################
+  ##################################
+  output$map_lines <- renderLeaflet({
+    leaflet(cities_df) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addMeasure(primaryLengthUnit = "meters", primaryAreaUnit = "sqmeters") %>%
+      addGeodesicPolylines(lng = ~lng, lat = ~lat,
+                           layerId = ~paste0("ID_",city),
+                           weight = 2, color = "red",
+                           group = "lines",
+                           steps = 50, opacity = 1) %>%
+      addLayersControl(overlayGroups = c("lines","lines_added"))
+
+  })
+
+  ## Event Outputs ###########
+  ## Geodesic
+  output$drag_lines <- renderPrint({
+    input$map_geodesic_stats
+  })
+  output$click_lines <- renderPrint({
+    input$map_geodesic_click
+  })
+  output$over_lines <- renderPrint({
+    input$map_geodesic_mouseover
+  })
+
+  ## Leaflet
+  output$leaf_click_lines <- renderPrint({
+    input$map_shape_click
+  })
+  output$leaf_over_lines <- renderPrint({
+    input$map_shape_mouseover
+  })
+  output$leaf_out_lines <- renderPrint({
+    input$map_shape_mouseout
+  })
+
+  ## Actions ###########
+  observeEvent(input$add_lines, {
+    leafletProxy("map_lines") %>%
+      addGeodesicPolylines(data = cities_df_all[5:7,],
+                           lng = ~lng, lat = ~lat,
+                           weight = 2, color = "red",
+                           group = "lines_added",
+                           steps = 50, opacity = 1)
+  })
+  observeEvent(input$rem_lines, {
+    leafletProxy("map_lines") %>%
+      leaflet::removeShape(layerId = paste0("ID_",cities_df$city[sample(1:7, sample(1:4,1))]))
+  })
+  observeEvent(input$rema_lines, {
+    leafletProxy("map_lines") %>%
+      leaflet::clearShapes()
+      # leaflet::clearMarkers()
+  })
+  observeEvent(input$cle_lines, {
+    leafletProxy("map_lines") %>%
+      leaflet::clearGroup(group = "lines")
+  })
+  observeEvent(input$show_lines, {
+    leafletProxy("map_lines") %>%
+      leaflet::showGroup(group = "lines")
+  })
+  observeEvent(input$hide_lines, {
+    leafletProxy("map_lines") %>%
+      leaflet::hideGroup(group = "lines")
   })
 }
 shinyApp(ui, server)
