@@ -97,6 +97,8 @@ addGeodesicPolylines = function(
 #' @describeIn addGeodesicPolylines Adds a Great Circle to the map
 #' @param lat_center,lng_center lat/lng for the center
 #' @param radius in meters
+#' @param showStats Show Statistics Info
+#' @inheritParams leaflet::markerOptions
 addGreatCircles = function(
   map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
   steps = 10,
@@ -114,6 +116,10 @@ addGreatCircles = function(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+  fill = TRUE,
+  showStats = FALSE,
+  statsFunction = NULL,
+  markerOptions = markerOptions(),
   data = getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
@@ -121,13 +127,14 @@ addGreatCircles = function(
   options = c(options, list(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,
-    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip
+    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
+    fill = fill, showStats = showStats, statsFunction = statsFunction
   ))
   points = leaflet::derivePoints(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),
     "addGreatCircles")
   leaflet::invokeMethod(
     map, data, "addGreatCircles",  points$lat, points$lng, radius, layerId, group, options,
-    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions) %>%
+    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions, markerOptions) %>%
     leaflet::expandLimits(points$lat, points$lng)
 }
