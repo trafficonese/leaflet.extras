@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [main, master, develop]
 
-strategy:
-  matrix:
-    node-version: ['14.x', '16.x', '18.x']
-
 name: Node.js CI
 
 jobs:
