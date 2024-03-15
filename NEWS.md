@@ -3,6 +3,7 @@
 ## New Features
 - The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
 - `searchOSMText` let's you set the OSM search text from R.
+- `addBounceMarkers` work now like normal markers.
 
 ## Bugfixes
 - #155
