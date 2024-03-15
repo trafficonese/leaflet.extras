@@ -7,7 +7,7 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
 
     if(map.drawToolbar) {
       map.drawToolbar.remove(map);
-      delete map.drawToobar;
+      delete map.drawToolbar;
     }
 
     // FeatureGroup that will hold our drawn shapes/markers
@@ -68,18 +68,69 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
       options.edit = editOptions;
     }
 
+    // Set Toolbar / Handlers options if provided. Changes the default values.
+    if (options && options.toolbar) {
+      var rtool = options.toolbar;
+      var tooldef = L.drawLocal.draw.toolbar;
+      L.drawLocal.draw.toolbar.buttons = {
+          ...tooldef.buttons,
+          ...rtool.buttons
+      };
+      L.drawLocal.draw.toolbar.actions = {
+          ...tooldef.actions,
+          ...rtool.actions
+      };
+      L.drawLocal.draw.toolbar.finish = {
+          ...tooldef.finish,
+          ...rtool.finish
+      };
+      L.drawLocal.draw.toolbar.undo = {
+          ...tooldef.undo,
+          ...rtool.undo
+      };
+    }
+    if (options && options.handlers) {
+      var rhand = options.handlers;
+      var handldef = L.drawLocal.draw.handlers;
+      L.drawLocal.draw.handlers.circle = {
+          ...handldef.circle,
+          ...rhand.circle
+      };
+      L.drawLocal.draw.handlers.circlemarker = {
+          ...handldef.circlemarker,
+          ...rhand.circlemarker
+      };
+      L.drawLocal.draw.handlers.marker = {
+          ...handldef.marker,
+          ...rhand.marker
+      };
+      L.drawLocal.draw.handlers.polygon = {
+          ...handldef.polygon,
+          ...rhand.polygon
+      };
+      L.drawLocal.draw.handlers.polyline = {
+          ...handldef.polyline,
+          ...rhand.polyline
+      };
+      L.drawLocal.draw.handlers.rectangle = {
+          ...handldef.rectangle,
+          ...rhand.rectangle
+      };
+    }
+
+    // Create new Drawing Control
     map.drawToolbar =  new L.Control.Draw(options);
     map.drawToolbar.addTo(map);
 
     // Event Listeners
     map.on(L.Draw.Event.DRAWSTART, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType, 'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.DRAWSTOP, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType,'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.CREATED, function (e) {

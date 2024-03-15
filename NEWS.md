@@ -1,3 +1,8 @@
+# leaflet.extras 1.1.0
+
+## New Features
+- The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js

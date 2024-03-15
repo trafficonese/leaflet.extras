@@ -6,11 +6,11 @@
 \title{Options for search control.}
 \usage{
 searchOptions(
-  url = "",
+  url = NULL,
   sourceData = NULL,
   jsonpParam = NULL,
-  propertyLoc = "loc",
-  propertyName = "title",
+  propertyLoc = NULL,
+  propertyName = NULL,
   formatData = NULL,
   filterData = NULL,
   moveToLocation = TRUE,
