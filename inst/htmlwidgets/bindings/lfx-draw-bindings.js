@@ -72,42 +72,50 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
     if (options && options.toolbar) {
       var rtool = options.toolbar;
       var tooldef = L.drawLocal.draw.toolbar;
-      L.drawLocal.draw.toolbar.buttons.polygon = rtool.buttons.polygon ? rtool.buttons.polygon : tooldef.buttons.polygon;
-      L.drawLocal.draw.toolbar.buttons.polyline = rtool.buttons.polyline ? rtool.buttons.polyline : tooldef.buttons.polyline;
-      L.drawLocal.draw.toolbar.buttons.rectangle = rtool.buttons.rectangle ? rtool.buttons.rectangle : tooldef.buttons.rectangle;
-      L.drawLocal.draw.toolbar.buttons.circle = rtool.buttons.circle ? rtool.buttons.circle : tooldef.buttons.circle;
-      L.drawLocal.draw.toolbar.buttons.marker = rtool.buttons.marker ? rtool.buttons.marker : tooldef.buttons.marker;
-      L.drawLocal.draw.toolbar.buttons.circlemarker = rtool.buttons.circlemarker ? rtool.buttons.circlemarker : tooldef.buttons.circlemarker;
-
-      L.drawLocal.draw.toolbar.actions.title = rtool.actions.title ? rtool.actions.rectangle : tooldef.actions.title;
-      L.drawLocal.draw.toolbar.actions.text = rtool.actions.text ? rtool.actions.text : tooldef.actions.text;
-
-      L.drawLocal.draw.toolbar.finish.title = rtool.finish.title ? rtool.finish.rectangle : tooldef.finish.title;
-      L.drawLocal.draw.toolbar.finish.text = rtool.finish.text ? rtool.finish.text : tooldef.finish.text;
-
-      L.drawLocal.draw.toolbar.undo.title = rtool.undo.title ? rtool.undo.rectangle : tooldef.undo.title;
-      L.drawLocal.draw.toolbar.undo.text = rtool.undo.text ? rtool.undo.text : tooldef.undo.text;
+      L.drawLocal.draw.toolbar.buttons = {
+          ...tooldef.buttons,
+          ...rtool.buttons
+      };
+      L.drawLocal.draw.toolbar.actions = {
+          ...tooldef.actions,
+          ...rtool.actions
+      };
+      L.drawLocal.draw.toolbar.finish = {
+          ...tooldef.finish,
+          ...rtool.finish
+      };
+      L.drawLocal.draw.toolbar.undo = {
+          ...tooldef.undo,
+          ...rtool.undo
+      };
     }
     if (options && options.handlers) {
       var rhand = options.handlers;
       var handldef = L.drawLocal.draw.handlers;
-      L.drawLocal.draw.handlers.circle.radius = rhand.circle.radius ? rhand.circle.radius : handldef.circle.radius;
-      L.drawLocal.draw.handlers.circle.tooltip.start = rhand.circle.tooltip.start ? rhand.circle.tooltip.start : handldef.circle.tooltip.start;
-
-      L.drawLocal.draw.handlers.circlemarker.tooltip.start = rhand.circlemarker.tooltip.start ? rhand.circlemarker.tooltip.start : handldef.circlemarker.tooltip.start;
-
-      L.drawLocal.draw.handlers.marker.tooltip.start = rhand.marker.tooltip.start ? rhand.marker.tooltip.start : handldef.marker.tooltip.start;
-
-      L.drawLocal.draw.handlers.polygon.tooltip.start = rhand.polygon.tooltip.start ? rhand.polygon.tooltip.start : handldef.polygon.tooltip.start;
-      L.drawLocal.draw.handlers.polygon.tooltip.cont = rhand.polygon.tooltip.cont ? rhand.polygon.tooltip.cont : handldef.polygon.tooltip.cont;
-      L.drawLocal.draw.handlers.polygon.tooltip.end = rhand.polygon.tooltip.end ? rhand.polygon.tooltip.end : handldef.polygon.tooltip.end;
-
-      L.drawLocal.draw.handlers.polyline.error = rhand.polyline.error ? rhand.polyline.error : handldef.polyline.error;
-      L.drawLocal.draw.handlers.polyline.tooltip.start = rhand.polyline.tooltip.start ? rhand.polyline.tooltip.start : handldef.polyline.tooltip.start;
-      L.drawLocal.draw.handlers.polyline.tooltip.cont = rhand.polyline.tooltip.cont ? rhand.polyline.tooltip.cont : handldef.polyline.tooltip.cont;
-      L.drawLocal.draw.handlers.polyline.tooltip.end = rhand.polyline.tooltip.end ? rhand.polyline.tooltip.end : handldef.polyline.tooltip.end;
-
-      L.drawLocal.draw.handlers.rectangle.tooltip.start = rhand.rectangle.tooltip.start ? rhand.rectangle.tooltip.start : handldef.rectangle.tooltip.start;
+      L.drawLocal.draw.handlers.circle = {
+          ...handldef.circle,
+          ...rhand.circle
+      };
+      L.drawLocal.draw.handlers.circlemarker = {
+          ...handldef.circlemarker,
+          ...rhand.circlemarker
+      };
+      L.drawLocal.draw.handlers.marker = {
+          ...handldef.marker,
+          ...rhand.marker
+      };
+      L.drawLocal.draw.handlers.polygon = {
+          ...handldef.polygon,
+          ...rhand.polygon
+      };
+      L.drawLocal.draw.handlers.polyline = {
+          ...handldef.polyline,
+          ...rhand.polyline
+      };
+      L.drawLocal.draw.handlers.rectangle = {
+          ...handldef.rectangle,
+          ...rhand.rectangle
+      };
     }
 
     // Create new Drawing Control
