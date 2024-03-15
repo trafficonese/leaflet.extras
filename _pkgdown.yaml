@@ -1,11 +1,11 @@
 title: leaflet.extras
+url: https://trafficonese.github.io/leaflet.extras/
 authors:
-  Bhaskar Karambelkar:
-    href: https://www.karambelkar.info/
+  Bhaskar Karambelkar
+  Sebastian Gatscha
 
 template:
-  params:
-    bootswatch: yeti
+  bootstrap: 5
 
 reference:
 - title: Package Documentation
