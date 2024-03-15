@@ -23,3 +23,5 @@
 ^inst/htmlwidgets/src
 ^__TODO\.R$
 ^\.github$
+^_pkgdown\.yml$
+^pkgdown$
