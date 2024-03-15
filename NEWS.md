@@ -1,3 +1,5 @@
+# leaflet.extras (development version)
+
 # leaflet.extras 1.1.0
 
 ## New Features
