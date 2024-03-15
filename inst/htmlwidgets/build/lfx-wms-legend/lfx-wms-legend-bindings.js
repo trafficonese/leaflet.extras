@@ -1,0 +1,2 @@
+LeafletWidget.methods.addWMSLegend1=function(d){(function(){var t=new L.Control.WMSLegend(d.options);d.layerId?this.controls.add(t,d.layerId):this.controls.add(t)}).call(this)};
+//# sourceMappingURL=lfx-wms-legend-bindings.js.map

@@ -10,11 +10,14 @@ const binding_path = "./inst/htmlwidgets/bindings/";
 const src_path = "./inst/htmlwidgets/src/";
 const build_path = path.resolve(__dirname, "./inst/htmlwidgets/build");
 
+const mode = "production";
+//const mode = "development";
+
 let library_prod = function(name, filename = name, library = undefined) {
   let foldername = filename;
   filename = filename + "-prod"
   var ret = {
-    mode: "production", // minify the files
+    mode: mode, // minify the files
     entry: name,
     devtool: "source-map", // produce a sibling source map file
     externals: {
@@ -78,7 +81,7 @@ let add_attachments = function(config, attachments, output_folder) {
 let library_binding = function(name) {
   let filename = binding_path + name + "-bindings.js";
   return {
-    mode: "production", // minify everything
+    mode: mode, // minify everything
     devtool: "source-map", // include external map file
     entry: binding_path + name + "-bindings.js",
     module: {
@@ -210,6 +213,7 @@ const config = [
     ["leaflet-wms-legend/leaflet.wmslegend.js", "leaflet-wms-legend/leaflet.wmslegend.css"],
     "lfx-wms-legend"
   ),
+  library_binding("lfx-wms-legend"),
 
   // "leaflet.heat": "0.2.0",
   //library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),

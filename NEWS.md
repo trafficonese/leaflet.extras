@@ -4,6 +4,10 @@
 - The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
 - `searchOSMText` let's you set the OSM search text from R.
 
+## Bugfixes
+- #155
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
