@@ -37,6 +37,7 @@
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2.3",
     "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
     "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#748f1dd",
+    "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
     "pouchdb-browser": "8.0.1",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1",
