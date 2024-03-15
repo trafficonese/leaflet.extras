@@ -75,6 +75,11 @@ addGeodesicPolylines = function(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+  icon = NULL,
+  showCenter = TRUE,
+  showStats = FALSE,
+  statsFunction = NULL,
+  markerOptions = NULL,
   data = getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
@@ -82,13 +87,23 @@ addGeodesicPolylines = function(
   options = c(options, list(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,
-    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip
+    dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
+    showStats = showStats, statsFunction = statsFunction,
+    showCenter = showCenter
   ))
+
+  # datapoints <- NULL
+  # if (inherits(data, "sf") && unique(sf::st_geometry_type(data)) == "LINESTRING") {
+  #   datapoints <- sf::st_cast(data, "POINT")
+  # }
+  # pts <- leaflet::derivePoints(
+  #   datapoints, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
   pgons = leaflet::derivePolygons(
     data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
   leaflet::invokeMethod(
-    map, data, "addGeodesicPolylines", pgons, layerId, group, options,
-    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions) %>%
+    map, data, "addGeodesicPolylines", pgons, layerId, group, options, icon,
+    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions,
+    markerOptions, NULL) %>%
     leaflet::expandLimitsBbox(pgons)
 }
 

@@ -1,5 +1,6 @@
 ## Libs + Data ##########################
 library(shiny)
+library(sf)
 library(leaflet)
 library(leaflet.extras)
 # install.packages("leaflet.extras")
@@ -15,6 +16,7 @@ cities_df_all$weight <- runif(nrow(cities_df_all), 1, 20)
 cities_df_all$opacity  <- runif(nrow(cities_df_all), 0.1, 1)
 cities_df_all$steps  <- runif(nrow(cities_df_all), 5, 400)
 cities_df_all$color <- sample(c("green","red","blue","orange","black"), nrow(cities_df_all), replace = TRUE)
+# cities_df_all <- list(cities_df_all[1:4,],cities_df_all[5:7,])
 cities_df <- cities_df_all[1:4,]
 
 greenLeafIcon <- makeIcon(
@@ -100,6 +102,8 @@ ui <- fluidPage(
 ## END - UI ##########################
 
 ## Server ##########################
+sflines <- mapview::trails[1:5,]
+sflines <- st_transform(sflines, 4326)
 server <- function(input, output, session) {
   ##################################
   ## CIRCLES ######################
@@ -238,10 +242,22 @@ server <- function(input, output, session) {
     leaflet(cities_df) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addMeasure(primaryLengthUnit = "meters", primaryAreaUnit = "sqmeters") %>%
-      addGeodesicPolylines(lng = ~lng, lat = ~lat,
-                           layerId = ~paste0("ID_",city),
+      addPolylines(data = sf::st_cast(sflines, "LINESTRING"), color="blue", opacity = 1) %>%
+      addGeodesicPolylines(
+        # lng = ~lng, lat = ~lat,
+        # data = sf::st_cast(sflines, "LINESTRING"),
+        data = sf::st_cast(asf$finished, "LINESTRING"),
+        # data = asf$finished,
+        # layerId = ~paste0("ID_",city),
                            weight = 2, color = "red",
                            group = "lines",
+                           # popup = NULL,
+                           showStats = TRUE,
+                           # popup = ~paste0("<h4>",city,"</h4>
+                           #            <div>radius = ",radius,"</div>
+                           #            <div>steps = ",steps,"</div>
+                           #            "),
+                           # label = ~paste(city, "-", color),
                            steps = 50, opacity = 1) %>%
       addLayersControl(overlayGroups = c("lines","lines_added"))
 
@@ -250,13 +266,13 @@ server <- function(input, output, session) {
   ## Event Outputs ###########
   ## Geodesic
   output$drag_lines <- renderPrint({
-    input$map_geodesic_stats
+    input$map_geodesiclines_stats
   })
   output$click_lines <- renderPrint({
-    input$map_geodesic_click
+    input$map_geodesiclines_click
   })
   output$over_lines <- renderPrint({
-    input$map_geodesic_mouseover
+    input$map_geodesiclines_mouseover
   })
 
   ## Leaflet
