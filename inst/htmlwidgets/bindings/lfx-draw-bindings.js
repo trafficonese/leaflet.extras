@@ -261,6 +261,8 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
 
 };
 
+
+// TODO - not used for now. Missing R-function..Is it working?
 LeafletWidget.methods.getDrawnItems = function() {
   var map = this;
 
