@@ -38,7 +38,7 @@ leaflet() \%>\%
   addDrawToolbar(
     targetGroup = "draw",
     editOptions = editToolbarOptions(selectedPathOptions = selectedPathOptions())
-  ) \%>\% \%>\%
+  ) \%>\%
   addLayersControl(
     overlayGroups = c("draw"), options = layersControlOptions(collapsed = FALSE)
   ) \%>\%

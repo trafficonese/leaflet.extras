@@ -12,9 +12,8 @@ LeafletWidget.methods.addStyleEditor = function(options) {
     map.styleEditor = styleEditor;
 
 
+    /*
     if (HTMLWidgets.shinyMode) {
-      console.log("HTMLWidgets.shinyMode");
-
       map.on('styleeditor:visible', function(element){
         console.log("visible");console.log(element);
       });
@@ -35,8 +34,8 @@ LeafletWidget.methods.addStyleEditor = function(options) {
         console.log("geometry");
         console.log(element);
       });
-
     };
+    */
 
   }).call(this);
 };
