@@ -1,9 +1,8 @@
 # leaflet.extras (development version)
 
-# leaflet.extras 1.1.0
-
 ## New Features
 - The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
+- `searchOSMText` let's you set the OSM search text from R.
 
 # leaflet.extras 1.0.0
 

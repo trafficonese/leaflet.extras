@@ -120,6 +120,23 @@ addSearchOSM <- function(
   )
 }
 
+#' Add a OSM search control to the map.
+#'
+#' @param map a map widget object
+#' @param text The search text
+#' @return modified map
+#' @rdname search-geocoding
+#' @export
+searchOSMText <- function(map, text = "") {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    NULL,
+    "searchOSMText",
+    text
+  )
+}
+
 #' Removes the OSM search control from the map.
 #'
 #' @return modified map
