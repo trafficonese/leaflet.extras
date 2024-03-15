@@ -21,7 +21,6 @@ server <- function(input, output, session) {
       addTiles() %>%
       addBounceMarkers(data = breweries91, label = ~address,
                        popup = ~brewery,
-                       # clusterOptions = markerClusterOptions(),
                        icon = greenLeafIcon)
   })
 }

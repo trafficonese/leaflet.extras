@@ -133,7 +133,7 @@ const config = [
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
   library_prod(
-    ["Leaflet.StyleEditor", "Leaflet.StyleEditor/dist/css/Leaflet.StyleEditor.min.css"],
+    ["leaflet-styleeditor", "Leaflet.StyleEditor/dist/css/Leaflet.StyleEditor.min.css"],
     "lfx-styleeditor"
   ),
   library_binding("lfx-styleeditor"),

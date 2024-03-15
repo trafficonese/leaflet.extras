@@ -28,6 +28,8 @@ addBounceMarkers = function(map, lng = NULL, lat = NULL, layerId = NULL, group =
                             label = NULL,
                             labelOptions = NULL,
                             options = leaflet::markerOptions(),
+                            # clusterOptions = NULL,
+                            # clusterId = NULL,
                             data = leaflet::getMapData(map)) {
 
   if (missing(labelOptions))
@@ -51,8 +53,8 @@ addBounceMarkers = function(map, lng = NULL, lat = NULL, layerId = NULL, group =
 
   map$dependencies <- c(map$dependencies, bounceMarkerDependency())
 
-  if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
+  # if (!is.null(clusterOptions))
+  #   map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
 
   pts = leaflet::derivePoints(
     data, lng, lat, missing(lng), missing(lat), "addBounceMarkers")
@@ -60,7 +62,9 @@ addBounceMarkers = function(map, lng = NULL, lat = NULL, layerId = NULL, group =
   leaflet::invokeMethod(
     map, data, "addBounceMarkers", pts$lat, pts$lng, icon, layerId, duration, height,
     group, options, popup, popupOptions,
-    NULL, NULL, leaflet::safeLabel(label, data), labelOptions,
+    # clusterOptions, clusterId,
+    NULL, NULL,
+    leaflet::safeLabel(label, data), labelOptions,
     leaflet:::getCrosstalkOptions(data)
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }

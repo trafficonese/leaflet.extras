@@ -18,8 +18,6 @@ addBounceMarkers(
   label = NULL,
   labelOptions = NULL,
   options = leaflet::markerOptions(),
-  clusterOptions = NULL,
-  clusterId = NULL,
   data = leaflet::getMapData(map)
 )
 }
@@ -68,13 +66,6 @@ options for each label. Default \code{NULL}}
 
 \item{options}{a list of extra options for tile layers, popups, paths
 (circles, rectangles, polygons, ...), or other map elements}
-
-\item{clusterOptions}{if not \code{NULL}, markers will be clustered using
-\href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
- you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
-options}
-
-\item{clusterId}{the id for the marker cluster layer}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
