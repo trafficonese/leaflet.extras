@@ -249,16 +249,19 @@ server <- function(input, output, session) {
         data = sf::st_cast(asf$finished, "LINESTRING"),
         # data = asf$finished,
         # layerId = ~paste0("ID_",city),
-                           weight = 2, color = "red",
-                           group = "lines",
-                           # popup = NULL,
-                           showStats = TRUE,
-                           # popup = ~paste0("<h4>",city,"</h4>
-                           #            <div>radius = ",radius,"</div>
-                           #            <div>steps = ",steps,"</div>
-                           #            "),
-                           # label = ~paste(city, "-", color),
-                           steps = 50, opacity = 1) %>%
+        weight = 10,
+        # color = c("red","blue"),
+        color = "red",
+        group = "lines",
+        popup = "some random popup",
+        markerOptions = markerOptions(draggable = TRUE, title = "some special Title"),
+        showStats = F,
+        # popup = ~paste0("<h4>",city,"</h4>
+        #            <div>radius = ",radius,"</div>
+        #            <div>steps = ",steps,"</div>
+        #            "),
+        # label = ~paste(city, "-", color),
+        steps = 50, opacity = 1) %>%
       addLayersControl(overlayGroups = c("lines","lines_added"))
 
   })

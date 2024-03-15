@@ -26,6 +26,11 @@ addGeodesicPolylines(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+  icon = NULL,
+  showCenter = TRUE,
+  showStats = FALSE,
+  statsFunction = NULL,
+  markerOptions = NULL,
   data = getMapData(map)
 )
 
@@ -53,9 +58,10 @@ addGreatCircles(
   highlightOptions = NULL,
   icon = NULL,
   fill = TRUE,
+  showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
-  markerOptions = markerOptions(),
+  markerOptions = NULL,
   data = getMapData(map)
 )
 }
@@ -107,13 +113,13 @@ a call to \code{\link[leaflet]{pathOptions}}()}
 
 \item{highlightOptions}{Options for highlighting the shape on mouse over.}
 
+\item{showStats}{Show Statistics Info}
+
 \item{data}{map data}
 
 \item{lat_center, lng_center}{lat/lng for the center}
 
 \item{radius}{in meters}
-
-\item{showStats}{Show Statistics Info}
 }
 \description{
 Add Geodesic Lines

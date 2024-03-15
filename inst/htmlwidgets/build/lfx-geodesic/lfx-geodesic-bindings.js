@@ -5,11 +5,145 @@ var __webpack_exports__ = {};
   \************************************************************/
 /* global $, LeafletWidget, L, HTMLWidgets */
 LeafletWidget.methods.addGeodesicPolylines  = function(
-  polygons, layerId, group, options, popup, popupOptions,
-  label, labelOptions, highlightOptions) {
+  polygons, layerId, group, options, icon, popup, popupOptions,
+  label, labelOptions, highlightOptions, markerOptions, pts) {
   if(polygons.length > 0) {
-    var df = new LeafletWidget.DataFrame()
-      .col('shapes', polygons)
+
+    const map = this;
+
+    console.log("START"); console.log(polygons)
+
+    // Show Statistics in InfoControl
+    if (options.showStats) {
+      // Info control
+      var info = L.control();
+      info.onAdd = function(map) {
+          this._div = L.DomUtil.create('div', 'info');
+          return this._div;
+      };
+      info.addTo(map);
+
+      // Define a function to update the info control based on passed statistics
+      function updateInfo(stats, statsFunction) {
+        var infoHTML = "";
+        if (typeof options.statsFunction === "function") {
+          // If additionalInput is a function, use it to generate content exclusively
+          infoHTML = options.statsFunction(stats);
+        } else {
+          // Default content generation logic
+          const totalDistance = stats.totalDistance ? (stats.totalDistance > 10000 ? (stats.totalDistance / 1000).toFixed(0) + ' km' : stats.totalDistance.toFixed(0) + ' m') : 'invalid';
+          infoHTML = '<h4>Statistics</h4>' +
+            '<b>Total Distance</b><br/>' + totalDistance +
+            '<br/><br/><b>Points</b><br/>' + stats.points +
+            '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
+        }
+        // Update the innerHTML of the info div with the constructed info HTML or leave it empty
+        info._div.innerHTML = infoHTML;
+      }
+    }
+    // Show Statistics in InfoControl
+    var info = L.control();
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        return this._div;
+    };
+    info.addTo(map);
+
+    // method that we will use to update the control based on feature properties passed
+    info.update = function (stats) {
+        const totalDistance = (stats.totalDistance ? (stats.totalDistance > 10000) ? (stats.totalDistance / 1000).toFixed(0) + ' km' : (stats.totalDistance).toFixed(0) + ' m' : 'invalid')
+        this._div.innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
+            '<br/><br/><b>Points</b><br/>' + stats.points +
+            '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
+    };
+
+    // Add Lines using addGenericLayers
+    debugger;
+    const geogesic_coords = polygons.map(line =>
+        line[0].flatMap(obj =>
+            obj.lat.map((lat, i) => ({lat, lng: obj.lng[i]}))
+        )
+    );
+    const Geodesic = L.geodesic(geogesic_coords, options);
+    info.update(Geodesic.statistics);
+    map.layerManager.addLayer(Geodesic, "shape", null, group, null, null);
+
+
+    var markers = [];
+    function updateGeodesic() {
+        let currentMultiline = [];
+        for (let subMarker of markers) {
+            let currentLine = [];
+            for (let point of subMarker) {
+                currentLine.push(point.getLatLng());
+            }
+            currentMultiline.push(currentLine);
+        }
+        Geodesic.setLatLngs(currentMultiline);
+        info.update(Geodesic.statistics);
+    }
+
+    for (let line of geogesic_coords) {
+        var subMarker = [];
+        for (let place of line) {
+            var marker = L.marker(place, { draggable: true }).addTo(map);
+            //map.layerManager.addLayer(marker, "markers", null, group, null, null);
+            map.on('layeradd', function(e) {
+              if(e.layer === Geodesic) {
+                map.layerManager.addLayer(marker, "marker", "fake_layerid", group, null, null);
+              }
+            });
+            map.on('layerremove', function(e) {
+              if(e.layer === Geodesic) {
+                map.layerManager.removeLayer("marker", "fake_layerid")
+              }
+            });
+            marker.on('drag', (e) => {
+              updateGeodesic();
+            });
+            subMarker.push(marker);
+        }
+        markers.push(subMarker);
+    }
+
+
+
+
+    /*
+    LeafletWidget.methods.addGenericLayers(this, 'shape', df,
+      function(df, i) {
+        var shapes = df.get(i, 'shapes');
+        shapes = shapes.map(shape => HTMLWidgets.dataframeToD3(shape[0]));
+        console.log("what are the shapes for LINES"); console.log(shapes)
+        const geodesic = L.geodesic(shapes, df.get(i));
+
+        return geodesic;
+      });
+      */
+
+
+
+/*
+
+    var info = L.control();
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        return this._div;
+    };
+    info.addTo(map);
+
+    // method that we will use to update the control based on feature properties passed
+    info.update = function (stats) {
+        const totalDistance = (stats.totalDistance ? (stats.totalDistance>10000)?(stats.totalDistance/1000).toFixed(0)+' km':(stats.totalDistance).toFixed(0)+' m' : 'invalid')
+        this._div.innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
+            '<br/><br/><b>Points</b><br/>' + stats.points +
+            '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
+    };
+
+    // Make DataFrame for Markers
+    var df_marker = new LeafletWidget.DataFrame()
+      .col('lat', pts.lat)
+      .col('lng', pts.lng)
       .col('layerId', layerId)
       .col('group', group)
       .col('popup', popup)
@@ -19,19 +153,37 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
       .col('highlightOptions', highlightOptions)
       .cbind(options);
 
-    LeafletWidget.methods.addGenericLayers(this, 'shape', df,
+
+    // Add Markers using addGenericLayers
+    LeafletWidget.methods.addGenericMarkers(this, df_marker, group, null, null,
       function(df, i) {
-        var shapes = df.get(i, 'shapes');
-        var ret_shapes = [];
-        for (var j = 0; j < shapes.length; j++) {
-          for (var k = 0; k < shapes[j].length; k++) {
-            ret_shapes.push(
-              HTMLWidgets.dataframeToD3(shapes[j][k])
-            );
-          }
-        }
-        return L.geodesic(ret_shapes, df.get(i));
+        let options = df.get(i);
+        if (icon) options.icon = getIcon(i);
+        var marker = L.marker([df.get(i, "lat"), df.get(i, "lng")],  { draggable: true });
+        marker.on('drag', (e) => {
+            let loc = [];
+            markers.forEach( (item) => {
+                loc.push(item.getLatLng());
+            })
+            geodesic.setLatLngs(loc);
+            info.update(geodesic.statistics);
+        });
+        return marker;
       });
+
+      */
+
+  }
+};
+
+LeafletWidget.methods.addLatLng = function(latlng) {
+  console.log("addLatLng"); console.log(addLatLng)
+  // Check if the geodesic object exists
+  if (this.geodesic) {
+    // Add the new latlng point to the geodesic object
+    this.geodesic.addLatLng(latlng);
+  } else {
+    console.error('Geodesic object is not initialized.');
   }
 };
 
