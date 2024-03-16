@@ -26,11 +26,10 @@ styleEditorDependencies <- function() {
 #'   # add the style editor to alter shapes added to map
 #'   addStyleEditor()
 addStyleEditor <- function(
-  map,
-  position = c("topleft", "topright", "bottomleft", "bottomright"),
-  openOnLeafletDraw = TRUE, useGrouping = FALSE,
-  ...) {
-
+    map,
+    position = c("topleft", "topright", "bottomleft", "bottomright"),
+    openOnLeafletDraw = TRUE, useGrouping = FALSE,
+    ...) {
   map$dependencies <- c(map$dependencies, styleEditorDependencies())
 
   position <- match.arg(position)

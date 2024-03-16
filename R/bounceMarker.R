@@ -5,7 +5,6 @@ bounceMarkerDependency <- function() {
     # bounce bindings
     html_dep_prod("lfx-bouncemarker", "1.1.0", has_binding = TRUE)
   )
-
 }
 
 #' Add Bounce Markers to map
@@ -20,20 +19,20 @@ bounceMarkerDependency <- function() {
 #' leaflet() %>%
 #'   addTiles() %>%
 #'   addBounceMarkers(49, 11)
-addBounceMarkers = function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-                            icon = NULL,
-                            duration = 1000, height = 100,
-                            popup = NULL,
-                            popupOptions = NULL,
-                            label = NULL,
-                            labelOptions = NULL,
-                            options = leaflet::markerOptions(),
-                            # clusterOptions = NULL,
-                            # clusterId = NULL,
-                            data = leaflet::getMapData(map)) {
-
-  if (missing(labelOptions))
+addBounceMarkers <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+                             icon = NULL,
+                             duration = 1000, height = 100,
+                             popup = NULL,
+                             popupOptions = NULL,
+                             label = NULL,
+                             labelOptions = NULL,
+                             options = leaflet::markerOptions(),
+                             # clusterOptions = NULL,
+                             # clusterId = NULL,
+                             data = leaflet::getMapData(map)) {
+  if (missing(labelOptions)) {
     labelOptions <- leaflet::labelOptions()
+  }
   if (!is.null(icon)) {
     icon <- leaflet::evalFormula(list(icon), data)[[1]]
     if (inherits(icon, "leaflet_icon_set")) {
@@ -56,8 +55,9 @@ addBounceMarkers = function(map, lng = NULL, lat = NULL, layerId = NULL, group =
   # if (!is.null(clusterOptions))
   #   map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
 
-  pts = leaflet::derivePoints(
-    data, lng, lat, missing(lng), missing(lat), "addBounceMarkers")
+  pts <- leaflet::derivePoints(
+    data, lng, lat, missing(lng), missing(lat), "addBounceMarkers"
+  )
 
   leaflet::invokeMethod(
     map, data, "addBounceMarkers", pts$lat, pts$lng, icon, layerId, duration, height,

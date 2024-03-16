@@ -4,13 +4,13 @@ output:
     html_preview: false
 ---
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(fig.retina=2, fig.path = "README_figs/README-")
+knitr::opts_chunk$set(fig.retina = 2, fig.path = "README_figs/README-")
 ```
 
 ```{r, echo = FALSE}
-description <- readLines(system.file("DESCRIPTION", package='leaflet.extras'))
+description <- readLines(system.file("DESCRIPTION", package = "leaflet.extras"))
 version <- gsub(" ", "", gsub("Version:", "", grep("Version:", description, value = TRUE)))
-last_changed <- gsub('-', '--', Sys.Date())
+last_changed <- gsub("-", "--", Sys.Date())
 ```
 
 
@@ -32,15 +32,15 @@ The goal of `leaflet.extras` package is to provide extra functionality to the [l
 For CRAN version
 
 ```{r, eval=FALSE}
-install.packages('leaflet.extras')
+install.packages("leaflet.extras")
 ```
 
 For latest development version
 
 ```{r, eval=FALSE}
 # We need latest leaflet package from Github, as CRAN package is too old.
-devtools::install_github('rstudio/leaflet')
-devtools::install_github('bhaskarvk/leaflet.extras')
+devtools::install_github("rstudio/leaflet")
+devtools::install_github("bhaskarvk/leaflet.extras")
 ```
 
 ### Progress

@@ -1,4 +1,3 @@
-
 weatherIconDependency <- function() {
   list(
     # napa tallsam/Leaflet.weather-markers#afda5b3
@@ -15,21 +14,22 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' @export
 #' @examples
 #'
-#' iconSet = weatherIconList(
+#' iconSet <- weatherIconList(
 #'   hurricane = makeWeatherIcon(icon = "hurricane"),
 #'   tornado = makeWeatherIcon(icon = "tornado")
 #' )
 #'
 #' iconSet[c("hurricane", "tornado")]
 #' @rdname weatherMarkers
-weatherIconList = function(...) {
-  res = structure(
+weatherIconList <- function(...) {
+  res <- structure(
     list(...),
     class = "leaflet_weather_icon_set"
   )
-  cls = unlist(lapply(res, inherits, "leaflet_weather_icon"))
-  if (any(!cls))
+  cls <- unlist(lapply(res, inherits, "leaflet_weather_icon"))
+  if (any(!cls)) {
     stop("Arguments passed to weatherIconList() must be icon objects returned from makeWeatherIcon()")
+  }
   res
 }
 
@@ -37,9 +37,9 @@ weatherIconList = function(...) {
 #' @param i offset
 #' @export
 #' @rdname weatherMarkers
-`[.leaflet_weather_icon_set` = function(x, i) {
+`[.leaflet_weather_icon_set` <- function(x, i) {
   if (is.factor(i)) {
-    i = as.character(i)
+    i <- as.character(i)
   }
 
   if (!is.character(i) && !is.numeric(i) && !is.integer(i)) {
@@ -49,15 +49,15 @@ weatherIconList = function(...) {
   structure(.subset(x, i), class = "leaflet_weather_icon_set")
 }
 
-weatherIconSetToWeatherIcons = function(x) {
-  cols = names(formals(makeWeatherIcon))
-  cols = structure(as.list(cols), names = cols)
+weatherIconSetToWeatherIcons <- function(x) {
+  cols <- names(formals(makeWeatherIcon))
+  cols <- structure(as.list(cols), names = cols)
 
   # Construct an equivalent output to weatherIcons().
   leaflet::filterNULL(lapply(cols, function(col) {
     # Pluck the `col` member off of each item in weatherIconObjs and put them in an
     # unnamed list (or vector if possible).
-    colVals = unname(sapply(x, `[[`, col))
+    colVals <- unname(sapply(x, `[[`, col))
 
     # If this is the common case where there's lots of values but they're all
     # actually the same exact thing, then just return one value; this will be
@@ -77,24 +77,22 @@ weatherIconSetToWeatherIcons = function(x) {
 #' @export
 #' @rdname weatherMarkers
 makeWeatherIcon <- function(
-  icon,
-  markerColor = "red",
-  iconColor = "white",
-  #iconSize = c(35, 45),
-  #iconAnchor =   c(17, 42),
-  #popupAnchor = c(1, -32),
-  #shadowAnchor = c(10, 12),
-  #shadowSize = c(36, 16),
-  #className = "weather-marker",
-  #prefix = "wi",
-  extraClasses = NULL
-) {
-
+    icon,
+    markerColor = "red",
+    iconColor = "white",
+    # iconSize = c(35, 45),
+    # iconAnchor =   c(17, 42),
+    # popupAnchor = c(1, -32),
+    # shadowAnchor = c(10, 12),
+    # shadowSize = c(36, 16),
+    # className = "weather-marker",
+    # prefix = "wi",
+    extraClasses = NULL) {
   if (!markerColor %in% markerColors) {
     stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
 
-  icon = leaflet::filterNULL(list(
+  icon <- leaflet::filterNULL(list(
     icon = icon, markerColor = markerColor,
     iconColor = iconColor, extraClasses = extraClasses
   ))
@@ -115,19 +113,17 @@ makeWeatherIcon <- function(
 #' @export
 #' @rdname weatherMarkers
 weatherIcons <- function(
-  icon,
-  markerColor = "red",
-  iconColor = "white",
-  #iconSize = c(35, 45),
-  #iconAnchor =   c(17, 42),
-  #popupAnchor = c(1, -32),
-  #shadowAnchor = c(10, 12),
-  #shadowSize = c(36, 16),
-  #className = "weather-marker",
-  #prefix = "wi",
-  extraClasses = NULL
-) {
-
+    icon,
+    markerColor = "red",
+    iconColor = "white",
+    # iconSize = c(35, 45),
+    # iconAnchor =   c(17, 42),
+    # popupAnchor = c(1, -32),
+    # shadowAnchor = c(10, 12),
+    # shadowSize = c(36, 16),
+    # className = "weather-marker",
+    # prefix = "wi",
+    extraClasses = NULL) {
   if (!any(markerColor %in% markerColors)) {
     stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
@@ -188,37 +184,40 @@ weatherIcons <- function(
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/weatherIcons.R", package = "leaflet.extras"))
-addWeatherMarkers = function(
-  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-  icon = NULL,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
-  options = leaflet::markerOptions(),
-  clusterOptions = NULL,
-  clusterId = NULL,
-  data = leaflet::getMapData(map)
-) {
-  map$dependencies <- c(map$dependencies,
-                        weatherIconDependency())
+addWeatherMarkers <- function(
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    icon = NULL,
+    popup = NULL,
+    popupOptions = NULL,
+    label = NULL,
+    labelOptions = NULL,
+    options = leaflet::markerOptions(),
+    clusterOptions = NULL,
+    clusterId = NULL,
+    data = leaflet::getMapData(map)) {
+  map$dependencies <- c(
+    map$dependencies,
+    weatherIconDependency()
+  )
 
   if (!is.null(icon)) {
     # If formulas are present, they must be evaluated first so we can pack the
     # resulting values
-    icon = leaflet::evalFormula(list(icon), data)[[1]]
+    icon <- leaflet::evalFormula(list(icon), data)[[1]]
 
     if (inherits(icon, "leaflet_weather_icon_set")) {
-      icon = weatherIconSetToWeatherIcons(icon)
+      icon <- weatherIconSetToWeatherIcons(icon)
     }
-    icon = leaflet::filterNULL(icon)
+    icon <- leaflet::filterNULL(icon)
   }
 
-  if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
+  if (!is.null(clusterOptions)) {
+    map$dependencies <- c(map$dependencies, leaflet::leafletDependencies$markerCluster())
+  }
 
-  pts = leaflet::derivePoints(
-    data, lng, lat, missing(lng), missing(lat), "addWeatherMarkers")
+  pts <- leaflet::derivePoints(
+    data, lng, lat, missing(lng), missing(lat), "addWeatherMarkers"
+  )
   leaflet::invokeMethod(
     map, data, "addWeatherMarkers", pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,

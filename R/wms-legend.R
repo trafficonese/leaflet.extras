@@ -20,7 +20,7 @@ wms.legendDependency <- function() {
 #'   setView(11, 51, 6) %>%
 #'   addWMSTiles(
 #'     baseUrl = "https://www.wms.nrw.de/wms/unfallatlas?request=GetMap",
-#'     layers = c("Unfallorte","Personenschaden_5000","Personenschaden_250"),
+#'     layers = c("Unfallorte", "Personenschaden_5000", "Personenschaden_250"),
 #'     options = WMSTileOptions(format = "image/png", transparent = TRUE)
 #'   ) %>%
 #'   addWMSLegend(
@@ -30,8 +30,10 @@ wms.legendDependency <- function() {
 #'   )
 addWMSLegend <- function(map, uri, position = "topright", layerId = NULL) {
   map$dependencies <- c(map$dependencies, wms.legendDependency())
-  options = leaflet::filterNULL(list(layerId = layerId,
-                                     options = list(uri = uri, position = position)))
+  options <- leaflet::filterNULL(list(
+    layerId = layerId,
+    options = list(uri = uri, position = position)
+  ))
 
   invokeMethod(map, getMapData(map), "addWMSLegend1", options)
 }
