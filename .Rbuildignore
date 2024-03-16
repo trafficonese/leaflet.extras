@@ -21,3 +21,9 @@
 ^webpack\.config\.js
 ^inst/htmlwidgets/bindings
 ^inst/htmlwidgets/src
+^__TODO\.R$
+^.eslintrc\.js$
+^\.github$
+^_pkgdown\.yml$
+^pkgdown$
+^codecov\.yml$

@@ -16,21 +16,20 @@
 #' @rdname draw-options
 #' @export
 drawShapeOptions <- function(
-  stroke = TRUE,
-  color = "#03f",
-  weight = 1,
-  opacity = 1,
-  fill = TRUE,
-  fillColor = "#03f",
-  fillOpacity = 0.4,
-  dashArray = NULL,
-  lineCap = NULL,
-  lineJoin = NULL,
-  clickable = TRUE,
-  pointerEvents = NULL,
-  smoothFactor = 1.0,
-  noClip = TRUE
-) {
+    stroke = TRUE,
+    color = "#03f",
+    weight = 1,
+    opacity = 1,
+    fill = TRUE,
+    fillColor = "#03f",
+    fillOpacity = 0.4,
+    dashArray = NULL,
+    lineCap = NULL,
+    lineJoin = NULL,
+    clickable = TRUE,
+    pointerEvents = NULL,
+    smoothFactor = 1.0,
+    noClip = TRUE) {
   leaflet::filterNULL(list(
     stroke = stroke,
     color = color,
@@ -64,18 +63,17 @@ drawShapeOptions <- function(
 #' @export
 #' @rdname draw-options
 drawPolylineOptions <- function(
-  allowIntersection = TRUE,
-  drawError = list(color = "#b00b00", timeout = 2500),
-  guidelineDistance = 20,
-  maxGuideLineLength = 4000,
-  showLength = TRUE,
-  metric = TRUE,
-  feet = TRUE,
-  nautic = FALSE,
-  zIndexOffset = 2000,
-  shapeOptions = drawShapeOptions(fill = FALSE),
-  repeatMode = FALSE
-) {
+    allowIntersection = TRUE,
+    drawError = list(color = "#b00b00", timeout = 2500),
+    guidelineDistance = 20,
+    maxGuideLineLength = 4000,
+    showLength = TRUE,
+    metric = TRUE,
+    feet = TRUE,
+    nautic = FALSE,
+    zIndexOffset = 2000,
+    shapeOptions = drawShapeOptions(fill = FALSE),
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     allowIntersection = allowIntersection,
     drawError = drawError,
@@ -96,11 +94,10 @@ drawPolylineOptions <- function(
 #' @rdname draw-options
 #' @export
 drawPolygonOptions <- function(
-  showArea = FALSE,
-  metric = TRUE,
-  shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE
-) {
+    showArea = FALSE,
+    metric = TRUE,
+    shapeOptions = drawShapeOptions(),
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     showArea = showArea,
     metric = metric,
@@ -113,11 +110,10 @@ drawPolygonOptions <- function(
 #' @rdname draw-options
 #' @export
 drawRectangleOptions <- function(
-  showArea = TRUE,
-  metric = TRUE,
-  shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE
-) {
+    showArea = TRUE,
+    metric = TRUE,
+    shapeOptions = drawShapeOptions(),
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     showArea = showArea,
     metric = metric,
@@ -131,13 +127,12 @@ drawRectangleOptions <- function(
 #' @param showRadius Show the radius of the drawn circle in m, km, ft (feet), or nm (nautical mile).
 #' @export
 drawCircleOptions <- function(
-  showRadius = TRUE,
-  metric = TRUE,
-  feet = TRUE,
-  nautic = FALSE,
-  shapeOptions = drawShapeOptions(),
-  repeatMode = FALSE
-) {
+    showRadius = TRUE,
+    metric = TRUE,
+    feet = TRUE,
+    nautic = FALSE,
+    shapeOptions = drawShapeOptions(),
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     shapeOptions = shapeOptions,
     repeatMode = repeatMode,
@@ -153,10 +148,9 @@ drawCircleOptions <- function(
 #' @rdname draw-options
 #' @export
 drawMarkerOptions <- function(
-  markerIcon = NULL,
-  zIndexOffset = 2000,
-  repeatMode = FALSE
-) {
+    markerIcon = NULL,
+    zIndexOffset = 2000,
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     markerIcon = markerIcon,
     zIndexOffset = zIndexOffset,
@@ -168,24 +162,23 @@ drawMarkerOptions <- function(
 #' @rdname draw-options
 #' @export
 drawCircleMarkerOptions <- function(
-  stroke = TRUE,
-  color = "#3388ff",
-  weight = 4,
-  opacity = 0.5,
-  fill = TRUE,
-  fillColor = NULL, #same as color by default
-  fillOpacity = 0.2,
-  clickable = TRUE,
-  zIndexOffset = 2000,
-  repeatMode = FALSE
-) {
+    stroke = TRUE,
+    color = "#3388ff",
+    weight = 4,
+    opacity = 0.5,
+    fill = TRUE,
+    fillColor = NULL, # same as color by default
+    fillOpacity = 0.2,
+    clickable = TRUE,
+    zIndexOffset = 2000,
+    repeatMode = FALSE) {
   leaflet::filterNULL(list(
     stroke = stroke,
     color = color,
     weight = weight,
     opacity = opacity,
     fill = fill,
-    fillColor = fillColor, #same as color by default
+    fillColor = fillColor, # same as color by default
     fillOpacity = fillOpacity,
     clickable = clickable,
     zIndexOffset = zIndexOffset,
@@ -198,14 +191,13 @@ drawCircleMarkerOptions <- function(
 #' @rdname draw-options
 #' @export
 selectedPathOptions <- function(
-  dashArray = c("10, 10"),
-  weight = 2,
-  color = "black",
-  fill = TRUE,
-  fillColor = "black",
-  fillOpacity = 0.6,
-  maintainColor = FALSE
-) {
+    dashArray = c("10, 10"),
+    weight = 2,
+    color = "black",
+    fill = TRUE,
+    fillColor = "black",
+    fillOpacity = 0.6,
+    maintainColor = FALSE) {
   leaflet::filterNULL(list(
     dashArray = dashArray,
     weight = weight,
@@ -224,15 +216,164 @@ selectedPathOptions <- function(
 #' @rdname draw-options
 #' @export
 editToolbarOptions <- function(
-  edit = TRUE,
-  remove = TRUE,
-  selectedPathOptions = NULL,
-  allowIntersection = TRUE
-) {
+    edit = TRUE,
+    remove = TRUE,
+    selectedPathOptions = NULL,
+    allowIntersection = TRUE) {
   leaflet::filterNULL(list(
     edit = edit,
     remove = remove,
     selectedPathOptions = selectedPathOptions,
     allowIntersection = allowIntersection
+  ))
+}
+
+
+#' Options for editing handlers
+#' @description Customize tooltips for \code{\link{addDrawToolbar}}
+#' @param polyline List of options for polyline tooltips.
+#' @param polygon List of options for polygon tooltips.
+#' @param rectangle List of options for rectangle tooltips.
+#' @param circle List of options for circle tooltips.
+#' @param marker List of options for marker tooltips.
+#' @param circlemarker List of options for circlemarker tooltips.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addDrawToolbar(
+#'     handlers = handlersOptions(
+#'       polyline = list(
+#'         tooltipStart = "Click It",
+#'         tooltipCont = "Keep going",
+#'         tooltipEnd = "Make it stop"
+#'       ),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = F, circleOptions = F,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+handlersOptions <- function(
+    polyline = list(
+      error = "<strong>Error:</strong> shape edges cannot cross!",
+      tooltipStart = "Click to start drawing line.",
+      tooltipCont = "Click to start drawing line.",
+      tooltipEnd = "Click to start drawing line."
+    ),
+    polygon = list(
+      tooltipStart = "Click to start drawing shape.",
+      tooltipCont = "Click to start drawing shape.",
+      tooltipEnd = "Click to start drawing shape."
+    ),
+    rectangle = list(
+      tooltipStart = "Click and drag to draw rectangle."
+    ),
+    circle = list(
+      tooltipStart = "Click map to place circle marker.",
+      radius = "Radius"
+    ),
+    marker = list(
+      tooltipStart = "Click map to place marker."
+    ),
+    circlemarker = list(
+      tooltipStart = "Click and drag to draw circle."
+    )) {
+  leaflet::filterNULL(list(
+    polyline = list(
+      error = polyline$error,
+      tooltip = list(
+        start = polyline$tooltipStart,
+        cont = polyline$tooltipCont,
+        end = polyline$tooltipEnd
+      )
+    ),
+    polygon = list(
+      tooltip = list(
+        start = polygon$tooltipStart,
+        cont = polygon$tooltipCont,
+        end = polygon$tooltipEnd
+      )
+    ),
+    rectangle = list(tooltip = list(start = rectangle$tooltipStart)),
+    circle = list(
+      radius = circle$radius,
+      tooltip = list(start = circle$tooltipStart)
+    ),
+    marker = list(tooltip = list(start = marker$tooltipStart)),
+    circlemarker = list(tooltip = list(start = circlemarker$tooltipStart))
+  ))
+}
+
+
+#' Options for editing the toolbar
+#' @description Customize the toolbar for \code{\link{addDrawToolbar}}
+#' @param actions List of options for actions toolbar button.
+#' @param finish List of options for finish toolbar button.
+#' @param undo List of options for undo toolbar button.
+#' @param buttons List of options for buttons toolbar button.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addDrawToolbar(
+#'     toolbar = toolbarOptions(
+#'       actions = list(text = "STOP"),
+#'       finish = list(text = "DONE"),
+#'       buttons = list(
+#'         polyline = "Draw a sexy polyline",
+#'         rectangle = "Draw a gigantic rectangle",
+#'         circlemarker = "Make a nice circle"
+#'       ),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = T, circleOptions = T,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+toolbarOptions <- function(
+    actions = list(
+      title = "Cancel drawing",
+      text = "Cancel"
+    ),
+    finish = list(
+      title = "Finish drawing",
+      text = "Finish"
+    ),
+    undo = list(
+      title = "Delete last point drawn",
+      text = "Delete last point"
+    ),
+    buttons = list(
+      polyline = "Draw a polyline",
+      polygon = "Draw a polygon",
+      rectangle = "Draw a rectangle",
+      circle = "Draw a circle",
+      marker = "Draw a marker",
+      circlemarker = "Draw a circlemarker"
+    )) {
+  leaflet::filterNULL(list(
+    actions = list(
+      title = actions$title,
+      text = actions$text
+    ),
+    finish = list(
+      title = finish$title,
+      text = finish$text
+    ),
+    undo = list(
+      title = undo$title,
+      text = undo$text
+    ),
+    buttons = list(
+      polyline = buttons$polyline,
+      polygon = buttons$polygon,
+      rectangle = buttons$rectangle,
+      circle = buttons$circle,
+      marker = buttons$marker,
+      circlemarker = buttons$circlemarker
+    )
   ))
 }

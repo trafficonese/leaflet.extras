@@ -17,7 +17,7 @@ LeafletWidget.methods.addControlGPS = function(options) {
         'radius': e.marker._radius
       });
     });
-    map.gpscontrol.on('gps:disabled', function(e){
+    map.gpscontrol.on('gps:disabled', function(){
       // Shiny stuff
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_gps_disabled',{});

@@ -26,11 +26,14 @@ addGeodesicPolylines(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+<<<<<<< HEAD
   icon = NULL,
   showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
+=======
+>>>>>>> develop
   data = getMapData(map)
 )
 
@@ -56,12 +59,15 @@ addGreatCircles(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
+<<<<<<< HEAD
   icon = NULL,
   fill = TRUE,
   showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
+=======
+>>>>>>> develop
   data = getMapData(map)
 )
 }
@@ -141,14 +147,18 @@ hammerfest <- c(70.67, 23.68)
 barrow <- c(71.29, -156.76)
 
 df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
-names(df) <- c("lat","lng")
+names(df) <- c("lat", "lng")
 
 leaflet(df) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
-  addGeodesicPolylines(lng = ~lng, lat = ~lat, weight = 2, color = "red",
-                       steps = 50, opacity = 1) \%>\%
-  addCircleMarkers(df, lat = ~lat,lng = ~lng, radius = 3, stroke = FALSE,
-                   fillColor = "black", fillOpacity = 1)
+  addGeodesicPolylines(
+    lng = ~lng, lat = ~lat, weight = 2, color = "red",
+    steps = 50, opacity = 1
+  ) \%>\%
+  addCircleMarkers(df,
+    lat = ~lat, lng = ~lng, radius = 3, stroke = FALSE,
+    fillColor = "black", fillOpacity = 1
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))

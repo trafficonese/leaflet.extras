@@ -58,14 +58,18 @@ LeafletWidget.methods.addSearchOSM = function(options) {
   }).call(this);
 };
 
+var clickOSMEventHandler;
 LeafletWidget.methods.removeSearchOSM = function() {
   (function(){
-
     var map = this;
-
     if(map.searchControlOSM) {
       map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
+    }
+    var revsear = document.getElementById('reverseSearchOSM');
+    if (revsear) {
+      revsear.remove();
+      map.off('click', clickOSMEventHandler);
     }
   }).call(this);
 };
@@ -82,8 +86,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
 
     var searchURL = 'https://nominatim.openstreetmap.org/reverse?format=json&polygon_geojson=1';
 
-    map.on('click', function(e){
-
+    clickOSMEventHandler = function(e){
       var latlng = e.latlng;
 
       // This will hold the query, boundingbox, and found feature layers
@@ -102,6 +105,11 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
       var query = searchURL + '&lat=' + latlng.lat + '&lon=' + latlng.lng;
 
       $.ajax({url: query, dataType: 'json'}).done(function(result){
+        // Check if the response contains an error
+        if (result.error && result.error === 'Unable to geocode') {
+          displayControl.innerHTML = 'Unable to geocode';
+          return;
+        }
 
         if(!$.isEmptyObject(displayControl)) {
           var displayText = '<div>';
@@ -146,7 +154,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         if(!$.isEmptyObject(tmp) && tmp.length >= 0) {
 
           if(!$.isEmptyObject(marker)) {
-            marker.on('mouseover', function(e){
+            marker.on('mouseover', function(){
               if(!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
                 rect.bringToFront();
@@ -156,7 +164,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
                 feature.bringToFront();
               }
             });
-            marker.on('mouseout', function(e){
+            marker.on('mouseout', function(){
               if(!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
                 rect.bringToBack();
@@ -181,10 +189,25 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         }
 
       });
-    });
+    };
+
+    map.on('click', clickOSMEventHandler);
 
   }).call(this);
 };
+
+
+LeafletWidget.methods.searchOSMText = function(text) {
+  (function(){
+    var map = this;
+    if(map.searchControlOSM) {
+      map.searchControlOSM.searchText(text);
+    }
+  }).call(this);
+};
+
+
+
 
 LeafletWidget.methods.addSearchGoogle = function(options) {
 
@@ -247,14 +270,18 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
   }).call(this);
 };
 
+var clickGOOEventHandler;
 LeafletWidget.methods.removeSearchGoogle = function() {
   (function(){
-
     var map = this;
-
     if(map.searchControlGoogle) {
       map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
+    }
+    var revsear = document.getElementById('reverseSearchGoogle');
+    if (revsear) {
+      revsear.remove();
+      map.off('click', clickGOOEventHandler);
     }
   }).call(this);
 };
@@ -271,10 +298,8 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
 
     var geocoder = new google.maps.Geocoder();
 
-    map.on('click', function(e){
-
+    clickGOOEventHandler = function(e){
       var latlng = e.latlng;
-
       // This will hold the query, boundingbox, and found feature layers
       var container = L.featureGroup();
       var layerID = L.stamp(container);
@@ -377,20 +402,19 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
             } else {
               if(!$.isEmptyObject(displayControl))
                 displayControl.innerHTML = 'No Results Found';
-              /* eslint-disable no-console */
               console.error('No Results Found');
-              /* eslint-enable no-console */
             }
           } else {
             if(!$.isEmptyObject(displayControl))
               displayControl.innerHTML = 'Reverse Geocoding failed due to: ' + status;
-            /* eslint-disable no-console */
             console.error('Reverse Geocoing failed due to: ' + status);
-            /* eslint-enable no-console */
           }
         }
       );
-    });
+    };
+
+    map.on('click', clickGOOEventHandler);
+
   }).call(this);
 };
 
@@ -451,10 +475,8 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
 
 LeafletWidget.methods.removeSearchUSCensusBureau = function() {
   (function(){
-
     var map = this;
-
-    if(map.searchControlUSCensusBureau) {
+    if (map.searchControlUSCensusBureau) {
       map.searchControlUSCensusBureau.remove(map);
       delete map.searchControlUSCensusBureau;
     }
@@ -463,7 +485,6 @@ LeafletWidget.methods.removeSearchUSCensusBureau = function() {
 
 
 LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
-
   (function(){
     var map = this;
 
@@ -509,9 +530,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
         if(target) {
           searchFeatureGroup.addLayer(target);
         } else {
-          /* eslint-disable no-console */
           console.warn('Group with ID "' + v + '" not Found, skipping');
-          /* eslint-enable no-console */
         }
       });
     }
@@ -535,17 +554,14 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
 
 LeafletWidget.methods.removeSearchFeatures = function(clearFeatures) {
   (function(){
-
     var map = this;
-
-    if(map.searchControl) {
+    if (map.searchControl) {
       map.searchControl.remove(map);
       delete map.searchControl;
     }
-    if(clearFeatures && map._searchFeatureGroupName) {
+    if (clearFeatures && map._searchFeatureGroupName) {
       map.layerManager.clearGroup(map._searchFeatureGroupName);
       delete map._searchFeatureGroupName ;
     }
   }).call(this);
-
 };

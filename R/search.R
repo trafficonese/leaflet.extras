@@ -7,8 +7,9 @@ leafletSearchDependencies <- function() {
   )
 }
 
+
 #' Options for search control.
-#' @param url url for search by ajax request, ex: "search.php?q={s}". Can be function that returns string for dynamic parameter setting.
+#' @param url url for search by ajax request, ex: `search.php?q={s}`. Can be function that returns string for dynamic parameter setting.
 #' @param sourceData function that fill _recordsCache, passed searching text by first param and callback in second.
 #' @param jsonpParam jsonp param name for search by jsonp service, ex: "callback".
 #' @param propertyLoc field for remapping location, using array: ["latname","lonname"] for select double fields(ex. ["lat","lon"] ) support dotted format: "prop.subprop.title".
@@ -39,11 +40,11 @@ leafletSearchDependencies <- function() {
 #' @rdname search-options
 #' @export
 searchOptions <- function(
-    url = "",
+    url = NULL,
     sourceData = NULL,
     jsonpParam = NULL,
-    propertyLoc = "loc",
-    propertyName = "title",
+    propertyLoc = NULL,
+    propertyName = NULL,
     formatData = NULL,
     filterData = NULL,
     moveToLocation = TRUE,
@@ -66,38 +67,37 @@ searchOptions <- function(
     textCancel = "Cancel",
     textPlaceholder = "Search...",
     position = "topleft",
-    hideMarkerOnCollapse = FALSE
-) {
-    leaflet::filterNULL(list(
-        url = url,
-        sourceData = sourceData,
-        jsonpParam = jsonpParam,
-        propertyLoc = propertyLoc,
-        propertyName = propertyName,
-        formatData = formatData,
-        filterData = filterData,
-        moveToLocation = moveToLocation,
-        zoom = zoom,
-        buildTip = buildTip,
-        container = container,
-        minLength = minLength,
-        initial = initial,
-        casesensitive = casesensitive,
-        autoType = autoType,
-        delayType = delayType,
-        tooltipLimit = tooltipLimit,
-        tipAutoSubmit = tipAutoSubmit,
-        firstTipSubmit = firstTipSubmit,
-        autoResize = autoResize,
-        collapsed = collapsed,
-        autoCollapse = autoCollapse,
-        autoCollapseTime = autoCollapseTime,
-        textErr = textErr,
-        textCancel = textCancel,
-        textPlaceholder = textPlaceholder,
-        position = position,
-        hideMarkerOnCollapse = hideMarkerOnCollapse
-    ))
+    hideMarkerOnCollapse = FALSE) {
+  leaflet::filterNULL(list(
+    url = url,
+    sourceData = sourceData,
+    jsonpParam = jsonpParam,
+    propertyLoc = propertyLoc,
+    propertyName = propertyName,
+    formatData = formatData,
+    filterData = filterData,
+    moveToLocation = moveToLocation,
+    zoom = zoom,
+    buildTip = buildTip,
+    container = container,
+    minLength = minLength,
+    initial = initial,
+    casesensitive = casesensitive,
+    autoType = autoType,
+    delayType = delayType,
+    tooltipLimit = tooltipLimit,
+    tipAutoSubmit = tipAutoSubmit,
+    firstTipSubmit = firstTipSubmit,
+    autoResize = autoResize,
+    collapsed = collapsed,
+    autoCollapse = autoCollapse,
+    autoCollapseTime = autoCollapseTime,
+    textErr = textErr,
+    textCancel = textCancel,
+    textPlaceholder = textPlaceholder,
+    position = position,
+    hideMarkerOnCollapse = hideMarkerOnCollapse
+  ))
 }
 
 #' Add a OSM search control to the map.
@@ -108,15 +108,31 @@ searchOptions <- function(
 #' @rdname search-geocoding
 #' @export
 addSearchOSM <- function(
-  map,
-  options = searchOptions(autoCollapse = TRUE, minLength = 2)
-) {
+    map,
+    options = searchOptions(autoCollapse = TRUE, minLength = 2)) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
     getMapData(map),
     "addSearchOSM",
     options
+  )
+}
+
+#' Add a OSM search control to the map.
+#'
+#' @param map a map widget object
+#' @param text The search text
+#' @return modified map
+#' @rdname search-geocoding
+#' @export
+searchOSMText <- function(map, text = "") {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    NULL,
+    "searchOSMText",
+    text
   )
 }
 
@@ -146,18 +162,19 @@ removeSearchOSM <- function(map) {
 #' @rdname search-geocoding
 #' @export
 addReverseSearchOSM <- function(
-  map,
-  showSearchLocation = TRUE,
-  showBounds = FALSE,
-  showFeature = TRUE,
-  fitBounds = TRUE,
-  displayText = TRUE,
-  group = NULL) {
+    map,
+    showSearchLocation = TRUE,
+    showBounds = FALSE,
+    showFeature = TRUE,
+    fitBounds = TRUE,
+    displayText = TRUE,
+    group = NULL) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
       addControl("Click anywhere on the map to reverse geocode",
-                 position = "topright", layerId = "reverseSearchOSM")
+        position = "topright", layerId = "reverseSearchOSM"
+      )
   }
   invokeMethod(
     map,
@@ -187,18 +204,16 @@ addReverseSearchOSM <- function(
 #' ## for more examples see
 #' # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
 #'
-#'
 #' @export
 addSearchGoogle <- function(
-  map,
-  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  options = searchOptions(autoCollapse = TRUE, minLength = 2)
-) {
+    map,
+    apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+    options = searchOptions(autoCollapse = TRUE, minLength = 2)) {
   url <- "https://maps.googleapis.com/maps/api/js?v=3"
-  if (is.null(apikey)) {
+  if (is.null(apikey) || apikey == "") {
     warning("Google Geocoding works best with an apikey")
   } else {
-   url <- paste0(url, "&key=", apikey)
+    url <- paste0(url, "&key=", apikey)
   }
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
@@ -228,25 +243,26 @@ removeSearchGoogle <- function(map) {
 #' @rdname search-geocoding
 #' @export
 addReverseSearchGoogle <- function(
-  map,
-  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  showSearchLocation = TRUE,
-  showBounds = FALSE,
-  showFeature = TRUE,
-  fitBounds = TRUE,
-  displayText = TRUE,
-  group = NULL) {
+    map,
+    apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+    showSearchLocation = TRUE,
+    showBounds = FALSE,
+    showFeature = TRUE,
+    fitBounds = TRUE,
+    displayText = TRUE,
+    group = NULL) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   url <- "https://maps.googleapis.com/maps/api/js?v=3"
-  if (is.null(apikey)) {
+  if (is.null(apikey) || apikey == "") {
     warning("Google Geocoding works best with an apikey")
   } else {
-   url <- paste0(url, "&key=", apikey)
+    url <- paste0(url, "&key=", apikey)
   }
   if (displayText == TRUE) {
     map <- map %>%
       addControl("Click anywhere on the map to reverse geocode",
-                 position = "topright", layerId = "reverseSearchGoogle")
+        position = "topright", layerId = "reverseSearchGoogle"
+      )
   }
   invokeMethod(
     map,
@@ -269,9 +285,8 @@ addReverseSearchGoogle <- function(
 #' @rdname search-geocoding
 #' @export
 addSearchUSCensusBureau <- function(
-  map,
-  options = searchOptions(autoCollapse = TRUE, minLength = 20)
-) {
+    map,
+    options = searchOptions(autoCollapse = TRUE, minLength = 20)) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
@@ -304,13 +319,15 @@ searchFeaturesOptions <- function(
     propertyName = "label",
     initial = FALSE,
     openPopup = FALSE,
-    ...
-) {
-  c(openPopup = openPopup,
+    ...) {
+  c(
+    openPopup = openPopup,
     searchOptions(
-       propertyName = propertyName,
-       initial = initial,
-       ...))
+      propertyName = propertyName,
+      initial = initial,
+      ...
+    )
+  )
 }
 
 
@@ -325,16 +342,15 @@ searchFeaturesOptions <- function(
 addSearchFeatures <- function(
     map,
     targetGroups,
-    options = searchFeaturesOptions()
-) {
-    map$dependencies <- c(map$dependencies, leafletSearchDependencies())
-    invokeMethod(
-        map,
-        getMapData(map),
-        "addSearchFeatures",
-        targetGroups,
-        options
-    )
+    options = searchFeaturesOptions()) {
+  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  invokeMethod(
+    map,
+    getMapData(map),
+    "addSearchFeatures",
+    targetGroups,
+    options
+  )
 }
 
 #' Removes the feature search control from the map.
@@ -343,7 +359,7 @@ addSearchFeatures <- function(
 #' @return modified map
 #' @rdname search-features
 #' @export
-removeSearchFeatures <- function(map, clearFeatures =FALSE) {
+removeSearchFeatures <- function(map, clearFeatures = FALSE) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,

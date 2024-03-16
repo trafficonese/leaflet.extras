@@ -1,7 +1,7 @@
 geodesicDependencies <- function() {
   list(
-    # // "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-    html_dep_prod("lfx-geodesic", "1.1.0", has_binding = TRUE)
+    # // "Leaflet.geodesic": "2.7.1",
+    html_dep_prod("lfx-geodesic", "2.7.1", has_binding = TRUE)
   )
 }
 
@@ -47,14 +47,18 @@ geodesicDependencies <- function() {
 #' barrow <- c(71.29, -156.76)
 #'
 #' df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
-#' names(df) <- c("lat","lng")
+#' names(df) <- c("lat", "lng")
 #'
 #' leaflet(df) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
-#'   addGeodesicPolylines(lng = ~lng, lat = ~lat, weight = 2, color = "red",
-#'                        steps = 50, opacity = 1) %>%
-#'   addCircleMarkers(df, lat = ~lat,lng = ~lng, radius = 3, stroke = FALSE,
-#'                    fillColor = "black", fillOpacity = 1)
+#'   addGeodesicPolylines(
+#'     lng = ~lng, lat = ~lat, weight = 2, color = "red",
+#'     steps = 50, opacity = 1
+#'   ) %>%
+#'   addCircleMarkers(df,
+#'     lat = ~lat, lng = ~lng, radius = 3, stroke = FALSE,
+#'     fillColor = "black", fillOpacity = 1
+#'   )
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))
@@ -84,7 +88,7 @@ addGeodesicPolylines = function(
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
 
-  options = c(options, list(
+  options <- c(options, list(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
@@ -141,16 +145,17 @@ addGreatCircles = function(
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
 
-  options = c(options, list(
+  options <- c(options, list(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
     fill = fill, showStats = showStats, statsFunction = statsFunction,
     showCenter = showCenter
   ))
-  points = leaflet::derivePoints(
+  points <- leaflet::derivePoints(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),
-    "addGreatCircles")
+    "addGreatCircles"
+  )
   leaflet::invokeMethod(
     map, data, "addGreatCircles",  points$lat, points$lng, radius, layerId, group, options, icon,
     popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions, markerOptions) %>%

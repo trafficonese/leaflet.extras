@@ -10,13 +10,16 @@ const binding_path = "./inst/htmlwidgets/bindings/";
 const src_path = "./inst/htmlwidgets/src/";
 const build_path = path.resolve(__dirname, "./inst/htmlwidgets/build");
 
+const mode = "production";
+//const mode = "development";
+
 let library_prod = function(name, filename = name, library = undefined) {
   let foldername = filename;
   filename = filename + "-prod"
   var ret = {
-    mode: "production", // minify the files
+    mode: mode, // minify the files
     entry: name,
-    devtool: "source-map", // produce a sibling source map file
+    devtool: false, // produce a sibling source map file
     externals: {
       // if 'leaflet' is required, pull from window.L
       leaflet: "L",
@@ -63,10 +66,11 @@ let add_externals = function(config, externals) {
   config.externals = Object.assign(config.externals, externals);
   return config;
 }
-let add_attachments = function(config, attachments, output_folder) {
+let add_attachments = function(config, src, attachments, output_folder) {
   config.plugins = config.plugins.concat([
     new CopyWebpackPlugin({
       patterns: [{
+        context: 'node_modules/' + src,
         from: attachments,
         to: build_path + "/" + output_folder
       }]
@@ -78,9 +82,8 @@ let add_attachments = function(config, attachments, output_folder) {
 let library_binding = function(name) {
   let filename = binding_path + name + "-bindings.js";
   return {
-    //mode: "production", // minify everything
-    mode: "development", // minify everything
-    devtool: "source-map", // include external map file
+    mode: mode, // minify everything
+    devtool: false, // include external map file
     entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
@@ -91,7 +94,7 @@ let library_binding = function(name) {
         // Specify the files/paths to lint.
         files: binding_path + name + "-bindings.js",
         // If you have an ESLint configuration file at a custom path, you can specify it here:
-        context: path.resolve(__dirname, 'inst/htmlwidgets/bindings/.eslintrc.js'),
+        context: path.resolve(__dirname, '.eslintrc.js'),
       }),
     ],
     // save bindings to build bindings folder
@@ -125,8 +128,8 @@ const config = [
   ),
   library_binding("lfx-omnivore"),
 
-  // "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-  library_prod("Leaflet.Geodesic", "lfx-geodesic"),
+  // "Leaflet.geodesic": "2.7.1",
+  library_prod("leaflet.geodesic", "lfx-geodesic"),
   library_binding("lfx-geodesic"),
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
@@ -178,7 +181,7 @@ const config = [
 
   // "leaflet-pulse-icon": "0.1.1",
   library_prod(
-    ["@ansur/leaflet-pulse-icon"],
+    ["@ansur/leaflet-pulse-icon", "@ansur/leaflet-pulse-icon/dist/L.Icon.Pulse.css"],
     "lfx-pulse-icon"
   ),
   library_binding("lfx-pulse-icon"),
@@ -201,7 +204,8 @@ const config = [
       ["webgl-heatmap/webgl-heatmap.js", "leaflet-webgl-heatmap"],
       "lfx-webgl-heatmap"
     ),
-    "node_modules/webgl-heatmap/*.png",
+    "webgl-heatmap/",
+    "*.png",
     "lfx-webgl-heatmap"
   ),
   library_binding("lfx-webgl-heatmap"),
@@ -211,6 +215,7 @@ const config = [
     ["leaflet-wms-legend/leaflet.wmslegend.js", "leaflet-wms-legend/leaflet.wmslegend.css"],
     "lfx-wms-legend"
   ),
+  library_binding("lfx-wms-legend"),
 
   // "leaflet.heat": "0.2.0",
   //library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
@@ -223,7 +228,6 @@ const config = [
   library_prod("leaflet.tilelayer.pouchdbcached", "lfx-tilelayer"),
 
   // napa tallsam/Leaflet.weather-markers#afda5b3:leaflet-weather-markers
-  /*
   library_prod(
     [
       "leaflet-weather-markers/dist/leaflet.weather-markers.js",
@@ -234,7 +238,6 @@ const config = [
     "lfx-weather-markers"
   ),
   library_binding("lfx-weather-markers"),
-  */
 
   // "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.1",
   library_prod("leaflet.BounceMarker", "lfx-bouncemarker"),

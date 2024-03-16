@@ -7,7 +7,7 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
 
     if(map.drawToolbar) {
       map.drawToolbar.remove(map);
-      delete map.drawToobar;
+      delete map.drawToolbar;
     }
 
     // FeatureGroup that will hold our drawn shapes/markers
@@ -68,18 +68,39 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
       options.edit = editOptions;
     }
 
+    // Set Toolbar / Handlers options if provided. Changes the default values.
+    if (options && options.toolbar) {
+      var rtool = options.toolbar;
+      var tooldef = L.drawLocal.draw.toolbar;
+      L.drawLocal.draw.toolbar.buttons = Object.assign({}, tooldef.buttons, rtool.buttons);
+      L.drawLocal.draw.toolbar.actions = Object.assign({}, tooldef.actions, rtool.actions);
+      L.drawLocal.draw.toolbar.finish = Object.assign({}, tooldef.finish, rtool.finish);
+      L.drawLocal.draw.toolbar.undo = Object.assign({}, tooldef.undo, rtool.undo);
+    }
+    if (options && options.handlers) {
+      var rhand = options.handlers;
+      var handldef = L.drawLocal.draw.handlers;
+      L.drawLocal.draw.handlers.circle = Object.assign({}, handldef.circle, rhand.circle);
+      L.drawLocal.draw.handlers.circlemarker = Object.assign({}, handldef.circlemarker, rhand.circlemarker);
+      L.drawLocal.draw.handlers.marker = Object.assign({}, handldef.marker, rhand.marker);
+      L.drawLocal.draw.handlers.polygon = Object.assign({}, handldef.polygon, rhand.polygon);
+      L.drawLocal.draw.handlers.polyline = Object.assign({}, handldef.polyline, rhand.polyline);
+      L.drawLocal.draw.handlers.rectangle = Object.assign({}, handldef.rectangle, rhand.rectangle);
+    }
+
+    // Create new Drawing Control
     map.drawToolbar =  new L.Control.Draw(options);
     map.drawToolbar.addTo(map);
 
     // Event Listeners
     map.on(L.Draw.Event.DRAWSTART, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_start', {'feature_type': e.layerType, 'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.DRAWSTOP, function(e) {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType});
+      Shiny.onInputChange(map.id+'_draw_stop', {'feature_type': e.layerType,'nonce': Math.random()});
     });
 
     map.on(L.Draw.Event.CREATED, function (e) {
@@ -116,11 +137,11 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         editableFeatureGroup.toGeoJSON());
     });
 
-    map.on(L.Draw.Event.EDITSTART, function (e) {
+    map.on(L.Draw.Event.EDITSTART, function () {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_draw_editstart', true);
     });
-    map.on(L.Draw.Event.EDITSTOP, function (e) {
+    map.on(L.Draw.Event.EDITSTOP, function () {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_draw_editstop', true);
     });
@@ -150,12 +171,12 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId, targetGroup, opti
         editableFeatureGroup.toGeoJSON());
     });
 
-    map.on(L.Draw.Event.DELETESTART, function (e) {
+    map.on(L.Draw.Event.DELETESTART, function () {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_draw_deletestart', true);
     });
 
-    map.on(L.Draw.Event.DELETESTOP, function (e) {
+    map.on(L.Draw.Event.DELETESTOP, function () {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id+'_draw_deletestop', true);
     });
@@ -210,6 +231,8 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
 
 };
 
+
+// TODO - not used for now. Missing R-function..Is it working?
 LeafletWidget.methods.getDrawnItems = function() {
   var map = this;
 

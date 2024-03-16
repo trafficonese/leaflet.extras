@@ -1,0 +1,1 @@
+LeafletWidget.methods.addWMSLegend=function(d){(function(){var t=new L.Control.WMSLegend(d.options);d.layerId?this.controls.add(t,d.layerId):this.controls.add(t)}).call(this)};

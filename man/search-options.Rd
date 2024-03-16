@@ -6,11 +6,19 @@
 \title{Options for search control.}
 \usage{
 searchOptions(
+<<<<<<< HEAD
   url = "",
   sourceData = NULL,
   jsonpParam = NULL,
   propertyLoc = "loc",
   propertyName = "title",
+=======
+  url = NULL,
+  sourceData = NULL,
+  jsonpParam = NULL,
+  propertyLoc = NULL,
+  propertyName = NULL,
+>>>>>>> develop
   formatData = NULL,
   filterData = NULL,
   moveToLocation = TRUE,
@@ -44,7 +52,7 @@ searchFeaturesOptions(
 )
 }
 \arguments{
-\item{url}{url for search by ajax request, ex: "search.php?q={s}". Can be function that returns string for dynamic parameter setting.}
+\item{url}{url for search by ajax request, ex: `search.php?q={s}`. Can be function that returns string for dynamic parameter setting.}
 
 \item{sourceData}{function that fill _recordsCache, passed searching text by first param and callback in second.}
 

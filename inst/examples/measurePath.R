@@ -52,6 +52,7 @@ leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 11) %>%
 #' ### With Draw
 #' You can update the measurements after editing by clicking on the refresh button of the measure path toolbar.
 library(rbgm)
+library(sf)
 set.seed(2)
 ## pick one of the available model files
 fs <- sample(bgmfiles::bgmfiles(), 1)
