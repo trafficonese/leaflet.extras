@@ -28,7 +28,7 @@ addBingTiles <- function(
     layerId = NULL,
     group = NULL,
     ...) {
-  if (is.null(apikey)) {
+  if (is.null(apikey) || apikey == "") {
     stop("Bing Tile Layer requires an apikey")
   }
 

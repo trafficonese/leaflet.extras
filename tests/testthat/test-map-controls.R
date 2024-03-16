@@ -189,6 +189,43 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, FALSE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
 
+
+  ## Search addSearchUSCensusBureau  ##########################
+  opts <- searchOptions(autoCollapse = TRUE, minLength = 2)
+  ts <- leaflet() %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addSearchUSCensusBureau(options = opts)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchUSCensusBureau")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
+
+  ts <- leaflet() %>%
+    removeSearchUSCensusBureau()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchUSCensusBureau")
+
+
+  ## Search Features  ##########################
+  ts <- leaflet() %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addSearchFeatures(targetGroups="group",
+                      options = searchFeaturesOptions())
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchFeatures")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], "group")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], searchFeaturesOptions())
+
+
+  ts <- leaflet() %>%
+    removeSearchFeatures()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchFeatures")
+
+
   ## Draw ##########################
   expect_error(leaflet() %>% addDrawToolbar(targetLayerId = "something", targetGroup = "asdf"))
   ts <- leaflet() %>%
