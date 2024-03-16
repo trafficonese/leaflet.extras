@@ -1,4 +1,4 @@
-/* global $, LeafletWidget, L, Shiny, HTMLWidgets, google */
+/* global $, LeafletWidget, L, Shiny, HTMLWidgets, google, document */
 
 // helper function to conver JS event to Shiny Event
 function eventToShiny(e) {
@@ -66,7 +66,7 @@ LeafletWidget.methods.removeSearchOSM = function() {
       map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
-    var revsear = document.getElementById('reverseSearchOSM')
+    var revsear = document.getElementById('reverseSearchOSM');
     if (revsear) {
       revsear.remove();
       map.off('click', clickOSMEventHandler);
@@ -106,8 +106,8 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
 
       $.ajax({url: query, dataType: 'json'}).done(function(result){
         // Check if the response contains an error
-        if (result.error && result.error === "Unable to geocode") {
-          displayControl.innerHTML = "Unable to geocode";
+        if (result.error && result.error === 'Unable to geocode') {
+          displayControl.innerHTML = 'Unable to geocode';
           return;
         }
 
@@ -154,7 +154,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         if(!$.isEmptyObject(tmp) && tmp.length >= 0) {
 
           if(!$.isEmptyObject(marker)) {
-            marker.on('mouseover', function(e){
+            marker.on('mouseover', function(){
               if(!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
                 rect.bringToFront();
@@ -164,7 +164,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
                 feature.bringToFront();
               }
             });
-            marker.on('mouseout', function(e){
+            marker.on('mouseout', function(){
               if(!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
                 rect.bringToBack();
@@ -189,7 +189,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         }
 
       });
-    }
+    };
 
     map.on('click', clickOSMEventHandler);
 
@@ -278,7 +278,7 @@ LeafletWidget.methods.removeSearchGoogle = function() {
       map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
     }
-    var revsear = document.getElementById('reverseSearchGoogle')
+    var revsear = document.getElementById('reverseSearchGoogle');
     if (revsear) {
       revsear.remove();
       map.off('click', clickGOOEventHandler);
@@ -415,9 +415,9 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
           }
         }
       );
-    }
+    };
 
-    map.on('click', clickGOOEventHandler)
+    map.on('click', clickGOOEventHandler);
 
   }).call(this);
 };

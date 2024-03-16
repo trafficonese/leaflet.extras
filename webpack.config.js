@@ -93,7 +93,7 @@ let library_binding = function(name) {
         // Specify the files/paths to lint.
         files: binding_path + name + "-bindings.js",
         // If you have an ESLint configuration file at a custom path, you can specify it here:
-        context: path.resolve(__dirname, 'inst/htmlwidgets/bindings/.eslintrc.js'),
+        context: path.resolve(__dirname, '.eslintrc.js'),
       }),
     ],
     // save bindings to build bindings folder

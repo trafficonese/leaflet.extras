@@ -1,4 +1,4 @@
-/* global LeafletWidget, $, L, topojson, csv2geojson, toGeoJSON */
+/* global LeafletWidget, $, L, DOMParser, topojson, csv2geojson, toGeoJSON */
 
 // parse an XML
 LeafletWidget.utils.parseXML = function(str) {

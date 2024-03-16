@@ -4,9 +4,9 @@ LeafletWidget.methods.addPulseMarkers = function(
   lat, lng, icon, layerId, group, options,
   popup, popupOptions, clusterOptions, clusterId, label, labelOptions) {
   (function(){
-    var icondf;
 
-    var getIcon;
+    let icondf;
+    let getIcon;
     if (icon) {
 
       // This cbinds the icon URLs and any other icon options; they're all
