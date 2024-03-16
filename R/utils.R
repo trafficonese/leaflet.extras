@@ -5,28 +5,27 @@ iconSetToIcons <- function(x) {
     colVals <- unname(sapply(x, `[[`, col))
     if (length(unique(colVals)) == 1) {
       return(colVals[[1]])
-    }
-    else {
+    } else {
       return(colVals)
     }
   }))
 }
 
-b64EncodePackedIcons <- function (packedIcons) {
-  if (is.null(packedIcons))
+b64EncodePackedIcons <- function(packedIcons) {
+  if (is.null(packedIcons)) {
     return(packedIcons)
+  }
   packedIcons$data <- sapply(packedIcons$data, function(icon) {
     if (is.character(icon) && file.exists(icon)) {
       xfun::base64_uri(icon)
-    }
-    else {
+    } else {
       icon
     }
   }, USE.NAMES = FALSE)
   packedIcons
 }
 
-packStrings <- function (strings) {
+packStrings <- function(strings) {
   if (length(strings) == 0) {
     return(NULL)
   }
