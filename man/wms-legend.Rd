@@ -29,7 +29,9 @@ leaflet() \%>\%
   ) \%>\%
   addWMSLegend(
     uri = paste0(
-      "https://www.wms.nrw.de/wms/unfallatlas?request=GetLegendGraphic\%26version=1.3.0\%26format=image/png\%26layer=Personenschaden_5000"
+      "https://www.wms.nrw.de/wms/unfallatlas?request=",
+      "GetLegendGraphic&version=1.3.0&",
+      "format=image/png&layer=Personenschaden_5000"
     )
   )
 }

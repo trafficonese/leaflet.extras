@@ -66,10 +66,11 @@ let add_externals = function(config, externals) {
   config.externals = Object.assign(config.externals, externals);
   return config;
 }
-let add_attachments = function(config, attachments, output_folder) {
+let add_attachments = function(config, src, attachments, output_folder) {
   config.plugins = config.plugins.concat([
     new CopyWebpackPlugin({
       patterns: [{
+        context: 'node_modules/' + src,
         from: attachments,
         to: build_path + "/" + output_folder
       }]
@@ -203,7 +204,8 @@ const config = [
       ["webgl-heatmap/webgl-heatmap.js", "leaflet-webgl-heatmap"],
       "lfx-webgl-heatmap"
     ),
-    "node_modules/webgl-heatmap/*.png",
+    "webgl-heatmap/",
+    "*.png",
     "lfx-webgl-heatmap"
   ),
   library_binding("lfx-webgl-heatmap"),
