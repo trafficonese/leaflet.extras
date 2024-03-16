@@ -36,12 +36,12 @@ addBounceMarkers <- function(map, lng = NULL, lat = NULL, layerId = NULL, group 
   if (!is.null(icon)) {
     icon <- leaflet::evalFormula(list(icon), data)[[1]]
     if (inherits(icon, "leaflet_icon_set")) {
-      icon <- leaflet:::iconSetToIcons(icon)
+      icon <- iconSetToIcons(icon)
     }
-    icon$iconUrl <- leaflet:::b64EncodePackedIcons(leaflet:::packStrings(icon$iconUrl))
-    icon$iconRetinaUrl <- leaflet:::b64EncodePackedIcons(leaflet:::packStrings(icon$iconRetinaUrl))
-    icon$shadowUrl <- leaflet:::b64EncodePackedIcons(leaflet:::packStrings(icon$shadowUrl))
-    icon$shadowRetinaUrl <- leaflet:::b64EncodePackedIcons(leaflet:::packStrings(icon$shadowRetinaUrl))
+    icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
+    icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
+    icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
+    icon$shadowRetinaUrl <- b64EncodePackedIcons(packStrings(icon$shadowRetinaUrl))
     if (length(icon$iconSize) == 2) {
       if (is.numeric(icon$iconSize[[1]]) && is.numeric(icon$iconSize[[2]])) {
         icon$iconSize <- list(icon$iconSize)
@@ -65,6 +65,7 @@ addBounceMarkers <- function(map, lng = NULL, lat = NULL, layerId = NULL, group 
     # clusterOptions, clusterId,
     NULL, NULL,
     leaflet::safeLabel(label, data), labelOptions,
-    leaflet:::getCrosstalkOptions(data)
+    # leaflet:::getCrosstalkOptions(data)
+    NULL
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
 }
