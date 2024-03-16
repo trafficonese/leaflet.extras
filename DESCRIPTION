@@ -48,11 +48,14 @@ Depends:
 Imports:
     htmlwidgets,
     htmltools,
+    xfun,
     stringr,
     magrittr
 Suggests:
     jsonlite,
-    readr
+    readr,
+    testthat (>= 3.0.0)
 URL: https://github.com/trafficonese/leaflet.extras, https://trafficonese.github.io/leaflet.extras/
 BugReports: https://github.com/trafficonese/leaflet.extras/issues
 RoxygenNote: 7.2.3
+Config/testthat/edition: 3

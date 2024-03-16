@@ -181,7 +181,7 @@ const config = [
 
   // "leaflet-pulse-icon": "0.1.1",
   library_prod(
-    ["@ansur/leaflet-pulse-icon"],
+    ["@ansur/leaflet-pulse-icon", "@ansur/leaflet-pulse-icon/dist/L.Icon.Pulse.css"],
     "lfx-pulse-icon"
   ),
   library_binding("lfx-pulse-icon"),

@@ -125,5 +125,5 @@ leaflet() \%>\%
 
 
 ## for more examples see
-# browseURL(system.file("examples/pluseIcon.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/pulseIcon.R", package = "leaflet.extras"))
 }
