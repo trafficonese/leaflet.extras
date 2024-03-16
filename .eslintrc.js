@@ -1,9 +1,13 @@
 module.exports = {
-  "parserOptions": {
+  parserOptions: {
     "ecmaVersion": 6
   },
-  "extends": "eslint:recommended",
-  "rules": {
+  env: {
+    browser: true,
+    node: true,
+  },
+  extends: "eslint:recommended",
+  rules: {
     "indent": [
       "error",
       2
@@ -21,14 +25,7 @@ module.exports = {
        "error",
        {"args": "none"}
     ],
-    "no-console": "off",
-    "no-restricted-syntax": [
-        "error",
-        {
-            "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
-            "message": "Unexpected property on console object was called"
-        }
-    ],
+    "no-console": ["error", { allow: ["warn", "error"] }],
     "no-var": "off", // Allow var declarations
     "prefer-const": "error", // Enforce the use of const where possible
     "no-assign-const": "off"

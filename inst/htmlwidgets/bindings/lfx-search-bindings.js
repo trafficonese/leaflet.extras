@@ -1,4 +1,4 @@
-/* global $, LeafletWidget, L, Shiny, HTMLWidgets, google, document */
+/* global $, LeafletWidget, L, Shiny, HTMLWidgets, google */
 
 // helper function to conver JS event to Shiny Event
 function eventToShiny(e) {
@@ -402,16 +402,12 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
             } else {
               if(!$.isEmptyObject(displayControl))
                 displayControl.innerHTML = 'No Results Found';
-              /* eslint-disable no-console */
               console.error('No Results Found');
-              /* eslint-enable no-console */
             }
           } else {
             if(!$.isEmptyObject(displayControl))
               displayControl.innerHTML = 'Reverse Geocoding failed due to: ' + status;
-            /* eslint-disable no-console */
             console.error('Reverse Geocoing failed due to: ' + status);
-            /* eslint-enable no-console */
           }
         }
       );
@@ -534,9 +530,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options){
         if(target) {
           searchFeatureGroup.addLayer(target);
         } else {
-          /* eslint-disable no-console */
           console.warn('Group with ID "' + v + '" not Found, skipping');
-          /* eslint-enable no-console */
         }
       });
     }
