@@ -2,7 +2,6 @@ library(leaflet)
 library(leaflet.extras)
 
 test_that("map-control-plugins", {
-
   ## Measure ###################
   ts <- leaflet() %>%
     addMeasurePathToolbar()
@@ -16,11 +15,13 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$imperial, FALSE)
 
   ts <- leaflet() %>%
-    addMeasurePathToolbar(options = measurePathOptions(showOnHover=TRUE,
-                                                       minPixelDistance = 10,
-                                                       showDistances = FALSE,
-                                                       showArea = FALSE,
-                                                       imperial = TRUE))
+    addMeasurePathToolbar(options = measurePathOptions(
+      showOnHover = TRUE,
+      minPixelDistance = 10,
+      showDistances = FALSE,
+      showArea = FALSE,
+      imperial = TRUE
+    ))
   expect_s3_class(ts, "leaflet")
   # expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-styleeditor")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "setMeasurementOptions")
@@ -122,8 +123,10 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
 
   ts <- leaflet() %>%
-    addReverseSearchOSM(displayText = FALSE, showSearchLocation = FALSE,group = "mygroup",
-                        showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE)
+    addReverseSearchOSM(
+      displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
+      showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
@@ -177,9 +180,11 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
 
   ts <- leaflet() %>%
-    addReverseSearchGoogle(displayText = FALSE, apikey = "something",
-                           showSearchLocation = FALSE,group = "mygroup",
-                        showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE)
+    addReverseSearchGoogle(
+      displayText = FALSE, apikey = "something",
+      showSearchLocation = FALSE, group = "mygroup",
+      showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchGoogle")
@@ -253,22 +258,26 @@ test_that("map-control-plugins", {
     iconAnchorX = 22, iconAnchorY = 94,
     shadowUrl = SHADOWURL,
     shadowWidth = 50, shadowHeight = 64,
-    shadowAnchorX = 4, shadowAnchorY = 62)
-  drawopts <- drawPolylineOptions(allowIntersection = FALSE,
-                                  nautic = TRUE, repeatMode = TRUE)
+    shadowAnchorX = 4, shadowAnchorY = 62
+  )
+  drawopts <- drawPolylineOptions(
+    allowIntersection = FALSE,
+    nautic = TRUE, repeatMode = TRUE
+  )
   drawpoly <- drawPolygonOptions(showArea = TRUE, metric = FALSE)
   drawcirc <- drawCircleOptions(showRadius = FALSE, metric = FALSE, repeatMode = TRUE)
   drawrect <- drawRectangleOptions(showArea = FALSE, metric = FALSE)
   drawmark <- drawMarkerOptions(zIndexOffset = 10, repeatMode = TRUE, markerIcon = greenLeafIcon)
-  drawcirm <- drawCircleMarkerOptions(color = "red", fill=FALSE)
-  drawrect <- drawCircleMarkerOptions(stroke = FALSE, color="orange")
-  selfeats <- selectedPathOptions(dashArray = c("20, 40"),maintainColor =TRUE)
+  drawcirm <- drawCircleMarkerOptions(color = "red", fill = FALSE)
+  drawrect <- drawCircleMarkerOptions(stroke = FALSE, color = "orange")
+  selfeats <- selectedPathOptions(dashArray = c("20, 40"), maintainColor = TRUE)
   hndl <- handlersOptions(
     polyline = list(
       tooltipStart = "Click It",
       tooltipCont = "Keep going",
       tooltipEnd = "Make it stop"
-    ))
+    )
+  )
   toolbr <- toolbarOptions(
     actions = list(text = "STOP"),
     finish = list(text = "DONE"),
@@ -276,7 +285,8 @@ test_that("map-control-plugins", {
       polyline = "Draw a sexy polyline",
       rectangle = "Draw a gigantic rectangle",
       circlemarker = "Make a nice circle"
-    ))
+    )
+  )
 
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
@@ -323,8 +333,10 @@ test_that("map-control-plugins", {
 
 
 
-  drawmark <- drawMarkerOptions(zIndexOffset = 10, repeatMode = TRUE,
-                                markerIcon = greenLeafIcon)
+  drawmark <- drawMarkerOptions(
+    zIndexOffset = 10, repeatMode = TRUE,
+    markerIcon = greenLeafIcon
+  )
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -341,10 +353,13 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "draw")
 
   awesomeicon <- leaflet::makeAwesomeIcon(awesomeIcons(
-    icon = 'ios-close',iconColor = 'black',
-    library = 'ion',markerColor = "green"))
-  drawmark <- drawMarkerOptions(zIndexOffset = 10, repeatMode = TRUE,
-                                markerIcon = awesomeicon)
+    icon = "ios-close", iconColor = "black",
+    library = "ion", markerColor = "green"
+  ))
+  drawmark <- drawMarkerOptions(
+    zIndexOffset = 10, repeatMode = TRUE,
+    markerIcon = awesomeicon
+  )
 
   ## TODO - this doesnt throw an error but it doesnt work. Console-errors..
   ts <- leaflet() %>%
@@ -363,10 +378,12 @@ test_that("map-control-plugins", {
 
 
   expect_error(leaflet() %>%
-                 addDrawToolbar(
-                   markerOptions = drawMarkerOptions(zIndexOffset = 10, repeatMode = TRUE,
-                                                     markerIcon = list("something else")),
-                 ))
+    addDrawToolbar(
+      markerOptions = drawMarkerOptions(
+        zIndexOffset = 10, repeatMode = TRUE,
+        markerIcon = list("something else")
+      ),
+    ))
 
   ## Full Screen ##########################
   ts <- leaflet() %>%
@@ -399,9 +416,11 @@ test_that("map-control-plugins", {
   expect_s3_class(ts, "leaflet")
 
   ts <- leaflet(options = NULL) %>%
-    suspendScroll(sleep, sleepTime = 1000, wakeTime = 1200,
-                  sleepNote = "Go to sleep", wakeMessage = "Wake Up",
-                  hoverToWake = FALSE, sleepOpacity = 0.1)
+    suspendScroll(sleep,
+      sleepTime = 1000, wakeTime = 1200,
+      sleepNote = "Go to sleep", wakeMessage = "Wake Up",
+      hoverToWake = FALSE, sleepOpacity = 0.1
+    )
   expect_identical(ts$x$options$sleepTime, 1000)
   expect_identical(ts$x$options$wakeTime, 1200)
   expect_identical(ts$x$options$sleepNote, "Go to sleep")
@@ -463,5 +482,4 @@ test_that("map-control-plugins", {
   ts <- ts %>%
     removeControlGPS()
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeControlGPS")
-
 })
