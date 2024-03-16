@@ -11,6 +11,7 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' Make weather-icon set
 #'
 #' @param ... icons created from \code{\link{makeWeatherIcon}()}
+#' @rdname weatherMarkers
 #' @export
 #' @examples
 #'
@@ -20,7 +21,6 @@ markerColors <- c("red", "darkred", "lightred", "orange", "beige", "green", "dar
 #' )
 #'
 #' iconSet[c("hurricane", "tornado")]
-#' @rdname weatherMarkers
 weatherIconList <- function(...) {
   res <- structure(
     list(...),
@@ -135,38 +135,7 @@ weatherIcons <- function(
 }
 
 #' Add Weather Markers
-#' @param map the map to add weather Markers to.
-#' @param lng a numeric vector of longitudes, or a one-sided formula of the form
-#'   \code{~x} where \code{x} is a variable in \code{data}; by default (if not
-#'   explicitly provided), it will be automatically inferred from \code{data} by
-#'   looking for a column named \code{lng}, \code{long}, or \code{longitude}
-#'   (case-insensitively)
-#' @param lat a vector of latitudes or a formula (similar to the \code{lng}
-#'   argument; the names \code{lat} and \code{latitude} are used when guessing
-#'   the latitude column from \code{data})
-#' @param popup a character vector of the HTML content for the popups (you are
-#'   recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
-#'   for security reasons)
-#' @param popupOptions options for popup
-#' @param layerId the layer id
-#' @param group the name of the group the newly created layers should belong to
-#'   (for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
-#'   Human-friendly group names are permitted--they need not be short,
-#'   identifier-style names. Any number of layers and even different types of
-#'   layers (e.g. markers and polygons) can share the same group name.
-#' @param data the data object from which the argument values are derived; by
-#'   default, it is the \code{data} object provided to \code{leaflet()}
-#'   initially, but can be overridden
-#' @param label a character vector of the HTML content for the labels
-#' @param labelOptions A Vector of \code{\link{labelOptions}} to provide label
-#' options for each label. Default \code{NULL}
-#' @param clusterOptions if not \code{NULL}, markers will be clustered using
-#'   \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
-#'    you can use \code{\link{markerClusterOptions}()} to specify marker cluster
-#'   options
-#' @param clusterId the id for the marker cluster layer
-#' @param options a list of extra options for tile layers, popups, paths
-#'   (circles, rectangles, polygons, ...), or other map elements
+#' @inheritParams leaflet::addMarkers
 #' @rdname weatherMarkers
 #' @export
 #' @examples

@@ -319,7 +319,8 @@ with options to map feature properties to labels, popups, colors, markers etc.
 }
 \examples{
 ## addGeoJSONv2
-\donttest{geoJson <- readr::read_file(
+\donttest{
+geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
@@ -327,14 +328,16 @@ leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLGeoJSONHeatmap(
-    geoJson, size = 30 , units = "px"
+    geoJson,
+    size = 30, units = "px"
   ) \%>\%
   addGeoJSONv2(
     geoJson,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
     markerOptions = markerOptions(radius = 2)
-  )}
+  )
+}
 
 ## for more examples see
 # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
@@ -342,9 +345,9 @@ leaflet() \%>\%
 # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
 # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 
-
 ## addGeoJSONChoropleth
-\donttest{geoJson <- readr::read_file(
+\donttest{
+geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 )
 
@@ -370,10 +373,14 @@ leaflet() \%>\%
     highlightOptions = highlightOptions(
       weight = 2, color = "#000000",
       fillOpacity = 1, opacity = 1,
-      bringToFront = TRUE, sendToBack = TRUE),
+      bringToFront = TRUE, sendToBack = TRUE
+    ),
     pathOptions = pathOptions(
       showMeasurements = TRUE,
-      measurementOptions = measurePathOptions(imperial = TRUE)))}
+      measurementOptions = measurePathOptions(imperial = TRUE)
+    )
+  )
+}
 
 ## for more examples see
 # browseURL(system.file("examples/geojsonv2.R", package = "leaflet.extras"))
@@ -381,9 +388,9 @@ leaflet() \%>\%
 # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
 # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 
-
 ## addKML
-\donttest{kml <- readr::read_file(
+\donttest{
+kml <- readr::read_file(
   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
@@ -396,11 +403,12 @@ leaflet() \%>\%
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1)
-  )}
-
+  )
+}
 
 ## addKMLChoropleth
-\donttest{kml <- readr::read_file(
+\donttest{
+kml <- readr::read_file(
   system.file("examples/data/kml/cb_2015_us_state_20m.kml.zip", package = "leaflet.extras")
 )
 
@@ -411,12 +419,12 @@ leaflet() \%>\%
   addKMLChoropleth(
     kml,
     valueProperty = JS(
-      'function(feature){
+      "function(feature){
          var props = feature.properties;
          var aland = props.ALAND/100000;
          var awater = props.AWATER/100000;
          return 100*awater/(awater+aland);
-      }'
+      }"
     ),
     scale = "OrRd", mode = "q", steps = 5,
     padding = c(0.2, 0),
@@ -434,11 +442,12 @@ leaflet() \%>\%
         maximumFractionDigits = 2
       )
     )
-  )}
-
+  )
+}
 
 ## addCSV
-\donttest{csv <- readr::read_file(
+\donttest{
+csv <- readr::read_file(
   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 )
 
@@ -450,11 +459,13 @@ leaflet() \%>\%
     csvParserOptions("latitude_deg", "longitude_deg"),
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "red", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 0.5))}
-
+    markerOptions = markerOptions(radius = 0.5)
+  )
+}
 
 ## addGPX
-\donttest{airports <- readr::read_file(
+\donttest{
+airports <- readr::read_file(
   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 )
 
@@ -472,10 +483,10 @@ leaflet() \%>\%
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1.5),
     group = "airports"
-  )}
+  )
+}
 
 ## for a larger example see
 # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
-
 
 }

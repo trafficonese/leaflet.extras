@@ -108,7 +108,7 @@ these arguments will be ignored.
 }
 \examples{
 
-iconSet = pulseIconList(
+iconSet <- pulseIconList(
   red = makePulseIcon(color = "#ff0000"),
   blue = makePulseIcon(color = "#0000ff")
 )

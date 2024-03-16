@@ -24,7 +24,7 @@ leaflet() \%>\%
   setView(11, 51, 6) \%>\%
   addWMSTiles(
     baseUrl = "https://www.wms.nrw.de/wms/unfallatlas?request=GetMap",
-    layers = c("Unfallorte","Personenschaden_5000","Personenschaden_250"),
+    layers = c("Unfallorte", "Personenschaden_5000", "Personenschaden_250"),
     options = WMSTileOptions(format = "image/png", transparent = TRUE)
   ) \%>\%
   addWMSLegend(

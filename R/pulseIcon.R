@@ -111,8 +111,6 @@ pulseIcons <- function(
 
 #' Add Pulse Markers
 #' @inheritParams leaflet::addMarkers
-#' @param options a list of extra options for tile layers, popups, paths
-#'   (circles, rectangles, polygons, ...), or other map elements
 #' @rdname pulseMarkers
 #' @export
 #' @examples

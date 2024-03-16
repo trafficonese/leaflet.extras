@@ -37,12 +37,14 @@ Customize tooltips for \code{\link{addDrawToolbar}}
 library(leaflet)
 library(leaflet.extras)
 leaflet() \%>\%
-addTiles() \%>\%
+  addTiles() \%>\%
   addDrawToolbar(
     handlers = handlersOptions(
-      polyline = list(tooltipStart = "Click It",
-                     tooltipCont = "Keep going",
-                     tooltipEnd = "Make it stop"),
+      polyline = list(
+        tooltipStart = "Click It",
+        tooltipCont = "Keep going",
+        tooltipEnd = "Make it stop"
+      ),
     ),
     polylineOptions = T, rectangleOptions = F, circleOptions = F,
     polygonOptions = F, markerOptions = F, circleMarkerOptions = F

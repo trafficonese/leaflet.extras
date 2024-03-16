@@ -35,11 +35,13 @@ leaflet() \%>\%
     toolbar = toolbarOptions(
       actions = list(text = "STOP"),
       finish = list(text = "DONE"),
-      buttons = list(polyline = "Draw a sexy polyline",
-                     rectangle = "Draw a gigantic rectangle",
-                     circlemarker = "Make a nice circle"),
+      buttons = list(
+        polyline = "Draw a sexy polyline",
+        rectangle = "Draw a gigantic rectangle",
+        circlemarker = "Make a nice circle"
+      ),
     ),
-    polylineOptions = T, rectangleOptions = T,circleOptions = T,
+    polylineOptions = T, rectangleOptions = T, circleOptions = T,
     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
   )
 }

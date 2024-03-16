@@ -120,5 +120,4 @@ leaflet() \%>\%
 ## for more examples see
 # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
 
-
 }

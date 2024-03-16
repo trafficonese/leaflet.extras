@@ -43,6 +43,7 @@ leaflet(cities) %>% addTiles() %>%
 #' The `group` param of `add*` methods has to match the `targetGroup` param of `addDrawToolbar`.
 
 library(rbgm)
+library(sp)
 set.seed(2)
 ## pick one of the available model files
 fs <- sample(bgmfiles::bgmfiles(), 1)

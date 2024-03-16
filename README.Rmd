@@ -86,9 +86,12 @@ Currently there are no vignettes (contributions welcome), but there are plenty o
 
 _I want to use a certain leaflet plugin not integrated so far._
 
-- **Good Solution**: Create issues for plugins you wish incorporated but before that search the existing issues to see if issue already exists and if so comment on that issue instead of creating duplicates.
+- **Good Solution**: Create issues for plugins you wish incorporated but before that, search the existing issues to see if issue 
+    already exists and if so comment on that issue instead of creating duplicates.
 - **Better Solution**: It would help in prioritizing if you can include additional details like why you need the plugin, how helpful will it be to everyone etc.
 - **Best Solution**: Code it yourself and submit a pull request. This is the fastest way to get a plugin into the package.
+
+Also take a look at this Gist to [include arbitrary Leaflet JS plugins](https://gist.github.com/jcheng5/c084a59717f18e947a17955007dc5f92)
 
 _I submitted an issue for a plugin long time ago but it is still not available._
 

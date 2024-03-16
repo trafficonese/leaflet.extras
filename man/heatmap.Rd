@@ -164,7 +164,7 @@ clears the heatmap
 \examples{
 leaflet(quakes) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatter) \%>\%
-  setView( 178, -20, 5 ) \%>\%
+  setView(178, -20, 5) \%>\%
   addHeatmap(
     lng = ~long, lat = ~lat, intensity = ~mag,
     blur = 20, max = 0.05, radius = 15
@@ -184,7 +184,8 @@ leaflet() \%>\%
     kml,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 1))
+    markerOptions = markerOptions(radius = 1)
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))
