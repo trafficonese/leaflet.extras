@@ -2,7 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    paths: ["**.[rR]", "**.[qrR]md", "**.[rR]markdown", "**.[rR]nw", "**.[rR]profile"]
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
 
 name: Style
 
