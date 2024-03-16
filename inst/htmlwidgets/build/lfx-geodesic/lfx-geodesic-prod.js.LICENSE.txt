@@ -1,1 +1,0 @@
-/*! leaflet.geodesic 2.7.1 - (c) Henry Thasler - https://github.com/henrythasler/Leaflet.Geodesic#readme */

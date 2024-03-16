@@ -19,7 +19,7 @@ let library_prod = function(name, filename = name, library = undefined) {
   var ret = {
     mode: mode, // minify the files
     entry: name,
-    devtool: "source-map", // produce a sibling source map file
+    devtool: false, // produce a sibling source map file
     externals: {
       // if 'leaflet' is required, pull from window.L
       leaflet: "L",
@@ -83,7 +83,7 @@ let library_binding = function(name) {
   let filename = binding_path + name + "-bindings.js";
   return {
     mode: mode, // minify everything
-    devtool: "source-map", // include external map file
+    devtool: false, // include external map file
     entry: binding_path + name + "-bindings.js",
     module: {
       rules: [
