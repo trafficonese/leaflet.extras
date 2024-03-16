@@ -37,5 +37,5 @@ addWMSLegend <- function(map, uri, position = "topright", layerId = NULL) {
     options = list(uri = uri, position = position)
   ))
 
-  invokeMethod(map, getMapData(map), "addWMSLegend1", options)
+  invokeMethod(map, getMapData(map), "addWMSLegend", options)
 }

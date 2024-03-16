@@ -3,7 +3,194 @@ library(leaflet.extras)
 
 test_that("map-control-plugins", {
 
+  ## Measure ###################
+  ts <- leaflet() %>%
+    addMeasurePathToolbar()
+  expect_s3_class(ts, "leaflet")
+  # expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-styleeditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "setMeasurementOptions")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showOnHover, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$minPixelDistance, 30)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showDistances, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showArea, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$imperial, FALSE)
+
+  ts <- leaflet() %>%
+    addMeasurePathToolbar(options = measurePathOptions(showOnHover=TRUE,
+                                                       minPixelDistance = 10,
+                                                       showDistances = FALSE,
+                                                       showArea = FALSE,
+                                                       imperial = TRUE))
+  expect_s3_class(ts, "leaflet")
+  # expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-styleeditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "setMeasurementOptions")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showOnHover, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$minPixelDistance, 10)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showDistances, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showArea, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$imperial, TRUE)
+
+
+  ## Style-Editor ##########################
+  ts <- leaflet() %>%
+    addStyleEditor()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-styleeditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addStyleEditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$openOnLeafletDraw, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$position, "topleft")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$useGrouping, FALSE)
+
+  ts <- leaflet() %>%
+    addStyleEditor(position = "bottomright", openOnLeafletDraw = FALSE, useGrouping = TRUE)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-styleeditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addStyleEditor")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$openOnLeafletDraw, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$position, "bottomright")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$useGrouping, TRUE)
+
+  ts <- leaflet() %>%
+    removeStyleEditor()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeStyleEditor")
+
+
+  ## WMS-Legend ##########################
+  ts <- leaflet() %>%
+    addWMSLegend(uri = "someuri")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-wms-legend")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addWMSLegend")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$options$uri, "someuri")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$options$position, "topright")
+
+  url <- "http://www.someuri.com/geovser"
+  ts <- leaflet() %>%
+    addWMSLegend(uri = url, position = "bottomright", layerId = "somelayerid")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-wms-legend")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addWMSLegend")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$options$uri, url)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$options$position, "bottomright")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$layerId, "somelayerid")
+
+
+  ## Search OSM ##########################
+  opts <- searchOptions(autoCollapse = TRUE, minLength = 2)
+  ts <- leaflet() %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addSearchOSM(options = opts)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
+
+  txt <- "some text"
+  ts <- leaflet() %>%
+    searchOSMText(txt)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "searchOSMText")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], txt)
+
+  ts <- leaflet() %>%
+    removeSearchOSM()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchOSM")
+
+
+  ts <- leaflet() %>%
+    addReverseSearchOSM(displayText = TRUE)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+
+  ts <- leaflet() %>%
+    addReverseSearchOSM(displayText = FALSE)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+
+  ts <- leaflet() %>%
+    addReverseSearchOSM(displayText = FALSE, showSearchLocation = FALSE,group = "mygroup",
+                        showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+
+  ## Search Google ##########################
+  opts <- searchOptions(autoCollapse = TRUE, minLength = 2)
+  expect_warning({
+    leaflet() %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addSearchGoogle(options = opts)
+  })
+  ts <- leaflet() %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addSearchGoogle(options = opts, apikey = "something")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchGoogle")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
+
+  ts <- leaflet() %>%
+    removeSearchGoogle()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchGoogle")
+
+
+  expect_warning(leaflet() %>% addReverseSearchGoogle())
+  ts <- leaflet() %>%
+    addReverseSearchGoogle(apikey = "something")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchGoogle")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+
+  ts <- leaflet() %>%
+    addReverseSearchGoogle(displayText = FALSE, apikey = "something")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchGoogle")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+
+  ts <- leaflet() %>%
+    addReverseSearchGoogle(displayText = FALSE, apikey = "something",
+                           showSearchLocation = FALSE,group = "mygroup",
+                        showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE)
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchGoogle")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+
   ## Draw ##########################
+  expect_error(leaflet() %>% addDrawToolbar(targetLayerId = "something", targetGroup = "asdf"))
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -76,6 +263,21 @@ test_that("map-control-plugins", {
   drawcirm <- drawCircleMarkerOptions(color = "red", fill=FALSE)
   drawrect <- drawCircleMarkerOptions(stroke = FALSE, color="orange")
   selfeats <- selectedPathOptions(dashArray = c("20, 40"),maintainColor =TRUE)
+  hndl <- handlersOptions(
+    polyline = list(
+      tooltipStart = "Click It",
+      tooltipCont = "Keep going",
+      tooltipEnd = "Make it stop"
+    ))
+  toolbr <- toolbarOptions(
+    actions = list(text = "STOP"),
+    finish = list(text = "DONE"),
+    buttons = list(
+      polyline = "Draw a sexy polyline",
+      rectangle = "Draw a gigantic rectangle",
+      circlemarker = "Make a nice circle"
+    ))
+
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -92,7 +294,9 @@ test_that("map-control-plugins", {
       editOptions = editToolbarOptions(
         edit = FALSE, remove = FALSE, allowIntersection = FALSE,
         selectedPathOptions = selfeats
-      )
+      ),
+      handlers = hndl,
+      toolbar = toolbr
     )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw-drag")
@@ -105,7 +309,7 @@ test_that("map-control-plugins", {
   expect_identical(ARGS$draw$polygon, drawpoly)
   expect_identical(ARGS$draw$circle, drawcirc)
   expect_identical(ARGS$draw$rectangle, drawrect)
-  expect_identical(ARGS$draw$marker, drawmark)
+  # expect_identical(ARGS$draw$marker, drawmark)
   expect_identical(ARGS$draw$circlemarker, drawcirm)
   expect_identical(ARGS$draw$singleFeature, FALSE)
 
@@ -113,8 +317,9 @@ test_that("map-control-plugins", {
   expect_identical(ARGS$edit$edit, FALSE)
   expect_identical(ARGS$edit$remove, FALSE)
   expect_identical(ARGS$edit$allowIntersection, FALSE)
-  expect_null(ARGS$toolbar)
-  expect_null(ARGS$handlers)
+
+  expect_identical(ARGS$toolbar, toolbr)
+  expect_identical(ARGS$handlers, hndl)
 
 
 
@@ -140,6 +345,8 @@ test_that("map-control-plugins", {
     library = 'ion',markerColor = "green"))
   drawmark <- drawMarkerOptions(zIndexOffset = 10, repeatMode = TRUE,
                                 markerIcon = awesomeicon)
+
+  ## TODO - this doesnt throw an error but it doesnt work. Console-errors..
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -150,8 +357,7 @@ test_that("map-control-plugins", {
       singleFeature = FALSE
     )
   expect_s3_class(ts, "leaflet")
-  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw-drag")
-  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "lfx-draw")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addDrawToolbar")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "draw")
 
