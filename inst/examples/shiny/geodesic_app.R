@@ -102,8 +102,12 @@ ui <- fluidPage(
 ## END - UI ##########################
 
 ## Server ##########################
-sflines <- mapview::trails[1:5,]
-sflines <- st_transform(sflines, 4326)
+# sflines <- mapview::trails[1:5,]
+# sflines <- st_transform(sflines, 4326)
+sflines <- sf::st_read(system.file("examples/data/geodesic_lines.shp", package = "leaflet.extras"))
+sflines$id = 1:nrow(sflines)
+sflines$color <- sample(c("green","red","blue","orange","black"), nrow(sflines), replace = TRUE)
+
 server <- function(input, output, session) {
   ##################################
   ## CIRCLES ######################
@@ -246,20 +250,20 @@ server <- function(input, output, session) {
       addGeodesicPolylines(
         # lng = ~lng, lat = ~lat,
         # data = sf::st_cast(sflines, "LINESTRING"),
-        data = sf::st_cast(asf$finished, "LINESTRING"),
-        # data = asf$finished,
-        # layerId = ~paste0("ID_",city),
-        weight = 10,
-        # color = c("red","blue"),
-        color = "red",
+        data = sflines,
+        layerId = ~paste0("ID_",id),
+        weight = 7,
+        color = ~color,
+        # color = "red",
         group = "lines",
-        popup = "some random popup",
         markerOptions = markerOptions(draggable = TRUE, title = "some special Title"),
         showStats = F,
-        # popup = ~paste0("<h4>",city,"</h4>
-        #            <div>radius = ",radius,"</div>
-        #            <div>steps = ",steps,"</div>
-        #            "),
+        showCenter = T,icon = greenLeafIcon,
+        label = ~paste0(id), labelOptions = labelOptions(textsize = "22px"),
+        popup = ~paste0("<h4>",id,"</h4>
+                   <div>color = ",color,"</div>
+                   <div>X_lflt_d = ",X_lflt_d,"</div>
+                   "),
         # label = ~paste(city, "-", color),
         steps = 50, opacity = 1) %>%
       addLayersControl(overlayGroups = c("lines","lines_added"))

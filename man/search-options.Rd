@@ -6,19 +6,11 @@
 \title{Options for search control.}
 \usage{
 searchOptions(
-<<<<<<< HEAD
-  url = "",
-  sourceData = NULL,
-  jsonpParam = NULL,
-  propertyLoc = "loc",
-  propertyName = "title",
-=======
   url = NULL,
   sourceData = NULL,
   jsonpParam = NULL,
   propertyLoc = NULL,
   propertyName = NULL,
->>>>>>> develop
   formatData = NULL,
   filterData = NULL,
   moveToLocation = TRUE,

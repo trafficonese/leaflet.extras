@@ -17,13 +17,9 @@ addDrawToolbar(
   markerOptions = drawMarkerOptions(),
   circleMarkerOptions = drawCircleMarkerOptions(),
   editOptions = FALSE,
-<<<<<<< HEAD
-  singleFeature = FALSE
-=======
   singleFeature = FALSE,
   toolbar = NULL,
   handlers = NULL
->>>>>>> develop
 )
 
 removeDrawToolbar(map, clearFeatures = FALSE)

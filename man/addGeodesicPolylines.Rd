@@ -26,14 +26,11 @@ addGeodesicPolylines(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
-<<<<<<< HEAD
   icon = NULL,
   showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
-=======
->>>>>>> develop
   data = getMapData(map)
 )
 
@@ -59,15 +56,12 @@ addGreatCircles(
   labelOptions = NULL,
   options = pathOptions(),
   highlightOptions = NULL,
-<<<<<<< HEAD
   icon = NULL,
   fill = TRUE,
   showCenter = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
-=======
->>>>>>> develop
   data = getMapData(map)
 )
 }
