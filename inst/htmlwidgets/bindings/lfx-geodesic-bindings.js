@@ -50,10 +50,12 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
     let getIcon;
     if (icon) {
       // Unpack icons
-      icon.iconUrl         = unpackStrings(icon.iconUrl);
-      icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-      icon.shadowUrl       = unpackStrings(icon.shadowUrl);
-      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+      if (!icon.awesomemarker) {
+        icon.iconUrl         = unpackStrings(icon.iconUrl);
+        icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
+        icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+      }
 
       // This cbinds the icon URLs and any other icon options; they're all
       // present on the icon object.
@@ -71,8 +73,12 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
         }
 
         if (opts.awesomemarker) {
+          delete opts.awesomemarker
           if (opts.squareMarker) {
             opts.className = "awesome-marker awesome-marker-square";
+          }
+          if (!opts.prefix) {
+            opts.prefix = icon.library;
           }
           return new L.AwesomeMarkers.icon(opts);
         } else {
@@ -176,14 +182,18 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
 };
 
 LeafletWidget.methods.addLatLng = function(lat, lng, layerId) {
-  console.log('lat'); console.log(lat);
-  console.log('lng'); console.log(lng);
-  console.log('layerId'); console.log(layerId);
+  //console.log('lat'); console.log(lat);
+  //console.log('lng'); console.log(lng);
+  //console.log('layerId'); console.log(layerId);
   // Check if the geodesic object exists
-  let geodesic = this.layerManager.getLayer("shape", layerId);
+  let map = this;
+  let geodesic = map.layerManager.getLayer("shape", layerId);
   if (geodesic) {
     // Add the new latlng point to the geodesic object
     geodesic.addLatLng({"lat": lat, "lng": lng});
+    // Create Marker
+    var marker = L.marker({"lat": lat, "lng": lng})
+    map.layerManager.addLayer(marker, "markers", null, null, null, null);
   } else {
     console.error('Geodesic object is not initialized.');
   }
