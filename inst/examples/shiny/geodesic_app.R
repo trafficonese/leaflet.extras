@@ -27,6 +27,31 @@ greenLeafIcon <- makeIcon(
   shadowWidth = 50, shadowHeight = 64,
   shadowAnchorX = 4, shadowAnchorY = 62
 )
+iconlist <- leaflet::iconList(
+  green = makeIcon(
+    iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-green.png",
+    iconWidth = 38, iconHeight = 95,
+    iconAnchorX = 22, iconAnchorY = 94
+  ),
+  red = makeIcon(
+    iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+    iconWidth = 38, iconHeight = 95,
+    iconAnchorX = 22, iconAnchorY = 94
+  )
+)
+awesomeicons <- awesomeIconList(
+  green = makeAwesomeIcon(icon = "glass", library = "fa", markerColor = "green"),
+  red = makeAwesomeIcon(icon = "cutlery", library = "fa", markerColor = "red")
+)
+
+# sflines <- mapview::trails[1:5,]
+# sflines <- st_transform(sflines, 4326)
+sflines <- sf::st_read(system.file("examples/data/geodesic_lines.shp", package = "leaflet.extras"))
+sflines$id = 1:nrow(sflines)
+sflines$color <- sample(c("green","red","orange","black"), nrow(sflines), replace = TRUE)
+sflines$icon <- sample(c("green","red"), nrow(sflines), replace = TRUE)
+sflines$icon <- c("red","green")
+
 
 ## UI ##########################
 ui <- fluidPage(
@@ -45,7 +70,9 @@ ui <- fluidPage(
                  actionButton("cle_lines", "Clear by Group"),
                  actionButton("show_lines", "Show by Group"),
                  actionButton("hide_lines", "Hide by Group"),
+                 actionButton("add_latLng", "Add some random Lat/Lngs")
                ),
+               ## Map ##################
                leafletOutput("map_lines", height = 600),
                ## Event Outputs ###########
                h4("Leaflet Geodesic Lines Events"),
@@ -102,12 +129,6 @@ ui <- fluidPage(
 ## END - UI ##########################
 
 ## Server ##########################
-# sflines <- mapview::trails[1:5,]
-# sflines <- st_transform(sflines, 4326)
-sflines <- sf::st_read(system.file("examples/data/geodesic_lines.shp", package = "leaflet.extras"))
-sflines$id = 1:nrow(sflines)
-sflines$color <- sample(c("green","red","blue","orange","black"), nrow(sflines), replace = TRUE)
-
 server <- function(input, output, session) {
   ##################################
   ## CIRCLES ######################
@@ -248,8 +269,6 @@ server <- function(input, output, session) {
       addMeasure(primaryLengthUnit = "meters", primaryAreaUnit = "sqmeters") %>%
       addPolylines(data = sf::st_cast(sflines, "LINESTRING"), color="blue", opacity = 1) %>%
       addGeodesicPolylines(
-        # lng = ~lng, lat = ~lat,
-        # data = sf::st_cast(sflines, "LINESTRING"),
         data = sflines,
         layerId = ~paste0("ID_",id),
         weight = 7,
@@ -257,40 +276,59 @@ server <- function(input, output, session) {
         # color = "red",
         group = "lines",
         markerOptions = markerOptions(draggable = TRUE, title = "some special Title"),
-        showStats = F,
-        showCenter = T,icon = greenLeafIcon,
+        showStats = T,
+        statsFunction = JS("function(stats) {
+                                           return('<h4>Custom Stats Info</h4>' +
+                                              '<div>Vertices:  ' + stats.vertices + '</div>' +
+                                              '<div>Distance:  ' + stats.totalDistance + '</div>')
+                                         }
+                                         "),
+        showCenter = T,
+        # icon = greenLeafIcon,
+        # icon = ~iconlist[icon],
+        # icon = iconlist,
+        icon = ~awesomeicons[icon],
         label = ~paste0(id), labelOptions = labelOptions(textsize = "22px"),
         popup = ~paste0("<h4>",id,"</h4>
                    <div>color = ",color,"</div>
+                   <div>icon = ",icon,"</div>
                    <div>X_lflt_d = ",X_lflt_d,"</div>
                    "),
         # label = ~paste(city, "-", color),
         steps = 50, opacity = 1) %>%
       addLayersControl(overlayGroups = c("lines","lines_added"))
 
+
+  })
+
+  observeEvent(input$add_latLng, {
+    leafletProxy("map_lines") %>%
+      addLatLng(lat = runif(1, -90, 90),
+                lng = runif(1, -180, 180),
+                layerId = "ID_2")
   })
 
   ## Event Outputs ###########
   ## Geodesic
   output$drag_lines <- renderPrint({
-    input$map_geodesiclines_stats
+    input$map_lines_geodesiclines_stats
   })
   output$click_lines <- renderPrint({
-    input$map_geodesiclines_click
+    input$map_lines_geodesiclines_click
   })
   output$over_lines <- renderPrint({
-    input$map_geodesiclines_mouseover
+    input$map_lines_geodesiclines_mouseover
   })
 
   ## Leaflet
   output$leaf_click_lines <- renderPrint({
-    input$map_shape_click
+    input$map_lines_shape_click
   })
   output$leaf_over_lines <- renderPrint({
-    input$map_shape_mouseover
+    input$map_lines_shape_mouseover
   })
   output$leaf_out_lines <- renderPrint({
-    input$map_shape_mouseout
+    input$map_lines_shape_mouseout
   })
 
   ## Actions ###########
@@ -304,7 +342,8 @@ server <- function(input, output, session) {
   })
   observeEvent(input$rem_lines, {
     leafletProxy("map_lines") %>%
-      leaflet::removeShape(layerId = paste0("ID_",cities_df$city[sample(1:7, sample(1:4,1))]))
+      # leaflet::removeShape(layerId = paste0("ID_",cities_df$city[sample(1:7, sample(1:4,1))]))
+      leaflet::removeShape(layerId = paste0("ID_",sflines$id[sample(1:3, sample(1:4,1))]))
   })
   observeEvent(input$rema_lines, {
     leafletProxy("map_lines") %>%
@@ -323,5 +362,6 @@ server <- function(input, output, session) {
     leafletProxy("map_lines") %>%
       leaflet::hideGroup(group = "lines")
   })
+
 }
 shinyApp(ui, server)

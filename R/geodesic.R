@@ -62,7 +62,7 @@ geodesicDependencies <- function() {
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))
-addGeodesicPolylines = function(
+addGeodesicPolylines <- function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   steps = 10,
   wrap = TRUE,
@@ -96,12 +96,28 @@ addGeodesicPolylines = function(
     showCenter = showCenter
   ))
 
-  # datapoints <- NULL
-  # if (inherits(data, "sf") && unique(sf::st_geometry_type(data)) == "LINESTRING") {
-  #   datapoints <- sf::st_cast(data, "POINT")
-  # }
-  # pts <- leaflet::derivePoints(
-  #   datapoints, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
+  if (!is.null(icon)) {
+    # If formulas are present, they must be evaluated first so we can pack the
+    # resulting values
+    icon <- leaflet::evalFormula(list(icon), data)[[1]]
+
+    if (inherits(icon, "leaflet_icon_set")) {
+      icon <- iconSetToIcons(icon)
+    }
+    else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
+      if (inherits(icon, "leaflet_awesome_icon_set")) {
+        libs <- unique(unlist(lapply(icon, function(x) x[["library"]])))
+        map <- addAwesomeMarkersDependencies(map, libs)
+      } else {
+        map <- addAwesomeMarkersDependencies(map, icon$library)
+      }
+      icon <- leaflet:::awesomeIconSetToAwesomeIcons(icon)
+      icon$awesomemarker = TRUE
+    }
+
+    icon <- leaflet::filterNULL(icon)
+  }
+
   pgons = leaflet::derivePolygons(
     data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
   leaflet::invokeMethod(
@@ -114,11 +130,19 @@ addGeodesicPolylines = function(
 
 #' @export
 #' @describeIn addGeodesicPolylines Adds a Great Circle to the map
+#' @param lat,lng lat/lng to add to the Geodesic
+addLatLng <- function(map, lat, lng, layerId = NULL) {
+  leaflet::invokeMethod(map, NULL, "addLatLng", lat, lng, layerId)
+}
+
+
+#' @export
+#' @describeIn addGeodesicPolylines Adds a Great Circle to the map
 #' @param lat_center,lng_center lat/lng for the center
 #' @param radius in meters
 #' @param showStats Show Statistics Info
 #' @inheritParams leaflet::markerOptions
-addGreatCircles = function(
+addGreatCircles <- function(
   map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
   steps = 10,
   wrap = TRUE,

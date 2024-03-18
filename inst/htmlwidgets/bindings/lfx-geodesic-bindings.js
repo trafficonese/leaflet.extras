@@ -6,27 +6,34 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
 
     const map = this;
 
-    console.log('START'); console.log(polygons);
-
     // Show Statistics in InfoControl
     var info = L.control();
     info.onAdd = function (map) {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
       return this._div;
     };
-    if (options.showStats) {
-      info.addTo(map);
-      // method that we will use to update the control based on feature properties passed
+    function updateInfo(stats, statsFunction) {
+        if (!options.showStats) return;
+
+        var infoHTML = '';
+        if (typeof options.statsFunction === 'function') {
+            // If additionalInput is a function, use it to generate content exclusively
+            infoHTML = options.statsFunction(stats);
+        } else {
+            const totalDistance = (stats.totalDistance ? (stats.totalDistance > 10000) ? (stats.totalDistance / 1000).toFixed(0) + ' km' : (stats.totalDistance).toFixed(0) + ' m' : 'invalid');
+            innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
+            '<br/><br/><b>Points</b><br/>' + stats.points +
+            '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
+        }
+        // Update the innerHTML of the info div with the constructed info HTML or leave it empty
+         info._div.innerHTML = infoHTML;
     }
-    info.update = function (stats) {
-        const totalDistance = (stats.totalDistance ? (stats.totalDistance > 10000) ? (stats.totalDistance / 1000).toFixed(0) + ' km' : (stats.totalDistance).toFixed(0) + ' m' : 'invalid');
-        this._div.innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
-              '<br/><br/><b>Points</b><br/>' + stats.points +
-              '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
-      };
+    info.update = updateInfo;
+    if (options.showStats) {
+        info.addTo(map);
+    }
 
-
-    // Add Lines using addGenericLayers
+    // Save Lines in DataFrame
     let df = new LeafletWidget.DataFrame()
       .col("polygons", polygons)
       .col("popup", popup)
@@ -35,41 +42,40 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
       .col("group", group)
       .cbind(options);
 
-    const geodesics = []; // Array to store Geodesic objects
+    // Array to store Geodesic objects
+    const geodesics = [];
 
-    for (let i = 0; i < df.nrow(); i++) {
-      let geogesic_coords = df.get(i, "polygons")[0].flatMap(obj =>
-        obj.lat.map((lat, i) => ({lat, lng: obj.lng[i]}))
-      )
-      const Geodesic = L.geodesic(geogesic_coords, df.get(i));
-      if (options.showStats) {
-        info.update(Geodesic.statistics);
-      }
-      map.layerManager.addLayer(Geodesic, 'shape', df.get(i, "layerId"), df.get(i, "group"), null, null);
+    // Get Leaflet or AwesomeMarker Icons
+    let icondf;
+    let getIcon;
+    if (icon) {
+      // Unpack icons
+      icon.iconUrl         = unpackStrings(icon.iconUrl);
+      icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
+      icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
 
+      // This cbinds the icon URLs and any other icon options; they're all
+      // present on the icon object.
+      icondf = new LeafletWidget.DataFrame().cbind(icon);
 
-
-      // Icon (Copy form Leaflet)
-      let icondf;
-      let getIcon;
-      if (icon) {
-        // Unpack icons
-        icon.iconUrl         = unpackStrings(icon.iconUrl);
-        icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-        icon.shadowUrl       = unpackStrings(icon.shadowUrl);
-        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
-
-        // This cbinds the icon URLs and any other icon options; they're all
-        // present on the icon object.
-        icondf = new LeafletWidget.DataFrame().cbind(icon);
-
-        // Constructs an icon from a specified row of the icon dataframe.
-        getIcon = function(i) {
-          const opts = icondf.get(i);
-          if (!opts.iconUrl) {
+      // Constructs an icon from a specified row of the icon dataframe.
+      getIcon = function(id) {
+        const opts = icondf.get(id);
+        if (!opts) {
+          if (opts.awesomemarker) {
+            return new L.AwesomeMarkers.icon();
+          } else {
             return new L.Icon.Default();
           }
+        }
 
+        if (opts.awesomemarker) {
+          if (opts.squareMarker) {
+            opts.className = "awesome-marker awesome-marker-square";
+          }
+          return new L.AwesomeMarkers.icon(opts);
+        } else {
           // Composite options (like points or sizes) are passed from R with each
           // individual component as its own option. We need to combine them now
           // into their composite form.
@@ -90,80 +96,94 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
           }
 
           return new L.Icon(opts);
-        };
-      }
-      if (icon) icondf.effectiveLength = geogesic_coords.length;
+        }
+      };
+    }
+    if (icon) icondf.effectiveLength = polygons.length;
 
+    for (let i = 0; i < df.nrow(); i++) {
+      // Add L.geodesic for every Polyline
+      let geogesic_coords = df.get(i, "polygons")[0].flatMap(obj =>
+        obj.lat.map((lat, i) => ({lat, lng: obj.lng[i]}))
+      )
+      const Geodesic = L.geodesic(geogesic_coords, df.get(i));
+      updateInfo.call(info, Geodesic.statistics);
+      map.layerManager.addLayer(Geodesic, 'shape', df.get(i, "layerId"), df.get(i, "group"), null, null);
+
+      // Add Node Markers
       if (options.showCenter) {
         var markers = [];
-
         for (const place of geogesic_coords) {
+          // Get markerOptions and add Icon
           markerOptions = markerOptions ? markerOptions : {};
           if (options.showCenter && icon) markerOptions.icon = getIcon(i);
+
+          // Create Marker and append label / popup if present
           var marker = L.marker(place, markerOptions)
-            if (label !== null) {
+          if (label !== null) {
               if (labelOptions !== null) {
                 marker.bindTooltip(df.get(i, 'label'), labelOptions);
               } else {
                 marker.bindTooltip(df.get(i, 'label'));
               }
             }
-            if (popup !== null) {
+          if (popup !== null) {
               if (popupOptions  !== null) {
                 marker.bindPopup(df.get(i, 'popup'), popupOptions);
               } else {
                 marker.bindPopup(df.get(i, 'popup'));
               }
             }
+
+          // Add Markers to Map
           map.layerManager.addLayer(marker, "markers", null, group, null, null);
+
+          // Add/Remove Markers when its Geodesic is added/removed (Using fake ID)
           map.on('layeradd', function(e) {
             if(e.layer === Geodesic) {
-              map.layerManager.addLayer(marker, 'marker', 'fake_layerid', group, null, null);
+              map.layerManager.addLayer(marker, 'marker', '______fake_layerid', group, null, null);
             }
           });
           map.on('layerremove', function(e) {
             if(e.layer === Geodesic) {
-              map.layerManager.removeLayer('marker', 'fake_layerid');
+              map.layerManager.removeLayer('marker', '______fake_layerid');
             }
           });
-          // Define event listeners for the marker
+          // Use Drag event and trigger custom `geodesicdrag` event for updating
           marker.on('drag', (e) => {
-              map.fire('geodesicdrag', { index: i, latlng: e.target.getLatLng() }); // Trigger custom event
+              map.fire('geodesicdrag', { index: i, latlng: e.target.getLatLng() });
           });
-
           markers.push(marker);
         }
-
       }
 
+      // Push to Geodesics Array
       geodesics.push({ Geodesic, markers });
     }
 
+    // Update a Geodesic LatLong and update Stats Control on custom `geodesicdrag` event
     function updateGeodesic(e) {
-      console.log("updateGeodesic"); console.log(e)
       const { index, latlng } = e;
       const currentLine = [];
       for (const point of geodesics[index].markers) {
         currentLine.push(point.getLatLng());
       }
       geodesics[index].Geodesic.setLatLngs(currentLine);
-      if (options.showStats) {
-        info.update(geodesics[index].Geodesic.statistics);
-      }
+      updateInfo.call(info, geodesics[index].Geodesic.statistics);
     }
     map.on('geodesicdrag', updateGeodesic);
-
-
-
   }
 };
 
-LeafletWidget.methods.addLatLng = function(latlng) {
-  console.log('addLatLng'); console.log(addLatLng);
+LeafletWidget.methods.addLatLng = function(lat, lng, layerId) {
+  console.log('lat'); console.log(lat);
+  console.log('lng'); console.log(lng);
+  console.log('layerId'); console.log(layerId);
   // Check if the geodesic object exists
-  if (this.geodesic) {
+  let geodesic = this.layerManager.getLayer("shape", layerId);
+  if (geodesic) {
     // Add the new latlng point to the geodesic object
-    this.geodesic.addLatLng(latlng);
+    geodesic.addLatLng({"lat": lat, "lng": lng});
   } else {
     console.error('Geodesic object is not initialized.');
   }
