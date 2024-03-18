@@ -2,8 +2,9 @@
 % Please edit documentation in R/geodesic.R
 \name{addGeodesicPolylines}
 \alias{addGeodesicPolylines}
+\alias{addLatLng}
 \alias{addGreatCircles}
-\title{Add Geodesic Lines}
+\title{Add Geodesic Lines & Circles}
 \usage{
 addGeodesicPolylines(
   map,
@@ -25,7 +26,6 @@ addGeodesicPolylines(
   label = NULL,
   labelOptions = NULL,
   options = pathOptions(),
-  highlightOptions = NULL,
   icon = NULL,
   showCenter = TRUE,
   showStats = FALSE,
@@ -33,6 +33,8 @@ addGeodesicPolylines(
   markerOptions = NULL,
   data = getMapData(map)
 )
+
+addLatLng(map, lat, lng, layerId = NULL)
 
 addGreatCircles(
   map,
@@ -66,15 +68,17 @@ addGreatCircles(
 )
 }
 \arguments{
-\item{map}{map object}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{lng}{vector of longitudes}
-
-\item{lat}{vector of latitudes}
+\item{lat, lng}{lat/lng to add to the Geodesic}
 
 \item{layerId}{the layer id}
 
-\item{group}{the name of the group this raster image should belong to (see}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{steps}{Defines how many intermediate points are generated along the path. More steps mean a smoother path.}
 
@@ -90,42 +94,57 @@ polygons or circles)}
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
 \item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash  pattern}}
+\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
+pattern}}
 
-\item{smoothFactor}{how much to simplify the polyline on each zoom level}
-
-\item{noClip}{whether to disable polyline clipping
+\item{smoothFactor}{how much to simplify the polyline on each zoom level
 (more means better performance and less accurate representation)}
 
-\item{popup}{a character vector of the HTML content for the popups (you are
-recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}}
+\item{noClip}{whether to disable polyline clipping}
 
-\item{popupOptions}{A Vector of \code{\link{popupOptions}} to provide popups
+\item{popup}{a character vector of the HTML content for the popups (you are
+recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
+
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link{labelOptions}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
-\item{options}{a list of additional options, intended to be provided by
-a call to \code{\link[leaflet]{pathOptions}}()}
+\item{options}{a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements}
 
-\item{highlightOptions}{Options for highlighting the shape on mouse over.}
+\item{icon}{the icon(s) for markers; an icon is represented by an R list of
+the form \code{list(iconUrl = "?", iconSize = c(x, y))}, and you can use
+\code{\link[leaflet]{icons}()} to create multiple icons; note when you use an R list
+that contains images as local files, these local image files will be base64
+encoded into the HTML page so the icon images will still be available even
+when you publish the map elsewhere}
 
 \item{showStats}{Show Statistics Info}
 
-\item{data}{map data}
+\item{data}{the data object from which the argument values are derived; by
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
 
 \item{lat_center, lng_center}{lat/lng for the center}
 
 \item{radius}{in meters}
+
+\item{highlightOptions}{Options for highlighting the shape on mouse over.}
+
+\item{fill}{whether to fill the path with color (e.g. filling on polygons or
+circles)}
 }
 \description{
-Add Geodesic Lines
+TODO this is some intro
 }
 \section{Functions}{
 \itemize{
+\item \code{addLatLng()}: Adds a Great Circle to the map
+
 \item \code{addGreatCircles()}: Adds a Great Circle to the map
 
 }}

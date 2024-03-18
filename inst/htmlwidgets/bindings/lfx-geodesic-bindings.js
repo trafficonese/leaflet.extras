@@ -214,10 +214,12 @@ LeafletWidget.methods.addGreatCircles  = function(
     let getIcon;
     if (icon) {
       // Unpack icons
-      icon.iconUrl         = unpackStrings(icon.iconUrl);
-      icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-      icon.shadowUrl       = unpackStrings(icon.shadowUrl);
-      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+      if (!icon.awesomemarker) {
+        icon.iconUrl         = unpackStrings(icon.iconUrl);
+        icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
+        icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+      }
 
       // This cbinds the icon URLs and any other icon options; they're all
       // present on the icon object.
@@ -226,30 +228,46 @@ LeafletWidget.methods.addGreatCircles  = function(
       // Constructs an icon from a specified row of the icon dataframe.
       getIcon = function(i) {
         const opts = icondf.get(i);
-        if (!opts.iconUrl) {
-          return new L.Icon.Default();
+        if (!opts) {
+          if (opts.awesomemarker) {
+            return new L.AwesomeMarkers.icon();
+          } else {
+            return new L.Icon.Default();
+          }
         }
 
-        // Composite options (like points or sizes) are passed from R with each
-        // individual component as its own option. We need to combine them now
-        // into their composite form.
-        if (opts.iconWidth) {
-          opts.iconSize = [opts.iconWidth, opts.iconHeight];
-        }
-        if (opts.shadowWidth) {
-          opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
-        }
-        if (opts.iconAnchorX) {
-          opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
-        }
-        if (opts.shadowAnchorX) {
-          opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
-        }
-        if (opts.popupAnchorX) {
-          opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
-        }
+        if (opts.awesomemarker) {
+          delete opts.awesomemarker
+          if (opts.squareMarker) {
+            opts.className = "awesome-marker awesome-marker-square";
+          }
+          if (!opts.prefix) {
+            opts.prefix = icon.library;
+          }
+          return new L.AwesomeMarkers.icon(opts);
+        } else {
+          // Composite options (like points or sizes) are passed from R with each
+          // individual component as its own option. We need to combine them now
+          // into their composite form.
+          if (opts.iconWidth) {
+            opts.iconSize = [opts.iconWidth, opts.iconHeight];
+          }
+          if (opts.shadowWidth) {
+            opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
+          }
+          if (opts.iconAnchorX) {
+            opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
+          }
+          if (opts.shadowAnchorX) {
+            opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
+          }
+          if (opts.popupAnchorX) {
+            opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
+          }
 
-        return new L.Icon(opts);
+          return new L.Icon(opts);
+
+        }
       };
     }
     if (icon) icondf.effectiveLength = lat.length;

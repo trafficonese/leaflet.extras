@@ -158,6 +158,39 @@ addGreatCircles <- function(
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
 
+  if (!is.null(icon)) {
+    # If formulas are present, they must be evaluated first so we can pack the
+    # resulting values
+    icon <- leaflet::evalFormula(list(icon), data)[[1]]
+
+    if (inherits(icon, "leaflet_icon_set")) {
+      icon <- iconSetToIcons(icon)
+    }
+    else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
+      if (inherits(icon, "leaflet_awesome_icon_set")) {
+        libs <- unique(unlist(lapply(icon, function(x) x[["library"]])))
+        map <- addAwesomeMarkersDependencies(map, libs)
+        icon <- awesomeIconSetToAwesomeIcons(icon)
+      } else {
+        map <- addAwesomeMarkersDependencies(map, icon$library)
+      }
+      icon$awesomemarker = TRUE
+    }
+    else {
+      icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
+      icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
+      icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
+      icon$shadowRetinaUrl <- b64EncodePackedIcons(packStrings(icon$shadowRetinaUrl))
+      if (length(icon$iconSize) == 2) {
+        if (is.numeric(icon$iconSize[[1]]) && is.numeric(icon$iconSize[[2]])) {
+          icon$iconSize <- list(icon$iconSize)
+        }
+      }
+    }
+
+    icon <- leaflet::filterNULL(icon)
+  }
+
   options <- c(options, list(
     steps = steps, wrap = wrap,
     stroke = stroke, color = color, weight = weight, opacity = opacity,

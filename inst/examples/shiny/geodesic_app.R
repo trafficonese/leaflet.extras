@@ -277,12 +277,12 @@ server <- function(input, output, session) {
         group = "lines",
         markerOptions = markerOptions(draggable = TRUE, title = "some special Title"),
         showStats = T,
-        statsFunction = JS("function(stats) {
-                                           return('<h4>Custom Stats Info</h4>' +
-                                              '<div>Vertices:  ' + stats.vertices + '</div>' +
-                                              '<div>Distance:  ' + stats.totalDistance + '</div>')
-                                         }
-                                         "),
+        # statsFunction = JS("function(stats) {
+        #                                    return('<h4>Custom Stats Info</h4>' +
+        #                                       '<div>Vertices:  ' + stats.vertices + '</div>' +
+        #                                       '<div>Distance:  ' + stats.totalDistance + '</div>')
+        #                                  }
+        #                                  "),
         showCenter = T,
         # icon = greenLeafIcon,
         # icon = ~iconlist[icon],
@@ -305,7 +305,7 @@ server <- function(input, output, session) {
     leafletProxy("map_lines") %>%
       addLatLng(lat = runif(1, -90, 90),
                 lng = runif(1, -180, 180),
-                layerId = "ID_2")
+                layerId = "ID_1")
   })
 
   ## Event Outputs ###########

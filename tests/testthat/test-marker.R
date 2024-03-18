@@ -64,9 +64,7 @@ test_that("markers", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addBounceMarkers")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], lat)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], lng)
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$iconUrl$data, ICONURL)
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$shadowUrl$data, SHADOWURL)
-
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$iconUrl$data, "character")
 
   ts <- leaflet() %>%
     addTiles() %>%

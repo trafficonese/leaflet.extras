@@ -27,6 +27,9 @@ sflines$icon <- c("red","green")
 mycustomicon <- makeIcon(iconUrl = system.file("examples/shiny/marker.png",
                                                package = "leaflet.extras"),
                          iconWidth = 30)
+mycustomicon_size <- list(iconUrl = system.file("examples/shiny/marker.png",
+                                               package = "leaflet.extras"),
+                         iconSize = c(30, 50))
 greenLeafIcon <- makeIcon(
   iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-green.png",
   iconWidth = 38, iconHeight = 95,
@@ -132,7 +135,8 @@ test_that("Geodesic", {
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeodesicPolylines")
   expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 3, 7, 9:12)]))
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconUrl$data, "http://leafletjs.com/examples/custom-icons/leaf-green.png")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconUrl$data,
+                   "https://leafletjs.com/examples/custom-icons/leaf-green.png")
 
   ts <- leaflet(df) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -144,6 +148,18 @@ test_that("Geodesic", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeodesicPolylines")
   expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 3, 7, 9:12)]))
   expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconUrl$data, "character")
+
+  ts <- leaflet(df) %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addGeodesicPolylines(lng = ~lng, lat = ~lat,
+                         icon = mycustomicon_size)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeodesicPolylines")
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 3, 7, 9:12)]))
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconUrl$data, "character")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconSize[[1]], c(30,50))
 
 
 
@@ -327,6 +343,139 @@ test_that("Geodesic", {
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 100)
   expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 7:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 1220000,
+                    icon = greenLeafIcon)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 1220000)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$iconUrl$data, greenLeafIcon$iconUrl)
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 1220000,
+                    icon = iconlist)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 1220000)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$iconUrl,
+                   as.character(unlist(lapply(iconlist, function(x) x$iconUrl))))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 1220000,
+                    icon = mycustomicon)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 1220000)
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$iconUrl$data, "character")
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 1220000,
+                    icon = mycustomicon_size)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 1220000)
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$iconUrl$data, "character")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$iconSize[[1]], c(30,50))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 500,
+                    icon = simpleawesome)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 500)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]], c(unclass(simpleawesome), awesomemarker=TRUE))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 500,
+                    icon = awesomeicons)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 500)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$icon,
+                   as.character(unlist(lapply(awesomeicons, function(x) x$icon))))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$markerColor,
+                   as.character(unlist(lapply(awesomeicons, function(x) x$markerColor))))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 500,
+                    icon = awesomeicons_glyph)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "bootstrap")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 500)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$icon,
+                   as.character(unlist(lapply(awesomeicons_glyph, function(x) x$icon))))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$markerColor,
+                   as.character(unlist(lapply(awesomeicons_glyph, function(x) x$markerColor))))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
+
+
+  ts <- leaflet(cities_df) %>% addTiles() %>%
+    addGreatCircles(lng_center = ~lng, lat_center = ~lat, radius = 500,
+                    icon = awesomeicons_ion)
+  # ts
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "ionicons")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-geodesic")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], cities_df$lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 500)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$icon,
+                   as.character(unlist(lapply(awesomeicons_ion, function(x) x$icon))))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]]$markerColor,
+                   as.character(unlist(lapply(awesomeicons_ion, function(x) x$markerColor))))
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4,5, 8:13)]))
 })
+
