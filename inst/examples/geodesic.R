@@ -32,6 +32,7 @@ leaflet(df) %>%
 
 library(bsam)
 library(trip)
+library(sf)
 
 data(ellie1)
 tr <- ellie1

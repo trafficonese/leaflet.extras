@@ -78,7 +78,7 @@ addGeodesicPolylines <- function(
   label = NULL,
   labelOptions = NULL,
   options = pathOptions(),
-  highlightOptions = NULL,
+  # highlightOptions = NULL,
   icon = NULL,
   showCenter = TRUE,
   showStats = FALSE,
@@ -122,7 +122,7 @@ addGeodesicPolylines <- function(
     data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
   leaflet::invokeMethod(
     map, data, "addGeodesicPolylines", pgons, layerId, group, options, icon,
-    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions,
+    popup, popupOptions, safeLabel(label, data), labelOptions, NULL,
     markerOptions, NULL) %>%
     leaflet::expandLimitsBbox(pgons)
 }
