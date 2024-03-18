@@ -7,6 +7,7 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
+library(leaflet)
 library(leaflet.extras)
 
 test_check("leaflet.extras")

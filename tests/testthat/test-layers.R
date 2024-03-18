@@ -1,5 +1,3 @@
-library(leaflet)
-library(leaflet.extras)
 
 test_that("layers", {
   expect_error(leaflet() %>% addBingTiles())

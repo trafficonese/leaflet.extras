@@ -1,6 +1,3 @@
-library(leaflet)
-library(leaflet.extras)
-
 ## Data ##############
 geoJson <- readr::read_file(
   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"

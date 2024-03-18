@@ -1,43 +1,44 @@
-# library(testthat)
-library(leaflet)
-library(leaflet.extras)
-
-test_that("markers", {
-
-  ## Data ##############
-  lng = 49; lat = 11
-  cities <- read.csv(textConnection("City,Lat,Long,Pop
+## Data ##############
+lng = 49; lat = 11
+cities <- read.csv(textConnection("City,Lat,Long,Pop
 Boston,42.3601,-71.0589,645966
 Hartford,41.7627,-72.6743,125017
 New York City,40.7127,-74.0059,8406000
 Philadelphia,39.9500,-75.1667,1553000
 Pittsburgh,40.4397,-79.9764,305841
 Providence,41.8236,-71.4222,177994"))
-  cities$PopCat <- ifelse(cities$Pop < 500000, "blue", "red")
+cities$PopCat <- ifelse(cities$Pop < 500000, "blue", "red")
 
-  ICONURL <- "http://leafletjs.com/examples/custom-icons/leaf-green.png"
-  SHADOWURL <- "http://leafletjs.com/examples/custom-icons/leaf-shadow.png"
-  greenLeafIcon <- makeIcon(
-    iconUrl = ICONURL,
-    iconWidth = 38, iconHeight = 95,
-    iconAnchorX = 22, iconAnchorY = 94,
-    shadowUrl = SHADOWURL,
-    shadowWidth = 50, shadowHeight = 64,
-    shadowAnchorX = 4, shadowAnchorY = 62)
+ICONURL <- "http://leafletjs.com/examples/custom-icons/leaf-green.png"
+SHADOWURL <- "http://leafletjs.com/examples/custom-icons/leaf-shadow.png"
+greenLeafIcon <- makeIcon(
+  iconUrl = ICONURL,
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = SHADOWURL,
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62)
 
-  myIconSet <- iconList(
-    greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png"),
-    redcol    = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png"),
-    orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png")
-  )
-  myIconSetDiffSize <- iconList(
-    greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
-                         iconWidth = 20, iconHeight = 35),
-    redcol    = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png",
-                         iconWidth = 40),
-    orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
-                         iconWidth = 30, iconHeight = 50)
-  )
+myIconSet <- iconList(
+  greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png"),
+  redcol    = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png"),
+  orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png")
+)
+myIconSetDiffSize <- iconList(
+  greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+                       iconWidth = 20, iconHeight = 35),
+  redcol    = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png",
+                       iconWidth = 40),
+  orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
+                       iconWidth = 30, iconHeight = 50)
+)
+mycustomicon <- makeIcon(iconUrl = system.file("examples/shiny/marker.png",
+                                               package = "leaflet.extras"),
+                         iconWidth = 30)
+
+
+## Tests ###############
+test_that("markers", {
 
   ## Bouncing Markers #########################
   ts <- leaflet() %>%
@@ -56,6 +57,16 @@ Providence,41.8236,-71.4222,177994"))
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], lng)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$iconUrl$data, ICONURL)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$shadowUrl$data, SHADOWURL)
+
+  ts <- leaflet() %>%
+    addTiles() %>%
+    addBounceMarkers(lng = lng, lat = lat, icon = mycustomicon)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addBounceMarkers")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], lat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], lng)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$iconUrl$data, ICONURL)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$shadowUrl$data, SHADOWURL)
+
 
   ts <- leaflet() %>%
     addTiles() %>%
