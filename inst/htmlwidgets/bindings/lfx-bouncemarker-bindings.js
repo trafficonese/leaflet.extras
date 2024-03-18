@@ -1,26 +1,6 @@
+import { unpackStrings } from './utils.js';
+
 /* global LeafletWidget, $, L */
-
-function asArray(value) {
-  if (value instanceof Array)
-    return value;
-  else
-    return [value];
-}
-function unpackStrings(iconset) {
-  if (!iconset) {
-    return iconset;
-  }
-  if (typeof(iconset.index) === 'undefined') {
-    return iconset;
-  }
-
-  iconset.data = asArray(iconset.data);
-  iconset.index = asArray(iconset.index);
-
-  return $.map(iconset.index, function(e, i) {
-    return iconset.data[e];
-  });
-}
 
 
 LeafletWidget.methods.addBounceMarkers = function(
