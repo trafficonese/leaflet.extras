@@ -362,6 +362,12 @@ LeafletWidget.methods.addGreatCircles  = function(
 
 
 // from https://github.com/rstudio/leaflet/blob/dc772e780317481e25335449b957c5f50082bcfd/javascript/src/methods.js#L221
+function asArray(value) {
+  if (value instanceof Array)
+    return value;
+  else
+    return [value];
+}
 function unpackStrings(iconset) {
   if (!iconset) {
     return iconset;

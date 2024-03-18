@@ -5,35 +5,13 @@ geodesicDependencies <- function() {
   )
 }
 
-#' Add Geodesic Lines
-#' @param map map object
-#' @param lat vector of latitudes
-#' @param lng vector of longitudes
-#' @param layerId the layer id
-#' @param group the name of the group this raster image should belong to (see
+#' Add Geodesic Lines & Circles
+#'
+#' TODO this is some intro
+#'
 #' @param steps Defines how many intermediate points are generated along the path. More steps mean a smoother path.
 #' @param wrap Wrap line at map border (date line). Set to "false" if you want lines to cross the dateline (experimental, see noWrap-example on how to use)
-#' @param stroke whether to draw stroke along the path (e.g. the borders of
-#'   polygons or circles)
-#' @param color stroke color
-#' @param weight stroke width in pixels
-#' @param opacity stroke opacity (or layer opacity for tile layers)
-#' @param dashArray a string that defines the stroke
-#'   \href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash  pattern}
-#' @param smoothFactor how much to simplify the polyline on each zoom level
-#' @param noClip whether to disable polyline clipping
-#'   (more means better performance and less accurate representation)
-#' @param popup a character vector of the HTML content for the popups (you are
-#'   recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
-#' @param popupOptions A Vector of \code{\link{popupOptions}} to provide popups
-#'   for security reasons)
-#' @param label a character vector of the HTML content for the labels
-#' @param labelOptions A Vector of \code{\link{labelOptions}} to provide label
-#' options for each label. Default \code{NULL}
-#' @param options a list of additional options, intended to be provided by
-#'   a call to \code{\link[leaflet]{pathOptions}}()
-#' @param highlightOptions Options for highlighting the shape on mouse over.
-#' @param data map data
+#' @inheritParams leaflet::addPolylines
 #' @export
 #' @examples
 #' berlin <- c(52.51, 13.4)
@@ -108,11 +86,22 @@ addGeodesicPolylines <- function(
       if (inherits(icon, "leaflet_awesome_icon_set")) {
         libs <- unique(unlist(lapply(icon, function(x) x[["library"]])))
         map <- addAwesomeMarkersDependencies(map, libs)
+        icon <- awesomeIconSetToAwesomeIcons(icon)
       } else {
         map <- addAwesomeMarkersDependencies(map, icon$library)
       }
-      icon <- leaflet:::awesomeIconSetToAwesomeIcons(icon)
       icon$awesomemarker = TRUE
+    }
+    else {
+      icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
+      icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
+      icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
+      icon$shadowRetinaUrl <- b64EncodePackedIcons(packStrings(icon$shadowRetinaUrl))
+      if (length(icon$iconSize) == 2) {
+        if (is.numeric(icon$iconSize[[1]]) && is.numeric(icon$iconSize[[2]])) {
+          icon$iconSize <- list(icon$iconSize)
+        }
+      }
     }
 
     icon <- leaflet::filterNULL(icon)

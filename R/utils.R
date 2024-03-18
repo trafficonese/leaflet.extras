@@ -36,6 +36,30 @@ packStrings <- function(strings) {
 }
 
 
+awesomeIconSetToAwesomeIcons <- function(x) {
+  # c("icon", "library", ...)
+  cols <- names(formals(makeAwesomeIcon))
+  # list(icon = "icon", library = "library", ...)
+  cols <- structure(as.list(cols), names = cols)
+
+  # Construct an equivalent output to awesomeIcons().
+  filterNULL(lapply(cols, function(col) {
+    # Pluck the `col` member off of each item in awesomeIconObjs and put them in an
+    # unnamed list (or vector if possible).
+    colVals <- unname(sapply(x, `[[`, col))
+
+    # If this is the common case where there's lots of values but they're all
+    # actually the same exact thing, then just return one value; this will be
+    # much cheaper to send to the client, and we'll do recycling on the client
+    # side anyway.
+    if (length(unique(colVals)) == 1) {
+      return(colVals[[1]])
+    } else {
+      return(colVals)
+    }
+  }))
+}
+
 # getCrosstalkOptions <- function (data) {
 #   if (is.SharedData(data)) {
 #     list(ctKey = data$key(), ctGroup = data$groupName())
