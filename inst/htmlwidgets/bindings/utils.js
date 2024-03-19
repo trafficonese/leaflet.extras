@@ -20,7 +20,7 @@ export function unpackStrings(iconset) {
   iconset.data = asArray(iconset.data);
   iconset.index = asArray(iconset.index);
 
-  return $.map(iconset.index, function(e, i) {
+  return $.map(iconset.index, function(e) {
     return iconset.data[e];
   });
 }

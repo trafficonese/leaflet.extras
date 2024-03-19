@@ -49,7 +49,7 @@ LeafletWidget.utils.getParsedGeoJSON = function(data) {
 function getResetStyle(style, highlightStyle) {
   var resetStyle = {};
   if (!$.isEmptyObject(highlightStyle)) {
-    $.each(highlightStyle, function(k, v) {
+    $.each(highlightStyle, function(k) {
       if (k != 'bringToFront' && k != 'sendToBack') {
         if (style && style[k]) {
           resetStyle[k] = style[k];

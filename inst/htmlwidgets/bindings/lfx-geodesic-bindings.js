@@ -4,7 +4,7 @@ import { unpackStrings, handleEvent } from './utils.js';
 
 LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
   options, icon, popup, popupOptions, label, labelOptions, highlightOptions,
-  markerOptions, pts) {
+  markerOptions) {
 
   if (polygons.length > 0) {
 
@@ -12,7 +12,7 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
 
     // Show Statistics in InfoControl
     var info = L.control();
-    info.onAdd = function(map) {
+    info.onAdd = function() {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
       return this._div;
     };
@@ -21,9 +21,9 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
       if (!options.showStats) return;
 
       var infoHTML = '';
-      if (typeof options.statsFunction === 'function') {
+      if (typeof statsFunction === 'function') {
         // If additionalInput is a function, use it to generate content exclusively
-        infoHTML = options.statsFunction(stats);
+        infoHTML = statsFunction(stats);
       } else {
         const totalDistance = (stats.totalDistance
           ? (stats.totalDistance > 10000) ?
@@ -176,7 +176,7 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
             }
           });
           // Use Drag event and trigger custom `geodesicdrag` event for updating
-          marker.on('drag', (e) => {
+          marker.on('drag', () => {
             map.fire('geodesicdrag', { index: i });
           });
           markers.push(marker);
@@ -321,7 +321,7 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
     if (options.showStats) {
       // Info control
       var info = L.control();
-      info.onAdd = function(map) {
+      info.onAdd = function() {
         this._div = L.DomUtil.create('div', 'info');
         return this._div;
       };
@@ -331,9 +331,9 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
       // Define a function to update the info control based on passed statistics
       updateInfo = function(stats, statsFunction) {
         var infoHTML = '';
-        if (typeof options.statsFunction === 'function') {
+        if (typeof statsFunction === 'function') {
           // If additionalInput is a function, use it to generate content exclusively
-          infoHTML = options.statsFunction(stats);
+          infoHTML = statsFunction(stats);
         } else {
           // Default content generation logic
           const totalDistance = stats.totalDistance

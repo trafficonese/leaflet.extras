@@ -12,10 +12,7 @@ module.exports = {
     '@stylistic/js'
   ],
   rules: {
-    'indent': [
-      'error',
-      2
-    ],
+    'indent': ['error', 2],
     '@stylistic/js/array-bracket-spacing': ['error', 'never'],
     '@stylistic/js/arrow-spacing': 'error',
     '@stylistic/js/comma-spacing': ['error', { 'before': false, 'after': true }],
@@ -32,21 +29,12 @@ module.exports = {
     '@stylistic/js/space-before-blocks': 'error',
     '@stylistic/js/keyword-spacing': ['error', { 'before': true, 'after': true }],
     'linebreak-style': 'off',
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ],
-    'no-unused-vars': [
-      'error',
-      {'args': 'none'}
-    ],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always'],
+    'no-unused-vars': ['error', {'args': 'none'}],
     'no-console': ['error', { allow: ['warn', 'error'] }],
-    'no-var': 'off', // Allow var declarations
-    'prefer-const': 'error', // Enforce the use of const where possible
+    'no-var': 'off',
+    'prefer-const': 'error',
     'no-assign-const': 'off'
   }
 };
