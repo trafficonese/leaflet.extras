@@ -1,7 +1,7 @@
 /* global LeafletWidget, L */
 
 LeafletWidget.methods.addBingTiles = function(layerId, group, options) {
-  (function(){
+  (function() {
     var map = this;
     var apikey = options.apikey;
     delete options.apikey;

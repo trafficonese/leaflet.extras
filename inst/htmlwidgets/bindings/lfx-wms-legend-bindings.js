@@ -1,6 +1,6 @@
 /* global LeafletWidget, L */
 LeafletWidget.methods.addWMSLegend = function(options) {
-  (function(){
+  (function() {
     var map = this;
     var wmsLegendControl = new L.Control.WMSLegend(options.options);
     if (options.layerId) {

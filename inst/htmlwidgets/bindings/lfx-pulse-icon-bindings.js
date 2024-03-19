@@ -1,9 +1,18 @@
 /* global LeafletWidget, $, L */
 
-LeafletWidget.methods.addPulseMarkers = function(
-  lat, lng, icon, layerId, group, options,
-  popup, popupOptions, clusterOptions, clusterId, label, labelOptions) {
-  (function(){
+LeafletWidget.methods.addPulseMarkers = function(lat, 
+  lng, 
+  icon, 
+  layerId, 
+  group, 
+  options,
+  popup, 
+  popupOptions, 
+  clusterOptions, 
+  clusterId, 
+  label, 
+  labelOptions) {
+  (function() {
 
     let icondf;
     let getIcon;
@@ -25,7 +34,7 @@ LeafletWidget.methods.addPulseMarkers = function(
       };
     }
 
-    if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+    if (!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
       ($.isNumeric(lat) && $.isNumeric(lng))) {
 
       var df = new LeafletWidget.DataFrame()
@@ -41,12 +50,11 @@ LeafletWidget.methods.addPulseMarkers = function(
 
       if (icon) icondf.effectiveLength = df.nrow();
 
-      LeafletWidget.methods.addGenericMarkers(
-        this, df, group, clusterOptions, clusterId, function(df, i) {
-          var options = df.get(i);
-          if (icon) options.icon = getIcon(i);
-          return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
-        });
+      LeafletWidget.methods.addGenericMarkers(this, df, group, clusterOptions, clusterId, function(df, i) {
+        var options = df.get(i);
+        if (icon) options.icon = getIcon(i);
+        return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
+      });
     }
 
   }).call(this);

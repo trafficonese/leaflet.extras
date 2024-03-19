@@ -1,6 +1,6 @@
 /* global LeafletWidget, L */
 LeafletWidget.methods.addStyleEditor = function(options) {
-  (function(){
+  (function() {
     var map = this;
     if (map.styleEditor) {
       map.styleEditor.remove(map);
@@ -41,7 +41,7 @@ LeafletWidget.methods.addStyleEditor = function(options) {
 };
 
 LeafletWidget.methods.removeStyleEditor = function() {
-  (function(){
+  (function() {
     var map = this;
     if (map.styleEditor) {
       map.styleEditor.remove(map);

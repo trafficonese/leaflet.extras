@@ -1,47 +1,56 @@
-import { unpackStrings, handleEvent } from './utils.js';
-/* global $, LeafletWidget, L, HTMLWidgets */
+/* global $, LeafletWidget, L */
 
-LeafletWidget.methods.addGeodesicPolylines  = function(
-  polygons, layerId, group, options, icon, popup, popupOptions,
-  label, labelOptions, highlightOptions, markerOptions, pts) {
-  if(polygons.length > 0) {
+import { unpackStrings, handleEvent } from './utils.js';
+
+LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
+  options, icon, popup, popupOptions, label, labelOptions, highlightOptions,
+  markerOptions, pts) {
+
+  if (polygons.length > 0) {
 
     const map = this;
 
     // Show Statistics in InfoControl
     var info = L.control();
-    info.onAdd = function (map) {
+    info.onAdd = function(map) {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
       return this._div;
     };
-    function updateInfo(stats, statsFunction) {
-        if (!options.showStats) return;
 
-        var infoHTML = '';
-        if (typeof options.statsFunction === 'function') {
-            // If additionalInput is a function, use it to generate content exclusively
-            infoHTML = options.statsFunction(stats);
-        } else {
-            const totalDistance = (stats.totalDistance ? (stats.totalDistance > 10000) ? (stats.totalDistance / 1000).toFixed(0) + ' km' : (stats.totalDistance).toFixed(0) + ' m' : 'invalid');
-            innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
+    const updateInfo = function(stats, statsFunction) {
+      if (!options.showStats) return;
+
+      var infoHTML = '';
+      if (typeof options.statsFunction === 'function') {
+        // If additionalInput is a function, use it to generate content exclusively
+        infoHTML = options.statsFunction(stats);
+      } else {
+        const totalDistance = (stats.totalDistance
+          ? (stats.totalDistance > 10000) ?
+            (stats.totalDistance / 1000).toFixed(0) + ' km' :
+            (stats.totalDistance).toFixed(0) + ' m'
+          : 'invalid');
+        infoHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance +
             '<br/><br/><b>Points</b><br/>' + stats.points +
             '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
-        }
-        // Update the innerHTML of the info div with the constructed info HTML or leave it empty
-         info._div.innerHTML = infoHTML;
-    }
+      }
+
+      // Update the innerHTML of the info div with the constructed info HTML or leave it empty
+      info._div.innerHTML = infoHTML;
+    };
+
     info.update = updateInfo;
     if (options.showStats) {
-        info.addTo(map);
+      info.addTo(map);
     }
 
     // Save Lines in DataFrame
-    let df = new LeafletWidget.DataFrame()
-      .col("polygons", polygons)
-      .col("popup", popup)
-      .col("layerId", layerId)
-      .col("label", label)
-      .col("group", group)
+    const df = new LeafletWidget.DataFrame()
+      .col('polygons', polygons)
+      .col('popup', popup)
+      .col('layerId', layerId)
+      .col('label', label)
+      .col('group', group)
       .cbind(options);
 
     // Array to store Geodesic objects
@@ -53,9 +62,9 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
     if (icon) {
       // Unpack icons
       if (!icon.awesomemarker) {
-        icon.iconUrl         = unpackStrings(icon.iconUrl);
-        icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-        icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+        icon.iconUrl = unpackStrings(icon.iconUrl);
+        icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+        icon.shadowUrl = unpackStrings(icon.shadowUrl);
         icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
       }
 
@@ -75,13 +84,15 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
         }
 
         if (opts.awesomemarker) {
-          delete opts.awesomemarker
+          delete opts.awesomemarker;
           if (opts.squareMarker) {
-            opts.className = "awesome-marker awesome-marker-square";
+            opts.className = 'awesome-marker awesome-marker-square';
           }
+
           if (!opts.prefix) {
             opts.prefix = icon.library;
           }
+
           return new L.AwesomeMarkers.icon(opts);
         } else {
           // Composite options (like points or sizes) are passed from R with each
@@ -90,15 +101,19 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
           if (opts.iconWidth) {
             opts.iconSize = [opts.iconWidth, opts.iconHeight];
           }
+
           if (opts.shadowWidth) {
             opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
           }
+
           if (opts.iconAnchorX) {
             opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
           }
+
           if (opts.shadowAnchorX) {
             opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
           }
+
           if (opts.popupAnchorX) {
             opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
           }
@@ -107,59 +122,62 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
         }
       };
     }
+
     if (icon) icondf.effectiveLength = polygons.length;
 
     for (let i = 0; i < df.nrow(); i++) {
       // Add L.geodesic for every Polyline
-      let geogesic_coords = df.get(i, "polygons")[0].flatMap(obj =>
-        obj.lat.map((lat, i) => ({lat, lng: obj.lng[i]}))
-      )
+      const geogesic_coords = df.get(i, 'polygons')[0].flatMap(obj =>
+        obj.lat.map((lat, i) => ({lat, lng: obj.lng[i]})));
       const Geodesic = L.geodesic(geogesic_coords, df.get(i));
       updateInfo.call(info, Geodesic.statistics);
-      map.layerManager.addLayer(Geodesic, 'shape', df.get(i, "layerId"), df.get(i, "group"), null, null);
+      map.layerManager.addLayer(Geodesic, 'shape', df.get(i, 'layerId'), df.get(i, 'group'), null, null);
 
       // Add Node Markers
       if (options.showCenter) {
         var markers = [];
         for (const place of geogesic_coords) {
           // Get markerOptions and add Icon
-          markerOptions = markerOptions ? markerOptions : {};
+          markerOptions = markerOptions
+            ? markerOptions
+            : {};
           if (options.showCenter && icon) markerOptions.icon = getIcon(i);
 
           // Create Marker and append label / popup if present
-          var marker = L.marker(place, markerOptions)
+          var marker = L.marker(place, markerOptions);
           if (label !== null) {
-              if (labelOptions !== null) {
-                marker.bindTooltip(df.get(i, 'label'), labelOptions);
-              } else {
-                marker.bindTooltip(df.get(i, 'label'));
-              }
+            if (labelOptions !== null) {
+              marker.bindTooltip(df.get(i, 'label'), labelOptions);
+            } else {
+              marker.bindTooltip(df.get(i, 'label'));
             }
+          }
+
           if (popup !== null) {
-              if (popupOptions  !== null) {
-                marker.bindPopup(df.get(i, 'popup'), popupOptions);
-              } else {
-                marker.bindPopup(df.get(i, 'popup'));
-              }
+            if (popupOptions !== null) {
+              marker.bindPopup(df.get(i, 'popup'), popupOptions);
+            } else {
+              marker.bindPopup(df.get(i, 'popup'));
             }
+          }
 
           // Add Markers to Map
-          map.layerManager.addLayer(marker, "markers", null, group, null, null);
+          map.layerManager.addLayer(marker, 'markers', null, group, null, null);
 
           // Add/Remove Markers when its Geodesic is added/removed (Using fake ID)
           map.on('layeradd', function(e) {
-            if(e.layer === Geodesic) {
+            if (e.layer === Geodesic) {
               map.layerManager.addLayer(marker, 'marker', '______fake_layerid', group, null, null);
             }
           });
           map.on('layerremove', function(e) {
-            if(e.layer === Geodesic) {
+            if (e.layer === Geodesic) {
               map.layerManager.removeLayer('marker', '______fake_layerid');
             }
           });
           // Use Drag event and trigger custom `geodesicdrag` event for updating
           marker.on('drag', (e) => {
-              map.fire('geodesicdrag', { index: i, latlng: e.target.getLatLng() });
+            map.fire('geodesicdrag', { index: i });
           });
           markers.push(marker);
         }
@@ -170,17 +188,20 @@ LeafletWidget.methods.addGeodesicPolylines  = function(
     }
 
     // Update a Geodesic LatLong and update Stats Control on custom `geodesicdrag` event
-    function updateGeodesic(e) {
-      const { index, latlng } = e;
+    const updateGeodesic = function(e) {
+      const { index } = e;
       const currentLine = [];
       for (const point of geodesics[index].markers) {
         currentLine.push(point.getLatLng());
       }
+
       geodesics[index].Geodesic.setLatLngs(currentLine);
       updateInfo.call(info, geodesics[index].Geodesic.statistics);
-    }
+    };
+
     map.on('geodesicdrag', updateGeodesic);
   }
+
 };
 
 LeafletWidget.methods.addLatLng = function(lat, lng, layerId) {
@@ -188,23 +209,24 @@ LeafletWidget.methods.addLatLng = function(lat, lng, layerId) {
   //console.log('lng'); console.log(lng);
   //console.log('layerId'); console.log(layerId);
   // Check if the geodesic object exists
-  let map = this;
-  let geodesic = map.layerManager.getLayer("shape", layerId);
+  const map = this;
+  const geodesic = map.layerManager.getLayer('shape', layerId);
   if (geodesic) {
     // Add the new latlng point to the geodesic object
-    geodesic.addLatLng({"lat": lat, "lng": lng});
+    geodesic.addLatLng({'lat': lat, 'lng': lng});
     // Create Marker
-    var marker = L.marker({"lat": lat, "lng": lng})
-    map.layerManager.addLayer(marker, "markers", null, null, null, null);
+    var marker = L.marker({'lat': lat, 'lng': lng});
+    map.layerManager.addLayer(marker, 'markers', null, null, null, null);
   } else {
     console.error('Geodesic object is not initialized.');
   }
 };
 
-LeafletWidget.methods.addGreatCircles  = function(
-  lat, lng, radius, layerId, group, options, icon, popup, popupOptions,
-  label, labelOptions, highlightOptions, markerOptions) {
-  if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
+  group, options, icon, popup, popupOptions, label, labelOptions,
+  highlightOptions, markerOptions) {
+
+  if (!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
       ($.isNumeric(lat) && $.isNumeric(lng))) {
 
     const map = this;
@@ -215,9 +237,9 @@ LeafletWidget.methods.addGreatCircles  = function(
     if (icon) {
       // Unpack icons
       if (!icon.awesomemarker) {
-        icon.iconUrl         = unpackStrings(icon.iconUrl);
-        icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-        icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+        icon.iconUrl = unpackStrings(icon.iconUrl);
+        icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+        icon.shadowUrl = unpackStrings(icon.shadowUrl);
         icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
       }
 
@@ -237,13 +259,15 @@ LeafletWidget.methods.addGreatCircles  = function(
         }
 
         if (opts.awesomemarker) {
-          delete opts.awesomemarker
+          delete opts.awesomemarker;
           if (opts.squareMarker) {
-            opts.className = "awesome-marker awesome-marker-square";
+            opts.className = 'awesome-marker awesome-marker-square';
           }
+
           if (!opts.prefix) {
             opts.prefix = icon.library;
           }
+
           return new L.AwesomeMarkers.icon(opts);
         } else {
           // Composite options (like points or sizes) are passed from R with each
@@ -252,15 +276,19 @@ LeafletWidget.methods.addGreatCircles  = function(
           if (opts.iconWidth) {
             opts.iconSize = [opts.iconWidth, opts.iconHeight];
           }
+
           if (opts.shadowWidth) {
             opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
           }
+
           if (opts.iconAnchorX) {
             opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
           }
+
           if (opts.shadowAnchorX) {
             opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
           }
+
           if (opts.popupAnchorX) {
             opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
           }
@@ -270,6 +298,7 @@ LeafletWidget.methods.addGreatCircles  = function(
         }
       };
     }
+
     if (icon) icondf.effectiveLength = lat.length;
 
     // Make DataFrame
@@ -288,6 +317,7 @@ LeafletWidget.methods.addGreatCircles  = function(
       .cbind(options);
 
     // Show Statistics in InfoControl
+    let updateInfo;
     if (options.showStats) {
       // Info control
       var info = L.control();
@@ -295,29 +325,37 @@ LeafletWidget.methods.addGreatCircles  = function(
         this._div = L.DomUtil.create('div', 'info');
         return this._div;
       };
+
       info.addTo(map);
 
       // Define a function to update the info control based on passed statistics
-      function updateInfo(stats, statsFunction) {
+      updateInfo = function(stats, statsFunction) {
         var infoHTML = '';
         if (typeof options.statsFunction === 'function') {
           // If additionalInput is a function, use it to generate content exclusively
           infoHTML = options.statsFunction(stats);
         } else {
           // Default content generation logic
-          const totalDistance = stats.totalDistance ? (stats.totalDistance > 10000 ? (stats.totalDistance / 1000).toFixed(0) + ' km' : stats.totalDistance.toFixed(0) + ' m') : 'invalid';
+          const totalDistance = stats.totalDistance
+            ? (stats.totalDistance > 10000
+              ? (stats.totalDistance / 1000).toFixed(0) + ' km'
+              : stats.totalDistance.toFixed(0) + ' m')
+            : 'invalid';
           infoHTML = '<h4>Statistics</h4>' +
             '<b>Total Distance</b><br/>' + totalDistance +
             '<br/><br/><b>Points</b><br/>' + stats.points +
             '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
         }
+
         // Update the innerHTML of the info div with the constructed info HTML or leave it empty
         info._div.innerHTML = infoHTML;
-      }
+      };
     }
 
     // Add Layer using addGenericLayers
-    LeafletWidget.methods.addGenericLayers(this, 'shape', df,
+    LeafletWidget.methods.addGenericLayers(this,
+      'shape',
+      df,
       function(df, i) {
         var options = df.get(i);
 
@@ -329,7 +367,9 @@ LeafletWidget.methods.addGreatCircles  = function(
 
         // Create a marker for each location
         if (options.showCenter) {
-          markerOptions = markerOptions ? markerOptions : {};
+          markerOptions = markerOptions
+            ? markerOptions
+            : {};
           if (options.showCenter && icon) markerOptions.icon = getIcon(i);
           const marker = L.marker(latlong, markerOptions);
 
@@ -340,20 +380,22 @@ LeafletWidget.methods.addGreatCircles  = function(
               marker.bindTooltip(df.get(i, 'label'));
             }
           }
+
           if (popup !== null) {
-            if (popupOptions  !== null) {
+            if (popupOptions !== null) {
               marker.bindPopup(df.get(i, 'popup'), popupOptions);
             } else {
               marker.bindPopup(df.get(i, 'popup'));
             }
           }
+
           map.on('layeradd', function(e) {
-            if(e.layer === Geodesic) {
+            if (e.layer === Geodesic) {
               map.layerManager.addLayer(marker, 'marker', df.get(i, 'layerId'), df.get(i, 'group'), null, null);
             }
           });
           map.on('layerremove', function(e) {
-            if(e.layer === Geodesic) {
+            if (e.layer === Geodesic) {
               map.layerManager.removeLayer('marker', df.get(i, 'layerId'));
             }
           });
@@ -378,6 +420,7 @@ LeafletWidget.methods.addGreatCircles  = function(
         return Geodesic;
       });
   }
+
 };
 
 

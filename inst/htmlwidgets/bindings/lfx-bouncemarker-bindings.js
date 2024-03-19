@@ -1,11 +1,12 @@
-import { unpackStrings } from './utils.js';
-
 /* global LeafletWidget, $, L */
 
+import { unpackStrings } from './utils.js';
 
-LeafletWidget.methods.addBounceMarkers = function(
-  lat, lng, icon, layerId, duration, height, group, options,
-  popup, popupOptions, clusterOptions, clusterId, label, labelOptions) {
+
+LeafletWidget.methods.addBounceMarkers = function(lat, lng, icon, layerId,
+  duration, height, group, options, popup, popupOptions, clusterOptions,
+  clusterId, label, labelOptions) {
+
   (function() {
 
     let icondf;
@@ -13,9 +14,9 @@ LeafletWidget.methods.addBounceMarkers = function(
 
     if (icon) {
       // Unpack icons
-      icon.iconUrl         = unpackStrings(icon.iconUrl);
-      icon.iconRetinaUrl   = unpackStrings(icon.iconRetinaUrl);
-      icon.shadowUrl       = unpackStrings(icon.shadowUrl);
+      icon.iconUrl = unpackStrings(icon.iconUrl);
+      icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+      icon.shadowUrl = unpackStrings(icon.shadowUrl);
       icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
 
       // This cbinds the icon URLs and any other icon options; they're all
@@ -35,15 +36,19 @@ LeafletWidget.methods.addBounceMarkers = function(
         if (opts.iconWidth) {
           opts.iconSize = [opts.iconWidth, opts.iconHeight];
         }
+
         if (opts.shadowWidth) {
           opts.shadowSize = [opts.shadowWidth, opts.shadowHeight];
         }
+
         if (opts.iconAnchorX) {
           opts.iconAnchor = [opts.iconAnchorX, opts.iconAnchorY];
         }
+
         if (opts.shadowAnchorX) {
           opts.shadowAnchor = [opts.shadowAnchorX, opts.shadowAnchorY];
         }
+
         if (opts.popupAnchorX) {
           opts.popupAnchor = [opts.popupAnchorX, opts.popupAnchorY];
         }
@@ -52,7 +57,7 @@ LeafletWidget.methods.addBounceMarkers = function(
       };
     }
 
-    if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+    if (!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
       ($.isNumeric(lat) && $.isNumeric(lng))) {
 
       var df = new LeafletWidget.DataFrame()
@@ -68,18 +73,18 @@ LeafletWidget.methods.addBounceMarkers = function(
 
       if (icon) icondf.effectiveLength = df.nrow();
 
-      LeafletWidget.methods.addGenericMarkers(
-        this, df, group, clusterOptions, clusterId, function(df, i) {
-          var options = df.get(i);
-          if (icon) options.icon = getIcon(i);
-          options.bounceOnAdd = true;
-          options.bounceOnAddOptions = {
-            duration: duration,
-            height: height
-          };
-          return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
-        });
+      LeafletWidget.methods.addGenericMarkers(this, df, group, clusterOptions, clusterId, function(df, i) {
+        var options = df.get(i);
+        if (icon) options.icon = getIcon(i);
+        options.bounceOnAdd = true;
+        options.bounceOnAddOptions = {
+          duration: duration,
+          height: height
+        };
+        return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
+      });
     }
 
   }).call(this);
+
 };

@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "napa": "napa",
-    "lint": "eslint ./inst/htmlwidgets/bindings --ext .js --fix",
+    "lint": "eslint .eslintrc.js webpack.config.js ./inst/htmlwidgets/bindings --ext .js --fix",
     "build": "npm run lint && napa && webpack --config webpack.config.js",
     "watch": "napa && webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -37,14 +37,15 @@
     "leaflet-webgl-heatmap": "0.2.7",
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2.3",
     "leaflet.geodesic": "^2.7.1",
-    "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#748f1dd",
     "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
+    "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#748f1dd",
     "pouchdb-browser": "8.0.1",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1",
     "topojson-simplify": "^3.0.3"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.7.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.10.0",
     "eslint": "^8.57.0",
