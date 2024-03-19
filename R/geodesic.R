@@ -7,12 +7,22 @@ geodesicDependencies <- function() {
 
 #' Add Geodesic Lines & Circles
 #'
-#' TODO this is some intro
-#'
-#' @param steps Defines how many intermediate points are generated along the path. More steps mean a smoother path.
-#' @param wrap Wrap line at map border (date line). Set to "false" if you want lines to cross the dateline (experimental, see noWrap-example on how to use)
+#' @description
+#' A geodesic line is the shortest path between two given positions on the
+#' earth surface. It's based on Vincenty's formulae implemented by
+#' \href{https://github.com/chrisveness/geodesy}{Chris Veness} for highest precision.
+#' @name geodesics
+NULL
+
+
+#' addGeodesicPolylines
+#' @param steps Defines how many intermediate points are generated along the path.
+#'   More steps mean a smoother path.
+#' @param wrap Wrap line at map border (date line). Set to "false" if you want
+#'   lines to cross the dateline (experimental, see noWrap-example on how to use)
 #' @inheritParams leaflet::addPolylines
 #' @export
+#' @rdname geodesics
 #' @examples
 #' berlin <- c(52.51, 13.4)
 #' losangeles <- c(34.05, -118.24)
@@ -118,7 +128,8 @@ addGeodesicPolylines <- function(
 
 
 #' @export
-#' @describeIn addGeodesicPolylines Adds a Great Circle to the map
+#' @rdname geodesics
+#' @description Add Lat/Long to a Geodesic Polyline.
 #' @param lat,lng lat/lng to add to the Geodesic
 addLatLng <- function(map, lat, lng, layerId = NULL) {
   leaflet::invokeMethod(map, NULL, "addLatLng", lat, lng, layerId)
@@ -126,7 +137,8 @@ addLatLng <- function(map, lat, lng, layerId = NULL) {
 
 
 #' @export
-#' @describeIn addGeodesicPolylines Adds a Great Circle to the map
+#' @rdname geodesics
+#' @description Adds a Great Circle to the map.
 #' @param lat_center,lng_center lat/lng for the center
 #' @param radius in meters
 #' @param showStats Show Statistics Info
