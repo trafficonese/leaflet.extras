@@ -1,4 +1,3 @@
-
 test_that("map-control-plugins", {
   ## Measure ###################
   ts <- leaflet() %>%
@@ -213,8 +212,10 @@ test_that("map-control-plugins", {
   ## Search Features  ##########################
   ts <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
-    addSearchFeatures(targetGroups="group",
-                      options = searchFeaturesOptions())
+    addSearchFeatures(
+      targetGroups = "group",
+      options = searchFeaturesOptions()
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchFeatures")

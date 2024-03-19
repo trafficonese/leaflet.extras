@@ -51,29 +51,28 @@ NULL
 #' ## for more examples see
 #' # browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))
 addGeodesicPolylines <- function(
-  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-  steps = 10,
-  wrap = TRUE,
-  stroke = TRUE,
-  color = "#03F",
-  weight = 5,
-  opacity = 0.5,
-  dashArray = NULL,
-  smoothFactor = 1.0,
-  noClip = FALSE,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
-  options = pathOptions(),
-  # highlightOptions = NULL,
-  icon = NULL,
-  showCenter = TRUE,
-  showStats = FALSE,
-  statsFunction = NULL,
-  markerOptions = NULL,
-  data = getMapData(map)
-) {
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    steps = 10,
+    wrap = TRUE,
+    stroke = TRUE,
+    color = "#03F",
+    weight = 5,
+    opacity = 0.5,
+    dashArray = NULL,
+    smoothFactor = 1.0,
+    noClip = FALSE,
+    popup = NULL,
+    popupOptions = NULL,
+    label = NULL,
+    labelOptions = NULL,
+    options = pathOptions(),
+    # highlightOptions = NULL,
+    icon = NULL,
+    showCenter = TRUE,
+    showStats = FALSE,
+    statsFunction = NULL,
+    markerOptions = NULL,
+    data = getMapData(map)) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
 
   options <- c(options, list(
@@ -91,8 +90,7 @@ addGeodesicPolylines <- function(
 
     if (inherits(icon, "leaflet_icon_set")) {
       icon <- iconSetToIcons(icon)
-    }
-    else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
+    } else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
       if (inherits(icon, "leaflet_awesome_icon_set")) {
         libs <- unique(unlist(lapply(icon, function(x) x[["library"]])))
         map <- addAwesomeMarkersDependencies(map, libs)
@@ -100,9 +98,8 @@ addGeodesicPolylines <- function(
       } else {
         map <- addAwesomeMarkersDependencies(map, icon$library)
       }
-      icon$awesomemarker = TRUE
-    }
-    else {
+      icon$awesomemarker <- TRUE
+    } else {
       icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
       icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
       icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
@@ -117,12 +114,14 @@ addGeodesicPolylines <- function(
     icon <- leaflet::filterNULL(icon)
   }
 
-  pgons = leaflet::derivePolygons(
-    data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines")
+  pgons <- leaflet::derivePolygons(
+    data, lng, lat, missing(lng), missing(lat), "addGeodesicPolylines"
+  )
   leaflet::invokeMethod(
     map, data, "addGeodesicPolylines", pgons, layerId, group, options, icon,
     popup, popupOptions, safeLabel(label, data), labelOptions, NULL,
-    markerOptions) %>%
+    markerOptions
+  ) %>%
     leaflet::expandLimitsBbox(pgons)
 }
 
@@ -144,30 +143,29 @@ addLatLng <- function(map, lat, lng, layerId = NULL) {
 #' @param showStats Show Statistics Info
 #' @inheritParams leaflet::markerOptions
 addGreatCircles <- function(
-  map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
-  steps = 10,
-  wrap = TRUE,
-  stroke = TRUE,
-  color = "#03F",
-  weight = 5,
-  opacity = 0.5,
-  dashArray = NULL,
-  smoothFactor = 1.0,
-  noClip = FALSE,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
-  options = pathOptions(),
-  highlightOptions = NULL,
-  icon = NULL,
-  fill = TRUE,
-  showCenter = TRUE,
-  showStats = FALSE,
-  statsFunction = NULL,
-  markerOptions = NULL,
-  data = getMapData(map)
-) {
+    map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
+    steps = 10,
+    wrap = TRUE,
+    stroke = TRUE,
+    color = "#03F",
+    weight = 5,
+    opacity = 0.5,
+    dashArray = NULL,
+    smoothFactor = 1.0,
+    noClip = FALSE,
+    popup = NULL,
+    popupOptions = NULL,
+    label = NULL,
+    labelOptions = NULL,
+    options = pathOptions(),
+    highlightOptions = NULL,
+    icon = NULL,
+    fill = TRUE,
+    showCenter = TRUE,
+    showStats = FALSE,
+    statsFunction = NULL,
+    markerOptions = NULL,
+    data = getMapData(map)) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
 
   if (!is.null(icon)) {
@@ -177,8 +175,7 @@ addGreatCircles <- function(
 
     if (inherits(icon, "leaflet_icon_set")) {
       icon <- iconSetToIcons(icon)
-    }
-    else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
+    } else if (inherits(icon, "leaflet_awesome_icon_set") || inherits(icon, "leaflet_awesome_icon")) {
       if (inherits(icon, "leaflet_awesome_icon_set")) {
         libs <- unique(unlist(lapply(icon, function(x) x[["library"]])))
         map <- addAwesomeMarkersDependencies(map, libs)
@@ -186,9 +183,8 @@ addGreatCircles <- function(
       } else {
         map <- addAwesomeMarkersDependencies(map, icon$library)
       }
-      icon$awesomemarker = TRUE
-    }
-    else {
+      icon$awesomemarker <- TRUE
+    } else {
       icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
       icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
       icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
@@ -215,7 +211,8 @@ addGreatCircles <- function(
     "addGreatCircles"
   )
   leaflet::invokeMethod(
-    map, data, "addGreatCircles",  points$lat, points$lng, radius, layerId, group, options, icon,
-    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions, markerOptions) %>%
+    map, data, "addGreatCircles", points$lat, points$lng, radius, layerId, group, options, icon,
+    popup, popupOptions, safeLabel(label, data), labelOptions, highlightOptions, markerOptions
+  ) %>%
     leaflet::expandLimits(points$lat, points$lng)
 }

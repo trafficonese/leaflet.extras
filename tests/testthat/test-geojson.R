@@ -1,6 +1,5 @@
 test_that("geojsonv2 examples", {
   skip()
-
   leaf <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron)
 
@@ -8,33 +7,41 @@ test_that("geojsonv2 examples", {
   fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
   geoJson <- jsonlite::fromJSON(readr::read_file(fName))
 
-  factpal <- colorFactor(topo.colors(nrow(geoJson$features$properties)),
-                         geoJson$features$properties$NAME)
+  factpal <- colorFactor(
+    topo.colors(nrow(geoJson$features$properties)),
+    geoJson$features$properties$NAME
+  )
 
   # Generate one HTML Table per feature with all properties of a feature.
   geoJson$features$properties <-
     dplyr::rowwise(geoJson$features$properties) %>%
     dplyr::do({
-      result = dplyr::as_tibble(.)
-      result$popup = purrr::map_chr(
+      result <- dplyr::as_tibble(.)
+      result$popup <- purrr::map_chr(
         htmlTable::htmlTable(
           t(result),
           caption = "Ward Details",
           align = "left",
           align.header = "left",
-          col.rgroup = c("#ffffff", "#eeeeee")), ~as.character(.))
+          col.rgroup = c("#ffffff", "#eeeeee")
+        ), ~ as.character(.)
+      )
       result
     })
-  geoJson$features$properties$style = purrr::map(factpal(geoJson$features$properties$NAME), ~list(fillColor = ., color = .))
+  geoJson$features$properties$style <- purrr::map(factpal(geoJson$features$properties$NAME), ~ list(fillColor = ., color = .))
 
-  ts <- leaf %>% setView(-77.0369, 38.9072, 11) %>%
+  ts <- leaf %>%
+    setView(-77.0369, 38.9072, 11) %>%
     addGeoJSONv2(
-      jsonlite::toJSON(geoJson), weight = 1, fillOpacity = 0.6,
+      jsonlite::toJSON(geoJson),
+      weight = 1, fillOpacity = 0.6,
       popupProperty = "popup", labelProperty = "NAME",
       highlightOptions = highlightOptions(
         weight = 2, color = "#000000",
         fillOpacity = 1, opacity = 1,
-        bringToFront = TRUE, sendToBack = TRUE))
+        bringToFront = TRUE, sendToBack = TRUE
+      )
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-omnivore")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
@@ -53,13 +60,17 @@ test_that("geojsonv2 examples", {
       crs = leafletCRS(
         crsClass = "L.Proj.CRS", code = "ESRI:53009",
         proj4def = "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs",
-        resolutions = c(65536, 32768, 16384, 8192, 4096, 2048)))) %>%
+        resolutions = c(65536, 32768, 16384, 8192, 4096, 2048)
+      )
+    )
+  ) %>%
     addGraticule(style = list(color = "#999", weight = 0.5, opacity = 1, fill = NA)) %>%
     addGraticule(sphere = TRUE, style = list(color = "#777", weight = 1, opacity = 0.25, fill = NA)) %>%
     addEasyButton(easyButton(
       icon = "ion-arrow-shrink",
       title = "Reset View",
-      onClick = JS("function(btn, map){ map.setView([0,0],0); }"))) %>%
+      onClick = JS("function(btn, map){ map.setView([0,0],0); }")
+    )) %>%
     setMapWidgetStyle(list(background = "white"))
 
   #' #### Example 2.1: Pre-processing in R
@@ -69,28 +80,31 @@ test_that("geojsonv2 examples", {
 
   geoJson$features$properties$POP_DENSITY <-
     as.numeric(geoJson$features$properties$POP2005) /
-    max(as.numeric(geoJson$features$properties$AREA), 1)
+      max(as.numeric(geoJson$features$properties$AREA), 1)
 
   pal <- colorNumeric(
     colormap::colormap(colormap::colormaps$copper, nshades = 256, reverse = TRUE),
-    geoJson$features$properties$POP_DENSITY)
+    geoJson$features$properties$POP_DENSITY
+  )
 
   # Generate one HTML Table per feature with all properties of a feature.
   geoJson$features$properties <-
     dplyr::rowwise(geoJson$features$properties) %>%
     dplyr::do({
-      result = dplyr::as_data_frame(.)
-      result$popup = purrr::map_chr(
+      result <- dplyr::as_data_frame(.)
+      result$popup <- purrr::map_chr(
         htmlTable::htmlTable(
           t(result),
           caption = "Ward Details",
           align = "left",
           align.header = "left",
-          col.rgroup = c("#ffffff", "#eeeeee")), ~as.character(.))
+          col.rgroup = c("#ffffff", "#eeeeee")
+        ), ~ as.character(.)
+      )
       result
     })
 
-  geoJson$features$properties$style = purrr::map(pal(geoJson$features$properties$POP_DENSITY), ~list(fillColor = .))
+  geoJson$features$properties$style <- purrr::map(pal(geoJson$features$properties$POP_DENSITY), ~ list(fillColor = .))
 
   ts <- leaf.world %>%
     addGeoJSONv2(
@@ -100,7 +114,9 @@ test_that("geojsonv2 examples", {
       highlightOptions = highlightOptions(
         weight = 2, color = "#000000",
         fillOpacity = 1, opacity = 1,
-        bringToFront = TRUE, sendToBack = TRUE))
+        bringToFront = TRUE, sendToBack = TRUE
+      )
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-omnivore")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
@@ -129,12 +145,14 @@ test_that("geojsonv2 examples", {
       # Select the data attributes to show in the popup.
       popupProperty = propstoHTMLTable(
         props = c("NAME", "REGION", "ISO_3_CODE", "ISO_2_CODE", "AREA", "POP2005"),
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
       labelProperty = "NAME",
       color = "#ffffff", weight = 1, fillOpacity = 0.9,
       highlightOptions = highlightOptions(
         fillOpacity = 1, weight = 2, opacity = 1, color = "#ff0000",
-        bringToFront = TRUE, sendToBack = TRUE),
+        bringToFront = TRUE, sendToBack = TRUE
+      ),
       legendOptions = legendOptions(title = "Pop. Density")
     )
   expect_s3_class(ts, "leaflet")
@@ -149,7 +167,8 @@ test_that("geojsonv2 examples", {
 
   geoJson <- readr::read_file(fName)
 
-  ts <- leaf %>% setView(-77.0369, 38.9072, 11) %>%
+  ts <- leaf %>%
+    setView(-77.0369, 38.9072, 11) %>%
     addBootstrapDependency() %>%
     addGeoJSONChoropleth(
       geoJson,
@@ -158,14 +177,17 @@ test_that("geojsonv2 examples", {
       labelProperty = "NAME",
       popupProperty = propstoHTMLTable(
         props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
       color = "#ffffff", weight = 1, fillOpacity = 0.7,
       highlightOptions = highlightOptions(
         weight = 2, color = "#000000",
         fillOpacity = 1, opacity = 1,
-        bringToFront = TRUE, sendToBack = TRUE),
+        bringToFront = TRUE, sendToBack = TRUE
+      ),
       legendOptions = legendOptions(title = "Area in Sq. Miles"),
-      group = "reds") %>%
+      group = "reds"
+    ) %>%
     addGeoJSONChoropleth(
       geoJson,
       valueProperty = "AREASQMI",
@@ -174,17 +196,21 @@ test_that("geojsonv2 examples", {
       labelProperty = "NAME",
       popupProperty = propstoHTMLTable(
         props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
       color = "#ffffff", weight = 1, fillOpacity = 0.7,
       highlightOptions = highlightOptions(
         weight = 2, color = "#000000",
         fillOpacity = 1, opacity = 1,
-        bringToFront = TRUE, sendToBack = TRUE),
+        bringToFront = TRUE, sendToBack = TRUE
+      ),
       legendOptions = legendOptions(title = "Area in Sq. Miles"),
       group = "yellow-black"
     ) %>%
-    addLayersControl(baseGroups = c("reds", "yellow-black"),
-                     options = layersControlOptions(collapsed = FALSE))
+    addLayersControl(
+      baseGroups = c("reds", "yellow-black"),
+      options = layersControlOptions(collapsed = FALSE)
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-choropleth")
   expect_identical(ts$x$calls[[length(ts$x$calls) - 1]]$method, "addGeoJSONChoropleth")
@@ -212,7 +238,8 @@ test_that("geojsonv2 examples", {
       labelProperty = "name",
       markerIcons = icons, markerIconProperty = "amenity",
       markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
-      clusterOptions = markerClusterOptions())
+      clusterOptions = markerClusterOptions()
+    )
   # ts
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
@@ -233,29 +260,35 @@ test_that("geojsonv2 examples", {
   artsAndCulture <- makeAwesomeIcon(icon = "paintbrush", library = "ion", markerColor = "red", iconColor = "black")
   historicLandmark <- makeAwesomeIcon(icon = "flag", library = "ion", markerColor = "green", iconColor = "black")
 
-  ts <- leaf %>% setView(-77.0369, 38.9072, 12) %>%
+  ts <- leaf %>%
+    setView(-77.0369, 38.9072, 12) %>%
     addBootstrapDependency() %>%
     addGeoJSONv2(
       artsAndCultures,
       labelProperty = "NAME",
       popupProperty = propstoHTMLTable(
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
-      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto"),
       markerIcons = artsAndCulture,
       markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
-      clusterOptions = markerClusterOptions(), group = "Arts/Culture") %>%
+      clusterOptions = markerClusterOptions(), group = "Arts/Culture"
+    ) %>%
     addGeoJSONv2(
       historicLandmarks,
       labelProperty = "LABEL",
       popupProperty = propstoHTMLTable(
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
-      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto"),
       markerIcons = historicLandmark,
       markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
-      clusterOptions = markerClusterOptions(), group = "Historic Landmarks") %>%
+      clusterOptions = markerClusterOptions(), group = "Historic Landmarks"
+    ) %>%
     addLayersControl(
-      overlayGroups =  c("Arts/Culture", "Historic Landmarks"),
-      options = layersControlOptions(collapsed = F))
+      overlayGroups = c("Arts/Culture", "Historic Landmarks"),
+      options = layersControlOptions(collapsed = F)
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "ionicons")
   expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
@@ -274,16 +307,19 @@ test_that("geojsonv2 examples", {
 
   geoJson <- readr::read_file(fName)
 
-  ts <- leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
+  ts <- leaflet() %>%
+    setView(-77.0369, 38.9072, 12) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     addWebGLGeoJSONHeatmap(
-      geoJson, size = 30, units = "px"
+      geoJson,
+      size = 30, units = "px"
     ) %>%
     addGeoJSONv2(
       geoJson,
       markerType = "circleMarker",
       stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
-      markerOptions = markerOptions(radius = 2))
+      markerOptions = markerOptions(radius = 2)
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-omnivore")
   expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "topojson")
@@ -294,5 +330,4 @@ test_that("geojsonv2 examples", {
   expect_identical(ts$dependencies[[length(ts$dependencies) - 6]]$name, "topojson")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
   expect_identical(ts$x$calls[[length(ts$x$calls) - 1]]$method, "addWebGLGeoJSONHeatmap")
-
 })
