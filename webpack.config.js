@@ -1,10 +1,9 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin'); // Import eslint-webpack-plugin
-//const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-//const TerserPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 const binding_path = './inst/htmlwidgets/bindings/';
@@ -24,6 +23,13 @@ const library_prod = function(name, filename = name, library = undefined) {
     externals: {
       // if 'leaflet' is required, pull from window.L
       leaflet: 'L',
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin(),
+        new CssMinimizerPlugin(),
+      ]
     },
     module: {
       rules: [
