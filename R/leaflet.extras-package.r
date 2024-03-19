@@ -7,7 +7,6 @@
 #' plugins.
 #'
 #' @importFrom magrittr %>%
-#' @importFrom xfun base64_uri
 #' @import leaflet
 #'
 #' @name leaflet.extras
