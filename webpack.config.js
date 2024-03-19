@@ -1,9 +1,10 @@
 const path = require('path');
-//const webpack = require('webpack');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin'); // Import eslint-webpack-plugin
+//const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+//const TerserPlugin = require('terser-webpack-plugin');
 
 
 const binding_path = './inst/htmlwidgets/bindings/';
@@ -32,10 +33,12 @@ const library_prod = function(name, filename = name, library = undefined) {
           type: 'asset/resource'
         },
         // copy from https://github.com/webpack-contrib/mini-css-extract-plugin/tree/e307e251a476e24f3d1827e74e0434de52ce6ea3
-        { test: /\.css$/,
+        {
+          test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
-            'css-loader']}
+            'css-loader']
+        },
       ]
     },
     plugins: [
@@ -130,7 +133,7 @@ const config = [
   library_binding('lfx-geodesic'),
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
-  library_prod(['Leaflet.StyleEditor', 'Leaflet.StyleEditor/dist/css/Leaflet.StyleEditor.min.css'],
+  library_prod(['leaflet-styleeditor', 'leaflet-styleeditor/dist/css/Leaflet.StyleEditor.min.css'],
     'lfx-styleeditor'),
   library_binding('lfx-styleeditor'),
 
