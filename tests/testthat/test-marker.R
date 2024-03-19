@@ -1,5 +1,6 @@
 ## Data ##############
-lng = 49; lat = 11
+lng <- 49
+lat <- 11
 cities <- read.csv(textConnection("City,Lat,Long,Pop
 Boston,42.3601,-71.0589,645966
 Hartford,41.7627,-72.6743,125017
@@ -17,7 +18,8 @@ greenLeafIcon <- makeIcon(
   iconAnchorX = 22, iconAnchorY = 94,
   shadowUrl = SHADOWURL,
   shadowWidth = 50, shadowHeight = 64,
-  shadowAnchorX = 4, shadowAnchorY = 62)
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
 
 myIconSet <- iconList(
   greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png"),
@@ -25,21 +27,29 @@ myIconSet <- iconList(
   orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png")
 )
 myIconSetDiffSize <- iconList(
-  greencol  = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
-                       iconWidth = 20, iconHeight = 35),
-  redcol    = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png",
-                       iconWidth = 40),
-  orangecol = makeIcon(iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
-                       iconWidth = 30, iconHeight = 50)
+  greencol = makeIcon(
+    iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+    iconWidth = 20, iconHeight = 35
+  ),
+  redcol = makeIcon(
+    iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-red.png",
+    iconWidth = 40
+  ),
+  orangecol = makeIcon(
+    iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-orange.png",
+    iconWidth = 30, iconHeight = 50
+  )
 )
-mycustomicon <- makeIcon(iconUrl = system.file("examples/shiny/marker.png",
-                                               package = "leaflet.extras"),
-                         iconWidth = 30)
+mycustomicon <- makeIcon(
+  iconUrl = system.file("examples/shiny/marker.png",
+    package = "leaflet.extras"
+  ),
+  iconWidth = 30
+)
 
 
 ## Tests ###############
 test_that("markers", {
-
   ## Bouncing Markers #########################
   ts <- leaflet() %>%
     addBounceMarkers(lng = lng, lat = lat)

@@ -1,6 +1,4 @@
-
 test_that("maputils", {
-
   geoJson <- jsonlite::fromJSON(readr::read_file(
     paste0(
       "https://raw.githubusercontent.com/MinnPost/simple-map-d3",
@@ -34,7 +32,8 @@ test_that("maputils", {
   expect_s3_class(ts, "leaflet")
   expect_identical(
     ts$jsHooks$render[[1]]$code[[1]],
-    "function(el, x){var map=this; debugger;}")
+    "function(el, x){var map=this; debugger;}"
+  )
 
 
   ts <- leaflet() %>%

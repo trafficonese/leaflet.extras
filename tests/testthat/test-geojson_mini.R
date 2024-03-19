@@ -1,6 +1,4 @@
-
 test_that("geojson and jsFunctions", {
-
   fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
   topoJson <- readr::read_file(fName)
   geoJson <- readr::read_file(
@@ -19,12 +17,15 @@ test_that("geojson and jsFunctions", {
       padding = c(0.2, 0),
       popupProperty = propstoHTMLTable(
         props = c("dist_numc", "location", "incidents", "_feature_id_string"),
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
       labelProperty = JS("function(feature){return \"WARD: \" + feature.properties.dist_numc;}"),
       color = "#ffffff", weight = 1, fillOpacity = 0.7,
       highlightOptions =
-        highlightOptions(fillOpacity = 1, weight = 2, opacity = 1, color = "#000000",
-                         bringToFront = TRUE, sendToBack = TRUE),
+        highlightOptions(
+          fillOpacity = 1, weight = 2, opacity = 1, color = "#000000",
+          bringToFront = TRUE, sendToBack = TRUE
+        ),
       legendOptions =
         legendOptions(title = "Crimes", position = "bottomright"),
       group = "orange-red"
@@ -41,7 +42,8 @@ test_that("geojson and jsFunctions", {
       topoJson,
       valueProperty = "incidents",
       popupProperty = propstoHTMLTable(
-        table.attrs = list("table table-striped table-bordered"), drop.na = T)
+        table.attrs = list("table table-striped table-bordered"), drop.na = T
+      )
     ))
 
   ts <- leaflet() %>%
@@ -108,12 +110,15 @@ test_that("geojson and jsFunctions", {
       scale = "OrRd", mode = "q", steps = 5,
       padding = c(0.2, 0),
       popupProperty = propsToHTML(
-        props = c("dist_numc", "location", "incidents", "_feature_id_string")),
+        props = c("dist_numc", "location", "incidents", "_feature_id_string")
+      ),
       labelProperty = JS("function(feature){return \"WARD: \" + feature.properties.dist_numc;}"),
       color = "#ffffff", weight = 1, fillOpacity = 0.7,
       highlightOptions =
-        highlightOptions(fillOpacity = 1, weight = 2, opacity = 1, color = "#000000",
-                         bringToFront = TRUE, sendToBack = TRUE),
+        highlightOptions(
+          fillOpacity = 1, weight = 2, opacity = 1, color = "#000000",
+          bringToFront = TRUE, sendToBack = TRUE
+        ),
       legendOptions =
         legendOptions(title = "Crimes", position = "bottomright"),
       group = "orange-red"
@@ -129,9 +134,12 @@ test_that("geojson and jsFunctions", {
 
   ts <- leaflet() %>%
     addGeoJSONChoropleth(
-      topoJson, valueProperty = "incidents",
+      topoJson,
+      valueProperty = "incidents",
       popupProperty = propsToHTML(
-        props = c("dist_numc")))
+        props = c("dist_numc")
+      )
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-choropleth")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONChoropleth")
@@ -140,10 +148,13 @@ test_that("geojson and jsFunctions", {
 
   ts <- leaflet() %>%
     addGeoJSONChoropleth(
-      topoJson, valueProperty = "incidents",
+      topoJson,
+      valueProperty = "incidents",
       popupProperty = propsToHTML(
         props = c("dist_numc"), elem = "asdasd",
-        elem.attrs = list(class="some named list")))
+        elem.attrs = list(class = "some named list")
+      )
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-choropleth")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONChoropleth")
@@ -151,14 +162,19 @@ test_that("geojson and jsFunctions", {
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[2]])
 
   expect_error(leaflet() %>%
-                 addGeoJSONChoropleth(
-                   topoJson, valueProperty = "incidents",
-                   popupProperty = propsToHTML(props = 1)))
+    addGeoJSONChoropleth(
+      topoJson,
+      valueProperty = "incidents",
+      popupProperty = propsToHTML(props = 1)
+    ))
   expect_error(leaflet() %>%
-                 addGeoJSONChoropleth(
-                   topoJson, valueProperty = "incidents",
-                   popupProperty = propsToHTML(
-                     props = "props1", elem = "asd", "asdasd")))
+    addGeoJSONChoropleth(
+      topoJson,
+      valueProperty = "incidents",
+      popupProperty = propsToHTML(
+        props = "props1", elem = "asd", "asdasd"
+      )
+    ))
 
 
 
@@ -173,12 +189,12 @@ test_that("geojson and jsFunctions", {
     addKMLChoropleth(
       kml,
       valueProperty = JS(
-        'function(feature){
+        "function(feature){
              var props = feature.properties;
              var aland = props.ALAND/100000;
              var awater = props.AWATER/100000;
              return 100*awater/(awater+aland);
-          }'
+          }"
       ),
       scale = "OrRd", mode = "q", steps = 5,
       padding = c(0.2, 0),
@@ -220,12 +236,12 @@ test_that("geojson and jsFunctions", {
       csvParserOptions("latitude_deg", "longitude_deg"),
       markerType = "circleMarker",
       stroke = FALSE, fillColor = "red", fillOpacity = 1,
-      markerOptions = markerOptions(radius = 0.5))
+      markerOptions = markerOptions(radius = 0.5)
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-omnivore")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addCSV")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], csv)
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[2]])
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[3]])
-
 })

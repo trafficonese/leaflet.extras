@@ -1,4 +1,3 @@
-
 test_that("layers", {
   expect_error(leaflet() %>% addBingTiles())
 
@@ -33,10 +32,13 @@ test_that("layers", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]]$type, "Aerial")
 
   expect_warning(leaflet() %>%
-    addBingTiles(apikey = "somekey", layerId = "somelayerid", group = "group",
-                 imagerySet = "AerialWithLabels"))
+    addBingTiles(
+      apikey = "somekey", layerId = "somelayerid", group = "group",
+      imagerySet = "AerialWithLabels"
+    ))
   expect_warning(leaflet() %>%
-                   addBingTiles(apikey = "somekey", layerId = "somelayerid", group = "group",
-                                imagerySet = "Road"))
-
+    addBingTiles(
+      apikey = "somekey", layerId = "somelayerid", group = "group",
+      imagerySet = "Road"
+    ))
 })
