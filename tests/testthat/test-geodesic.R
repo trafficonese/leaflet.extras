@@ -92,7 +92,7 @@ test_that("Geodesic", {
   expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$noClip == FALSE)
   expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showStats == FALSE)
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$statsFunction)
-  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showCenter == TRUE)
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showMarker == TRUE)
 
   ts <- leaflet() %>%
     addLatLng(lng = 100, lat = 40, layerId = "someid")
@@ -128,7 +128,7 @@ test_that("Geodesic", {
   expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$noClip == FALSE)
   expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showStats == FALSE)
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$statsFunction)
-  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showCenter == TRUE)
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$showMarker == TRUE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[6]], "some popup")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[8]], "somelabel")
   expect_identical(

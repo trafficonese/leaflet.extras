@@ -134,14 +134,14 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
       map.layerManager.addLayer(Geodesic, 'shape', df.get(i, 'layerId'), df.get(i, 'group'), null, null);
 
       // Add Node Markers
-      if (options.showCenter) {
+      if (options.showMarker) {
         var markers = [];
         for (const place of geogesic_coords) {
           // Get markerOptions and add Icon
           markerOptions = markerOptions
             ? markerOptions
             : {};
-          if (options.showCenter && icon) markerOptions.icon = getIcon(i);
+          if (options.showMarker && icon) markerOptions.icon = getIcon(i);
 
           // Create Marker and append label / popup if present
           var marker = L.marker(place, markerOptions);
@@ -366,11 +366,11 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
         const Geodesic = new L.GeodesicCircle(latlong, options);
 
         // Create a marker for each location
-        if (options.showCenter) {
+        if (options.showMarker) {
           markerOptions = markerOptions
             ? markerOptions
             : {};
-          if (options.showCenter && icon) markerOptions.icon = getIcon(i);
+          if (options.showMarker && icon) markerOptions.icon = getIcon(i);
           const marker = L.marker(latlong, markerOptions);
 
           if (label !== null) {

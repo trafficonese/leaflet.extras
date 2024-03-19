@@ -20,6 +20,9 @@ NULL
 #'   More steps mean a smoother path.
 #' @param wrap Wrap line at map border (date line). Set to "false" if you want
 #'   lines to cross the dateline (experimental, see noWrap-example on how to use)
+#' @param showMarker Should the nodes/center points be visualized as Markers?
+#' @param showStats This will create an L.Control with some information on the geodesics
+#' @param statsFunction A custom JS function to be showed in the info control
 #' @inheritParams leaflet::addPolylines
 #' @export
 #' @rdname geodesics
@@ -68,7 +71,7 @@ addGeodesicPolylines <- function(
     options = pathOptions(),
     # highlightOptions = NULL,
     icon = NULL,
-    showCenter = TRUE,
+    showMarker = TRUE,
     showStats = FALSE,
     statsFunction = NULL,
     markerOptions = NULL,
@@ -80,7 +83,7 @@ addGeodesicPolylines <- function(
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
     showStats = showStats, statsFunction = statsFunction,
-    showCenter = showCenter
+    showMarker = showMarker
   ))
 
   if (!is.null(icon)) {
@@ -140,8 +143,8 @@ addLatLng <- function(map, lat, lng, layerId = NULL) {
 #' @description Adds a Great Circle to the map.
 #' @param lat_center,lng_center lat/lng for the center
 #' @param radius in meters
-#' @param showStats Show Statistics Info
 #' @inheritParams leaflet::markerOptions
+#' @inheritParams addGeodesicPolylines
 addGreatCircles <- function(
     map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,
     steps = 10,
@@ -161,7 +164,7 @@ addGreatCircles <- function(
     highlightOptions = NULL,
     icon = NULL,
     fill = TRUE,
-    showCenter = TRUE,
+    showMarker = TRUE,
     showStats = FALSE,
     statsFunction = NULL,
     markerOptions = NULL,
@@ -204,7 +207,7 @@ addGreatCircles <- function(
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
     fill = fill, showStats = showStats, statsFunction = statsFunction,
-    showCenter = showCenter
+    showMarker = showMarker
   ))
   points <- leaflet::derivePoints(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),

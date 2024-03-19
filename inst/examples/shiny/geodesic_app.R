@@ -146,7 +146,7 @@ server <- function(input, output, session) {
                       layerId = ~paste0("ID_",city),
                       wrap = FALSE,
                       fill = T,
-                      # showCenter = FALSE,
+                      # showMarker = FALSE,
                       showStats = TRUE,
                       # statsFunction = NULL,
                       # statsFunction = JS("function(stats) {
@@ -283,7 +283,7 @@ server <- function(input, output, session) {
         #                                       '<div>Distance:  ' + stats.totalDistance + '</div>')
         #                                  }
         #                                  "),
-        showCenter = T,
+        showMarker = T,
         # icon = greenLeafIcon,
         # icon = ~iconlist[icon],
         # icon = iconlist,

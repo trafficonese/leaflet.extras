@@ -1,5 +1,16 @@
 test_that("geojsonv2 examples", {
-  skip()
+  testthat::skip_on_ci()
+  testthat::skip_on_cran()
+  testthat::skip_if_not_installed("readr")
+  testthat::skip_if_not_installed("dplyr")
+  testthat::skip_if_not_installed("purrr")
+  testthat::skip_if_not_installed("colormap")
+  testthat::skip_if_not_installed("rmapshaper")
+  testthat::skip_if_not_installed("V8")
+  testthat::skip_if_not_installed("geojsonio")
+  testthat::skip_if_not_installed("htmlTable")
+
+
   leaf <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron)
 

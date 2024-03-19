@@ -28,7 +28,7 @@ addGeodesicPolylines(
   labelOptions = NULL,
   options = pathOptions(),
   icon = NULL,
-  showCenter = TRUE,
+  showMarker = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
@@ -61,7 +61,7 @@ addGreatCircles(
   highlightOptions = NULL,
   icon = NULL,
   fill = TRUE,
-  showCenter = TRUE,
+  showMarker = TRUE,
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
@@ -126,7 +126,11 @@ that contains images as local files, these local image files will be base64
 encoded into the HTML page so the icon images will still be available even
 when you publish the map elsewhere}
 
-\item{showStats}{Show Statistics Info}
+\item{showMarker}{Should the nodes/center points be visualized as Markers?}
+
+\item{showStats}{This will create an L.Control with some information on the geodesics}
+
+\item{statsFunction}{A custom JS function to be showed in the info control}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
