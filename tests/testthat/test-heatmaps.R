@@ -228,7 +228,8 @@ test_that("heatmaps", {
     setView(178, -20, 5) %>%
     addHeatmap(
       lng = ~long, lat = ~lat, intensity = ~mag,
-      gradient = RColorBrewer::brewer.pal(5, "Reds"),
+      # gradient = RColorBrewer::brewer.pal(5, "Reds"),
+      gradient = c("#FEE5D9", "#FCAE91", "#FB6A4A", "#DE2D26", "#A50F15"),
       blur = 20, max = 0.05, radius = 15
     )
   expect_s3_class(ts, "leaflet")
@@ -246,7 +247,8 @@ test_that("heatmaps", {
     setView(178, -20, 5) %>%
     addHeatmap(
       lng = ~long, lat = ~lat, intensity = NULL,
-      gradient = RColorBrewer::brewer.pal(5, "BrBG"),
+      # gradient = RColorBrewer::brewer.pal(5, "BrBG"),
+      gradient = c("#A6611A", "#DFC27D", "#F5F5F5", "#80CDC1", "#018571"),
       blur = 20, max = 0.05, radius = 15
     )
   expect_s3_class(ts, "leaflet")

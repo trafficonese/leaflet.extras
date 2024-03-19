@@ -23,6 +23,7 @@ NULL
 #' @param showMarker Should the nodes/center points be visualized as Markers?
 #' @param showStats This will create an L.Control with some information on the geodesics
 #' @param statsFunction A custom JS function to be showed in the info control
+#' @param markerOptions List of options for the markers. See \code{\link[leaflet]{markerOptions}}
 #' @inheritParams leaflet::addPolylines
 #' @export
 #' @rdname geodesics
@@ -143,7 +144,6 @@ addLatLng <- function(map, lat, lng, layerId = NULL) {
 #' @description Adds a Great Circle to the map.
 #' @param lat_center,lng_center lat/lng for the center
 #' @param radius in meters
-#' @inheritParams leaflet::markerOptions
 #' @inheritParams addGeodesicPolylines
 addGreatCircles <- function(
     map, lat_center = NULL, lng_center = NULL, radius, layerId = NULL, group = NULL,

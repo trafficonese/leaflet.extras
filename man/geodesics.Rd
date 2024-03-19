@@ -132,6 +132,8 @@ when you publish the map elsewhere}
 
 \item{statsFunction}{A custom JS function to be showed in the info control}
 
+\item{markerOptions}{List of options for the markers. See \code{\link[leaflet]{markerOptions}}}
+
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
