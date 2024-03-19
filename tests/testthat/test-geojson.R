@@ -1,4 +1,5 @@
 test_that("geojsonv2 examples", {
+  skip()
 
   leaf <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron)

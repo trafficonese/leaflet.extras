@@ -38,10 +38,7 @@
     "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2.3",
     "leaflet.geodesic": "^2.7.1",
     "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#748f1dd",
-    "pouchdb-browser": "8.0.1",
-    "topojson-client": "^3.1.0",
-    "topojson-server": "^3.0.1",
-    "topojson-simplify": "^3.0.3"
+    "pouchdb-browser": "8.0.1"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin-js": "^1.7.0",
