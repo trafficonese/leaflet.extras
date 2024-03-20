@@ -1,11 +1,17 @@
-test_that("geojson and jsFunctions", {
-  fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
-  topoJson <- readr::read_file(fName)
-  geoJson <- readr::read_file(
-    "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
-  )
+## DATA ###################
+fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
+topoJson <- readr::read_file(fName)
+geoJson <- readr::read_file(
+  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+)
+geoJsonPoints <- readr::read_file(
+  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+)
 
-  ## TODO - both together are not working
+
+## Tests ###################
+test_that("geojson and jsFunctions", {
+
   ts <- leaflet() %>%
     addBootstrapDependency() %>%
     setView(-75.14, 40, zoom = 11) %>%

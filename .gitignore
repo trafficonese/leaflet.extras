@@ -13,4 +13,5 @@ revdep/checks*
 revdep/library*
 revdep/data*
 viztest-*
+private
 __TODO.R

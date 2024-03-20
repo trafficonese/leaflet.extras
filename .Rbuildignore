@@ -16,6 +16,7 @@
 ^package.*\.json
 ^revdep
 ^viztest
+^private
 ^\.lintr$
 ^scripts
 ^webpack\.config\.js
