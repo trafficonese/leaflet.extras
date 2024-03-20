@@ -13,7 +13,6 @@ iconsList <- awesomeIconList(
 
 ## Tests ###################
 test_that("geojson and jsFunctions", {
-
   ts <- leaflet() %>%
     addBootstrapDependency() %>%
     setView(-75.14, 40, zoom = 11) %>%
@@ -45,7 +44,8 @@ test_that("geojson and jsFunctions", {
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[2]])
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], "orange-red")
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     setView(-77.0369, 38.9072, 11) %>%
     addGeoJSONv2(
       geoJson,
@@ -70,18 +70,21 @@ test_that("geojson and jsFunctions", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[14]], popupOptions())
 
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     setView(-77.0369, 38.9072, 12) %>%
     addBootstrapDependency() %>%
     addGeoJSONv2(
       geosonpointurl,
       labelProperty = "LABEL",
       popupProperty = propstoHTMLTable(
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
-      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto"),
       markerIcons = historicLandmark,
       markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
-      clusterOptions = markerClusterOptions(), group = "Historic Landmarks")
+      clusterOptions = markerClusterOptions(), group = "Historic Landmarks"
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "ionicons")
   expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
@@ -99,19 +102,22 @@ test_that("geojson and jsFunctions", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[14]], popupOptions())
 
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     setView(-77.0369, 38.9072, 12) %>%
     addBootstrapDependency() %>%
     addGeoJSONv2(
       geosonpointurl,
       labelProperty = "LABEL",
       popupProperty = propstoHTMLTable(
-        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
-      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T
+      ),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto"),
       markerIcons = iconsList,
       markerIconProperty = "STATUS",
       markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
-      group = "Historic Landmarks")
+      group = "Historic Landmarks"
+    )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
   expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
