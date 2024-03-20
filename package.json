@@ -40,17 +40,17 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.10",
-    "eslint": "^4.19.1",
+    "eslint": "^8.57.0",
     "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
     "license-checker": "^18.0.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^0.2.0",
     "napa": "^3.0.0",
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^5.1.4"
   }
 }
