@@ -1,13 +1,15 @@
 ## DATA ###################
 fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
 topoJson <- readr::read_file(fName)
-geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
-)
-geoJsonPoints <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
-)
+geosonpointurl <- "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+geoJson <- readr::read_file(geosonpointurl)
 
+historicLandmark <- makeAwesomeIcon(icon = "flag", library = "ion", markerColor = "green", iconColor = "black")
+
+iconsList <- awesomeIconList(
+  Designated = makeAwesomeIcon(icon = "glass", library = "fa", markerColor = "red"),
+  Pending = makeAwesomeIcon(icon = "cutlery", library = "fa", markerColor = "blue")
+)
 
 ## Tests ###################
 test_that("geojson and jsFunctions", {
@@ -42,6 +44,89 @@ test_that("geojson and jsFunctions", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], topoJson)
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[2]])
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], "orange-red")
+
+  ts <- leaflet() %>% addTiles() %>%
+    setView(-77.0369, 38.9072, 11) %>%
+    addGeoJSONv2(
+      geoJson,
+      markerType = "marker",
+      markerIcons = makeAwesomeIcon(icon = "glass", library = "fa", markerColor = "red"),
+      markerOptions = markerOptions(radius = 2),
+      clusterOptions = markerClusterOptions()
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "leaflet-markercluster")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 3]]$name, "lfx-omnivore")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], geoJson)
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 3, 6, 10, 11, 13, 16)]))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]], "marker")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]], makeAwesomeIcon(icon = "glass", library = "fa", markerColor = "red"))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]], markerOptions(radius = 2))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[9]], markerClusterOptions())
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[12]], labelOptions())
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[14]], popupOptions())
+
+
+  ts <- leaflet() %>% addTiles() %>%
+    setView(-77.0369, 38.9072, 12) %>%
+    addBootstrapDependency() %>%
+    addGeoJSONv2(
+      geosonpointurl,
+      labelProperty = "LABEL",
+      popupProperty = propstoHTMLTable(
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+      markerIcons = historicLandmark,
+      markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
+      clusterOptions = markerClusterOptions(), group = "Historic Landmarks")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "ionicons")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "leaflet-markercluster")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 3]]$name, "lfx-omnivore")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], geosonpointurl)
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 4, 6, 10, 16)]))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], "Historic Landmarks")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]], historicLandmark)
+  expect_identical(class(ts$x$calls[[length(ts$x$calls)]]$args[[8]]), "JS_EVAL")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]], markerOptions(riseOnHover = TRUE, opacity = 1))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[9]], markerClusterOptions())
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[12]], labelOptions(textsize = "12px", direction = "auto"))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[14]], popupOptions())
+
+
+  ts <- leaflet() %>% addTiles() %>%
+    setView(-77.0369, 38.9072, 12) %>%
+    addBootstrapDependency() %>%
+    addGeoJSONv2(
+      geosonpointurl,
+      labelProperty = "LABEL",
+      popupProperty = propstoHTMLTable(
+        table.attrs = list(class = "table table-striped table-bordered"), drop.na = T),
+      labelOptions = labelOptions(textsize = "12px", direction = "auto" ),
+      markerIcons = iconsList,
+      markerIconProperty = "STATUS",
+      markerOptions = markerOptions(riseOnHover = TRUE, opacity = 1),
+      group = "Historic Landmarks")
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "fontawesome")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-omnivore")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGeoJSONv2")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], geosonpointurl)
+  expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(2, 4, 9, 10, 16)]))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], "Historic Landmarks")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]], iconsList)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[6]], "STATUS")
+  expect_identical(class(ts$x$calls[[length(ts$x$calls)]]$args[[8]]), "JS_EVAL")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[7]], markerOptions(riseOnHover = TRUE, opacity = 1))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[12]], labelOptions(textsize = "12px", direction = "auto"))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[14]], popupOptions())
+
 
   expect_error(leaflet() %>%
     addGeoJSONChoropleth(
