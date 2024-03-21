@@ -264,7 +264,7 @@ server <- function(input, output, session) {
   ## LINES ######################
   ##################################
   output$map_lines <- renderLeaflet({
-    leaflet(cities_df) %>%
+    leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addMeasure(primaryLengthUnit = "meters", primaryAreaUnit = "sqmeters") %>%
       addPolylines(data = sf::st_cast(sflines, "LINESTRING"), color="blue", opacity = 1) %>%
@@ -276,6 +276,7 @@ server <- function(input, output, session) {
         # color = "red",
         group = "lines",
         markerOptions = markerOptions(draggable = TRUE, title = "some special Title"),
+        highlightOptions = highlightOptions(opacity = 1),
         showStats = T,
         # statsFunction = JS("function(stats) {
         #                                    return('<h4>Custom Stats Info</h4>' +
@@ -291,11 +292,9 @@ server <- function(input, output, session) {
         label = ~paste0(id), labelOptions = labelOptions(textsize = "22px"),
         popup = ~paste0("<h4>",id,"</h4>
                    <div>color = ",color,"</div>
-                   <div>icon = ",icon,"</div>
-                   <div>X_lflt_d = ",X_lflt_d,"</div>
-                   "),
+                   <div>icon = ",icon,"</div>"),
         # label = ~paste(city, "-", color),
-        steps = 50, opacity = 1) %>%
+        steps = 50, opacity = 0.4) %>%
       addLayersControl(overlayGroups = c("lines","lines_added"))
 
 

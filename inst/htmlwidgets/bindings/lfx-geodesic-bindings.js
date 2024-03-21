@@ -51,6 +51,7 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
       .col('layerId', layerId)
       .col('label', label)
       .col('group', group)
+      .col('highlightOptions', highlightOptions)
       .cbind(options);
 
     // Array to store Geodesic objects
@@ -185,6 +186,35 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
 
       // Push to Geodesics Array
       geodesics.push({ Geodesic, markers });
+
+
+      // Highlight
+      let highlightStyle = df.get(i,"highlightOptions");
+      if(!$.isEmptyObject(highlightStyle)) {
+        let defaultStyle = {};
+        $.each(highlightStyle, function (k, v) {
+          if(k != "bringToFront" && k != "sendToBack"){
+            if(df.get(i, k)) {
+              defaultStyle[k] = df.get(i, k);
+            }
+          }
+        });
+
+        Geodesic.on("mouseover",
+          function(e) {
+            this.setStyle(highlightStyle);
+            if(highlightStyle.bringToFront) {
+              this.bringToFront();
+            }
+          });
+        Geodesic.on("mouseout",
+          function(e) {
+            this.setStyle(defaultStyle);
+            if(highlightStyle.sendToBack) {
+              this.bringToBack();
+            }
+          });
+      }
     }
 
     // Update a Geodesic LatLong and update Stats Control on custom `geodesicdrag` event

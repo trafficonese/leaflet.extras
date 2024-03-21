@@ -27,6 +27,7 @@ addGeodesicPolylines(
   label = NULL,
   labelOptions = NULL,
   options = pathOptions(),
+  highlightOptions = NULL,
   icon = NULL,
   showMarker = TRUE,
   showStats = FALSE,
@@ -119,6 +120,8 @@ options for each label. Default \code{NULL}}
 \item{options}{a list of extra options for tile layers, popups, paths
 (circles, rectangles, polygons, ...), or other map elements}
 
+\item{highlightOptions}{Options for highlighting the shape on mouse over.}
+
 \item{icon}{the icon(s) for markers; an icon is represented by an R list of
 the form \code{list(iconUrl = "?", iconSize = c(x, y))}, and you can use
 \code{\link[leaflet]{icons}()} to create multiple icons; note when you use an R list
@@ -141,8 +144,6 @@ initially, but can be overridden}
 \item{lat_center, lng_center}{lat/lng for the center}
 
 \item{radius}{in meters}
-
-\item{highlightOptions}{Options for highlighting the shape on mouse over.}
 
 \item{fill}{whether to fill the path with color (e.g. filling on polygons or
 circles)}
