@@ -7,7 +7,22 @@
 addWMSLegend(map, uri, position = "topright", layerId = NULL, group = NULL)
 }
 \arguments{
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+
 \item{uri}{The legend URI}
+
+\item{position}{the position of the legend}
+
+\item{layerId}{the ID of the legend; subsequent calls to \code{addLegend}
+or \code{addControl} with the same \code{layerId} will replace this
+legend. The ID can also be used with \code{removeControl}.}
+
+\item{group}{\code{group} name of a leaflet layer group.
+Supplying this value will tie the legend to the leaflet layer group
+with this name and will auto add/remove the legend as the
+group is added/removed, for example via layerControl.
+You will need to set the \code{group} when you add a layer
+(e.g. \code{\link[leaflet]{addPolygons}}) and supply the same name here.}
 }
 \description{
 Add a WMS Legend

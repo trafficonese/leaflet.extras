@@ -9,7 +9,7 @@ wms.legendDependency <- function() {
 #' Add WMS Legend
 #' @description Add a WMS Legend
 #' @param uri The legend URI
-#' @inheritParams leaflet:.addLegend
+#' @inheritParams leaflet::addLegend
 #' @rdname wms-legend
 #' @export
 #' @examples
