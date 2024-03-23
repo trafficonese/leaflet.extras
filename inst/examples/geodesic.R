@@ -85,3 +85,4 @@ leaflet(df) %>% addProviderTiles(providers$CartoDB.Positron) %>%
   addGreatCircles(radius = 2000000, steps = 100, group = "circle")  %>%
   setView(0, 35, 1) %>%
   addLayersControl(overlayGroups = c("circle"))
+

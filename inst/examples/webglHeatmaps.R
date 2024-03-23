@@ -28,14 +28,14 @@ spdf <- geojsonio::geojson_sp(geoJson)
 #'
 #'
 leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
   addWebGLHeatmap(size = 60000)
 
 #' <br/><br/>Size in Pixels
 #'
 #'
 leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
   addWebGLHeatmap(size = 25, units = "px")
 
 #' <br/><br/>10,000 points

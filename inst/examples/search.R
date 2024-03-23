@@ -89,6 +89,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
     markerIcons = icons, markerIconProperty = "amenity",
     markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
     clusterOptions = markerClusterOptions(),
+    popupOptions = popupOptions(minWidth = 500),
     group = "pubs") %>%
   addResetMapButton() %>%
   addSearchFeatures(

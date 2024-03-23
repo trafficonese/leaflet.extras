@@ -90,3 +90,4 @@ leaf %>%
     baseGroups = names(london_crimes),
     options = layersControlOptions(collapsed = FALSE)
   )
+
