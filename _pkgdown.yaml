@@ -22,6 +22,8 @@ reference:
   - '`addDrawToolbar`'
   - '`addStyleEditor`'
   - '`enableMeasurePath`'
+  - '`toolbarOptions`'
+  - '`handlersOptions`'
 - title: Heatmaps
   desc: ~
   contents:
