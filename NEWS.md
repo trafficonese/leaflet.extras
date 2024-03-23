@@ -11,11 +11,10 @@
 - Extend BingTiles `imagerySet` and emit warnings for deprecated sets
 
 ## Improvements
-- Updated most JavaScript dependencies
+- Updated most JavaScript dependencies, changed Webpack Build, removed **source-maps** as package size was an R-CMD-check issue
 - Include Tests for R functions 
 - Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
 - Fixed & extended examples
-- Removed source-maps as package size was an R-CMD-check issue
 - Add `xfun` package to Suggests for base64 encoding of icons
 
 ## Bugfixes

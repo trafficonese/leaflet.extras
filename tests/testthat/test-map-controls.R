@@ -388,16 +388,14 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addDrawToolbar")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "draw")
 
-  awesomeicon <- leaflet::makeAwesomeIcon(awesomeIcons(
+  awesomeicon <- leaflet::makeAwesomeIcon(
     icon = "ios-close", iconColor = "black",
     library = "ion", markerColor = "green"
-  ))
+  )
   drawmark <- drawMarkerOptions(
     zIndexOffset = 10, repeatMode = TRUE,
     markerIcon = awesomeicon
   )
-
-  ## TODO - this doesnt throw an error but it doesnt work. Console-errors..
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
@@ -418,8 +416,21 @@ test_that("map-control-plugins", {
       markerOptions = drawMarkerOptions(
         zIndexOffset = 10, repeatMode = TRUE,
         markerIcon = list("something else")
-      ),
+      )
     ))
+
+
+  ## This doesnt throw an error but it doesnt work. Console-errors.. Should we emit a warning?
+  # drawmark <- drawMarkerOptions(
+  #   markerIcon = leaflet::makeAwesomeIcon(awesomeIcons(
+  #     icon = "ios-close", iconColor = "black",
+  #     library = "ion", markerColor = "green"
+  #   ))
+  # )
+  # ts <- leaflet() %>%
+  #   setView(0, 0, 2) %>%
+  #   addProviderTiles(providers$CartoDB.Positron) %>%
+  #   addDrawToolbar(markerOptions = drawmark)
 
   ## Full Screen ##########################
   ts <- leaflet() %>%

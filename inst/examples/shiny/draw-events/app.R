@@ -8,11 +8,21 @@ ui <- fluidPage(
 
 )
 
+awesomeicon <- leaflet::makeAwesomeIcon(
+  icon = "ios-close", iconColor = "black",
+  library = "ion", markerColor = "green"
+)
+drawmark <- drawMarkerOptions(
+  zIndexOffset = 10, repeatMode = TRUE,
+  markerIcon = awesomeicon
+)
+
 server <- function(input, output, session) {
   output$leafmap <- renderLeaflet({
     leaflet() %>%
       addTiles() %>%
       addDrawToolbar(
+        markerOptions = drawmark,
         toolbar = toolbarOptions(
           actions = list(title = "Cancel it", text = "Cancel!"),
           finish = list(title = "I'm Done", text = "Done"),

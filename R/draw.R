@@ -73,7 +73,6 @@ addDrawToolbar <- function(
     if (inherits(markerOptions$markerIcon, "leaflet_icon")) {
       markerIconFunction <- defIconFunction
     } else if (inherits(markerOptions$markerIcon, "leaflet_awesome_icon")) {
-      ## TODO - not working correctly..
       map <- addAwesomeMarkersDependencies(
         map, markerOptions$markerIcon$library
       )
