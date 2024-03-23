@@ -4,16 +4,10 @@
 \alias{addWMSLegend}
 \title{Add WMS Legend}
 \usage{
-addWMSLegend(map, uri, position = "topright", layerId = NULL)
+addWMSLegend(map, uri, position = "topright", layerId = NULL, group = NULL)
 }
 \arguments{
-\item{map}{The leaflet map}
-
 \item{uri}{The legend URI}
-
-\item{position}{position of control: "topleft", "topright", "bottomleft", or "bottomright"}
-
-\item{layerId}{A unique ID for the Legend}
 }
 \description{
 Add a WMS Legend

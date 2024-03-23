@@ -8,10 +8,8 @@ wms.legendDependency <- function() {
 
 #' Add WMS Legend
 #' @description Add a WMS Legend
-#' @param map The leaflet map
 #' @param uri The legend URI
-#' @param position position of control: "topleft", "topright", "bottomleft", or "bottomright"
-#' @param layerId A unique ID for the Legend
+#' @inheritParams leaflet:.addLegend
 #' @rdname wms-legend
 #' @export
 #' @examples
@@ -30,10 +28,11 @@ wms.legendDependency <- function() {
 #'       "format=image/png&layer=Personenschaden_5000"
 #'     )
 #'   )
-addWMSLegend <- function(map, uri, position = "topright", layerId = NULL) {
+addWMSLegend <- function(map, uri, position = "topright", layerId = NULL, group = NULL) {
   map$dependencies <- c(map$dependencies, wms.legendDependency())
   options <- leaflet::filterNULL(list(
     layerId = layerId,
+    group = group,
     options = list(uri = uri, position = position)
   ))
 
