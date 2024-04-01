@@ -12,17 +12,36 @@ weatherIconList(...)
 
 \method{[}{leaflet_weather_icon_set}(x, i)
 
-makeWeatherIcon(icon, markerColor = "red", iconColor = "white",
-  extraClasses = NULL)
+makeWeatherIcon(
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  extraClasses = NULL
+)
 
-weatherIcons(icon, markerColor = "red", iconColor = "white",
-  extraClasses = NULL)
+weatherIcons(
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  extraClasses = NULL
+)
 
-addWeatherMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
-  group = NULL, icon = NULL, popup = NULL, popupOptions = NULL,
-  label = NULL, labelOptions = NULL, options = leaflet::markerOptions(),
-  clusterOptions = NULL, clusterId = NULL,
-  data = leaflet::getMapData(map))
+addWeatherMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+)
 }
 \arguments{
 \item{...}{icons created from \code{\link{makeWeatherIcon}()}}
@@ -39,7 +58,7 @@ addWeatherMarkers(map, lng = NULL, lat = NULL, layerId = NULL,
 
 \item{extraClasses}{Character vector of extra classes.}
 
-\item{map}{the map to add weather Markers to.}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -54,7 +73,7 @@ the latitude column from \code{data})}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
@@ -63,11 +82,11 @@ layers (e.g. markers and polygons) can share the same group name.}
 recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
 
-\item{popupOptions}{options for popup}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link{labelOptions}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{options}{a list of extra options for tile layers, popups, paths
@@ -75,7 +94,7 @@ options for each label. Default \code{NULL}}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
- you can use \code{\link{markerClusterOptions}()} to specify marker cluster
+ you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
 options}
 
 \item{clusterId}{the id for the marker cluster layer}
@@ -85,20 +104,14 @@ default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
-Make weather-icon set
-
-Make Weather Icon
-
 An icon can be represented as a list of the form \code{list(icon, markerColor,
 ...)}. This function is vectorized over its arguments to create a list of
 icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
-
-Add Weather Markers
 }
 \examples{
 
-iconSet = weatherIconList(
+iconSet <- weatherIconList(
   hurricane = makeWeatherIcon(icon = "hurricane"),
   tornado = makeWeatherIcon(icon = "tornado")
 )

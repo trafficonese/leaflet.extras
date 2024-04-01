@@ -25,11 +25,12 @@ leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 11) %>%
       bringToFront = TRUE, sendToBack = TRUE),
     pathOptions = pathOptions(
       showMeasurements = TRUE,
-      measurementOptions = measurePathOptions(imperial = TRUE)))
+      measurementOptions = measurePathOptions(imperial = TRUE,
+                                              showOnHover = TRUE,
+                                              showArea = TRUE)))
 
 
-#' ### Dynamically show/hide measurements
-
+#' ### Dynamically show/hide measurements (toolbar-buttons)
 leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 11) %>%
   addBootstrapDependency() %>%
   addGeoJSONChoropleth(
@@ -45,11 +46,13 @@ leaflet() %>% addTiles() %>% setView(-77.0369, 38.9072, 11) %>%
       weight = 2, color = "#000000",
       fillOpacity = 1, opacity = 1,
       bringToFront = TRUE, sendToBack = TRUE)) %>%
-  addMeasurePathToolbar(options = measurePathOptions(imperial = TRUE, showDistances = FALSE))
+  addMeasurePathToolbar(options = measurePathOptions(imperial = TRUE,
+                                                     showDistances = TRUE))
 
 #' ### With Draw
 #' You can update the measurements after editing by clicking on the refresh button of the measure path toolbar.
 library(rbgm)
+library(sf)
 set.seed(2)
 ## pick one of the available model files
 fs <- sample(bgmfiles::bgmfiles(), 1)
@@ -57,7 +60,9 @@ fs <- sample(bgmfiles::bgmfiles(), 1)
 ## read the model, and convert to Spatial (box for polygons, face for boundary lines)
 model <- boxSpatial(bgmfile(fs))
 ## most of the BGM models will be in a local map projection
-model <- spTransform(model, "+init=epsg:4326")
+model <- st_as_sf(model)
+st_crs(model) <- 32718
+model <- st_transform(model, 4326)
 
 #+ fig.width=10, fig.height=8
 leaflet() %>% addTiles() %>%

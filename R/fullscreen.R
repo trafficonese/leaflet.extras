@@ -18,10 +18,11 @@ fullscreenDependency <- function() {
 #'   addTiles() %>%
 #'   addFullscreenControl()
 addFullscreenControl <- function(
-  map, position = "topleft", pseudoFullscreen = FALSE) {
+    map, position = "topleft", pseudoFullscreen = FALSE) {
   map$dependencies <- c(map$dependencies, fullscreenDependency())
-  if (is.null(map$x$options))
+  if (is.null(map$x$options)) {
     map$x$options <- list()
+  }
   map$x$options["fullscreenControl"] <-
     list(list(position = position, pseudoFullscreen = pseudoFullscreen))
   map

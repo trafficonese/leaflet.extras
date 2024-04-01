@@ -1,3 +1,26 @@
+# leaflet.extras (development version)
+
+## New Features
+- The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
+- `searchOSMText` let's you set the OSM search text from R
+- New function `clearSearchFeatures` let's you clear the search marker
+- Changed default values in `searchOptions` for `url` / `propertyLoc` /  `propertyName`
+- The `apikey` of `addSearchGoogle` / `addReverseSearchGoogle` / `addBingTiles` now has to be not `NULL` and also not `""`.
+- `addBounceMarkers` behave now like normal Markers (except for clustering).
+- **Update Geodesics** functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons. 
+- New function `addLatLng` for `addGeodesicPolylines`
+- Extend BingTiles `imagerySet` and emit warnings for deprecated sets
+
+## Improvements
+- Updated most JavaScript dependencies, changed Webpack Build, removed **source-maps** as package size was an R-CMD-check issue
+- Include Tests for R functions 
+- Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
+- Fixed & extended examples
+
+## Bugfixes
+- #104, #148, #155, #156, #164, #165, #169, #174, #187
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js

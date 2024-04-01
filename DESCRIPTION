@@ -1,7 +1,7 @@
 Package: leaflet.extras
 Type: Package
 Title: Extra Functionality for 'leaflet' Package
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: c(
       person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
       person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("aut")),
@@ -52,7 +52,11 @@ Imports:
     magrittr
 Suggests:
     jsonlite,
-    readr
-URL: https://github.com/bhaskarvk/leaflet.extras, https://bhaskarvk.github.io/leaflet.extras/
-BugReports: https://github.com/bhaskarvk/leaflet.extras/issues
-RoxygenNote: 6.0.1
+    readr,
+    sf,
+    xfun,
+    testthat (>= 3.0.0)
+URL: https://github.com/trafficonese/leaflet.extras, https://trafficonese.github.io/leaflet.extras/
+BugReports: https://github.com/trafficonese/leaflet.extras/issues
+RoxygenNote: 7.2.3
+Config/testthat/edition: 3

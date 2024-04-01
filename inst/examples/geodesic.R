@@ -18,7 +18,7 @@ df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, t
 names(df) <- c("lat", "lng")
 
 library(leaflet.extras)
-library(sp)
+library(sf)
 
 #' #### Example 1
 
@@ -32,16 +32,15 @@ leaflet(df) %>%
 
 library(bsam)
 library(trip)
+library(sf)
 
-data(ellie)
-tr <- ellie
-coordinates(tr) <- c("lon", "lat")
-proj4string(tr) <- CRS("+init=epsg:4326")
-tr <- trip(tr, c("date", "id"))
+data(ellie1)
+tr <- ellie1
+tr_sf <- st_as_sf(ellie1, coords = c("lon", "lat"), crs = 4326)
+tr <- trip(tr_sf, c("date", "id"))
 colshorten <- function(x) lapply(strsplit(x, ""), function(a) paste(a[c(1, 2, 4, 6)], collapse = ""))
 
 trcol <- colshorten(viridis::viridis(length(unique(tr$id))))
-
 
 pts <- structure(list(x = c(71, 114.3, 96.4, 70.3, 51.4, 31.7, 38.2,
                             66.7), y = c(-49.1, -64.9, -63.6, -50.1, -65.8, -68.2, -64.8,
@@ -58,9 +57,10 @@ resolutions <- c(16384, 8192, 4096, 2048, 1024, 512, 256)
 zoom <- 0
 maxZoom <- 7
 
-border <- geojsonio::geojson_read(
-  system.file("examples/Seamask_medium_res_polygon.kml",
-              package = "leaflet"), what = "sp")
+
+# kmlURL = system.file("examples/Seamask_medium_res_polygon.kml", package = "leaflet")
+kmlURL = "https://raw.githubusercontent.com/rstudio/leaflet/main/inst/examples/Seamask_medium_res_polygon.kml"
+border <- geojsonio::geojson_read(kmlURL, what = "sp")
 crsAntartica <-  leafletCRS(
   crsClass = "L.Proj.CRS",
   code = "EPSG:3031",
@@ -85,3 +85,4 @@ leaflet(df) %>% addProviderTiles(providers$CartoDB.Positron) %>%
   addGreatCircles(radius = 2000000, steps = 100, group = "circle")  %>%
   setView(0, 35, 1) %>%
   addLayersControl(overlayGroups = c("circle"))
+

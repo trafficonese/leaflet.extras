@@ -1,4 +1,3 @@
-
 html_dependency <- function(name, version, script, folder, ...) {
   htmltools::htmlDependency(
     name,

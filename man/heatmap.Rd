@@ -10,26 +10,78 @@
 \alias{clearHeatmap}
 \title{Add a heatmap}
 \usage{
-addHeatmap(map, lng = NULL, lat = NULL, intensity = NULL,
-  layerId = NULL, group = NULL, minOpacity = 0.05, max = 1,
-  radius = 25, blur = 15, gradient = NULL, cellSize = NULL,
-  data = leaflet::getMapData(map))
+addHeatmap(
+  map,
+  lng = NULL,
+  lat = NULL,
+  intensity = NULL,
+  layerId = NULL,
+  group = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL,
+  data = leaflet::getMapData(map)
+)
 
-addGeoJSONHeatmap(map, geojson, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addGeoJSONHeatmap(
+  map,
+  geojson,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addKMLHeatmap(map, kml, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addKMLHeatmap(
+  map,
+  kml,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addCSVHeatmap(map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addCSVHeatmap(
+  map,
+  csv,
+  csvParserOptions,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
-addGPXHeatmap(map, gpx, layerId = NULL, group = NULL,
-  intensityProperty = NULL, minOpacity = 0.05, max = 1, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL)
+addGPXHeatmap(
+  map,
+  gpx,
+  layerId = NULL,
+  group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1,
+  radius = 25,
+  blur = 15,
+  gradient = NULL,
+  cellSize = NULL
+)
 
 removeHeatmap(map, layerId)
 
@@ -112,7 +164,7 @@ clears the heatmap
 \examples{
 leaflet(quakes) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatter) \%>\%
-  setView( 178, -20, 5 ) \%>\%
+  setView(178, -20, 5) \%>\%
   addHeatmap(
     lng = ~long, lat = ~lat, intensity = ~mag,
     blur = 20, max = 0.05, radius = 15
@@ -132,7 +184,8 @@ leaflet() \%>\%
     kml,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 1))
+    markerOptions = markerOptions(radius = 1)
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))

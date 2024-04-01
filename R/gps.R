@@ -14,12 +14,11 @@ leafletGPSDependencies <- function() {
 #' @rdname gps
 #' @export
 gpsOptions <- function(
-  position = "topleft",
-  activate = FALSE,
-  autoCenter = FALSE,
-  maxZoom = NULL,
-  setView = FALSE
-) {
+    position = "topleft",
+    activate = FALSE,
+    autoCenter = FALSE,
+    maxZoom = NULL,
+    setView = FALSE) {
   leaflet::filterNULL(list(
     position = position,
     activate = activate,
@@ -40,9 +39,8 @@ gpsOptions <- function(
 #'   addTiles() %>%
 #'   addControlGPS()
 addControlGPS <- function(
-  map,
-  options = gpsOptions()
-) {
+    map,
+    options = gpsOptions()) {
   map$dependencies <- c(map$dependencies, leafletGPSDependencies())
   invokeMethod(
     map,

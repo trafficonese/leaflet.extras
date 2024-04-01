@@ -1,11 +1,8 @@
 title: leaflet.extras
-authors:
-  Bhaskar Karambelkar:
-    href: https://www.karambelkar.info/
+url: https://trafficonese.github.io/leaflet.extras/
 
 template:
-  params:
-    bootswatch: yeti
+  bootstrap: 5
 
 reference:
 - title: Package Documentation
@@ -25,6 +22,8 @@ reference:
   - '`addDrawToolbar`'
   - '`addStyleEditor`'
   - '`enableMeasurePath`'
+  - '`toolbarOptions`'
+  - '`handlersOptions`'
 - title: Heatmaps
   desc: ~
   contents:

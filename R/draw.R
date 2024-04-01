@@ -24,6 +24,8 @@ drawDependencies <- function() {
 #' @param circleMarkerOptions See \code{\link{drawCircleMarkerOptions}}(). Set to FALSE to disable circle marker drawing.
 #' @param editOptions By default editing is disable. To enable editing pass \code{\link{editToolbarOptions}}().
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
+#' @param toolbar See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.
+#' @param handlers See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @export
 #' @rdname draw
 #' @examples
@@ -35,7 +37,7 @@ drawDependencies <- function() {
 #'     editOptions = editToolbarOptions(
 #'       selectedPathOptions = selectedPathOptions()
 #'     )
-#'   )  %>%
+#'   ) %>%
 #'   addLayersControl(
 #'     overlayGroups = c("draw"),
 #'     options = layersControlOptions(collapsed = FALSE)
@@ -45,35 +47,39 @@ drawDependencies <- function() {
 #' ## for more examples see
 #' # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
 addDrawToolbar <- function(
-  map, targetLayerId = NULL, targetGroup = NULL,
-  position = c("topleft", "topright", "bottomleft", "bottomright"),
-  polylineOptions = drawPolylineOptions(),
-  polygonOptions = drawPolygonOptions(),
-  circleOptions = drawCircleOptions(),
-  rectangleOptions = drawRectangleOptions(),
-  markerOptions = drawMarkerOptions(),
-  circleMarkerOptions = drawCircleMarkerOptions(),
-  editOptions = FALSE,
-  singleFeature = FALSE
-) {
-
+    map, targetLayerId = NULL, targetGroup = NULL,
+    position = c("topleft", "topright", "bottomleft", "bottomright"),
+    polylineOptions = drawPolylineOptions(),
+    polygonOptions = drawPolygonOptions(),
+    circleOptions = drawCircleOptions(),
+    rectangleOptions = drawRectangleOptions(),
+    markerOptions = drawMarkerOptions(),
+    circleMarkerOptions = drawCircleMarkerOptions(),
+    editOptions = FALSE,
+    singleFeature = FALSE,
+    toolbar = NULL,
+    handlers = NULL) {
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
-      stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
+    stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
+
+  if (!inherits(toolbar, "list")) toolbar <- NULL
+  if (!inherits(handlers, "list")) handlers <- NULL
 
   map$dependencies <- c(map$dependencies, drawDependencies())
 
   markerIconFunction <- NULL
   if (inherits(markerOptions, "list") && !is.null(markerOptions$markerIcon)) {
-     if (inherits(markerOptions$markerIcon, "leaflet_icon")) {
-       markerIconFunction <- defIconFunction
-     } else if (inherits(markerOptions$markerIcon, "leaflet_awesome_icon")) {
-       map <- addAwesomeMarkersDependencies(
-         map, markerOptions$markerIcon$library)
-       markerIconFunction <- awesomeIconFunction
-     } else {
-       stop("markerIcon should be created using either leaflet::makeIcon() or leaflet::makeAwesomeIcon()")
-     }
+    if (inherits(markerOptions$markerIcon, "leaflet_icon")) {
+      markerIconFunction <- defIconFunction
+    } else if (inherits(markerOptions$markerIcon, "leaflet_awesome_icon")) {
+      map <- addAwesomeMarkersDependencies(
+        map, markerOptions$markerIcon$library
+      )
+      markerIconFunction <- awesomeIconFunction
+    } else {
+      stop("markerIcon should be created using either leaflet::makeIcon() or leaflet::makeAwesomeIcon()")
+    }
     markerOptions$markerIconFunction <- markerIconFunction
   }
 
@@ -88,11 +94,17 @@ addDrawToolbar <- function(
       rectangle = rectangleOptions,
       marker = markerOptions,
       circlemarker = circleMarkerOptions,
-      singleFeature = singleFeature)),
-    edit = editOptions )
+      singleFeature = singleFeature
+    )),
+    edit = editOptions,
+    toolbar = toolbar,
+    handlers = handlers
+  )
 
-  leaflet::invokeMethod(map, leaflet::getMapData(map), "addDrawToolbar",
-                        targetLayerId, targetGroup, options)
+  leaflet::invokeMethod(
+    map, leaflet::getMapData(map), "addDrawToolbar",
+    targetLayerId, targetGroup, options
+  )
 }
 
 #' Removes the draw toolbar

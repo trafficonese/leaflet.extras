@@ -2,19 +2,22 @@ library(leaflet.extras)
 
 leaflet(
   options = leafletOptions(
-    center = c(-33.95293, 20.82824),
-    zoom = 14,
+    center = c(51, 11),
+    zoom = 6,
     minZoom = 5,
-    maxZoom = 18,
-    maxBounds = list(
-      c(-33.91444, 20.75351),
-      c(-33.98731, 20.90626)
-    )
+    maxZoom = 18
   )
 ) %>%
-  #addTiles() %>%
-  addWMSTiles(baseUrl = "http://maps.kartoza.com/web/?map=/web/Boosmansbos/Boosmansbos.qgs",
-              layers = "Boosmansbos",
-              options = WMSTileOptions(format = "image/png", transparent = TRUE),
-              attribution = "(c)<a href=\"http://kartoza.com\">Kartoza.com</a> and <a href=\"http://www.ngi.gov.za/\">SA-NGI</a>")  %>%
-  addWMSLegend(uri = "http://maps.kartoza.com/web/?map=/web/Boosmansbos/Boosmansbos.qgs&&SERVICE=WMS&VERSION=1.3.0&SLD_VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/jpeg&LAYER=Boosmansbos&STYLE=")
+  addTiles() %>%
+  addWMSTiles(
+    baseUrl = "https://www.wms.nrw.de/wms/unfallatlas?request=GetMap",
+    layers = c("Unfallorte", "Personenschaden_5000", "Personenschaden_250"),
+    options = WMSTileOptions(format = "image/png", transparent = TRUE)
+  ) %>%
+  addWMSLegend(
+    uri = paste0(
+      "https://www.wms.nrw.de/wms/unfallatlas?request=",
+      "GetLegendGraphic&version=1.3.0&",
+      "format=image/png&layer=Personenschaden_5000"
+    )
+  )

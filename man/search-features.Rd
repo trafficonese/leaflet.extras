@@ -3,11 +3,14 @@
 \name{addSearchFeatures}
 \alias{addSearchFeatures}
 \alias{removeSearchFeatures}
+\alias{clearSearchFeatures}
 \title{Add a feature search control to the map.}
 \usage{
 addSearchFeatures(map, targetGroups, options = searchFeaturesOptions())
 
 removeSearchFeatures(map, clearFeatures = FALSE)
+
+clearSearchFeatures(map)
 }
 \arguments{
 \item{map}{a map widget object}
@@ -22,9 +25,13 @@ removeSearchFeatures(map, clearFeatures = FALSE)
 modified map
 
 modified map
+
+modified map
 }
 \description{
 Add a feature search control to the map.
 
 Removes the feature search control from the map.
+
+Clears the search marker
 }

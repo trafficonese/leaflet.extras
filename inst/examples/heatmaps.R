@@ -17,19 +17,21 @@ jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_r
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- geojsonio::as.json(v8$get("pubsGeoJSON"))
-spdf <- geojsonio::geojson_sp(geoJson)
 
 #'
 #'
+spdf <- geojsonio::geojson_sp(geoJson)
 leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
   addHeatmap(blur = 20, max = 0.05, radius = 15)
 
 #'
 #'
-leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.Transport) %>%
-  addHeatmap(blur = 20, max = 0.05, radius = 15, gradient = "Greys")
+spdf1 <- geojsonio::geojson_sf(geoJson)
+leaflet(spdf1) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
+  addHeatmap(blur = 20, max = 0.05, radius = 15,
+             gradient = "Spectral")
 
 #' <br/><br/>10,000 points
 #'
@@ -88,3 +90,4 @@ leaf %>%
     baseGroups = names(london_crimes),
     options = layersControlOptions(collapsed = FALSE)
   )
+
