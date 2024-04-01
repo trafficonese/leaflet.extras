@@ -566,7 +566,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
     map.searchControl = new L.Control.Search(options);
     map.searchControl.addTo(map);
 
-    map.searchControl.on("search:cancel", function(e) {
+    map.searchControl.on('search:cancel', function(e) {
       if (e.target.options.hideMarkerOnCollapse) {
         e.target._map.removeLayer(this._markerSearch);
       }
@@ -604,7 +604,7 @@ LeafletWidget.methods.clearSearchFeatures = function() {
   (function() {
     var map = this;
     if (map.searchControl) {
-      map.removeLayer(map.searchControl._markerSearch)
+      map.removeLayer(map.searchControl._markerSearch);
     }
   }).call(this);
 };

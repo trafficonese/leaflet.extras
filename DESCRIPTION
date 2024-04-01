@@ -53,7 +53,6 @@ Imports:
 Suggests:
     jsonlite,
     readr,
-    xfun,
     sf,
     testthat (>= 3.0.0)
 URL: https://github.com/trafficonese/leaflet.extras, https://trafficonese.github.io/leaflet.extras/

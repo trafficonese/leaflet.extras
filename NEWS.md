@@ -16,7 +16,6 @@
 - Include Tests for R functions 
 - Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
 - Fixed & extended examples
-- Add `xfun` package to Suggests for base64 encoding of icons
 
 ## Bugfixes
 - #104, #148, #155, #156, #164, #165, #169, #174, #187
