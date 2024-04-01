@@ -1,0 +1,1 @@
+LeafletWidget.methods.setMapWidgetStyle=function(t){var e=this;$.isEmptyObject(e._container.style)&&(e._container.style={}),$.each(t,(function(t,n){e._container.style[t]=n}))};
