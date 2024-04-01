@@ -9,6 +9,11 @@ wms.legendDependency <- function() {
 #' @description Add a WMS Legend
 #' @param uri The legend URI
 #' @inheritParams leaflet::addLegend
+#' @param layerId When the layerId of the WMS layer is properly set, the legend
+#'   will appear or disappear accordingly based on whether the layer is visible or not.
+#'   If no layerId is given, it will try to get the layer name from the `uri`,
+#'   otherwise a random ID will be assigned.
+#' @param group The group argument is not used. Please set the `layerId` correctly.
 #' @rdname wms-legend
 #' @export
 #' @examples

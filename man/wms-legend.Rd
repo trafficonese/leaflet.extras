@@ -13,16 +13,12 @@ addWMSLegend(map, uri, position = "topright", layerId = NULL, group = NULL)
 
 \item{position}{the position of the legend}
 
-\item{layerId}{the ID of the legend; subsequent calls to \code{addLegend}
-or \code{addControl} with the same \code{layerId} will replace this
-legend. The ID can also be used with \code{removeControl}.}
+\item{layerId}{When the layerId of the WMS layer is properly set, the legend
+will appear or disappear accordingly based on whether the layer is visible or not.
+If no layerId is given, it will try to get the layer name from the `uri`,
+otherwise a random ID will be assigned.}
 
-\item{group}{\code{group} name of a leaflet layer group.
-Supplying this value will tie the legend to the leaflet layer group
-with this name and will auto add/remove the legend as the
-group is added/removed, for example via layerControl.
-You will need to set the \code{group} when you add a layer
-(e.g. \code{\link[leaflet]{addPolygons}}) and supply the same name here.}
+\item{group}{The group argument is not used. Please set the `layerId` correctly.}
 }
 \description{
 Add a WMS Legend
