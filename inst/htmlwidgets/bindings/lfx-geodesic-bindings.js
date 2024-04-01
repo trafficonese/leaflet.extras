@@ -189,28 +189,28 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
 
 
       // Highlight
-      let highlightStyle = df.get(i,"highlightOptions");
-      if(!$.isEmptyObject(highlightStyle)) {
-        let defaultStyle = {};
+      const highlightStyle = df.get(i, 'highlightOptions');
+      if (!$.isEmptyObject(highlightStyle)) {
+        const defaultStyle = {};
         $.each(highlightStyle, function (k, v) {
-          if(k != "bringToFront" && k != "sendToBack"){
-            if(df.get(i, k)) {
+          if (k != 'bringToFront' && k != 'sendToBack') {
+            if (df.get(i, k)) {
               defaultStyle[k] = df.get(i, k);
             }
           }
         });
 
-        Geodesic.on("mouseover",
+        Geodesic.on('mouseover',
           function(e) {
             this.setStyle(highlightStyle);
-            if(highlightStyle.bringToFront) {
+            if (highlightStyle.bringToFront) {
               this.bringToFront();
             }
           });
-        Geodesic.on("mouseout",
+        Geodesic.on('mouseout',
           function(e) {
             this.setStyle(defaultStyle);
-            if(highlightStyle.sendToBack) {
+            if (highlightStyle.sendToBack) {
               this.bringToBack();
             }
           });

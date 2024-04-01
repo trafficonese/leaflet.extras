@@ -27,7 +27,9 @@ const library_prod = function(name, filename = name, library = undefined) {
     optimization: {
       minimize: true,
       minimizer: [
-        new TerserPlugin(),
+        new TerserPlugin({
+          extractComments: false,
+        }),
         new CssMinimizerPlugin(),
       ]
     },
@@ -75,6 +77,7 @@ const add_externals = function(config, externals) {
   config.externals = Object.assign(config.externals, externals);
   return config;
 };
+
 const add_attachments = function(config, src, attachments, output_folder) {
   config.plugins = config.plugins.concat([
     new CopyWebpackPlugin({
@@ -87,7 +90,6 @@ const add_attachments = function(config, src, attachments, output_folder) {
   ]);
   return config;
 };
-
 const library_binding = function(name) {
   return {
     mode: mode, // minify everything
@@ -139,7 +141,7 @@ const config = [
   library_binding('lfx-geodesic'),
 
   // "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9"
-  library_prod(['leaflet-styleeditor', 'leaflet-styleeditor/dist/css/Leaflet.StyleEditor.min.css'],
+  library_prod(['leaflet-styleeditor/dist/javascript/Leaflet.StyleEditor.js', 'leaflet-styleeditor/dist/css/Leaflet.StyleEditor.min.css'],
     'lfx-styleeditor'),
   library_binding('lfx-styleeditor'),
 
@@ -180,8 +182,8 @@ const config = [
     'lfx-pulse-icon'),
   library_binding('lfx-pulse-icon'),
 
-  // "fuse.js": "3.2.0",
-  // "leaflet-search": "2.3.7",
+  // "fuse.js": "7.0.0",
+  // "leaflet-search": "3.0.5",
   library_prod('fuse.js', 'fuse_js', 'Fuse'),
   library_prod(['leaflet-search', 'leaflet-search/dist/leaflet-search.min.css'],
     'lfx-search'),
@@ -204,7 +206,6 @@ const config = [
   library_binding('lfx-wms-legend'),
 
   // "leaflet.heat": "0.2.0",
-  //library_prod(src_path + "heat/leaflet-heat.js", "lfx-heat"),
   library_prod('leaflet-heat', 'lfx-heat'),
   library_binding('lfx-heat'),
 
@@ -229,8 +230,6 @@ const config = [
 
 
   library_binding('map-widget-style')
-
-
 
 ];
 
