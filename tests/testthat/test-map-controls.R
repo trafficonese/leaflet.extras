@@ -222,9 +222,11 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], "group")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], searchFeaturesOptions())
 
-  opts <- searchFeaturesOptions(propertyName = "popup",
-                                initial = TRUE,
-                                openPopup = TRUE)
+  opts <- searchFeaturesOptions(
+    propertyName = "popup",
+    initial = TRUE,
+    openPopup = TRUE
+  )
   ts <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     addSearchFeatures(
