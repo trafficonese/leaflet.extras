@@ -1,9 +1,9 @@
 leafletSearchDependencies <- function() {
   list(
-    # // "fuse.js": "3.2.0",
-    # // "leaflet-search": "2.3.7",
-    html_dep_prod("fuse_js", "3.2.0"),
-    html_dep_prod("lfx-search", "2.3.7", has_style = TRUE, has_binding = TRUE)
+    # // "fuse.js": "7.0.0",
+    # // "leaflet-search": "3.0.5",
+    html_dep_prod("fuse_js", "7.0.0"),
+    html_dep_prod("lfx-search", "3.0.5", has_style = TRUE, has_binding = TRUE)
   )
 }
 
@@ -366,5 +366,16 @@ removeSearchFeatures <- function(map, clearFeatures = FALSE) {
     getMapData(map),
     "removeSearchFeatures",
     clearFeatures
+  )
+}
+
+#' Clears the search marker
+#'
+#' @return modified map
+#' @rdname search-features
+#' @export
+clearSearchFeatures <- function(map) {
+  invokeMethod(
+    map, NULL, "clearSearchFeatures"
   )
 }

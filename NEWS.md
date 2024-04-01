@@ -3,6 +3,7 @@
 ## New Features
 - The `addDrawToolbar` offers two new options: `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips.
 - `searchOSMText` let's you set the OSM search text from R
+- New function `clearSearchFeatures` let's you clear the search marker
 - Changed default values in `searchOptions` for `url` / `propertyLoc` /  `propertyName`
 - The `apikey` of `addSearchGoogle` / `addReverseSearchGoogle` / `addBingTiles` now has to be not `NULL` and also not `""`.
 - `addBounceMarkers` behave now like normal Markers (except for clustering).
