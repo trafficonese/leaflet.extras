@@ -4,6 +4,7 @@
 \alias{addSearchOSM}
 \alias{searchOSMText}
 \alias{removeSearchOSM}
+\alias{clearSearchOSM}
 \alias{addReverseSearchOSM}
 \alias{addSearchGoogle}
 \alias{removeSearchGoogle}
@@ -17,6 +18,8 @@ addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 searchOSMText(map, text = "")
 
 removeSearchOSM(map)
+
+clearSearchOSM(map)
 
 addReverseSearchOSM(
   map,
@@ -95,6 +98,8 @@ modified map
 modified map
 
 modified map
+
+modified map
 }
 \description{
 Add a OSM search control to the map.
@@ -102,6 +107,8 @@ Add a OSM search control to the map.
 Add a OSM search control to the map.
 
 Removes the OSM search control from the map.
+
+Clears the search marker
 
 Add a Google search control to the map.
 

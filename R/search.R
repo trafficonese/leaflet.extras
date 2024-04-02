@@ -148,6 +148,19 @@ removeSearchOSM <- function(map) {
   )
 }
 
+#' Clears the search marker
+#'
+#' @return modified map
+#' @rdname search-geocoding
+#' @export
+clearSearchOSM <- function(map) {
+  invokeMethod(
+    map,
+    getMapData(map),
+    "clearSearchOSM"
+  )
+}
+
 #' @param showSearchLocation Boolean. If TRUE displays a Marker on the searched location's coordinates.
 #' @param showBounds Boolean. If TRUE show the bounding box of the found feature.
 #' @param showFeature Boolean. If TRUE show the found feature.

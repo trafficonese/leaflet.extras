@@ -18,7 +18,6 @@ function eventToShiny(e) {
 }
 
 LeafletWidget.methods.addSearchOSM = function(options) {
-
   (function() {
     var map = this;
 
@@ -75,7 +74,11 @@ var clickOSMEventHandler;
 LeafletWidget.methods.removeSearchOSM = function() {
   (function() {
     var map = this;
+
     if (map.searchControlOSM) {
+      if (map.searchControlOSM._markerSearch) {
+        map.removeLayer(map.searchControlOSM._markerSearch);
+      }
       map.searchControlOSM.remove(map);
       delete map.searchControlOSM;
     }
@@ -84,6 +87,17 @@ LeafletWidget.methods.removeSearchOSM = function() {
     if (revsear) {
       revsear.remove();
       map.off('click', clickOSMEventHandler);
+    }
+  }).call(this);
+};
+
+LeafletWidget.methods.clearSearchOSM = function() {
+  (function() {
+    var map = this;
+    if (map.searchControlOSM) {
+      if (map.searchControlOSM._markerSearch) {
+        map.removeLayer(map.searchControlOSM._markerSearch);
+      }
     }
   }).call(this);
 };

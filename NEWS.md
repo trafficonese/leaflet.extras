@@ -5,6 +5,7 @@
   - `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips
   - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://www.npmjs.com/package/leaflet-draw-drag) plugin. Otherwise, this library will not be included. Fix #115
 - `searchOSMText` let's you set the OSM search text from R
+- `clearSearchOSM` let's you clear the search marker for `addSearchOSM`. Fix #158, Fix #209
 - `clearSearchFeatures` let's you clear the search marker
 - `addBounceMarkers` behave now like normal Markers (except for clustering)
 - **Update Geodesics** functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons. 
