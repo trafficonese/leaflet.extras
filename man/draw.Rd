@@ -85,4 +85,6 @@ leaflet() \%>\%
 
 ## for more examples see
 # browseURL(system.file("examples/draw.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/shiny/draw-events/app.R", package = "leaflet.extras"))
+# browseURL(system.file("examples/shiny/draw-events/draw_mouse_events.R", package = "leaflet.extras"))
 }

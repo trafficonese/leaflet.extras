@@ -3,6 +3,26 @@
 LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
   targetGroup, options) {
 
+  // Copied from: https://github.com/rstudio/leaflet/blob/8b20549eeca9b7b66019f098a380422377666bc6/javascript/src/methods.js#L17
+  function mouseHandler(mapId, layerId, group, eventName, extraInfo) {
+    return function(e) {
+      if (!HTMLWidgets.shinyMode) return;
+
+      var eventInfo = $.extend(
+        {
+          id: layerId,
+          category: extraInfo,
+          '.nonce': Math.random()  // force reactivity
+        },
+        group !== null ? {group: group} : null,
+        e.target._latlngs ? {latlngs: e.target._latlngs.flat()} : e.target._latlng,
+        e.target._mRadius !== undefined ? { radius: e.target._mRadius } : {}
+      );
+
+      Shiny.onInputChange(mapId + '_' + eventName, eventInfo);
+    };
+  }
+
   (function() {
 
     var map = this;
@@ -134,6 +154,21 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
       }
 
       if (!HTMLWidgets.shinyMode) return;
+
+      // Derive R leaflet layer category (shape, marker) from leaflet layer type
+      var layerCategory = e.layerType;
+
+      if (['rectangle', 'polygon', 'circle'].includes(layerCategory)) {
+        layerCategory = 'shape';
+      } else if (layerCategory === 'circlemarker') {
+        layerCategory = 'marker';
+      }
+
+      // Add R leaflet click, etc, handlers.
+      // Adjusted from: https://github.com/rstudio/leaflet/blob/8b20549eeca9b7b66019f098a380422377666bc6/javascript/src/methods.js#L355
+      layer.on('click', mouseHandler(map.id, featureId, targetGroup, layerCategory + '_draw_click', layerCategory), map);
+      layer.on('mouseover', mouseHandler(map.id, featureId, targetGroup, layerCategory + '_draw_mouseover', layerCategory), map);
+      layer.on('mouseout', mouseHandler(map.id, featureId, targetGroup, layerCategory + '_draw_mouseout', layerCategory), map);
 
       Shiny.onInputChange(map.id + '_draw_new_feature',
         layer.toGeoJSON(), {priority: "event"});

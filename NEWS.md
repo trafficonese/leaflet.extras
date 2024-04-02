@@ -9,6 +9,7 @@
 - `addBounceMarkers` behave now like normal Markers (except for clustering)
 - **Update Geodesics** functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons. 
 - `addLatLng` for `addGeodesicPolylines` allows you to append line vertices
+- Emit mouse events (`click`, `mouseover`, and `mouseout`) for **drawn features**. The event names are suffixed with identifiers based on the `layercategory`, appended with `_draw_click`, `_draw_mouseover`, or `_draw_mouseout`. The `layercategory` should be either `shape`, `polyline`, or `marker`. (Thanks to @cmcaine) See `examples/shiny/draw-events/draw_mouse_events.R`
 
 ## Improvements
 - The `apikey` of `addSearchGoogle` / `addReverseSearchGoogle` / `addBingTiles` now has to be not `NULL` and also not `""`

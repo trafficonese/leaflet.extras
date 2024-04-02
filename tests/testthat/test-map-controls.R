@@ -298,6 +298,14 @@ test_that("map-control-plugins", {
   expect_null(ARGS$toolbar)
   expect_null(ARGS$handlers)
 
+  ts <- ts %>%
+    removeDrawToolbar()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw-drag")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "lfx-draw")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeDrawToolbar")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], FALSE)
+
 
   drawshape <- drawShapeOptions(
     stroke = FALSE,color = "blue",weight = 3,opacity = 0.7,fill = FALSE,fillColor = "blue",fillOpacity = 0.2,
@@ -361,8 +369,7 @@ test_that("map-control-plugins", {
   ts <- ts %>%
     removeDrawToolbar()
   expect_s3_class(ts, "leaflet")
-  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw-drag")
-  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "lfx-draw")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeDrawToolbar")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], FALSE)
 
