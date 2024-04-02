@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-04-02T17:48Z
+last_built: 2024-04-02T18:11Z
 urls:
   reference: https://trafficonese.github.io/leaflet.extras/reference
   article: https://trafficonese.github.io/leaflet.extras/articles
