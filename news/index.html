@@ -65,6 +65,8 @@
 <strong>Update Geodesics</strong> functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons.</li>
 <li>
 <code>addLatLng</code> for <code>addGeodesicPolylines</code> allows you to append line vertices</li>
+<li>Emit mouse events (<code>click</code>, <code>mouseover</code>, and <code>mouseout</code>) for <strong>drawn features</strong>. The event names are suffixed with identifiers based on the <code>layercategory</code>, appended with <code>_draw_click</code>, <code>_draw_mouseover</code>, or <code>_draw_mouseout</code>. The <code>layercategory</code> should be either <code>shape</code>, <code>polyline</code>, or <code>marker</code>. (Thanks to <a href="https://github.com/cmcaine" class="external-link">@cmcaine</a>) See <code>examples/shiny/draw-events/draw_mouse_events.R</code>
+</li>
 </ul></div>
 <div class="section level3">
 <h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
