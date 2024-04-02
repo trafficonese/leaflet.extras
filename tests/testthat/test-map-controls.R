@@ -308,26 +308,33 @@ test_that("map-control-plugins", {
 
 
   drawshape <- drawShapeOptions(
-    stroke = FALSE,color = "blue",weight = 3,opacity = 0.7,fill = FALSE,fillColor = "blue",fillOpacity = 0.2,
-    dashArray = c(10,16),lineCap = TRUE,lineJoin = TRUE,clickable = FALSE,pointerEvents = NULL,smoothFactor = 3, noClip = FALSE)
+    stroke = FALSE, color = "blue", weight = 3, opacity = 0.7, fill = FALSE, fillColor = "blue", fillOpacity = 0.2,
+    dashArray = c(10, 16), lineCap = TRUE, lineJoin = TRUE, clickable = FALSE, pointerEvents = NULL, smoothFactor = 3, noClip = FALSE
+  )
   drawopts <- drawPolylineOptions(
     allowIntersection = FALSE, drawError = list(color = "red", timeout = 200),
     guidelineDistance = 500, maxGuideLineLength = 2000,
     showLength = FALSE, metric = FALSE, feet = FALSE, nautic = TRUE,
-    zIndexOffset = 4000, shapeOptions = drawshape, repeatMode = TRUE)
+    zIndexOffset = 4000, shapeOptions = drawshape, repeatMode = TRUE
+  )
   drawpolyg <- drawPolygonOptions(
-    showArea = TRUE, metric = FALSE, shapeOptions = drawshape, repeatMode = TRUE)
+    showArea = TRUE, metric = FALSE, shapeOptions = drawshape, repeatMode = TRUE
+  )
   drawcircl <- drawCircleOptions(
-    showRadius = FALSE,metric = FALSE,feet = FALSE,nautic = TRUE,shapeOptions = drawshape,repeatMode = TRUE)
+    showRadius = FALSE, metric = FALSE, feet = FALSE, nautic = TRUE, shapeOptions = drawshape, repeatMode = TRUE
+  )
   drawrect <- drawRectangleOptions(
-    showArea = FALSE,metric = FALSE,shapeOptions = drawshape,repeatMode = TRUE)
+    showArea = FALSE, metric = FALSE, shapeOptions = drawshape, repeatMode = TRUE
+  )
   drawmark <- drawMarkerOptions(markerIcon = NULL, zIndexOffset = 4000, repeatMode = TRUE)
   drawcirc <- drawCircleMarkerOptions(
-    stroke = TRUE,color = "blue",weight = 8,opacity = 1,fill = FALSE,fillColor = "red",
-    fillOpacity = 0.5,clickable = FALSE,zIndexOffset = 4000,repeatMode = TRUE)
+    stroke = TRUE, color = "blue", weight = 8, opacity = 1, fill = FALSE, fillColor = "red",
+    fillOpacity = 0.5, clickable = FALSE, zIndexOffset = 4000, repeatMode = TRUE
+  )
   selpath <- selectedPathOptions(
-    dashArray = c("30, 40"),weight = 5,color = "orange",fill = FALSE,
-    fillColor = "yellow",fillOpacity = 0.9,maintainColor = TRUE)
+    dashArray = c("30, 40"), weight = 5, color = "orange", fill = FALSE,
+    fillColor = "yellow", fillOpacity = 0.9, maintainColor = TRUE
+  )
   ts <- leaflet() %>%
     setView(0, 0, 2) %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
