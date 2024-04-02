@@ -62,8 +62,10 @@ addHeatmap <- function(
   )
 
   # convert gradient to expected format from leaflet
-  if (!is.null(gradient) && !is.function(gradient)) {
-    gradient <- colorNumeric(gradient, 0:1)
+  if (!is.null(gradient)) {
+    if (!is.function(gradient)) {
+      gradient <- colorNumeric(gradient, 0:1, alpha = TRUE)
+    }
     gradient <- as.list(gradient(0:20 / 20))
     names(gradient) <- as.character(0:20 / 20)
   }
