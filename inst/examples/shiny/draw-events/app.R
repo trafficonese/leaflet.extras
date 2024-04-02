@@ -73,6 +73,18 @@ server <- function(input, output, session) {
     print(input$leafmap_draw_new_feature)
   })
 
+  # Start of Draw-Edit
+  observeEvent(input$leafmap_draw_editstart, {
+    print("Start of draw edit")
+    print(input$leafmap_draw_editstart)
+  })
+
+  # Stop of Draw-Edit
+  observeEvent(input$leafmap_draw_editstop, {
+    print("STOP of draw edit")
+    print(input$leafmap_draw_editstop)
+  })
+
   # Edited Features
   observeEvent(input$leafmap_draw_edited_features, {
     print("Edited Features")

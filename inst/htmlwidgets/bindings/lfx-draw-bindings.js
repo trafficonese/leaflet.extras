@@ -136,18 +136,18 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
       if (!HTMLWidgets.shinyMode) return;
 
       Shiny.onInputChange(map.id + '_draw_new_feature',
-        layer.toGeoJSON());
+        layer.toGeoJSON(), {priority: "event"});
       Shiny.onInputChange(map.id + '_draw_all_features',
-        editableFeatureGroup.toGeoJSON());
+        editableFeatureGroup.toGeoJSON(), {priority: "event"});
     });
 
     map.on(L.Draw.Event.EDITSTART, function() {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id + '_draw_editstart', true);
+      Shiny.onInputChange(map.id + '_draw_editstart', true, {priority: "event"});
     });
     map.on(L.Draw.Event.EDITSTOP, function() {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id + '_draw_editstop', true);
+      Shiny.onInputChange(map.id + '_draw_editstop', true, {priority: "event"});
     });
 
     map.on(L.Draw.Event.EDITED, function(e) {
@@ -172,19 +172,19 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
       if (!HTMLWidgets.shinyMode) return;
 
       Shiny.onInputChange(map.id + '_draw_edited_features',
-        layers.toGeoJSON());
+        layers.toGeoJSON(), {priority: "event"});
       Shiny.onInputChange(map.id + '_draw_all_features',
-        editableFeatureGroup.toGeoJSON());
+        editableFeatureGroup.toGeoJSON(), {priority: "event"});
     });
 
     map.on(L.Draw.Event.DELETESTART, function() {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id + '_draw_deletestart', true);
+      Shiny.onInputChange(map.id + '_draw_deletestart', true, {priority: "event"});
     });
 
     map.on(L.Draw.Event.DELETESTOP, function() {
       if (!HTMLWidgets.shinyMode) return;
-      Shiny.onInputChange(map.id + '_draw_deletestop', true);
+      Shiny.onInputChange(map.id + '_draw_deletestop', true, {priority: "event"});
     });
 
     map.on(L.Draw.Event.DELETED, function(e) {
@@ -208,9 +208,9 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
 
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_deleted_features',
-        layers.toGeoJSON());
+        layers.toGeoJSON(), {priority: "event"});
       Shiny.onInputChange(map.id + '_draw_all_features',
-        editableFeatureGroup.toGeoJSON());
+        editableFeatureGroup.toGeoJSON(), {priority: "event"});
     });
 
   }).call(this);
