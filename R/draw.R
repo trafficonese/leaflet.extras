@@ -1,8 +1,14 @@
-drawDependencies <- function() {
-  list(
-    html_dep_prod("lfx-draw", "1.0.4", has_style = TRUE, has_binding = TRUE),
-    html_dep_prod("lfx-draw-drag", "0.4.8")
-  )
+drawDependencies <- function(drag = TRUE) {
+  if (drag) {
+    list(
+      html_dep_prod("lfx-draw", "1.0.4", has_style = TRUE, has_binding = TRUE),
+      html_dep_prod("lfx-draw-drag", "0.4.8")
+    )
+  } else {
+    list(
+      html_dep_prod("lfx-draw", "1.0.4", has_style = TRUE, has_binding = TRUE)
+    )
+  }
 }
 
 #' Adds a Toolbar to draw shapes/points on the map.
@@ -23,6 +29,8 @@ drawDependencies <- function() {
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @param toolbar See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @param handlers See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.
+#' @param drag When set to \code{TRUE}, the drawn features will be draggable during editing, utilizing
+#'    the \code{Leaflet.Draw.Drag} plugin. Otherwise, this library will not be included.
 #' @export
 #' @rdname draw
 #' @examples
@@ -55,7 +63,8 @@ addDrawToolbar <- function(
     editOptions = FALSE,
     singleFeature = FALSE,
     toolbar = NULL,
-    handlers = NULL) {
+    handlers = NULL,
+    drag = TRUE) {
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
     stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
@@ -63,7 +72,7 @@ addDrawToolbar <- function(
   if (!inherits(toolbar, "list")) toolbar <- NULL
   if (!inherits(handlers, "list")) handlers <- NULL
 
-  map$dependencies <- c(map$dependencies, drawDependencies())
+  map$dependencies <- c(map$dependencies, drawDependencies(drag))
 
   markerIconFunction <- NULL
   if (inherits(markerOptions, "list") && !is.null(markerOptions$markerIcon)) {

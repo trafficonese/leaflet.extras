@@ -291,8 +291,67 @@ test_that("map-control-plugins", {
   expect_identical(ARGS$draw$marker, drawMarkerOptions())
   expect_identical(ARGS$draw$circlemarker, drawCircleMarkerOptions())
   expect_identical(ARGS$draw$singleFeature, FALSE)
-
   expect_identical(ARGS$edit$selectedPathOptions, selectedPathOptions())
+  expect_identical(ARGS$edit$edit, TRUE)
+  expect_identical(ARGS$edit$remove, TRUE)
+  expect_identical(ARGS$edit$allowIntersection, TRUE)
+  expect_null(ARGS$toolbar)
+  expect_null(ARGS$handlers)
+
+
+  drawshape <- drawShapeOptions(
+    stroke = FALSE,color = "blue",weight = 3,opacity = 0.7,fill = FALSE,fillColor = "blue",fillOpacity = 0.2,
+    dashArray = c(10,16),lineCap = TRUE,lineJoin = TRUE,clickable = FALSE,pointerEvents = NULL,smoothFactor = 3, noClip = FALSE)
+  drawopts <- drawPolylineOptions(
+    allowIntersection = FALSE, drawError = list(color = "red", timeout = 200),
+    guidelineDistance = 500, maxGuideLineLength = 2000,
+    showLength = FALSE, metric = FALSE, feet = FALSE, nautic = TRUE,
+    zIndexOffset = 4000, shapeOptions = drawshape, repeatMode = TRUE)
+  drawpolyg <- drawPolygonOptions(
+    showArea = TRUE, metric = FALSE, shapeOptions = drawshape, repeatMode = TRUE)
+  drawcircl <- drawCircleOptions(
+    showRadius = FALSE,metric = FALSE,feet = FALSE,nautic = TRUE,shapeOptions = drawshape,repeatMode = TRUE)
+  drawrect <- drawRectangleOptions(
+    showArea = FALSE,metric = FALSE,shapeOptions = drawshape,repeatMode = TRUE)
+  drawmark <- drawMarkerOptions(markerIcon = NULL, zIndexOffset = 4000, repeatMode = TRUE)
+  drawcirc <- drawCircleMarkerOptions(
+    stroke = TRUE,color = "blue",weight = 8,opacity = 1,fill = FALSE,fillColor = "red",
+    fillOpacity = 0.5,clickable = FALSE,zIndexOffset = 4000,repeatMode = TRUE)
+  selpath <- selectedPathOptions(
+    dashArray = c("30, 40"),weight = 5,color = "orange",fill = FALSE,
+    fillColor = "yellow",fillOpacity = 0.9,maintainColor = TRUE)
+  ts <- leaflet() %>%
+    setView(0, 0, 2) %>%
+    addProviderTiles(providers$CartoDB.Positron) %>%
+    addDrawToolbar(
+      targetGroup = "draw",
+      position = "topright",
+      polylineOptions = drawopts,
+      polygonOptions = drawpolyg,
+      circleOptions = drawcircl,
+      rectangleOptions = drawrect,
+      markerOptions = drawmark,
+      circleMarkerOptions = drawcirc,
+      singleFeature = FALSE,
+      editOptions = editToolbarOptions(
+        selectedPathOptions = selpath
+      ),
+      drag = FALSE
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-draw")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addDrawToolbar")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "draw")
+  ARGS <- ts$x$calls[[length(ts$x$calls)]]$args[[3]]
+  expect_identical(ARGS$position, "topright")
+  expect_identical(ARGS$draw$polyline, drawopts)
+  expect_identical(ARGS$draw$polygon, drawpolyg)
+  expect_identical(ARGS$draw$circle, drawcircl)
+  expect_identical(ARGS$draw$rectangle, drawrect)
+  expect_identical(ARGS$draw$marker, drawmark)
+  expect_identical(ARGS$draw$circlemarker, drawcirc)
+  expect_identical(ARGS$draw$singleFeature, FALSE)
+  expect_identical(ARGS$edit$selectedPathOptions, selpath)
   expect_identical(ARGS$edit$edit, TRUE)
   expect_identical(ARGS$edit$remove, TRUE)
   expect_identical(ARGS$edit$allowIntersection, TRUE)

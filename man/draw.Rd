@@ -19,7 +19,8 @@ addDrawToolbar(
   editOptions = FALSE,
   singleFeature = FALSE,
   toolbar = NULL,
-  handlers = NULL
+  handlers = NULL,
+  drag = TRUE
 )
 
 removeDrawToolbar(map, clearFeatures = FALSE)
@@ -55,6 +56,9 @@ You can either set layerId or group or none but not both.}
 \item{toolbar}{See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.}
 
 \item{handlers}{See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.}
+
+\item{drag}{When set to \code{TRUE}, the drawn features will be draggable during editing, utilizing
+the \code{Leaflet.Draw.Drag} plugin. Otherwise, this library will not be included.}
 
 \item{clearFeatures}{whether to clear the map of drawn features.}
 }
