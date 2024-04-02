@@ -1,11 +1,12 @@
-
 webGLHeatmapDependency <- function() {
   list(
     # // "leaflet-webgl-heatmap": "0.2.7",
     html_dep_prod(
       "lfx-webgl-heatmap", "0.2.7",
-      attachment = c("skyline" = "skyline-gradient.png",
-                     "deep-sea" = "deep-sea-gradient.png"),
+      attachment = c(
+        "skyline" = "skyline-gradient.png",
+        "deep-sea" = "deep-sea-gradient.png"
+      ),
       has_binding = TRUE
     )
   )
@@ -47,25 +48,27 @@ webGLHeatmapDependency <- function() {
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))
-addWebGLHeatmap = function(
-  map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
-  size = "30000",
-  units = "m",
-  opacity = 1,
-  gradientTexture = NULL,
-  alphaRange = 1,
-  data = leaflet::getMapData(map)
-) {
-  map$dependencies <- c(map$dependencies,
-                        webGLHeatmapDependency())
+addWebGLHeatmap <- function(
+    map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
+    size = "30000",
+    units = "m",
+    opacity = 1,
+    gradientTexture = NULL,
+    alphaRange = 1,
+    data = leaflet::getMapData(map)) {
+  map$dependencies <- c(
+    map$dependencies,
+    webGLHeatmapDependency()
+  )
 
   if (!is.null(gradientTexture) &&
-     !gradientTexture %in% c("skyline", "deep-sea")) {
+    !gradientTexture %in% c("skyline", "deep-sea")) {
     stop("Only allowed values for gradientTexture are \"skyline\" and \"deep-sea\"")
   }
 
-  pts = leaflet::derivePoints(
-    data, lng, lat, missing(lng), missing(lat), "addWebGLHeatmap")
+  pts <- leaflet::derivePoints(
+    data, lng, lat, missing(lng), missing(lat), "addWebGLHeatmap"
+  )
 
   if (is.null(intensity)) {
     points <- cbind(pts$lat, pts$lng)
@@ -97,7 +100,8 @@ addWebGLHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLGeoJSONHeatmap
-#' \donttest{geoJson <- readr::read_file(
+#' \donttest{
+#' geoJson <- readr::read_file(
 #'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
@@ -105,27 +109,28 @@ addWebGLHeatmap = function(
 #'   setView(-77.0369, 38.9072, 12) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addWebGLGeoJSONHeatmap(
-#'     geoJson, size = 30 , units = "px"
+#'     geoJson,
+#'     size = 30, units = "px"
 #'   ) %>%
 #'   addGeoJSONv2(
 #'     geoJson,
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
 #'     markerOptions = markerOptions(radius = 2)
-#'   )}
+#'   )
+#' }
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
 #' # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
-addWebGLGeoJSONHeatmap = function(
-  map, geojson, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  size = "30000",
-  units = "m",
-  opacity = 1,
-  gradientTexture = NULL,
-  alphaRange = 1
-  ) {
+addWebGLGeoJSONHeatmap <- function(
+    map, geojson, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    size = "30000",
+    units = "m",
+    opacity = 1,
+    gradientTexture = NULL,
+    alphaRange = 1) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -139,7 +144,8 @@ addWebGLGeoJSONHeatmap = function(
       opacity = opacity,
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
-    )))
+    ))
+  )
 }
 
 #' Adds a heatmap with data from a KML file/url
@@ -148,29 +154,31 @@ addWebGLGeoJSONHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLKMLHeatmap
-#' \donttest{kml <- readr::read_file(
+#' \donttest{
+#' kml <- readr::read_file(
 #'   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 #' )
 #'
-#' leaflet() %>% setView(-77.0369, 38.9072, 12) %>%
+#' leaflet() %>%
+#'   setView(-77.0369, 38.9072, 12) %>%
 #'   addProviderTiles(providers$CartoDB.Positron) %>%
 #'   addWebGLKMLHeatmap(kml, size = 20, units = "px") %>%
 #'   addKML(
 #'     kml,
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-#'     markerOptions = markerOptions(radius = 1))}
+#'     markerOptions = markerOptions(radius = 1)
+#'   )
+#' }
 #'
-#'
-addWebGLKMLHeatmap = function(
-  map, kml, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  size = "30000",
-  units = "m",
-  opacity = 1,
-  gradientTexture = NULL,
-  alphaRange = 1
-  ) {
+addWebGLKMLHeatmap <- function(
+    map, kml, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    size = "30000",
+    units = "m",
+    opacity = 1,
+    gradientTexture = NULL,
+    alphaRange = 1) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -184,7 +192,8 @@ addWebGLKMLHeatmap = function(
       opacity = opacity,
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
-    )))
+    ))
+  )
 }
 
 #' Adds a heatmap with data from a CSV file/url
@@ -195,7 +204,8 @@ addWebGLKMLHeatmap = function(
 #' @export
 #' @examples
 #' ## addWebGLCSVHeatmap
-#' \donttest{csv <- readr::read_file(
+#' \donttest{
+#' csv <- readr::read_file(
 #'   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 #' )
 #'
@@ -205,17 +215,18 @@ addWebGLKMLHeatmap = function(
 #'   addWebGLCSVHeatmap(
 #'     csv,
 #'     csvParserOptions("latitude_deg", "longitude_deg"),
-#'     size = 10, units = "px")}
+#'     size = 10, units = "px"
+#'   )
+#' }
 #'
-addWebGLCSVHeatmap = function(
-  map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  size = "30000",
-  units = "m",
-  opacity = 1,
-  gradientTexture = NULL,
-  alphaRange = 1
-  ) {
+addWebGLCSVHeatmap <- function(
+    map, csv, csvParserOptions, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    size = "30000",
+    units = "m",
+    opacity = 1,
+    gradientTexture = NULL,
+    alphaRange = 1) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -230,7 +241,8 @@ addWebGLCSVHeatmap = function(
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
     )),
-    csvParserOptions)
+    csvParserOptions
+  )
 }
 
 #' Adds a heatmap with data from a GPX file/url
@@ -238,8 +250,8 @@ addWebGLCSVHeatmap = function(
 #' @rdname webglheatmap
 #' @export
 #' @examples
-#'
-#' \donttest{airports <- readr::read_file(
+#' \donttest{
+#' airports <- readr::read_file(
 #'   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 #' )
 #'
@@ -262,20 +274,20 @@ addWebGLCSVHeatmap = function(
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
 #'     markerOptions = markerOptions(radius = 1.5),
 #'     group = "airports"
-#'   )}
+#'   )
+#' }
 #'
 #'
 #' ## for a larger example see
 #' # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
-addWebGLGPXHeatmap = function(
-  map, gpx, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  size = "30000",
-  units = "m",
-  opacity = 1,
-  gradientTexture = NULL,
-  alphaRange = 1
-  ) {
+addWebGLGPXHeatmap <- function(
+    map, gpx, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    size = "30000",
+    units = "m",
+    opacity = 1,
+    gradientTexture = NULL,
+    alphaRange = 1) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -289,20 +301,21 @@ addWebGLGPXHeatmap = function(
       opacity = opacity,
       gradientTexture = gradientTexture,
       alphaRange = alphaRange
-    )))
+    ))
+  )
 }
 
 
 #' removes the webgl heatmap
 #' @rdname webglheatmap
 #' @export
-removeWebGLHeatmap = function(map, layerId) {
-    leaflet::invokeMethod(map, leaflet::getMapData(map), "removeWebGLHeatmap", layerId)
+removeWebGLHeatmap <- function(map, layerId) {
+  leaflet::invokeMethod(map, leaflet::getMapData(map), "removeWebGLHeatmap", layerId)
 }
 
 #' clears the webgl heatmap
 #' @rdname webglheatmap
 #' @export
-clearWebGLHeatmap = function(map) {
-    leaflet::invokeMethod(map, NULL, "clearWebGLHeatmap")
+clearWebGLHeatmap <- function(map) {
+  leaflet::invokeMethod(map, NULL, "clearWebGLHeatmap")
 }

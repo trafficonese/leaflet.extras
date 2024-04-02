@@ -9,3 +9,12 @@ library(leaflet.extras)
 leaflet(width = "100%") %>% setView(0, 0, 1) %>%
   addTiles() %>%
   suspendScroll()
+
+
+leaflet(width = "100%") %>% setView(0, 0, 1) %>%
+  addTiles() %>%
+  suspendScroll(wakeMessage = "Click to Wake",
+                hoverToWake = FALSE,
+                sleep = TRUE,
+                sleepTime = 100, wakeTime = 750,
+                sleepNote = TRUE)

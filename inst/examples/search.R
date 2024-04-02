@@ -13,9 +13,11 @@ library(leaflet.extras)
 leaflet() %>%
   addProviderTiles(providers$Esri.WorldStreetMap) %>%
   addResetMapButton() %>%
-  addSearchOSM() %>%
-  addSearchGoogle() %>%
-  addSearchUSCensusBureau()
+  addSearchOSM(options = searchOptions(autoCollapse = TRUE,
+                                       textPlaceholder = "Custom OSM Search",
+                                       minLength = 2)) %>%
+  addSearchGoogle(options = searchOptions(textPlaceholder = "Custom Google Search")) %>%
+  addSearchUSCensusBureau(options = searchOptions(textPlaceholder = "Custom Census Search"))
 
 #' Reverse Geocoding using OSM
 # Reverse Geocoding ----
@@ -38,14 +40,18 @@ Providence,41.8236,-71.4222,177994
 
 leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
   addCircles(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity = 0.5,
-             radius = ~sqrt(Pop) * 10, popup = ~City, label = ~City, group = "cities") %>%
+             radius = ~sqrt(Pop) * 10,
+             popup = ~City,
+             label = ~City, ## Search uses the Label!!
+             group = "cities") %>%
   addResetMapButton() %>%
   addSearchFeatures(
     targetGroups = "cities",
     options = searchFeaturesOptions(
       zoom = 12, openPopup = TRUE, firstTipSubmit = TRUE,
       autoCollapse = TRUE, hideMarkerOnCollapse = TRUE )) %>%
-  addControl("<P><B>Hint!</B> Search for ...<br/><ul><li>New York</li><li>Boston</li><li>Hartford</li><li>Philadelphia</li><li>Pittsburgh</li><li>Providence</li></ul></P>",
+  addControl("<P><B>Hint!</B> Search for ...<br/><ul><li>New York</li><li>Boston</li><li>Hartford</li>
+             <li>Philadelphia</li><li>Pittsburgh</li><li>Providence</li></ul></P>",
              position = "bottomright")
 
 #' ### Search Polygons
@@ -83,6 +89,7 @@ leaflet() %>% addProviderTiles(providers$Esri.WorldStreetMap) %>%
     markerIcons = icons, markerIconProperty = "amenity",
     markerOptions = markerOptions(riseOnHover = TRUE, opacity = 0.75),
     clusterOptions = markerClusterOptions(),
+    popupOptions = popupOptions(minWidth = 500),
     group = "pubs") %>%
   addResetMapButton() %>%
   addSearchFeatures(

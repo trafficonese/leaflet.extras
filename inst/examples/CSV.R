@@ -33,4 +33,4 @@ leaf %>%
   addWebGLCSVHeatmap(
     csv,
     csvParserOptions("latitude_deg", "longitude_deg"),
-    size = 3, units = "px")
+    size = 13, units = "px")

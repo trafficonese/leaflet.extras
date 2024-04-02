@@ -4,9 +4,17 @@
 \alias{addBingTiles}
 \title{Adds Bing Tiles Layer}
 \usage{
-addBingTiles(map, apikey = Sys.getenv("BING_MAPS_API_KEY"),
-  imagerySet = c("Aerial", "AerialWithLabels", "CanvasDark", "CanvasLight",
-  "CanvasGray", "Road"), layerId = NULL, group = NULL, ...)
+addBingTiles(
+  map,
+  apikey = Sys.getenv("BING_MAPS_API_KEY"),
+  imagerySet = c("Aerial", "AerialWithLabels", "AerialWithLabelsOnDemand",
+    "AerialWithLabelsOnDemand", "Birdseye", "BirdseyeWithLabels", "BirdseyeV2",
+    "BirdseyeV2WithLabels", "CanvasDark", "CanvasLight", "CanvasGray", "Road",
+    "RoadOnDemand", "Streetside"),
+  layerId = NULL,
+  group = NULL,
+  ...
+)
 }
 \arguments{
 \item{map}{The Map widget}

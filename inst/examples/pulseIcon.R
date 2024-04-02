@@ -17,8 +17,7 @@ City,Lat,Long,Pop
                                   Pittsburgh,40.4397,-79.9764,305841
                                   Providence,41.8236,-71.4222,177994"))
 
-library(dplyr)
-cities <- cities %>% mutate(PopCat = ifelse(Pop < 500000, "blue", "red"))
+cities$PopCat <- ifelse(cities$Pop < 500000, "blue", "red")
 
 leaflet(cities) %>% addTiles() %>%
   addPulseMarkers(lng = ~Long, lat = ~Lat,
@@ -45,3 +44,4 @@ leaflet(cities) %>% addTiles() %>%
                     label = ~City,
                     labelOptions = rep(labelOptions(noHide = T), nrow(cities)),
                     icon = ~popIcons[PopCat] )
+

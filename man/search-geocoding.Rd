@@ -2,6 +2,7 @@
 % Please edit documentation in R/search.R
 \name{addSearchOSM}
 \alias{addSearchOSM}
+\alias{searchOSMText}
 \alias{removeSearchOSM}
 \alias{addReverseSearchOSM}
 \alias{addSearchGoogle}
@@ -13,23 +14,43 @@
 \usage{
 addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
+searchOSMText(map, text = "")
+
 removeSearchOSM(map)
 
-addReverseSearchOSM(map, showSearchLocation = TRUE, showBounds = FALSE,
-  showFeature = TRUE, fitBounds = TRUE, displayText = TRUE,
-  group = NULL)
+addReverseSearchOSM(
+  map,
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL
+)
 
-addSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  options = searchOptions(autoCollapse = TRUE, minLength = 2))
+addSearchGoogle(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  options = searchOptions(autoCollapse = TRUE, minLength = 2)
+)
 
 removeSearchGoogle(map)
 
-addReverseSearchGoogle(map, apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-  showSearchLocation = TRUE, showBounds = FALSE, showFeature = TRUE,
-  fitBounds = TRUE, displayText = TRUE, group = NULL)
+addReverseSearchGoogle(
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL
+)
 
-addSearchUSCensusBureau(map, options = searchOptions(autoCollapse = TRUE,
-  minLength = 20))
+addSearchUSCensusBureau(
+  map,
+  options = searchOptions(autoCollapse = TRUE, minLength = 20)
+)
 
 removeSearchUSCensusBureau(map)
 }
@@ -37,6 +58,8 @@ removeSearchUSCensusBureau(map)
 \item{map}{a map widget object}
 
 \item{options}{Search Options}
+
+\item{text}{The search text}
 
 \item{showSearchLocation}{Boolean. If TRUE displays a Marker on the searched location's coordinates.}
 
@@ -70,8 +93,12 @@ modified map
 modified map
 
 modified map
+
+modified map
 }
 \description{
+Add a OSM search control to the map.
+
 Add a OSM search control to the map.
 
 Removes the OSM search control from the map.
@@ -92,6 +119,5 @@ leaflet() \%>\%
 
 ## for more examples see
 # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
-
 
 }

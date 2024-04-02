@@ -18,62 +18,43 @@ cities <- read.csv(
     Pittsburgh,40.4397,-79.9764,305841
     Providence,41.8236,-71.4222,177994"))
 
-# Translate darksky API icons to Weather Icons
+# Translate OpenWeather API icons to Weather Icons
 iconMap = list(
-  "clear-day" = "day-sunny",
-  "clear-night" = "night-clear",
-  "rain" = "rain",
-  "snow" = "snow",
-  "sleet" = "sleet",
-  "wind" = "windy",
-  "fog" = "fog",
-  "cloudy" = "cloudy",
-  "partly-cloudy-day" = "day-cloudy",
-  "partly-cloudy-night" = "night-alt-cloudy"
+  "Clear" = "day-sunny",
+  "Rain" = "rain",
+  "Snow" = "snow",
+  "Sleet" = "sleet",
+  "Wind" = "windy",
+  "Fog" = "fog",
+  "Clouds" = "cloudy"
 )
 
 
-cities_forecast <- purrr::map2(
-  cities$Lat, cities$Long,
-  function(lat, long) {
-    darksky::get_current_forecast(lat, long)
+## Requires an OWM_API_KEY - https://openweathermap.org/
+cities_forecast <- lapply(cities$City, function(ct) {
+  df <- owmr::get_current(ct, units = "metric")
+  cbind(df$weather, df$main, df$wind, df$clouds)
+})
+cities_forecast <- cities_forecast[lengths(cities_forecast) != 0]
+cities_forecast <- data.table::rbindlist(cities_forecast, fill=TRUE)
+
+map_temp_to_color <- function(temp) {
+  if (temp < 10) {
+    "lightblue"
+  } else if (temp >= 60 && temp < 65) {
+    "orange"
+  } else {
+    "red"
   }
-)
-
+}
 cities_icons <- weatherIcons(
-  icon = as.character(iconMap[purrr::map_chr(cities_forecast, ~ .$currently$icon)]),
-  markerColor = purrr::map_chr(
-    cities_forecast,
-    function(forecast){
-      temp <- forecast$currently$temperature
-      if (temp < 60) {
-        "lightblue"
-      } else if (temp >= 60 && temp < 65) {
-        "orange"
-      } else {
-        "red"
-      }
-    })
+  icon = as.character(iconMap[cities_forecast$main]),
+  markerColor = sapply(cities_forecast$temp, map_temp_to_color)
 )
-
-cities_popups <- purrr::map(
-  cities_forecast,
-  function(forecast) {
-    df <- forecast$currently
-    colnames(df) <- tools::toTitleCase(stringr::str_replace_all(
-      colnames(df), "([A-Z])", " \\1"))
-    htmlTable::htmlTable(
-      t(df),
-      caption = "Current Forecast",
-      align = "left",
-      header = c("Value"),
-      rowlabel = "Variable",
-      align.header = "left",
-      col.rgroup = c("#ffffff", "#eeeeee"))
-  })
 
 leaflet(cities) %>% addProviderTiles(providers$CartoDB.Positron) %>%
   addWeatherMarkers(lng = ~Long, lat = ~Lat,
                     label = ~City,
-                    icon = cities_icons,
-                    popup = cities_popups)
+                    # popup = cities_popups,
+                    icon = cities_icons
+                    )

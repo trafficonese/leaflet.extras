@@ -1,4 +1,3 @@
-
 # Source https://github.com/Leaflet/Leaflet.heat
 heatmapDependency <- function() {
   list(
@@ -43,7 +42,7 @@ heatmapDependency <- function() {
 #' @examples
 #' leaflet(quakes) %>%
 #'   addProviderTiles(providers$CartoDB.DarkMatter) %>%
-#'   setView( 178, -20, 5 ) %>%
+#'   setView(178, -20, 5) %>%
 #'   addHeatmap(
 #'     lng = ~long, lat = ~lat, intensity = ~mag,
 #'     blur = 20, max = 0.05, radius = 15
@@ -56,8 +55,8 @@ addHeatmap = function(
   minOpacity = 0.05,
   max = 1.0, radius = 25,
   blur = 15, gradient = NULL, cellSize = NULL,
-  data = leaflet::getMapData(map)
-) {
+  data = leaflet::getMapData(map)) {
+  
   map$dependencies <- c(map$dependencies,
                         heatmapDependency())
 
@@ -102,13 +101,12 @@ addHeatmap = function(
 #' Can be a "string" or a JS function, or NULL.
 #' @rdname heatmap
 #' @export
-addGeoJSONHeatmap = function(
-  map, geojson, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  minOpacity = 0.05,
-  max = 1.0, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL
-  ) {
+addGeoJSONHeatmap <- function(
+    map, geojson, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    minOpacity = 0.05,
+    max = 1.0, radius = 25,
+    blur = 15, gradient = NULL, cellSize = NULL) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -123,7 +121,8 @@ addGeoJSONHeatmap = function(
       blur = blur,
       gradient = gradient,
       cellSize = cellSize
-    )))
+    ))
+  )
 }
 
 #' Adds a heatmap with data from a KML file/url
@@ -143,17 +142,17 @@ addGeoJSONHeatmap = function(
 #'     kml,
 #'     markerType = "circleMarker",
 #'     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-#'     markerOptions = markerOptions(radius = 1))
+#'     markerOptions = markerOptions(radius = 1)
+#'   )
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))
-addKMLHeatmap = function(
-  map, kml, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  minOpacity = 0.05,
-  max = 1.0, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL
-  ) {
+addKMLHeatmap <- function(
+    map, kml, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    minOpacity = 0.05,
+    max = 1.0, radius = 25,
+    blur = 15, gradient = NULL, cellSize = NULL) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -168,7 +167,8 @@ addKMLHeatmap = function(
       blur = blur,
       gradient = gradient,
       cellSize = cellSize
-    )))
+    ))
+  )
 }
 
 #' Adds a heatmap with data from a CSV file/url
@@ -177,13 +177,12 @@ addKMLHeatmap = function(
 #' Use \code{\link{csvParserOptions}}() to supply csv parser options.
 #' @rdname heatmap
 #' @export
-addCSVHeatmap = function(
-  map, csv, csvParserOptions, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  minOpacity = 0.05,
-  max = 1.0, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL
-  ) {
+addCSVHeatmap <- function(
+    map, csv, csvParserOptions, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    minOpacity = 0.05,
+    max = 1.0, radius = 25,
+    blur = 15, gradient = NULL, cellSize = NULL) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -199,20 +198,20 @@ addCSVHeatmap = function(
       gradient = gradient,
       cellSize = cellSize
     )),
-    csvParserOptions)
+    csvParserOptions
+  )
 }
 
 #' Adds a heatmap with data from a GPX file/url
 #' @param gpx The GPX url or contents as string.
 #' @rdname heatmap
 #' @export
-addGPXHeatmap = function(
-  map, gpx, layerId = NULL, group = NULL,
-  intensityProperty = NULL,
-  minOpacity = 0.05,
-  max = 1.0, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL
-  ) {
+addGPXHeatmap <- function(
+    map, gpx, layerId = NULL, group = NULL,
+    intensityProperty = NULL,
+    minOpacity = 0.05,
+    max = 1.0, radius = 25,
+    blur = 15, gradient = NULL, cellSize = NULL) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -227,20 +226,21 @@ addGPXHeatmap = function(
       blur = blur,
       gradient = gradient,
       cellSize = cellSize
-    )))
+    ))
+  )
 }
 
 
 #' removes the heatmap
 #' @rdname heatmap
 #' @export
-removeHeatmap = function(map, layerId) {
-    leaflet::invokeMethod(map, leaflet::getMapData(map), "removeHeatmap", layerId)
+removeHeatmap <- function(map, layerId) {
+  leaflet::invokeMethod(map, leaflet::getMapData(map), "removeHeatmap", layerId)
 }
 
 #' clears the heatmap
 #' @rdname heatmap
 #' @export
-clearHeatmap = function(map) {
-    leaflet::invokeMethod(map, NULL, "clearHeatmap")
+clearHeatmap <- function(map) {
+  leaflet::invokeMethod(map, NULL, "clearHeatmap")
 }
