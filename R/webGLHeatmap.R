@@ -131,10 +131,11 @@ addWebGLGeoJSONHeatmap <- function(
     opacity = 1,
     gradientTexture = NULL,
     alphaRange = 1) {
-
-  map$dependencies <- c(map$dependencies,
-                        omnivoreDependencies(),
-                        webGLHeatmapDependency())
+  map$dependencies <- c(
+    map$dependencies,
+    omnivoreDependencies(),
+    webGLHeatmapDependency()
+  )
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
