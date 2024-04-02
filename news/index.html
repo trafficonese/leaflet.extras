@@ -48,24 +48,33 @@
 <h2 class="pkg-version" data-toc-text="development version" id="leafletextras-development-version">leaflet.extras (development version)<a class="anchor" aria-label="anchor" href="#leafletextras-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>The <code>addDrawToolbar</code> offers two new options: <code>handlersOptions</code> and <code>toolbarOptions</code>, with which you can customize the drawing toolbar and the tooltips.</li>
+<ul><li>
+<code>addDrawToolbar</code> offers some new options:
+<ul><li>
+<code>handlersOptions</code> and <code>toolbarOptions</code>, with which you can customize the drawing toolbar and the tooltips</li>
+<li>
+<code>addDrawToolbar</code> got a new argument <code>drag</code>. When set to <code>TRUE</code>, the drawn features will be draggable during editing, utilizing the <a href="https://www.npmjs.com/package/leaflet-draw-drag" class="external-link">Leaflet.Draw.Drag</a> plugin. Otherwise, this library will not be included. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/115" class="external-link">#115</a></li>
+</ul></li>
 <li>
 <code>searchOSMText</code> let’s you set the OSM search text from R</li>
-<li>New function <code>clearSearchFeatures</code> let’s you clear the search marker</li>
-<li>Changed default values in <code>searchOptions</code> for <code>url</code> / <code>propertyLoc</code> / <code>propertyName</code>
-</li>
-<li>The <code>apikey</code> of <code>addSearchGoogle</code> / <code>addReverseSearchGoogle</code> / <code>addBingTiles</code> now has to be not <code>NULL</code> and also not <code>""</code>.</li>
 <li>
-<code>addBounceMarkers</code> behave now like normal Markers (except for clustering).</li>
+<code>clearSearchFeatures</code> let’s you clear the search marker</li>
+<li>
+<code>addBounceMarkers</code> behave now like normal Markers (except for clustering)</li>
 <li>
 <strong>Update Geodesics</strong> functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons.</li>
-<li>New function <code>addLatLng</code> for <code>addGeodesicPolylines</code>
-</li>
-<li>Extend BingTiles <code>imagerySet</code> and emit warnings for deprecated sets</li>
+<li>
+<code>addLatLng</code> for <code>addGeodesicPolylines</code> allows you to append line vertices</li>
 </ul></div>
 <div class="section level3">
 <h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
-<ul><li>Updated most JavaScript dependencies, changed Webpack Build, removed <strong>source-maps</strong> as package size was an R-CMD-check issue</li>
+<ul><li>The <code>apikey</code> of <code>addSearchGoogle</code> / <code>addReverseSearchGoogle</code> / <code>addBingTiles</code> now has to be not <code>NULL</code> and also not <code>""</code>
+</li>
+<li>Extend BingTiles <code>imagerySet</code> and emit warnings for deprecated sets</li>
+<li>Changed default values in <code>searchOptions</code> for <code>url</code> / <code>propertyLoc</code> / <code>propertyName</code>
+</li>
+<li>Draw events trigger correctly using <code>priority: "event"</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/89" class="external-link">#89</a></li>
+<li>Updated most JavaScript dependencies, changed Webpack Build, removed <strong>source-maps</strong> as package size was an R-CMD-check issue</li>
 <li>Include Tests for R functions</li>
 <li>Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)</li>
 <li>Fixed &amp; extended examples</li>

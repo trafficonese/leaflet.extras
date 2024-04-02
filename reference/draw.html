@@ -4,7 +4,7 @@ Removes the draw toolbar"><title>Adds a Toolbar to draw shapes/points on the map
 Removes the draw toolbar"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/lfx-draw-1.0.2/lfx-draw-prod.css" rel="stylesheet"><script src="libs/lfx-draw-1.0.2/lfx-draw-prod.js"></script><script src="libs/lfx-draw-1.0.2/lfx-draw-bindings.js"></script><script src="libs/lfx-draw-drag-1.0.2/lfx-draw-drag-prod.js"></script><link href="libs/lfx-styleeditor-0.1.6/lfx-styleeditor-prod.css" rel="stylesheet"><script src="libs/lfx-styleeditor-0.1.6/lfx-styleeditor-prod.js"></script><script src="libs/lfx-styleeditor-0.1.6/lfx-styleeditor-bindings.js"></script></head><body>
+<![endif]--><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><link href="libs/lfx-draw-1.0.4/lfx-draw-prod.css" rel="stylesheet"><script src="libs/lfx-draw-1.0.4/lfx-draw-prod.js"></script><script src="libs/lfx-draw-1.0.4/lfx-draw-bindings.js"></script><script src="libs/lfx-draw-drag-0.4.8/lfx-draw-drag-prod.js"></script><link href="libs/lfx-styleeditor-0.1.21/lfx-styleeditor-prod.css" rel="stylesheet"><script src="libs/lfx-styleeditor-0.1.21/lfx-styleeditor-prod.js"></script><script src="libs/lfx-styleeditor-0.1.21/lfx-styleeditor-bindings.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
@@ -68,7 +68,8 @@ Removes the draw toolbar"><!-- mathjax --><script src="https://cdnjs.cloudflare.
 <span>  editOptions <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  singleFeature <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  toolbar <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  handlers <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  handlers <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drag <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">removeDrawToolbar</span><span class="op">(</span><span class="va">map</span>, clearFeatures <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -133,6 +134,11 @@ You can either set layerId or group or none but not both.</p></dd>
 
 <dt>handlers</dt>
 <dd><p>See <code><a href="handlersOptions.html">handlersOptions</a></code>. Set to <code>NULL</code> to take Leaflets default values.</p></dd>
+
+
+<dt>drag</dt>
+<dd><p>When set to <code>TRUE</code>, the drawn features will be draggable during editing, utilizing
+the <code>Leaflet.Draw.Drag</code> plugin. Otherwise, this library will not be included.</p></dd>
 
 
 <dt>clearFeatures</dt>

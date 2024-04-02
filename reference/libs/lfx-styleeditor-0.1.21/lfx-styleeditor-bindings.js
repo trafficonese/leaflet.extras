@@ -1,0 +1,1 @@
+LeafletWidget.methods.addStyleEditor=function(t){(function(){var e=this;e.styleEditor&&(e.styleEditor.remove(e),delete e.styleEditor);var o=L.control.styleEditor(t);o.addTo(e),e.styleEditor=o}).call(this)},LeafletWidget.methods.removeStyleEditor=function(){(function(){var t=this;t.styleEditor&&(t.styleEditor.remove(t),delete t.styleEditor)}).call(this)};
