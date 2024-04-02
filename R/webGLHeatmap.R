@@ -3,7 +3,7 @@ webGLHeatmapDependency <- function() {
     # // "leaflet-webgl-heatmap": "0.2.7",
     html_dep_prod(
       "lfx-webgl-heatmap", "0.2.7",
-      attachment = c(
+      attachment = list(
         "skyline" = "skyline-gradient.png",
         "deep-sea" = "deep-sea-gradient.png"
       ),
@@ -131,8 +131,10 @@ addWebGLGeoJSONHeatmap <- function(
     opacity = 1,
     gradientTexture = NULL,
     alphaRange = 1) {
-  map$dependencies <- c(map$dependencies, omnivoreDependencies())
-  map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
+
+  map$dependencies <- c(map$dependencies,
+                        omnivoreDependencies(),
+                        webGLHeatmapDependency())
 
   leaflet::invokeMethod(
     map, leaflet::getMapData(map),
