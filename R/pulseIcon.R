@@ -1,6 +1,5 @@
 pulseIconDependency <- function() {
   list(
-    # // "leaflet-pulse-icon": "0.1.1",
     html_dep_prod("lfx-pulse-icon", "0.1.1", has_style = TRUE, has_binding = TRUE)
   )
 }

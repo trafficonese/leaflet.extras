@@ -1,7 +1,7 @@
 bingLayerDependencies <- function() {
   list(
-    # // "leaflet-plugins": "3.0.2",
-    html_dep_prod("tile-bing", "3.0.2", has_binding = TRUE)
+    # // "leaflet-plugins": "3.4.0",
+    html_dep_prod("tile-bing", "3.4.0", has_binding = TRUE)
   )
 }
 

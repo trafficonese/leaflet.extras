@@ -5,7 +5,6 @@ ui <- fluidPage(
   actionButton("delete","Remove the Draw Toolbar"),
   actionButton("deleteandclear","Remove the Draw Toolbar and cleanFeatures=T"),
   leafletOutput("leafmap")
-
 )
 
 awesomeicon <- leaflet::makeAwesomeIcon(

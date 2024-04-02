@@ -1,6 +1,5 @@
 weatherIconDependency <- function() {
   list(
-    # napa tallsam/Leaflet.weather-markers#afda5b3
     html_dep_prod("lfx-weather-markers", "3.0.0", has_style = TRUE, has_binding = TRUE)
   )
 }

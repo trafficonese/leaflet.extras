@@ -1,16 +1,12 @@
 omnivoreDependencies <- function() {
   list(
-    # // "csv2geojson": "5.0.2",
-    # // "togeojson": "0.16.0",
-    # // "topojson": "3.0.2"
-    html_dep_prod("csv2geojson", "5.0.2"),
-    html_dep_prod("togeojson", "0.16.0"),
+    html_dep_prod("csv2geojson", "5.1.2"),
+    html_dep_prod("togeojson", "0.16.2"),
     html_dep_prod("topojson", "3.0.2"),
     # polyline is not implemented
     # wellknown is not implemented
 
-    # // "@mapbox/leaflet-omnivore": "0.3.4",
-    html_dep_prod("lfx-omnivore", "3.0.2", has_binding = TRUE)
+    html_dep_prod("lfx-omnivore", "3.0.4", has_binding = TRUE)
   )
 }
 

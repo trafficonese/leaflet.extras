@@ -1,7 +1,6 @@
 # Source https://github.com/mlevans/leaflet-fullscreen
 fullscreenDependency <- function() {
   list(
-    # // "leaflet-fullscreen": "1.0.2",
     html_dep_prod("lfx-fullscreen", "1.0.2", has_style = TRUE)
   )
 }

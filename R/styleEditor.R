@@ -1,6 +1,6 @@
 styleEditorDependencies <- function() {
   list(
-    html_dep_prod("lfx-styleeditor", "0.1.6", has_style = TRUE, has_binding = TRUE)
+    html_dep_prod("lfx-styleeditor", "0.1.21", has_style = TRUE, has_binding = TRUE)
   )
 }
 

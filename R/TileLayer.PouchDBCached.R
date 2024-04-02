@@ -1,9 +1,7 @@
 tileLayer.PouchDBCachedDependency <- function() {
   list(
-    # // "pouchdb-browser": "6.4.3",
-    html_dep_prod("pouchdb-browser", "6.4.3"),
-    # // "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
-    html_dep_prod("lfx-tilelayer", "0.3.0")
+    html_dep_prod("pouchdb-browser", "8.0.1"),
+    html_dep_prod("lfx-tilelayer", "0.5.0")
   )
 }
 

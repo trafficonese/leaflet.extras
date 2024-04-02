@@ -1,6 +1,5 @@
 geodesicDependencies <- function() {
   list(
-    # // "Leaflet.geodesic": "2.7.1",
     html_dep_prod("lfx-geodesic", "2.7.1", has_binding = TRUE)
   )
 }
