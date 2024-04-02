@@ -50,27 +50,29 @@ heatmapDependency <- function() {
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/heatmaps.R", package = "leaflet.extras"))
-addHeatmap = function(
-  map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
-  minOpacity = 0.05,
-  max = 1.0, radius = 25,
-  blur = 15, gradient = NULL, cellSize = NULL,
-  data = leaflet::getMapData(map)) {
-  
-  map$dependencies <- c(map$dependencies,
-                        heatmapDependency())
+addHeatmap <- function(
+    map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
+    minOpacity = 0.05,
+    max = 1.0, radius = 25,
+    blur = 15, gradient = NULL, cellSize = NULL,
+    data = leaflet::getMapData(map)) {
+  map$dependencies <- c(
+    map$dependencies,
+    heatmapDependency()
+  )
 
-  #convert gradient to expected format from leaflet
+  # convert gradient to expected format from leaflet
   if (!is.null(gradient)) {
     if (!is.function(gradient)) {
-      gradient <- colorNumeric( gradient, 0:1, alpha = TRUE )
-     }
-      gradient <- as.list(gradient(0:20 / 20))
-      names(gradient) <- as.character(0:20 / 20)
-   }
-    
-  pts = leaflet::derivePoints(
-    data, lng, lat, missing(lng), missing(lat), "addHeatmap")
+      gradient <- colorNumeric(gradient, 0:1, alpha = TRUE)
+    }
+    gradient <- as.list(gradient(0:20 / 20))
+    names(gradient) <- as.character(0:20 / 20)
+  }
+
+  pts <- leaflet::derivePoints(
+    data, lng, lat, missing(lng), missing(lat), "addHeatmap"
+  )
 
   if (is.null(intensity)) {
     points <- cbind(pts$lat, pts$lng)
