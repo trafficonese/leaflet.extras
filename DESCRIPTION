@@ -3,6 +3,7 @@ Type: Package
 Title: Extra Functionality for 'leaflet' Package
 Version: 1.0.0.9000
 Authors@R: c(
+      person("Sebastian", "Gatscha", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre")),
       person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com", role = c("aut", "cre")),
       person("Barret", "Schloerke", email = "barret@rstudio.com", role = c("aut")),
       person("Bangyou", "Zheng", email= "Bangyou.Zheng@csiro.au", role = c("ctb"),
