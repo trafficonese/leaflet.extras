@@ -31,6 +31,29 @@ drawDependencies <- function(drag = TRUE) {
 #' @param handlers See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @param drag When set to \code{TRUE}, the drawn features will be draggable during editing, utilizing
 #'    the \code{Leaflet.Draw.Drag} plugin. Otherwise, this library will not be included.
+#'
+#' @details
+#' The drawn features emit events upon mouse interaction.
+#' Event names follow the pattern: \code{input$MAPID_LAYERCATEGORY_EVENTNAME},
+#' where \code{LAYERCATEGORY} can be one of:
+#' \itemize{
+#'   \item \code{marker}
+#'   \item \code{shape}
+#'   \item \code{polyline}
+#' }
+#'
+#' Similarly, for \code{EVENTNAME}, valid values are:
+#' \itemize{
+#'   \item \code{click}
+#'   \item \code{mouseover}
+#'   \item \code{mouseout}
+#' }
+#'
+#' See the provided example for usage:
+#'
+#' \code{browseURL(system.file("examples/shiny/draw-events/draw_mouse_events.R",
+#'                             package = "leaflet.extras"))}
+#'
 #' @export
 #' @rdname draw
 #' @examples

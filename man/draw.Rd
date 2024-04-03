@@ -67,6 +67,28 @@ Adds a Toolbar to draw shapes/points on the map.
 
 Removes the draw toolbar
 }
+\details{
+The drawn features emit events upon mouse interaction.
+Event names follow the pattern: \code{input$MAPID_LAYERCATEGORY_EVENTNAME},
+where \code{LAYERCATEGORY} can be one of:
+\itemize{
+  \item \code{marker}
+  \item \code{shape}
+  \item \code{polyline}
+}
+
+Similarly, for \code{EVENTNAME}, valid values are:
+\itemize{
+  \item \code{click}
+  \item \code{mouseover}
+  \item \code{mouseout}
+}
+
+See the provided example for usage:
+
+\code{browseURL(system.file("examples/shiny/draw-events/draw_mouse_events.R",
+                            package = "leaflet.extras"))}
+}
 \examples{
 leaflet() \%>\%
   setView(0, 0, 2) \%>\%

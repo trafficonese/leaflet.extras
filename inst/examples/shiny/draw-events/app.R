@@ -1,5 +1,7 @@
 library(leaflet.extras)
 library(shiny)
+library(jsonlite)
+library(geojsonio)
 
 ui <- fluidPage(
   actionButton("delete","Remove the Draw Toolbar"),
@@ -57,51 +59,63 @@ server <- function(input, output, session) {
 
   # Start of Drawing
   observeEvent(input$leafmap_draw_start, {
-    print("Start of drawing")
+    cat("\n\nStart of drawing\n")
     print(input$leafmap_draw_start)
   })
 
   # Stop of Drawing
   observeEvent(input$leafmap_draw_stop, {
-    print("Stopped drawing")
+    cat("\n\nStopped drawing\n")
     print(input$leafmap_draw_stop)
   })
 
   # New Feature
   observeEvent(input$leafmap_draw_new_feature, {
-    print("New Feature")
-    print(input$leafmap_draw_new_feature)
+    cat("\n\nNew Feature\n")
+    data <- input$leafmap_draw_new_feature # list
+    data <- jsonlite::toJSON(data, auto_unbox = TRUE) # string
+    data <- geojsonio::geojson_sf(data) # sf
+    print(data)
   })
 
   # Start of Draw-Edit
   observeEvent(input$leafmap_draw_editstart, {
-    print("Start of draw edit")
+    cat("\n\nStart of draw edit\n")
     print(input$leafmap_draw_editstart)
   })
 
   # Stop of Draw-Edit
   observeEvent(input$leafmap_draw_editstop, {
-    print("STOP of draw edit")
+    cat("\n\nStop of draw edit\n")
     print(input$leafmap_draw_editstop)
   })
 
   # Edited Features
   observeEvent(input$leafmap_draw_edited_features, {
-    print("Edited Features")
-    print(input$leafmap_draw_edited_features)
+    cat("\n\nEdited Features\n")
+    data <- input$leafmap_draw_edited_features # list
+    data <- jsonlite::toJSON(data, auto_unbox = TRUE) # string
+    data <- geojsonio::geojson_sf(data) # sf
+    print(data)
   })
 
   # Deleted features
   observeEvent(input$leafmap_draw_deleted_features, {
-    print("Deleted Features")
-    print(input$leafmap_draw_deleted_features)
+    cat("\n\nDeleted Features\n")
+    data <- input$leafmap_draw_deleted_features # list
+    data <- jsonlite::toJSON(data, auto_unbox = TRUE) # string
+    data <- geojsonio::geojson_sf(data) # sf
+    print(data)
   })
 
   # We also listen for draw_all_features which is called anytime
   # features are created/edited/deleted from the map
   observeEvent(input$leafmap_draw_all_features, {
-    print("All Features")
-    print(input$leafmap_draw_all_features)
+    cat("\n\nAll Features\n")
+    data <- input$leafmap_draw_all_features # list
+    data <- jsonlite::toJSON(data, auto_unbox = TRUE) # string
+    data <- geojsonio::geojson_sf(data) # sf
+    print(data)
   })
 }
 
