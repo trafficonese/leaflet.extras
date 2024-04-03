@@ -1,5 +1,7 @@
 /* global $, LeafletWidget, L, Shiny, HTMLWidgets, google */
 
+import { unpackStrings } from './utils.js';
+
 // helper function to conver JS event to Shiny Event
 function eventToShiny(e) {
   var shinyEvent = {};
@@ -573,6 +575,46 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
           console.warn('Group with ID "' + v + '" not Found, skipping');
         }
       });
+    }
+
+    var icon = options.marker.icon;
+    if (icon) {
+      if (icon.awesomemarker) {
+        delete icon.awesomemarker;
+        if (icon.squareMarker) {
+          icon.className = 'awesome-marker awesome-marker-square';
+        }
+        if (!icon.prefix) {
+          icon.prefix = icon.library;
+        }
+        options.marker.icon = new L.AwesomeMarkers.icon(icon);
+      } else if (icon === true) {
+        options.marker.icon = new L.Icon.Default();
+      } else {
+        // Unpack icons
+        icon.iconUrl = unpackStrings(icon.iconUrl);
+        icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+        icon.shadowUrl = unpackStrings(icon.shadowUrl);
+        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+
+        if (icon.iconWidth) {
+          icon.iconSize = [icon.iconWidth, icon.iconHeight];
+        }
+        if (icon.shadowWidth) {
+          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
+        }
+        if (icon.iconAnchorX) {
+          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
+        }
+        if (icon.shadowAnchorX) {
+          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
+        }
+        if (icon.popupAnchorX) {
+          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
+        }
+
+        options.marker.icon = new L.Icon(icon);
+      }
     }
 
     L.stamp(searchFeatureGroup);

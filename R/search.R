@@ -65,7 +65,19 @@ searchOptions <- function(
     textCancel = "Cancel",
     textPlaceholder = "Search...",
     position = "topleft",
-    hideMarkerOnCollapse = FALSE) {
+    hideMarkerOnCollapse = FALSE,
+    marker = list(
+      icon = NULL,
+      animate = TRUE,
+      circle = list(
+          radius = 10,
+          weight = 3,
+          color = '#e03',
+          stroke = TRUE,
+          fill = FALSE
+      )
+    )) {
+
   leaflet::filterNULL(list(
     url = url,
     sourceData = sourceData,
@@ -94,7 +106,8 @@ searchOptions <- function(
     textCancel = textCancel,
     textPlaceholder = textPlaceholder,
     position = position,
-    hideMarkerOnCollapse = hideMarkerOnCollapse
+    hideMarkerOnCollapse = hideMarkerOnCollapse,
+    marker = marker
   ))
 }
 
@@ -105,9 +118,9 @@ searchOptions <- function(
 #' @return modified map
 #' @rdname search-geocoding
 #' @export
-addSearchOSM <- function(
-    map,
-    options = searchOptions(autoCollapse = TRUE, minLength = 2)) {
+addSearchOSM <- function(map,
+                         options = searchOptions(autoCollapse = TRUE, minLength = 2),
+                         icon = NULL) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
@@ -355,6 +368,11 @@ addSearchFeatures <- function(
     targetGroups,
     options = searchFeaturesOptions()) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+
+  result <- makeSearchIcon(map, options)
+  map <- result$map
+  options$marker$icon <- result$icon
+
   invokeMethod(
     map,
     getMapData(map),
@@ -389,4 +407,32 @@ clearSearchFeatures <- function(map) {
   invokeMethod(
     map, NULL, "clearSearchFeatures"
   )
+}
+
+
+makeSearchIcon <- function(map, options) {
+  icon <- options$marker$icon
+  icon <- if (is.null(icon) || all(is.na(icon)) || isFALSE(icon)) NULL else icon
+
+  if (!is.null(icon)) {
+    if (isTRUE(icon)) {
+      # Do nothing
+    } else {
+      if (inherits(icon, "leaflet_awesome_icon")) {
+        map <- addAwesomeMarkersDependencies(map, icon$library)
+        icon$awesomemarker <- TRUE
+      } else {
+        icon$iconUrl <- b64EncodePackedIcons(packStrings(icon$iconUrl))
+        icon$iconRetinaUrl <- b64EncodePackedIcons(packStrings(icon$iconRetinaUrl))
+        icon$shadowUrl <- b64EncodePackedIcons(packStrings(icon$shadowUrl))
+        icon$shadowRetinaUrl <- b64EncodePackedIcons(packStrings(icon$shadowRetinaUrl))
+        if (length(icon$iconSize) == 2 && is.numeric(icon$iconSize[[1]]) && is.numeric(icon$iconSize[[2]])) {
+          icon$iconSize <- list(icon$iconSize)
+        }
+      }
+      options$marker$icon <- leaflet::filterNULL(icon)
+    }
+  }
+
+  return(list(map = map, icon = options$marker$icon))
 }

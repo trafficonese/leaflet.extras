@@ -33,7 +33,9 @@ searchOptions(
   textCancel = "Cancel",
   textPlaceholder = "Search...",
   position = "topleft",
-  hideMarkerOnCollapse = FALSE
+  hideMarkerOnCollapse = FALSE,
+  marker = list(icon = NULL, animate = TRUE, circle = list(radius = 10, weight = 3, color
+    = "#e03", stroke = TRUE, fill = FALSE))
 )
 
 searchFeaturesOptions(

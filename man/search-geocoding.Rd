@@ -13,7 +13,11 @@
 \alias{removeSearchUSCensusBureau}
 \title{Add a OSM search control to the map.}
 \usage{
-addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
+addSearchOSM(
+  map,
+  options = searchOptions(autoCollapse = TRUE, minLength = 2),
+  icon = NULL
+)
 
 searchOSMText(map, text = "")
 

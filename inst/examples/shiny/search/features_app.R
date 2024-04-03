@@ -17,15 +17,40 @@ ui <- fluidPage(
   actionButton("clearsearchmarker", "Clear Search Marker")
 )
 
+greenLeafIcon <- makeIcon(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
+awesomeicon <- leaflet::makeAwesomeIcon(
+    icon = "ios-close", iconColor = "black",
+    library = "ion", markerColor = "green")
+
+
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet(cities) %>% addProviderTiles(providers$OpenStreetMap) %>%
       addCircles(lng = ~Long, lat = ~Lat, weight = 1, fillOpacity = 0.5,
-                 radius = ~sqrt(Pop) * 10,
-                 popup = ~City, label = ~City,
+                 radius = ~sqrt(Pop) * 10, popup = ~City, label = ~City,
                  group = "cities") %>%
       addSearchFeatures(
-        targetGroups = "cities",options = searchFeaturesOptions())
+        targetGroups = "cities", options = searchFeaturesOptions(
+          marker = list(
+            icon = greenLeafIcon,
+            # icon = awesomeicon,
+            # animate = FALSE,
+            circle = list(
+              radius = 50,
+              weight = 3,
+              color = 'yellow',
+              stroke = TRUE,
+              fill = TRUE
+            )
+          )
+        ))
   })
 
   observeEvent(input$clearsearchmarker, {
