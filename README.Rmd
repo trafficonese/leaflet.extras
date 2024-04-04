@@ -38,9 +38,7 @@ install.packages("leaflet.extras")
 For latest development version
 
 ```{r, eval=FALSE}
-# We need latest leaflet package from Github, as CRAN package is too old.
-devtools::install_github("rstudio/leaflet")
-devtools::install_github("bhaskarvk/leaflet.extras")
+remotes::install_github("trafficonese/leaflet.extras")
 ```
 
 ### Progress
@@ -79,7 +77,7 @@ See the [FAQ](#FAQ) section below for details.
 
 The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
 
-Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/trafficonese/leaflet.extras/tree/master/inst/examples) available. 
+There are also plenty of [examples](https://github.com/trafficonese/leaflet.extras/tree/master/inst/examples) available. 
 
 
 ### FAQ
@@ -95,7 +93,7 @@ Also take a look at this Gist to [include arbitrary Leaflet JS plugins](https://
 
 _I submitted an issue for a plugin long time ago but it is still not available._
 
-This package is being developed purely on a voluntary basis on spare time without any monetary compensation. So the development progress can stall at times. It may also not be possible to prioritize one-off requests that no one else is interested in. Getting more people interested in a feature request will help prioritize development. Other option is to contribute code. That will get you added to the contributer list and a thanks tweet.
+This package is being developed purely on a voluntary basis on spare time without any monetary compensation. So the development progress can stall at times. It may also not be possible to prioritize one-off requests that no one else is interested in. Getting more people interested in a feature request will help prioritize development. Other option is to contribute code. That will get you added to the contributor list and a thanks tweet.
 
 _I found a bug._
 
@@ -103,15 +101,12 @@ _I found a bug._
 - **Better Solution**: Along with issue submission provide a minimal reproducible code sample.
 - **Best Solution**: Fix the issue and submit a pull request. This is the fastest way to get a bug fixed.
 
-_I need a plugin which requires 1.x version of the leaflet JavaScript library_
-
-As of version 1.0.0, `leaflet.extras` supports leaflet.js version 1.x.
 
 ### Development
 
-To make additions to the plugin dependencies, please add the plugin using `npm`.  Make sure it is compiled within the `webpack.config.js`.  Finally, make sure htmlwidgets finds it within your plugin's dependency function.
+To make additions to the plugin dependencies, please add the plugin using `npm`.  Make sure it is compiled within the `webpack.config.js`.  Finally, make sure `htmlwidgets` finds it within your plugin's dependency function.
 
-To build the latest version of the plugins, please make sure Node.js is installed on your system, then run:
+To build the latest version of the plugins, please make sure `Node.js` is installed on your system, then run:
 
 ```
 npm install

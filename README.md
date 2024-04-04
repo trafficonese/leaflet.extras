@@ -2,10 +2,10 @@
 [![R-CMD-check](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml)
 [![Project Status: Active – The project is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--03--15-green.svg)](/commits/master)  
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--04-green.svg)](/commits/master)  
 [![License:
 GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0.9000-orange.svg?style=flat-square)](commits/master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
 [![Codecov test
@@ -23,15 +23,13 @@ package using various [leaflet plugins](http://leafletjs.com/plugins).
 For CRAN version
 
 ``` r
-install.packages('leaflet.extras')
+install.packages("leaflet.extras")
 ```
 
 For latest development version
 
 ``` r
-# We need latest leaflet package from Github, as CRAN package is too old.
-devtools::install_github('rstudio/leaflet')
-devtools::install_github('bhaskarvk/leaflet.extras')
+remotes::install_github("trafficonese/leaflet.extras")
 ```
 
 ### Progress
@@ -77,8 +75,7 @@ enough help to get started on using a feature. However some plugins have
 lots of options and it’s not feasible to document every single detail.
 In such cases you are encouraged to check the plugin’s documentation.
 
-Currently there are no vignettes (contributions welcome), but there are
-plenty of
+There are also plenty of
 [examples](https://github.com/trafficonese/leaflet.extras/tree/master/inst/examples)
 available.
 
@@ -87,13 +84,16 @@ available.
 *I want to use a certain leaflet plugin not integrated so far.*
 
 - **Good Solution**: Create issues for plugins you wish incorporated but
-  before that search the existing issues to see if issue already exists
+  before that, search the existing issues to see if issue already exists
   and if so comment on that issue instead of creating duplicates.
 - **Better Solution**: It would help in prioritizing if you can include
   additional details like why you need the plugin, how helpful will it
   be to everyone etc.
 - **Best Solution**: Code it yourself and submit a pull request. This is
   the fastest way to get a plugin into the package.
+
+Also take a look at this Gist to [include arbitrary Leaflet JS
+plugins](https://gist.github.com/jcheng5/c084a59717f18e947a17955007dc5f92)
 
 *I submitted an issue for a plugin long time ago but it is still not
 available.*
@@ -103,7 +103,7 @@ time without any monetary compensation. So the development progress can
 stall at times. It may also not be possible to prioritize one-off
 requests that no one else is interested in. Getting more people
 interested in a feature request will help prioritize development. Other
-option is to contribute code. That will get you added to the contributer
+option is to contribute code. That will get you added to the contributor
 list and a thanks tweet.
 
 *I found a bug.*
@@ -115,20 +115,15 @@ list and a thanks tweet.
 - **Best Solution**: Fix the issue and submit a pull request. This is
   the fastest way to get a bug fixed.
 
-*I need a plugin which requires 1.x version of the leaflet JavaScript
-library*
-
-As of version 1.0.0, `leaflet.extras` supports leaflet.js version 1.x.
-
 ### Development
 
 To make additions to the plugin dependencies, please add the plugin
 using `npm`. Make sure it is compiled within the `webpack.config.js`.
-Finally, make sure htmlwidgets finds it within your plugin’s dependency
-function.
+Finally, make sure `htmlwidgets` finds it within your plugin’s
+dependency function.
 
-To build the latest version of the plugins, please make sure Node.js is
-installed on your system, then run:
+To build the latest version of the plugins, please make sure `Node.js`
+is installed on your system, then run:
 
     npm install
     npm run build
