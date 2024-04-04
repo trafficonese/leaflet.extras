@@ -5,7 +5,19 @@ webGLHeatmapDependency <- function() {
       "lfx-webgl-heatmap", "0.2.7",
       attachment = list(
         "skyline" = "skyline-gradient.png",
-        "deep-sea" = "deep-sea-gradient.png"
+        "deep-sea" = "deep-sea-gradient.png",
+        "BuGn" = "BuGn.png",
+        "BuPu" = "BuPu.png",
+        "GnBu" = "GnBu.png",
+        "OrRd" = "OrRd.png",
+        "PuBu" = "PuBu.png",
+        "PuBuGn" = "PuBuGn.png",
+        "PuRd" = "PuRd.png",
+        "RdPu" = "RdPu.png",
+        "YlGn" = "YlGn.png",
+        "YlGnBu" = "YlGnBu.png",
+        "YlOrBr" = "YlOrBr.png",
+        "YlOrRd" = "YlOrRd.png"
       ),
       has_binding = TRUE
     )
@@ -56,14 +68,19 @@ addWebGLHeatmap <- function(
     gradientTexture = NULL,
     alphaRange = 1,
     data = leaflet::getMapData(map)) {
+
   map$dependencies <- c(
     map$dependencies,
     webGLHeatmapDependency()
   )
 
+  gradients <- c("skyline", "deep-sea", "BuGn", "BuPu", "GnBu",
+                 "OrRd", "PuBu", "PuBuGn", "PuRd", "RdPu",
+                 "YlGn", "YlGnBu", "YlOrBr", "YlOrRd")
+
   if (!is.null(gradientTexture) &&
-    !gradientTexture %in% c("skyline", "deep-sea")) {
-    stop("Only allowed values for gradientTexture are \"skyline\" and \"deep-sea\"")
+    !gradientTexture %in% gradients) {
+    stop("Only allowed values for 'gradientTexture' are:\n", paste0("'",gradients,"'", collapse = ", "))
   }
 
   pts <- leaflet::derivePoints(

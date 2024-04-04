@@ -23,7 +23,8 @@
 - Extend BingTiles `imagerySet` and emit warnings for deprecated sets
 - Changed default values in `searchOptions` for `url` / `propertyLoc` /  `propertyName`
 - Draw events trigger correctly using `priority: "event"`. Fix #89
-- In `addReverseSearchOSM`, longitudes are now normalized to ensure that the Nomiatim search returns features for wrapped tiles.
+- Included 12 color gradients from [colorbrewer2](https://colorbrewer2.org) for `addWebGLHeatmap` using this script `/scripts/generate_color_gradients.R`
+- In `addReverseSearchOSM`, longitudes are now normalized to ensure that the Nominatim search returns features for wrapped tiles.
 - Updated most JavaScript dependencies, changed Webpack Build, removed **source-maps** as package size was an R-CMD-check issue
 - Include Tests for R functions 
 - Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
