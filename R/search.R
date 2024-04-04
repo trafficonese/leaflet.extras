@@ -122,6 +122,11 @@ addSearchOSM <- function(map,
                          options = searchOptions(autoCollapse = TRUE, minLength = 2),
                          icon = NULL) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+
+  result <- makeSearchIcon(map, options)
+  map <- result$map
+  options$marker$icon <- result$icon
+
   invokeMethod(
     map,
     getMapData(map),
@@ -182,6 +187,10 @@ clearSearchOSM <- function(map) {
 #'   For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \code{showFeature} shoule also be TRUE.
 #' @param displayText Boolean. If TRUE show a text box with found location's name on the map.
 #' @param group String. An optional group to hold all the searched locations and their results.
+#' @param marker Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}
+#' @param showFeatureOptions A list of styling options for the found feature
+#' @param showBoundsOptions A list of styling options for the bounds of the found feature
+#' @param showHighlightOptions A list of styling options for the hover effect of a found feature
 #' @return modified map
 #' @rdname search-geocoding
 #' @export
@@ -192,7 +201,30 @@ addReverseSearchOSM <- function(
     showFeature = TRUE,
     fitBounds = TRUE,
     displayText = TRUE,
-    group = NULL) {
+    group = NULL,
+    marker = list(
+      icon = NULL
+    ),
+    showFeatureOptions = list(
+      weight = 2,
+      color = "red",
+      dashArray = '5,10',
+      fillOpacity = 0.2,
+      opacity = 0.5
+    ),
+    showBoundsOptions = list(
+      weight = 2,
+      color = "#444444",
+      dashArray = '5,10',
+      fillOpacity = 0.2,
+      opacity = 0.5
+    ),
+    showHighlightOptions = list(
+      opacity = 0.8,
+      fillOpacity = 0.5,
+      weight = 5
+    )) {
+
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
@@ -200,6 +232,11 @@ addReverseSearchOSM <- function(
         position = "topright", layerId = "reverseSearchOSM"
       )
   }
+
+  result <- makeSearchIcon(map, list("marker" = marker))
+  map <- result$map
+  marker$icon <- result$icon
+
   invokeMethod(
     map,
     getMapData(map),
@@ -208,7 +245,11 @@ addReverseSearchOSM <- function(
       showSearchLocation = showSearchLocation,
       fitBounds = fitBounds,
       showBounds = showBounds,
-      showFeature = showFeature
+      showFeature = showFeature,
+      marker = marker,
+      showFeatureOptions = showFeatureOptions,
+      showBoundsOptions = showBoundsOptions,
+      showHighlightOptions = showHighlightOptions
     ),
     group
   )
@@ -416,7 +457,6 @@ makeSearchIcon <- function(map, options) {
 
   if (!is.null(icon)) {
     if (isTRUE(icon)) {
-      # Do nothing
     } else {
       if (inherits(icon, "leaflet_awesome_icon")) {
         map <- addAwesomeMarkersDependencies(map, icon$library)
@@ -430,9 +470,9 @@ makeSearchIcon <- function(map, options) {
           icon$iconSize <- list(icon$iconSize)
         }
       }
-      options$marker$icon <- leaflet::filterNULL(icon)
+      icon <- leaflet::filterNULL(icon)
     }
   }
 
-  return(list(map = map, icon = options$marker$icon))
+  return(list(map = map, icon = icon))
 }

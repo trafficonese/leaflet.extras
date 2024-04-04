@@ -19,6 +19,61 @@ function eventToShiny(e) {
   return shinyEvent;
 }
 
+function adaptIcon(options) {
+  var icon = options.marker.icon;
+
+  if (icon) {
+    if (icon.awesomemarker) {
+      //delete icon.awesomemarker;
+
+      if (icon.squareMarker) {
+          icon.className = 'awesome-marker awesome-marker-square';
+      }
+
+      if (!icon.prefix) {
+          icon.prefix = icon.library;
+      }
+
+      return new L.AwesomeMarkers.icon(icon);
+    } else if (icon === true) {
+      return new L.Icon.Default();
+    } else {
+      // Unpack icons
+      icon.iconUrl = unpackStrings(icon.iconUrl);
+      icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+      icon.shadowUrl = unpackStrings(icon.shadowUrl);
+      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+
+      if (icon.iconWidth) {
+          icon.iconSize = [icon.iconWidth, icon.iconHeight];
+      }
+      if (icon.shadowWidth) {
+          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
+      }
+      if (icon.iconAnchorX) {
+          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
+      }
+      if (icon.shadowAnchorX) {
+          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
+      }
+      if (icon.popupAnchorX) {
+          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
+      }
+      return new L.Icon(icon);
+    }
+  }
+}
+
+function normalizeLongitude(longitude) {
+  while (longitude > 180) {
+      longitude -= 360;
+  }
+  while (longitude < -180) {
+      longitude += 360;
+  }
+  return longitude;
+}
+
 LeafletWidget.methods.addSearchOSM = function(options) {
   (function() {
     var map = this;
@@ -46,7 +101,8 @@ LeafletWidget.methods.addSearchOSM = function(options) {
       : ['lat', 'lon'];
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
-    options.marker = L.circleMarker([0, 0], {radius: 30});
+    //options.marker = L.circleMarker([0, 0], {radius: 30});
+    options.marker.icon = adaptIcon(options)
 
     if (options.moveToLocation) {
       options.moveToLocation = function(latlng, title, map) {
@@ -118,13 +174,18 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
 
     clickOSMEventHandler = function(e) {
       var latlng = e.latlng;
+      latlng.lng = normalizeLongitude(latlng.lng)
 
       // This will hold the query, boundingbox, and found feature layers
       var container = L.featureGroup();
       var layerID = L.stamp(container);
 
       if (options.showSearchLocation) {
-        var marker = L.marker(e.latlng, {'type': 'query'}).bindTooltip('lat=' + latlng.lat + ' lng=' + latlng.lng + '</P>');
+        var icon = adaptIcon(options);
+        if (icon === undefined) {
+          icon = new L.Icon.Default();
+        }
+        var marker = L.marker(e.latlng, {icon: icon, 'type': 'query'}).bindTooltip('lat=' + latlng.lat + ' lng=' + latlng.lng + '</P>');
         /* eslint-disable no-unused-vars */
         var m_layerID = L.stamp(marker);
         /* eslint-enable no-unused-vars */
@@ -154,9 +215,19 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
           L.latLng(result.boundingbox[1], result.boundingbox[3]));
 
         if (options.showBounds) {
+          var fillOpacity = options.showBoundsOptions.fillOpacity ? options.showBoundsOptions.fillOpacity : 0.2
+          var opacity = options.showBoundsOptions.opacity ? options.showBoundsOptions.opacity : 0.5
+          var weight = options.showBoundsOptions.weight ? options.showBoundsOptions.weight : 2
+          var color = options.showBoundsOptions.color ? options.showBoundsOptions.color : '#444444'
+          var dashArray = options.showBoundsOptions.dashArray ? options.showBoundsOptions.dashArray : '5,10'
           var rect = L.rectangle(bb, {
-            weight: 2, color: '#444444', clickable: false,
-            dashArray: '5,10', 'type': 'result_boundingbox'});
+            weight: weight,
+            color: color,
+            dashArray: dashArray,
+            fillOpacity: fillOpacity,
+            opacity: opacity,
+            clickable: false,
+            'type': 'result_boundingbox'});
             /* eslint-disable no-unused-vars */
           var bb_layerID = L.stamp(rect);
           /* eslint-enable no-unused-vars */
@@ -164,13 +235,28 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         }
 
         if (options.showFeature) {
+          var fillOpacity = options.showFeatureOptions.fillOpacity ? options.showFeatureOptions.fillOpacity : 0.2
+          var opacity = options.showFeatureOptions.opacity ? options.showFeatureOptions.opacity : 0.5
+          var weight = options.showFeatureOptions.weight ? options.showFeatureOptions.weight : 2
+          var color = options.showFeatureOptions.color ? options.showFeatureOptions.color : 'red'
+          var dashArray = options.showFeatureOptions.dashArray ? options.showFeatureOptions.dashArray : '5,10'
           var feature = L.geoJson(result.geojson,
             {
-              weight: 2, color: 'red', dashArray: '5,10',
-              clickable: false, 'type': 'result_feature',
+              weight: weight,
+              color: color,
+              dashArray: dashArray,
+              fillOpacity: fillOpacity,
+              opacity: opacity,
+              clickable: false,
+              'type': 'result_feature',
               pointToLayer: function(feature, latlng) {
                 return L.circleMarker(latlng, {
-                  weight: 2, color: 'red', dashArray: '5,10', clickable: false});
+                  weight: weight,
+                  color: color,
+                  dashArray: dashArray,
+                  fillOpacity: fillOpacity,
+                  opacity: opacity,
+                  clickable: false});
               }
             });
 
@@ -184,25 +270,40 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         if (!$.isEmptyObject(tmp) && tmp.length >= 0) {
 
           if (!$.isEmptyObject(marker)) {
+
             marker.on('mouseover', function() {
+              var fillOpacity = options.showHighlightOptions.fillOpacity ? options.showHighlightOptions.fillOpacity : 0.5
+              var opacity = options.showHighlightOptions.opacity ? options.showFeatureOptions.opacity : 0.8
+              var weight = options.showHighlightOptions.weight ? options.showHighlightOptions.weight : 5
               if (!$.isEmptyObject(rect)) {
-                rect.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+                rect.setStyle({fillOpacity: fillOpacity,
+                               opacity: opacity,
+                               weight: weight});
                 rect.bringToFront();
               }
 
               if (!$.isEmptyObject(feature)) {
-                feature.setStyle({fillOpacity: 0.5, opacity: 0.8, weight: 5});
+                feature.setStyle({fillOpacity: fillOpacity,
+                                  opacity: opacity,
+                                  weight: weight});
                 feature.bringToFront();
               }
             });
             marker.on('mouseout', function() {
+              var fillOpacity = options.showBoundsOptions.fillOpacity ? options.showBoundsOptions.fillOpacity : 0.2
+              var opacity = options.showBoundsOptions.opacity ? options.showBoundsOptions.opacity : 0.5
+              var weight = options.showBoundsOptions.weight ? options.showBoundsOptions.weight : 2
               if (!$.isEmptyObject(rect)) {
-                rect.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+                rect.setStyle({fillOpacity: fillOpacity,
+                               opacity: opacity,
+                               weight: weight});
                 rect.bringToBack();
               }
 
               if (!$.isEmptyObject(feature)) {
-                feature.setStyle({fillOpacity: 0.2, opacity: 0.5, weight: 2});
+                feature.setStyle({fillOpacity: fillOpacity,
+                                  opacity: opacity,
+                                  weight: weight});
                 feature.bringToBack();
               }
             });
@@ -276,7 +377,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
       : 'Search using Google Geocoder';
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
-    options.marker = L.circleMarker([0, 0], {radius: 30});
+    //options.marker = L.circleMarker([0, 0], {radius: 30});
 
     if (options.moveToLocation) {
       options.moveToLocation = function(latlng, title, map) {
@@ -293,6 +394,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     options.sourceData = googleGeocoding;
     options.formatData = formatJSON;
 
+    options.marker.icon = adaptIcon(options)
     map.searchControlGoogle = new L.Control.Search(options);
     map.searchControlGoogle.addTo(map);
 
@@ -488,7 +590,7 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     options.formatData = formatJSON;
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
-    options.marker = L.circleMarker([0, 0], {radius: 30});
+    // options.marker = L.circleMarker([0, 0], {radius: 30});
 
     if (options.moveToLocation) {
       options.moveToLocation = function(latlng, title, map) {
@@ -501,6 +603,8 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
         map.setView(latlng, zoom);
       };
     }
+
+    options.marker.icon = adaptIcon(options)
 
     map.searchControlUSCensusBureau = new L.Control.Search(options);
     map.searchControlUSCensusBureau.addTo(map);
@@ -577,45 +681,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
       });
     }
 
-    var icon = options.marker.icon;
-    if (icon) {
-      if (icon.awesomemarker) {
-        delete icon.awesomemarker;
-        if (icon.squareMarker) {
-          icon.className = 'awesome-marker awesome-marker-square';
-        }
-        if (!icon.prefix) {
-          icon.prefix = icon.library;
-        }
-        options.marker.icon = new L.AwesomeMarkers.icon(icon);
-      } else if (icon === true) {
-        options.marker.icon = new L.Icon.Default();
-      } else {
-        // Unpack icons
-        icon.iconUrl = unpackStrings(icon.iconUrl);
-        icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
-        icon.shadowUrl = unpackStrings(icon.shadowUrl);
-        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
-
-        if (icon.iconWidth) {
-          icon.iconSize = [icon.iconWidth, icon.iconHeight];
-        }
-        if (icon.shadowWidth) {
-          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
-        }
-        if (icon.iconAnchorX) {
-          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
-        }
-        if (icon.shadowAnchorX) {
-          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
-        }
-        if (icon.popupAnchorX) {
-          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
-        }
-
-        options.marker.icon = new L.Icon(icon);
-      }
-    }
+    options.marker.icon = adaptIcon(options)
 
     L.stamp(searchFeatureGroup);
     options.layer = searchFeatureGroup;

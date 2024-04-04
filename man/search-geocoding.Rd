@@ -32,7 +32,13 @@ addReverseSearchOSM(
   showFeature = TRUE,
   fitBounds = TRUE,
   displayText = TRUE,
-  group = NULL
+  group = NULL,
+  marker = list(icon = NULL),
+  showFeatureOptions = list(weight = 2, color = "red", dashArray = "5,10", fillOpacity =
+    0.2, opacity = 0.5),
+  showBoundsOptions = list(weight = 2, color = "#444444", dashArray = "5,10", fillOpacity
+    = 0.2, opacity = 0.5),
+  showHighlightOptions = list(opacity = 0.8, fillOpacity = 0.5, weight = 5)
 )
 
 addSearchGoogle(
@@ -81,6 +87,14 @@ For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \c
 \item{displayText}{Boolean. If TRUE show a text box with found location's name on the map.}
 
 \item{group}{String. An optional group to hold all the searched locations and their results.}
+
+\item{marker}{Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}}
+
+\item{showFeatureOptions}{A list of styling options for the found feature}
+
+\item{showBoundsOptions}{A list of styling options for the bounds of the found feature}
+
+\item{showHighlightOptions}{A list of styling options for the hover effect of a found feature}
 
 \item{apikey}{String. API Key for Google GeoCoding Service.}
 }

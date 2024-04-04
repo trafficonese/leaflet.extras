@@ -4,9 +4,15 @@
 - `addDrawToolbar` offers some new options: 
   - `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips
   - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://www.npmjs.com/package/leaflet-draw-drag) plugin. Otherwise, this library will not be included. Fix #115
-- `searchOSMText` let's you set the OSM search text from R
-- `clearSearchOSM` let's you clear the search marker for `addSearchOSM`. Fix #158, Fix #209
-- `clearSearchFeatures` let's you clear the search marker
+- `searchOSMText` enables setting the OpenStreetMap (OSM) search text directly from R
+- `clearSearchOSM` allows clearing the search marker associated with `addSearchOSM`. Fix #158, Fix #209
+- `clearSearchFeatures` provides functionality to clear the search marker
+- `addReverseSearchOSM` gained new arguments:
+  - `marker` allows customization of the icon for the found feature
+  - `showFeatureOptions` enables styling options for the found feature
+  - `showBoundsOptions` allows customization of the style for the boundary of a found feature
+  - `showHighlightOptions` enables customization of the hover effect for a found feature
+
 - `addBounceMarkers` behave now like normal Markers (except for clustering)
 - **Update Geodesics** functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons. 
 - `addLatLng` for `addGeodesicPolylines` allows you to append line vertices
@@ -17,6 +23,7 @@
 - Extend BingTiles `imagerySet` and emit warnings for deprecated sets
 - Changed default values in `searchOptions` for `url` / `propertyLoc` /  `propertyName`
 - Draw events trigger correctly using `priority: "event"`. Fix #89
+- In `addReverseSearchOSM`, longitudes are now normalized to ensure that the Nomiatim search returns features for wrapped tiles.
 - Updated most JavaScript dependencies, changed Webpack Build, removed **source-maps** as package size was an R-CMD-check issue
 - Include Tests for R functions 
 - Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
