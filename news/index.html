@@ -56,11 +56,22 @@
 <code>addDrawToolbar</code> got a new argument <code>drag</code>. When set to <code>TRUE</code>, the drawn features will be draggable during editing, utilizing the <a href="https://www.npmjs.com/package/leaflet-draw-drag" class="external-link">Leaflet.Draw.Drag</a> plugin. Otherwise, this library will not be included. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/115" class="external-link">#115</a></li>
 </ul></li>
 <li>
-<code>searchOSMText</code> let’s you set the OSM search text from R</li>
+<code>searchOSMText</code> enables setting the OpenStreetMap (OSM) search text directly from R</li>
 <li>
-<code>clearSearchOSM</code> let’s you clear the search marker for <code>addSearchOSM</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/158" class="external-link">#158</a>, Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/209" class="external-link">#209</a></li>
+<code>clearSearchOSM</code> allows clearing the search marker associated with <code>addSearchOSM</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/158" class="external-link">#158</a>, Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/209" class="external-link">#209</a></li>
 <li>
-<code>clearSearchFeatures</code> let’s you clear the search marker</li>
+<code>clearSearchFeatures</code> provides functionality to clear the search marker</li>
+<li>
+<code>addReverseSearchOSM</code> gained new arguments:
+<ul><li>
+<code>marker</code> allows customization of the icon for the found feature</li>
+<li>
+<code>showFeatureOptions</code> enables styling options for the found feature</li>
+<li>
+<code>showBoundsOptions</code> allows customization of the style for the boundary of a found feature</li>
+<li>
+<code>showHighlightOptions</code> enables customization of the hover effect for a found feature</li>
+</ul></li>
 <li>
 <code>addBounceMarkers</code> behave now like normal Markers (except for clustering)</li>
 <li>
@@ -78,6 +89,7 @@
 <li>Changed default values in <code>searchOptions</code> for <code>url</code> / <code>propertyLoc</code> / <code>propertyName</code>
 </li>
 <li>Draw events trigger correctly using <code>priority: "event"</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/89" class="external-link">#89</a></li>
+<li>In <code>addReverseSearchOSM</code>, longitudes are now normalized to ensure that the Nomiatim search returns features for wrapped tiles.</li>
 <li>Updated most JavaScript dependencies, changed Webpack Build, removed <strong>source-maps</strong> as package size was an R-CMD-check issue</li>
 <li>Include Tests for R functions</li>
 <li>Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)</li>
@@ -346,7 +358,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Bhaskar Karambelkar, Barret Schloerke.</p>
+  <p></p><p>Developed by Sebastian Gatscha, Bhaskar Karambelkar, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown-footer-right">

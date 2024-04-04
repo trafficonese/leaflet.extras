@@ -72,7 +72,11 @@ Removes the US Census Bureau search control from the map."><!-- mathjax --><scri
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">addSearchOSM</span><span class="op">(</span><span class="va">map</span>, options <span class="op">=</span> <span class="fu"><a href="search-options.html">searchOptions</a></span><span class="op">(</span>autoCollapse <span class="op">=</span> <span class="cn">TRUE</span>, minLength <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">addSearchOSM</span><span class="op">(</span></span>
+<span>  <span class="va">map</span>,</span>
+<span>  options <span class="op">=</span> <span class="fu"><a href="search-options.html">searchOptions</a></span><span class="op">(</span>autoCollapse <span class="op">=</span> <span class="cn">TRUE</span>, minLength <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  icon <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">searchOSMText</span><span class="op">(</span><span class="va">map</span>, text <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span></span>
@@ -87,7 +91,13 @@ Removes the US Census Bureau search control from the map."><!-- mathjax --><scri
 <span>  showFeature <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fitBounds <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  displayText <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  group <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  marker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>icon <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  showFeatureOptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="st">"red"</span>, dashArray <span class="op">=</span> <span class="st">"5,10"</span>, fillOpacity <span class="op">=</span></span>
+<span>    <span class="fl">0.2</span>, opacity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  showBoundsOptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="st">"#444444"</span>, dashArray <span class="op">=</span> <span class="st">"5,10"</span>, fillOpacity</span>
+<span>    <span class="op">=</span> <span class="fl">0.2</span>, opacity <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  showHighlightOptions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>opacity <span class="op">=</span> <span class="fl">0.8</span>, fillOpacity <span class="op">=</span> <span class="fl">0.5</span>, weight <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">addSearchGoogle</span><span class="op">(</span></span>
@@ -157,6 +167,22 @@ For this to be effective one of <code>showSearchLocation</code>, <code>showBound
 <dd><p>String. An optional group to hold all the searched locations and their results.</p></dd>
 
 
+<dt>marker</dt>
+<dd><p>Let's you set the icon. Can be an icon made by <code><a href="https://rstudio.github.io/leaflet/reference/makeIcon.html" class="external-link">makeIcon</a></code> or <code><a href="https://rstudio.github.io/leaflet/reference/makeAwesomeIcon.html" class="external-link">makeAwesomeIcon</a></code></p></dd>
+
+
+<dt>showFeatureOptions</dt>
+<dd><p>A list of styling options for the found feature</p></dd>
+
+
+<dt>showBoundsOptions</dt>
+<dd><p>A list of styling options for the bounds of the found feature</p></dd>
+
+
+<dt>showHighlightOptions</dt>
+<dd><p>A list of styling options for the hover effect of a found feature</p></dd>
+
+
 <dt>apikey</dt>
 <dd><p>String. API Key for Google GeoCoding Service.</p></dd>
 
@@ -203,7 +229,7 @@ For this to be effective one of <code>showSearchLocation</code>, <code>showBound
 <span class="r-in"><span>  <span class="fu">addSearchGoogle</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Google Geocoding works best with an apikey</span>
 <div id="htmlwidget-0ed12bb554391c49c2e3" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script src="https://maps.googleapis.com/maps/api/js?v=3"></script><script type="application/json" data-for="htmlwidget-0ed12bb554391c49c2e3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addEasyButton","args":[{"icon":"ion-arrow-shrink","title":"Reset View","onClick":"function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }","position":"topleft"}]},{"method":"addSearchGoogle","args":[{"moveToLocation":true,"zoom":17,"container":"","minLength":2,"initial":true,"casesensitive":false,"autoType":true,"delayType":400,"tooltipLimit":-1,"tipAutoSubmit":true,"firstTipSubmit":false,"autoResize":true,"collapsed":true,"autoCollapse":true,"autoCollapseTime":1200,"textErr":"Location Not Found","textCancel":"Cancel","textPlaceholder":"Search...","position":"topleft","hideMarkerOnCollapse":false}]}]},"evals":["calls.1.args.0.onClick"],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\nfunction(el, x){\n  var map = this;\n  map.whenReady(function(){\n    map._initialCenter = map.getCenter();\n    map._initialZoom = map.getZoom();\n  });\n}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script><span class="r-in"><span></span></span>
+<script src="https://maps.googleapis.com/maps/api/js?v=3"></script><script type="application/json" data-for="htmlwidget-0ed12bb554391c49c2e3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addEasyButton","args":[{"icon":"ion-arrow-shrink","title":"Reset View","onClick":"function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }","position":"topleft"}]},{"method":"addSearchGoogle","args":[{"moveToLocation":true,"zoom":17,"container":"","minLength":2,"initial":true,"casesensitive":false,"autoType":true,"delayType":400,"tooltipLimit":-1,"tipAutoSubmit":true,"firstTipSubmit":false,"autoResize":true,"collapsed":true,"autoCollapse":true,"autoCollapseTime":1200,"textErr":"Location Not Found","textCancel":"Cancel","textPlaceholder":"Search...","position":"topleft","hideMarkerOnCollapse":false,"marker":{"icon":null,"animate":true,"circle":{"radius":10,"weight":3,"color":"#e03","stroke":true,"fill":false}}}]}]},"evals":["calls.1.args.0.onClick"],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\nfunction(el, x){\n  var map = this;\n  map.whenReady(function(){\n    map._initialCenter = map.getCenter();\n    map._initialZoom = map.getZoom();\n  });\n}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## for more examples see</span></span></span>
 <span class="r-in"><span><span class="co"># browseURL(system.file("examples/search.R", package = "leaflet.extras"))</span></span></span>
 <span class="r-in"><span></span></span>
@@ -214,7 +240,7 @@ For this to be effective one of <code>showSearchLocation</code>, <code>showBound
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Bhaskar Karambelkar, Barret Schloerke.</p>
+  <p></p><p>Developed by Sebastian Gatscha, Bhaskar Karambelkar, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown-footer-right">

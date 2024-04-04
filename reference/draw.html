@@ -145,6 +145,20 @@ the <code>Leaflet.Draw.Drag</code> plugin. Otherwise, this library will not be i
 <dd><p>whether to clear the map of drawn features.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The drawn features emit events upon mouse interaction.
+Event names follow the pattern: <code>input$MAPID_LAYERCATEGORY_EVENTNAME</code>,
+where <code>LAYERCATEGORY</code> can be one of:</p><ul><li><p><code>marker</code></p></li>
+<li><p><code>shape</code></p></li>
+<li><p><code>polyline</code></p></li>
+</ul><p>Similarly, for <code>EVENTNAME</code>, valid values are:</p><ul><li><p><code>click</code></p></li>
+<li><p><code>mouseover</code></p></li>
+<li><p><code>mouseout</code></p></li>
+</ul><p>See the provided example for usage:</p>
+<p><code>browseURL(system.file("examples/shiny/draw-events/draw_mouse_events.R",
+                            package = "leaflet.extras"))</code></p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -175,7 +189,7 @@ the <code>Leaflet.Draw.Drag</code> plugin. Otherwise, this library will not be i
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Bhaskar Karambelkar, Barret Schloerke.</p>
+  <p></p><p>Developed by Sebastian Gatscha, Bhaskar Karambelkar, Barret Schloerke.</p>
 </div>
 
 <div class="pkgdown-footer-right">
