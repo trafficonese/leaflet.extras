@@ -4,13 +4,16 @@ greenLeafIcon <- makeIcon(
   iconAnchorX = 22, iconAnchorY = 94,
   shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
   shadowWidth = 50, shadowHeight = 64,
-  shadowAnchorX = 4, shadowAnchorY = 62)
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
 customIcon <- list(
   iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
-  iconSize = c(38, 90))
+  iconSize = c(38, 90)
+)
 awesomeicon <- leaflet::makeAwesomeIcon(
   icon = "ios-close", iconColor = "black",
-  library = "ion", markerColor = "green")
+  library = "ion", markerColor = "green"
+)
 
 
 test_that("map-control-plugins", {
@@ -97,7 +100,7 @@ test_that("map-control-plugins", {
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchOSM")
-  opts$marker$icon = NULL
+  opts$marker$icon <- NULL
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
 
   txt <- "some text"
@@ -115,7 +118,8 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchOSM")
 
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(displayText = TRUE)
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
@@ -125,7 +129,8 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(displayText = FALSE)
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
@@ -141,10 +146,11 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "clearSearchOSM")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args, list())
 
-  showfeat <- list(weight = 2,color = "red",dashArray = '5,10',fillOpacity = 0.2,opacity = 0.5)
-  showbound <- list(weight = 2,color = "#444444",dashArray = '5,10',fillOpacity = 0.2,opacity = 0.5)
-  showhigh <- list(opacity = 0.8,fillOpacity = 0.5,weight = 5)
-  ts <- leaflet() %>% addTiles() %>%
+  showfeat <- list(weight = 2, color = "red", dashArray = "5,10", fillOpacity = 0.2, opacity = 0.5)
+  showbound <- list(weight = 2, color = "#444444", dashArray = "5,10", fillOpacity = 0.2, opacity = 0.5)
+  showhigh <- list(opacity = 0.8, fillOpacity = 0.5, weight = 5)
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(
       displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
       showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE
@@ -162,10 +168,11 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
 
 
-  showfeat <- list(weight = 7, color = "purple", dashArray = '2,5', fillOpacity = 0.8, opacity = 1)
-  showbound <- list(weight = 4, color = "orange", dashArray = '10,20', fillOpacity = 0.1, opacity = 1)
+  showfeat <- list(weight = 7, color = "purple", dashArray = "2,5", fillOpacity = 0.8, opacity = 1)
+  showbound <- list(weight = 4, color = "orange", dashArray = "10,20", fillOpacity = 0.1, opacity = 1)
   showhigh <- list(opacity = 1, fillOpacity = 0.8, weight = 9)
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(
       displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
       showBounds = TRUE, fitBounds = FALSE, showFeature = TRUE,
@@ -188,10 +195,11 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBoundsOptions, showbound)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
 
-  showfeat <- list(weight = 7, color = "#335423", dashArray = '2,5', fillOpacity = 0.8, opacity = 1)
-  showbound <- list(weight = 4, color = "#987655", dashArray = '10,20', fillOpacity = 0.1, opacity = 1)
+  showfeat <- list(weight = 7, color = "#335423", dashArray = "2,5", fillOpacity = 0.8, opacity = 1)
+  showbound <- list(weight = 4, color = "#987655", dashArray = "10,20", fillOpacity = 0.1, opacity = 1)
   showhigh <- list(opacity = 1, fillOpacity = 0.8, weight = 9)
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(
       displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
       showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE,
@@ -216,7 +224,8 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBoundsOptions, showbound)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
 
-  ts <- leaflet() %>% addTiles() %>%
+  ts <- leaflet() %>%
+    addTiles() %>%
     addReverseSearchOSM(
       displayText = TRUE, showSearchLocation = TRUE, group = "mygroup",
       showBounds = TRUE, fitBounds = TRUE, showFeature = TRUE,
