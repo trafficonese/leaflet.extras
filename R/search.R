@@ -70,14 +70,13 @@ searchOptions <- function(
       icon = NULL,
       animate = TRUE,
       circle = list(
-          radius = 10,
-          weight = 3,
-          color = '#e03',
-          stroke = TRUE,
-          fill = FALSE
+        radius = 10,
+        weight = 3,
+        color = "#e03",
+        stroke = TRUE,
+        fill = FALSE
       )
     )) {
-
   leaflet::filterNULL(list(
     url = url,
     sourceData = sourceData,
@@ -208,14 +207,14 @@ addReverseSearchOSM <- function(
     showFeatureOptions = list(
       weight = 2,
       color = "red",
-      dashArray = '5,10',
+      dashArray = "5,10",
       fillOpacity = 0.2,
       opacity = 0.5
     ),
     showBoundsOptions = list(
       weight = 2,
       color = "#444444",
-      dashArray = '5,10',
+      dashArray = "5,10",
       fillOpacity = 0.2,
       opacity = 0.5
     ),
@@ -224,7 +223,6 @@ addReverseSearchOSM <- function(
       fillOpacity = 0.5,
       weight = 5
     )) {
-
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
