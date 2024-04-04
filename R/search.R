@@ -35,6 +35,7 @@ leafletSearchDependencies <- function() {
 #' @param textPlaceholder placeholder value.
 #' @param position "topleft".
 #' @param hideMarkerOnCollapse remove circle and marker on search control collapsed.
+#' @param marker Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}
 #' @rdname search-options
 #' @export
 searchOptions <- function(
@@ -118,8 +119,7 @@ searchOptions <- function(
 #' @rdname search-geocoding
 #' @export
 addSearchOSM <- function(map,
-                         options = searchOptions(autoCollapse = TRUE, minLength = 2),
-                         icon = NULL) {
+                         options = searchOptions(autoCollapse = TRUE, minLength = 2)) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
 
   result <- makeSearchIcon(map, options)

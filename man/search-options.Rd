@@ -102,6 +102,8 @@ searchFeaturesOptions(
 
 \item{hideMarkerOnCollapse}{remove circle and marker on search control collapsed.}
 
+\item{marker}{Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}}
+
 \item{openPopup}{whether to open the popup associated with the feature when the feature is searched for}
 
 \item{...}{Other options to pass to \code{\link{searchOptions}()} function.}
