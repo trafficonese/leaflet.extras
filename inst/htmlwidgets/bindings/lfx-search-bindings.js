@@ -27,11 +27,11 @@ function adaptIcon(options) {
       //delete icon.awesomemarker;
 
       if (icon.squareMarker) {
-          icon.className = 'awesome-marker awesome-marker-square';
+        icon.className = 'awesome-marker awesome-marker-square';
       }
 
       if (!icon.prefix) {
-          icon.prefix = icon.library;
+        icon.prefix = icon.library;
       }
 
       return new L.AwesomeMarkers.icon(icon);
@@ -45,19 +45,19 @@ function adaptIcon(options) {
       icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
 
       if (icon.iconWidth) {
-          icon.iconSize = [icon.iconWidth, icon.iconHeight];
+        icon.iconSize = [icon.iconWidth, icon.iconHeight];
       }
       if (icon.shadowWidth) {
-          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
+        icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
       }
       if (icon.iconAnchorX) {
-          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
+        icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
       }
       if (icon.shadowAnchorX) {
-          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
+        icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
       }
       if (icon.popupAnchorX) {
-          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
+        icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
       }
       return new L.Icon(icon);
     }
@@ -66,10 +66,10 @@ function adaptIcon(options) {
 
 function normalizeLongitude(longitude) {
   while (longitude > 180) {
-      longitude -= 360;
+    longitude -= 360;
   }
   while (longitude < -180) {
-      longitude += 360;
+    longitude += 360;
   }
   return longitude;
 }
@@ -102,7 +102,7 @@ LeafletWidget.methods.addSearchOSM = function(options) {
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     //options.marker = L.circleMarker([0, 0], {radius: 30});
-    options.marker.icon = adaptIcon(options)
+    options.marker.icon = adaptIcon(options);
 
     if (options.moveToLocation) {
       options.moveToLocation = function(latlng, title, map) {
@@ -174,7 +174,7 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
 
     clickOSMEventHandler = function(e) {
       var latlng = e.latlng;
-      latlng.lng = normalizeLongitude(latlng.lng)
+      latlng.lng = normalizeLongitude(latlng.lng);
 
       // This will hold the query, boundingbox, and found feature layers
       var container = L.featureGroup();
@@ -292,38 +292,50 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
           if (!$.isEmptyObject(marker)) {
 
             marker.on('mouseover', function() {
-              var fillOpacity = options.showHighlightOptions.fillOpacity ? options.showHighlightOptions.fillOpacity : 0.5
-              var opacity = options.showHighlightOptions.opacity ? options.showFeatureOptions.opacity : 0.8
-              var weight = options.showHighlightOptions.weight ? options.showHighlightOptions.weight : 5
+              var fillOpacity = options.showHighlightOptions.fillOpacity
+                ? options.showHighlightOptions.fillOpacity
+                : 0.5;
+              var opacity = options.showHighlightOptions.opacity
+                ? options.showFeatureOptions.opacity
+                : 0.8;
+              var weight = options.showHighlightOptions.weight
+                ? options.showHighlightOptions.weight
+                : 5;
               if (!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: fillOpacity,
-                               opacity: opacity,
-                               weight: weight});
+                  opacity: opacity,
+                  weight: weight});
                 rect.bringToFront();
               }
 
               if (!$.isEmptyObject(feature)) {
                 feature.setStyle({fillOpacity: fillOpacity,
-                                  opacity: opacity,
-                                  weight: weight});
+                  opacity: opacity,
+                  weight: weight});
                 feature.bringToFront();
               }
             });
             marker.on('mouseout', function() {
-              var fillOpacity = options.showBoundsOptions.fillOpacity ? options.showBoundsOptions.fillOpacity : 0.2
-              var opacity = options.showBoundsOptions.opacity ? options.showBoundsOptions.opacity : 0.5
-              var weight = options.showBoundsOptions.weight ? options.showBoundsOptions.weight : 2
+              var fillOpacity = options.showBoundsOptions.fillOpacity
+                ? options.showBoundsOptions.fillOpacity
+                : 0.2;
+              var opacity = options.showBoundsOptions.opacity
+                ? options.showBoundsOptions.opacity
+                : 0.5;
+              var weight = options.showBoundsOptions.weight
+                ? options.showBoundsOptions.weight
+                : 2;
               if (!$.isEmptyObject(rect)) {
                 rect.setStyle({fillOpacity: fillOpacity,
-                               opacity: opacity,
-                               weight: weight});
+                  opacity: opacity,
+                  weight: weight});
                 rect.bringToBack();
               }
 
               if (!$.isEmptyObject(feature)) {
                 feature.setStyle({fillOpacity: fillOpacity,
-                                  opacity: opacity,
-                                  weight: weight});
+                  opacity: opacity,
+                  weight: weight});
                 feature.bringToBack();
               }
             });
@@ -414,7 +426,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     options.sourceData = googleGeocoding;
     options.formatData = formatJSON;
 
-    options.marker.icon = adaptIcon(options)
+    options.marker.icon = adaptIcon(options);
     map.searchControlGoogle = new L.Control.Search(options);
     map.searchControlGoogle.addTo(map);
 
@@ -624,7 +636,7 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
       };
     }
 
-    options.marker.icon = adaptIcon(options)
+    options.marker.icon = adaptIcon(options);
 
     map.searchControlUSCensusBureau = new L.Control.Search(options);
     map.searchControlUSCensusBureau.addTo(map);
@@ -701,7 +713,7 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
       });
     }
 
-    options.marker.icon = adaptIcon(options)
+    options.marker.icon = adaptIcon(options);
 
     L.stamp(searchFeatureGroup);
     options.layer = searchFeatureGroup;
