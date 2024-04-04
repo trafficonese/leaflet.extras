@@ -215,17 +215,27 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
           L.latLng(result.boundingbox[1], result.boundingbox[3]));
 
         if (options.showBounds) {
-          var fillOpacity = options.showBoundsOptions.fillOpacity ? options.showBoundsOptions.fillOpacity : 0.2
-          var opacity = options.showBoundsOptions.opacity ? options.showBoundsOptions.opacity : 0.5
-          var weight = options.showBoundsOptions.weight ? options.showBoundsOptions.weight : 2
-          var color = options.showBoundsOptions.color ? options.showBoundsOptions.color : '#444444'
-          var dashArray = options.showBoundsOptions.dashArray ? options.showBoundsOptions.dashArray : '5,10'
+          var fillOpacityBound = options.showBoundsOptions.fillOpacity
+            ? options.showBoundsOptions.fillOpacity
+            : 0.2;
+          var opacityBound = options.showBoundsOptions.opacity
+            ? options.showBoundsOptions.opacity
+            : 0.5;
+          var weightBound = options.showBoundsOptions.weight
+            ? options.showBoundsOptions.weight
+            : 2;
+          var colorBound = options.showBoundsOptions.color
+            ? options.showBoundsOptions.color
+            : '#444444';
+          var dashArrayBound = options.showBoundsOptions.dashArray
+            ? options.showBoundsOptions.dashArray
+            : '5,10';
           var rect = L.rectangle(bb, {
-            weight: weight,
-            color: color,
-            dashArray: dashArray,
-            fillOpacity: fillOpacity,
-            opacity: opacity,
+            weight: weightBound,
+            color: colorBound,
+            dashArray: dashArrayBound,
+            fillOpacity: fillOpacityBound,
+            opacity: opacityBound,
             clickable: false,
             'type': 'result_boundingbox'});
             /* eslint-disable no-unused-vars */
@@ -235,11 +245,21 @@ LeafletWidget.methods.addReverseSearchOSM = function(options, group) {
         }
 
         if (options.showFeature) {
-          var fillOpacity = options.showFeatureOptions.fillOpacity ? options.showFeatureOptions.fillOpacity : 0.2
-          var opacity = options.showFeatureOptions.opacity ? options.showFeatureOptions.opacity : 0.5
-          var weight = options.showFeatureOptions.weight ? options.showFeatureOptions.weight : 2
-          var color = options.showFeatureOptions.color ? options.showFeatureOptions.color : 'red'
-          var dashArray = options.showFeatureOptions.dashArray ? options.showFeatureOptions.dashArray : '5,10'
+          var fillOpacity = options.showFeatureOptions.fillOpacity
+            ? options.showFeatureOptions.fillOpacity
+            : 0.2;
+          var opacity = options.showFeatureOptions.opacity
+            ? options.showFeatureOptions.opacity
+            : 0.5;
+          var weight = options.showFeatureOptions.weight
+            ? options.showFeatureOptions.weight
+            : 2;
+          var color = options.showFeatureOptions.color
+            ? options.showFeatureOptions.color
+            : 'red';
+          var dashArray = options.showFeatureOptions.dashArray
+            ? options.showFeatureOptions.dashArray
+            : '5,10';
           var feature = L.geoJson(result.geojson,
             {
               weight: weight,
