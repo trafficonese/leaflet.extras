@@ -68,19 +68,20 @@ addWebGLHeatmap <- function(
     gradientTexture = NULL,
     alphaRange = 1,
     data = leaflet::getMapData(map)) {
-
   map$dependencies <- c(
     map$dependencies,
     webGLHeatmapDependency()
   )
 
-  gradients <- c("skyline", "deep-sea", "BuGn", "BuPu", "GnBu",
-                 "OrRd", "PuBu", "PuBuGn", "PuRd", "RdPu",
-                 "YlGn", "YlGnBu", "YlOrBr", "YlOrRd")
+  gradients <- c(
+    "skyline", "deep-sea", "BuGn", "BuPu", "GnBu",
+    "OrRd", "PuBu", "PuBuGn", "PuRd", "RdPu",
+    "YlGn", "YlGnBu", "YlOrBr", "YlOrRd"
+  )
 
   if (!is.null(gradientTexture) &&
     !gradientTexture %in% gradients) {
-    stop("Only allowed values for 'gradientTexture' are:\n", paste0("'",gradients,"'", collapse = ", "))
+    stop("Only allowed values for 'gradientTexture' are:\n", paste0("'", gradients, "'", collapse = ", "))
   }
 
   pts <- leaflet::derivePoints(
