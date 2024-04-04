@@ -89,7 +89,9 @@
 <li>Changed default values in <code>searchOptions</code> for <code>url</code> / <code>propertyLoc</code> / <code>propertyName</code>
 </li>
 <li>Draw events trigger correctly using <code>priority: "event"</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/89" class="external-link">#89</a></li>
-<li>In <code>addReverseSearchOSM</code>, longitudes are now normalized to ensure that the Nomiatim search returns features for wrapped tiles.</li>
+<li>Included 12 color gradients from <a href="https://colorbrewer2.org" class="external-link">colorbrewer2</a> for <code>addWebGLHeatmap</code> using this script <code>/scripts/generate_color_gradients.R</code>
+</li>
+<li>In <code>addReverseSearchOSM</code>, longitudes are now normalized to ensure that the Nominatim search returns features for wrapped tiles.</li>
 <li>Updated most JavaScript dependencies, changed Webpack Build, removed <strong>source-maps</strong> as package size was an R-CMD-check issue</li>
 <li>Include Tests for R functions</li>
 <li>Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)</li>
