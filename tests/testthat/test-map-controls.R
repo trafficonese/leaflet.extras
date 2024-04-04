@@ -1,3 +1,18 @@
+greenLeafIcon <- makeIcon(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62)
+customIcon <- list(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconSize = c(38, 90))
+awesomeicon <- leaflet::makeAwesomeIcon(
+  icon = "ios-close", iconColor = "black",
+  library = "ion", markerColor = "green")
+
+
 test_that("map-control-plugins", {
   ## Measure ###################
   ts <- leaflet() %>%
@@ -82,6 +97,7 @@ test_that("map-control-plugins", {
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchOSM")
+  opts$marker$icon = NULL
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
 
   txt <- "some text"
@@ -99,7 +115,7 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "removeSearchOSM")
 
 
-  ts <- leaflet() %>%
+  ts <- leaflet() %>% addTiles() %>%
     addReverseSearchOSM(displayText = TRUE)
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
@@ -109,7 +125,7 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
 
-  ts <- leaflet() %>%
+  ts <- leaflet() %>% addTiles() %>%
     addReverseSearchOSM(displayText = FALSE)
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
@@ -120,6 +136,15 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
 
   ts <- leaflet() %>%
+    clearSearchOSM()
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "clearSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args, list())
+
+  showfeat <- list(weight = 2,color = "red",dashArray = '5,10',fillOpacity = 0.2,opacity = 0.5)
+  showbound <- list(weight = 2,color = "#444444",dashArray = '5,10',fillOpacity = 0.2,opacity = 0.5)
+  showhigh <- list(opacity = 0.8,fillOpacity = 0.5,weight = 5)
+  ts <- leaflet() %>% addTiles() %>%
     addReverseSearchOSM(
       displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
       showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE
@@ -132,6 +157,82 @@ test_that("map-control-plugins", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, FALSE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeatureOptions, showfeat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBoundsOptions, showbound)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
+
+
+  showfeat <- list(weight = 7, color = "purple", dashArray = '2,5', fillOpacity = 0.8, opacity = 1)
+  showbound <- list(weight = 4, color = "orange", dashArray = '10,20', fillOpacity = 0.1, opacity = 1)
+  showhigh <- list(opacity = 1, fillOpacity = 0.8, weight = 9)
+  ts <- leaflet() %>% addTiles() %>%
+    addReverseSearchOSM(
+      displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
+      showBounds = TRUE, fitBounds = FALSE, showFeature = TRUE,
+      marker = list(icon = greenLeafIcon),
+      showFeatureOptions = showfeat,
+      showBoundsOptions = showbound,
+      showHighlightOptions = showhigh
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker, "list")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker$icon$iconUrl$data, greenLeafIcon$iconUrl)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeatureOptions, showfeat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBoundsOptions, showbound)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
+
+  showfeat <- list(weight = 7, color = "#335423", dashArray = '2,5', fillOpacity = 0.8, opacity = 1)
+  showbound <- list(weight = 4, color = "#987655", dashArray = '10,20', fillOpacity = 0.1, opacity = 1)
+  showhigh <- list(opacity = 1, fillOpacity = 0.8, weight = 9)
+  ts <- leaflet() %>% addTiles() %>%
+    addReverseSearchOSM(
+      displayText = FALSE, showSearchLocation = FALSE, group = "mygroup",
+      showBounds = TRUE, fitBounds = FALSE, showFeature = FALSE,
+      marker = list(icon = awesomeicon),
+      showFeatureOptions = showfeat,
+      showBoundsOptions = showbound,
+      showHighlightOptions = showhigh
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "ionicons")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 1]]$name, "leaflet-awesomemarkers")
+  expect_identical(ts$dependencies[[length(ts$dependencies) - 2]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, FALSE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker, "list")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker$icon, c(awesomeicon, awesomemarker = TRUE))
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeatureOptions, showfeat)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBoundsOptions, showbound)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showHighlightOptions, showhigh)
+
+  ts <- leaflet() %>% addTiles() %>%
+    addReverseSearchOSM(
+      displayText = TRUE, showSearchLocation = TRUE, group = "mygroup",
+      showBounds = TRUE, fitBounds = TRUE, showFeature = TRUE,
+      marker = list(icon = customIcon)
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchOSM")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showFeature, TRUE)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], "mygroup")
+  expect_type(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker, "list")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker$icon$iconUrl$data, customIcon$iconUrl)
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$marker$icon$iconSize, list(customIcon$iconSize))
 
   ## Search Google ##########################
   opts <- searchOptions(autoCollapse = TRUE, minLength = 2)
@@ -210,17 +311,19 @@ test_that("map-control-plugins", {
 
 
   ## Search Features  ##########################
+  opts <- searchFeaturesOptions()
   ts <- leaflet() %>%
     addProviderTiles(providers$CartoDB.Positron) %>%
     addSearchFeatures(
       targetGroups = "group",
-      options = searchFeaturesOptions()
+      options = opts
     )
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchFeatures")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], "group")
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], searchFeaturesOptions())
+  opts$marker$icon <- NULL
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], opts)
 
   opts <- searchFeaturesOptions(
     propertyName = "popup",
@@ -237,6 +340,7 @@ test_that("map-control-plugins", {
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchFeatures")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], "group")
+  opts$marker$icon <- NULL
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], opts)
 
   ts <- leaflet() %>%
