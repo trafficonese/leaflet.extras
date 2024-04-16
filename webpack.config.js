@@ -11,7 +11,7 @@ const src_path = './inst/htmlwidgets/src/';
 const build_path = path.resolve(__dirname, './inst/htmlwidgets/build');
 
 const mode = 'production';
-//const mode = "development";
+//const mode = 'development';
 
 const library_prod = function(name, filename = name, library = undefined) {
   const foldername = filename;

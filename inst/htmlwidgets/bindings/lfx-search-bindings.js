@@ -20,9 +20,8 @@ function eventToShiny(e) {
 }
 
 function adaptIcon(options) {
-  var icon = options.marker.icon;
-
-  if (icon) {
+  if (options.marker && options.marker.icon) {
+    var icon = options.marker.icon;
     if (icon.awesomemarker) {
       //delete icon.awesomemarker;
 
@@ -61,6 +60,8 @@ function adaptIcon(options) {
       }
       return new L.Icon(icon);
     }
+  } else {
+    return new L.Icon.Default();
   }
 }
 
