@@ -118,20 +118,24 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
 
     // Create new Drawing Control
     map.drawToolbar = new L.Control.Draw(options);
+    // Store event handlers in map property
+    map.drawToolbar.eventHandler = {};
     map.drawToolbar.addTo(map);
 
     // Event Listeners
-    map.on(L.Draw.Event.DRAWSTART, function(e) {
+    map.drawToolbar.eventHandler.onDrawStart = function(e) {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_start', {'feature_type': e.layerType, 'nonce': Math.random()});
-    });
+    }
+    map.on(L.Draw.Event.DRAWSTART, map.drawToolbar.eventHandler.onDrawStart);
 
-    map.on(L.Draw.Event.DRAWSTOP, function(e) {
+    map.drawToolbar.eventHandler.onDrawStop = function(e) {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_stop', {'feature_type': e.layerType, 'nonce': Math.random()});
-    });
+    }
+    map.on(L.Draw.Event.DRAWSTOP, map.drawToolbar.eventHandler.onDrawStop);
 
-    map.on(L.Draw.Event.CREATED, function(e) {
+    map.drawToolbar.eventHandler.onCreated = function(e) {
       if (options.draw.singleFeature) {
         if (editableFeatureGroup.getLayers().length > 0) {
           editableFeatureGroup.clearLayers();
@@ -178,18 +182,22 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layer.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.CREATED, map.drawToolbar.eventHandler.onCreated);
 
-    map.on(L.Draw.Event.EDITSTART, function() {
+    map.drawToolbar.eventHandler.onEditstart = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_editstart', true, {priority: 'event'});
-    });
-    map.on(L.Draw.Event.EDITSTOP, function() {
+    }
+    map.on(L.Draw.Event.EDITSTART, map.drawToolbar.eventHandler.onEditstart);
+
+    map.drawToolbar.eventHandler.onEditstop = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_editstop', true, {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.EDITSTOP, map.drawToolbar.eventHandler.onEditstop);
 
-    map.on(L.Draw.Event.EDITED, function(e) {
+    map.drawToolbar.eventHandler.onEdited = function(e) {
       var layers = e.layers;
       layers.eachLayer(function(layer) {
         var featureId = L.stamp(layer);
@@ -214,19 +222,22 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layers.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.EDITED, map.drawToolbar.eventHandler.onEdited);
 
-    map.on(L.Draw.Event.DELETESTART, function() {
+    map.drawToolbar.eventHandler.onDeletestart = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_deletestart', true, {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.DELETESTART, map.drawToolbar.eventHandler.onDeletestart);
 
-    map.on(L.Draw.Event.DELETESTOP, function() {
+    map.drawToolbar.eventHandler.onDeletestop = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_deletestop', true, {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.DELETESTOP, map.drawToolbar.eventHandler.onDeletestop);
 
-    map.on(L.Draw.Event.DELETED, function(e) {
+    map.drawToolbar.eventHandler.onDeleted = function(e) {
       var layers = e.layers;
       layers.eachLayer(function(layer) {
         var featureId = L.stamp(layer);
@@ -250,7 +261,8 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layers.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    });
+    }
+    map.on(L.Draw.Event.DELETED, map.drawToolbar.eventHandler.onDeleted);
 
   }).call(this);
 
@@ -262,6 +274,15 @@ LeafletWidget.methods.removeDrawToolbar = function(clearFeatures) {
     var map = this;
 
     if (map.drawToolbar) {
+      map.off(L.Draw.Event.DRAWSTART, map.drawToolbar.eventHandler.onDrawStart);
+      map.off(L.Draw.Event.DRAWSTOP, map.drawToolbar.eventHandler.onDrawStop);
+      map.off(L.Draw.Event.CREATED, map.drawToolbar.eventHandler.onCreated);
+      map.off(L.Draw.Event.EDITSTART, map.drawToolbar.eventHandler.onEditstart);
+      map.off(L.Draw.Event.EDITSTOP, map.drawToolbar.eventHandler.onEditstop);
+      map.off(L.Draw.Event.EDITED, map.drawToolbar.eventHandler.onEdited);
+      map.off(L.Draw.Event.DELETESTART, map.drawToolbar.eventHandler.onDeletestart);
+      map.off(L.Draw.Event.DELETESTOP, map.drawToolbar.eventHandler.onDeletestop);
+      map.off(L.Draw.Event.DELETED, map.drawToolbar.eventHandler.onDeleted);
       map.drawToolbar.remove(map);
       delete map.drawToolbar;
     }
