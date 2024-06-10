@@ -1,3 +1,25 @@
+## 2024-6-10
+
+- I will be the new maintainer
+- I updated most JavaScript dependencies, added new features and fixed some bugs
+
+## Test environments
+Local (Windows 11 x64 (build 22631) - R version 4.4.0 Patched)
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+All checks on GHA are fine with this setup:
+    - {os: macos-latest,   r: 'release'}
+    - {os: windows-latest, r: 'release'}
+    - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
+    - {os: ubuntu-latest,   r: 'release'}
+    - {os: ubuntu-latest,   r: 'oldrel-1'}
+    
+## revdepcheck results
+We checked 17 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+ * We saw 0 new problems
+ * We failed to check 0 packages
+
+
 # Comments
 
 ## 2018-4-21

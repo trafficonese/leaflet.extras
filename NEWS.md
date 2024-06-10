@@ -58,7 +58,7 @@
   - leaflet-pulse-icon@0.1.0 - https://github.com/mapshakers/leaflet-icon-pulse
   - leaflet-search@2.3.7 - https://github.com/stefanocudini/leaflet-search
   - leaflet-sleep@0.5.1 - https://github.com/CliffCloud/Leaflet.Sleep
-  - leaflet-webgl-heatmap@0.2.7 - https://github.com/ursudio/webgl-heatmap-leaflet
+  - leaflet-webgl-heatmap@0.2.7 - https://github.com/ursudio/leaflet-webgl-heatmap
   - leaflet.BounceMarker@1.0.0 - https://github.com/maximeh/leaflet.bouncemarker
   - leaflet.heat@0.2.0 - https://github.com/Leaflet/Leaflet.heat
   - leaflet.tilelayer.pouchdbcached@0.4.0 - https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached
@@ -125,7 +125,7 @@
 
 ## New Features
 
-* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin. Contributed by [Bangyou Zheng](https://github.com/bhaskarvk/leaflet.extras/pull/15).
+* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin. Contributed by [Bangyou Zheng](https://github.com/trafficonese/leaflet.extras/pull/15).
 
 # leaflet.extras 0.1.9002
 
@@ -212,7 +212,7 @@
 
 ## New Features
 
-* Added [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet) plugin
+* Added [webgl-heatmap](https://github.com/ursudio/leaflet-webgl-heatmap) plugin
 * Added [geojson-choropleth](https://github.com/bhaskarvk/leaflet-choropleth) plugin
 * Added [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers) plugin
 * Added [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse) plugin

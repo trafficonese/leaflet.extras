@@ -2,7 +2,7 @@
 [![R-CMD-check](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml)
 [![Project Status: Active – The project is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--04--04-green.svg)](/commits/master)  
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
 [![License:
 GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 [![packageversion](https://img.shields.io/badge/Package%20version-1.0.0.9000-orange.svg?style=flat-square)](commits/master)

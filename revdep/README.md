@@ -1,20 +1,18 @@
-These are *partial* results!
-
 # Platform
 
-|field    |value                                                                                |
-|:--------|:------------------------------------------------------------------------------------|
-|version  |R version 4.3.1 (2023-06-16 ucrt)                                                    |
-|os       |Windows 11 x64 (build 22631)                                                         |
-|system   |x86_64, mingw32                                                                      |
-|ui       |RStudio                                                                              |
-|language |(EN)                                                                                 |
-|collate  |German_Austria.utf8                                                                  |
-|ctype    |German_Austria.utf8                                                                  |
-|tz       |Europe/Vienna                                                                        |
-|date     |2024-04-04                                                                           |
-|rstudio  |2023.06.0+421 Mountain Hydrangea (desktop)                                           |
-|pandoc   |3.1.1 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
+|field    |value                                                                                 |
+|:--------|:-------------------------------------------------------------------------------------|
+|version  |R version 4.4.0 Patched (2024-05-26 r86642 ucrt)                                      |
+|os       |Windows 11 x64 (build 22631)                                                          |
+|system   |x86_64, mingw32                                                                       |
+|ui       |RStudio                                                                               |
+|language |(EN)                                                                                  |
+|collate  |German_Austria.utf8                                                                   |
+|ctype    |German_Austria.utf8                                                                   |
+|tz       |Europe/Vienna                                                                         |
+|date     |2024-06-10                                                                            |
+|rstudio  |2024.04.1+748 Chocolate Cosmos (desktop)                                              |
+|pandoc   |3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
 
 # Dependencies
 
@@ -70,25 +68,4 @@ These are *partial* results!
 |yaml              |2.3.8   |2.3.8      |   |
 
 # Revdeps
-
-## All (16)
-
-|package         |version |error |warning |note |
-|:---------------|:-------|:-----|:-------|:----|
-|bcdata          |0.4.1   |      |        |     |
-|berryFunctions  |1.22.5  |      |        |     |
-|GPSeqClus       |1.4.0   |      |        |     |
-|gwavr           |0.2.0   |      |        |     |
-|hydflood        |0.5.7   |      |        |     |
-|[HYPEtools](problems.md#hypetools)|1.6.1   |1     |        |     |
-|[IceSat2R](problems.md#icesat2r)|1.0.4   |      |        |1    |
-|lcars           |0.3.8   |      |        |     |
-|[leaflet.esri](problems.md#leafletesri)|1.0.0   |      |        |1    |
-|[mapedit](problems.md#mapedit)|0.6.0   |      |        |2    |
-|MDMAPR          |0.2.3   |      |        |     |
-|[naturaList](problems.md#naturalist)|0.5.2   |      |1       |1    |
-|[oceanis](problems.md#oceanis)|1.8.5   |      |        |1    |
-|[pdxTrees](problems.md#pdxtrees)|0.4.0   |      |        |1    |
-|rfars           |1.1.0   |      |        |     |
-|starsTileServer |0.1.1   |      |        |     |
 

@@ -12,8 +12,9 @@ bingLayerDependencies <- function() {
 #' @param imagerySet String. Type of Tiles to display
 #' @param layerId String. An optional unique ID for the layer
 #' @param group String. An optional group name for the layer
-#' @param ... Optional Parameters required by the Bing API described at \url{https://msdn.microsoft.com/en-us/library/ff701716.aspx}
-#' @seealso Get a Bing Maps API Key: \url{https://msdn.microsoft.com/en-us/library/ff428642.aspx}
+#' @param ... Optional Parameters required by the Bing API described at
+#'   \url{https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key?redirectedfrom=MSDN}
+#' @seealso Get a Bing Maps API Key: \url{https://learn.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata?redirectedfrom=MSDN}
 #' @export
 addBingTiles <- function(
     map,
