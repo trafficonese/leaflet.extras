@@ -1,13 +1,12 @@
 
-[![R-CMD-check](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml)
-[![Project Status: Active – The project is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Checks](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras)
+[![CRAN checks](https://badges.cranchecks.info/summary/leaflet.extras.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras.html)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
 [![License:
 GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0.9000-orange.svg?style=flat-square)](commits/master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
+[![](http://cranlogs.r-pkg.org/badges/last-month/leaflet.extras?color=blue)](https://cran.r-project.org/package=leaflet.extras)
 [![Codecov test
 coverage](https://codecov.io/gh/trafficonese/leaflet.extras/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras?branch=master)
 
