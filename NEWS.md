@@ -1,4 +1,4 @@
-# leaflet.extras (development version)
+# leaflet.extras 2.0.0
 
 ## New Features
 - `addDrawToolbar` offers some new options: 
