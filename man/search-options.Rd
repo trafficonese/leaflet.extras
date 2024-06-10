@@ -46,7 +46,7 @@ searchFeaturesOptions(
 )
 }
 \arguments{
-\item{url}{url for search by ajax request, ex: `search.php?q={s}`. Can be function that returns string for dynamic parameter setting.}
+\item{url}{url for search by ajax request, ex: `search.php?q=\{s\}`. Can be function that returns string for dynamic parameter setting.}
 
 \item{sourceData}{function that fill _recordsCache, passed searching text by first param and callback in second.}
 

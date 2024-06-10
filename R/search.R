@@ -7,7 +7,7 @@ leafletSearchDependencies <- function() {
 
 
 #' Options for search control.
-#' @param url url for search by ajax request, ex: `search.php?q={s}`. Can be function that returns string for dynamic parameter setting.
+#' @param url url for search by ajax request, ex: `search.php?q=\{s\}`. Can be function that returns string for dynamic parameter setting.
 #' @param sourceData function that fill _recordsCache, passed searching text by first param and callback in second.
 #' @param jsonpParam jsonp param name for search by jsonp service, ex: "callback".
 #' @param propertyLoc field for remapping location, using array: ["latname","lonname"] for select double fields(ex. ["lat","lon"] ) support dotted format: "prop.subprop.title".
@@ -223,6 +223,7 @@ addReverseSearchOSM <- function(
       fillOpacity = 0.5,
       weight = 5
     )) {
+
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
