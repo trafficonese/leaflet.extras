@@ -223,7 +223,6 @@ addReverseSearchOSM <- function(
       fillOpacity = 0.5,
       weight = 5
     )) {
-
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
