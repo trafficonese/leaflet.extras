@@ -200,16 +200,19 @@ addGPX(
 )
 }
 \arguments{
-\item{map}{the leaflet map widget}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{geojson}{a GeoJSON/TopoJSON URL or file contents in a character vector.}
 
 \item{layerId}{the layer id}
 
-\item{group}{the name of the group this raster image should belong to (see
-the same parameter under \code{\link{addTiles}})}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{markerType}{The type of marker.  either "marker" or "circleMarker"}
+\item{markerType}{The type of marker. Either \code{marker} or \code{circleMarker}}
 
 \item{markerIcons}{Icons for Marker.
 Can be a single marker using \code{\link[leaflet]{makeIcon}}
@@ -231,12 +234,13 @@ options}
 \item{labelProperty}{The property to use for the label.
 You can also pass in a JS function that takes in a feature and returns a text/HTML content.}
 
-\item{labelOptions}{A Vector of \code{\link{labelOptions}} to provide label}
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+options for each label. Default \code{NULL}}
 
 \item{popupProperty}{The property to use for popup content
 You can also pass in a JS function that takes in a feature and returns a text/HTML content.}
 
-\item{popupOptions}{A Vector of \code{\link{popupOptions}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{stroke}{whether to draw stroke along the path (e.g. the borders of
 polygons or circles)}
@@ -255,7 +259,7 @@ circles)}
 \item{fillOpacity}{fill opacity}
 
 \item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash
+\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
 pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
@@ -265,10 +269,7 @@ pattern}}
 
 \item{pathOptions}{Options for shapes}
 
-\item{highlightOptions}{Options for highlighting the shape on mouse over.
-options for each label. Default \code{NULL}
-   you can use \code{\link[leaflet]{highlightOptions}()} to specify highlight
-  options}
+\item{highlightOptions}{Options for highlighting the shape on mouse over.}
 
 \item{title}{An optional title for the legend}
 

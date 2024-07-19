@@ -88,7 +88,7 @@ removeHeatmap(map, layerId)
 clearHeatmap(map)
 }
 \arguments{
-\item{map}{the map widget.}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -105,7 +105,7 @@ the latitude column from \code{data})}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}

@@ -70,14 +70,14 @@ addGreatCircles(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lat, lng}{lat/lng to add to the Geodesic}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
@@ -97,7 +97,9 @@ polygons or circles)}
 
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
-\item{dashArray}{a string that defines the stroke \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash pattern}}
+\item{dashArray}{a string that defines the stroke
+\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
+pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
 (more means better performance and less accurate representation)}
@@ -105,14 +107,14 @@ polygons or circles)}
 \item{noClip}{whether to disable polyline clipping}
 
 \item{popup}{a character vector of the HTML content for the popups (you are
-recommended to escape the text using \code{\link[htmltools:htmlEscape]{htmltools::htmlEscape()}}
+recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
 
-\item{popupOptions}{A Vector of \code{\link[leaflet:popupOptions]{popupOptions()}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link[leaflet:labelOptions]{labelOptions()}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{options}{a list of extra options for tile layers, popups, paths
@@ -122,7 +124,7 @@ options for each label. Default \code{NULL}}
 
 \item{icon}{the icon(s) for markers; an icon is represented by an R list of
 the form \code{list(iconUrl = "?", iconSize = c(x, y))}, and you can use
-\code{\link[leaflet:icons]{icons()}} to create multiple icons; note when you use an R list
+\code{\link[leaflet]{icons}()} to create multiple icons; note when you use an R list
 that contains images as local files, these local image files will be base64
 encoded into the HTML page so the icon images will still be available even
 when you publish the map elsewhere}

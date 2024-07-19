@@ -7,7 +7,7 @@
 addWMSLegend(map, uri, position = "topright", layerId = NULL, group = NULL)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{uri}{The legend URI}
 
