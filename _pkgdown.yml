@@ -1,14 +1,11 @@
 title: leaflet.extras
 url: https://trafficonese.github.io/leaflet.extras/
-
 template:
   bootstrap: 5
-
 reference:
 - title: Package Documentation
   desc: ~
-  contents:
-  - '`leaflet.extras`'
+  contents: '`leaflet.extras`'
 - title: Useful Dependencies
   desc: ~
   contents:
@@ -59,3 +56,4 @@ reference:
   - '`addResetMapButton`'
   - '`addBingTiles`'
   - '`addBounceMarkers`'
+
