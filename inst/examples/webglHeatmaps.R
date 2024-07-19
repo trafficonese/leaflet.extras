@@ -41,7 +41,7 @@ leaflet(spdf) %>%
 #' <br/><br/>10,000 points
 #'
 #'
-jsURL <- "http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"
+jsURL <- "https://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 

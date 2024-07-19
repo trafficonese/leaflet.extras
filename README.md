@@ -1,12 +1,14 @@
 
 [![Checks](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras/actions/workflows/R-CMD-check.yaml)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras)
-[![CRAN checks](https://badges.cranchecks.info/summary/leaflet.extras.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras.html)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/leaflet.extras)](https://CRAN.R-project.org/package=leaflet.extras)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/leaflet.extras.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras.html)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
 [![License:
 GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
-[![](http://cranlogs.r-pkg.org/badges/last-month/leaflet.extras?color=blue)](https://cran.r-project.org/package=leaflet.extras)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](https://cran.rstudio.com/web/packages/leaflet.extras/index.html)
+[![](https://cranlogs.r-pkg.org/badges/last-month/leaflet.extras?color=blue)](https://cran.r-project.org/package=leaflet.extras)
 [![Codecov test
 coverage](https://codecov.io/gh/trafficonese/leaflet.extras/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras?branch=master)
 
@@ -15,7 +17,7 @@ coverage](https://codecov.io/gh/trafficonese/leaflet.extras/branch/master/graph/
 The goal of `leaflet.extras` package is to provide extra functionality
 to the
 [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) R
-package using various [leaflet plugins](http://leafletjs.com/plugins).
+package using various [leaflet plugins](https://leafletjs.com/plugins).
 
 ### Installation
 
