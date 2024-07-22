@@ -97,7 +97,6 @@ addDrawToolbar <- function(
     edittoolbar = NULL,
     edithandlers = NULL,
     drag = TRUE) {
-
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
     stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
