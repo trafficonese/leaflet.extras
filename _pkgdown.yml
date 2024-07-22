@@ -21,6 +21,8 @@ reference:
   - '`enableMeasurePath`'
   - '`toolbarOptions`'
   - '`handlersOptions`'
+  - '`edithandlersOptions`'
+  - '`edittoolbarOptions`'
 - title: Heatmaps
   desc: ~
   contents:
