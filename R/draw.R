@@ -29,6 +29,8 @@ drawDependencies <- function(drag = TRUE) {
 #' @param singleFeature When set to TRUE, only one feature can be drawn at a time, the previous ones being removed.
 #' @param toolbar See \code{\link{toolbarOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @param handlers See \code{\link{handlersOptions}}. Set to \code{NULL} to take Leaflets default values.
+#' @param edittoolbar See \code{\link{edittoolbarOptions}}. Set to \code{NULL} to take Leaflets default values.
+#' @param edithandlers See \code{\link{edithandlersOptions}}. Set to \code{NULL} to take Leaflets default values.
 #' @param drag When set to \code{TRUE}, the drawn features will be draggable during editing, utilizing
 #'    the \code{Leaflet.Draw.Drag} plugin. Otherwise, this library will not be included.
 #'
@@ -92,13 +94,18 @@ addDrawToolbar <- function(
     singleFeature = FALSE,
     toolbar = NULL,
     handlers = NULL,
+    edittoolbar = NULL,
+    edithandlers = NULL,
     drag = TRUE) {
+
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
     stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
 
   if (!inherits(toolbar, "list")) toolbar <- NULL
   if (!inherits(handlers, "list")) handlers <- NULL
+  if (!inherits(edittoolbar, "list")) edittoolbar <- NULL
+  if (!inherits(edithandlers, "list")) edithandlers <- NULL
 
   map$dependencies <- c(map$dependencies, drawDependencies(drag))
 
@@ -132,7 +139,9 @@ addDrawToolbar <- function(
     )),
     edit = editOptions,
     toolbar = toolbar,
-    handlers = handlers
+    handlers = handlers,
+    edittoolbar = edittoolbar,
+    edithandlers = edithandlers
   )
 
   leaflet::invokeMethod(

@@ -13,7 +13,8 @@ handlersOptions(
   rectangle = list(tooltipStart = "Click and drag to draw rectangle."),
   circle = list(tooltipStart = "Click map to place circle marker.", radius = "Radius"),
   marker = list(tooltipStart = "Click map to place marker."),
-  circlemarker = list(tooltipStart = "Click and drag to draw circle.")
+  circlemarker = list(tooltipStart = "Click and drag to draw circle."),
+  simpleshape = list(tooltipEnd = "Release mouse to finish drawing.")
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ handlersOptions(
 \item{marker}{List of options for marker tooltips.}
 
 \item{circlemarker}{List of options for circlemarker tooltips.}
+
+\item{simpleshape}{List of options for simpleshape tooltips.}
 }
 \description{
 Customize tooltips for \code{\link{addDrawToolbar}}

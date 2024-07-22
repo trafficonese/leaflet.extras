@@ -93,6 +93,19 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
 
       editOptions.featureGroup = editableFeatureGroup;
       options.edit = editOptions;
+
+      if (options && options.edittoolbar) {
+        var rtool = options.edittoolbar;
+        var tooldef = L.drawLocal.draw.toolbar;
+        L.drawLocal.edit.toolbar.buttons = Object.assign({}, tooldef.buttons, rtool.buttons);
+        L.drawLocal.edit.toolbar.actions = Object.assign({}, tooldef.actions, rtool.actions);
+      }
+
+      if (options && options.edithandlers) {
+        var rhand = options.edithandlers;
+        L.drawLocal.edit.handlers.edit = Object.assign({}, rhand.buttons, rtool.edit);
+        L.drawLocal.edit.handlers.remove = Object.assign({}, rhand.actions, rtool.remove);
+      }
     }
 
     // Set Toolbar / Handlers options if provided. Changes the default values.
@@ -114,6 +127,7 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
       L.drawLocal.draw.handlers.polygon = Object.assign({}, handldef.polygon, rhand.polygon);
       L.drawLocal.draw.handlers.polyline = Object.assign({}, handldef.polyline, rhand.polyline);
       L.drawLocal.draw.handlers.rectangle = Object.assign({}, handldef.rectangle, rhand.rectangle);
+      L.drawLocal.draw.handlers.simpleshape = Object.assign({}, handldef.simpleshape, rhand.simpleshape);
     }
 
     // Create new Drawing Control

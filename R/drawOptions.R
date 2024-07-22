@@ -237,6 +237,7 @@ editToolbarOptions <- function(
 #' @param circle List of options for circle tooltips.
 #' @param marker List of options for marker tooltips.
 #' @param circlemarker List of options for circlemarker tooltips.
+#' @param simpleshape List of options for simpleshape tooltips.
 #' @export
 #' @examples \dontrun{
 #' library(leaflet)
@@ -279,6 +280,9 @@ handlersOptions <- function(
     ),
     circlemarker = list(
       tooltipStart = "Click and drag to draw circle."
+    ),
+    simpleshape = list(
+      tooltipEnd = "Release mouse to finish drawing."
     )) {
   leaflet::filterNULL(list(
     polyline = list(
@@ -302,7 +306,8 @@ handlersOptions <- function(
       tooltip = list(start = circle$tooltipStart)
     ),
     marker = list(tooltip = list(start = marker$tooltipStart)),
-    circlemarker = list(tooltip = list(start = circlemarker$tooltipStart))
+    circlemarker = list(tooltip = list(start = circlemarker$tooltipStart)),
+    simpleshape = list(tooltip = list(end = simpleshape$tooltipEnd))
   ))
 }
 
@@ -375,5 +380,75 @@ toolbarOptions <- function(
       marker = buttons$marker,
       circlemarker = buttons$circlemarker
     )
+  ))
+}
+
+
+
+
+
+
+
+#' Options for editing edit handlers
+#' @description Customize edit handlers for \code{\link{addDrawToolbar}}
+#' @param edit List of options for editing tooltips.
+#' @param remove List of options for removing tooltips.
+#' @export
+edithandlersOptions <- function(
+    edit = list(
+      tooltipText = "Drag handles or markers to edit features.",
+      tooltipSubtext = "Click cancel to undo changes."
+    ),
+    remove = list(
+      tooltipText = "Click on a feature to remove."
+    )) {
+
+  leaflet::filterNULL(list(
+    edit = list(
+      tooltip = list(
+        text = edit$tooltipText,
+        subtext = edit$tooltipSubtext
+      )
+    ),
+    remove = list(
+      tooltip = list(
+        text = remove$tooltipText
+      )
+    )
+  ))
+}
+
+
+
+#' Options for editing the toolbar
+#' @description Customize the edit toolbar for \code{\link{addDrawToolbar}}
+#' @param actions List of options for edit action tooltips.
+#' @param buttons List of options for edit button tooltips.
+#' @export
+edittoolbarOptions <- function(
+    actions = list(
+      save = list(
+        title = "Save changes",
+        text = "Save"
+      ),
+      cancel = list(
+        title = "Cancel editing, discards all changes",
+        text = "Cancel"
+      ),
+      clearAll = list(
+        title = "Clear all layers",
+        text = "Clear All"
+      )
+    ),
+    buttons = list(
+      edit = "Edit layers",
+      editDisabled = "No layers to edit",
+      remove = "Delete layers",
+      removeDisabled = "No layers to delete"
+    )) {
+
+  leaflet::filterNULL(list(
+    actions = actions,
+    buttons = buttons
   ))
 }
