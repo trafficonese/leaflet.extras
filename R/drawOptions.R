@@ -402,7 +402,6 @@ edithandlersOptions <- function(
     remove = list(
       tooltipText = "Click on a feature to remove."
     )) {
-
   leaflet::filterNULL(list(
     edit = list(
       tooltip = list(
@@ -446,7 +445,6 @@ edittoolbarOptions <- function(
       remove = "Delete layers",
       removeDisabled = "No layers to delete"
     )) {
-
   leaflet::filterNULL(list(
     actions = actions,
     buttons = buttons
