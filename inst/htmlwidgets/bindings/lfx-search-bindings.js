@@ -21,43 +21,43 @@ function eventToShiny(e) {
 
 function adaptIcon(options) {
   if (options.marker && options.marker.icon) {
-      var icon = options.marker.icon;
-      if (icon.awesomemarker) {
-        if (icon.squareMarker) {
-          icon.className = 'awesome-marker awesome-marker-square';
-        }
-
-        if (!icon.prefix) {
-          icon.prefix = icon.library;
-        }
-
-        return new L.AwesomeMarkers.icon(icon);
-      } else if (icon === true) {
-        return new L.Icon.Default();
-      } else {
-        // Unpack icons
-        icon.iconUrl = unpackStrings(icon.iconUrl);
-        icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
-        icon.shadowUrl = unpackStrings(icon.shadowUrl);
-        icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
-
-        if (icon.iconWidth) {
-          icon.iconSize = [icon.iconWidth, icon.iconHeight];
-        }
-        if (icon.shadowWidth) {
-          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
-        }
-        if (icon.iconAnchorX) {
-          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
-        }
-        if (icon.shadowAnchorX) {
-          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
-        }
-        if (icon.popupAnchorX) {
-          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
-        }
-        return new L.Icon(icon);
+    var icon = options.marker.icon;
+    if (icon.awesomemarker) {
+      if (icon.squareMarker) {
+        icon.className = 'awesome-marker awesome-marker-square';
       }
+
+      if (!icon.prefix) {
+        icon.prefix = icon.library;
+      }
+
+      return new L.AwesomeMarkers.icon(icon);
+    } else if (icon === true) {
+      return new L.Icon.Default();
+    } else {
+      // Unpack icons
+      icon.iconUrl = unpackStrings(icon.iconUrl);
+      icon.iconRetinaUrl = unpackStrings(icon.iconRetinaUrl);
+      icon.shadowUrl = unpackStrings(icon.shadowUrl);
+      icon.shadowRetinaUrl = unpackStrings(icon.shadowRetinaUrl);
+
+      if (icon.iconWidth) {
+        icon.iconSize = [icon.iconWidth, icon.iconHeight];
+      }
+      if (icon.shadowWidth) {
+        icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
+      }
+      if (icon.iconAnchorX) {
+        icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
+      }
+      if (icon.shadowAnchorX) {
+        icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
+      }
+      if (icon.popupAnchorX) {
+        icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
+      }
+      return new L.Icon(icon);
+    }
   }
 }
 

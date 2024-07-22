@@ -95,16 +95,17 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
       options.edit = editOptions;
 
       if (options && options.edittoolbar) {
-        var rtool = options.edittoolbar;
-        var tooldef = L.drawLocal.draw.toolbar;
-        L.drawLocal.edit.toolbar.buttons = Object.assign({}, tooldef.buttons, rtool.buttons);
-        L.drawLocal.edit.toolbar.actions = Object.assign({}, tooldef.actions, rtool.actions);
+        var edittool = options.edittoolbar;
+        var edittooldef = L.drawLocal.edit.toolbar;
+        L.drawLocal.edit.toolbar.buttons = Object.assign({}, edittooldef.buttons, edittool.buttons);
+        L.drawLocal.edit.toolbar.actions = Object.assign({}, edittooldef.actions, edittool.actions);
       }
 
       if (options && options.edithandlers) {
-        var rhand = options.edithandlers;
-        L.drawLocal.edit.handlers.edit = Object.assign({}, rhand.buttons, rtool.edit);
-        L.drawLocal.edit.handlers.remove = Object.assign({}, rhand.actions, rtool.remove);
+        var edithand = options.edithandlers;
+        var edithandledef = L.drawLocal.edit.handlers;
+        L.drawLocal.edit.handlers.edit = Object.assign({}, edithandledef.buttons, edithand.edit);
+        L.drawLocal.edit.handlers.remove = Object.assign({}, edithandledef.actions, edithand.remove);
       }
     }
 
@@ -140,13 +141,13 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
     map.drawToolbar.eventHandler.onDrawStart = function(e) {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_start', {'feature_type': e.layerType, 'nonce': Math.random()});
-    }
+    };
     map.on(L.Draw.Event.DRAWSTART, map.drawToolbar.eventHandler.onDrawStart);
 
     map.drawToolbar.eventHandler.onDrawStop = function(e) {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_stop', {'feature_type': e.layerType, 'nonce': Math.random()});
-    }
+    };
     map.on(L.Draw.Event.DRAWSTOP, map.drawToolbar.eventHandler.onDrawStop);
 
     map.drawToolbar.eventHandler.onCreated = function(e) {
@@ -196,19 +197,19 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layer.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.CREATED, map.drawToolbar.eventHandler.onCreated);
 
     map.drawToolbar.eventHandler.onEditstart = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_editstart', true, {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.EDITSTART, map.drawToolbar.eventHandler.onEditstart);
 
     map.drawToolbar.eventHandler.onEditstop = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_editstop', true, {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.EDITSTOP, map.drawToolbar.eventHandler.onEditstop);
 
     map.drawToolbar.eventHandler.onEdited = function(e) {
@@ -236,19 +237,19 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layers.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.EDITED, map.drawToolbar.eventHandler.onEdited);
 
     map.drawToolbar.eventHandler.onDeletestart = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_deletestart', true, {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.DELETESTART, map.drawToolbar.eventHandler.onDeletestart);
 
     map.drawToolbar.eventHandler.onDeletestop = function() {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_draw_deletestop', true, {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.DELETESTOP, map.drawToolbar.eventHandler.onDeletestop);
 
     map.drawToolbar.eventHandler.onDeleted = function(e) {
@@ -275,7 +276,7 @@ LeafletWidget.methods.addDrawToolbar = function(targetLayerId,
         layers.toGeoJSON(), {priority: 'event'});
       Shiny.onInputChange(map.id + '_draw_all_features',
         editableFeatureGroup.toGeoJSON(), {priority: 'event'});
-    }
+    };
     map.on(L.Draw.Event.DELETED, map.drawToolbar.eventHandler.onDeleted);
 
   }).call(this);
