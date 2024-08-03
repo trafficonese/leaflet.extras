@@ -4,6 +4,11 @@ LeafletWidget.methods.addWMSLegend = function(options) {
     var map = this;
     var wmsLegendControl = new L.Control.WMSLegend(options.options);
 
+    const titleDiv = document.createElement('div');
+    titleDiv.className = options.titleClass;
+    titleDiv.textContent = options.title;
+    titleDiv.style = options.titleStyle;
+
     // Use the layername as ID if possble
     if (!options.layerId) {
       const match = wmsLegendControl.options.uri.match(/layer=([^&]+)/);
@@ -19,6 +24,7 @@ LeafletWidget.methods.addWMSLegend = function(options) {
       if (wmslayer && wmslayer.options) {
         if (e.layer.options.layers == wmslayer.options.layers) {
           map.controls.add(wmsLegendControl, options.layerId);
+          map.controls._controlsById[options.layerId].container.prepend(titleDiv);
         }
       }
     });
@@ -32,6 +38,7 @@ LeafletWidget.methods.addWMSLegend = function(options) {
     });
 
     map.controls.add(wmsLegendControl, options.layerId);
+    map.controls._controlsById[options.layerId].container.prepend(titleDiv);
 
   }).call(this);
 };

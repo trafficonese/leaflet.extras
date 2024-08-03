@@ -4,7 +4,16 @@
 \alias{addWMSLegend}
 \title{Add WMS Legend}
 \usage{
-addWMSLegend(map, uri, position = "topright", layerId = NULL, group = NULL)
+addWMSLegend(
+  map,
+  uri,
+  position = "topright",
+  layerId = NULL,
+  group = NULL,
+  title = "",
+  titleClass = "wms-legend-title",
+  titleStyle = ""
+)
 }
 \arguments{
 \item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
@@ -19,6 +28,12 @@ If no layerId is given, it will try to get the layer name from the `uri`,
 otherwise a random ID will be assigned.}
 
 \item{group}{The group argument is not used. Please set the `layerId` correctly.}
+
+\item{title}{A title that is prepended before the image.}
+
+\item{titleClass}{CSS-class for the title div}
+
+\item{titleStyle}{Style the title with CSS}
 }
 \description{
 Add a WMS Legend
@@ -33,6 +48,7 @@ leaflet() \%>\%
     options = WMSTileOptions(format = "image/png", transparent = TRUE)
   ) \%>\%
   addWMSLegend(
+    title = "Personenschaden_5000", titleStyle = "font-size:1em; font-weight:800",
     uri = paste0(
       "https://www.wms.nrw.de/wms/unfallatlas?request=",
       "GetLegendGraphic&version=1.3.0&",

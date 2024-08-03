@@ -1,5 +1,9 @@
 # leaflet.extras (development version)
 
+## New Features
+- `addWMSLegend` gained the arguments `title`, `titleStyle` and `titleClass` to . Fix #219
+- `addDrawToolbar` gained the arguments `edittoolbar` and `edithandlers`, which let's you customize all the tooltips
+
 # leaflet.extras 2.0.0
 
 ## New Features
