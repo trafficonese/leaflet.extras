@@ -37,7 +37,7 @@ wms.legendDependency <- function() {
 #'     )
 #'   )
 addWMSLegend <- function(map, uri, position = "topright", layerId = NULL, group = NULL,
-                         title = "", titleClass = "wms-legend-title", titleStyle="") {
+                         title = "", titleClass = "wms-legend-title", titleStyle = "") {
   map$dependencies <- c(map$dependencies, wms.legendDependency())
   options <- leaflet::filterNULL(list(
     layerId = layerId,
