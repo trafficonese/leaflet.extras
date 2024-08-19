@@ -4,6 +4,9 @@
 - `addWMSLegend` gained the arguments `title`, `titleStyle` and `titleClass` to . Fix #219
 - `addDrawToolbar` gained the arguments `edittoolbar` and `edithandlers`, which let's you customize all the tooltips
 
+## Bugfixes
+- Fixed CRAN devel checks: *Found the following Rd file(s) with Rd \link{} targets missing package*
+
 # leaflet.extras 2.0.0
 
 ## New Features
