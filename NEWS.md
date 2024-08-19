@@ -1,4 +1,4 @@
-# leaflet.extras (development version)
+# leaflet.extras 2.0.1
 
 ## New Features
 - `addWMSLegend` gained the arguments `title`, `titleStyle` and `titleClass` to . Fix #219
