@@ -1,3 +1,9 @@
+## 2024-8-19
+
+- Fixed some CRAN devel Notes about "Found the following Rd file(s) with Rd \link{} targets missing package""
+- added some minor features
+
+
 ## 2024-6-10
 
 - I will be the new maintainer

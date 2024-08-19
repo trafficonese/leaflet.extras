@@ -14,7 +14,7 @@ heatmapDependency <- function() {
 #' @param blur amount of blur to apply.  The default is \code{15}.
 #'          \code{blur=1} means no blur.
 #' @param gradient palette name from \code{RColorBrewer} or an array of
-#'          of colors to be provided to \code{\link{colorNumeric}}, or
+#'          of colors to be provided to \code{\link[leaflet]{colorNumeric}}, or
 #'          a color mapping function returned from \code{colorNumeric}
 #' @param cellSize  the cell size in the grid. Points which are closer
 #'          than this may be merged. Defaults to `radius / 2`.s

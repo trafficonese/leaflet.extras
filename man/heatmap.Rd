@@ -121,7 +121,7 @@ layers (e.g. markers and polygons) can share the same group name.}
 \code{blur=1} means no blur.}
 
 \item{gradient}{palette name from \code{RColorBrewer} or an array of
-of colors to be provided to \code{\link{colorNumeric}}, or
+of colors to be provided to \code{\link[leaflet]{colorNumeric}}, or
 a color mapping function returned from \code{colorNumeric}}
 
 \item{cellSize}{the cell size in the grid. Points which are closer
