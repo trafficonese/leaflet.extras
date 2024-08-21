@@ -63,6 +63,7 @@ Plugins integrated so far …
 - [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep)
 - [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
 - [Bounce Marker](https://github.com/maximeh/leaflet.bouncemarker)
+- [Grouped LayerControl](https://github.com/trafficonese/leaflet-groupedlayercontrol)
 
 If you need a plugin that is not already implemented create an
 [issue](https://github.com/trafficonese/leaflet.extras/issues/new). See
