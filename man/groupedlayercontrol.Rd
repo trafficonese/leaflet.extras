@@ -4,6 +4,9 @@
 \alias{addGroupedLayersControl}
 \alias{groupedLayersControlOptions}
 \alias{addGroupedOverlay}
+\alias{addGroupedBaseLayer}
+\alias{removeGroupedOverlay}
+\alias{removeGroupedLayersControl}
 \title{Leaflet layer control with support for grouping overlays together.
 Also supports making groups exclusive (radio instead of checkbox).}
 \usage{
@@ -19,12 +22,24 @@ addGroupedLayersControl(
 groupedLayersControlOptions(
   exclusiveGroups = NULL,
   groupCheckboxes = TRUE,
+  groupsCollapsable = TRUE,
+  groupsExpandedClass = "leaflet-control-layers-group-collapse-default",
+  groupsCollapsedClass = "leaflet-control-layers-group-expand-default",
+  sortLayers = FALSE,
+  sortGroups = FALSE,
+  sortBaseLayers = FALSE,
   collapsed = TRUE,
   autoZIndex = TRUE,
   ...
 )
 
 addGroupedOverlay(map, group, name, groupname)
+
+addGroupedBaseLayer(map, group, name)
+
+removeGroupedOverlay(map, group)
+
+removeGroupedLayersControl(map)
 }
 \arguments{
 \item{map}{The map widget.}
@@ -50,6 +65,18 @@ initially, but can be overridden}
 
 \item{groupCheckboxes}{Show a checkbox next to non-exclusive group labels for toggling all}
 
+\item{groupsCollapsable}{Should groups be collapsible? Default is \code{TRUE}}
+
+\item{groupsExpandedClass}{The CSS class of expanded groups}
+
+\item{groupsCollapsedClass}{The CSS class of collapsed groups}
+
+\item{sortLayers}{Sort the overlay layers alphabetically? Default is \code{FALSE}}
+
+\item{sortGroups}{Sort the groups alphabetically? Default is \code{FALSE}}
+
+\item{sortBaseLayers}{Sort the baselayers alphabetically? Default is \code{FALSE}}
+
 \item{collapsed}{if \code{TRUE} (the default), the layers control will be
 rendered as an icon that expands when hovered over. Set to \code{FALSE}
 to have the layers control always appear in its expanded state.}
@@ -59,9 +86,11 @@ the z-order of its various groups as overlays are switched on and off.}
 
 \item{...}{other options for \code{layersControlOptions()}}
 
-\item{group}{The groupname of the layer}
+\item{group}{The group of the layer}
 
 \item{name}{The name of the layer}
+
+\item{groupname}{The groupname of the layer}
 }
 \description{
 Leaflet layer control with support for grouping overlays together.
@@ -69,8 +98,14 @@ Also supports making groups exclusive (radio instead of checkbox).
 
 Options for the grouped layercontrol
 
+Add an overlay layer to the layerscontrol
+
+Add a base layer to the layerscontrol
+
+Remove an overlay layer from the layerscontrol
+
 Removes the grouped layercontrol
 }
 \seealso{
-https://github.com/ismyrnow/leaflet-groupedlayercontrol
+https://github.com/trafficonese/leaflet-groupedlayercontrol/
 }

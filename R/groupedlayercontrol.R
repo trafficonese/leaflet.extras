@@ -9,6 +9,7 @@ groupedlayersControlDependencies <- function() {
 #' @param map The map widget.
 #' @inheritParams leaflet::addLayersControl
 #' @rdname groupedlayercontrol
+#' @seealso https://github.com/trafficonese/leaflet-groupedlayercontrol/
 #' @export
 addGroupedLayersControl <- function(
     map,
@@ -26,29 +27,49 @@ addGroupedLayersControl <- function(
                         baseGroups, groupedOverlayGroups,
                         options)
 }
-# addLayersControl()
 
 #' Options for the grouped layercontrol
 #' @param exclusiveGroups character vector of layer groups to make exclusive (use radio buttons)
 #' @param groupCheckboxes Show a checkbox next to non-exclusive group labels for toggling all
+#' @param groupsCollapsable Should groups be collapsible? Default is \code{TRUE}
+#' @param groupsExpandedClass The CSS class of expanded groups
+#' @param groupsCollapsedClass The CSS class of collapsed groups
+#' @param sortLayers Sort the overlay layers alphabetically? Default is \code{FALSE}
+#' @param sortGroups Sort the groups alphabetically? Default is \code{FALSE}
+#' @param sortBaseLayers Sort the baselayers alphabetically? Default is \code{FALSE}
 #' @inheritParams leaflet::layersControlOptions
 #' @rdname groupedlayercontrol
-#' @seealso https://github.com/ismyrnow/leaflet-groupedlayercontrol
 #' @export
-groupedLayersControlOptions <- function(exclusiveGroups = NULL, groupCheckboxes = TRUE,
-                                        collapsed = TRUE, autoZIndex = TRUE, ...) {
+groupedLayersControlOptions <- function(exclusiveGroups = NULL,
+                                        groupCheckboxes = TRUE,
+                                        groupsCollapsable = TRUE,
+                                        groupsExpandedClass = "leaflet-control-layers-group-collapse-default",
+                                        groupsCollapsedClass = "leaflet-control-layers-group-expand-default",
+                                        sortLayers = FALSE,
+                                        sortGroups = FALSE,
+                                        sortBaseLayers = FALSE,
+                                        collapsed = TRUE,
+                                        autoZIndex = TRUE,
+                                        ...) {
+
   filterNULL(list(exclusiveGroups = exclusiveGroups,
                   groupCheckboxes = groupCheckboxes,
+                  groupsCollapsable = groupsCollapsable,
+                  groupsExpandedClass = groupsExpandedClass,
+                  groupsCollapsedClass = groupsCollapsedClass,
+                  sortLayers = sortLayers,
+                  sortGroups = sortGroups,
+                  sortBaseLayers = sortBaseLayers,
                   collapsed = collapsed,
                   autoZIndex = autoZIndex,
                   ...))
 }
 
-#' Removes the grouped layercontrol
+#' Add an overlay layer to the layerscontrol
 #' @inheritParams leaflet::removeLayersControl
 #' @param group The group of the layer
 #' @param name The name of the layer
-#' @param group The groupname of the layer
+#' @param groupname The groupname of the layer
 #' @rdname groupedlayercontrol
 #' @export
 addGroupedOverlay <- function(map, group, name, groupname) {
@@ -56,9 +77,29 @@ addGroupedOverlay <- function(map, group, name, groupname) {
                group, name, groupname)
 }
 
+#' Add a base layer to the layerscontrol
+#' @inheritParams leaflet::removeLayersControl
+#' @param group The group of the layer
+#' @param name The name of the layer
+#' @rdname groupedlayercontrol
+#' @export
+addGroupedBaseLayer <- function(map, group, name) {
+  invokeMethod(map, NULL, "addGroupedBaseLayer",
+               group, name)
+}
+
+#' Remove an overlay layer from the layerscontrol
+#' @inheritParams leaflet::removeLayersControl
+#' @param group The group of the layer
+#' @rdname groupedlayercontrol
+#' @export
+removeGroupedOverlay <- function(map, group) {
+  invokeMethod(map, NULL, "removeGroupedOverlay", group)
+}
+
 #' Removes the grouped layercontrol
 #' @inheritParams leaflet::removeLayersControl
-#' @rdname draw
+#' @rdname groupedlayercontrol
 #' @export
 removeGroupedLayersControl <- function(map) {
   invokeMethod(map, NULL, "removeGroupedLayersControl")
@@ -76,6 +117,3 @@ transform_groupedoverlays <- function(lst) {
     }
   })
 }
-# transform_groupedoverlays(c("Markers1","Markers2","Markers3"))
-# transform_groupedoverlays(list("Markers1+2" = c("Markers1","Markers2"),
-#                                "Markers3" = "Markers3"))

@@ -46,13 +46,13 @@ LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGrou
         // Assign the layer object to the groupedOverlays
         const layer = map.layerManager.getLayerGroup(layerName, true);
         if (layer) {
-          groupedOverlays[group][key] = layer
+          groupedOverlays[group][key] = layer;
         }
       });
     });
 
     if (options.exclusiveGroups) {
-      options.exclusiveGroups = asArray(options.exclusiveGroups)
+      options.exclusiveGroups = asArray(options.exclusiveGroups);
     }
 
     map.currentLayersControl = L.control.groupedLayers(base, groupedOverlays, options);
@@ -61,11 +61,25 @@ LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGrou
   }).call(this);
 };
 
+
+LeafletWidget.methods.addGroupedBaseLayer = function(group, name) {
+  (function() {
+    if (this.currentLayersControl) {
+      var map = this;
+      const layer = map.layerManager.getLayerGroup(group, true);
+      if (layer) {
+        map.currentLayersControl.addBaseLayer(layer, name);
+      }
+    }
+  }).call(this);
+};
+
+
 LeafletWidget.methods.addGroupedOverlay = function(group, name, groupname) {
   (function() {
     if (this.currentLayersControl) {
       var map = this;
-      let layer = map.layerManager.getLayerGroup(group, true);
+      const layer = map.layerManager.getLayerGroup(group, true);
       if (layer) {
         map.currentLayersControl.addOverlay(layer, name, groupname);
       }
@@ -73,6 +87,17 @@ LeafletWidget.methods.addGroupedOverlay = function(group, name, groupname) {
   }).call(this);
 };
 
+LeafletWidget.methods.removeGroupedOverlay = function(group) {
+  (function() {
+    if (this.currentLayersControl) {
+      var map = this;
+      const layer = map.layerManager.getLayerGroup(group, true);
+      if (layer) {
+        map.currentLayersControl.removeLayer(layer);
+      }
+    }
+  }).call(this);
+};
 
 LeafletWidget.methods.removeGroupedLayersControl = function() {
   (function() {
