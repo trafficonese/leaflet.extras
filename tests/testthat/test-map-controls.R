@@ -633,6 +633,130 @@ test_that("map-control-plugins", {
       )
     ))
 
+  ## Test draw toolbarOptions
+  opts <- toolbarOptions()
+  expect_true(is.list(opts))
+  expect_equal(opts$actions$title, "Cancel drawing")
+  expect_equal(opts$actions$text, "Cancel")
+  expect_equal(opts$finish$title, "Finish drawing")
+  expect_equal(opts$finish$text, "Finish")
+  expect_equal(opts$undo$title, "Delete last point drawn")
+  expect_equal(opts$undo$text, "Delete last point")
+  expect_equal(opts$buttons$polyline, "Draw a polyline")
+  expect_equal(opts$buttons$polygon, "Draw a polygon")
+  expect_equal(opts$buttons$rectangle, "Draw a rectangle")
+  expect_equal(opts$buttons$circle, "Draw a circle")
+  expect_equal(opts$buttons$marker, "Draw a marker")
+  expect_equal(opts$buttons$circlemarker, "Draw a circlemarker")
+
+  # Custom options
+  custom_opts <- toolbarOptions(
+    actions = list(title = "Stop", text = "Stop Drawing"),
+    finish = list(title = "Complete", text = "Complete Drawing"),
+    undo = list(title = "Undo", text = "Undo Last"),
+    buttons = list(
+      polyline = "Custom Polyline",
+      polygon = "Custom Polygon",
+      rectangle = "Custom Rectangle",
+      circle = "Custom Circle",
+      marker = "Custom Marker",
+      circlemarker = "Custom Circlemarker"
+    )
+  )
+  expect_true(is.list(custom_opts))
+  expect_equal(custom_opts$actions$title, "Stop")
+  expect_equal(custom_opts$actions$text, "Stop Drawing")
+  expect_equal(custom_opts$finish$title, "Complete")
+  expect_equal(custom_opts$finish$text, "Complete Drawing")
+  expect_equal(custom_opts$undo$title, "Undo")
+  expect_equal(custom_opts$undo$text, "Undo Last")
+  expect_equal(custom_opts$buttons$polyline, "Custom Polyline")
+  expect_equal(custom_opts$buttons$polygon, "Custom Polygon")
+  expect_equal(custom_opts$buttons$rectangle, "Custom Rectangle")
+  expect_equal(custom_opts$buttons$circle, "Custom Circle")
+  expect_equal(custom_opts$buttons$marker, "Custom Marker")
+  expect_equal(custom_opts$buttons$circlemarker, "Custom Circlemarker")
+
+  # edithandlersOptions
+  edit_opts <- edithandlersOptions()
+  expect_true(is.list(edit_opts))
+  expect_equal(edit_opts$edit$tooltip$text, "Drag handles or markers to edit features.")
+  expect_equal(edit_opts$edit$tooltip$subtext, "Click cancel to undo changes.")
+  expect_equal(edit_opts$remove$tooltip$text, "Click on a feature to remove.")
+
+  # Custom options
+  custom_edit_opts <- edithandlersOptions(
+    edit = list(
+      tooltipText = "Edit features by dragging.",
+      tooltipSubtext = "Undo changes by clicking cancel."
+    ),
+    remove = list(
+      tooltipText = "Select a feature to delete."
+    )
+  )
+  expect_true(is.list(custom_edit_opts))
+  expect_equal(custom_edit_opts$edit$tooltip$text, "Edit features by dragging.")
+  expect_equal(custom_edit_opts$edit$tooltip$subtext, "Undo changes by clicking cancel.")
+  expect_equal(custom_edit_opts$remove$tooltip$text, "Select a feature to delete.")
+
+
+  ## Test edittoolbarOptions ###################
+  edit_opts <- edittoolbarOptions()
+  expect_true(is.list(edit_opts))
+
+  # Test actions
+  expect_equal(edit_opts$actions$save$title, "Save changes")
+  expect_equal(edit_opts$actions$save$text, "Save")
+  expect_equal(edit_opts$actions$cancel$title, "Cancel editing, discards all changes")
+  expect_equal(edit_opts$actions$cancel$text, "Cancel")
+  expect_equal(edit_opts$actions$clearAll$title, "Clear all layers")
+  expect_equal(edit_opts$actions$clearAll$text, "Clear All")
+
+  # Test buttons
+  expect_equal(edit_opts$buttons$edit, "Edit layers")
+  expect_equal(edit_opts$buttons$editDisabled, "No layers to edit")
+  expect_equal(edit_opts$buttons$remove, "Delete layers")
+  expect_equal(edit_opts$buttons$removeDisabled, "No layers to delete")
+
+  # Custom options
+  custom_edit_opts <- edittoolbarOptions(
+    actions = list(
+      save = list(
+        title = "Save the current changes",
+        text = "Apply"
+      ),
+      cancel = list(
+        title = "Discard changes",
+        text = "Undo"
+      ),
+      clearAll = list(
+        title = "Remove all layers",
+        text = "Remove All"
+      )
+    ),
+    buttons = list(
+      edit = "Modify layers",
+      editDisabled = "No editable layers",
+      remove = "Erase layers",
+      removeDisabled = "No removable layers"
+    )
+  )
+
+  expect_true(is.list(custom_edit_opts))
+
+  # Test custom actions
+  expect_equal(custom_edit_opts$actions$save$title, "Save the current changes")
+  expect_equal(custom_edit_opts$actions$save$text, "Apply")
+  expect_equal(custom_edit_opts$actions$cancel$title, "Discard changes")
+  expect_equal(custom_edit_opts$actions$cancel$text, "Undo")
+  expect_equal(custom_edit_opts$actions$clearAll$title, "Remove all layers")
+  expect_equal(custom_edit_opts$actions$clearAll$text, "Remove All")
+
+  # Test custom buttons
+  expect_equal(custom_edit_opts$buttons$edit, "Modify layers")
+  expect_equal(custom_edit_opts$buttons$editDisabled, "No editable layers")
+  expect_equal(custom_edit_opts$buttons$remove, "Erase layers")
+  expect_equal(custom_edit_opts$buttons$removeDisabled, "No removable layers")
 
   ## This doesnt throw an error but it doesnt work. Console-errors.. Should we emit a warning?
   # drawmark <- drawMarkerOptions(
