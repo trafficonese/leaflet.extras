@@ -70,14 +70,14 @@ earth surface. It's based on Vincenty's formulae implemented by
 <span>  popupOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  labelOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">pathOptions</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  options <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">pathOptions</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  highlightOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  icon <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  showMarker <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  showStats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  statsFunction <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  markerOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="fu">getMapData</span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/getMapData.html" class="external-link">getMapData</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">addLatLng</span><span class="op">(</span><span class="va">map</span>, <span class="va">lat</span>, <span class="va">lng</span>, layerId <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -102,7 +102,7 @@ earth surface. It's based on Vincenty's formulae implemented by
 <span>  popupOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  labelOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu">pathOptions</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  options <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">pathOptions</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  highlightOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  icon <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fill <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -110,7 +110,7 @@ earth surface. It's based on Vincenty's formulae implemented by
 <span>  showStats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  statsFunction <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  markerOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="fu">getMapData</span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
+<span>  data <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/getMapData.html" class="external-link">getMapData</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -235,7 +235,7 @@ when you publish the map elsewhere</p></dd>
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>the data object from which the argument values are derived; by
-default, it is the <code>data</code> object provided to <code>leaflet()</code>
+default, it is the <code>data</code> object provided to <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet()</a></code>
 initially, but can be overridden</p></dd>
 
 
@@ -268,18 +268,18 @@ circles)</p></dd>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">hammerfest</span>, <span class="va">calgary</span>, <span class="va">losangeles</span>, <span class="va">santiago</span>, <span class="va">capetown</span>, <span class="va">tokio</span>, <span class="va">barrow</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lat"</span>, <span class="st">"lng"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">leaflet</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
-<span class="r-in"><span>  <span class="fu">addProviderTiles</span><span class="op">(</span><span class="va">providers</span><span class="op">$</span><span class="va">CartoDB.Positron</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/addProviderTiles.html" class="external-link">addProviderTiles</a></span><span class="op">(</span><span class="va">providers</span><span class="op">$</span><span class="va">CartoDB.Positron</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">addGeodesicPolylines</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    lng <span class="op">=</span> <span class="op">~</span><span class="va">lng</span>, lat <span class="op">=</span> <span class="op">~</span><span class="va">lat</span>, weight <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="st">"red"</span>,</span></span>
 <span class="r-in"><span>    steps <span class="op">=</span> <span class="fl">50</span>, opacity <span class="op">=</span> <span class="fl">1</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">%&gt;%</span></span></span>
-<span class="r-in"><span>  <span class="fu">addCircleMarkers</span><span class="op">(</span><span class="va">df</span>,</span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addCircleMarkers</a></span><span class="op">(</span><span class="va">df</span>,</span></span>
 <span class="r-in"><span>    lat <span class="op">=</span> <span class="op">~</span><span class="va">lat</span>, lng <span class="op">=</span> <span class="op">~</span><span class="va">lng</span>, radius <span class="op">=</span> <span class="fl">3</span>, stroke <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>    fillColor <span class="op">=</span> <span class="st">"black"</span>, fillOpacity <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<div id="htmlwidget-10b3b7155e8045a1b2ad" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-10b3b7155e8045a1b2ad">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addGeodesicPolylines","args":[[[[{"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001]}]]],null,null,{"interactive":true,"className":"","steps":50,"wrap":true,"stroke":true,"color":"red","weight":2,"opacity":1,"dashArray":null,"smoothFactor":1,"noClip":false,"showStats":false,"statsFunction":null,"showMarker":false},null,null,null,null,null,null,null]},{"method":"addCircleMarkers","args":[[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],3,{"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76]},null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"black","fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-33.91,71.29000000000001],"lng":[-156.76,139.69]}},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<div id="htmlwidget-4018eef1a407a0df6b52" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4018eef1a407a0df6b52">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addGeodesicPolylines","args":[[[[{"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001]}]]],null,null,{"interactive":true,"className":"","steps":50,"wrap":true,"stroke":true,"color":"red","weight":2,"opacity":1,"dashArray":null,"smoothFactor":1,"noClip":false,"showStats":false,"statsFunction":null,"showMarker":false},null,null,null,null,null,null,null]},{"method":"addCircleMarkers","args":[[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],3,{"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76]},null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"black","fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-33.91,71.29000000000001],"lng":[-156.76,139.69]}},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## for more examples see</span></span></span>
 <span class="r-in"><span><span class="co"># browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))</span></span></span>
 </code></pre></div>
