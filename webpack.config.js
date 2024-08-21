@@ -120,8 +120,9 @@ const config = [
 
   // library_prod(LIBRARY, SAVE_NAME, GLOBAL_JS_VAR_NAME)
 
-  library_prod(['leaflet-groupedlayercontrol', 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.css'],
-    'lfx-groupedlayercontrol'),
+  library_prod(['leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js',
+    'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.css'],
+  'lfx-groupedlayercontrol'),
   library_binding('lfx-groupedlayercontrol'),
 
   // "csv2geojson": "5.0.2",
