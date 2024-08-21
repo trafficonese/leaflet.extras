@@ -18,7 +18,7 @@ ui <- fluidPage(
   ")),
   splitLayout(
     cellWidths = c("35%", "65%"),
-    div(class="btns", #style = "display: grid; ",
+    div(class="btns",
         div(tags$b(HTML("Add 2 new Layers ('Markers6', 'Markers7') to the map, <br>add 1 to an existing legend group and one to a new group"))),
         actionButton("addlayer", "Add Layers"),
         div(tags$b("Add a new Baselayer ('CartoDB Darkmode')")),
@@ -54,7 +54,7 @@ server <- function(input, output, session) {
                              "Layergroup_1" = c("Markers2","Markers1","Markers3")),
         position = "topright",
         options = groupedLayersControlOptions(groupCheckboxes = T,
-                                              collapsed = FALSE,
+                                              collapsed = F,
                                               groupsExpandedClass = "glyphicon glyphicon-chevron-down",
                                               groupsCollapsedClass = "glyphicon glyphicon-chevron-right",
                                               groupsCollapsable = T,

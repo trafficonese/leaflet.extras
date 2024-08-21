@@ -4,31 +4,59 @@ groupedlayersControlDependencies <- function() {
     )
 }
 
-#' Leaflet layer control with support for grouping overlays together.
-#' Also supports making groups exclusive (radio instead of checkbox).
-#' @param map The map widget.
+#' @title Leaflet layer control with support for grouping overlays together.
+#' @description Also supports making groups exclusive (using radio inputs instead of checkbox).
+#' See the JavaScript plugin for more information
+#' \url{https://github.com/trafficonese/leaflet-groupedlayercontrol/}
+#' @param overlayGroups A list of named vectors where each element is the name
+#' of a group.
+#' @param options a list of additional options, intended to be provided by a
+#' call to \code{\link{groupedLayersControlOptions}}
 #' @inheritParams leaflet::addLayersControl
-#' @rdname groupedlayercontrol
-#' @seealso https://github.com/trafficonese/leaflet-groupedlayercontrol/
+#' @family GroupedLayersControl
 #' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras)
+#'
+#' leaflet() %>%
+#'   addTiles(group = "OpenStreetMap") %>%
+#'   addProviderTiles("CartoDB", group = "CartoDB") %>%
+#'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "red", group = "Markers2") %>%
+#'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color="green", group = "Markers1") %>%
+#'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color="yellow", group = "Markers3") %>%
+#'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "lightblue", group = "Markers4") %>%
+#'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "purple", group = "Markers5") %>%
+#'   addGroupedLayersControl(
+#'     baseGroups = c("OpenStreetMap","CartoDB"),
+#'     overlayGroups = list("Layergroup_2" = c("Markers5","Markers4"),
+#'                          "Layergroup_1" = c("Markers2","Markers1","Markers3")),
+#'     position = "topright",
+#'     options = groupedLayersControlOptions(groupCheckboxes = T,
+#'                                           collapsed = F,
+#'                                           groupsCollapsable = T,
+#'                                           sortLayers = F,
+#'                                           sortGroups = F,
+#'                                           sortBaseLayers = F,
+#'                                           exclusiveGroups = "Layergroup_1")
+#'   )
 addGroupedLayersControl <- function(
     map,
     baseGroups = character(0),
     overlayGroups = character(0),
     position = c("topright", "bottomright", "bottomleft", "topleft"),
-    options = groupedLayersControlOptions(),
-    data = getMapData(map)) {
+    options = groupedLayersControlOptions()) {
 
   map$dependencies <- c(map$dependencies, groupedlayersControlDependencies())
   options <- c(options, list(position = match.arg(position)))
 
   groupedOverlayGroups <- transform_groupedoverlays(overlayGroups)
-  leaflet::invokeMethod(map, data, "addGroupedLayersControl",
+  leaflet::invokeMethod(map, NULL, "addGroupedLayersControl",
                         baseGroups, groupedOverlayGroups,
                         options)
 }
 
-#' Options for the grouped layercontrol
+#' Options for the GroupedLayersControl
 #' @param exclusiveGroups character vector of layer groups to make exclusive (use radio buttons)
 #' @param groupCheckboxes Show a checkbox next to non-exclusive group labels for toggling all
 #' @param groupsCollapsable Should groups be collapsible? Default is \code{TRUE}
@@ -38,7 +66,7 @@ addGroupedLayersControl <- function(
 #' @param sortGroups Sort the groups alphabetically? Default is \code{FALSE}
 #' @param sortBaseLayers Sort the baselayers alphabetically? Default is \code{FALSE}
 #' @inheritParams leaflet::layersControlOptions
-#' @rdname groupedlayercontrol
+#' @family GroupedLayersControl
 #' @export
 groupedLayersControlOptions <- function(exclusiveGroups = NULL,
                                         groupCheckboxes = TRUE,
@@ -65,41 +93,41 @@ groupedLayersControlOptions <- function(exclusiveGroups = NULL,
                   ...))
 }
 
-#' Add an overlay layer to the layerscontrol
-#' @inheritParams leaflet::removeLayersControl
-#' @param group The group of the layer
-#' @param name The name of the layer
-#' @param groupname The groupname of the layer
-#' @rdname groupedlayercontrol
+
+#' Methods of GroupedLayersControl
+#' @description Add an overlay to the GroupedLayersControl
+#' @param map The map widget
+#' @param group The group of the leaflet layer
+#' @param name The visible name of the layer in the control
+#' @param groupname The visible group name in the control
+#' @family GroupedLayersControl
+#' @rdname GroupedLayersControl
 #' @export
 addGroupedOverlay <- function(map, group, name, groupname) {
   invokeMethod(map, NULL, "addGroupedOverlay",
                group, name, groupname)
 }
 
-#' Add a base layer to the layerscontrol
-#' @inheritParams leaflet::removeLayersControl
-#' @param group The group of the layer
-#' @param name The name of the layer
-#' @rdname groupedlayercontrol
+#' @description Add a baselayer to the GroupedLayersControl
+#' @inheritParams leaflet::addGroupedOverlay
+#' @rdname GroupedLayersControl
 #' @export
 addGroupedBaseLayer <- function(map, group, name) {
   invokeMethod(map, NULL, "addGroupedBaseLayer",
                group, name)
 }
 
-#' Remove an overlay layer from the layerscontrol
-#' @inheritParams leaflet::removeLayersControl
-#' @param group The group of the layer
-#' @rdname groupedlayercontrol
+#' @description Remove an overlay layer from the GroupedLayersControl
+#' @inheritParams leaflet::addGroupedOverlay
+#' @rdname GroupedLayersControl
 #' @export
 removeGroupedOverlay <- function(map, group) {
   invokeMethod(map, NULL, "removeGroupedOverlay", group)
 }
 
-#' Removes the grouped layercontrol
+#' @description Removes the GroupedLayersControl from the map
 #' @inheritParams leaflet::removeLayersControl
-#' @rdname groupedlayercontrol
+#' @rdname GroupedLayersControl
 #' @export
 removeGroupedLayersControl <- function(map) {
   invokeMethod(map, NULL, "removeGroupedLayersControl")
