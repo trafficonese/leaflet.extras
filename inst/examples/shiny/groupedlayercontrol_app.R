@@ -30,6 +30,7 @@ server <- function(input, output, session) {
         options = groupedLayersControlOptions(groupCheckboxes = TRUE,
                                               collapsed = FALSE,
                                               exclusiveGroups = "Markers1+2 (exclusive)")
+                                              # exclusiveGroups = c("Markers1+2 (exclusive)","Markers-Group"))
       )
   })
   observeEvent(input$addlayer, {

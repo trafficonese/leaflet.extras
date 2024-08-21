@@ -15,9 +15,6 @@ function asArray(value) {
 LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGroups, options) {
   (function() {
     var map = this;
-
-    //options.exclusiveGroups = asArray(options.exclusiveGroups)
-
     // Only allow one layers control at a time
     LeafletWidget.methods.removeGroupedLayersControl.call(map);
 
@@ -53,6 +50,10 @@ LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGrou
         }
       });
     });
+
+    if (options.exclusiveGroups) {
+      options.exclusiveGroups = asArray(options.exclusiveGroups)
+    }
 
     map.currentLayersControl = L.control.groupedLayers(base, groupedOverlays, options);
     map.addControl(map.currentLayersControl);

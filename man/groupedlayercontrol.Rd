@@ -71,3 +71,6 @@ Options for the grouped layercontrol
 
 Removes the grouped layercontrol
 }
+\seealso{
+https://github.com/ismyrnow/leaflet-groupedlayercontrol
+}
