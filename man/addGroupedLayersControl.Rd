@@ -40,22 +40,28 @@ library(leaflet.extras)
 leaflet() \%>\%
   addTiles(group = "OpenStreetMap") \%>\%
   addProviderTiles("CartoDB", group = "CartoDB") \%>\%
-  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "red", group = "Markers2") \%>\%
-  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color="green", group = "Markers1") \%>\%
-  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color="yellow", group = "Markers3") \%>\%
-  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "lightblue", group = "Markers4") \%>\%
-  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "purple", group = "Markers5") \%>\%
+  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
+                   color = "red", group = "Markers2") \%>\%
+  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
+                   color="green", group = "Markers1") \%>\%
+  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
+                   color="yellow", group = "Markers3") \%>\%
+  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
+                   color = "lightblue", group = "Markers4") \%>\%
+  addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
+                   color = "purple", group = "Markers5") \%>\%
   addGroupedLayersControl(
     baseGroups = c("OpenStreetMap","CartoDB"),
-    overlayGroups = list("Layergroup_2" = c("Markers5","Markers4"),
-                         "Layergroup_1" = c("Markers2","Markers1","Markers3")),
+    overlayGroups = list(
+      "Layergroup_2" = c("Markers5","Markers4"),
+      "Layergroup_1" = c("Markers2","Markers1","Markers3")),
     position = "topright",
-    options = groupedLayersControlOptions(groupCheckboxes = T,
-                                          collapsed = F,
-                                          groupsCollapsable = T,
-                                          sortLayers = F,
-                                          sortGroups = F,
-                                          sortBaseLayers = F,
+    options = groupedLayersControlOptions(groupCheckboxes = TRUE,
+                                          collapsed = FALSE,
+                                          groupsCollapsable = TRUE,
+                                          sortLayers = FALSE,
+                                          sortGroups = FALSE,
+                                          sortBaseLayers = FALSE,
                                           exclusiveGroups = "Layergroup_1")
   )
 }

@@ -11,6 +11,7 @@
 
 ## usethis namespace: start
 #' @importFrom magrittr %>%
+#' @importFrom stats setNames
 #' @import leaflet
 ## usethis namespace: end
 #'
