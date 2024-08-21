@@ -1,1 +1,52 @@
-LeafletWidget.methods.addWMSLegend=function(e){(function(){var t=this,o=new L.Control.WMSLegend(e.options);const a=document.createElement("div");if(a.className=e.titleClass,a.textContent=e.title,a.style=e.titleStyle,!e.layerId){const t=o.options.uri.match(/layer=([^&]+)/);t&&t[1]?e.layerId=t[1]:e.layerId=L.Util.stamp(o)}t.on("layeradd",(function(l){const n=t.layerManager.getLayer("tile",e.layerId);n&&n.options&&l.layer.options.layers==n.options.layers&&(t.controls.add(o,e.layerId),t.controls._controlsById[e.layerId].container.prepend(a))})),t.on("layerremove",(function(o){const a=t.layerManager.getLayer("tile",e.layerId);a&&a.options&&o.layer.options.layers==t.layerManager.getLayer("tile",e.layerId).options.layers&&t.controls.remove(e.layerId)})),t.controls.add(o,e.layerId),t.controls._controlsById[e.layerId].container.prepend(a)}).call(this)};
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!**************************************************************!*\
+  !*** ./inst/htmlwidgets/bindings/lfx-wms-legend-bindings.js ***!
+  \**************************************************************/
+/* global LeafletWidget, L */
+LeafletWidget.methods.addWMSLegend = function(options) {
+  (function() {
+    var map = this;
+    var wmsLegendControl = new L.Control.WMSLegend(options.options);
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = options.titleClass;
+    titleDiv.textContent = options.title;
+    titleDiv.style = options.titleStyle;
+
+    // Use the layername as ID if possble
+    if (!options.layerId) {
+      const match = wmsLegendControl.options.uri.match(/layer=([^&]+)/);
+      if (match && match[1]) {
+        options.layerId = match[1];
+      } else {
+        options.layerId = L.Util.stamp(wmsLegendControl);
+      }
+    }
+
+    map.on('layeradd', function(e) {
+      const wmslayer = map.layerManager.getLayer('tile', options.layerId);
+      if (wmslayer && wmslayer.options) {
+        if (e.layer.options.layers == wmslayer.options.layers) {
+          map.controls.add(wmsLegendControl, options.layerId);
+          map.controls._controlsById[options.layerId].container.prepend(titleDiv);
+        }
+      }
+    });
+    map.on('layerremove', function(e) {
+      const wmslayer = map.layerManager.getLayer('tile', options.layerId);
+      if (wmslayer && wmslayer.options) {
+        if (e.layer.options.layers == map.layerManager.getLayer('tile', options.layerId).options.layers) {
+          map.controls.remove(options.layerId);
+        }
+      }
+    });
+
+    map.controls.add(wmsLegendControl, options.layerId);
+    map.controls._controlsById[options.layerId].container.prepend(titleDiv);
+
+  }).call(this);
+};
+
+/******/ })()
+;

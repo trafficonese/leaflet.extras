@@ -10,8 +10,8 @@ const binding_path = './inst/htmlwidgets/bindings/';
 const src_path = './inst/htmlwidgets/src/';
 const build_path = path.resolve(__dirname, './inst/htmlwidgets/build');
 
-const mode = 'production';
-//const mode = 'development';
+//const mode = 'production';
+const mode = 'development';
 
 const library_prod = function(name, filename = name, library = undefined) {
   const foldername = filename;
@@ -119,6 +119,10 @@ const library_binding = function(name) {
 const config = [
 
   // library_prod(LIBRARY, SAVE_NAME, GLOBAL_JS_VAR_NAME)
+
+  library_prod(['leaflet-groupedlayercontrol', 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.css'],
+    'lfx-groupedlayercontrol'),
+  library_binding('lfx-groupedlayercontrol'),
 
   // "csv2geojson": "5.0.2",
   // "togeojson": "0.16.0",

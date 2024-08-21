@@ -32,7 +32,7 @@ module.exports = {
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
     'no-unused-vars': ['error', {'args': 'none'}],
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    //'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-var': 'off',
     'prefer-const': 'error',
     'no-assign-const': 'off'
