@@ -1,7 +1,7 @@
 groupedlayersControlDependencies <- function() {
-    list(
-      html_dep_prod("lfx-groupedlayercontrol", "0.6.1", has_style = TRUE, has_binding = TRUE)
-    )
+  list(
+    html_dep_prod("lfx-groupedlayercontrol", "0.6.1", has_style = TRUE, has_binding = TRUE)
+  )
 }
 
 #' @title Leaflet layer control with support for grouping overlays together.
@@ -23,28 +23,36 @@ groupedlayersControlDependencies <- function() {
 #'   addTiles(group = "OpenStreetMap") %>%
 #'   addProviderTiles("CartoDB", group = "CartoDB") %>%
 #'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
-#'                    color = "red", group = "Markers2") %>%
+#'     color = "red", group = "Markers2"
+#'   ) %>%
 #'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
-#'                    color="green", group = "Markers1") %>%
+#'     color = "green", group = "Markers1"
+#'   ) %>%
 #'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
-#'                    color="yellow", group = "Markers3") %>%
+#'     color = "yellow", group = "Markers3"
+#'   ) %>%
 #'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
-#'                    color = "lightblue", group = "Markers4") %>%
+#'     color = "lightblue", group = "Markers4"
+#'   ) %>%
 #'   addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42),
-#'                    color = "purple", group = "Markers5") %>%
+#'     color = "purple", group = "Markers5"
+#'   ) %>%
 #'   addGroupedLayersControl(
-#'     baseGroups = c("OpenStreetMap","CartoDB"),
+#'     baseGroups = c("OpenStreetMap", "CartoDB"),
 #'     overlayGroups = list(
-#'       "Layergroup_2" = c("Markers5","Markers4"),
-#'       "Layergroup_1" = c("Markers2","Markers1","Markers3")),
+#'       "Layergroup_2" = c("Markers5", "Markers4"),
+#'       "Layergroup_1" = c("Markers2", "Markers1", "Markers3")
+#'     ),
 #'     position = "topright",
-#'     options = groupedLayersControlOptions(groupCheckboxes = TRUE,
-#'                                           collapsed = FALSE,
-#'                                           groupsCollapsable = TRUE,
-#'                                           sortLayers = FALSE,
-#'                                           sortGroups = FALSE,
-#'                                           sortBaseLayers = FALSE,
-#'                                           exclusiveGroups = "Layergroup_1")
+#'     options = groupedLayersControlOptions(
+#'       groupCheckboxes = TRUE,
+#'       collapsed = FALSE,
+#'       groupsCollapsable = TRUE,
+#'       sortLayers = FALSE,
+#'       sortGroups = FALSE,
+#'       sortBaseLayers = FALSE,
+#'       exclusiveGroups = "Layergroup_1"
+#'     )
 #'   )
 addGroupedLayersControl <- function(
     map,
@@ -52,14 +60,15 @@ addGroupedLayersControl <- function(
     overlayGroups = character(0),
     position = c("topright", "bottomright", "bottomleft", "topleft"),
     options = groupedLayersControlOptions()) {
-
   map$dependencies <- c(map$dependencies, groupedlayersControlDependencies())
   options <- c(options, list(position = match.arg(position)))
 
   groupedOverlayGroups <- transform_groupedoverlays(overlayGroups)
-  leaflet::invokeMethod(map, NULL, "addGroupedLayersControl",
-                        baseGroups, groupedOverlayGroups,
-                        options)
+  leaflet::invokeMethod(
+    map, NULL, "addGroupedLayersControl",
+    baseGroups, groupedOverlayGroups,
+    options
+  )
 }
 
 #' Options for the GroupedLayersControl
@@ -85,18 +94,19 @@ groupedLayersControlOptions <- function(exclusiveGroups = NULL,
                                         collapsed = TRUE,
                                         autoZIndex = TRUE,
                                         ...) {
-
-  filterNULL(list(exclusiveGroups = exclusiveGroups,
-                  groupCheckboxes = groupCheckboxes,
-                  groupsCollapsable = groupsCollapsable,
-                  groupsExpandedClass = groupsExpandedClass,
-                  groupsCollapsedClass = groupsCollapsedClass,
-                  sortLayers = sortLayers,
-                  sortGroups = sortGroups,
-                  sortBaseLayers = sortBaseLayers,
-                  collapsed = collapsed,
-                  autoZIndex = autoZIndex,
-                  ...))
+  filterNULL(list(
+    exclusiveGroups = exclusiveGroups,
+    groupCheckboxes = groupCheckboxes,
+    groupsCollapsable = groupsCollapsable,
+    groupsExpandedClass = groupsExpandedClass,
+    groupsCollapsedClass = groupsCollapsedClass,
+    sortLayers = sortLayers,
+    sortGroups = sortGroups,
+    sortBaseLayers = sortBaseLayers,
+    collapsed = collapsed,
+    autoZIndex = autoZIndex,
+    ...
+  ))
 }
 
 
@@ -110,16 +120,20 @@ groupedLayersControlOptions <- function(exclusiveGroups = NULL,
 #' @rdname GroupedLayersControl
 #' @export
 addGroupedOverlay <- function(map, group, name, groupname) {
-  invokeMethod(map, NULL, "addGroupedOverlay",
-               group, name, groupname)
+  invokeMethod(
+    map, NULL, "addGroupedOverlay",
+    group, name, groupname
+  )
 }
 
 #' @description Add a baselayer to the GroupedLayersControl
 #' @rdname GroupedLayersControl
 #' @export
 addGroupedBaseLayer <- function(map, group, name) {
-  invokeMethod(map, NULL, "addGroupedBaseLayer",
-               group, name)
+  invokeMethod(
+    map, NULL, "addGroupedBaseLayer",
+    group, name
+  )
 }
 
 #' @description Remove an overlay layer from the GroupedLayersControl
