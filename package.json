@@ -27,6 +27,7 @@
     "leaflet-draw-drag": "0.4.8",
     "leaflet-fullscreen": "1.0.2",
     "leaflet-gps": "1.7.8",
+    "leaflet-groupedlayercontrol": "github:trafficonese/leaflet-groupedlayercontrol",
     "leaflet-hash": "github:wattnpapa/leaflet-hash#4020d13",
     "leaflet-heat": "github:Leaflet/Leaflet.heat#fbca300",
     "leaflet-measure-path": "1.5.0",
