@@ -2,6 +2,8 @@
 % Please edit documentation in R/groupedlayercontrol.R
 \name{addGroupedLayersControl}
 \alias{addGroupedLayersControl}
+\alias{groupedLayersControlOptions}
+\alias{addGroupedOverlay}
 \title{Leaflet layer control with support for grouping overlays together.
 Also supports making groups exclusive (radio instead of checkbox).}
 \usage{
@@ -10,9 +12,19 @@ addGroupedLayersControl(
   baseGroups = character(0),
   overlayGroups = character(0),
   position = c("topright", "bottomright", "bottomleft", "topleft"),
-  options = leaflet::layersControlOptions(),
+  options = groupedLayersControlOptions(),
   data = getMapData(map)
 )
+
+groupedLayersControlOptions(
+  exclusiveGroups = NULL,
+  groupCheckboxes = TRUE,
+  collapsed = TRUE,
+  autoZIndex = TRUE,
+  ...
+)
+
+addGroupedOverlay(map, group, name, groupname)
 }
 \arguments{
 \item{map}{The map widget.}
@@ -33,8 +45,29 @@ a call to \code{layersControlOptions}}
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
+
+\item{exclusiveGroups}{character vector of layer groups to make exclusive (use radio buttons)}
+
+\item{groupCheckboxes}{Show a checkbox next to non-exclusive group labels for toggling all}
+
+\item{collapsed}{if \code{TRUE} (the default), the layers control will be
+rendered as an icon that expands when hovered over. Set to \code{FALSE}
+to have the layers control always appear in its expanded state.}
+
+\item{autoZIndex}{if \code{TRUE}, the control will automatically maintain
+the z-order of its various groups as overlays are switched on and off.}
+
+\item{...}{other options for \code{layersControlOptions()}}
+
+\item{group}{The groupname of the layer}
+
+\item{name}{The name of the layer}
 }
 \description{
 Leaflet layer control with support for grouping overlays together.
 Also supports making groups exclusive (radio instead of checkbox).
+
+Options for the grouped layercontrol
+
+Removes the grouped layercontrol
 }

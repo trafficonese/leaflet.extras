@@ -8,16 +8,10 @@ function asArray(value) {
 }
 
 LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGroups, options) {
-  console.log('I am in here addGroupedLayersControl');
-  console.log('I am in here addGroupedLayersControl - step2');
-
-
   (function() {
     var map = this;
 
-    console.log('options'); console.log(options);
-    console.log('base'); console.log(base);
-    console.log('overlay'); console.log(overlay);
+    //options.exclusiveGroups = asArray(options.exclusiveGroups)
 
     // Only allow one layers control at a time
     LeafletWidget.methods.removeGroupedLayersControl.call(map);
@@ -39,36 +33,47 @@ LeafletWidget.methods.addGroupedLayersControl = function(baseGroups, overlayGrou
         }
       }
     });
-    const overlay = {};
-    $.each(asArray(overlayGroups), (i, g) => {
-      const layer = map.layerManager.getLayerGroup(g, true);
-      if (layer) {
-        overlay[g] = layer;
-      }
+
+    const groupedOverlays = {};
+    Object.keys(overlayGroups).forEach(function(group) {
+      // Initialize the group as an empty object
+      groupedOverlays[group] = {};
+
+      Object.keys(overlayGroups[group]).forEach(function(key) {
+        var layerName = overlayGroups[group][key];
+        // Assign the layer object to the groupedOverlays
+        const layer = map.layerManager.getLayerGroup(layerName, true);
+        if (layer) {
+          groupedOverlays[group][key] = layer
+        }
+      });
     });
 
-
-    map.currentLayersControl = L.control.groupedLayers(base, overlay, options);
+    map.currentLayersControl = L.control.groupedLayers(base, groupedOverlays, options);
     map.addControl(map.currentLayersControl);
 
-  });
+  }).call(this);
 };
 
-LeafletWidget.methods.addGroupedOverlay = function(layer, name, group) {
-  if (this.currentLayersControl) {
-    console.log('layer'); console.log(layer);
-    console.log('name'); console.log(name);
-    console.log('group'); console.log(group);
-
-    this.currentLayersControl.addOverlay(layer, name, group);
-  }
+LeafletWidget.methods.addGroupedOverlay = function(group, name, groupname) {
+  (function() {
+    if (this.currentLayersControl) {
+      var map = this;
+      let layer = map.layerManager.getLayerGroup(group, true);
+      if (layer) {
+        map.currentLayersControl.addOverlay(layer, name, groupname);
+      }
+    }
+  }).call(this);
 };
 
 
 LeafletWidget.methods.removeGroupedLayersControl = function() {
-  if (this.currentLayersControl) {
-    this.removeControl(this.currentLayersControl);
-    this.currentLayersControl = null;
-  }
+  (function() {
+    if (this.currentLayersControl) {
+      this.removeControl(this.currentLayersControl);
+      this.currentLayersControl = null;
+    }
+  }).call(this);
 };
 

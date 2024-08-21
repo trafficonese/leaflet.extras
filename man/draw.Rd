@@ -3,7 +3,6 @@
 \name{addDrawToolbar}
 \alias{addDrawToolbar}
 \alias{removeDrawToolbar}
-\alias{addGroupedOverlay}
 \alias{removeGroupedLayersControl}
 \title{Adds a Toolbar to draw shapes/points on the map.}
 \usage{
@@ -28,8 +27,6 @@ addDrawToolbar(
 )
 
 removeDrawToolbar(map, clearFeatures = FALSE)
-
-addGroupedOverlay(map, layer, name, group)
 
 removeGroupedLayersControl(map)
 }
@@ -73,19 +70,11 @@ You can either set layerId or group or none but not both.}
 the \code{Leaflet.Draw.Drag} plugin. Otherwise, this library will not be included.}
 
 \item{clearFeatures}{whether to clear the map of drawn features.}
-
-\item{layer}{The layerId of the layer to add}
-
-\item{name}{The name of the layer}
-
-\item{group}{The correspondng group of the layer}
 }
 \description{
 Adds a Toolbar to draw shapes/points on the map.
 
 Removes the draw toolbar
-
-Removes the grouped layercontrol
 
 Removes the grouped layercontrol
 }
