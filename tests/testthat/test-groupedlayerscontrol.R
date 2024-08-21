@@ -13,7 +13,8 @@ test_that("Test addGroupedLayersControl", {
       baseGroups = c("OpenStreetMap", "CartoDB"),
       overlayGroups = list(
         "Layergroup_2" = c("Markers5", "Markers4"),
-        "Layergroup_1" = c("Markers2", "Markers1", "Markers3")),
+        "Layergroup_1" = c("Markers2", "Markers1", "Markers3")
+      ),
       position = "topright",
       options = groupedLayersControlOptions(groupCheckboxes = TRUE, collapsed = FALSE)
     )
@@ -32,8 +33,11 @@ test_that("Test addGroupedLayersControl", {
       baseGroups = c("OpenStreetMap", "CartoDB"),
       overlayGroups = list(
         "Layergroup_2" = c("Markername5" = "Markers5", "Markername4" = "Markers4"),
-        "Layergroup_1" = c("Markername2" = "Markers2", "Markername1" = "Markers1",
-                           "Markername3" = "Markers3")),
+        "Layergroup_1" = c(
+          "Markername2" = "Markers2", "Markername1" = "Markers1",
+          "Markername3" = "Markers3"
+        )
+      ),
       position = "topright",
       options = groupedLayersControlOptions(groupCheckboxes = TRUE, collapsed = FALSE)
     )
