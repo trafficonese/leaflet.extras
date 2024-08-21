@@ -33,6 +33,12 @@ reference:
   contents:
   - '`addGeoJSONv2`'
   - '`propsToHTML`'
+- title: GroupedLayerControl
+  desc: ~
+  contents:
+  - matches("GroupedLayer")
+  - matches("groupedLayers")
+  - matches("addGrouped")
 - title: Extra Icons
   desc: ~
   contents:
