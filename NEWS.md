@@ -1,8 +1,8 @@
 # leaflet.extras (development version)
 
 ## New Features
-- Include the plugin `leaflet-groupedlayercontrol`. See the example in `/inst/examples/shiny/groupedlayercontrol_app.R`
-  for a demo of all options and methods. Fix #202
+- Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
+  See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
 
 # leaflet.extras 2.0.1
