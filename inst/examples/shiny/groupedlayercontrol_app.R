@@ -49,7 +49,7 @@ server <- function(input, output, session) {
       addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "lightblue", group = "Markers4") %>%
       addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "purple", group = "Markers5") %>%
       addGroupedLayersControl(
-        baseGroups = c("OpenStreetMap","CartoDB"),
+        baseGroups = c(list("Base1" = "OpenStreetMap")),
         overlayGroups = list("Layergroup_2" = c("Markers5","Markers4"),
                              "Layergroup_1" = c("Markers2","Markers1","Markers3")),
         position = "topright",

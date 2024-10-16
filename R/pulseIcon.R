@@ -76,11 +76,12 @@ pulseIconSetToPulseIcons <- function(x) {
 #' @rdname pulseMarkers
 makePulseIcon <- function(
     color = "#ff0000",
+    fillColor = color,
     iconSize = 12,
     animate = TRUE,
     heartbeat = 1) {
   icon <- leaflet::filterNULL(list(
-    color = color, iconSize = iconSize, animate = animate, heartbeat = heartbeat
+    color = color, fillColor = fillColor, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
   structure(icon, class = "leaflet_pulse_icon")
 }
@@ -93,6 +94,7 @@ makePulseIcon <- function(
 #' icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 #' these arguments will be ignored.
 #' @param color Color of the icon
+#' @param fillColor Fill color of the icon
 #' @param iconSize Size of Icon in Pixels.
 #' @param animate To animate the icon or not, defaults to TRUE.
 #' @param heartbeat Interval between each pulse in seconds.
@@ -100,11 +102,12 @@ makePulseIcon <- function(
 #' @rdname pulseMarkers
 pulseIcons <- function(
     color = "#ff0000",
+    fillColor = color,
     iconSize = 12,
     animate = TRUE,
     heartbeat = 1) {
   leaflet::filterNULL(list(
-    color = color, iconSize = iconSize, animate = animate, heartbeat = heartbeat
+    color = color, fillColor = fillColor, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
 }
 

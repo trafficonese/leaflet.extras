@@ -4,6 +4,8 @@
 - Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
+## Bugfixes
+- New argument `fillColor` for `pulseIcons`. Fix #231
 
 # leaflet.extras 2.0.1
 

@@ -12,9 +12,21 @@ pulseIconList(...)
 
 \method{[}{leaflet_pulse_icon_set}(x, i)
 
-makePulseIcon(color = "#ff0000", iconSize = 12, animate = TRUE, heartbeat = 1)
+makePulseIcon(
+  color = "#ff0000",
+  fillColor = color,
+  iconSize = 12,
+  animate = TRUE,
+  heartbeat = 1
+)
 
-pulseIcons(color = "#ff0000", iconSize = 12, animate = TRUE, heartbeat = 1)
+pulseIcons(
+  color = "#ff0000",
+  fillColor = color,
+  iconSize = 12,
+  animate = TRUE,
+  heartbeat = 1
+)
 
 addPulseMarkers(
   map,
@@ -41,6 +53,8 @@ addPulseMarkers(
 \item{i}{offset}
 
 \item{color}{Color of the icon}
+
+\item{fillColor}{Fill color of the icon}
 
 \item{iconSize}{Size of Icon in Pixels.}
 
