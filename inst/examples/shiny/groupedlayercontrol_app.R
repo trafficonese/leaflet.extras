@@ -49,19 +49,27 @@ server <- function(input, output, session) {
       addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "lightblue", group = "Markers4") %>%
       addCircleMarkers(runif(20, -75, -74), runif(20, 41, 42), color = "purple", group = "Markers5") %>%
       addGroupedLayersControl(
-        baseGroups = c(list("Base1" = "OpenStreetMap")),
+        baseGroups = c("OpenStreetMap", "CartoDB"),
         overlayGroups = list("Layergroup_2" = c("Markers5","Markers4"),
-                             "Layergroup_1" = c("Markers2","Markers1","Markers3")),
+                             "Layergroup_1" = c("Markers2","Markers1"),
+                             "Layergroup_3" = c("Markers3")
+                             ),
         position = "topright",
-        options = groupedLayersControlOptions(groupCheckboxes = T,
-                                              collapsed = F,
-                                              groupsExpandedClass = "glyphicon glyphicon-chevron-down",
-                                              groupsCollapsedClass = "glyphicon glyphicon-chevron-right",
-                                              groupsCollapsable = T,
-                                              sortLayers = F,
-                                              sortGroups = F,
-                                              sortBaseLayers = F,
-                                              exclusiveGroups = "Layergroup_1")
+        options = groupedLayersControlOptions(
+            exclusiveGroups = "Layergroup_1"
+            # exclusiveGroups = c("Layergroup_1","Layergroup_3","Layergroup_2")
+          , groupCheckboxes = T
+          , groupsCollapsable = T
+          , groupsCollapsed = c("Layergroup_1", "Layergroup_3")
+          # , groupsCollapsed = "Layergroup_1"
+          # , groupsCollapsed = F
+          , groupsExpandedClass = "glyphicon glyphicon-chevron-down"
+          , groupsCollapsedClass = "glyphicon glyphicon-chevron-right"
+          , sortLayers = F
+          , sortGroups = F
+          , sortBaseLayers = F
+          , collapsed = F
+          )
       )
   })
   observeEvent(input$addlayer, {

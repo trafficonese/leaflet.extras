@@ -8,6 +8,7 @@ groupedLayersControlOptions(
   exclusiveGroups = NULL,
   groupCheckboxes = TRUE,
   groupsCollapsable = TRUE,
+  groupsCollapsed = TRUE,
   groupsExpandedClass = "leaflet-control-layers-group-collapse-default",
   groupsCollapsedClass = "leaflet-control-layers-group-expand-default",
   sortLayers = FALSE,
@@ -24,6 +25,14 @@ groupedLayersControlOptions(
 \item{groupCheckboxes}{Show a checkbox next to non-exclusive group labels for toggling all}
 
 \item{groupsCollapsable}{Should groups be collapsible? Default is \code{TRUE}}
+
+\item{groupsCollapsed}{A logical, character string, or character vector:
+\itemize{
+  \item \code{TRUE} (default): Collapses all groups.
+  \item \code{FALSE}: No groups are collapsed.
+  \item A string: Collapses a single group (e.g., \code{"Group 1"}).
+  \item A vector of strings: Collapses multiple groups (e.g., \code{c("Group 1", "Group 2")}).
+}}
 
 \item{groupsExpandedClass}{The CSS class of expanded groups}
 

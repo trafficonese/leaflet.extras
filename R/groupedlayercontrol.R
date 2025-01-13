@@ -75,6 +75,13 @@ addGroupedLayersControl <- function(
 #' @param exclusiveGroups character vector of layer groups to make exclusive (use radio buttons)
 #' @param groupCheckboxes Show a checkbox next to non-exclusive group labels for toggling all
 #' @param groupsCollapsable Should groups be collapsible? Default is \code{TRUE}
+#' @param groupsCollapsed A logical, character string, or character vector:
+#'   \itemize{
+#'     \item \code{TRUE} (default): Collapses all groups.
+#'     \item \code{FALSE}: No groups are collapsed.
+#'     \item A string: Collapses a single group (e.g., \code{"Group 1"}).
+#'     \item A vector of strings: Collapses multiple groups (e.g., \code{c("Group 1", "Group 2")}).
+#'   }
 #' @param groupsExpandedClass The CSS class of expanded groups
 #' @param groupsCollapsedClass The CSS class of collapsed groups
 #' @param sortLayers Sort the overlay layers alphabetically? Default is \code{FALSE}
@@ -86,6 +93,7 @@ addGroupedLayersControl <- function(
 groupedLayersControlOptions <- function(exclusiveGroups = NULL,
                                         groupCheckboxes = TRUE,
                                         groupsCollapsable = TRUE,
+                                        groupsCollapsed = TRUE,
                                         groupsExpandedClass = "leaflet-control-layers-group-collapse-default",
                                         groupsCollapsedClass = "leaflet-control-layers-group-expand-default",
                                         sortLayers = FALSE,
@@ -98,6 +106,7 @@ groupedLayersControlOptions <- function(exclusiveGroups = NULL,
     exclusiveGroups = exclusiveGroups,
     groupCheckboxes = groupCheckboxes,
     groupsCollapsable = groupsCollapsable,
+    groupsCollapsed = groupsCollapsed,
     groupsExpandedClass = groupsExpandedClass,
     groupsCollapsedClass = groupsCollapsedClass,
     sortLayers = sortLayers,
