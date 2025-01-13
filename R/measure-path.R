@@ -91,8 +91,7 @@ addMeasurePathToolbar <- function(
     map,
     options = measurePathOptions(),
     group = NULL) {
-
-  if (is.null(group)) group = ""
+  if (is.null(group)) group <- ""
   group <- jsonlite::toJSON(group)
 
   map <- enableMeasurePath(map) %>%
