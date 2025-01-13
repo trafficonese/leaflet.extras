@@ -43,6 +43,7 @@
 <span>  exclusiveGroups <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  groupCheckboxes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  groupsCollapsable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  groupsCollapsed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  groupsExpandedClass <span class="op">=</span> <span class="st">"leaflet-control-layers-group-collapse-default"</span>,</span>
 <span>  groupsCollapsedClass <span class="op">=</span> <span class="st">"leaflet-control-layers-group-expand-default"</span>,</span>
 <span>  sortLayers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -68,6 +69,14 @@
 
 <dt id="arg-groupscollapsable">groupsCollapsable<a class="anchor" aria-label="anchor" href="#arg-groupscollapsable"></a></dt>
 <dd><p>Should groups be collapsible? Default is <code>TRUE</code></p></dd>
+
+
+<dt id="arg-groupscollapsed">groupsCollapsed<a class="anchor" aria-label="anchor" href="#arg-groupscollapsed"></a></dt>
+<dd><p>A logical, character string, or character vector:</p><ul><li><p><code>TRUE</code> (default): Collapses all groups.</p></li>
+<li><p><code>FALSE</code>: No groups are collapsed.</p></li>
+<li><p>A string: Collapses a single group (e.g., <code>"Group 1"</code>).</p></li>
+<li><p>A vector of strings: Collapses multiple groups (e.g., <code>c("Group 1", "Group 2")</code>).</p></li>
+</ul></dd>
 
 
 <dt id="arg-groupsexpandedclass">groupsExpandedClass<a class="anchor" aria-label="anchor" href="#arg-groupsexpandedclass"></a></dt>
