@@ -6,6 +6,8 @@
 
 ## Bugfixes
 - New argument `fillColor` for `pulseIcons`. Fix #231
+- New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
+
 
 # leaflet.extras 2.0.1
 
@@ -15,6 +17,7 @@
 
 ## Bugfixes
 - Fixed CRAN devel checks: *Found the following Rd file(s) with Rd \link{} targets missing package*
+
 
 # leaflet.extras 2.0.0
 

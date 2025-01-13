@@ -58,5 +58,5 @@ Suggests:
     testthat (>= 3.0.0)
 URL: https://github.com/trafficonese/leaflet.extras, https://trafficonese.github.io/leaflet.extras/
 BugReports: https://github.com/trafficonese/leaflet.extras/issues
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
