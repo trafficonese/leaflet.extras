@@ -677,7 +677,16 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
           zoom = maxZoom;
         }
 
-        map.setView(latlng, zoom);
+        // Check if latlng is an array of coordinates (array of arrays)
+        if (Array.isArray(latlng)) {
+          // Compute center point of all coordinates
+          //const center = L.latLngBounds(latlng).getCenter();
+          //map.setView(center, zoom);
+          map.fitBounds(L.latLngBounds(latlng));
+        } else {
+          // Just a single coordinate pair
+          map.setView(latlng, zoom);
+        }
       };
     }
 
@@ -724,7 +733,15 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
     });
 
     map.searchControl.on('search:locationfound', function(e) {
-      if (options.openPopup && e.layer._popup) {
+
+      if (e.layer._layers) {
+        Object.values(e.layer._layers).some(layer => {
+          if (layer._popup) {
+            layer._popup.options.autoClose = false;
+            layer.openPopup();
+          }
+        });
+      } else if (e.layer._popup) {
         e.layer.openPopup();
       }
 
