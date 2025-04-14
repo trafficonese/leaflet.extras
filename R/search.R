@@ -14,26 +14,27 @@ leafletSearchDependencies <- function() {
 #' @param propertyName property in marker.options(or feature.properties for vector layer) trough filter elements in layer,.
 #' @param formatData callback for reformat all data from source to indexed data object.
 #' @param filterData callback for filtering data from text searched, params: textSearch, allRecords.
-#' @param moveToLocation whether to move to the found location.
+#' @param filtersearch Optional comma-separated string to prepend to the search text
+#' @param moveToLocation whether to move to the found location
 #' @param zoom zoom to this level when moving to location
 #' @param buildTip function that return row tip html node(or html string), receive text tooltip in first param.
-#' @param container container id to insert Search Control.
-#' @param minLength minimal text length for autocomplete.
-#' @param initial search elements only by initial text.
-#' @param casesensitive search elements in case sensitive text.
-#' @param autoType complete input with first suggested result and select this filled-in text..
+#' @param container container id to insert Search Control
+#' @param minLength minimal text length for autocomplete
+#' @param initial search elements only by initial text
+#' @param casesensitive search elements in case sensitive text
+#' @param autoType complete input with first suggested result and select this filled-in text
 #' @param delayType delay while typing for show tooltip.
-#' @param tooltipLimit limit max results to show in tooltip. -1 for no limit..
-#' @param tipAutoSubmit auto map panTo when click on tooltip.
-#' @param firstTipSubmit auto select first result con enter click.
-#' @param autoResize autoresize on input change.
-#' @param collapsed collapse search control at startup.
+#' @param tooltipLimit limit max results to show in tooltip. -1 for no limit
+#' @param tipAutoSubmit auto map panTo when click on tooltip
+#' @param firstTipSubmit auto select first result con enter click
+#' @param autoResize autoresize on input change
+#' @param collapsed collapse search control at startup
 #' @param autoCollapse collapse search control after submit(on button or on tips if enabled tipAutoSubmit).
 #' @param autoCollapseTime delay for autoclosing alert and collapse after blur.
-#' @param textErr 'Location not error message.
-#' @param textCancel title in cancel button.
-#' @param textPlaceholder placeholder value.
-#' @param position "topleft".
+#' @param textErr Error message
+#' @param textCancel title in cancel button
+#' @param textPlaceholder placeholder value
+#' @param position position of the search input. Default is "topleft".
 #' @param hideMarkerOnCollapse remove circle and marker on search control collapsed.
 #' @param marker Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}
 #' @rdname search-options
@@ -46,6 +47,7 @@ searchOptions <- function(
     propertyName = NULL,
     formatData = NULL,
     filterData = NULL,
+    filtersearch = NULL,
     moveToLocation = TRUE,
     zoom = 17,
     buildTip = NULL,
@@ -86,6 +88,7 @@ searchOptions <- function(
     propertyName = propertyName,
     formatData = formatData,
     filterData = filterData,
+    filtersearch = filtersearch,
     moveToLocation = moveToLocation,
     zoom = zoom,
     buildTip = buildTip,

@@ -13,6 +13,7 @@ searchOptions(
   propertyName = NULL,
   formatData = NULL,
   filterData = NULL,
+  filtersearch = NULL,
   moveToLocation = TRUE,
   zoom = 17,
   buildTip = NULL,
@@ -60,45 +61,47 @@ searchFeaturesOptions(
 
 \item{filterData}{callback for filtering data from text searched, params: textSearch, allRecords.}
 
-\item{moveToLocation}{whether to move to the found location.}
+\item{filtersearch}{Optional comma-separated string to prepend to the search text}
+
+\item{moveToLocation}{whether to move to the found location}
 
 \item{zoom}{zoom to this level when moving to location}
 
 \item{buildTip}{function that return row tip html node(or html string), receive text tooltip in first param.}
 
-\item{container}{container id to insert Search Control.}
+\item{container}{container id to insert Search Control}
 
-\item{minLength}{minimal text length for autocomplete.}
+\item{minLength}{minimal text length for autocomplete}
 
-\item{initial}{search elements only by initial text.}
+\item{initial}{search elements only by initial text}
 
-\item{casesensitive}{search elements in case sensitive text.}
+\item{casesensitive}{search elements in case sensitive text}
 
-\item{autoType}{complete input with first suggested result and select this filled-in text..}
+\item{autoType}{complete input with first suggested result and select this filled-in text}
 
 \item{delayType}{delay while typing for show tooltip.}
 
-\item{tooltipLimit}{limit max results to show in tooltip. -1 for no limit..}
+\item{tooltipLimit}{limit max results to show in tooltip. -1 for no limit}
 
-\item{tipAutoSubmit}{auto map panTo when click on tooltip.}
+\item{tipAutoSubmit}{auto map panTo when click on tooltip}
 
-\item{firstTipSubmit}{auto select first result con enter click.}
+\item{firstTipSubmit}{auto select first result con enter click}
 
-\item{autoResize}{autoresize on input change.}
+\item{autoResize}{autoresize on input change}
 
-\item{collapsed}{collapse search control at startup.}
+\item{collapsed}{collapse search control at startup}
 
 \item{autoCollapse}{collapse search control after submit(on button or on tips if enabled tipAutoSubmit).}
 
 \item{autoCollapseTime}{delay for autoclosing alert and collapse after blur.}
 
-\item{textErr}{'Location not error message.}
+\item{textErr}{Error message}
 
-\item{textCancel}{title in cancel button.}
+\item{textCancel}{title in cancel button}
 
-\item{textPlaceholder}{placeholder value.}
+\item{textPlaceholder}{placeholder value}
 
-\item{position}{"topleft".}
+\item{position}{position of the search input. Default is "topleft".}
 
 \item{hideMarkerOnCollapse}{remove circle and marker on search control collapsed.}
 
