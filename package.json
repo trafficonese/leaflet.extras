@@ -32,7 +32,7 @@
     "leaflet-heat": "github:Leaflet/Leaflet.heat#fbca300",
     "leaflet-measure-path": "1.5.0",
     "leaflet-plugins": "3.4.0",
-    "leaflet-search": "4.0.0",
+    "leaflet-search": "github:stefanocudini/leaflet-search#pull/337/head",
     "leaflet-sleep": "0.5.2",
     "leaflet-styleeditor": "^0.1.21",
     "leaflet-webgl-heatmap": "0.2.7",
