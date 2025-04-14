@@ -50,6 +50,7 @@ Customized searchOptions for Feature Search"></head><body>
 <span>  propertyName <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  formatData <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filterData <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filtersearch <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  moveToLocation <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  zoom <span class="op">=</span> <span class="fl">17</span>,</span>
 <span>  buildTip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -115,8 +116,12 @@ Customized searchOptions for Feature Search"></head><body>
 <dd><p>callback for filtering data from text searched, params: textSearch, allRecords.</p></dd>
 
 
+<dt id="arg-filtersearch">filtersearch<a class="anchor" aria-label="anchor" href="#arg-filtersearch"></a></dt>
+<dd><p>Optional comma-separated string to prepend to the search text</p></dd>
+
+
 <dt id="arg-movetolocation">moveToLocation<a class="anchor" aria-label="anchor" href="#arg-movetolocation"></a></dt>
-<dd><p>whether to move to the found location.</p></dd>
+<dd><p>whether to move to the found location</p></dd>
 
 
 <dt id="arg-zoom">zoom<a class="anchor" aria-label="anchor" href="#arg-zoom"></a></dt>
@@ -128,23 +133,23 @@ Customized searchOptions for Feature Search"></head><body>
 
 
 <dt id="arg-container">container<a class="anchor" aria-label="anchor" href="#arg-container"></a></dt>
-<dd><p>container id to insert Search Control.</p></dd>
+<dd><p>container id to insert Search Control</p></dd>
 
 
 <dt id="arg-minlength">minLength<a class="anchor" aria-label="anchor" href="#arg-minlength"></a></dt>
-<dd><p>minimal text length for autocomplete.</p></dd>
+<dd><p>minimal text length for autocomplete</p></dd>
 
 
 <dt id="arg-initial">initial<a class="anchor" aria-label="anchor" href="#arg-initial"></a></dt>
-<dd><p>search elements only by initial text.</p></dd>
+<dd><p>search elements only by initial text</p></dd>
 
 
 <dt id="arg-casesensitive">casesensitive<a class="anchor" aria-label="anchor" href="#arg-casesensitive"></a></dt>
-<dd><p>search elements in case sensitive text.</p></dd>
+<dd><p>search elements in case sensitive text</p></dd>
 
 
 <dt id="arg-autotype">autoType<a class="anchor" aria-label="anchor" href="#arg-autotype"></a></dt>
-<dd><p>complete input with first suggested result and select this filled-in text..</p></dd>
+<dd><p>complete input with first suggested result and select this filled-in text</p></dd>
 
 
 <dt id="arg-delaytype">delayType<a class="anchor" aria-label="anchor" href="#arg-delaytype"></a></dt>
@@ -152,23 +157,23 @@ Customized searchOptions for Feature Search"></head><body>
 
 
 <dt id="arg-tooltiplimit">tooltipLimit<a class="anchor" aria-label="anchor" href="#arg-tooltiplimit"></a></dt>
-<dd><p>limit max results to show in tooltip. -1 for no limit..</p></dd>
+<dd><p>limit max results to show in tooltip. -1 for no limit</p></dd>
 
 
 <dt id="arg-tipautosubmit">tipAutoSubmit<a class="anchor" aria-label="anchor" href="#arg-tipautosubmit"></a></dt>
-<dd><p>auto map panTo when click on tooltip.</p></dd>
+<dd><p>auto map panTo when click on tooltip</p></dd>
 
 
 <dt id="arg-firsttipsubmit">firstTipSubmit<a class="anchor" aria-label="anchor" href="#arg-firsttipsubmit"></a></dt>
-<dd><p>auto select first result con enter click.</p></dd>
+<dd><p>auto select first result con enter click</p></dd>
 
 
 <dt id="arg-autoresize">autoResize<a class="anchor" aria-label="anchor" href="#arg-autoresize"></a></dt>
-<dd><p>autoresize on input change.</p></dd>
+<dd><p>autoresize on input change</p></dd>
 
 
 <dt id="arg-collapsed">collapsed<a class="anchor" aria-label="anchor" href="#arg-collapsed"></a></dt>
-<dd><p>collapse search control at startup.</p></dd>
+<dd><p>collapse search control at startup</p></dd>
 
 
 <dt id="arg-autocollapse">autoCollapse<a class="anchor" aria-label="anchor" href="#arg-autocollapse"></a></dt>
@@ -180,19 +185,19 @@ Customized searchOptions for Feature Search"></head><body>
 
 
 <dt id="arg-texterr">textErr<a class="anchor" aria-label="anchor" href="#arg-texterr"></a></dt>
-<dd><p>'Location not error message.</p></dd>
+<dd><p>Error message</p></dd>
 
 
 <dt id="arg-textcancel">textCancel<a class="anchor" aria-label="anchor" href="#arg-textcancel"></a></dt>
-<dd><p>title in cancel button.</p></dd>
+<dd><p>title in cancel button</p></dd>
 
 
 <dt id="arg-textplaceholder">textPlaceholder<a class="anchor" aria-label="anchor" href="#arg-textplaceholder"></a></dt>
-<dd><p>placeholder value.</p></dd>
+<dd><p>placeholder value</p></dd>
 
 
 <dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
-<dd><p>"topleft".</p></dd>
+<dd><p>position of the search input. Default is "topleft".</p></dd>
 
 
 <dt id="arg-hidemarkeroncollapse">hideMarkerOnCollapse<a class="anchor" aria-label="anchor" href="#arg-hidemarkeroncollapse"></a></dt>
