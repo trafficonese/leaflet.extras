@@ -5,6 +5,7 @@
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
 ## Bugfixes
+- New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
 - New argument `fillColor` for `pulseIcons`. Fix #231
 - New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
 
