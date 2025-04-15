@@ -6,6 +6,7 @@
 
 ## Bugfixes
 - New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
+- `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
 - New argument `fillColor` for `pulseIcons`. Fix #231
 - New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
 
