@@ -4,7 +4,6 @@
 status](https://www.r-pkg.org/badges/version/leaflet.extras)](https://CRAN.R-project.org/package=leaflet.extras)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/leaflet.extras.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras.html)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
 [![License:
 GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras)
@@ -63,7 +62,8 @@ Plugins integrated so far …
 - [Leaflet.Sleep](https://github.com/CliffCloud/Leaflet.Sleep)
 - [Bing Tiles](https://github.com/shramov/leaflet-plugins/tree/v2)
 - [Bounce Marker](https://github.com/maximeh/leaflet.bouncemarker)
-- [Grouped LayerControl](https://github.com/trafficonese/leaflet-groupedlayercontrol)
+- [Grouped
+  LayerControl](https://github.com/trafficonese/leaflet-groupedlayercontrol)
 
 If you need a plugin that is not already implemented create an
 [issue](https://github.com/trafficonese/leaflet.extras/issues/new). See
