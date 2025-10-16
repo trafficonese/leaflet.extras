@@ -44,13 +44,14 @@ webGLHeatmapDependency <- function() {
 #' ## for more examples see
 #' # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))
 addWebGLHeatmap <- function(
-    map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
-    size = "30000",
-    units = "m",
-    opacity = 1,
-    gradientTexture = NULL,
-    alphaRange = 1,
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1,
+  data = leaflet::getMapData(map)
+) {
   map$dependencies <- c(
     map$dependencies,
     webGLHeatmapDependency()
@@ -125,13 +126,14 @@ addWebGLHeatmap <- function(
 #' # browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
 #' # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 addWebGLGeoJSONHeatmap <- function(
-    map, geojson, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    size = "30000",
-    units = "m",
-    opacity = 1,
-    gradientTexture = NULL,
-    alphaRange = 1) {
+  map, geojson, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+) {
   map$dependencies <- c(
     map$dependencies,
     omnivoreDependencies(),
@@ -176,13 +178,14 @@ addWebGLGeoJSONHeatmap <- function(
 #' }
 #'
 addWebGLKMLHeatmap <- function(
-    map, kml, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    size = "30000",
-    units = "m",
-    opacity = 1,
-    gradientTexture = NULL,
-    alphaRange = 1) {
+  map, kml, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -224,13 +227,14 @@ addWebGLKMLHeatmap <- function(
 #' }
 #'
 addWebGLCSVHeatmap <- function(
-    map, csv, csvParserOptions, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    size = "30000",
-    units = "m",
-    opacity = 1,
-    gradientTexture = NULL,
-    alphaRange = 1) {
+  map, csv, csvParserOptions, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 
@@ -285,13 +289,14 @@ addWebGLCSVHeatmap <- function(
 #' ## for a larger example see
 #' # browseURL(system.file("examples/GPX.R", package = "leaflet.extras"))
 addWebGLGPXHeatmap <- function(
-    map, gpx, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    size = "30000",
-    units = "m",
-    opacity = 1,
-    gradientTexture = NULL,
-    alphaRange = 1) {
+  map, gpx, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  size = "30000",
+  units = "m",
+  opacity = 1,
+  gradientTexture = NULL,
+  alphaRange = 1
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, webGLHeatmapDependency())
 

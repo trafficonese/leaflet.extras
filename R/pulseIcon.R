@@ -75,11 +75,12 @@ pulseIconSetToPulseIcons <- function(x) {
 #' @export
 #' @rdname pulseMarkers
 makePulseIcon <- function(
-    color = "#ff0000",
-    fillColor = color,
-    iconSize = 12,
-    animate = TRUE,
-    heartbeat = 1) {
+  color = "#ff0000",
+  fillColor = color,
+  iconSize = 12,
+  animate = TRUE,
+  heartbeat = 1
+) {
   icon <- leaflet::filterNULL(list(
     color = color, fillColor = fillColor, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
@@ -101,11 +102,12 @@ makePulseIcon <- function(
 #' @export
 #' @rdname pulseMarkers
 pulseIcons <- function(
-    color = "#ff0000",
-    fillColor = color,
-    iconSize = 12,
-    animate = TRUE,
-    heartbeat = 1) {
+  color = "#ff0000",
+  fillColor = color,
+  iconSize = 12,
+  animate = TRUE,
+  heartbeat = 1
+) {
   leaflet::filterNULL(list(
     color = color, fillColor = fillColor, iconSize = iconSize, animate = animate, heartbeat = heartbeat
   ))
@@ -128,16 +130,17 @@ pulseIcons <- function(
 #' ## for more examples see
 #' # browseURL(system.file("examples/pulseIcon.R", package = "leaflet.extras"))
 addPulseMarkers <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-    icon = NULL,
-    popup = NULL,
-    popupOptions = NULL,
-    label = NULL,
-    labelOptions = NULL,
-    options = leaflet::markerOptions(),
-    clusterOptions = NULL,
-    clusterId = NULL,
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+) {
   map$dependencies <- c(
     map$dependencies,
     pulseIconDependency()

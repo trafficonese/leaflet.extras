@@ -34,11 +34,12 @@ heatmapDependency <- function() {
 #' ## for more examples see
 #' # browseURL(system.file("examples/heatmaps.R", package = "leaflet.extras"))
 addHeatmap <- function(
-    map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
-    minOpacity = 0.05,
-    max = 1.0, radius = 25,
-    blur = 15, gradient = NULL, cellSize = NULL,
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, intensity = NULL, layerId = NULL, group = NULL,
+  minOpacity = 0.05,
+  max = 1.0, radius = 25,
+  blur = 15, gradient = NULL, cellSize = NULL,
+  data = leaflet::getMapData(map)
+) {
   map$dependencies <- c(
     map$dependencies,
     heatmapDependency()
@@ -87,11 +88,12 @@ addHeatmap <- function(
 #' @rdname heatmap
 #' @export
 addGeoJSONHeatmap <- function(
-    map, geojson, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    minOpacity = 0.05,
-    max = 1.0, radius = 25,
-    blur = 15, gradient = NULL, cellSize = NULL) {
+  map, geojson, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1.0, radius = 25,
+  blur = 15, gradient = NULL, cellSize = NULL
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -133,11 +135,12 @@ addGeoJSONHeatmap <- function(
 #' ## for more examples see
 #' # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))
 addKMLHeatmap <- function(
-    map, kml, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    minOpacity = 0.05,
-    max = 1.0, radius = 25,
-    blur = 15, gradient = NULL, cellSize = NULL) {
+  map, kml, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1.0, radius = 25,
+  blur = 15, gradient = NULL, cellSize = NULL
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -163,11 +166,12 @@ addKMLHeatmap <- function(
 #' @rdname heatmap
 #' @export
 addCSVHeatmap <- function(
-    map, csv, csvParserOptions, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    minOpacity = 0.05,
-    max = 1.0, radius = 25,
-    blur = 15, gradient = NULL, cellSize = NULL) {
+  map, csv, csvParserOptions, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1.0, radius = 25,
+  blur = 15, gradient = NULL, cellSize = NULL
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 
@@ -192,11 +196,12 @@ addCSVHeatmap <- function(
 #' @rdname heatmap
 #' @export
 addGPXHeatmap <- function(
-    map, gpx, layerId = NULL, group = NULL,
-    intensityProperty = NULL,
-    minOpacity = 0.05,
-    max = 1.0, radius = 25,
-    blur = 15, gradient = NULL, cellSize = NULL) {
+  map, gpx, layerId = NULL, group = NULL,
+  intensityProperty = NULL,
+  minOpacity = 0.05,
+  max = 1.0, radius = 25,
+  blur = 15, gradient = NULL, cellSize = NULL
+) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(map$dependencies, heatmapDependency())
 

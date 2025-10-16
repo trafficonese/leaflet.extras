@@ -16,20 +16,21 @@
 #' @rdname draw-options
 #' @export
 drawShapeOptions <- function(
-    stroke = TRUE,
-    color = "#03f",
-    weight = 1,
-    opacity = 1,
-    fill = TRUE,
-    fillColor = "#03f",
-    fillOpacity = 0.4,
-    dashArray = NULL,
-    lineCap = NULL,
-    lineJoin = NULL,
-    clickable = TRUE,
-    pointerEvents = NULL,
-    smoothFactor = 1.0,
-    noClip = TRUE) {
+  stroke = TRUE,
+  color = "#03f",
+  weight = 1,
+  opacity = 1,
+  fill = TRUE,
+  fillColor = "#03f",
+  fillOpacity = 0.4,
+  dashArray = NULL,
+  lineCap = NULL,
+  lineJoin = NULL,
+  clickable = TRUE,
+  pointerEvents = NULL,
+  smoothFactor = 1.0,
+  noClip = TRUE
+) {
   leaflet::filterNULL(list(
     stroke = stroke,
     color = color,
@@ -63,17 +64,18 @@ drawShapeOptions <- function(
 #' @export
 #' @rdname draw-options
 drawPolylineOptions <- function(
-    allowIntersection = TRUE,
-    drawError = list(color = "#b00b00", timeout = 2500),
-    guidelineDistance = 20,
-    maxGuideLineLength = 4000,
-    showLength = TRUE,
-    metric = TRUE,
-    feet = TRUE,
-    nautic = FALSE,
-    zIndexOffset = 2000,
-    shapeOptions = drawShapeOptions(fill = FALSE),
-    repeatMode = FALSE) {
+  allowIntersection = TRUE,
+  drawError = list(color = "#b00b00", timeout = 2500),
+  guidelineDistance = 20,
+  maxGuideLineLength = 4000,
+  showLength = TRUE,
+  metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
+  zIndexOffset = 2000,
+  shapeOptions = drawShapeOptions(fill = FALSE),
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     allowIntersection = allowIntersection,
     drawError = drawError,
@@ -94,10 +96,11 @@ drawPolylineOptions <- function(
 #' @rdname draw-options
 #' @export
 drawPolygonOptions <- function(
-    showArea = FALSE,
-    metric = TRUE,
-    shapeOptions = drawShapeOptions(),
-    repeatMode = FALSE) {
+  showArea = FALSE,
+  metric = TRUE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     showArea = showArea,
     metric = metric,
@@ -110,10 +113,11 @@ drawPolygonOptions <- function(
 #' @rdname draw-options
 #' @export
 drawRectangleOptions <- function(
-    showArea = TRUE,
-    metric = TRUE,
-    shapeOptions = drawShapeOptions(),
-    repeatMode = FALSE) {
+  showArea = TRUE,
+  metric = TRUE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     showArea = showArea,
     metric = metric,
@@ -127,12 +131,13 @@ drawRectangleOptions <- function(
 #' @param showRadius Show the radius of the drawn circle in m, km, ft (feet), or nm (nautical mile).
 #' @export
 drawCircleOptions <- function(
-    showRadius = TRUE,
-    metric = TRUE,
-    feet = TRUE,
-    nautic = FALSE,
-    shapeOptions = drawShapeOptions(),
-    repeatMode = FALSE) {
+  showRadius = TRUE,
+  metric = TRUE,
+  feet = TRUE,
+  nautic = FALSE,
+  shapeOptions = drawShapeOptions(),
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     shapeOptions = shapeOptions,
     repeatMode = repeatMode,
@@ -148,9 +153,10 @@ drawCircleOptions <- function(
 #' @rdname draw-options
 #' @export
 drawMarkerOptions <- function(
-    markerIcon = NULL,
-    zIndexOffset = 2000,
-    repeatMode = FALSE) {
+  markerIcon = NULL,
+  zIndexOffset = 2000,
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     markerIcon = markerIcon,
     zIndexOffset = zIndexOffset,
@@ -162,16 +168,17 @@ drawMarkerOptions <- function(
 #' @rdname draw-options
 #' @export
 drawCircleMarkerOptions <- function(
-    stroke = TRUE,
-    color = "#3388ff",
-    weight = 4,
-    opacity = 0.5,
-    fill = TRUE,
-    fillColor = NULL, # same as color by default
-    fillOpacity = 0.2,
-    clickable = TRUE,
-    zIndexOffset = 2000,
-    repeatMode = FALSE) {
+  stroke = TRUE,
+  color = "#3388ff",
+  weight = 4,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = NULL, # same as color by default
+  fillOpacity = 0.2,
+  clickable = TRUE,
+  zIndexOffset = 2000,
+  repeatMode = FALSE
+) {
   leaflet::filterNULL(list(
     stroke = stroke,
     color = color,
@@ -191,13 +198,14 @@ drawCircleMarkerOptions <- function(
 #' @rdname draw-options
 #' @export
 selectedPathOptions <- function(
-    dashArray = c("10, 10"),
-    weight = 2,
-    color = "black",
-    fill = TRUE,
-    fillColor = "black",
-    fillOpacity = 0.6,
-    maintainColor = FALSE) {
+  dashArray = c("10, 10"),
+  weight = 2,
+  color = "black",
+  fill = TRUE,
+  fillColor = "black",
+  fillOpacity = 0.6,
+  maintainColor = FALSE
+) {
   leaflet::filterNULL(list(
     dashArray = dashArray,
     weight = weight,
@@ -216,10 +224,11 @@ selectedPathOptions <- function(
 #' @rdname draw-options
 #' @export
 editToolbarOptions <- function(
-    edit = TRUE,
-    remove = TRUE,
-    selectedPathOptions = NULL,
-    allowIntersection = TRUE) {
+  edit = TRUE,
+  remove = TRUE,
+  selectedPathOptions = NULL,
+  allowIntersection = TRUE
+) {
   leaflet::filterNULL(list(
     edit = edit,
     remove = remove,
@@ -257,33 +266,34 @@ editToolbarOptions <- function(
 #'   )
 #' }
 handlersOptions <- function(
-    polyline = list(
-      error = "<strong>Error:</strong> shape edges cannot cross!",
-      tooltipStart = "Click to start drawing line.",
-      tooltipCont = "Click to start drawing line.",
-      tooltipEnd = "Click to start drawing line."
-    ),
-    polygon = list(
-      tooltipStart = "Click to start drawing shape.",
-      tooltipCont = "Click to start drawing shape.",
-      tooltipEnd = "Click to start drawing shape."
-    ),
-    rectangle = list(
-      tooltipStart = "Click and drag to draw rectangle."
-    ),
-    circle = list(
-      tooltipStart = "Click map to place circle marker.",
-      radius = "Radius"
-    ),
-    marker = list(
-      tooltipStart = "Click map to place marker."
-    ),
-    circlemarker = list(
-      tooltipStart = "Click and drag to draw circle."
-    ),
-    simpleshape = list(
-      tooltipEnd = "Release mouse to finish drawing."
-    )) {
+  polyline = list(
+    error = "<strong>Error:</strong> shape edges cannot cross!",
+    tooltipStart = "Click to start drawing line.",
+    tooltipCont = "Click to start drawing line.",
+    tooltipEnd = "Click to start drawing line."
+  ),
+  polygon = list(
+    tooltipStart = "Click to start drawing shape.",
+    tooltipCont = "Click to start drawing shape.",
+    tooltipEnd = "Click to start drawing shape."
+  ),
+  rectangle = list(
+    tooltipStart = "Click and drag to draw rectangle."
+  ),
+  circle = list(
+    tooltipStart = "Click map to place circle marker.",
+    radius = "Radius"
+  ),
+  marker = list(
+    tooltipStart = "Click map to place marker."
+  ),
+  circlemarker = list(
+    tooltipStart = "Click and drag to draw circle."
+  ),
+  simpleshape = list(
+    tooltipEnd = "Release mouse to finish drawing."
+  )
+) {
   leaflet::filterNULL(list(
     polyline = list(
       error = polyline$error,
@@ -339,26 +349,27 @@ handlersOptions <- function(
 #'   )
 #' }
 toolbarOptions <- function(
-    actions = list(
-      title = "Cancel drawing",
-      text = "Cancel"
-    ),
-    finish = list(
-      title = "Finish drawing",
-      text = "Finish"
-    ),
-    undo = list(
-      title = "Delete last point drawn",
-      text = "Delete last point"
-    ),
-    buttons = list(
-      polyline = "Draw a polyline",
-      polygon = "Draw a polygon",
-      rectangle = "Draw a rectangle",
-      circle = "Draw a circle",
-      marker = "Draw a marker",
-      circlemarker = "Draw a circlemarker"
-    )) {
+  actions = list(
+    title = "Cancel drawing",
+    text = "Cancel"
+  ),
+  finish = list(
+    title = "Finish drawing",
+    text = "Finish"
+  ),
+  undo = list(
+    title = "Delete last point drawn",
+    text = "Delete last point"
+  ),
+  buttons = list(
+    polyline = "Draw a polyline",
+    polygon = "Draw a polygon",
+    rectangle = "Draw a rectangle",
+    circle = "Draw a circle",
+    marker = "Draw a marker",
+    circlemarker = "Draw a circlemarker"
+  )
+) {
   leaflet::filterNULL(list(
     actions = list(
       title = actions$title,
@@ -384,24 +395,20 @@ toolbarOptions <- function(
 }
 
 
-
-
-
-
-
 #' Options for editing edit handlers
 #' @description Customize edit handlers for \code{\link{addDrawToolbar}}
 #' @param edit List of options for editing tooltips.
 #' @param remove List of options for removing tooltips.
 #' @export
 edithandlersOptions <- function(
-    edit = list(
-      tooltipText = "Drag handles or markers to edit features.",
-      tooltipSubtext = "Click cancel to undo changes."
-    ),
-    remove = list(
-      tooltipText = "Click on a feature to remove."
-    )) {
+  edit = list(
+    tooltipText = "Drag handles or markers to edit features.",
+    tooltipSubtext = "Click cancel to undo changes."
+  ),
+  remove = list(
+    tooltipText = "Click on a feature to remove."
+  )
+) {
   leaflet::filterNULL(list(
     edit = list(
       tooltip = list(
@@ -418,33 +425,33 @@ edithandlersOptions <- function(
 }
 
 
-
 #' Options for editing the toolbar
 #' @description Customize the edit toolbar for \code{\link{addDrawToolbar}}
 #' @param actions List of options for edit action tooltips.
 #' @param buttons List of options for edit button tooltips.
 #' @export
 edittoolbarOptions <- function(
-    actions = list(
-      save = list(
-        title = "Save changes",
-        text = "Save"
-      ),
-      cancel = list(
-        title = "Cancel editing, discards all changes",
-        text = "Cancel"
-      ),
-      clearAll = list(
-        title = "Clear all layers",
-        text = "Clear All"
-      )
+  actions = list(
+    save = list(
+      title = "Save changes",
+      text = "Save"
     ),
-    buttons = list(
-      edit = "Edit layers",
-      editDisabled = "No layers to edit",
-      remove = "Delete layers",
-      removeDisabled = "No layers to delete"
-    )) {
+    cancel = list(
+      title = "Cancel editing, discards all changes",
+      text = "Cancel"
+    ),
+    clearAll = list(
+      title = "Clear all layers",
+      text = "Clear All"
+    )
+  ),
+  buttons = list(
+    edit = "Edit layers",
+    editDisabled = "No layers to edit",
+    remove = "Delete layers",
+    removeDisabled = "No layers to delete"
+  )
+) {
   leaflet::filterNULL(list(
     actions = actions,
     buttons = buttons

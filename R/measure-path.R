@@ -59,11 +59,12 @@ enableMeasurePath <- function(map) {
 #' @rdname measure-path
 #' @export
 measurePathOptions <- function(
-    showOnHover = FALSE,
-    minPixelDistance = 30,
-    showDistances = TRUE,
-    showArea = TRUE,
-    imperial = FALSE) {
+  showOnHover = FALSE,
+  minPixelDistance = 30,
+  showDistances = TRUE,
+  showArea = TRUE,
+  imperial = FALSE
+) {
   list(
     showOnHover = showOnHover,
     minPixelDistance = minPixelDistance,
@@ -88,9 +89,10 @@ measurePathOptions <- function(
 #'   addCircles(lng = c(15, 25), lat = c(55, 65), group = "Group 2") %>%
 #'   addMeasurePathToolbar(group = "Group 1") # Enable measurements for "Group 1" only
 addMeasurePathToolbar <- function(
-    map,
-    options = measurePathOptions(),
-    group = NULL) {
+  map,
+  options = measurePathOptions(),
+  group = NULL
+) {
   if (is.null(group)) group <- ""
   group <- jsonlite::toJSON(group)
 

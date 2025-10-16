@@ -40,46 +40,47 @@ leafletSearchDependencies <- function() {
 #' @rdname search-options
 #' @export
 searchOptions <- function(
-    url = NULL,
-    sourceData = NULL,
-    jsonpParam = NULL,
-    propertyLoc = NULL,
-    propertyName = NULL,
-    formatData = NULL,
-    filterData = NULL,
-    filtersearch = NULL,
-    moveToLocation = TRUE,
-    zoom = 17,
-    buildTip = NULL,
-    container = "",
-    minLength = 1,
-    initial = TRUE,
-    casesensitive = FALSE,
-    autoType = TRUE,
-    delayType = 400,
-    tooltipLimit = -1,
-    tipAutoSubmit = TRUE,
-    firstTipSubmit = FALSE,
-    autoResize = TRUE,
-    collapsed = TRUE,
-    autoCollapse = FALSE,
-    autoCollapseTime = 1200,
-    textErr = "Location Not Found",
-    textCancel = "Cancel",
-    textPlaceholder = "Search...",
-    position = "topleft",
-    hideMarkerOnCollapse = FALSE,
-    marker = list(
-      icon = NULL,
-      animate = TRUE,
-      circle = list(
-        radius = 10,
-        weight = 3,
-        color = "#e03",
-        stroke = TRUE,
-        fill = FALSE
-      )
-    )) {
+  url = NULL,
+  sourceData = NULL,
+  jsonpParam = NULL,
+  propertyLoc = NULL,
+  propertyName = NULL,
+  formatData = NULL,
+  filterData = NULL,
+  filtersearch = NULL,
+  moveToLocation = TRUE,
+  zoom = 17,
+  buildTip = NULL,
+  container = "",
+  minLength = 1,
+  initial = TRUE,
+  casesensitive = FALSE,
+  autoType = TRUE,
+  delayType = 400,
+  tooltipLimit = -1,
+  tipAutoSubmit = TRUE,
+  firstTipSubmit = FALSE,
+  autoResize = TRUE,
+  collapsed = TRUE,
+  autoCollapse = FALSE,
+  autoCollapseTime = 1200,
+  textErr = "Location Not Found",
+  textCancel = "Cancel",
+  textPlaceholder = "Search...",
+  position = "topleft",
+  hideMarkerOnCollapse = FALSE,
+  marker = list(
+    icon = NULL,
+    animate = TRUE,
+    circle = list(
+      radius = 10,
+      weight = 3,
+      color = "#e03",
+      stroke = TRUE,
+      fill = FALSE
+    )
+  )
+) {
   leaflet::filterNULL(list(
     url = url,
     sourceData = sourceData,
@@ -197,35 +198,36 @@ clearSearchOSM <- function(map) {
 #' @rdname search-geocoding
 #' @export
 addReverseSearchOSM <- function(
-    map,
-    showSearchLocation = TRUE,
-    showBounds = FALSE,
-    showFeature = TRUE,
-    fitBounds = TRUE,
-    displayText = TRUE,
-    group = NULL,
-    marker = list(
-      icon = NULL
-    ),
-    showFeatureOptions = list(
-      weight = 2,
-      color = "red",
-      dashArray = "5,10",
-      fillOpacity = 0.2,
-      opacity = 0.5
-    ),
-    showBoundsOptions = list(
-      weight = 2,
-      color = "#444444",
-      dashArray = "5,10",
-      fillOpacity = 0.2,
-      opacity = 0.5
-    ),
-    showHighlightOptions = list(
-      opacity = 0.8,
-      fillOpacity = 0.5,
-      weight = 5
-    )) {
+  map,
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL,
+  marker = list(
+    icon = NULL
+  ),
+  showFeatureOptions = list(
+    weight = 2,
+    color = "red",
+    dashArray = "5,10",
+    fillOpacity = 0.2,
+    opacity = 0.5
+  ),
+  showBoundsOptions = list(
+    weight = 2,
+    color = "#444444",
+    dashArray = "5,10",
+    fillOpacity = 0.2,
+    opacity = 0.5
+  ),
+  showHighlightOptions = list(
+    opacity = 0.8,
+    fillOpacity = 0.5,
+    weight = 5
+  )
+) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   if (displayText == TRUE) {
     map <- map %>%
@@ -272,9 +274,10 @@ addReverseSearchOSM <- function(
 #'
 #' @export
 addSearchGoogle <- function(
-    map,
-    apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-    options = searchOptions(autoCollapse = TRUE, minLength = 2)) {
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  options = searchOptions(autoCollapse = TRUE, minLength = 2)
+) {
   url <- "https://maps.googleapis.com/maps/api/js?v=3"
   if (is.null(apikey) || apikey == "") {
     warning("Google Geocoding works best with an apikey")
@@ -309,14 +312,15 @@ removeSearchGoogle <- function(map) {
 #' @rdname search-geocoding
 #' @export
 addReverseSearchGoogle <- function(
-    map,
-    apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
-    showSearchLocation = TRUE,
-    showBounds = FALSE,
-    showFeature = TRUE,
-    fitBounds = TRUE,
-    displayText = TRUE,
-    group = NULL) {
+  map,
+  apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
+  showSearchLocation = TRUE,
+  showBounds = FALSE,
+  showFeature = TRUE,
+  fitBounds = TRUE,
+  displayText = TRUE,
+  group = NULL
+) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   url <- "https://maps.googleapis.com/maps/api/js?v=3"
   if (is.null(apikey) || apikey == "") {
@@ -351,8 +355,9 @@ addReverseSearchGoogle <- function(
 #' @rdname search-geocoding
 #' @export
 addSearchUSCensusBureau <- function(
-    map,
-    options = searchOptions(autoCollapse = TRUE, minLength = 20)) {
+  map,
+  options = searchOptions(autoCollapse = TRUE, minLength = 20)
+) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
   invokeMethod(
     map,
@@ -382,10 +387,11 @@ removeSearchUSCensusBureau <- function(map) {
 #' @rdname search-options
 #' @export
 searchFeaturesOptions <- function(
-    propertyName = "label",
-    initial = FALSE,
-    openPopup = FALSE,
-    ...) {
+  propertyName = "label",
+  initial = FALSE,
+  openPopup = FALSE,
+  ...
+) {
   c(
     openPopup = openPopup,
     searchOptions(
@@ -406,9 +412,10 @@ searchFeaturesOptions <- function(
 #' @rdname search-features
 #' @export
 addSearchFeatures <- function(
-    map,
-    targetGroups,
-    options = searchFeaturesOptions()) {
+  map,
+  targetGroups,
+  options = searchFeaturesOptions()
+) {
   map$dependencies <- c(map$dependencies, leafletSearchDependencies())
 
   result <- makeSearchIcon(map, options)
@@ -457,8 +464,7 @@ makeSearchIcon <- function(map, options) {
   icon <- if (is.null(icon) || all(is.na(icon)) || isFALSE(icon)) NULL else icon
 
   if (!is.null(icon)) {
-    if (isTRUE(icon)) {
-    } else {
+    if (isTRUE(icon)) {} else {
       if (inherits(icon, "leaflet_awesome_icon")) {
         map <- addAwesomeMarkersDependencies(map, icon$library)
         icon$awesomemarker <- TRUE
