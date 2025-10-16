@@ -678,14 +678,12 @@ LeafletWidget.methods.addSearchFeatures = function(targetGroups, options) {
         }
 
         // Check if latlng is an array of coordinates (array of arrays)
-        if (Array.isArray(latlng)) {
-          // Compute center point of all coordinates
-          //const center = L.latLngBounds(latlng).getCenter();
-          //map.setView(center, zoom);
+        if (Array.isArray(latlng) && latlng.length > 1) {
+          // Ignore Zoom and fit Bounds to all found features
           map.fitBounds(L.latLngBounds(latlng));
         } else {
           // Just a single coordinate pair
-          map.setView(latlng, zoom);
+          map.setView(latlng[0], zoom);
         }
       };
     }
