@@ -104,7 +104,7 @@ addWebGLHeatmap <- function(
 #' ## addWebGLGeoJSONHeatmap
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+#'   "https://github.com/benbalter/dc-maps/blob/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
 #' leaflet() %>%

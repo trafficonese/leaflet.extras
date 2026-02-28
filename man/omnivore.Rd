@@ -200,17 +200,17 @@ addGPX(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{geojson}{a GeoJSON/TopoJSON URL or file contents in a character vector.}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{markerType}{The type of marker. Either \code{marker} or \code{circleMarker}}
 
@@ -226,7 +226,7 @@ In either case the result must be one of the indexes of markerIcons.}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
- you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
+you can use \code{\link[leaflet:markerClusterOptions]{markerClusterOptions()}} to specify marker cluster
 options}
 
 \item{clusterId}{the id for the marker cluster layer}
@@ -234,15 +234,15 @@ options}
 \item{labelProperty}{The property to use for the label.
 You can also pass in a JS function that takes in a feature and returns a text/HTML content.}
 
-\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet:labelOptions]{labelOptions()}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{popupProperty}{The property to use for popup content
 You can also pass in a JS function that takes in a feature and returns a text/HTML content.}
 
-\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet:popupOptions]{popupOptions()}} to provide popups}
 
-\item{stroke}{whether to draw stroke along the path (e.g. the borders of
+\item{stroke}{whether to draw stroke along the path (e.g., the borders of
 polygons or circles)}
 
 \item{color}{stroke color}
@@ -251,16 +251,14 @@ polygons or circles)}
 
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
-\item{fill}{whether to fill the path with color (e.g. filling on polygons or
+\item{fill}{whether to fill the path with color (e.g., filling on polygons or
 circles)}
 
 \item{fillColor}{fill color}
 
 \item{fillOpacity}{fill opacity}
 
-\item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
-pattern}}
+\item{dashArray}{a string that defines the stroke \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
 (more means better performance and less accurate representation)}
@@ -322,7 +320,7 @@ with options to map feature properties to labels, popups, colors, markers etc.
 ## addGeoJSONv2
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+  "https://github.com/benbalter/dc-maps/blob/master/maps/historic-landmarks-points.geojson"
 )
 
 leaflet() \%>\%
@@ -349,7 +347,7 @@ leaflet() \%>\%
 ## addGeoJSONChoropleth
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+  "https://github.com/benbalter/dc-maps/blob/master/maps/ward-2012.geojson"
 )
 
 leaflet() \%>\%

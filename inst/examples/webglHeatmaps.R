@@ -18,7 +18,7 @@ leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
 #' Roughly 1500 points dataset
 #'
 library(sp)
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://github.com/Norkart/Leaflet-MiniMap/blob/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- geojsonio::as.json(v8$get("pubsGeoJSON"))

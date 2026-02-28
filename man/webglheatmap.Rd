@@ -83,7 +83,7 @@ removeWebGLHeatmap(map, layerId)
 clearWebGLHeatmap(map)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -100,10 +100,10 @@ the latitude column from \code{data})}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{size}{in meters or pixels}
 
@@ -160,7 +160,7 @@ leaflet(quakes) \%>\%
 ## addWebGLGeoJSONHeatmap
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+  "https://github.com/benbalter/dc-maps/blob/master/maps/historic-landmarks-points.geojson"
 )
 
 leaflet() \%>\%

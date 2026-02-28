@@ -67,7 +67,7 @@ leaflet(nc) %>%
 
 #' ### Search GeoJSON Markers
 # GeoJSON w/ Markers ----
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://github.com/Norkart/Leaflet-MiniMap/blob/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- v8$get("pubsGeoJSON")

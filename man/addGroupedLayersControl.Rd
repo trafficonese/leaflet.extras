@@ -22,8 +22,8 @@ most commonly used for mostly-opaque tile layers.}
 \item{overlayGroups}{A list of named vectors where each element is the name
 of a group.}
 
-\item{position}{position of control: "topleft", "topright", "bottomleft", or
-"bottomright"}
+\item{position}{position of control: \code{"topleft"}, \code{"topright"},
+\code{"bottomleft"}, or \code{"bottomright"}.}
 
 \item{options}{a list of additional options, intended to be provided by a
 call to \code{\link{groupedLayersControlOptions}}}

@@ -127,7 +127,7 @@ invokeJSAddMethod <- function(
 #' ## addGeoJSONv2
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+#'   "https://github.com/benbalter/dc-maps/blob/master/maps/historic-landmarks-points.geojson"
 #' )
 #'
 #' leaflet() %>%
@@ -238,7 +238,7 @@ legendOptions <- function(
 #' ## addGeoJSONChoropleth
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+#'   "https://github.com/benbalter/dc-maps/blob/master/maps/ward-2012.geojson"
 #' )
 #'
 #' leaflet() %>%

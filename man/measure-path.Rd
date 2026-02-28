@@ -47,7 +47,7 @@ Adds a toolbar to enable/disable measuring path distances/areas
 \examples{
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+  "https://github.com/benbalter/dc-maps/blob/master/maps/ward-2012.geojson"
 )
 
 leaflet() \%>\%

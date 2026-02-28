@@ -27,7 +27,7 @@ leaflet() %>%
 
 #' We plot some crime stats by district. Notice the convenient "propsToHTMLTable" function for pretty popups.
 #'
-fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
+fName <- "https://github.com/TrantorM/leaflet-choropleth/blob/gh-pages/examples/basic_topo/crimes_by_district.topojson"
 topoJson <- readr::read_file(fName)
 
 leaflet() %>%
