@@ -12,6 +12,8 @@
 
 ## Improvements
 - Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
+- Style GHA no longer runs on `pull_request` (detached HEAD made `git pull` fail after auto-commits). It now runs on push to the branch instead.
+- pkgdown reference index includes `addHeatmapLegend`.
 
 ## Bugfixes
 - Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`. Long example URLs in `omnivore` and `webglheatmap` docs are wrapped to stay under the Rd 100-character limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting and opening #251. Fix #250

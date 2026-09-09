@@ -57,8 +57,7 @@ heatmapLegendColors <- function(gradient = NULL) {
 }
 
 webglLegendColors <- function(name) {
-  switch(
-    name,
+  switch(name,
     "skyline" = c("#0b1026", "#1b4f8a", "#4ec5d6", "#f4f7ff"),
     "deep-sea" = c("#031163", "#0a4b8c", "#1ec8e6"),
     "BuGn" = c("#edf8fb", "#b2e2e2", "#66c2a4", "#238b45"),
