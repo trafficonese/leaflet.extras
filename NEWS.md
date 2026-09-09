@@ -2,6 +2,11 @@
 
 
 ## New Features
+- `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
+  weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
+  for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when
+  scaling so Leaflet.heat does not fade points to blue at low zoom. New
+  `addHeatmapLegend()` (also via `legend = TRUE`) adds a color guide. Fix #126, Fix #160
 - Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
