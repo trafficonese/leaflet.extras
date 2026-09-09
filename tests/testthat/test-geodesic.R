@@ -181,9 +181,6 @@ test_that("Geodesic", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[5]]$iconSize[[1]], c(30, 50))
 
 
-
-
-
   ts <- leaflet(cities_df) %>%
     # addMeasure(primaryLengthUnit = "meters", primaryAreaUnit = "sqmeters") %>%
     # addPolylines(data = sf::st_cast(sflines, "LINESTRING"), color="blue", opacity = 1) %>%
@@ -225,7 +222,6 @@ test_that("Geodesic", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], paste0("ID_", sflines$id))
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[9]], labelOptions(textsize = "22px"))
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[11]], markerOptions(draggable = TRUE, title = "some special Title"))
-
 
 
   ## Lines with Awesome Icons ###################

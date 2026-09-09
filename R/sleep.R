@@ -21,15 +21,16 @@ sleepDependency <- function() {
 #'   addTiles() %>%
 #'   suspendScroll()
 suspendScroll <- function(
-    map,
-    sleep = TRUE,
-    sleepTime = 750,
-    wakeTime = 750,
-    sleepNote = TRUE,
-    hoverToWake = TRUE,
-    wakeMessage = "Click or Hover to Wake",
-    # sleepButton = "L.Control.sleepMapControl",
-    sleepOpacity = .7) {
+  map,
+  sleep = TRUE,
+  sleepTime = 750,
+  wakeTime = 750,
+  sleepNote = TRUE,
+  hoverToWake = TRUE,
+  wakeMessage = "Click or Hover to Wake",
+  # sleepButton = "L.Control.sleepMapControl",
+  sleepOpacity = .7
+) {
   sleepOptions <- list(
     sleep = sleep,
     sleepTime = sleepTime,

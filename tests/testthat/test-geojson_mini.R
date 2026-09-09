@@ -198,9 +198,6 @@ test_that("geojson and jsFunctions", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]], "circleMarker")
 
 
-
-
-
   ts <- leaflet() %>%
     addBootstrapDependency() %>%
     setView(-75.14, 40, zoom = 11) %>%
@@ -230,7 +227,6 @@ test_that("geojson and jsFunctions", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], topoJson)
   expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[2]])
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], "orange-red")
-
 
 
   ts <- leaflet() %>%
@@ -276,7 +272,6 @@ test_that("geojson and jsFunctions", {
         props = "props1", elem = "asd", "asdasd"
       )
     ))
-
 
 
   ## KML Chlorpleth ###########################

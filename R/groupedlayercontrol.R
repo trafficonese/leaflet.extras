@@ -55,11 +55,12 @@ groupedlayersControlDependencies <- function() {
 #'     )
 #'   )
 addGroupedLayersControl <- function(
-    map,
-    baseGroups = character(0),
-    overlayGroups = character(0),
-    position = c("topright", "bottomright", "bottomleft", "topleft"),
-    options = groupedLayersControlOptions()) {
+  map,
+  baseGroups = character(0),
+  overlayGroups = character(0),
+  position = c("topright", "bottomright", "bottomleft", "topleft"),
+  options = groupedLayersControlOptions()
+) {
   map$dependencies <- c(map$dependencies, groupedlayersControlDependencies())
   options <- c(options, list(position = match.arg(position)))
 

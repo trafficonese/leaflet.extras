@@ -39,8 +39,9 @@ utilsDependencies <- function() {
 #' }
 #'
 setMapWidgetStyle <- function(
-    map,
-    style = list(background = "transparent")) {
+  map,
+  style = list(background = "transparent")
+) {
   map$dependencies <- c(map$dependencies, utilsDependencies())
   invokeMethod(map, getMapData(map), "setMapWidgetStyle", style)
 }

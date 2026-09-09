@@ -582,7 +582,6 @@ test_that("map-control-plugins", {
   expect_identical(ARGS$handlers, hndl)
 
 
-
   drawmark <- drawMarkerOptions(
     zIndexOffset = 10, repeatMode = TRUE,
     markerIcon = greenLeafIcon

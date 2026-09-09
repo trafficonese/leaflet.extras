@@ -76,17 +76,18 @@ weatherIconSetToWeatherIcons <- function(x) {
 #' @export
 #' @rdname weatherMarkers
 makeWeatherIcon <- function(
-    icon,
-    markerColor = "red",
-    iconColor = "white",
-    # iconSize = c(35, 45),
-    # iconAnchor =   c(17, 42),
-    # popupAnchor = c(1, -32),
-    # shadowAnchor = c(10, 12),
-    # shadowSize = c(36, 16),
-    # className = "weather-marker",
-    # prefix = "wi",
-    extraClasses = NULL) {
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  # iconSize = c(35, 45),
+  # iconAnchor =   c(17, 42),
+  # popupAnchor = c(1, -32),
+  # shadowAnchor = c(10, 12),
+  # shadowSize = c(36, 16),
+  # className = "weather-marker",
+  # prefix = "wi",
+  extraClasses = NULL
+) {
   if (!markerColor %in% markerColors) {
     stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
@@ -112,17 +113,18 @@ makeWeatherIcon <- function(
 #' @export
 #' @rdname weatherMarkers
 weatherIcons <- function(
-    icon,
-    markerColor = "red",
-    iconColor = "white",
-    # iconSize = c(35, 45),
-    # iconAnchor =   c(17, 42),
-    # popupAnchor = c(1, -32),
-    # shadowAnchor = c(10, 12),
-    # shadowSize = c(36, 16),
-    # className = "weather-marker",
-    # prefix = "wi",
-    extraClasses = NULL) {
+  icon,
+  markerColor = "red",
+  iconColor = "white",
+  # iconSize = c(35, 45),
+  # iconAnchor =   c(17, 42),
+  # popupAnchor = c(1, -32),
+  # shadowAnchor = c(10, 12),
+  # shadowSize = c(36, 16),
+  # className = "weather-marker",
+  # prefix = "wi",
+  extraClasses = NULL
+) {
   if (!any(markerColor %in% markerColors)) {
     stop(sprintf("markerColor should be one of %s", paste(markerColors, collapse = ", ")))
   }
@@ -153,16 +155,17 @@ weatherIcons <- function(
 #' ## for more examples see
 #' # browseURL(system.file("examples/weatherIcons.R", package = "leaflet.extras"))
 addWeatherMarkers <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-    icon = NULL,
-    popup = NULL,
-    popupOptions = NULL,
-    label = NULL,
-    labelOptions = NULL,
-    options = leaflet::markerOptions(),
-    clusterOptions = NULL,
-    clusterId = NULL,
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+) {
   map$dependencies <- c(
     map$dependencies,
     weatherIconDependency()

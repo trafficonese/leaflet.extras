@@ -82,21 +82,22 @@ drawDependencies <- function(drag = TRUE) {
 #' # browseURL(system.file("examples/shiny/draw-events/draw_mouse_events.R",
 #' #                       package = "leaflet.extras"))
 addDrawToolbar <- function(
-    map, targetLayerId = NULL, targetGroup = NULL,
-    position = c("topleft", "topright", "bottomleft", "bottomright"),
-    polylineOptions = drawPolylineOptions(),
-    polygonOptions = drawPolygonOptions(),
-    circleOptions = drawCircleOptions(),
-    rectangleOptions = drawRectangleOptions(),
-    markerOptions = drawMarkerOptions(),
-    circleMarkerOptions = drawCircleMarkerOptions(),
-    editOptions = FALSE,
-    singleFeature = FALSE,
-    toolbar = NULL,
-    handlers = NULL,
-    edittoolbar = NULL,
-    edithandlers = NULL,
-    drag = TRUE) {
+  map, targetLayerId = NULL, targetGroup = NULL,
+  position = c("topleft", "topright", "bottomleft", "bottomright"),
+  polylineOptions = drawPolylineOptions(),
+  polygonOptions = drawPolygonOptions(),
+  circleOptions = drawCircleOptions(),
+  rectangleOptions = drawRectangleOptions(),
+  markerOptions = drawMarkerOptions(),
+  circleMarkerOptions = drawCircleMarkerOptions(),
+  editOptions = FALSE,
+  singleFeature = FALSE,
+  toolbar = NULL,
+  handlers = NULL,
+  edittoolbar = NULL,
+  edithandlers = NULL,
+  drag = TRUE
+) {
   if (!is.null(targetGroup) && !is.null(targetLayerId)) {
     stop("To edit existing features either specify a targetGroup or a targetLayerId, but not both")
   }
