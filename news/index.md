@@ -10,6 +10,13 @@
   for a demo of all options and methods. Fix
   [\#202](https://github.com/trafficonese/leaflet.extras/issues/202)
 
+### Improvements
+
+- Updated GitHub Actions dependencies (`actions/checkout` v6,
+  `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact`
+  v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm
+  `js-yaml` lockfile (4.1.1).
+
 ### Bugfixes
 
 - Tests no longer download example GeoJSON/TopoJSON from the defunct
@@ -17,7 +24,12 @@
   those URLs were unreachable (`test-geojson_mini.R`,
   `test-heatmaps.R`). Local fixtures are used instead, and remaining
   rawgit links in examples/docs now point to
-  `raw.githubusercontent.com`.
+  `raw.githubusercontent.com`. Long example URLs in `omnivore` and
+  `webglheatmap` docs are wrapped to stay under the Rd 100-character
+  limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting
+  and opening
+  [\#251](https://github.com/trafficonese/leaflet.extras/issues/251).
+  Fix [\#250](https://github.com/trafficonese/leaflet.extras/issues/250)
 - New argument `filtersearch` for `searchOptions` to limit the Nominatim
   search area. Fix
   [\#168](https://github.com/trafficonese/leaflet.extras/issues/168)
