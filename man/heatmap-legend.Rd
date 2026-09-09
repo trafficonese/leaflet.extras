@@ -38,6 +38,8 @@ or \code{addControl} with the same \code{layerId} will replace this
 legend. The ID can also be used with \code{removeControl}.}
 
 \item{opacity}{legend opacity}
+
+\item{...}{additional arguments passed to \code{\link[leaflet]{addLegend}}}
 }
 \description{
 Add a color legend for a heatmap

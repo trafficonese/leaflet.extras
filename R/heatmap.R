@@ -87,6 +87,7 @@ webglLegendColors <- function(name) {
 #' @param max upper end of the legend. Defaults to the maximum of \code{values}.
 #' @param title legend title
 #' @param opacity legend opacity
+#' @param ... additional arguments passed to \code{\link[leaflet]{addLegend}}
 #' @inheritParams leaflet::addLegend
 #' @rdname heatmap-legend
 #' @export
