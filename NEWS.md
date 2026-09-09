@@ -31,7 +31,7 @@
 ## New Features
 - `addDrawToolbar` offers some new options: 
   - `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips
-  - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://www.npmjs.com/package/leaflet-draw-drag) plugin. Otherwise, this library will not be included. Fix #115
+  - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://github.com/w8r/Leaflet.draw.drag) plugin. Otherwise, this library will not be included. Fix #115
 - `searchOSMText` enables setting the OpenStreetMap (OSM) search text directly from R
 - `clearSearchOSM` allows clearing the search marker associated with `addSearchOSM`. Fix #158, Fix #209
 - `clearSearchFeatures` provides functionality to clear the search marker
