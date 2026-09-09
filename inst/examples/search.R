@@ -67,7 +67,7 @@ leaflet(nc) %>%
 
 #' ### Search GeoJSON Markers
 # GeoJSON w/ Markers ----
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://raw.githubusercontent.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- v8$get("pubsGeoJSON")
@@ -162,7 +162,7 @@ leaf.world %>%
 #' ### Search Multiple GeoJSON Layers
 # GeoJSON Groups w/ Markers ----
 artsAndCultures <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson")
+  "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson")
 bankLocations <- readr::read_file(
   "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/bank-locations.geojson")
 

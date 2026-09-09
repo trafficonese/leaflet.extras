@@ -1,19 +1,19 @@
-## Data ##############
-geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
-)
-kml <- readr::read_file(
-  system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
-)
-csv <- readr::read_file(
-  system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
-)
-airports <- readr::read_file(
-  system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
-)
-
 ## Tests ###################
 test_that("heatmaps", {
+  skip_if_not_installed("readr")
+  geoJson <- readr::read_file(
+    testthat::test_path("testdata", "historic-landmarks-points.geojson")
+  )
+  kml <- readr::read_file(
+    system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
+  )
+  csv <- readr::read_file(
+    system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
+  )
+  airports <- readr::read_file(
+    system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
+  )
+
   ## WebGL Heatmap #########################
   ts <- leaflet(quakes) %>%
     addProviderTiles(providers$CartoDB.DarkMatter) %>%

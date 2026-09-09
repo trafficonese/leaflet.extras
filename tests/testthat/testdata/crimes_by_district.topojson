@@ -1,0 +1,35 @@
+{
+  "type": "Topology",
+  "bbox": [-75.25, 39.87, -75.05, 40.05],
+  "objects": {
+    "districts": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Polygon",
+          "arcs": [[0]],
+          "properties": {
+            "dist_numc": "01",
+            "location": "Center City",
+            "incidents": 120,
+            "_feature_id_string": "1"
+          }
+        },
+        {
+          "type": "Polygon",
+          "arcs": [[1]],
+          "properties": {
+            "dist_numc": "02",
+            "location": "North",
+            "incidents": 45,
+            "_feature_id_string": "2"
+          }
+        }
+      ]
+    }
+  },
+  "arcs": [
+    [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]],
+    [[1, 0], [1, 1], [2, 1], [2, 0], [1, 0]]
+  ]
+}

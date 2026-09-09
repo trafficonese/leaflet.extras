@@ -1,9 +1,8 @@
 test_that("maputils", {
+  skip_if_not_installed("readr")
+  skip_if_not_installed("jsonlite")
   geoJson <- jsonlite::fromJSON(readr::read_file(
-    paste0(
-      "https://raw.githubusercontent.com/MinnPost/simple-map-d3",
-      "/master/example-data/world-population.geo.json"
-    )
+    testthat::test_path("testdata", "world-population.geo.json")
   ))
   world <- leaflet(
     options = leafletOptions(

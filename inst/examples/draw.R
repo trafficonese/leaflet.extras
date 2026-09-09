@@ -68,7 +68,7 @@ leaflet() %>% addTiles() %>%
 #' ### Add GeoJSON and then edit it
 #' The layerId of the GeoJSON has to match the targetLayerId of `addDrawToolbar`. Also notice that we have to simplify the geometry quite a bit using `rmapshaper::ms_simplify`, otherwise the edit feature is very slow and will even hang the browser.
 
-fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+fName <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 
 geoJson <- readr::read_file(fName)
 geoJson2 <- rmapshaper::ms_simplify(geoJson, keep = 0.01)

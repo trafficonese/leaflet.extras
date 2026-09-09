@@ -160,7 +160,7 @@ leaflet(quakes) \%>\%
 ## addWebGLGeoJSONHeatmap
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+  "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
 leaflet() \%>\%

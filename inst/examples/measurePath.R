@@ -3,7 +3,7 @@ library(leaflet.extras)
 
 #' ### Add shapes with measurements enabled
 
-fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+fName <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 
 geoJson <- readr::read_file(fName)
 

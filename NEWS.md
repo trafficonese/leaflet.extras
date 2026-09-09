@@ -5,6 +5,7 @@
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
 ## Bugfixes
+- Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`.
 - New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
 - `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
 - New argument `fillColor` for `pulseIcons`. Fix #231

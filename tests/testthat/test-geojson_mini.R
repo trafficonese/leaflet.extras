@@ -1,9 +1,4 @@
 ## DATA ###################
-fName <- "https://rawgit.com/TrantorM/leaflet-choropleth/gh-pages/examples/basic_topo/crimes_by_district.topojson"
-topoJson <- readr::read_file(fName)
-geosonpointurl <- "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
-geoJson <- readr::read_file(geosonpointurl)
-
 historicLandmark <- makeAwesomeIcon(icon = "flag", library = "ion", markerColor = "green", iconColor = "black")
 
 iconsList <- awesomeIconList(
@@ -13,6 +8,15 @@ iconsList <- awesomeIconList(
 
 ## Tests ###################
 test_that("geojson and jsFunctions", {
+  skip_if_not_installed("readr")
+  topoJson <- readr::read_file(
+    testthat::test_path("testdata", "crimes_by_district.topojson")
+  )
+  geosonpointurl <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+  geoJson <- readr::read_file(
+    testthat::test_path("testdata", "historic-landmarks-points.geojson")
+  )
+
   ts <- leaflet() %>%
     addBootstrapDependency() %>%
     setView(-75.14, 40, zoom = 11) %>%

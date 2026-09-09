@@ -322,7 +322,7 @@ with options to map feature properties to labels, popups, colors, markers etc.
 ## addGeoJSONv2
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+  "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 )
 
 leaflet() \%>\%
@@ -349,7 +349,7 @@ leaflet() \%>\%
 ## addGeoJSONChoropleth
 \donttest{
 geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+  "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 )
 
 leaflet() \%>\%
