@@ -1,0 +1,253 @@
+# Add Geodesic Lines & Circles
+
+A geodesic line is the shortest path between two given positions on the
+earth surface. It's based on Vincenty's formulae implemented by [Chris
+Veness](https://github.com/chrisveness/geodesy) for highest precision.
+
+Add Lat/Long to a Geodesic Polyline.
+
+Adds a Great Circle to the map.
+
+## Usage
+
+``` r
+addGeodesicPolylines(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  steps = 10,
+  wrap = TRUE,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  icon = NULL,
+  showMarker = FALSE,
+  showStats = FALSE,
+  statsFunction = NULL,
+  markerOptions = NULL,
+  data = getMapData(map)
+)
+
+addLatLng(map, lat, lng, layerId = NULL)
+
+addGreatCircles(
+  map,
+  lat_center = NULL,
+  lng_center = NULL,
+  radius,
+  layerId = NULL,
+  group = NULL,
+  steps = 10,
+  wrap = TRUE,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = pathOptions(),
+  highlightOptions = NULL,
+  icon = NULL,
+  fill = TRUE,
+  showMarker = FALSE,
+  showStats = FALSE,
+  statsFunction = NULL,
+  markerOptions = NULL,
+  data = getMapData(map)
+)
+```
+
+## Arguments
+
+- map:
+
+  a map widget object created from
+  [`leaflet()`](https://rstudio.github.io/leaflet/reference/leaflet.html)
+
+- lat, lng:
+
+  lat/lng to add to the Geodesic
+
+- layerId:
+
+  the layer id
+
+- group:
+
+  the name of the group the newly created layers should belong to (for
+  [`clearGroup`](https://rstudio.github.io/leaflet/reference/remove.html)
+  and
+  [`addLayersControl`](https://rstudio.github.io/leaflet/reference/addLayersControl.html)
+  purposes). Human-friendly group names are permitted–they need not be
+  short, identifier-style names. Any number of layers and even different
+  types of layers (e.g. markers and polygons) can share the same group
+  name.
+
+- steps:
+
+  Defines how many intermediate points are generated along the path.
+  More steps mean a smoother path.
+
+- wrap:
+
+  Wrap line at map border (date line). Set to "false" if you want lines
+  to cross the dateline (experimental, see noWrap-example on how to use)
+
+- stroke:
+
+  whether to draw stroke along the path (e.g. the borders of polygons or
+  circles)
+
+- color:
+
+  stroke color
+
+- weight:
+
+  stroke width in pixels
+
+- opacity:
+
+  stroke opacity (or layer opacity for tile layers)
+
+- dashArray:
+
+  a string that defines the stroke [dash
+  pattern](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray)
+
+- smoothFactor:
+
+  how much to simplify the polyline on each zoom level (more means
+  better performance and less accurate representation)
+
+- noClip:
+
+  whether to disable polyline clipping
+
+- popup:
+
+  a character vector of the HTML content for the popups (you are
+  recommended to escape the text using
+  [`htmlEscape()`](https://rstudio.github.io/htmltools/reference/htmlEscape.html)
+  for security reasons)
+
+- popupOptions:
+
+  A Vector of
+  [`popupOptions`](https://rstudio.github.io/leaflet/reference/map-options.html)
+  to provide popups
+
+- label:
+
+  a character vector of the HTML content for the labels
+
+- labelOptions:
+
+  A Vector of
+  [`labelOptions`](https://rstudio.github.io/leaflet/reference/map-options.html)
+  to provide label options for each label. Default `NULL`
+
+- options:
+
+  a list of extra options for tile layers, popups, paths (circles,
+  rectangles, polygons, ...), or other map elements
+
+- highlightOptions:
+
+  Options for highlighting the shape on mouse over.
+
+- icon:
+
+  the icon(s) for markers; an icon is represented by an R list of the
+  form `list(iconUrl = "?", iconSize = c(x, y))`, and you can use
+  [`icons()`](https://rstudio.github.io/leaflet/reference/icons.html) to
+  create multiple icons; note when you use an R list that contains
+  images as local files, these local image files will be base64 encoded
+  into the HTML page so the icon images will still be available even
+  when you publish the map elsewhere
+
+- showMarker:
+
+  Should the nodes/center points be visualized as Markers?
+
+- showStats:
+
+  This will create an L.Control with some information on the geodesics
+
+- statsFunction:
+
+  A custom JS function to be showed in the info control
+
+- markerOptions:
+
+  List of options for the markers. See
+  [`markerOptions`](https://rstudio.github.io/leaflet/reference/map-options.html)
+
+- data:
+
+  the data object from which the argument values are derived; by
+  default, it is the `data` object provided to
+  [`leaflet()`](https://rstudio.github.io/leaflet/reference/leaflet.html)
+  initially, but can be overridden
+
+- lat_center, lng_center:
+
+  lat/lng for the center
+
+- radius:
+
+  in meters
+
+- fill:
+
+  whether to fill the path with color (e.g. filling on polygons or
+  circles)
+
+## Examples
+
+``` r
+berlin <- c(52.51, 13.4)
+losangeles <- c(34.05, -118.24)
+santiago <- c(-33.44, -70.71)
+tokio <- c(35.69, 139.69)
+sydney <- c(-33.91, 151.08)
+capetown <- c(-33.91, 18.41)
+calgary <- c(51.05, -114.08)
+hammerfest <- c(70.67, 23.68)
+barrow <- c(71.29, -156.76)
+
+df <- as.data.frame(rbind(hammerfest, calgary, losangeles, santiago, capetown, tokio, barrow))
+names(df) <- c("lat", "lng")
+
+leaflet(df) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGeodesicPolylines(
+    lng = ~lng, lat = ~lat, weight = 2, color = "red",
+    steps = 50, opacity = 1
+  ) %>%
+  addCircleMarkers(df,
+    lat = ~lat, lng = ~lng, radius = 3, stroke = FALSE,
+    fillColor = "black", fillOpacity = 1
+  )
+
+{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addGeodesicPolylines","args":[[[[{"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001]}]]],null,null,{"interactive":true,"className":"","steps":50,"wrap":true,"stroke":true,"color":"red","weight":2,"opacity":1,"dashArray":null,"smoothFactor":1,"noClip":false,"showStats":false,"statsFunction":null,"showMarker":false},null,null,null,null,null,null,null]},{"method":"addCircleMarkers","args":[[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76],3,{"lat":[70.67,51.05,34.05,-33.44,-33.91,35.69,71.29000000000001],"lng":[23.68,-114.08,-118.24,-70.70999999999999,18.41,139.69,-156.76]},null,{"interactive":true,"className":"","stroke":false,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"black","fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-33.91,71.29000000000001],"lng":[-156.76,139.69]}},"evals":[],"jsHooks":[]}
+## for more examples see
+# browseURL(system.file("examples/geodesic.R", package = "leaflet.extras"))
+```
