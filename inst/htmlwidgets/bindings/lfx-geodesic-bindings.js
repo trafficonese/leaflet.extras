@@ -2,6 +2,108 @@
 
 import { unpackStrings, handleEvent } from './utils.js';
 
+function formatMeters(value) {
+  if (value === null || value === undefined || isNaN(value)) {
+    return 'invalid';
+  }
+
+  return value > 10000
+    ? (value / 1000).toFixed(0) + ' km'
+    : value.toFixed(0) + ' m';
+}
+
+function circleStats(geodesic) {
+  const stats = geodesic.statistics
+    ? Object.assign({}, geodesic.statistics)
+    : {};
+  stats.radius = geodesic.radius;
+  return stats;
+}
+
+function radiusHandleLatLng(geodesic) {
+  const latlngs = geodesic.getLatLngs();
+  if (!latlngs || latlngs.length === 0) {
+    return geodesic.center;
+  }
+
+  const ring = Array.isArray(latlngs[0])
+    ? latlngs[0]
+    : latlngs;
+  return ring[0];
+}
+
+function radiusHandleLayerId(layerId, index) {
+  return layerId == null
+    ? '__geodesic_radius_' + index
+    : String(layerId) + '_radius';
+}
+
+function vertexMarkerId(layerId, stamp) {
+  return (layerId == null
+    ? 'geodesic'
+    : String(layerId)) + '_pt_' + stamp;
+}
+
+function geodesicStillManaged(map, geodesic) {
+  const layerId = geodesic._lfxLayerId;
+  if (typeof layerId === 'string') {
+    return map.layerManager.getLayer('shape', layerId) === geodesic;
+  }
+
+  const stamp = L.Util.stamp(geodesic);
+  return !!(map.layerManager._byStamp && map.layerManager._byStamp[stamp]);
+}
+
+function removeVertexMarkers(map, geodesic) {
+  const markers = geodesic._lfxVertexMarkers || [];
+  markers.forEach(function(marker) {
+    if (marker._lfxLayerId) {
+      map.layerManager.removeLayer('marker', marker._lfxLayerId);
+    }
+  });
+  geodesic._lfxVertexMarkers = [];
+}
+
+function bindGeodesicRemoveCleanup(map, geodesic) {
+  if (geodesic._lfxRemoveBound) {
+    return;
+  }
+
+  geodesic._lfxRemoveBound = true;
+  geodesic.on('remove', function() {
+    setTimeout(function() {
+      if (!geodesicStillManaged(map, geodesic)) {
+        removeVertexMarkers(map, geodesic);
+      }
+    }, 0);
+  });
+}
+
+function addVertexMarker(map, geodesic, latlng, markerOptions, group, layerId) {
+  const marker = L.marker(latlng, markerOptions || {});
+  const markerId = vertexMarkerId(layerId, L.stamp(marker));
+  marker._lfxLayerId = markerId;
+  map.layerManager.addLayer(marker, 'marker', markerId, group, null, null);
+  if (!geodesic._lfxVertexMarkers) {
+    geodesic._lfxVertexMarkers = [];
+  }
+
+  geodesic._lfxVertexMarkers.push(marker);
+  marker.on('drag', function() {
+    if (!geodesic._lfxShowMarker) {
+      return;
+    }
+
+    geodesic.setLatLngs(geodesic._lfxVertexMarkers.map(function(m) {
+      return m.getLatLng();
+    }));
+    if (typeof geodesic._lfxUpdateInfo === 'function') {
+      geodesic._lfxUpdateInfo(geodesic.statistics);
+    }
+  });
+  return marker;
+}
+
 LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
   options, icon, popup, popupOptions, label, labelOptions, highlightOptions,
   markerOptions) {
@@ -53,9 +155,6 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
       .col('group', group)
       .col('highlightOptions', highlightOptions)
       .cbind(options);
-
-    // Array to store Geodesic objects
-    const geodesics = [];
 
     // Get Leaflet or AwesomeMarker Icons
     let icondf;
@@ -134,18 +233,29 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
       updateInfo.call(info, Geodesic.statistics);
       map.layerManager.addLayer(Geodesic, 'shape', df.get(i, 'layerId'), df.get(i, 'group'), null, null);
 
+      const lineGroup = df.get(i, 'group');
+      const lineId = df.get(i, 'layerId');
+      const lineMarkerOptions = markerOptions
+        ? Object.assign({}, markerOptions)
+        : {};
+      if (options.showMarker && icon) {
+        lineMarkerOptions.icon = getIcon(i);
+      }
+
+      Geodesic._lfxVertexMarkers = [];
+      Geodesic._lfxGroup = lineGroup;
+      Geodesic._lfxLayerId = lineId;
+      Geodesic._lfxShowMarker = !!options.showMarker;
+      Geodesic._lfxMarkerOptions = lineMarkerOptions;
+      Geodesic._lfxUpdateInfo = function(stats) {
+        updateInfo.call(info, stats);
+      };
+      bindGeodesicRemoveCleanup(map, Geodesic);
+
       // Add Node Markers
       if (options.showMarker) {
-        var markers = [];
         for (const place of geogesic_coords) {
-          // Get markerOptions and add Icon
-          markerOptions = markerOptions
-            ? markerOptions
-            : {};
-          if (options.showMarker && icon) markerOptions.icon = getIcon(i);
-
-          // Create Marker and append label / popup if present
-          var marker = L.marker(place, markerOptions);
+          const marker = addVertexMarker(map, Geodesic, place, lineMarkerOptions, lineGroup, lineId);
           if (label !== null) {
             if (labelOptions !== null) {
               marker.bindTooltip(df.get(i, 'label'), labelOptions);
@@ -161,31 +271,8 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
               marker.bindPopup(df.get(i, 'popup'));
             }
           }
-
-          // Add Markers to Map
-          map.layerManager.addLayer(marker, 'markers', null, group, null, null);
-
-          // Add/Remove Markers when its Geodesic is added/removed (Using fake ID)
-          map.on('layeradd', function(e) {
-            if (e.layer === Geodesic) {
-              map.layerManager.addLayer(marker, 'marker', '______fake_layerid', group, null, null);
-            }
-          });
-          map.on('layerremove', function(e) {
-            if (e.layer === Geodesic) {
-              map.layerManager.removeLayer('marker', '______fake_layerid');
-            }
-          });
-          // Use Drag event and trigger custom `geodesicdrag` event for updating
-          marker.on('drag', () => {
-            map.fire('geodesicdrag', { index: i });
-          });
-          markers.push(marker);
         }
       }
-
-      // Push to Geodesics Array
-      geodesics.push({ Geodesic, markers });
 
 
       // Highlight
@@ -216,40 +303,25 @@ LeafletWidget.methods.addGeodesicPolylines = function(polygons, layerId, group,
           });
       }
     }
-
-    // Update a Geodesic LatLong and update Stats Control on custom `geodesicdrag` event
-    const updateGeodesic = function(e) {
-      const { index } = e;
-      const currentLine = [];
-      for (const point of geodesics[index].markers) {
-        currentLine.push(point.getLatLng());
-      }
-
-      geodesics[index].Geodesic.setLatLngs(currentLine);
-      updateInfo.call(info, geodesics[index].Geodesic.statistics);
-    };
-
-    map.on('geodesicdrag', updateGeodesic);
   }
 
 };
 
 LeafletWidget.methods.addLatLng = function(lat, lng, layerId) {
-  //console.log('lat'); console.log(lat);
-  //console.log('lng'); console.log(lng);
-  //console.log('layerId'); console.log(layerId);
-  // Check if the geodesic object exists
   const map = this;
   const geodesic = map.layerManager.getLayer('shape', layerId);
-  if (geodesic) {
-    // Add the new latlng point to the geodesic object
-    geodesic.addLatLng({'lat': lat, 'lng': lng});
-    // Create Marker
-    var marker = L.marker({'lat': lat, 'lng': lng});
-    map.layerManager.addLayer(marker, 'markers', null, null, null, null);
-  } else {
+  if (!geodesic) {
     console.error('Geodesic object is not initialized.');
+    return;
   }
+
+  geodesic.addLatLng({ lat: lat, lng: lng });
+  if (!geodesic._lfxVertexMarkers) {
+    geodesic._lfxVertexMarkers = [];
+  }
+
+  bindGeodesicRemoveCleanup(map, geodesic);
+  addVertexMarker(map, geodesic, { lat: lat, lng: lng }, geodesic._lfxMarkerOptions || {}, geodesic._lfxGroup, layerId);
 };
 
 LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
@@ -360,24 +432,19 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
 
       // Define a function to update the info control based on passed statistics
       updateInfo = function(stats, statsFunction) {
+        const fn = typeof statsFunction === 'function'
+          ? statsFunction
+          : options.statsFunction;
         var infoHTML = '';
-        if (typeof statsFunction === 'function') {
-          // If additionalInput is a function, use it to generate content exclusively
-          infoHTML = statsFunction(stats);
+        if (typeof fn === 'function') {
+          infoHTML = fn(stats);
         } else {
-          // Default content generation logic
-          const totalDistance = stats.totalDistance
-            ? (stats.totalDistance > 10000
-              ? (stats.totalDistance / 1000).toFixed(0) + ' km'
-              : stats.totalDistance.toFixed(0) + ' m')
-            : 'invalid';
           infoHTML = '<h4>Statistics</h4>' +
-            '<b>Total Distance</b><br/>' + totalDistance +
-            '<br/><br/><b>Points</b><br/>' + stats.points +
+            '<b>Radius</b><br/>' + formatMeters(stats.radius) +
+            '<br/><br/><b>Circumference</b><br/>' + formatMeters(stats.totalDistance) +
             '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
         }
 
-        // Update the innerHTML of the info div with the constructed info HTML or leave it empty
         info._div.innerHTML = infoHTML;
       };
     }
@@ -394,6 +461,42 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
 
         // Create Geodesic Circle
         const Geodesic = new L.GeodesicCircle(latlong, options);
+        const stats = circleStats(Geodesic);
+
+        let radiusHandle = null;
+        let handleOffset = { lat: 0, lng: 0 };
+
+        const emit = function(e, eventName) {
+          handleEvent(e, eventName, options, df, i, circleStats(Geodesic), updateInfo);
+        };
+
+        if (options.showStats && updateInfo) {
+          updateInfo(stats, options.statsFunction);
+        }
+
+        if (options.editable) {
+          radiusHandle = L.marker(radiusHandleLatLng(Geodesic), {
+            draggable: true,
+            title: 'Drag to resize radius'
+          });
+          const handleId = radiusHandleLayerId(df.get(i, 'layerId'), i);
+
+          map.on('layeradd', function(e) {
+            if (e.layer === Geodesic) {
+              map.layerManager.addLayer(radiusHandle, 'marker', handleId, df.get(i, 'group'), null, null);
+            }
+          });
+          map.on('layerremove', function(e) {
+            if (e.layer === Geodesic) {
+              map.layerManager.removeLayer('marker', handleId);
+            }
+          });
+
+          radiusHandle.on('drag', (e) => {
+            Geodesic.setRadius(Geodesic.distanceTo(e.latlng));
+            emit(e, '_geodesic_stats');
+          });
+        }
 
         // Create a marker for each location
         if (options.showMarker) {
@@ -430,21 +533,37 @@ LeafletWidget.methods.addGreatCircles = function(lat, lng, radius, layerId,
             }
           });
 
-          // Event listener for Center / Circles
+          if (radiusHandle) {
+            marker.on('dragstart', () => {
+              const center = marker.getLatLng();
+              const handleLatLng = radiusHandle.getLatLng();
+              handleOffset = {
+                lat: center.lat - handleLatLng.lat,
+                lng: center.lng - handleLatLng.lng
+              };
+            });
+          }
+
           marker.on('drag', (e) => {
             Geodesic.setLatLng(e.latlng);
-            handleEvent(e, '_geodesic_stats', options, df, i, Geodesic.statistics, updateInfo);
+            if (radiusHandle) {
+              radiusHandle.setLatLng({
+                lat: Math.max(-90, Math.min(90, e.latlng.lat - handleOffset.lat)),
+                lng: e.latlng.lng - handleOffset.lng
+              });
+            }
+            emit(e, '_geodesic_stats');
           });
           marker.on('click', (e) => {
-            handleEvent(e, '_geodesic_click', options, df, i, Geodesic.statistics, updateInfo);
+            emit(e, '_geodesic_click');
           });
         }
 
         Geodesic.on('click', (e) => {
-          handleEvent(e, '_geodesic_click', options, df, i, Geodesic.statistics, updateInfo);
+          emit(e, '_geodesic_click');
         });
         Geodesic.on('mouseover', (e) => {
-          handleEvent(e, '_geodesic_mouseover', options, df, i, Geodesic.statistics, updateInfo);
+          emit(e, '_geodesic_mouseover');
         });
 
         return Geodesic;

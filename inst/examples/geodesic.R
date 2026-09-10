@@ -86,3 +86,12 @@ leaflet(df) %>% addProviderTiles(providers$CartoDB.Positron) %>%
   setView(0, 35, 1) %>%
   addLayersControl(overlayGroups = c("circle"))
 
+#' ### Interactive Great Circle (drag center and radius handle)
+leaflet(data.frame(lat = 52.5, lng = 13.35)) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addGreatCircles(
+    radius = 5e5, steps = 80, color = "red",
+    showMarker = TRUE, showStats = TRUE, editable = TRUE,
+    markerOptions = markerOptions(draggable = TRUE)
+  )
+
