@@ -135,7 +135,8 @@ removeSearchUSCensusBureau(map)
 
 - apikey:
 
-  String. API Key for Google GeoCoding Service.
+  String. API Key for Google GeoCoding Service. Required in Shiny;
+  without a key the Maps JavaScript API often fails to load.
 
 ## Value
 

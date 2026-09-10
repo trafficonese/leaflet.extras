@@ -73,6 +73,21 @@
 - New argument `group` for `addMeasurePathToolbar`. Supports single
   group, multiple groups, or all layers (`group = NULL`). Fix
   [\#233](https://github.com/trafficonese/leaflet.extras/issues/233)
+- `addSearchGoogle` / `addReverseSearchGoogle` load the Google Maps
+  JavaScript API as an htmlDependency instead of
+  [`htmlwidgets::appendContent()`](https://rdrr.io/pkg/htmlwidgets/man/prependContent.html),
+  which Shiny ignores (`Ignoring appended content`). The search control
+  now appears in
+  [`renderLeaflet()`](https://rstudio.github.io/leaflet/reference/map-shiny.html).
+  Demo: `/inst/examples/shiny/search/google_app.R`. Fix
+  [\#112](https://github.com/trafficonese/leaflet.extras/issues/112)
+- Google and OSM search suggestions crashed or showed `undefined`
+  because leaflet-search PR 339 called `formatData(control, data)`
+  instead of `formatData(data)`. Search formatters now accept both
+  signatures, and Google results unwrap `GeocoderResponse.results`.
+- `addReverseSearchGoogle` no longer reads minified Google
+  `LatLngBounds` internals (`viewport.f` / `viewport.b`). Bounds use
+  `getSouthWest()` / `getNorthEast()` (or `south/west/north/east`).
 - `addLatLng` registers vertex markers in Leaflet’s `marker` category
   with the geodesic’s group and a unique layer id, and removes them when
   the line is deleted (`removeShape` / `clearShapes` / `clearGroup`).

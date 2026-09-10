@@ -60,6 +60,11 @@
 <li>New argument <code>fillColor</code> for <code>pulseIcons</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/231" class="external-link">#231</a></li>
 <li>New argument <code>group</code> for <code>addMeasurePathToolbar</code>. Supports single group, multiple groups, or all layers (<code>group = NULL</code>). Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/233" class="external-link">#233</a></li>
 <li>
+<code>addSearchGoogle</code> / <code>addReverseSearchGoogle</code> load the Google Maps JavaScript API as an htmlDependency instead of <code><a href="https://rdrr.io/pkg/htmlwidgets/man/prependContent.html" class="external-link">htmlwidgets::appendContent()</a></code>, which Shiny ignores (<code>Ignoring appended content</code>). The search control now appears in <code><a href="https://rstudio.github.io/leaflet/reference/map-shiny.html" class="external-link">renderLeaflet()</a></code>. Demo: <code>/inst/examples/shiny/search/google_app.R</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/112" class="external-link">#112</a></li>
+<li>Google and OSM search suggestions crashed or showed <code>undefined</code> because leaflet-search PR 339 called <code>formatData(control, data)</code> instead of <code>formatData(data)</code>. Search formatters now accept both signatures, and Google results unwrap <code>GeocoderResponse.results</code>.</li>
+<li>
+<code>addReverseSearchGoogle</code> no longer reads minified Google <code>LatLngBounds</code> internals (<code>viewport.f</code> / <code>viewport.b</code>). Bounds use <code>getSouthWest()</code> / <code>getNorthEast()</code> (or <code>south/west/north/east</code>).</li>
+<li>
 <code>addLatLng</code> registers vertex markers in Leaflet’s <code>marker</code> category with the geodesic’s group and a unique layer id, and removes them when the line is deleted (<code>removeShape</code> / <code>clearShapes</code> / <code>clearGroup</code>). Hide/show by group still keeps them.</li>
 </ul></div>
 </div>
