@@ -102,13 +102,13 @@
   [`makePulseIcon()`](https://trafficonese.github.io/leaflet.extras/reference/pulseMarkers.md)
   [`pulseIcons()`](https://trafficonese.github.io/leaflet.extras/reference/pulseMarkers.md)
   [`addPulseMarkers()`](https://trafficonese.github.io/leaflet.extras/reference/pulseMarkers.md)
-  : Make pulse-icon set
+  : Create a list of pulse icon data see
 - [`weatherIconList()`](https://trafficonese.github.io/leaflet.extras/reference/weatherMarkers.md)
   [`` `[`( ``*`<leaflet_weather_icon_set>`*`)`](https://trafficonese.github.io/leaflet.extras/reference/weatherMarkers.md)
   [`makeWeatherIcon()`](https://trafficonese.github.io/leaflet.extras/reference/weatherMarkers.md)
   [`weatherIcons()`](https://trafficonese.github.io/leaflet.extras/reference/weatherMarkers.md)
   [`addWeatherMarkers()`](https://trafficonese.github.io/leaflet.extras/reference/weatherMarkers.md)
-  : Make weather-icon set
+  : Create a list of weather icon data see
 
 ## Search Markers/Shapes
 

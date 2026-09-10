@@ -1,4 +1,4 @@
-# Make weather-icon set
+# Create a list of weather icon data see
 
 An icon can be represented as a list of the form
 `list(icon, markerColor, ...)`. This function is vectorized over its
@@ -49,7 +49,8 @@ addWeatherMarkers(
 
 - ...:
 
-  icons created from `makeWeatherIcon()`
+  icons created from `makeWeatherIcon()` iconSet\[c("hurricane",
+  "tornado")\]
 
 - x:
 
@@ -165,35 +166,6 @@ iconSet <- weatherIconList(
   tornado = makeWeatherIcon(icon = "tornado")
 )
 
-iconSet[c("hurricane", "tornado")]
-#> $hurricane
-#> $icon
-#> [1] "hurricane"
-#> 
-#> $markerColor
-#> [1] "red"
-#> 
-#> $iconColor
-#> [1] "white"
-#> 
-#> attr(,"class")
-#> [1] "leaflet_weather_icon"
-#> 
-#> $tornado
-#> $icon
-#> [1] "tornado"
-#> 
-#> $markerColor
-#> [1] "red"
-#> 
-#> $iconColor
-#> [1] "white"
-#> 
-#> attr(,"class")
-#> [1] "leaflet_weather_icon"
-#> 
-#> attr(,"class")
-#> [1] "leaflet_weather_icon_set"
 leaflet() %>%
   addTiles() %>%
   addWeatherMarkers(

@@ -1,4 +1,4 @@
-# Make pulse-icon set
+# Create a list of pulse icon data see
 
 An icon can be represented as a list of the form
 `list(color, iconSize, ...)`. This function is vectorized over its

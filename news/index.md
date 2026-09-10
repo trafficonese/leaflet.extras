@@ -4,6 +4,13 @@
 
 ### New Features
 
+- [`addGeoJSONChoropleth()`](https://trafficonese.github.io/leaflet.extras/reference/omnivore.md)
+  /
+  [`addKMLChoropleth()`](https://trafficonese.github.io/leaflet.extras/reference/omnivore.md)
+  can vary polygon fill opacity per feature via `fillOpacityProperty`
+  (property name or JS function). Passing a JS function as `fillOpacity`
+  works too. Fix
+  [\#53](https://github.com/trafficonese/leaflet.extras/issues/53)
 - `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that
   raw weights such as 1 vs 500 stay visually distinct. Use
   `scaleIntensity = FALSE` for the previous clipping behavior.
@@ -32,6 +39,10 @@
 
 ### Bugfixes
 
+- Rd examples no longer download GeoJSON from GitHub during
+  `R CMD check --as-cran` (`--run-donttest`). CI failed with HTTP 429
+  (rate limit) on ubuntu-latest/oldrel-1. Examples now use local
+  fixtures under `inst/examples/data/geojson/`.
 - Tests no longer download example GeoJSON/TopoJSON from the defunct
   [rawgit.com](https://rawgit.com) service. CRAN checks failed because
   those URLs were unreachable (`test-geojson_mini.R`,

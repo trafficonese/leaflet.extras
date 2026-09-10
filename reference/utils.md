@@ -50,13 +50,6 @@ setMapWidgetStyle(map, style = list(background = "transparent"))
 
 ``` r
 # \donttest{
-geoJson <- jsonlite::fromJSON(readr::read_file(
-  paste0(
-    "https://raw.githubusercontent.com/MinnPost/simple-map-d3",
-    "/master/example-data/world-population.geo.json"
-  )
-))
-
 world <- leaflet(
   options = leafletOptions(
     maxZoom = 5,

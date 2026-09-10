@@ -88,13 +88,6 @@ Customize the leaflet widget style"><!-- dependencies from examples --><script s
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">geoJson</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_file.html" class="external-link">read_file</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"https://raw.githubusercontent.com/MinnPost/simple-map-d3"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"/master/example-data/world-population.geo.json"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">world</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  options <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leafletOptions</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    maxZoom <span class="op">=</span> <span class="fl">5</span>,</span></span>
