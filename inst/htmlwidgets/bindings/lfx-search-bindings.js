@@ -21,7 +21,9 @@ function eventToShiny(e) {
 
 // leaflet-search PR 339 called formatData(control, data); upstream uses formatData(data).
 function searchFormatPayload(a, b) {
-  return arguments.length >= 2 ? b : a;
+  return arguments.length >= 2
+    ? b
+    : a;
 }
 
 function wrapFormatData(fn) {
@@ -35,8 +37,12 @@ function googleLatLng(location) {
     return null;
   }
 
-  var lat = typeof location.lat === 'function' ? location.lat() : location.lat;
-  var lng = typeof location.lng === 'function' ? location.lng() : location.lng;
+  var lat = typeof location.lat === 'function'
+    ? location.lat()
+    : location.lat;
+  var lng = typeof location.lng === 'function'
+    ? location.lng()
+    : location.lng;
   if (lat == null || lng == null) {
     return null;
   }
@@ -53,7 +59,9 @@ function googleResultList(results) {
     results = results.results;
   }
 
-  return Array.isArray(results) ? results : [];
+  return Array.isArray(results)
+    ? results
+    : [];
 }
 
 function googleViewportBounds(geometry) {
@@ -76,17 +84,13 @@ function googleViewportBounds(geometry) {
   }
 
   if (box.south != null && box.west != null && box.north != null && box.east != null) {
-    return L.latLngBounds(
-      L.latLng(box.south, box.west),
-      L.latLng(box.north, box.east)
-    );
+    return L.latLngBounds(L.latLng(box.south, box.west),
+      L.latLng(box.north, box.east));
   }
 
   if (box.f && box.b && box.f.f != null && box.b.b != null) {
-    return L.latLngBounds(
-      L.latLng(box.f.f, box.b.b),
-      L.latLng(box.f.b, box.b.f)
-    );
+    return L.latLngBounds(L.latLng(box.f.f, box.b.b),
+      L.latLng(box.f.b, box.b.f));
   }
 
   return null;
@@ -114,10 +118,8 @@ function formatNominatimData(json) {
         continue;
       }
 
-      jsonret[name] = L.latLng(
-        this._getPath(rec, propLoc[0]),
-        this._getPath(rec, propLoc[1])
-      );
+      jsonret[name] = L.latLng(this._getPath(rec, propLoc[0]),
+        this._getPath(rec, propLoc[1]));
     }
   } else {
     for (i in json) {
@@ -529,7 +531,9 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
       geocoder.geocode({address: text}, function(results, status) {
         var ok = !status || status === 'OK' ||
           (google.maps.GeocoderStatus && status === google.maps.GeocoderStatus.OK);
-        callResponse(ok ? googleResultList(results) : []);
+        callResponse(ok
+          ? googleResultList(results)
+          : []);
       });
     }
 

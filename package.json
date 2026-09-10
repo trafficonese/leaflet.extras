@@ -8,6 +8,9 @@
     "watch": "napa && webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "napa": {
     "leaflet-weather-markers": "tallsam/Leaflet.weather-markers#afda5b3",
     "leaflet-wms-legend": "kartoza/leaflet-wms-legend#0f59578",
@@ -18,7 +21,7 @@
   },
   "dependencies": {
     "@ansur/leaflet-pulse-icon": "^0.1.1",
-    "@mapbox/leaflet-omnivore": "0.3.4",
+    "@mapbox/leaflet-omnivore": "github:trafficonese/leaflet-omnivore#0.4.0",
     "@mapbox/togeojson": "^0.16.2",
     "csv2geojson": "^5.1.2",
     "fuse.js": "7.0.0",
@@ -43,20 +46,20 @@
   },
   "devDependencies": {
     "@stylistic/eslint-plugin-js": "^1.7.0",
-    "copy-webpack-plugin": "^12.0.2",
+    "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^6.10.0",
-    "css-minimizer-webpack-plugin": "^6.0.0",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "eslint": "^8.57.0",
     "eslint-webpack-plugin": "^4.1.0",
     "license-checker": "^25.0.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "mini-css-extract-plugin": "^2.8.1",
     "napa": "^3.0.0",
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.94.0",
+    "webpack": "^5.110.3",
     "webpack-cli": "^5.1.4"
   }
 }
