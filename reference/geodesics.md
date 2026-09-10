@@ -70,6 +70,7 @@ addGreatCircles(
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
+  editable = FALSE,
   data = getMapData(map)
 )
 ```
@@ -219,6 +220,14 @@ addGreatCircles(
 
   whether to fill the path with color (e.g. filling on polygons or
   circles)
+
+- editable:
+
+  For `addGreatCircles`: if `TRUE`, add a draggable handle on the
+  circumference to resize the radius. Move the center with
+  `showMarker = TRUE` and `markerOptions(draggable = TRUE)`. Radius and
+  circumference are included in `showStats` and in the Shiny input
+  `MAPID_geodesic_stats`.
 
 ## Examples
 

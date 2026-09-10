@@ -110,6 +110,7 @@ earth surface. It's based on Vincenty's formulae implemented by
 <span>  showStats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  statsFunction <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  markerOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  editable <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  data <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/getMapData.html" class="external-link">getMapData</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -250,6 +251,14 @@ initially, but can be overridden</p></dd>
 <dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
 <dd><p>whether to fill the path with color (e.g. filling on polygons or
 circles)</p></dd>
+
+
+<dt id="arg-editable">editable<a class="anchor" aria-label="anchor" href="#arg-editable"></a></dt>
+<dd><p>For <code>addGreatCircles</code>: if <code>TRUE</code>, add a draggable
+handle on the circumference to resize the radius. Move the center with
+<code>showMarker = TRUE</code> and <code>markerOptions(draggable = TRUE)</code>.
+Radius and circumference are included in <code>showStats</code> and in the Shiny
+input <code>MAPID_geodesic_stats</code>.</p></dd>
 
 </dl></div>
 

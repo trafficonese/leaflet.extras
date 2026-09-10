@@ -25,6 +25,13 @@
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R`
   for a demo of all options and methods. Fix
   [\#202](https://github.com/trafficonese/leaflet.extras/issues/202)
+- [`addGreatCircles()`](https://trafficonese.github.io/leaflet.extras/reference/geodesics.md)
+  gained `editable = TRUE` to drag a radius handle on the circumference
+  (as in the [Leaflet.Geodesic interactive circle
+  demo](https://blog.cyclemap.link/Leaflet.Geodesic/circle-interactive.html)).
+  `showStats` now reports radius and circumference; Shiny input
+  `MAPID_geodesic_stats` includes `radius`. Fix
+  [\#44](https://github.com/trafficonese/leaflet.extras/issues/44)
 
 ### Improvements
 
@@ -66,6 +73,10 @@
 - New argument `group` for `addMeasurePathToolbar`. Supports single
   group, multiple groups, or all layers (`group = NULL`). Fix
   [\#233](https://github.com/trafficonese/leaflet.extras/issues/233)
+- `addLatLng` registers vertex markers in Leaflet’s `marker` category
+  with the geodesic’s group and a unique layer id, and removes them when
+  the line is deleted (`removeShape` / `clearShapes` / `clearGroup`).
+  Hide/show by group still keeps them.
 
 ## leaflet.extras 2.0.1
 
