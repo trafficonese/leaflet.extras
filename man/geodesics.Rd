@@ -66,6 +66,7 @@ addGreatCircles(
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
+  editable = FALSE,
   data = getMapData(map)
 )
 }
@@ -147,6 +148,12 @@ initially, but can be overridden}
 
 \item{fill}{whether to fill the path with color (e.g. filling on polygons or
 circles)}
+
+\item{editable}{For \code{addGreatCircles}: if \code{TRUE}, add a draggable
+handle on the circumference to resize the radius. Move the center with
+\code{showMarker = TRUE} and \code{markerOptions(draggable = TRUE)}.
+Radius and circumference are included in \code{showStats} and in the Shiny
+input \code{MAPID_geodesic_stats}.}
 }
 \description{
 A geodesic line is the shortest path between two given positions on the

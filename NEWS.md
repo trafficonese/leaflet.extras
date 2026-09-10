@@ -2,6 +2,9 @@
 
 
 ## New Features
+- `addGeoJSONChoropleth()` / `addKMLChoropleth()` can vary polygon fill
+  opacity per feature via `fillOpacityProperty` (property name or JS
+  function). Passing a JS function as `fillOpacity` works too. Fix #53
 - `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
   weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
   for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when
@@ -9,6 +12,10 @@
   `addHeatmapLegend()` (also via `legend = TRUE`) adds a color guide. Fix #126, Fix #160
 - Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
+- `addGreatCircles()` gained `editable = TRUE` to drag a radius handle on the
+  circumference (as in the [Leaflet.Geodesic interactive circle demo](https://blog.cyclemap.link/Leaflet.Geodesic/circle-interactive.html)).
+  `showStats` now reports radius and circumference; Shiny input
+  `MAPID_geodesic_stats` includes `radius`. Fix #44
 
 ## Improvements
 - Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
@@ -16,6 +23,9 @@
 - pkgdown reference index includes `addHeatmapLegend`.
 
 ## Bugfixes
+- Rd examples no longer download GeoJSON from GitHub during `R CMD check --as-cran`
+  (`--run-donttest`). CI failed with HTTP 429 (rate limit) on ubuntu-latest/oldrel-1.
+  Examples now use local fixtures under `inst/examples/data/geojson/`.
 - Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`. Long example URLs in `omnivore` and `webglheatmap` docs are wrapped to stay under the Rd 100-character limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting and opening #251. Fix #250
 - New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
 - `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
@@ -24,6 +34,7 @@
 - `addSearchGoogle` / `addReverseSearchGoogle` load the Google Maps JavaScript API as an htmlDependency instead of `htmlwidgets::appendContent()`, which Shiny ignores (`Ignoring appended content`). The search control now appears in `renderLeaflet()`. Demo: `/inst/examples/shiny/search/google_app.R`. Fix #112
 - Google and OSM search suggestions crashed or showed `undefined` because leaflet-search PR 339 called `formatData(control, data)` instead of `formatData(data)`. Search formatters now accept both signatures, and Google results unwrap `GeocoderResponse.results`.
 - `addReverseSearchGoogle` no longer reads minified Google `LatLngBounds` internals (`viewport.f` / `viewport.b`). Bounds use `getSouthWest()` / `getNorthEast()` (or `south/west/north/east`).
+- `addLatLng` registers vertex markers in Leaflet's `marker` category with the geodesic's group and a unique layer id, and removes them when the line is deleted (`removeShape` / `clearShapes` / `clearGroup`). Hide/show by group still keeps them.
 
 
 # leaflet.extras 2.0.1

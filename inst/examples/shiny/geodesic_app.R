@@ -146,8 +146,9 @@ server <- function(input, output, session) {
                       layerId = ~paste0("ID_",city),
                       wrap = FALSE,
                       fill = T,
-                      # showMarker = FALSE,
+                      showMarker = TRUE,
                       showStats = TRUE,
+                      editable = TRUE,
                       # statsFunction = NULL,
                       # statsFunction = JS("function(stats) {
                       #                      return('<h4>Custom Stats Info</h4>' +
@@ -218,10 +219,13 @@ server <- function(input, output, session) {
                     layerId = ~paste0("ID_",city),
                     wrap = FALSE,
                     fill = T,
+                    showMarker = TRUE,
                     showStats = T,
+                    editable = TRUE,
                     statsFunction = JS("function(stats) {
                                          return('<h4>Custom Stats Info</h4>' +
                                             '<div>Vertices:  ' + stats.vertices + '</div>' +
+                                            '<div>Radius:  ' + stats.radius + '</div>' +
                                             '<div>Distance:  ' + stats.totalDistance + '</div>')
                                        }
                                        "),

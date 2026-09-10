@@ -370,6 +370,8 @@ test_that("Geodesic", {
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[2]], cities_df$lng)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[3]], 100)
   expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4, 5, 7:13)]))
+  expect_false(ts$x$calls[[length(ts$x$calls)]]$args[[6]]$editable)
+  expect_false(ts$x$calls[[length(ts$x$calls)]]$args[[6]]$showMarker)
 
 
   ts <- leaflet(cities_df) %>%
@@ -538,4 +540,18 @@ test_that("Geodesic", {
     as.character(unlist(lapply(awesomeicons_ion, function(x) x$markerColor)))
   )
   expect_null(unlist(ts$x$calls[[length(ts$x$calls)]]$args[c(4, 5, 8:13)]))
+
+  ts <- leaflet(cities_df) %>%
+    addTiles() %>%
+    addGreatCircles(
+      lng_center = ~lng, lat_center = ~lat, radius = 500000,
+      showMarker = TRUE, showStats = TRUE, editable = TRUE,
+      markerOptions = markerOptions(draggable = TRUE)
+    )
+  expect_s3_class(ts, "leaflet")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addGreatCircles")
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[6]]$editable)
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[6]]$showMarker)
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[6]]$showStats)
+  expect_true(ts$x$calls[[length(ts$x$calls)]]$args[[13]]$draggable)
 })
