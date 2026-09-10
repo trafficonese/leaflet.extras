@@ -124,12 +124,36 @@ function addGeoJSONLayer(widget, geojsonLayerFunction, layerId, group, setStyle,
     }
   }
 
+  function fillOpacityFromProperty(feature) {
+    var prop = style && style.fillOpacityProperty;
+    if (prop == null || !feature) {
+      return null;
+    }
+    var op;
+    if (typeof prop === 'function') {
+      op = prop(feature);
+    } else if (typeof prop === 'string' && feature.properties) {
+      op = feature.properties[prop];
+    } else if (typeof prop === 'number') {
+      op = prop;
+    }
+    if (op == null || isNaN(Number(op))) {
+      return null;
+    }
+    return Number(op);
+  }
+
   function resetFeature(e) {
     var layer = e.target;
+    var reset = $.extend({}, defaultStyle);
     if (typeof style.style == 'function') {
-      $.extend(defaultStyle, style.style(layer.feature));
+      $.extend(reset, style.style(layer.feature));
     }
-    layer.setStyle(defaultStyle);
+    var fillOpacity = fillOpacityFromProperty(layer.feature);
+    if (fillOpacity != null) {
+      reset.fillOpacity = fillOpacity;
+    }
+    layer.setStyle(reset);
     if (highlightStyle.sendToBack) {
       layer.bringToBack();
     }

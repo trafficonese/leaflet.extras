@@ -149,7 +149,7 @@ const config = [
     'lfx-styleeditor'),
   library_binding('lfx-styleeditor'),
 
-  // "leaflet-choropleth": "1.1.4",
+  // "leaflet-choropleth": "github:trafficonese/leaflet-choropleth"
   library_prod('leaflet-choropleth', 'lfx-choropleth'),
 
   // "leaflet-draw": "1.0.2",

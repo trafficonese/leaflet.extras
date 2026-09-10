@@ -233,6 +233,30 @@ test_that("geojson and jsFunctions", {
     addGeoJSONChoropleth(
       topoJson,
       valueProperty = "incidents",
+      fillOpacityProperty = "dist_num"
+    )
+  expect_identical(
+    ts$x$calls[[length(ts$x$calls)]]$args[[8]]$fillOpacityProperty,
+    "dist_num"
+  )
+
+  js_op <- JS("function(feature){return feature.properties.dist_num / 100;}")
+  ts <- leaflet() %>%
+    addGeoJSONChoropleth(
+      topoJson,
+      valueProperty = "incidents",
+      fillOpacity = js_op
+    )
+  expect_identical(
+    ts$x$calls[[length(ts$x$calls)]]$args[[8]]$fillOpacityProperty,
+    js_op
+  )
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[8]]$fillOpacity, 0.2)
+
+  ts <- leaflet() %>%
+    addGeoJSONChoropleth(
+      topoJson,
+      valueProperty = "incidents",
       popupProperty = propsToHTML(
         props = c("dist_numc")
       )

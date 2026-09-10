@@ -2,6 +2,9 @@
 
 
 ## New Features
+- `addGeoJSONChoropleth()` / `addKMLChoropleth()` can vary polygon fill
+  opacity per feature via `fillOpacityProperty` (property name or JS
+  function). Passing a JS function as `fillOpacity` works too. Fix #53
 - `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
   weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
   for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when

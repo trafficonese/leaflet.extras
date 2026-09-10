@@ -22,7 +22,7 @@
     "@mapbox/togeojson": "^0.16.2",
     "csv2geojson": "^5.1.2",
     "fuse.js": "7.0.0",
-    "leaflet-choropleth": "github:trafficonese/leaflet-choropleth#issue_53_le",
+    "leaflet-choropleth": "github:trafficonese/leaflet-choropleth",
     "leaflet-draw": "1.0.4",
     "leaflet-draw-drag": "0.4.8",
     "leaflet-fullscreen": "1.0.2",

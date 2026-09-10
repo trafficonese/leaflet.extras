@@ -75,7 +75,8 @@ addGeoJSONChoropleth(
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL,
-  legendOptions = NULL
+  legendOptions = NULL,
+  fillOpacityProperty = NULL
 )
 
 addKML(
@@ -135,7 +136,8 @@ addKMLChoropleth(
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL,
-  legendOptions = NULL
+  legendOptions = NULL,
+  fillOpacityProperty = NULL
 )
 
 csvParserOptions(latfield, lonfield, delimiter = ",")
@@ -279,7 +281,8 @@ pattern}}
 
 \item{numberFormatOptions}{Options for formatting numbers}
 
-\item{valueProperty}{The property to use for coloring}
+\item{valueProperty}{The property to use for coloring. Either a property
+name or a JS function of the GeoJSON feature.}
 
 \item{scale}{The scale to use from chroma.js}
 
@@ -299,7 +302,10 @@ pattern}}
 
 \item{legendOptions}{Options to show a legend.}
 
-\item{fillOpacityProperty}{The property to use for opacity}
+\item{fillOpacityProperty}{The property to use for fill opacity. Either a
+property name or a JS function of the GeoJSON feature, e.g.
+\code{JS("function(feature){return feature.properties.dist_num / 100;}")}.
+A JS function may also be passed as \code{fillOpacity}.}
 
 \item{kml}{a KML URL or contents in a character vector.}
 
