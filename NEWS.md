@@ -9,6 +9,10 @@
   `addHeatmapLegend()` (also via `legend = TRUE`) adds a color guide. Fix #126, Fix #160
 - Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
+- `addGreatCircles()` gained `editable = TRUE` to drag a radius handle on the
+  circumference (as in the [Leaflet.Geodesic interactive circle demo](https://blog.cyclemap.link/Leaflet.Geodesic/circle-interactive.html)).
+  `showStats` now reports radius and circumference; Shiny input
+  `MAPID_geodesic_stats` includes `radius`. Fix #44
 
 ## Improvements
 - Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
@@ -21,6 +25,7 @@
 - `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
 - New argument `fillColor` for `pulseIcons`. Fix #231
 - New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
+- `addLatLng` registers vertex markers in Leaflet's `marker` category with the geodesic's group and a unique layer id, and removes them when the line is deleted (`removeShape` / `clearShapes` / `clearGroup`). Hide/show by group still keeps them.
 
 
 # leaflet.extras 2.0.1

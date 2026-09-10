@@ -23,6 +23,11 @@ NULL
 #' @param showStats This will create an L.Control with some information on the geodesics
 #' @param statsFunction A custom JS function to be showed in the info control
 #' @param markerOptions List of options for the markers. See \code{\link[leaflet]{markerOptions}}
+#' @param editable For \code{addGreatCircles}: if \code{TRUE}, add a draggable
+#'   handle on the circumference to resize the radius. Move the center with
+#'   \code{showMarker = TRUE} and \code{markerOptions(draggable = TRUE)}.
+#'   Radius and circumference are included in \code{showStats} and in the Shiny
+#'   input \code{MAPID_geodesic_stats}.
 #' @inheritParams leaflet::addPolylines
 #' @export
 #' @rdname geodesics
@@ -168,6 +173,7 @@ addGreatCircles <- function(
   showStats = FALSE,
   statsFunction = NULL,
   markerOptions = NULL,
+  editable = FALSE,
   data = getMapData(map)
 ) {
   map$dependencies <- c(map$dependencies, geodesicDependencies())
@@ -208,7 +214,7 @@ addGreatCircles <- function(
     stroke = stroke, color = color, weight = weight, opacity = opacity,
     dashArray = dashArray, smoothFactor = smoothFactor, noClip = noClip,
     fill = fill, showStats = showStats, statsFunction = statsFunction,
-    showMarker = showMarker
+    showMarker = showMarker, editable = isTRUE(editable)
   ))
   points <- leaflet::derivePoints(
     data, lng_center, lat_center, missing(lng_center), missing(lat_center),
