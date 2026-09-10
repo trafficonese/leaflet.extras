@@ -254,9 +254,12 @@ test_that("map-control-plugins", {
     addProviderTiles(providers$CartoDB.Positron) %>%
     addSearchGoogle(options = opts, apikey = "something")
   expect_s3_class(ts, "leaflet")
-  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addSearchGoogle")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]], opts)
+  expect_null(ts$append)
+  expect_true("google-maps-api" %in% vapply(ts$dependencies, `[[`, character(1), "name"))
+  gdep <- Filter(function(d) identical(d$name, "google-maps-api"), ts$dependencies)[[1]]
+  expect_match(gdep$script[[1]]$src, "key=something", fixed = TRUE)
 
   ts <- leaflet() %>%
     removeSearchGoogle()
@@ -269,8 +272,9 @@ test_that("map-control-plugins", {
   ts <- leaflet() %>%
     addReverseSearchGoogle(apikey = "something")
   expect_s3_class(ts, "leaflet")
-  expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-search")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addReverseSearchGoogle")
+  expect_null(ts$append)
+  expect_true("google-maps-api" %in% vapply(ts$dependencies, `[[`, character(1), "name"))
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showSearchLocation, TRUE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$fitBounds, TRUE)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$showBounds, FALSE)

@@ -19,6 +19,144 @@ function eventToShiny(e) {
   return shinyEvent;
 }
 
+// leaflet-search PR 339 called formatData(control, data); upstream uses formatData(data).
+function searchFormatPayload(a, b) {
+  return arguments.length >= 2 ? b : a;
+}
+
+function wrapFormatData(fn) {
+  return function() {
+    return fn.call(this, searchFormatPayload.apply(this, arguments));
+  };
+}
+
+function googleLatLng(location) {
+  if (!location) {
+    return null;
+  }
+
+  var lat = typeof location.lat === 'function' ? location.lat() : location.lat;
+  var lng = typeof location.lng === 'function' ? location.lng() : location.lng;
+  if (lat == null || lng == null) {
+    return null;
+  }
+
+  return L.latLng(lat, lng);
+}
+
+function googleResultList(results) {
+  if (!results) {
+    return [];
+  }
+
+  if (!Array.isArray(results) && results.results) {
+    results = results.results;
+  }
+
+  return Array.isArray(results) ? results : [];
+}
+
+function googleViewportBounds(geometry) {
+  if (!geometry) {
+    return null;
+  }
+
+  var box = geometry.viewport || geometry.bounds;
+  if (!box) {
+    return null;
+  }
+
+  var swLL, neLL;
+  if (typeof box.getSouthWest === 'function' && typeof box.getNorthEast === 'function') {
+    swLL = googleLatLng(box.getSouthWest());
+    neLL = googleLatLng(box.getNorthEast());
+    if (swLL && neLL) {
+      return L.latLngBounds(swLL, neLL);
+    }
+  }
+
+  if (box.south != null && box.west != null && box.north != null && box.east != null) {
+    return L.latLngBounds(
+      L.latLng(box.south, box.west),
+      L.latLng(box.north, box.east)
+    );
+  }
+
+  if (box.f && box.b && box.f.f != null && box.b.b != null) {
+    return L.latLngBounds(
+      L.latLng(box.f.f, box.b.b),
+      L.latLng(box.f.b, box.b.f)
+    );
+  }
+
+  return null;
+}
+
+function formatNominatimData(json) {
+  var jsonret = {};
+  if (!json) {
+    return jsonret;
+  }
+
+  var propName = this.options.propertyName;
+  var propLoc = this.options.propertyLoc;
+  var i, rec, name;
+
+  if (L.Util.isArray(propLoc)) {
+    for (i in json) {
+      if (!Object.prototype.hasOwnProperty.call(json, i)) {
+        continue;
+      }
+
+      rec = json[i];
+      name = this._getPath(rec, propName);
+      if (!name) {
+        continue;
+      }
+
+      jsonret[name] = L.latLng(
+        this._getPath(rec, propLoc[0]),
+        this._getPath(rec, propLoc[1])
+      );
+    }
+  } else {
+    for (i in json) {
+      if (!Object.prototype.hasOwnProperty.call(json, i)) {
+        continue;
+      }
+
+      rec = json[i];
+      name = this._getPath(rec, propName);
+      if (!name) {
+        continue;
+      }
+
+      jsonret[name] = L.latLng(this._getPath(rec, propLoc));
+    }
+  }
+
+  return jsonret;
+}
+
+function whenGoogleMapsReady(callback) {
+  if (window.google && google.maps && google.maps.Geocoder) {
+    callback();
+    return;
+  }
+
+  let attempts = 0;
+  const timer = setInterval(function() {
+    attempts += 1;
+    if (window.google && google.maps && google.maps.Geocoder) {
+      clearInterval(timer);
+      callback();
+    } else if (attempts >= 100) {
+      clearInterval(timer);
+      console.error('Google Maps JavaScript API failed to load. Pass a valid apikey to addSearchGoogle() / addReverseSearchGoogle() and enable the Maps JavaScript API.');
+    }
+  }, 50);
+}
+
 function adaptIcon(options) {
   if (options.marker && options.marker.icon) {
     var icon = options.marker.icon;
@@ -96,6 +234,12 @@ LeafletWidget.methods.addSearchOSM = function(options) {
     options.propertyLoc = options.propertyLoc
       ? options.propertyLoc
       : ['lat', 'lon'];
+
+    if (typeof options.formatData === 'function') {
+      options.formatData = wrapFormatData(options.formatData);
+    } else {
+      options.formatData = wrapFormatData(formatNominatimData);
+    }
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     //options.marker = L.circleMarker([0, 0], {radius: 30});
@@ -372,9 +516,8 @@ LeafletWidget.methods.searchOSMText = function(text) {
 
 
 LeafletWidget.methods.addSearchGoogle = function(options) {
-  (function() {
-    var map = this;
-
+  const map = this;
+  whenGoogleMapsReady(function() {
     if (map.searchControlGoogle) {
       map.searchControlGoogle.remove(map);
       delete map.searchControlGoogle;
@@ -383,17 +526,29 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     var geocoder = new google.maps.Geocoder();
 
     function googleGeocoding(text, callResponse) {
-      geocoder.geocode({address: text}, callResponse);
+      geocoder.geocode({address: text}, function(results, status) {
+        var ok = !status || status === 'OK' ||
+          (google.maps.GeocoderStatus && status === google.maps.GeocoderStatus.OK);
+        callResponse(ok ? googleResultList(results) : []);
+      });
     }
 
     function formatJSON(rawjson) {
-      var json = {},
-        key, loc;
+      var json = {};
+      var list = googleResultList(rawjson);
 
-      for (var i in rawjson) {
-        key = rawjson[i].formatted_address;
-        loc = L.latLng(rawjson[i].geometry.location.lat(), rawjson[i].geometry.location.lng());
-        json[ key ] = loc; //key,value format
+      for (var i = 0; i < list.length; i++) {
+        var item = list[i];
+        if (!item || !item.geometry) {
+          continue;
+        }
+
+        var loc = googleLatLng(item.geometry.location);
+        if (!loc) {
+          continue;
+        }
+
+        json[item.formatted_address || ('result-' + i)] = loc;
       }
 
       return json;
@@ -421,7 +576,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
     }
 
     options.sourceData = googleGeocoding;
-    options.formatData = formatJSON;
+    options.formatData = wrapFormatData(formatJSON);
 
     options.marker.icon = adaptIcon(options);
     map.searchControlGoogle = new L.Control.Search(options);
@@ -432,8 +587,7 @@ LeafletWidget.methods.addSearchGoogle = function(options) {
       if (!HTMLWidgets.shinyMode) return;
       Shiny.onInputChange(map.id + '_search_location_found', eventToShiny(e));
     });
-
-  }).call(this);
+  });
 };
 
 var clickGOOEventHandler;
@@ -454,10 +608,8 @@ LeafletWidget.methods.removeSearchGoogle = function() {
 };
 
 LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
-  (function() {
-
-    var map = this;
-
+  const map = this;
+  whenGoogleMapsReady(function() {
     group = group || 'reverse_search_google' ;
     map.layerManager.clearGroup(group);
 
@@ -481,10 +633,13 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
 
       geocoder.geocode({'location': {'lat': latlng.lat, 'lng': latlng.lng}},
         function(results, status) {
+          var list = googleResultList(results);
+          var ok = status === 'OK' ||
+            (google.maps.GeocoderStatus && status === google.maps.GeocoderStatus.OK);
 
-          if (status === 'OK') {
-            if (results[0]) {
-              var result = results[0];
+          if (ok) {
+            if (list[0]) {
+              var result = list[0];
 
               if (!$.isEmptyObject(displayControl)) {
                 var displayText = '<div>';
@@ -496,12 +651,9 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
                 displayControl.innerHTML = displayText;
               }
 
-              var bb = L.latLngBounds(L.latLng(result.geometry.viewport.f.f,
-                result.geometry.viewport.b.b),
-              L.latLng(result.geometry.viewport.f.b,
-                result.geometry.viewport.b.f));
+              var bb = googleViewportBounds(result.geometry);
 
-              if (options.showBounds) {
+              if (options.showBounds && bb) {
                 var rect = L.rectangle(bb, {
                   weight: 2, color: '#444444', clickable: false,
                   dashArray: '5,10', 'type': 'result_boundingbox'});
@@ -511,9 +663,9 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
                 container.addLayer(rect);
               }
 
-              if (options.showFeature) {
-                var feature = L.circleMarker(L.latLng(result.geometry.location.lat(),
-                  result.geometry.location.lng()), {
+              var loc = googleLatLng(result.geometry && result.geometry.location);
+              if (options.showFeature && loc) {
+                var feature = L.circleMarker(loc, {
                   weight: 2, color: 'red', dashArray: '5,10',
                   clickable: false, 'type': 'result_feature'
                 });
@@ -577,8 +729,7 @@ LeafletWidget.methods.addReverseSearchGoogle = function(options, group) {
     };
 
     map.on('click', clickGOOEventHandler);
-
-  }).call(this);
+  });
 };
 
 
@@ -592,13 +743,23 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     }
 
     function formatJSON(rawjson) {
-      var json = {}, key, loc;
+      var json = {};
+      var matches = rawjson && rawjson.result && rawjson.result.addressMatches;
+      if (!matches) {
+        return json;
+      }
 
-      for (var i in rawjson.result.addressMatches) {
-        key = rawjson.result.addressMatches[i].matchedAddress;
-        loc = L.latLng(rawjson.result.addressMatches[i].coordinates.y,
-          rawjson.result.addressMatches[i].coordinates.x);
-        json[key] = loc; //key,value format
+      for (var i in matches) {
+        if (!Object.prototype.hasOwnProperty.call(matches, i)) {
+          continue;
+        }
+
+        var match = matches[i];
+        if (!match || !match.coordinates) {
+          continue;
+        }
+
+        json[match.matchedAddress] = L.latLng(match.coordinates.y, match.coordinates.x);
       }
 
       return json;
@@ -616,7 +777,7 @@ LeafletWidget.methods.addSearchUSCensusBureau = function(options) {
     options.jsonpParam = options.jsonpParam
       ? options.jsonpParam
       : 'callback';
-    options.formatData = formatJSON;
+    options.formatData = wrapFormatData(formatJSON);
 
     // https://github.com/stefanocudini/leaflet-search/issues/129
     // options.marker = L.circleMarker([0, 0], {radius: 30});

@@ -21,6 +21,9 @@
 - `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
 - New argument `fillColor` for `pulseIcons`. Fix #231
 - New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
+- `addSearchGoogle` / `addReverseSearchGoogle` load the Google Maps JavaScript API as an htmlDependency instead of `htmlwidgets::appendContent()`, which Shiny ignores (`Ignoring appended content`). The search control now appears in `renderLeaflet()`. Demo: `/inst/examples/shiny/search/google_app.R`. Fix #112
+- Google and OSM search suggestions crashed or showed `undefined` because leaflet-search PR 339 called `formatData(control, data)` instead of `formatData(data)`. Search formatters now accept both signatures, and Google results unwrap `GeocoderResponse.results`.
+- `addReverseSearchGoogle` no longer reads minified Google `LatLngBounds` internals (`viewport.f` / `viewport.b`). Bounds use `getSouthWest()` / `getNorthEast()` (or `south/west/north/east`).
 
 
 # leaflet.extras 2.0.1

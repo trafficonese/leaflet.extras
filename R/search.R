@@ -5,6 +5,29 @@ leafletSearchDependencies <- function() {
   )
 }
 
+googleMapsApiDependency <- function(apikey) {
+  url <- "https://maps.googleapis.com/maps/api/js?v=3"
+  if (!is.null(apikey) && nzchar(apikey)) {
+    url <- paste0(url, "&key=", utils::URLencode(apikey, reserved = TRUE))
+  }
+  htmltools::htmlDependency(
+    name = "google-maps-api",
+    version = "3",
+    src = c(href = "https://maps.googleapis.com/maps/api"),
+    script = list(list(src = sub("^https://maps.googleapis.com/maps/api/", "", url))),
+    all_files = FALSE
+  )
+}
+
+attachSearchGoogleDependencies <- function(map, apikey) {
+  map$dependencies <- c(
+    map$dependencies,
+    list(googleMapsApiDependency(apikey)),
+    leafletSearchDependencies()
+  )
+  map
+}
+
 
 #' Options for search control.
 #' @param url url for search by ajax request, ex: `search.php?q=\{s\}`. Can be function that returns string for dynamic parameter setting.
@@ -261,6 +284,7 @@ addReverseSearchOSM <- function(
 #' Add a Google search control to the map.
 #'
 #' @param apikey String. API Key for Google GeoCoding Service.
+#'   Required in Shiny; without a key the Maps JavaScript API often fails to load.
 #' @return modified map
 #' @rdname search-geocoding
 #' @examples
@@ -278,20 +302,16 @@ addSearchGoogle <- function(
   apikey = Sys.getenv("GOOGLE_MAP_GEOCODING_KEY"),
   options = searchOptions(autoCollapse = TRUE, minLength = 2)
 ) {
-  url <- "https://maps.googleapis.com/maps/api/js?v=3"
   if (is.null(apikey) || apikey == "") {
     warning("Google Geocoding works best with an apikey")
-  } else {
-    url <- paste0(url, "&key=", apikey)
   }
-  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
+  map <- attachSearchGoogleDependencies(map, apikey)
   invokeMethod(
     map,
     getMapData(map),
     "addSearchGoogle",
     options
-  ) %>%
-    htmlwidgets::appendContent(htmltools::tags$script(src = url))
+  )
 }
 
 #' Removes the Google search control from the map.
@@ -321,13 +341,10 @@ addReverseSearchGoogle <- function(
   displayText = TRUE,
   group = NULL
 ) {
-  map$dependencies <- c(map$dependencies, leafletSearchDependencies())
-  url <- "https://maps.googleapis.com/maps/api/js?v=3"
   if (is.null(apikey) || apikey == "") {
     warning("Google Geocoding works best with an apikey")
-  } else {
-    url <- paste0(url, "&key=", apikey)
   }
+  map <- attachSearchGoogleDependencies(map, apikey)
   if (displayText == TRUE) {
     map <- map %>%
       addControl("Click anywhere on the map to reverse geocode",
@@ -345,8 +362,7 @@ addReverseSearchGoogle <- function(
       showFeature = showFeature
     ),
     group
-  ) %>%
-    htmlwidgets::appendContent(htmltools::tags$script(src = url))
+  )
 }
 
 #' Add a US Census Bureau search control to the map.

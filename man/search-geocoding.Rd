@@ -92,7 +92,8 @@ For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \c
 
 \item{showHighlightOptions}{A list of styling options for the hover effect of a found feature}
 
-\item{apikey}{String. API Key for Google GeoCoding Service.}
+\item{apikey}{String. API Key for Google GeoCoding Service.
+Required in Shiny; without a key the Maps JavaScript API often fails to load.}
 }
 \value{
 modified map
