@@ -1,3 +1,15 @@
+#' Create a list of pulse icon data see
+#' @param color Color of the icon
+#' @param iconSize Size of Icon in Pixels.
+#' @param animate To animate the icon or not, defaults to TRUE.
+#' @param heartbeat Interval between each pulse in seconds.
+#' @param x icons
+#' @param i offset
+#' @param ... icons created from \code{\link{makePulseIcon}()}
+#' @name pulseMarkers
+NULL
+
+
 pulseIconDependency <- function() {
   list(
     html_dep_prod("lfx-pulse-icon", "0.1.1", has_style = TRUE, has_binding = TRUE)
@@ -7,7 +19,6 @@ pulseIconDependency <- function() {
 
 #' Make pulse-icon set
 #'
-#' @param ... icons created from \code{\link{makePulseIcon}()}
 #' @rdname pulseMarkers
 #' @export
 #' @examples
@@ -31,10 +42,8 @@ pulseIconList <- function(...) {
   res
 }
 
-#' @param x icons
-#' @param i offset
-#' @export
 #' @rdname pulseMarkers
+#' @export
 `[.leaflet_pulse_icon_set` <- function(x, i) {
   if (is.factor(i)) {
     i <- as.character(i)
@@ -71,9 +80,8 @@ pulseIconSetToPulseIcons <- function(x) {
 
 #' Make Pulse Icon
 #'
-#' @inheritParams pulseIcons
-#' @export
 #' @rdname pulseMarkers
+#' @export
 makePulseIcon <- function(
   color = "#ff0000",
   fillColor = color,
@@ -99,8 +107,8 @@ makePulseIcon <- function(
 #' @param iconSize Size of Icon in Pixels.
 #' @param animate To animate the icon or not, defaults to TRUE.
 #' @param heartbeat Interval between each pulse in seconds.
-#' @export
 #' @rdname pulseMarkers
+#' @export
 pulseIcons <- function(
   color = "#ff0000",
   fillColor = color,

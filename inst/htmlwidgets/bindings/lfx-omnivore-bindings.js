@@ -124,9 +124,36 @@ function addGeoJSONLayer(widget, geojsonLayerFunction, layerId, group, setStyle,
     }
   }
 
+  function fillOpacityFromProperty(feature) {
+    var prop = style && style.fillOpacityProperty;
+    if (prop == null || !feature) {
+      return null;
+    }
+    var op;
+    if (typeof prop === 'function') {
+      op = prop(feature);
+    } else if (typeof prop === 'string' && feature.properties) {
+      op = feature.properties[prop];
+    } else if (typeof prop === 'number') {
+      op = prop;
+    }
+    if (op == null || isNaN(Number(op))) {
+      return null;
+    }
+    return Number(op);
+  }
+
   function resetFeature(e) {
     var layer = e.target;
-    layer.setStyle(defaultStyle);
+    var reset = $.extend({}, defaultStyle);
+    if (typeof style.style == 'function') {
+      $.extend(reset, style.style(layer.feature));
+    }
+    var fillOpacity = fillOpacityFromProperty(layer.feature);
+    if (fillOpacity != null) {
+      reset.fillOpacity = fillOpacity;
+    }
+    layer.setStyle(reset);
     if (highlightStyle.sendToBack) {
       layer.bringToBack();
     }
@@ -148,42 +175,42 @@ function addGeoJSONLayer(widget, geojsonLayerFunction, layerId, group, setStyle,
 
     // create and bind popups if enabled.
     if (typeof popupProperty !== 'undefined' && popupProperty !== null) {
-      if (typeof popupProperty == 'string') {
-        if (!$.isEmptyObject(popupOptions)) {
+      if(typeof popupProperty == 'string') {
+        if(!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(feature.properties[popupProperty], popupOptions);
         } else {
-          layer.bindPopup(feature.properties[popupProperty]);
+          layer.bindPopup('' +feature.properties[popupProperty]);
         }
-      } else if (typeof popupProperty == 'function') {
-        if (!$.isEmptyObject(popupOptions)) {
+      } else if(typeof popupProperty == 'function') {
+        if(!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(popupProperty(feature), popupOptions);
         } else {
-          layer.bindPopup(popupProperty(feature));
+          layer.bindPopup('' +popupProperty(feature));
         }
       }
     }
 
     // create and bind labels if enabled.
     if (typeof labelProperty !== 'undefined' && labelProperty !== null) {
-      if (typeof labelProperty == 'string') {
-        if (!$.isEmptyObject(labelOptions)) {
-          if (labelOptions.permanent) {
+      if(typeof labelProperty == 'string') {
+        if(!$.isEmptyObject(labelOptions)) {
+          if(labelOptions.permanent) {
             layer.bindTooltip(feature.properties[labelProperty], labelOptions).showLabel();
           } else {
-            layer.bindTooltip(feature.properties[labelProperty], labelOptions);
+            layer.bindTooltip('' + feature.properties[labelProperty], labelOptions);
           }
         } else {
           layer.bindTooltip(feature.properties[labelProperty]);
         }
-      } else if (typeof labelProperty == 'function') {
-        if (!$.isEmptyObject(labelOptions)) {
-          if (labelOptions.noHide) {
+      } else if(typeof labelProperty == 'function') {
+        if(!$.isEmptyObject(labelOptions)) {
+          if(labelOptions.noHide) {
             layer.bindTooltip(labelProperty(feature), labelOptions).showLabel();
           } else {
-            layer.bindTooltip(labelProperty(feature), labelOptions);
+            layer.bindTooltip('' + labelProperty(feature), labelOptions);
           }
         } else {
-          layer.bindTooltip(labelProperty(feature));
+          layer.bindTooltip('' + labelProperty(feature));
         }
       }
     }

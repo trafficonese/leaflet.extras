@@ -19,6 +19,18 @@ geoJSONChoroplethDependency <- function() {
   )
 }
 
+choroplethOpacityArgs <- function(fillOpacity, fillOpacityProperty = NULL) {
+  if ((inherits(fillOpacity, "JS_EVAL") || is.function(fillOpacity)) &&
+    is.null(fillOpacityProperty)) {
+    fillOpacityProperty <- fillOpacity
+    fillOpacity <- 0.2
+  }
+  list(
+    fillOpacity = fillOpacity,
+    fillOpacityProperty = fillOpacityProperty
+  )
+}
+
 
 # Utility Function
 invokeJSAddMethod <- function(
@@ -127,9 +139,9 @@ invokeJSAddMethod <- function(
 #' ## addGeoJSONv2
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   paste0(
-#'     "https://raw.githubusercontent.com/benbalter/dc-maps",
-#'     "/master/maps/historic-landmarks-points.geojson"
+#'   system.file(
+#'     "examples/data/geojson/historic-landmarks-points.geojson",
+#'     package = "leaflet.extras"
 #'   )
 #' )
 #'
@@ -225,7 +237,12 @@ legendOptions <- function(
 }
 
 #' Adds a GeoJSON/TopoJSON Choropleth.
-#' @param valueProperty The property to use for coloring
+#' @param valueProperty The property to use for coloring. Either a property
+#'   name or a JS function of the GeoJSON feature.
+#' @param fillOpacityProperty The property to use for fill opacity. Either a
+#'   property name or a JS function of the GeoJSON feature, e.g.
+#'   \code{JS("function(feature){return feature.properties.dist_num / 100;}")}.
+#'   A JS function may also be passed as \code{fillOpacity}.
 #' @param scale The scale to use from chroma.js
 #' @param steps number of breakes
 #' @param mode q for quantile, e for equidistant, k for k-means
@@ -241,24 +258,27 @@ legendOptions <- function(
 #' ## addGeoJSONChoropleth
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+#'   system.file(
+#'     "examples/data/geojson/crimes_by_district.topojson",
+#'     package = "leaflet.extras"
+#'   )
 #' )
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
-#'   setView(-77.0369, 38.9072, 11) %>%
+#'   setView(-75.14, 40, 11) %>%
 #'   addBootstrapDependency() %>%
 #'   enableMeasurePath() %>%
 #'   addGeoJSONChoropleth(
 #'     geoJson,
-#'     valueProperty = "AREASQMI",
+#'     valueProperty = "incidents",
 #'     scale = c("white", "red"),
 #'     mode = "q",
 #'     steps = 4,
 #'     padding = c(0.2, 0),
-#'     labelProperty = "NAME",
+#'     labelProperty = "location",
 #'     popupProperty = propstoHTMLTable(
-#'       props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
+#'       props = c("dist_numc", "location", "incidents"),
 #'       table.attrs = list(class = "table table-striped table-bordered"),
 #'       drop.na = TRUE
 #'     ),
@@ -304,7 +324,8 @@ addGeoJSONChoropleth <- function(
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL,
-  legendOptions = NULL
+  legendOptions = NULL,
+  fillOpacityProperty = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(
@@ -313,9 +334,11 @@ addGeoJSONChoropleth <- function(
   )
 
   channelMode <- match.arg(channelMode)
+  opacityArgs <- choroplethOpacityArgs(fillOpacity, fillOpacityProperty)
 
   pathOptions <- c(pathOptions, list(
     valueProperty = valueProperty,
+    fillOpacityProperty = opacityArgs$fillOpacityProperty,
     scale = scale,
     steps = steps,
     mode = mode,
@@ -328,7 +351,7 @@ addGeoJSONChoropleth <- function(
     color = color,
     weight = weight,
     opacity = opacity,
-    fillOpacity = fillOpacity,
+    fillOpacity = opacityArgs$fillOpacity,
     dashArray = dashArray,
     smoothFactor = smoothFactor,
     noClip = noClip
@@ -471,7 +494,8 @@ addKMLChoropleth <- function(
   noClip = FALSE,
   pathOptions = leaflet::pathOptions(),
   highlightOptions = NULL,
-  legendOptions = NULL
+  legendOptions = NULL,
+  fillOpacityProperty = NULL
 ) {
   map$dependencies <- c(map$dependencies, omnivoreDependencies())
   map$dependencies <- c(
@@ -479,8 +503,10 @@ addKMLChoropleth <- function(
     geoJSONChoroplethDependency()
   )
   channelMode <- match.arg(channelMode)
+  opacityArgs <- choroplethOpacityArgs(fillOpacity, fillOpacityProperty)
   pathOptions <- c(pathOptions, list(
     valueProperty = valueProperty,
+    fillOpacityProperty = opacityArgs$fillOpacityProperty,
     scale = scale,
     steps = steps,
     mode = mode,
@@ -493,7 +519,7 @@ addKMLChoropleth <- function(
     color = color,
     weight = weight,
     opacity = opacity,
-    fillOpacity = fillOpacity,
+    fillOpacity = opacityArgs$fillOpacity,
     dashArray = dashArray,
     smoothFactor = smoothFactor,
     noClip = noClip
