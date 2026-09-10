@@ -2,6 +2,9 @@
 
 
 ## New Features
+- `addGeoJSONChoropleth()` / `addKMLChoropleth()` can vary polygon fill
+  opacity per feature via `fillOpacityProperty` (property name or JS
+  function). Passing a JS function as `fillOpacity` works too. Fix #53
 - `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
   weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
   for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when
@@ -20,6 +23,9 @@
 - pkgdown reference index includes `addHeatmapLegend`.
 
 ## Bugfixes
+- Rd examples no longer download GeoJSON from GitHub during `R CMD check --as-cran`
+  (`--run-donttest`). CI failed with HTTP 429 (rate limit) on ubuntu-latest/oldrel-1.
+  Examples now use local fixtures under `inst/examples/data/geojson/`.
 - Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`. Long example URLs in `omnivore` and `webglheatmap` docs are wrapped to stay under the Rd 100-character limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting and opening #251. Fix #250
 - New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
 - `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 

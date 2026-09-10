@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "LABEL": "Example Landmark",
+        "STATUS": "Designated"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-77.0369, 38.9072]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "LABEL": "Pending Landmark",
+        "STATUS": "Pending"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-77.0400, 38.9100]
+      }
+    }
+  ]
+}
