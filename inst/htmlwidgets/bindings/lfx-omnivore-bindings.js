@@ -175,26 +175,26 @@ function addGeoJSONLayer(widget, geojsonLayerFunction, layerId, group, setStyle,
 
     // create and bind popups if enabled.
     if (typeof popupProperty !== 'undefined' && popupProperty !== null) {
-      if(typeof popupProperty == 'string') {
-        if(!$.isEmptyObject(popupOptions)) {
+      if (typeof popupProperty == 'string') {
+        if (!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(feature.properties[popupProperty], popupOptions);
         } else {
-          layer.bindPopup('' +feature.properties[popupProperty]);
+          layer.bindPopup('' + feature.properties[popupProperty]);
         }
-      } else if(typeof popupProperty == 'function') {
-        if(!$.isEmptyObject(popupOptions)) {
+      } else if (typeof popupProperty == 'function') {
+        if (!$.isEmptyObject(popupOptions)) {
           layer.bindPopup(popupProperty(feature), popupOptions);
         } else {
-          layer.bindPopup('' +popupProperty(feature));
+          layer.bindPopup('' + popupProperty(feature));
         }
       }
     }
 
     // create and bind labels if enabled.
     if (typeof labelProperty !== 'undefined' && labelProperty !== null) {
-      if(typeof labelProperty == 'string') {
-        if(!$.isEmptyObject(labelOptions)) {
-          if(labelOptions.permanent) {
+      if (typeof labelProperty == 'string') {
+        if (!$.isEmptyObject(labelOptions)) {
+          if (labelOptions.permanent) {
             layer.bindTooltip(feature.properties[labelProperty], labelOptions).showLabel();
           } else {
             layer.bindTooltip('' + feature.properties[labelProperty], labelOptions);
@@ -202,9 +202,9 @@ function addGeoJSONLayer(widget, geojsonLayerFunction, layerId, group, setStyle,
         } else {
           layer.bindTooltip(feature.properties[labelProperty]);
         }
-      } else if(typeof labelProperty == 'function') {
-        if(!$.isEmptyObject(labelOptions)) {
-          if(labelOptions.noHide) {
+      } else if (typeof labelProperty == 'function') {
+        if (!$.isEmptyObject(labelOptions)) {
+          if (labelOptions.noHide) {
             layer.bindTooltip(labelProperty(feature), labelOptions).showLabel();
           } else {
             layer.bindTooltip('' + labelProperty(feature), labelOptions);
