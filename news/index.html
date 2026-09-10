@@ -36,11 +36,15 @@
 <h2 class="pkg-version" data-toc-text="development version" id="leafletextras-development-version">leaflet.extras (development version)<a class="anchor" aria-label="anchor" href="#leafletextras-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>Include the plugin <a href="https://github.com/ismyrnow/leaflet-groupedlayercontrol" class="external-link"><code>leaflet-groupedlayercontrol</code></a>. See the example in <code>/inst/examples/shiny/groupedlayercontrol_app.R</code> for a demo of all options and methods. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/202" class="external-link">#202</a></li>
+<ul><li>
+<code>addHeatmap</code> and <code>addWebGLHeatmap</code> now scale intensity values so that raw weights such as 1 vs 500 stay visually distinct. Use <code>scaleIntensity = FALSE</code> for the previous clipping behavior. <code>addHeatmap</code> also sets <code>maxZoom = 0</code> when scaling so Leaflet.heat does not fade points to blue at low zoom. New <code><a href="../reference/heatmap-legend.html">addHeatmapLegend()</a></code> (also via <code>legend = TRUE</code>) adds a color guide. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/126" class="external-link">#126</a>, Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/160" class="external-link">#160</a></li>
+<li>Include the plugin <a href="https://github.com/ismyrnow/leaflet-groupedlayercontrol" class="external-link"><code>leaflet-groupedlayercontrol</code></a>. See the example in <code>/inst/examples/shiny/groupedlayercontrol_app.R</code> for a demo of all options and methods. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/202" class="external-link">#202</a></li>
 </ul></div>
 <div class="section level3">
 <h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
 <ul><li>Updated GitHub Actions dependencies (<code>actions/checkout</code> v6, <code>actions/setup-node</code> v6, <code>actions/cache</code> v5, <code>actions/upload-artifact</code> v6, <code>JamesIves/github-pages-deploy-action</code> 4.7.6) and the npm <code>js-yaml</code> lockfile (4.1.1).</li>
+<li>Style GHA no longer runs on <code>pull_request</code> (detached HEAD made <code>git pull</code> fail after auto-commits). It now runs on push to the branch instead.</li>
+<li>pkgdown reference index includes <code>addHeatmapLegend</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bugfixes-development-version">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-development-version"></a></h3>
@@ -76,7 +80,7 @@
 <ul><li>
 <code>handlersOptions</code> and <code>toolbarOptions</code>, with which you can customize the drawing toolbar and the tooltips</li>
 <li>
-<code>addDrawToolbar</code> got a new argument <code>drag</code>. When set to <code>TRUE</code>, the drawn features will be draggable during editing, utilizing the <a href="https://www.npmjs.com/package/leaflet-draw-drag" class="external-link">Leaflet.Draw.Drag</a> plugin. Otherwise, this library will not be included. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/115" class="external-link">#115</a></li>
+<code>addDrawToolbar</code> got a new argument <code>drag</code>. When set to <code>TRUE</code>, the drawn features will be draggable during editing, utilizing the <a href="https://github.com/w8r/Leaflet.draw.drag" class="external-link">Leaflet.Draw.Drag</a> plugin. Otherwise, this library will not be included. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/115" class="external-link">#115</a></li>
 </ul></li>
 <li>
 <code>searchOSMText</code> enables setting the OpenStreetMap (OSM) search text directly from R</li>

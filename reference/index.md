@@ -56,6 +56,8 @@
   [`removeHeatmap()`](https://trafficonese.github.io/leaflet.extras/reference/heatmap.md)
   [`clearHeatmap()`](https://trafficonese.github.io/leaflet.extras/reference/heatmap.md)
   : Add a heatmap
+- [`addHeatmapLegend()`](https://trafficonese.github.io/leaflet.extras/reference/heatmap-legend.md)
+  : Add a color legend for a heatmap
 - [`addWebGLHeatmap()`](https://trafficonese.github.io/leaflet.extras/reference/webglheatmap.md)
   [`addWebGLGeoJSONHeatmap()`](https://trafficonese.github.io/leaflet.extras/reference/webglheatmap.md)
   [`addWebGLKMLHeatmap()`](https://trafficonese.github.io/leaflet.extras/reference/webglheatmap.md)
