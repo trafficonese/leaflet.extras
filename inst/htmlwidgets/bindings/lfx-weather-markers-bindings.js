@@ -1,8 +1,17 @@
 /* global LeafletWidget, $, L */
-LeafletWidget.methods.addWeatherMarkers = function(
-  lat, lng, icon, layerId, group, options,
-  popup, popupOptions, clusterOptions, clusterId, label, labelOptions) {
-  (function(){
+LeafletWidget.methods.addWeatherMarkers = function(lat, 
+  lng, 
+  icon, 
+  layerId, 
+  group, 
+  options,
+  popup, 
+  popupOptions, 
+  clusterOptions, 
+  clusterId, 
+  label, 
+  labelOptions) {
+  (function() {
     var icondf;
 
     var getIcon;
@@ -19,19 +28,19 @@ LeafletWidget.methods.addWeatherMarkers = function(
           return new L.WeatherMarkers.Icon();
         }
 
-        opts.iconSize= [35, 45];
-        opts.iconAnchor=   [17, 42];
-        opts.popupAnchor= [1, -32];
-        opts.shadowAnchor= [10, 12];
-        opts.shadowSize= [36, 16];
-        opts.className= 'weather-marker';
-        opts.prefix= 'wi';
+        opts.iconSize = [35, 45];
+        opts.iconAnchor = [17, 42];
+        opts.popupAnchor = [1, -32];
+        opts.shadowAnchor = [10, 12];
+        opts.shadowSize = [36, 16];
+        opts.className = 'weather-marker';
+        opts.prefix = 'wi';
 
         return new L.WeatherMarkers.Icon(opts);
       };
     }
 
-    if(!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
+    if (!($.isEmptyObject(lat) || $.isEmptyObject(lng)) ||
       ($.isNumeric(lat) && $.isNumeric(lng))) {
 
       var df = new LeafletWidget.DataFrame()
@@ -47,12 +56,11 @@ LeafletWidget.methods.addWeatherMarkers = function(
 
       if (icon) icondf.effectiveLength = df.nrow();
 
-      LeafletWidget.methods.addGenericMarkers(
-        this, df, group, clusterOptions, clusterId, function(df, i) {
-          var options = df.get(i);
-          if (icon) options.icon = getIcon(i);
-          return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
-        });
+      LeafletWidget.methods.addGenericMarkers(this, df, group, clusterOptions, clusterId, function(df, i) {
+        var options = df.get(i);
+        if (icon) options.icon = getIcon(i);
+        return L.marker([df.get(i, 'lat'), df.get(i, 'lng')], options);
+      });
     }
 
   }).call(this);

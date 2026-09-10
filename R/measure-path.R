@@ -1,7 +1,6 @@
 measurePathDependencies <- function() {
   list(
-    # // "leaflet-measure-path": "1.3.1",
-    html_dep_prod("lfx-measure-path", "1.3.1", has_style = TRUE, has_binding = TRUE)
+    html_dep_prod("lfx-measure-path", "1.5.0", has_style = TRUE, has_binding = TRUE)
   )
 }
 
@@ -10,8 +9,9 @@ measurePathDependencies <- function() {
 #' @rdname measure-path
 #' @export
 #' @examples
-#' \donttest{geoJson <- readr::read_file(
-#'   "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+#' \donttest{
+#' geoJson <- readr::read_file(
+#'   "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 #' )
 #'
 #' leaflet() %>%
@@ -22,10 +22,10 @@ measurePathDependencies <- function() {
 #'   addGeoJSONChoropleth(
 #'     geoJson,
 #'     valueProperty = "AREASQMI",
-#'     scale = c("white","red"),
+#'     scale = c("white", "red"),
 #'     mode = "q",
 #'     steps = 4,
-#'     padding = c(0.2,0),
+#'     padding = c(0.2, 0),
 #'     labelProperty = "NAME",
 #'     popupProperty = propstoHTMLTable(
 #'       props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
@@ -36,11 +36,14 @@ measurePathDependencies <- function() {
 #'     highlightOptions = highlightOptions(
 #'       weight = 2, color = "#000000",
 #'       fillOpacity = 1, opacity = 1,
-#'       bringToFront = TRUE, sendToBack = TRUE),
+#'       bringToFront = TRUE, sendToBack = TRUE
+#'     ),
 #'     pathOptions = pathOptions(
 #'       showMeasurements = TRUE,
-#'       measurementOptions = measurePathOptions(imperial = TRUE)))}
-#'
+#'       measurementOptions = measurePathOptions(imperial = TRUE)
+#'     )
+#'   )
+#' }
 #'
 enableMeasurePath <- function(map) {
   map$dependencies <- c(map$dependencies, measurePathDependencies())
@@ -71,44 +74,61 @@ measurePathOptions <- function(
   )
 }
 
-#' Adds a toolbar to enable/disable measuing path distances/areas
+#' Adds a toolbar to enable/disable measuring path distances/areas
 #' @param options The measurePathOptions.
+#' @param group The group name
+#' @param group A character vector specifying the group(s) of layers for measurements.
+#' If `group` is `NULL` (default), measurements apply to all layers.
+#' For a single group or multiple groups, measurements apply only to matching layers.
 #' @rdname measure-path
 #' @export
+#' @examples
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addCircles(lng = c(10, 20), lat = c(50, 60), group = "Group 1") %>%
+#'   addCircles(lng = c(15, 25), lat = c(55, 65), group = "Group 2") %>%
+#'   addMeasurePathToolbar(group = "Group 1") # Enable measurements for "Group 1" only
 addMeasurePathToolbar <- function(
   map,
-  options = measurePathOptions()
+  options = measurePathOptions(),
+  group = NULL
 ) {
-  map <- enableMeasurePath(map) %>%
-  addEasyButtonBar(
-    easyButton(
-    states = list(
-      easyButtonState(
-        stateName = "disabled-measurement",
-        icon = "ion-ios-flask-outline",
-        title = "Enable Measurements",
-        onClick = JS("
-          function(btn, map) {
-             LeafletWidget.methods.enableMeasurements.call(map);
-             btn.state(\"enabled-measurement\");
+  if (is.null(group)) group <- ""
+  group <- jsonlite::toJSON(group)
 
-          }")
-      ),
-      easyButtonState(
-        stateName = "enabled-measurement",
-        icon = "ion-ios-flask",
-        title = "Disable Measurements",
-        onClick = JS("
+  map <- enableMeasurePath(map) %>%
+    addEasyButtonBar(
+      easyButton(
+        states = list(
+          easyButtonState(
+            stateName = "disabled-measurement",
+            icon = "ion-ios-flask-outline",
+            title = "Enable Measurements",
+            onClick = JS(sprintf("
           function(btn, map) {
-             LeafletWidget.methods.disableMeasurements.call(map);
+             LeafletWidget.methods.enableMeasurements.call(map, '%s');
+             btn.state(\"enabled-measurement\");
+          }", group))
+          ),
+          easyButtonState(
+            stateName = "enabled-measurement",
+            icon = "ion-ios-flask",
+            title = "Disable Measurements",
+            onClick = JS(sprintf("
+          function(btn, map) {
+             LeafletWidget.methods.disableMeasurements.call(map, '%s');
              btn.state(\"disabled-measurement\");
-          }")
+          }", group))
+          )
+        )
+      ),
+      easyButton(
+        icon = "ion-android-refresh", title = "Recalculate Measurements",
+        onClick = JS(sprintf("
+          function(btn, map) {
+             LeafletWidget.methods.refreshMeasurements.call(map, '%s');
+          }", group))
       )
     )
-  ),
-  easyButton(
-      icon = "ion-android-refresh", title = "Recalculate Measurements",
-      onClick = JS("function(btn, map){ LeafletWidget.methods.refreshMeasurements.call(map); }"))
-  )
   invokeMethod(map, leaflet::getMapData(map), "setMeasurementOptions", options)
 }

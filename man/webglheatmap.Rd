@@ -22,6 +22,10 @@ addWebGLHeatmap(
   opacity = 1,
   gradientTexture = NULL,
   alphaRange = 1,
+  max = NULL,
+  scaleIntensity = TRUE,
+  legend = FALSE,
+  legendOptions = NULL,
   data = leaflet::getMapData(map)
 )
 
@@ -83,7 +87,7 @@ removeWebGLHeatmap(map, layerId)
 clearWebGLHeatmap(map)
 }
 \arguments{
-\item{map}{the map to add pulse Markers to.}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -95,12 +99,15 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{intensity}{intensity of the heat. A vector of numeric values or a formula.}
+\item{intensity}{intensity of the heat. A vector of numeric values or a formula.
+The WebGL plugin expects values between 0 and 1. If \code{scaleIntensity = TRUE},
+values are divided by \code{max} (or by the data maximum when \code{max} is
+\code{NULL}) so that 1 and 500 stay visually distinct.}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
@@ -115,6 +122,17 @@ layers (e.g. markers and polygons) can share the same group name.}
 allowed values are "skyline", "deep-sea"}
 
 \item{alphaRange}{adjust transparency by changing to value between 0 and 1}
+
+\item{max}{intensity used for scaling when \code{scaleIntensity = TRUE}.
+The default \code{NULL} uses the maximum of \code{intensity}.}
+
+\item{scaleIntensity}{If \code{TRUE} (default), scale \code{intensity} to
+the 0-1 range expected by the WebGL plugin.}
+
+\item{legend}{If \code{TRUE}, add a color legend for the intensity scale.}
+
+\item{legendOptions}{A list of arguments passed to \code{\link{addHeatmapLegend}},
+such as \code{title} or \code{position}.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -153,48 +171,61 @@ clears the webgl heatmap
 ## addWebGLHeatmap
 leaflet(quakes) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatter) \%>\%
-  addWebGLHeatmap(lng = ~long, lat = ~lat, size = 60000)
+  addWebGLHeatmap(
+    lng = ~long, lat = ~lat, intensity = ~mag, size = 60000,
+    legend = TRUE
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))
 ## addWebGLGeoJSONHeatmap
-\donttest{geoJson <- readr::read_file(
-  "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+\donttest{
+geoJson <- readr::read_file(
+  paste0(
+    "https://raw.githubusercontent.com/benbalter/dc-maps",
+    "/master/maps/historic-landmarks-points.geojson"
+  )
 )
 
 leaflet() \%>\%
   setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLGeoJSONHeatmap(
-    geoJson, size = 30 , units = "px"
+    geoJson,
+    size = 30, units = "px"
   ) \%>\%
   addGeoJSONv2(
     geoJson,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 0.7,
     markerOptions = markerOptions(radius = 2)
-  )}
+  )
+}
 
 ## for more examples see
 # browseURL(system.file("examples/geojsonV2.R", package = "leaflet.extras"))
 # browseURL(system.file("examples/TopoJSON.R", package = "leaflet.extras"))
 ## addWebGLKMLHeatmap
-\donttest{kml <- readr::read_file(
+\donttest{
+kml <- readr::read_file(
   system.file("examples/data/kml/crimes.kml.zip", package = "leaflet.extras")
 )
 
-leaflet() \%>\% setView(-77.0369, 38.9072, 12) \%>\%
+leaflet() \%>\%
+  setView(-77.0369, 38.9072, 12) \%>\%
   addProviderTiles(providers$CartoDB.Positron) \%>\%
   addWebGLKMLHeatmap(kml, size = 20, units = "px") \%>\%
   addKML(
     kml,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 1))}
-
+    markerOptions = markerOptions(radius = 1)
+  )
+}
 
 ## addWebGLCSVHeatmap
-\donttest{csv <- readr::read_file(
+\donttest{
+csv <- readr::read_file(
   system.file("examples/data/csv/world_airports.csv.zip", package = "leaflet.extras")
 )
 
@@ -204,10 +235,12 @@ leaflet() \%>\%
   addWebGLCSVHeatmap(
     csv,
     csvParserOptions("latitude_deg", "longitude_deg"),
-    size = 10, units = "px")}
+    size = 10, units = "px"
+  )
+}
 
-
-\donttest{airports <- readr::read_file(
+\donttest{
+airports <- readr::read_file(
   system.file("examples/data/gpx/md-airports.gpx.zip", package = "leaflet.extras")
 )
 
@@ -230,7 +263,8 @@ leaflet() \%>\%
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
     markerOptions = markerOptions(radius = 1.5),
     group = "airports"
-  )}
+  )
+}
 
 
 ## for a larger example see

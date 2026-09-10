@@ -4,18 +4,72 @@
 \alias{addBounceMarkers}
 \title{Add Bounce Markers to map}
 \usage{
-addBounceMarkers(map, lat, lng, duration = 1000, height = 100)
+addBounceMarkers(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  icon = NULL,
+  duration = 1000,
+  height = 100,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  data = leaflet::getMapData(map)
+)
 }
 \arguments{
-\item{map}{map object created by \link[leaflet:leaflet]{leaflet::leaflet}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{lat}{numeric latitude}
+\item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
+\code{~x} where \code{x} is a variable in \code{data}; by default (if not
+explicitly provided), it will be automatically inferred from \code{data} by
+looking for a column named \code{lng}, \code{long}, or \code{longitude}
+(case-insensitively)}
 
-\item{lng}{numeric longitude}
+\item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
+argument; the names \code{lat} and \code{latitude} are used when guessing
+the latitude column from \code{data})}
+
+\item{layerId}{the layer id}
+
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
+
+\item{icon}{the icon(s) for markers; an icon is represented by an R list of
+the form \code{list(iconUrl = "?", iconSize = c(x, y))}, and you can use
+\code{\link[leaflet]{icons}()} to create multiple icons; note when you use an R list
+that contains images as local files, these local image files will be base64
+encoded into the HTML page so the icon images will still be available even
+when you publish the map elsewhere}
 
 \item{duration}{integer scalar: The duration of the animation in milliseconds.}
 
 \item{height}{integer scalar: Height at which the marker is dropped.}
+
+\item{popup}{a character vector of the HTML content for the popups (you are
+recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
+for security reasons)}
+
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+
+\item{label}{a character vector of the HTML content for the labels}
+
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+options for each label. Default \code{NULL}}
+
+\item{options}{a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements}
+
+\item{data}{the data object from which the argument values are derived; by
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
 }
 \description{
 Add Bounce Markers to map

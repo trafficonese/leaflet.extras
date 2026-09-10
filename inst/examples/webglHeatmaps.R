@@ -12,13 +12,16 @@ leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
 #'
 #'
 leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
-  addWebGLHeatmap(lng = ~long, lat = ~lat, intensity = ~mag, size = 60000)
+  addWebGLHeatmap(
+    lng = ~long, lat = ~lat, intensity = ~mag, size = 60000,
+    legend = TRUE, legendOptions = list(title = "Magnitude")
+  )
 
 #' <br/><br/>
 #' Roughly 1500 points dataset
 #'
 library(sp)
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://raw.githubusercontent.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- geojsonio::as.json(v8$get("pubsGeoJSON"))
@@ -28,20 +31,20 @@ spdf <- geojsonio::geojson_sp(geoJson)
 #'
 #'
 leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
   addWebGLHeatmap(size = 60000)
 
 #' <br/><br/>Size in Pixels
 #'
 #'
 leaflet(spdf) %>%
-  addProviderTiles(providers$Thunderforest.TransportDark) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
   addWebGLHeatmap(size = 25, units = "px")
 
 #' <br/><br/>10,000 points
 #'
 #'
-jsURL <- "http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"
+jsURL <- "https://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 

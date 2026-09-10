@@ -7,8 +7,10 @@
 addBingTiles(
   map,
   apikey = Sys.getenv("BING_MAPS_API_KEY"),
-  imagerySet = c("Aerial", "AerialWithLabels", "CanvasDark", "CanvasLight", "CanvasGray",
-    "Road"),
+  imagerySet = c("Aerial", "AerialWithLabels", "AerialWithLabelsOnDemand",
+    "AerialWithLabelsOnDemand", "Birdseye", "BirdseyeWithLabels", "BirdseyeV2",
+    "BirdseyeV2WithLabels", "CanvasDark", "CanvasLight", "CanvasGray", "Road",
+    "RoadOnDemand", "Streetside"),
   layerId = NULL,
   group = NULL,
   ...
@@ -25,11 +27,12 @@ addBingTiles(
 
 \item{group}{String. An optional group name for the layer}
 
-\item{...}{Optional Parameters required by the Bing API described at \url{https://msdn.microsoft.com/en-us/library/ff701716.aspx}}
+\item{...}{Optional Parameters required by the Bing API described at
+\url{https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key?redirectedfrom=MSDN}}
 }
 \description{
 Adds Bing Tiles Layer
 }
 \seealso{
-Get a Bing Maps API Key: \url{https://msdn.microsoft.com/en-us/library/ff428642.aspx}
+Get a Bing Maps API Key: \url{https://learn.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata?redirectedfrom=MSDN}
 }

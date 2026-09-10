@@ -23,6 +23,10 @@ addHeatmap(
   blur = 15,
   gradient = NULL,
   cellSize = NULL,
+  maxZoom = NULL,
+  scaleIntensity = TRUE,
+  legend = FALSE,
+  legendOptions = NULL,
   data = leaflet::getMapData(map)
 )
 
@@ -88,7 +92,7 @@ removeHeatmap(map, layerId)
 clearHeatmap(map)
 }
 \arguments{
-\item{map}{the map widget.}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -100,12 +104,15 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{intensity}{intensity of the heat. A vector of numeric values or a formula.}
+\item{intensity}{intensity of the heat. A vector of numeric values or a formula.
+Values are interpreted relative to \code{max}. If \code{scaleIntensity = TRUE}
+and \code{max} is left at the default, values greater than 1 are scaled
+automatically so that 1 and 500 stay visually distinct.}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
@@ -121,12 +128,28 @@ layers (e.g. markers and polygons) can share the same group name.}
 \code{blur=1} means no blur.}
 
 \item{gradient}{palette name from \code{RColorBrewer} or an array of
-of colors to be provided to \code{\link{colorNumeric}}, or
+of colors to be provided to \code{\link[leaflet]{colorNumeric}}, or
 a color mapping function returned from \code{colorNumeric}}
 
 \item{cellSize}{the cell size in the grid. Points which are closer
 than this may be merged. Defaults to `radius / 2`.s
 Set to `1` to do almost no merging.}
+
+\item{maxZoom}{zoom level at which a point reaches its full intensity.
+Leaflet.heat otherwise fades points at low zoom, which makes everything
+look blue and hides \code{intensity}. When \code{scaleIntensity = TRUE}
+and \code{maxZoom} is \code{NULL}, it defaults to \code{0} so weights
+stay visible at world/regional zoom.}
+
+\item{scaleIntensity}{If \code{TRUE} (default) and \code{max} was not set
+by the caller, \code{max} becomes the maximum intensity so raw values
+such as 1 vs 500 are visible. Set to \code{FALSE} to keep the previous
+clipping behavior.}
+
+\item{legend}{If \code{TRUE}, add a color legend for the intensity scale.}
+
+\item{legendOptions}{A list of arguments passed to \code{\link{addHeatmapLegend}},
+such as \code{title} or \code{position}.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -164,10 +187,10 @@ clears the heatmap
 \examples{
 leaflet(quakes) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatter) \%>\%
-  setView( 178, -20, 5 ) \%>\%
+  setView(178, -20, 5) \%>\%
   addHeatmap(
     lng = ~long, lat = ~lat, intensity = ~mag,
-    blur = 20, max = 0.05, radius = 15
+    blur = 20, radius = 15, legend = TRUE
   )
 
 ## for more examples see
@@ -184,7 +207,8 @@ leaflet() \%>\%
     kml,
     markerType = "circleMarker",
     stroke = FALSE, fillColor = "black", fillOpacity = 1,
-    markerOptions = markerOptions(radius = 1))
+    markerOptions = markerOptions(radius = 1)
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/KML.R", package = "leaflet.extras"))

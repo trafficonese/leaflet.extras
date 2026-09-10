@@ -1,10 +1,12 @@
 #' Add Bootstrap dependency to a map
 #' @param map the map widget
 #' @export
-addBootstrapDependency <- function(map)  {
-    map$dependencies <- c(map$dependencies,
-                          leaflet::leafletDependencies$bootstrap())
-    map
+addBootstrapDependency <- function(map) {
+  map$dependencies <- c(
+    map$dependencies,
+    leaflet::leafletDependencies$bootstrap()
+  )
+  map
 }
 
 #' Add AwesomeMarkers and related lib dependencies to a map
@@ -12,19 +14,27 @@ addBootstrapDependency <- function(map)  {
 #' @param libs char vector with lib names.
 #' @export
 addAwesomeMarkersDependencies <- function(map, libs) {
-  map$dependencies <- c(map$dependencies,
-                        leaflet::leafletDependencies$awesomeMarkers())
+  map$dependencies <- c(
+    map$dependencies,
+    leaflet::leafletDependencies$awesomeMarkers()
+  )
   if ("fa" %in% libs) {
-    map$dependencies <- c(map$dependencies,
-                          leaflet::leafletDependencies$fontawesome())
+    map$dependencies <- c(
+      map$dependencies,
+      leaflet::leafletDependencies$fontawesome()
+    )
   }
   if ("ion" %in% libs) {
-    map$dependencies <- c(map$dependencies,
-                          leaflet::leafletDependencies$ionicon())
+    map$dependencies <- c(
+      map$dependencies,
+      leaflet::leafletDependencies$ionicon()
+    )
   }
   if ("glyphicon" %in% libs) {
-    map$dependencies <- c(map$dependencies,
-                          leaflet::leafletDependencies$bootstrap())
+    map$dependencies <- c(
+      map$dependencies,
+      leaflet::leafletDependencies$bootstrap()
+    )
   }
   map
 }
@@ -38,13 +48,13 @@ leafletExtrasDependencies <- list(
   choropleth = function() {
     geoJSONChoroplethDependency()
   },
-  weatherIcons = function(){
+  weatherIcons = function() {
     weatherIconDependency()
   },
-  pulseIcons = function(){
+  pulseIcons = function() {
     pulseIconDependency()
   },
-  webGLHeatmap = function(){
+  webGLHeatmap = function() {
     webGLHeatmapDependency()
   }
 )

@@ -1,7 +1,6 @@
 # Source https://github.com/mlevans/leaflet-hash
 hashDependency <- function() {
   list(
-    # // "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
     html_dep_prod("lfx-hash", "1.0.1")
   )
 }

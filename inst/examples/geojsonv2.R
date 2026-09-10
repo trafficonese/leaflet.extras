@@ -21,7 +21,7 @@ leaf <- leaflet() %>%
 #'
 
 # Read as a R list
-fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+fName <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 geoJson <- jsonlite::fromJSON(readr::read_file(fName))
 
 factpal <- colorFactor(topo.colors(nrow(geoJson$features$properties)),
@@ -155,7 +155,7 @@ leaf.world %>%
 #'
 #' Here again we don't do any pre-processing in R, everything is done on the browser side.
 
-fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+fName <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
 
 geoJson <- readr::read_file(fName)
 
@@ -200,7 +200,7 @@ leaf %>% setView(-77.0369, 38.9072, 11) %>%
 #'
 #' ### Example 1
 #' Here we plot GeoJSON with Point data using customized markers
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://raw.githubusercontent.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- v8$get("pubsGeoJSON")
@@ -223,8 +223,8 @@ leaf %>%
 #' ### Example 2
 #' Here we plot arts/cultural places and historic places in Washington DC. Notice that we are not loading the GeoJSONs in R, but directly downloading them and parsing them int the browser. We are also specifying popups content to be generated from the feature properties. We are also using marker clustering to cluster our points.
 
-artsAndCultures <- "https://rawgit.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson"
-historicLandmarks <- "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+artsAndCultures <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/arts-and-culture-organizations-as-501-c-3.geojson"
+historicLandmarks <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 
 artsAndCulture <- makeAwesomeIcon(icon = "paintbrush", library = "ion", markerColor = "red", iconColor = "black")
 historicLandmark <- makeAwesomeIcon(icon = "flag", library = "ion", markerColor = "green", iconColor = "black")
@@ -256,7 +256,7 @@ leaf %>% setView(-77.0369, 38.9072, 12) %>%
 #' ### Example 3
 #'
 #' This time in addition to the points we also plot the heatmap
-fName <- "https://rawgit.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
+fName <- "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/historic-landmarks-points.geojson"
 
 geoJson <- readr::read_file(fName)
 

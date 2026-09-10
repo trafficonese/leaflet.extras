@@ -1,7 +1,6 @@
 # Source https://github.com/mlevans/leaflet-fullscreen
 fullscreenDependency <- function() {
   list(
-    # // "leaflet-fullscreen": "1.0.2",
     html_dep_prod("lfx-fullscreen", "1.0.2", has_style = TRUE)
   )
 }
@@ -18,10 +17,12 @@ fullscreenDependency <- function() {
 #'   addTiles() %>%
 #'   addFullscreenControl()
 addFullscreenControl <- function(
-  map, position = "topleft", pseudoFullscreen = FALSE) {
+  map, position = "topleft", pseudoFullscreen = FALSE
+) {
   map$dependencies <- c(map$dependencies, fullscreenDependency())
-  if (is.null(map$x$options))
+  if (is.null(map$x$options)) {
     map$x$options <- list()
+  }
   map$x$options["fullscreenControl"] <-
     list(list(position = position, pseudoFullscreen = pseudoFullscreen))
   map

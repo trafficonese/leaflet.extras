@@ -173,7 +173,7 @@ drawCircleMarkerOptions <- function(
   weight = 4,
   opacity = 0.5,
   fill = TRUE,
-  fillColor = NULL, #same as color by default
+  fillColor = NULL, # same as color by default
   fillOpacity = 0.2,
   clickable = TRUE,
   zIndexOffset = 2000,
@@ -185,7 +185,7 @@ drawCircleMarkerOptions <- function(
     weight = weight,
     opacity = opacity,
     fill = fill,
-    fillColor = fillColor, #same as color by default
+    fillColor = fillColor, # same as color by default
     fillOpacity = fillOpacity,
     clickable = clickable,
     zIndexOffset = zIndexOffset,
@@ -234,5 +234,226 @@ editToolbarOptions <- function(
     remove = remove,
     selectedPathOptions = selectedPathOptions,
     allowIntersection = allowIntersection
+  ))
+}
+
+
+#' Options for editing handlers
+#' @description Customize tooltips for \code{\link{addDrawToolbar}}
+#' @param polyline List of options for polyline tooltips.
+#' @param polygon List of options for polygon tooltips.
+#' @param rectangle List of options for rectangle tooltips.
+#' @param circle List of options for circle tooltips.
+#' @param marker List of options for marker tooltips.
+#' @param circlemarker List of options for circlemarker tooltips.
+#' @param simpleshape List of options for simpleshape tooltips.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addDrawToolbar(
+#'     handlers = handlersOptions(
+#'       polyline = list(
+#'         tooltipStart = "Click It",
+#'         tooltipCont = "Keep going",
+#'         tooltipEnd = "Make it stop"
+#'       ),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = F, circleOptions = F,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+handlersOptions <- function(
+  polyline = list(
+    error = "<strong>Error:</strong> shape edges cannot cross!",
+    tooltipStart = "Click to start drawing line.",
+    tooltipCont = "Click to start drawing line.",
+    tooltipEnd = "Click to start drawing line."
+  ),
+  polygon = list(
+    tooltipStart = "Click to start drawing shape.",
+    tooltipCont = "Click to start drawing shape.",
+    tooltipEnd = "Click to start drawing shape."
+  ),
+  rectangle = list(
+    tooltipStart = "Click and drag to draw rectangle."
+  ),
+  circle = list(
+    tooltipStart = "Click map to place circle marker.",
+    radius = "Radius"
+  ),
+  marker = list(
+    tooltipStart = "Click map to place marker."
+  ),
+  circlemarker = list(
+    tooltipStart = "Click and drag to draw circle."
+  ),
+  simpleshape = list(
+    tooltipEnd = "Release mouse to finish drawing."
+  )
+) {
+  leaflet::filterNULL(list(
+    polyline = list(
+      error = polyline$error,
+      tooltip = list(
+        start = polyline$tooltipStart,
+        cont = polyline$tooltipCont,
+        end = polyline$tooltipEnd
+      )
+    ),
+    polygon = list(
+      tooltip = list(
+        start = polygon$tooltipStart,
+        cont = polygon$tooltipCont,
+        end = polygon$tooltipEnd
+      )
+    ),
+    rectangle = list(tooltip = list(start = rectangle$tooltipStart)),
+    circle = list(
+      radius = circle$radius,
+      tooltip = list(start = circle$tooltipStart)
+    ),
+    marker = list(tooltip = list(start = marker$tooltipStart)),
+    circlemarker = list(tooltip = list(start = circlemarker$tooltipStart)),
+    simpleshape = list(tooltip = list(end = simpleshape$tooltipEnd))
+  ))
+}
+
+
+#' Options for editing the toolbar
+#' @description Customize the toolbar for \code{\link{addDrawToolbar}}
+#' @param actions List of options for actions toolbar button.
+#' @param finish List of options for finish toolbar button.
+#' @param undo List of options for undo toolbar button.
+#' @param buttons List of options for buttons toolbar button.
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addDrawToolbar(
+#'     toolbar = toolbarOptions(
+#'       actions = list(text = "STOP"),
+#'       finish = list(text = "DONE"),
+#'       buttons = list(
+#'         polyline = "Draw a sexy polyline",
+#'         rectangle = "Draw a gigantic rectangle",
+#'         circlemarker = "Make a nice circle"
+#'       ),
+#'     ),
+#'     polylineOptions = T, rectangleOptions = T, circleOptions = T,
+#'     polygonOptions = F, markerOptions = F, circleMarkerOptions = F
+#'   )
+#' }
+toolbarOptions <- function(
+  actions = list(
+    title = "Cancel drawing",
+    text = "Cancel"
+  ),
+  finish = list(
+    title = "Finish drawing",
+    text = "Finish"
+  ),
+  undo = list(
+    title = "Delete last point drawn",
+    text = "Delete last point"
+  ),
+  buttons = list(
+    polyline = "Draw a polyline",
+    polygon = "Draw a polygon",
+    rectangle = "Draw a rectangle",
+    circle = "Draw a circle",
+    marker = "Draw a marker",
+    circlemarker = "Draw a circlemarker"
+  )
+) {
+  leaflet::filterNULL(list(
+    actions = list(
+      title = actions$title,
+      text = actions$text
+    ),
+    finish = list(
+      title = finish$title,
+      text = finish$text
+    ),
+    undo = list(
+      title = undo$title,
+      text = undo$text
+    ),
+    buttons = list(
+      polyline = buttons$polyline,
+      polygon = buttons$polygon,
+      rectangle = buttons$rectangle,
+      circle = buttons$circle,
+      marker = buttons$marker,
+      circlemarker = buttons$circlemarker
+    )
+  ))
+}
+
+
+#' Options for editing edit handlers
+#' @description Customize edit handlers for \code{\link{addDrawToolbar}}
+#' @param edit List of options for editing tooltips.
+#' @param remove List of options for removing tooltips.
+#' @export
+edithandlersOptions <- function(
+  edit = list(
+    tooltipText = "Drag handles or markers to edit features.",
+    tooltipSubtext = "Click cancel to undo changes."
+  ),
+  remove = list(
+    tooltipText = "Click on a feature to remove."
+  )
+) {
+  leaflet::filterNULL(list(
+    edit = list(
+      tooltip = list(
+        text = edit$tooltipText,
+        subtext = edit$tooltipSubtext
+      )
+    ),
+    remove = list(
+      tooltip = list(
+        text = remove$tooltipText
+      )
+    )
+  ))
+}
+
+
+#' Options for editing the toolbar
+#' @description Customize the edit toolbar for \code{\link{addDrawToolbar}}
+#' @param actions List of options for edit action tooltips.
+#' @param buttons List of options for edit button tooltips.
+#' @export
+edittoolbarOptions <- function(
+  actions = list(
+    save = list(
+      title = "Save changes",
+      text = "Save"
+    ),
+    cancel = list(
+      title = "Cancel editing, discards all changes",
+      text = "Cancel"
+    ),
+    clearAll = list(
+      title = "Clear all layers",
+      text = "Clear All"
+    )
+  ),
+  buttons = list(
+    edit = "Edit layers",
+    editDisabled = "No layers to edit",
+    remove = "Delete layers",
+    removeDisabled = "No layers to delete"
+  )
+) {
+  leaflet::filterNULL(list(
+    actions = actions,
+    buttons = buttons
   ))
 }

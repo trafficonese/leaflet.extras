@@ -1,19 +1,22 @@
 library(leaflet.extras)
 library(magrittr)
 
+devtools::load_all()
+
 #' Quakes
 #'
 #'
 leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
   setView( 178, -20, 5 ) %>%
   addHeatmap(lng = ~long, lat = ~lat, intensity = ~mag,
-             blur = 20, max = 0.05, radius = 15)
+             blur = 20, radius = 15, legend = TRUE, scaleIntensity = TRUE,
+             legendOptions = list(title = "Magnitude"))
 
 #' <br/><br/>
 #' Roughly 1500 points dataset
 #'
 library(sp)
-jsURL <- "https://rawgit.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
+jsURL <- "https://raw.githubusercontent.com/Norkart/Leaflet-MiniMap/master/example/local_pubs_restaurant_norway.js"
 v8 <- V8::v8()
 v8$source(jsURL)
 geoJson <- geojsonio::as.json(v8$get("pubsGeoJSON"))
@@ -90,3 +93,4 @@ leaf %>%
     baseGroups = names(london_crimes),
     options = layersControlOptions(collapsed = FALSE)
   )
+

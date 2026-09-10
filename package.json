@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "napa": "napa",
-    "build": "napa && webpack --config webpack.config.js",
+    "lint": "eslint .eslintrc.js webpack.config.js ./inst/htmlwidgets/bindings --ext .js --fix",
+    "build": "npm run lint && napa && webpack --config webpack.config.js",
     "watch": "napa && webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,27 +27,27 @@
     "leaflet-draw-drag": "0.4.8",
     "leaflet-fullscreen": "1.0.2",
     "leaflet-gps": "1.7.8",
-    "leaflet-hash": "github:PowerPan/leaflet-hash#4020d13",
+    "leaflet-groupedlayercontrol": "github:trafficonese/leaflet-groupedlayercontrol",
+    "leaflet-hash": "github:wattnpapa/leaflet-hash#4020d13",
     "leaflet-heat": "github:Leaflet/Leaflet.heat#fbca300",
     "leaflet-measure-path": "1.5.0",
     "leaflet-plugins": "3.4.0",
-    "leaflet-search": "4.0.0",
+    "leaflet-search": "github:stefanocudini/leaflet-search#pull/339/head",
     "leaflet-sleep": "0.5.2",
+    "leaflet-styleeditor": "^0.1.21",
     "leaflet-webgl-heatmap": "0.2.7",
-    "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2",
-    "Leaflet.Geodesic": "github:henrythasler/Leaflet.Geodesic#c5fe36b",
-    "Leaflet.StyleEditor": "github:dwilhelm89/Leaflet.StyleEditor#24366b9",
-    "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#a92b176",
-    "pouchdb-browser": "8.0.1",
-    "topojson-client": "^3.1.0",
-    "topojson-server": "^3.0.1",
-    "topojson-simplify": "^3.0.3"
+    "leaflet.BounceMarker": "github:maximeh/leaflet.bouncemarker#v1.2.3",
+    "leaflet.geodesic": "^2.7.1",
+    "leaflet.tilelayer.pouchdbcached": "nikolauskrismer/Leaflet.TileLayer.PouchDBCached#748f1dd",
+    "pouchdb-browser": "8.0.1"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^1.7.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.10.0",
+    "css-minimizer-webpack-plugin": "^6.0.0",
     "eslint": "^8.57.0",
-    "eslint-webpack-plugin": "^4.0.1",
+    "eslint-webpack-plugin": "^4.1.0",
     "license-checker": "^25.0.1",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.8.1",
@@ -54,7 +55,8 @@
     "path": "^0.12.7",
     "script-loader": "^0.7.2",
     "style-loader": "^3.3.4",
-    "webpack": "^5.90.3",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   }
 }

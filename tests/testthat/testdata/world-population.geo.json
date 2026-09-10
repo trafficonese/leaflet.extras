@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME": "Testland",
+        "POP_DENSITY": 12.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-10, -10], [10, -10], [10, 10], [-10, 10], [-10, -10]]]
+      }
+    }
+  ]
+}

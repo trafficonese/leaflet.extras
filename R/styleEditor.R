@@ -1,6 +1,6 @@
 styleEditorDependencies <- function() {
   list(
-    html_dep_prod("lfx-styleeditor", "0.1.6", has_style = TRUE, has_binding = TRUE)
+    html_dep_prod("lfx-styleeditor", "0.1.21", has_style = TRUE, has_binding = TRUE)
   )
 }
 
@@ -29,8 +29,8 @@ addStyleEditor <- function(
   map,
   position = c("topleft", "topright", "bottomleft", "bottomright"),
   openOnLeafletDraw = TRUE, useGrouping = FALSE,
-  ...) {
-
+  ...
+) {
   map$dependencies <- c(map$dependencies, styleEditorDependencies())
 
   position <- match.arg(position)

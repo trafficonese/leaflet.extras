@@ -2,7 +2,9 @@
 % Please edit documentation in R/search.R
 \name{addSearchOSM}
 \alias{addSearchOSM}
+\alias{searchOSMText}
 \alias{removeSearchOSM}
+\alias{clearSearchOSM}
 \alias{addReverseSearchOSM}
 \alias{addSearchGoogle}
 \alias{removeSearchGoogle}
@@ -13,7 +15,11 @@
 \usage{
 addSearchOSM(map, options = searchOptions(autoCollapse = TRUE, minLength = 2))
 
+searchOSMText(map, text = "")
+
 removeSearchOSM(map)
+
+clearSearchOSM(map)
 
 addReverseSearchOSM(
   map,
@@ -22,7 +28,13 @@ addReverseSearchOSM(
   showFeature = TRUE,
   fitBounds = TRUE,
   displayText = TRUE,
-  group = NULL
+  group = NULL,
+  marker = list(icon = NULL),
+  showFeatureOptions = list(weight = 2, color = "red", dashArray = "5,10", fillOpacity =
+    0.2, opacity = 0.5),
+  showBoundsOptions = list(weight = 2, color = "#444444", dashArray = "5,10", fillOpacity
+    = 0.2, opacity = 0.5),
+  showHighlightOptions = list(opacity = 0.8, fillOpacity = 0.5, weight = 5)
 )
 
 addSearchGoogle(
@@ -56,6 +68,8 @@ removeSearchUSCensusBureau(map)
 
 \item{options}{Search Options}
 
+\item{text}{The search text}
+
 \item{showSearchLocation}{Boolean. If TRUE displays a Marker on the searched location's coordinates.}
 
 \item{showBounds}{Boolean. If TRUE show the bounding box of the found feature.}
@@ -69,6 +83,14 @@ For this to be effective one of \code{showSearchLocation}, \code{showBounds}, \c
 \item{displayText}{Boolean. If TRUE show a text box with found location's name on the map.}
 
 \item{group}{String. An optional group to hold all the searched locations and their results.}
+
+\item{marker}{Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}}
+
+\item{showFeatureOptions}{A list of styling options for the found feature}
+
+\item{showBoundsOptions}{A list of styling options for the bounds of the found feature}
+
+\item{showHighlightOptions}{A list of styling options for the hover effect of a found feature}
 
 \item{apikey}{String. API Key for Google GeoCoding Service.}
 }
@@ -88,11 +110,19 @@ modified map
 modified map
 
 modified map
+
+modified map
+
+modified map
 }
 \description{
 Add a OSM search control to the map.
 
+Add a OSM search control to the map.
+
 Removes the OSM search control from the map.
+
+Clears the search marker
 
 Add a Google search control to the map.
 
@@ -110,6 +140,5 @@ leaflet() \%>\%
 
 ## for more examples see
 # browseURL(system.file("examples/search.R", package = "leaflet.extras"))
-
 
 }

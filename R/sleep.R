@@ -1,7 +1,6 @@
 sleepDependency <- function() {
   list(
-    # // "leaflet-sleep": "0.5.1",
-    html_dep_prod("lfx-sleep", "0.5.1")
+    html_dep_prod("lfx-sleep", "0.5.2")
   )
 }
 
@@ -29,7 +28,7 @@ suspendScroll <- function(
   sleepNote = TRUE,
   hoverToWake = TRUE,
   wakeMessage = "Click or Hover to Wake",
-  #sleepButton = "L.Control.sleepMapControl",
+  # sleepButton = "L.Control.sleepMapControl",
   sleepOpacity = .7
 ) {
   sleepOptions <- list(
@@ -39,12 +38,13 @@ suspendScroll <- function(
     sleepNote = sleepNote,
     hoverToWake = hoverToWake,
     wakeMessage = wakeMessage,
-    #sleepButton = sleepButton,
+    # sleepButton = sleepButton,
     sleepOpacity = sleepOpacity
   )
   map$dependencies <- c(map$dependencies, sleepDependency())
-  if (is.null(map$x$options))
+  if (is.null(map$x$options)) {
     map$x$options <- list()
+  }
   map$x$options <- c(map$x$options, sleepOptions)
   map
 }

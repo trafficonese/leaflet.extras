@@ -1,0 +1,68 @@
+title: leaflet.extras
+url: https://trafficonese.github.io/leaflet.extras/
+template:
+  bootstrap: 5
+reference:
+- title: Package Documentation
+  desc: ~
+  contents: '`leaflet.extras`'
+- title: Useful Dependencies
+  desc: ~
+  contents:
+  - '`addAwesomeMarkersDependencies`'
+  - '`addBootstrapDependency`'
+  - '`leafletExtrasDependencies`'
+- title: Draw on Map
+  desc: ~
+  contents:
+  - '`drawShapeOptions`'
+  - '`addDrawToolbar`'
+  - '`addStyleEditor`'
+  - '`enableMeasurePath`'
+  - '`toolbarOptions`'
+  - '`handlersOptions`'
+  - '`edithandlersOptions`'
+  - '`edittoolbarOptions`'
+- title: Heatmaps
+  desc: ~
+  contents:
+  - '`addHeatmap`'
+  - '`addHeatmapLegend`'
+  - '`addWebGLHeatmap`'
+- title: GeoJSON/TopoJSON
+  desc: ~
+  contents:
+  - '`addGeoJSONv2`'
+  - '`propsToHTML`'
+- title: GroupedLayerControl
+  desc: ~
+  contents:
+  - matches("GroupedLayer")
+  - matches("groupedLayers")
+  - matches("addGrouped")
+- title: Extra Icons
+  desc: ~
+  contents:
+  - '`pulseIconList`'
+  - '`weatherIconList`'
+- title: Search Markers/Shapes
+  desc: ~
+  contents:
+  - '`searchOptions`'
+  - '`addSearchOSM`'
+  - '`addSearchFeatures`'
+- title: Miscellaneous Features
+  desc: ~
+  contents:
+  - '`addGeodesicPolylines`'
+  - '`addFullscreenControl`'
+  - '`gpsOptions`'
+  - '`addHash`'
+  - '`suspendScroll`'
+  - '`enableTileCaching`'
+  - '`addWMSLegend`'
+  - '`debugMap`'
+  - '`addResetMapButton`'
+  - '`addBingTiles`'
+  - '`addBounceMarkers`'
+

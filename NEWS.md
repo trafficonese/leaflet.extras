@@ -1,3 +1,74 @@
+# leaflet.extras (development version)
+
+
+## New Features
+- `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
+  weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
+  for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when
+  scaling so Leaflet.heat does not fade points to blue at low zoom. New
+  `addHeatmapLegend()` (also via `legend = TRUE`) adds a color guide. Fix #126, Fix #160
+- Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
+  See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
+
+## Improvements
+- Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
+- Style GHA no longer runs on `pull_request` (detached HEAD made `git pull` fail after auto-commits). It now runs on push to the branch instead.
+- pkgdown reference index includes `addHeatmapLegend`.
+
+## Bugfixes
+- Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`. Long example URLs in `omnivore` and `webglheatmap` docs are wrapped to stay under the Rd 100-character limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting and opening #251. Fix #250
+- New argument `filtersearch` for `searchOptions` to limit the Nominatim search area. Fix #168
+- `addSearchFeatures` displays all matching results, even in the case of duplicates. However, markers and animations are currently only applied to a single result and not to all matching entries. Fix #150 
+- New argument `fillColor` for `pulseIcons`. Fix #231
+- New argument `group` for `addMeasurePathToolbar`. Supports single group, multiple groups, or all layers (`group = NULL`). Fix #233
+
+
+# leaflet.extras 2.0.1
+
+## New Features
+- `addWMSLegend` gained the arguments `title`, `titleStyle` and `titleClass` to . Fix #219
+- `addDrawToolbar` gained the arguments `edittoolbar` and `edithandlers`, which let's you customize all the tooltips
+
+## Bugfixes
+- Fixed CRAN devel checks: *Found the following Rd file(s) with Rd \link{} targets missing package*
+
+
+# leaflet.extras 2.0.0
+
+## New Features
+- `addDrawToolbar` offers some new options: 
+  - `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips
+  - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://github.com/w8r/Leaflet.draw.drag) plugin. Otherwise, this library will not be included. Fix #115
+- `searchOSMText` enables setting the OpenStreetMap (OSM) search text directly from R
+- `clearSearchOSM` allows clearing the search marker associated with `addSearchOSM`. Fix #158, Fix #209
+- `clearSearchFeatures` provides functionality to clear the search marker
+- `addReverseSearchOSM` gained new arguments:
+  - `marker` allows customization of the icon for the found feature
+  - `showFeatureOptions` enables styling options for the found feature
+  - `showBoundsOptions` allows customization of the style for the boundary of a found feature
+  - `showHighlightOptions` enables customization of the hover effect for a found feature
+
+- `addBounceMarkers` behave now like normal Markers (except for clustering)
+- **Update Geodesics** functions to show default or custom statistics in Control Info, show (draggable) Markers, use layerManager, enable popup/label/markerOptions/highlightOptions, emit Mouse Events, accept icons. 
+- `addLatLng` for `addGeodesicPolylines` allows you to append line vertices
+- Emit mouse events (`click`, `mouseover`, and `mouseout`) for **drawn features**. The event names are suffixed with identifiers based on the `layercategory`, appended with `_draw_click`, `_draw_mouseover`, or `_draw_mouseout`. The `layercategory` should be either `shape`, `polyline`, or `marker`. (Thanks to @cmcaine) See `examples/shiny/draw-events/draw_mouse_events.R`
+
+## Improvements
+- The `apikey` of `addSearchGoogle` / `addReverseSearchGoogle` / `addBingTiles` now has to be not `NULL` and also not `""`
+- Extend BingTiles `imagerySet` and emit warnings for deprecated sets
+- Changed default values in `searchOptions` for `url` / `propertyLoc` /  `propertyName`
+- Draw events trigger correctly using `priority: "event"`. Fix #89
+- Included 12 color gradients from [colorbrewer2](https://colorbrewer2.org) for `addWebGLHeatmap` using this script `/scripts/generate_color_gradients.R`
+- In `addReverseSearchOSM`, longitudes are now normalized to ensure that the Nominatim search returns features for wrapped tiles.
+- Updated most JavaScript dependencies, changed Webpack Build, removed **source-maps** as package size was an R-CMD-check issue
+- Include Tests for R functions 
+- Use Github Actions (R-CMD-check, pkgdown, test-coverage, NPM builds, Styler, PR-commands)
+- Fixed & extended examples
+
+## Bugfixes
+-  #104, #148, #155, #156, #164, #165, #169, #174, #187
+
+
 # leaflet.extras 1.0.0
 
 ## leaflet.js
@@ -22,7 +93,7 @@
   - leaflet-pulse-icon@0.1.0 - https://github.com/mapshakers/leaflet-icon-pulse
   - leaflet-search@2.3.7 - https://github.com/stefanocudini/leaflet-search
   - leaflet-sleep@0.5.1 - https://github.com/CliffCloud/Leaflet.Sleep
-  - leaflet-webgl-heatmap@0.2.7 - https://github.com/ursudio/webgl-heatmap-leaflet
+  - leaflet-webgl-heatmap@0.2.7 - https://github.com/ursudio/leaflet-webgl-heatmap
   - leaflet.BounceMarker@1.0.0 - https://github.com/maximeh/leaflet.bouncemarker
   - leaflet.heat@0.2.0 - https://github.com/Leaflet/Leaflet.heat
   - leaflet.tilelayer.pouchdbcached@0.4.0 - https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached
@@ -89,7 +160,7 @@
 
 ## New Features
 
-* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin. Contributed by [Bangyou Zheng](https://github.com/bhaskarvk/leaflet.extras/pull/15).
+* Added support for [Leaflet-search](https://github.com/stefanocudini/leaflet-search) plugin. Contributed by [Bangyou Zheng](https://github.com/trafficonese/leaflet.extras/pull/15).
 
 # leaflet.extras 0.1.9002
 
@@ -176,7 +247,7 @@
 
 ## New Features
 
-* Added [webgl-heatmap](https://github.com/ursudio/webgl-heatmap-leaflet) plugin
+* Added [webgl-heatmap](https://github.com/ursudio/leaflet-webgl-heatmap) plugin
 * Added [geojson-choropleth](https://github.com/bhaskarvk/leaflet-choropleth) plugin
 * Added [Weather Markers](https://github.com/tallsam/Leaflet.weather-markers) plugin
 * Added [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse) plugin

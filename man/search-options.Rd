@@ -6,13 +6,14 @@
 \title{Options for search control.}
 \usage{
 searchOptions(
-  url = "",
+  url = NULL,
   sourceData = NULL,
   jsonpParam = NULL,
-  propertyLoc = "loc",
-  propertyName = "title",
+  propertyLoc = NULL,
+  propertyName = NULL,
   formatData = NULL,
   filterData = NULL,
+  filtersearch = NULL,
   moveToLocation = TRUE,
   zoom = 17,
   buildTip = NULL,
@@ -33,7 +34,9 @@ searchOptions(
   textCancel = "Cancel",
   textPlaceholder = "Search...",
   position = "topleft",
-  hideMarkerOnCollapse = FALSE
+  hideMarkerOnCollapse = FALSE,
+  marker = list(icon = NULL, animate = TRUE, circle = list(radius = 10, weight = 3, color
+    = "#e03", stroke = TRUE, fill = FALSE))
 )
 
 searchFeaturesOptions(
@@ -44,7 +47,7 @@ searchFeaturesOptions(
 )
 }
 \arguments{
-\item{url}{url for search by ajax request, ex: "search.php?q={s}". Can be function that returns string for dynamic parameter setting.}
+\item{url}{url for search by ajax request, ex: `search.php?q=\{s\}`. Can be function that returns string for dynamic parameter setting.}
 
 \item{sourceData}{function that fill _recordsCache, passed searching text by first param and callback in second.}
 
@@ -58,47 +61,51 @@ searchFeaturesOptions(
 
 \item{filterData}{callback for filtering data from text searched, params: textSearch, allRecords.}
 
-\item{moveToLocation}{whether to move to the found location.}
+\item{filtersearch}{Optional comma-separated string to prepend to the search text}
+
+\item{moveToLocation}{whether to move to the found location}
 
 \item{zoom}{zoom to this level when moving to location}
 
 \item{buildTip}{function that return row tip html node(or html string), receive text tooltip in first param.}
 
-\item{container}{container id to insert Search Control.}
+\item{container}{container id to insert Search Control}
 
-\item{minLength}{minimal text length for autocomplete.}
+\item{minLength}{minimal text length for autocomplete}
 
-\item{initial}{search elements only by initial text.}
+\item{initial}{search elements only by initial text}
 
-\item{casesensitive}{search elements in case sensitive text.}
+\item{casesensitive}{search elements in case sensitive text}
 
-\item{autoType}{complete input with first suggested result and select this filled-in text..}
+\item{autoType}{complete input with first suggested result and select this filled-in text}
 
 \item{delayType}{delay while typing for show tooltip.}
 
-\item{tooltipLimit}{limit max results to show in tooltip. -1 for no limit..}
+\item{tooltipLimit}{limit max results to show in tooltip. -1 for no limit}
 
-\item{tipAutoSubmit}{auto map panTo when click on tooltip.}
+\item{tipAutoSubmit}{auto map panTo when click on tooltip}
 
-\item{firstTipSubmit}{auto select first result con enter click.}
+\item{firstTipSubmit}{auto select first result con enter click}
 
-\item{autoResize}{autoresize on input change.}
+\item{autoResize}{autoresize on input change}
 
-\item{collapsed}{collapse search control at startup.}
+\item{collapsed}{collapse search control at startup}
 
 \item{autoCollapse}{collapse search control after submit(on button or on tips if enabled tipAutoSubmit).}
 
 \item{autoCollapseTime}{delay for autoclosing alert and collapse after blur.}
 
-\item{textErr}{'Location not error message.}
+\item{textErr}{Error message}
 
-\item{textCancel}{title in cancel button.}
+\item{textCancel}{title in cancel button}
 
-\item{textPlaceholder}{placeholder value.}
+\item{textPlaceholder}{placeholder value}
 
-\item{position}{"topleft".}
+\item{position}{position of the search input. Default is "topleft".}
 
 \item{hideMarkerOnCollapse}{remove circle and marker on search control collapsed.}
+
+\item{marker}{Let's you set the icon. Can be an icon made by \code{\link[leaflet]{makeIcon}} or \code{\link[leaflet]{makeAwesomeIcon}}}
 
 \item{openPopup}{whether to open the popup associated with the feature when the feature is searched for}
 
