@@ -23,6 +23,10 @@ addHeatmap(
   blur = 15,
   gradient = NULL,
   cellSize = NULL,
+  maxZoom = NULL,
+  scaleIntensity = TRUE,
+  legend = FALSE,
+  legendOptions = NULL,
   data = leaflet::getMapData(map)
 )
 
@@ -100,7 +104,10 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{intensity}{intensity of the heat. A vector of numeric values or a formula.}
+\item{intensity}{intensity of the heat. A vector of numeric values or a formula.
+Values are interpreted relative to \code{max}. If \code{scaleIntensity = TRUE}
+and \code{max} is left at the default, values greater than 1 are scaled
+automatically so that 1 and 500 stay visually distinct.}
 
 \item{layerId}{the layer id}
 
@@ -127,6 +134,22 @@ a color mapping function returned from \code{colorNumeric}}
 \item{cellSize}{the cell size in the grid. Points which are closer
 than this may be merged. Defaults to `radius / 2`.s
 Set to `1` to do almost no merging.}
+
+\item{maxZoom}{zoom level at which a point reaches its full intensity.
+Leaflet.heat otherwise fades points at low zoom, which makes everything
+look blue and hides \code{intensity}. When \code{scaleIntensity = TRUE}
+and \code{maxZoom} is \code{NULL}, it defaults to \code{0} so weights
+stay visible at world/regional zoom.}
+
+\item{scaleIntensity}{If \code{TRUE} (default) and \code{max} was not set
+by the caller, \code{max} becomes the maximum intensity so raw values
+such as 1 vs 500 are visible. Set to \code{FALSE} to keep the previous
+clipping behavior.}
+
+\item{legend}{If \code{TRUE}, add a color legend for the intensity scale.}
+
+\item{legendOptions}{A list of arguments passed to \code{\link{addHeatmapLegend}},
+such as \code{title} or \code{position}.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -167,7 +190,7 @@ leaflet(quakes) \%>\%
   setView(178, -20, 5) \%>\%
   addHeatmap(
     lng = ~long, lat = ~lat, intensity = ~mag,
-    blur = 20, max = 0.05, radius = 15
+    blur = 20, radius = 15, legend = TRUE
   )
 
 ## for more examples see

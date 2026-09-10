@@ -27,6 +27,7 @@ reference:
   desc: ~
   contents:
   - '`addHeatmap`'
+  - '`addHeatmapLegend`'
   - '`addWebGLHeatmap`'
 - title: GeoJSON/TopoJSON
   desc: ~

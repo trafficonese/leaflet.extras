@@ -12,7 +12,10 @@ leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
 #'
 #'
 leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
-  addWebGLHeatmap(lng = ~long, lat = ~lat, intensity = ~mag, size = 60000)
+  addWebGLHeatmap(
+    lng = ~long, lat = ~lat, intensity = ~mag, size = 60000,
+    legend = TRUE, legendOptions = list(title = "Magnitude")
+  )
 
 #' <br/><br/>
 #' Roughly 1500 points dataset

@@ -26,12 +26,22 @@ webGLHeatmapDependency <- function() {
 
 #' Add a webgl heatmap
 #' @param intensity intensity of the heat. A vector of numeric values or a formula.
+#'   The WebGL plugin expects values between 0 and 1. If \code{scaleIntensity = TRUE},
+#'   values are divided by \code{max} (or by the data maximum when \code{max} is
+#'   \code{NULL}) so that 1 and 500 stay visually distinct.
 #' @param size in meters or pixels
 #' @param units either "m" or "px"
 #' @param opacity for the canvas element
 #' @param gradientTexture Alternative colors for heatmap.
 #'    allowed values are "skyline", "deep-sea"
 #' @param alphaRange adjust transparency by changing to value between 0 and 1
+#' @param max intensity used for scaling when \code{scaleIntensity = TRUE}.
+#'   The default \code{NULL} uses the maximum of \code{intensity}.
+#' @param scaleIntensity If \code{TRUE} (default), scale \code{intensity} to
+#'   the 0-1 range expected by the WebGL plugin.
+#' @param legend If \code{TRUE}, add a color legend for the intensity scale.
+#' @param legendOptions A list of arguments passed to \code{\link{addHeatmapLegend}},
+#'   such as \code{title} or \code{position}.
 #' @inheritParams leaflet::addCircleMarkers
 #' @rdname webglheatmap
 #' @export
@@ -39,7 +49,10 @@ webGLHeatmapDependency <- function() {
 #' ## addWebGLHeatmap
 #' leaflet(quakes) %>%
 #'   addProviderTiles(providers$CartoDB.DarkMatter) %>%
-#'   addWebGLHeatmap(lng = ~long, lat = ~lat, size = 60000)
+#'   addWebGLHeatmap(
+#'     lng = ~long, lat = ~lat, intensity = ~mag, size = 60000,
+#'     legend = TRUE
+#'   )
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))
@@ -50,6 +63,10 @@ addWebGLHeatmap <- function(
   opacity = 1,
   gradientTexture = NULL,
   alphaRange = 1,
+  max = NULL,
+  scaleIntensity = TRUE,
+  legend = FALSE,
+  legendOptions = NULL,
   data = leaflet::getMapData(map)
 ) {
   map$dependencies <- c(
@@ -72,16 +89,20 @@ addWebGLHeatmap <- function(
     data, lng, lat, missing(lng), missing(lat), "addWebGLHeatmap"
   )
 
+  intensity <- evalHeatmapIntensity(intensity, data)
+  legend_values <- intensity
+  if (!is.null(intensity) && isTRUE(scaleIntensity)) {
+    scale <- if (is.null(max)) heatmapIntensityMax(intensity) else max
+    intensity <- intensity / scale
+  }
+
   if (is.null(intensity)) {
     points <- cbind(pts$lat, pts$lng)
   } else {
-    if (inherits(intensity, "formula")) {
-      intensity <- eval(intensity[[2]], data, environment(intensity))
-    }
     points <- cbind(pts$lat, pts$lng, intensity)
   }
 
-  leaflet::invokeMethod(
+  map <- leaflet::invokeMethod(
     map, data, "addWebGLHeatmap", points,
     layerId, group,
     leaflet::filterNULL(list(
@@ -92,6 +113,25 @@ addWebGLHeatmap <- function(
       alphaRange = alphaRange
     ))
   ) %>% leaflet::expandLimits(pts$lat, pts$lng)
+
+  if (isTRUE(legend)) {
+    if (is.null(legend_values)) {
+      legend_values <- c(0, 1)
+    }
+    map <- do.call(
+      addHeatmapLegend,
+      c(
+        list(
+          map = map,
+          values = legend_values,
+          colors = gradientTexture,
+          max = if (is.null(max)) heatmapIntensityMax(legend_values) else max
+        ),
+        legendOptions
+      )
+    )
+  }
+  map
 }
 
 #' Adds a heatmap with data from a GeoJSON/TopoJSON file/url

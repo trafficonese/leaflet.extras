@@ -2,11 +2,18 @@
 
 
 ## New Features
+- `addHeatmap` and `addWebGLHeatmap` now scale intensity values so that raw
+  weights such as 1 vs 500 stay visually distinct. Use `scaleIntensity = FALSE`
+  for the previous clipping behavior. `addHeatmap` also sets `maxZoom = 0` when
+  scaling so Leaflet.heat does not fade points to blue at low zoom. New
+  `addHeatmapLegend()` (also via `legend = TRUE`) adds a color guide. Fix #126, Fix #160
 - Include the plugin [`leaflet-groupedlayercontrol`](https://github.com/ismyrnow/leaflet-groupedlayercontrol). 
   See the example in `/inst/examples/shiny/groupedlayercontrol_app.R` for a demo of all options and methods. Fix #202
 
 ## Improvements
 - Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
+- Style GHA no longer runs on `pull_request` (detached HEAD made `git pull` fail after auto-commits). It now runs on push to the branch instead.
+- pkgdown reference index includes `addHeatmapLegend`.
 
 ## Bugfixes
 - Tests no longer download example GeoJSON/TopoJSON from the defunct [rawgit.com](https://rawgit.com) service. CRAN checks failed because those URLs were unreachable (`test-geojson_mini.R`, `test-heatmaps.R`). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to `raw.githubusercontent.com`. Long example URLs in `omnivore` and `webglheatmap` docs are wrapped to stay under the Rd 100-character limit. Thanks [@ngoodkind](https://github.com/ngoodkind) for reporting and opening #251. Fix #250
@@ -31,7 +38,7 @@
 ## New Features
 - `addDrawToolbar` offers some new options: 
   - `handlersOptions` and `toolbarOptions`, with which you can customize the drawing toolbar and the tooltips
-  - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://www.npmjs.com/package/leaflet-draw-drag) plugin. Otherwise, this library will not be included. Fix #115
+  - `addDrawToolbar` got a new argument `drag`. When set to `TRUE`, the drawn features will be draggable during editing, utilizing the [Leaflet.Draw.Drag](https://github.com/w8r/Leaflet.draw.drag) plugin. Otherwise, this library will not be included. Fix #115
 - `searchOSMText` enables setting the OpenStreetMap (OSM) search text directly from R
 - `clearSearchOSM` allows clearing the search marker associated with `addSearchOSM`. Fix #158, Fix #209
 - `clearSearchFeatures` provides functionality to clear the search marker

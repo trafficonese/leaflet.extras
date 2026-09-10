@@ -41,7 +41,10 @@ test_that("heatmaps", {
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-webgl-heatmap")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addWebGLHeatmap")
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]][, "intensity"], quakes$mag)
+  expect_equal(
+    ts$x$calls[[length(ts$x$calls)]]$args[[1]][, "intensity"],
+    quakes$mag / max(quakes$mag)
+  )
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$size, "30000")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$units, "m")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$opacity, 1)
@@ -58,7 +61,10 @@ test_that("heatmaps", {
   expect_s3_class(ts, "leaflet")
   expect_identical(ts$dependencies[[length(ts$dependencies)]]$name, "lfx-webgl-heatmap")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addWebGLHeatmap")
-  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]][, "intensity"], quakes$mag)
+  expect_equal(
+    ts$x$calls[[length(ts$x$calls)]]$args[[1]][, "intensity"],
+    quakes$mag / max(quakes$mag)
+  )
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$size, 20000)
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$units, "px")
   expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$opacity, 0.1)
@@ -369,4 +375,48 @@ test_that("heatmaps", {
   expect_null(ts$x$calls[[length(ts$x$calls) - 1]]$args[[2]])
   expect_null(ts$x$calls[[length(ts$x$calls) - 1]]$args[[3]])
   expect_null(ts$x$calls[[length(ts$x$calls) - 1]]$args[[4]])
+})
+
+test_that("heatmap intensity is scaled and can show a legend", {
+  ts <- leaflet(quakes) %>%
+    addHeatmap(lng = ~long, lat = ~lat, intensity = ~mag)
+  expect_identical(
+    ts$x$calls[[length(ts$x$calls)]]$args[[4]]$max,
+    max(quakes$mag)
+  )
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$maxZoom, 0)
+
+  ts <- leaflet(quakes) %>%
+    addHeatmap(
+      lng = ~long, lat = ~lat, intensity = ~mag,
+      scaleIntensity = FALSE
+    )
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$max, 1)
+  expect_null(ts$x$calls[[length(ts$x$calls)]]$args[[4]]$maxZoom)
+
+  ts <- leaflet(quakes) %>%
+    addWebGLHeatmap(
+      lng = ~long, lat = ~lat, intensity = ~mag,
+      scaleIntensity = FALSE
+    )
+  expect_identical(
+    ts$x$calls[[length(ts$x$calls)]]$args[[1]][, "intensity"],
+    quakes$mag
+  )
+
+  ts <- leaflet(quakes) %>%
+    addHeatmap(
+      lng = ~long, lat = ~lat, intensity = ~mag,
+      legend = TRUE, legendOptions = list(title = "Magnitude")
+    )
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addLegend")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$title, "Magnitude")
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$args[[1]]$labels[[1]], "0")
+
+  ts <- leaflet(quakes) %>%
+    addWebGLHeatmap(
+      lng = ~long, lat = ~lat, intensity = ~mag,
+      legend = TRUE
+    )
+  expect_identical(ts$x$calls[[length(ts$x$calls)]]$method, "addLegend")
 })

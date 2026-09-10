@@ -22,6 +22,10 @@ addWebGLHeatmap(
   opacity = 1,
   gradientTexture = NULL,
   alphaRange = 1,
+  max = NULL,
+  scaleIntensity = TRUE,
+  legend = FALSE,
+  legendOptions = NULL,
   data = leaflet::getMapData(map)
 )
 
@@ -95,7 +99,10 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{intensity}{intensity of the heat. A vector of numeric values or a formula.}
+\item{intensity}{intensity of the heat. A vector of numeric values or a formula.
+The WebGL plugin expects values between 0 and 1. If \code{scaleIntensity = TRUE},
+values are divided by \code{max} (or by the data maximum when \code{max} is
+\code{NULL}) so that 1 and 500 stay visually distinct.}
 
 \item{layerId}{the layer id}
 
@@ -115,6 +122,17 @@ layers (e.g. markers and polygons) can share the same group name.}
 allowed values are "skyline", "deep-sea"}
 
 \item{alphaRange}{adjust transparency by changing to value between 0 and 1}
+
+\item{max}{intensity used for scaling when \code{scaleIntensity = TRUE}.
+The default \code{NULL} uses the maximum of \code{intensity}.}
+
+\item{scaleIntensity}{If \code{TRUE} (default), scale \code{intensity} to
+the 0-1 range expected by the WebGL plugin.}
+
+\item{legend}{If \code{TRUE}, add a color legend for the intensity scale.}
+
+\item{legendOptions}{A list of arguments passed to \code{\link{addHeatmapLegend}},
+such as \code{title} or \code{position}.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -153,7 +171,10 @@ clears the webgl heatmap
 ## addWebGLHeatmap
 leaflet(quakes) \%>\%
   addProviderTiles(providers$CartoDB.DarkMatter) \%>\%
-  addWebGLHeatmap(lng = ~long, lat = ~lat, size = 60000)
+  addWebGLHeatmap(
+    lng = ~long, lat = ~lat, intensity = ~mag, size = 60000,
+    legend = TRUE
+  )
 
 ## for more examples see
 # browseURL(system.file("examples/webglHeatmaps.R", package = "leaflet.extras"))

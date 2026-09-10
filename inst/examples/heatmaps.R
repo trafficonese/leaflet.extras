@@ -1,13 +1,16 @@
 library(leaflet.extras)
 library(magrittr)
 
+devtools::load_all()
+
 #' Quakes
 #'
 #'
 leaflet(quakes) %>% addProviderTiles(providers$CartoDB.DarkMatter) %>%
   setView( 178, -20, 5 ) %>%
   addHeatmap(lng = ~long, lat = ~lat, intensity = ~mag,
-             blur = 20, max = 0.05, radius = 15)
+             blur = 20, radius = 15, legend = TRUE, scaleIntensity = TRUE,
+             legendOptions = list(title = "Magnitude"))
 
 #' <br/><br/>
 #' Roughly 1500 points dataset
