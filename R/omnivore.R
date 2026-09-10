@@ -139,9 +139,9 @@ invokeJSAddMethod <- function(
 #' ## addGeoJSONv2
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   paste0(
-#'     "https://raw.githubusercontent.com/benbalter/dc-maps",
-#'     "/master/maps/historic-landmarks-points.geojson"
+#'   system.file(
+#'     "examples/data/geojson/historic-landmarks-points.geojson",
+#'     package = "leaflet.extras"
 #'   )
 #' )
 #'
@@ -258,24 +258,27 @@ legendOptions <- function(
 #' ## addGeoJSONChoropleth
 #' \donttest{
 #' geoJson <- readr::read_file(
-#'   "https://raw.githubusercontent.com/benbalter/dc-maps/master/maps/ward-2012.geojson"
+#'   system.file(
+#'     "examples/data/geojson/crimes_by_district.topojson",
+#'     package = "leaflet.extras"
+#'   )
 #' )
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
-#'   setView(-77.0369, 38.9072, 11) %>%
+#'   setView(-75.14, 40, 11) %>%
 #'   addBootstrapDependency() %>%
 #'   enableMeasurePath() %>%
 #'   addGeoJSONChoropleth(
 #'     geoJson,
-#'     valueProperty = "AREASQMI",
+#'     valueProperty = "incidents",
 #'     scale = c("white", "red"),
 #'     mode = "q",
 #'     steps = 4,
 #'     padding = c(0.2, 0),
-#'     labelProperty = "NAME",
+#'     labelProperty = "location",
 #'     popupProperty = propstoHTMLTable(
-#'       props = c("NAME", "AREASQMI", "REP_NAME", "WEB_URL", "REP_PHONE", "REP_EMAIL", "REP_OFFICE"),
+#'       props = c("dist_numc", "location", "incidents"),
 #'       table.attrs = list(class = "table table-striped table-bordered"),
 #'       drop.na = TRUE
 #'     ),
