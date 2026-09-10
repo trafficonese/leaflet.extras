@@ -136,6 +136,7 @@ const config = [
     {
       topojson: 'topojson',
       csv2geojson: 'csv2geojson',
+      '@mapbox/togeojson': 'toGeoJSON',
       togeojson: 'toGeoJSON'
     }),
   library_binding('lfx-omnivore'),

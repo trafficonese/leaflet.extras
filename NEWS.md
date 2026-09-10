@@ -18,6 +18,9 @@
   `MAPID_geodesic_stats` includes `radius`. Fix #44
 
 ## Improvements
+- Node webpack CI now runs on Node 22, 24, and 26 (`engines.node >= 22`). Node 16/18/20 are EOL; newer `copy-webpack-plugin` needs `Array.toSorted`.
+- `copy-webpack-plugin` 14 and `css-minimizer-webpack-plugin` 8 (drops old `serialize-javascript`).
+- KML/GPX/CSV parsing now uses the maintained fork [`trafficonese/leaflet-omnivore@0.4.0`](https://github.com/trafficonese/leaflet-omnivore) (`@mapbox/togeojson`, no `brfs`/`xmldom`).
 - Updated GitHub Actions dependencies (`actions/checkout` v6, `actions/setup-node` v6, `actions/cache` v5, `actions/upload-artifact` v6, `JamesIves/github-pages-deploy-action` 4.7.6) and the npm `js-yaml` lockfile (4.1.1).
 - Style GHA no longer runs on `pull_request` (detached HEAD made `git pull` fail after auto-commits). It now runs on push to the branch instead.
 - pkgdown reference index includes `addHeatmapLegend`.
@@ -35,6 +38,12 @@
 - Google and OSM search suggestions crashed or showed `undefined` because leaflet-search PR 339 called `formatData(control, data)` instead of `formatData(data)`. Search formatters now accept both signatures, and Google results unwrap `GeocoderResponse.results`.
 - `addReverseSearchGoogle` no longer reads minified Google `LatLngBounds` internals (`viewport.f` / `viewport.b`). Bounds use `getSouthWest()` / `getNorthEast()` (or `south/west/north/east`).
 - `addLatLng` registers vertex markers in Leaflet's `marker` category with the geodesic's group and a unique layer id, and removes them when the line is deleted (`removeShape` / `clearShapes` / `clearGroup`). Hide/show by group still keeps them.
+
+## Known issues / Todos
+- Do not merge `fix/npm_updates` onto the CRAN `master` until the current CRAN submission is done. The lockfile is not in the tarball, but rebuilt `inst/htmlwidgets/build/**` is.
+- `npm audit` still reports build-only findings via `napa` (decompress/tar/got Zip Slip). Do not run `npm audit fix --force` (would downgrade `napa` and `pouchdb-browser`).
+- `fuse.js` stays pinned at 7.0.0.
+- Draw/GeoJSON reimport (#234) still open.
 
 
 # leaflet.extras 2.0.1

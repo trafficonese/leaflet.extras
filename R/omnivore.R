@@ -6,7 +6,7 @@ omnivoreDependencies <- function() {
     # polyline is not implemented
     # wellknown is not implemented
 
-    html_dep_prod("lfx-omnivore", "3.0.4", has_binding = TRUE)
+    html_dep_prod("lfx-omnivore", "0.4.0", has_binding = TRUE)
   )
 }
 
