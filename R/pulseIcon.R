@@ -44,7 +44,7 @@ pulseIconList <- function(...) {
 
 #' @rdname pulseMarkers
 #' @export
-`[.leaflet_pulse_icon_set` = function(x, i) {
+`[.leaflet_pulse_icon_set` <- function(x, i) {
   if (is.factor(i)) {
     i <- as.character(i)
   }
