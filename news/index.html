@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">leaflet.extras</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +33,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="leafletextras-development-version">leaflet.extras (development version)<a class="anchor" aria-label="anchor" href="#leafletextras-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.0" id="leafletextras-210">leaflet.extras 2.1.0<a class="anchor" aria-label="anchor" href="#leafletextras-210"></a></h2><p class="text-muted">CRAN release: 2026-09-16</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-2-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-2-1-0"></a></h3>
 <ul><li>
 <code><a href="../reference/omnivore.html">addGeoJSONChoropleth()</a></code> / <code><a href="../reference/omnivore.html">addKMLChoropleth()</a></code> can vary polygon fill opacity per feature via <code>fillOpacityProperty</code> (property name or JS function). Passing a JS function as <code>fillOpacity</code> works too. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/53" class="external-link">#53</a></li>
 <li>
@@ -45,13 +45,13 @@
 <code><a href="../reference/geodesics.html">addGreatCircles()</a></code> gained <code>editable = TRUE</code> to drag a radius handle on the circumference (as in the <a href="https://blog.cyclemap.link/Leaflet.Geodesic/circle-interactive.html" class="external-link">Leaflet.Geodesic interactive circle demo</a>). <code>showStats</code> now reports radius and circumference; Shiny input <code>MAPID_geodesic_stats</code> includes <code>radius</code>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/44" class="external-link">#44</a></li>
 </ul></div>
 <div class="section level3">
-<h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
+<h3 id="improvements-2-1-0">Improvements<a class="anchor" aria-label="anchor" href="#improvements-2-1-0"></a></h3>
 <ul><li>Updated GitHub Actions dependencies (<code>actions/checkout</code> v6, <code>actions/setup-node</code> v6, <code>actions/cache</code> v5, <code>actions/upload-artifact</code> v6, <code>JamesIves/github-pages-deploy-action</code> 4.7.6) and the npm <code>js-yaml</code> lockfile (4.1.1).</li>
 <li>Style GHA no longer runs on <code>pull_request</code> (detached HEAD made <code>git pull</code> fail after auto-commits). It now runs on push to the branch instead.</li>
 <li>pkgdown reference index includes <code>addHeatmapLegend</code>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bugfixes-development-version">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-development-version"></a></h3>
+<h3 id="bugfixes-2-1-0">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-2-1-0"></a></h3>
 <ul><li>Rd examples no longer download GeoJSON from GitHub during <code>R CMD check --as-cran</code> (<code>--run-donttest</code>). CI failed with HTTP 429 (rate limit) on ubuntu-latest/oldrel-1. Examples now use local fixtures under <code>inst/examples/data/geojson/</code>.</li>
 <li>Tests no longer download example GeoJSON/TopoJSON from the defunct <a href="https://rawgit.com" class="external-link">rawgit.com</a> service. CRAN checks failed because those URLs were unreachable (<code>test-geojson_mini.R</code>, <code>test-heatmaps.R</code>). Local fixtures are used instead, and remaining rawgit links in examples/docs now point to <code>raw.githubusercontent.com</code>. Long example URLs in <code>omnivore</code> and <code>webglheatmap</code> docs are wrapped to stay under the Rd 100-character limit. Thanks <a href="https://github.com/ngoodkind" class="external-link">@ngoodkind</a> for reporting and opening <a href="https://github.com/trafficonese/leaflet.extras/issues/251" class="external-link">#251</a>. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/250" class="external-link">#250</a></li>
 <li>New argument <code>filtersearch</code> for <code>searchOptions</code> to limit the Nominatim search area. Fix <a href="https://github.com/trafficonese/leaflet.extras/issues/168" class="external-link">#168</a></li>
