@@ -89,13 +89,13 @@ Source:
 [`DESCRIPTION`](https://github.com/trafficonese/leaflet.extras/blob/master/DESCRIPTION)
 
 Gatscha S, Karambelkar B, Schloerke B (2026). *leaflet.extras: Extra
-Functionality for 'leaflet' Package*. R package version 2.1.0,
+Functionality for 'leaflet' Package*. R package version 2.1.0.9000,
 <https://github.com/trafficonese/leaflet.extras>.
 
     @Manual{,
       title = {leaflet.extras: Extra Functionality for 'leaflet' Package},
       author = {Sebastian Gatscha and Bhaskar Karambelkar and Barret Schloerke},
       year = {2026},
-      note = {R package version 2.1.0},
+      note = {R package version 2.1.0.9000},
       url = {https://github.com/trafficonese/leaflet.extras},
     }
